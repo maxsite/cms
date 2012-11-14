@@ -1,0 +1,221 @@
+* { padding: 0; margin: 0; }
+body, td {font: 13px "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana, sans-serif}
+label { cursor: pointer; }
+
+p { margin: 3px 0px 7px 0px;}
+p.info {margin: 7px 0px 15px 0px; font-size: 13px;}
+
+ul, ol {margin-left: 30px;}
+
+p, li, dl, dd, dt { line-height: 140%; }
+
+textarea, input, select { font: 13px Verdana, Arial, Helvetica, sans-serif;	margin: 1px; padding: 3px; }
+input { border: 1px solid #C6D9E9; }
+input[type='submit'] { background-color: #e5e5e5; color: #246; border: 1px solid #80b5d0;	cursor: pointer; padding: 3px 8px; font: bold 13px "Lucida Grande", "Lucida Sans Unicode", Tahoma, Verdana, sans-serif; }
+input[type='submit']:hover { border-color: #535353;	color: #d54e21; }
+input#f_tags, input[name='f_slug'], input[name='f_password'] {width: 96% !important}
+input.f_header {width: 99%; border: 1px solid #CCC; margin: 5px auto 5px auto; padding: 2px; font-size: 18pt; margin-bottom: 12px;}
+select { background-color: #FFF; border: 1px solid #CCC; }
+textarea { border: 1px solid #C6D9E9; }
+textarea#f_content { border: 1px solid #CCC; width: 99% !important; line-height: 19px; }
+
+td {background: #e4f2fd;}
+
+a { color: #448abd;; text-decoration: none; }
+a:hover { color: #D54E21; text-decoration: underline; }
+
+a img { border: none; text-decoration: none;} /* ie fix*/
+a img, a:visited img, a:hover img, a img:hover, img+a, img+a:hover { border: none; text-decoration: none;}
+
+
+h1 { margin: 0 0 .67em;	padding: 0 0 7px;	border-bottom: 1px #DADADA solid;	font: 24px Georgia, "Times New Roman", Times, serif; color: #666; }
+.navline h1 {	margin: 0; padding: 15px 0 15px 20px; }
+h2 { font-size: 1.25em; font-weight: bold; margin: .83em 0; }
+h3 { font-size: 1.17em; font-weight: bold; margin: 1em 0; }
+
+.page td p { font-size: 12px; }
+
+#container {width: 100%;}
+
+
+.admin-header {background: #E4F2FD; color: white; margin: 0 0 15px 0; padding: 30px 0 0; position: relative;}
+.admin-header a {color: #555; }
+
+.menu {background: #464646; height: 30px; position: absolute; top: 0; width: 100%;}
+*+html .menu {height: 31px;}
+
+div.navline a {font-style: italic;}
+
+
+div.admin-content {margin: 0; padding: 10px 20px;}
+
+#wysiwyg {background: #FFF !important}
+div.wysiwyg ul.panel {background: #EAF3FA !important}
+
+.editor_button { width: 99%; background: #CEE1EF; padding: 3px 4px; margin: 0 0 -1px 1px; }
+.editor_button input { cursor: pointer; padding: 3px 6px; line-height: 18px; display: inline-block; background: #FFF url(images/fade-butt.png ) repeat-x 0 -2px; border: 1px outset #F4F4F4; }
+* html .editor_button input { overflow: visible;	padding: 1px 6px; }
+*+html .editor_button input { overflow: visible;	padding: 1px 6px; }
+
+
+div.admin-footer {clear: both; background: #464646 url(images/maxsitelogo-gray.png) 20px 45% no-repeat; color: #999; padding: 20px 20px 20px 75px; border-top: 20px solid #FFF; height: 1%;}
+div.admin-footer a {color: white;}
+div.admin-footer p {margin: 0;}
+
+
+div.admin-widget {margin: 0; border: 2px solid #404040; padding: 20px; text-align: center; color: #404040; -moz-border-radius: 10px; background: #F9FFEE;}
+
+
+ul.widgets-allow {line-height: 2.1em;}
+ul.widgets-allow b {font-size: 10pt;}
+.widgets-allow input { cursor: pointer; }
+
+div.admin-h-menu {padding: 10px; background: #A0A0A0; color: white; margin-bottom: 10px; line-height: 1.5em;}
+div.admin-h-menu a {color: white;}
+div.admin-h-menu a.select {font-size: 1.5em; background: #F4F4F4; color: #000; padding: 1px 6px 2px;}
+
+table.page td {padding: 7px;}
+table.page td.alt {}
+table.page th {padding: 8px;  background: #888; color: #FFF; font-size: 13px;}
+table.page tr {background: white;}
+table.page tr.alt {background: white;}
+
+div.section {background: #dddddd; margin: -7px; padding: 5px; height: 1.4em; font-weight: bold; font-style: italic; border-top: 12px solid white;}
+div.section h2 {margin: 0; line-height: 1em;}
+
+div.update {padding: 10px; background: #209920; margin-bottom: 10px; color: white;}
+div.update a {color: white;}
+div.error {padding: 10px; background: #FF2020; margin-bottom: 10px; color: white;}
+
+.gray {color: gray;}
+.gray a {color: gray;}
+
+
+div.block_page {margin: 0 0 15px 0; padding: 2px; background: #EAF3FA;}
+div.block_page h3 {background: #888; padding: 7px 0 7px 10px; margin: 0 0 10px 0; color: #FFF;}
+div.block_page p {margin: 0; padding: 0 5px 5px;}
+
+div.page_meta div {margin: 15px 8px; padding: 4px 4px 0; background: #F4F4F4; border: 1px solid #CCC;}
+div.page_meta div h3 {background: #D3D3D3; padding: 7px 0 7px 10px; font-size: 13px; color: #404040; margin: 0 0 4px;}
+div.page_meta p {font-size: 12px;}
+div.page_meta input {border-color: #CCC;}
+
+
+div.page_files div.frame {height: 470px; width: auto; overflow: auto;}
+*html div.page_files div.frame {overflow: scroll;}
+*+html div.page_files div.frame {overflow: scroll;}
+
+div.page_files div.frame table {background: #F0F0F0;}
+div.page_files div.frame table td {background: #E0E0E0;}
+*html div.page_files div.frame table {width: 96%;}
+*+html div.page_files div.frame table {width: 96%;}
+
+div.page_files div.frame input {width: 99%;}
+*html div.page_files div.frame input {width: 500px;}
+*+html div.page_files div.frame input {width: 500px;}
+
+div.page_files div.frame input.check_files {width: auto;}
+div.page_files div.frame #gallerycodeclick {width: auto;}
+
+
+div.cat_page ul {list-style-type: none; margin-left: 0px; padding: 0 5px 5px;}
+div.cat_page ul ul {margin-left: 20px;}
+
+div.admin-edit-widgets {margin-bottom: 30px; padding: 5px 10px 10px 10px; background: #D0D0D0;}
+div.admin-edit-widgets h2 {font-size: 1.8em; font-style: italic; font-weight: normal;}
+div.admin-edit-widgets-form {border: #A0A0A0 1px solid; margin: 10px 0 10px 0; padding: 10px 10px 10px 10px; background: white; border-bottom: #707070 1px solid; border-right: #707070 1px solid;}
+div.admin-edit-widgets-form h3 {color: #0D419B;}
+div.admin-edit-widgets-form input {width: 500px; font: 10pt Courier New, mono;}
+div.admin-edit-widgets-form input[type='checkbox'] {width: auto;}
+div.admin-edit-widgets-form textarea {width: 500px;}
+div.admin-edit-widgets-form select {width: 500px;}
+
+div.ushki {background: #C0C0C0 !important; border: 1px solid #A0A0A0 !important;}
+
+div.t150, div.t200, div.t250 {width: 200px; text-align: right; float: left; margin: 0 5px; font-weight: bold;}
+div.t200 {width: 200px;}
+div.t250 {width: 200px;}
+
+
+h1#loginlogo { font-size: 34px; border: none; margin: 100px auto 5px; width: 320px; text-align: center; }
+#loginlogo a { color: #666; background: url(images/maxsitelogo-white.gif) no-repeat; padding: 0 0 10px 50px; }
+#login_block { width: 300px; text-align: center; margin: 0 auto; padding: 20px 20px 20px 0; background: #EAF3FA; border: 1px solid #C4DCF0; }
+#flogin_user, #flogin_password { font: 20px Arial, Tahoma, Verdana, sans-serif; padding: 3px; vertical-align: middle; width: 200px; color: #555; }
+#flogin_submit { background: #CEE1EF; font-weight: normal; }
+#flogin_submit:hover { border-color: #328AB2; }
+
+
+#logout { position: absolute; top: 7px; right: 10px; color: #DDD; }
+#logout a {	color: #DDD; }
+
+div.admin_plugin_options {border: 1px gray solid; background: #E0E0E0; padding: 5px; margin: 0 0 15px 0; line-height: 1.5em;}
+div.admin_plugin_options strong {}
+div.admin_plugin_options input {width: 99%;}
+div.admin_plugin_options input.checkbox { width: auto;}
+div.admin_plugin_options textarea { width: 99%;}
+div.admin_plugin_options select { width: 99%;}
+
+/* поля форм */
+input, select {vertical-align: middle;}
+textarea {overflow: auto;}
+input[type="radio"], input[type="checkbox"] {margin: 0; padding: 0; position: relative; top: 1px; cursor: pointer; vertical-align: text-top;} 
+*+html input[type="submit"], *+html input[type="reset"], *+html input[type="button"]  {overflow: visible;} /*IE7*/
+
+label {cursor: pointer;}
+textarea {width:99%}
+table input[type=text] {width:99%}
+td select  {width:99%}
+select {max-width:99%}
+
+td select  {width:99%}
+th {text-align:left}
+table.new_or_edit {width: 99%; border: none; line-height: 1.4em;}
+	td.editor_and_meta {padding: 0 10px 0;vertical-align: top;}
+	td.page_info {width: 250px;vertical-align: top;}
+#wysiwyg {width: 100%} /* редактор */
+td.editor_and_meta > div {margin-bottom: 10px} /* блоки под редактором */
+td.editor_and_meta > div > p label {margin-right: 10px}
+#pagetable {width: 99%; margin: 10px 0} /* список всех страниц */
+#pagetable + form {margin:10px 0}
+#comments_content {width: 99%; height: 150px;}
+.template {float: left; margin: 5px 5px 10px 5px; border: 1px silver solid; border-right: 3px gray solid; border-bottom: 3px #676767 solid; padding: 0px 10px; width: 280px; height: 340px; text-align: center; position: relative;}
+.template_noimage {margin: 0 auto; width: 250px; height: 200px; background: #f0f0f0; border: 1px solid silver;}
+.cats {width: 100%; border-collapse: collapse;}
+.cats colgroup {padding: 0 4px;}
+.cats td {text-align: center; vertical-align:top}
+	td sub {color: gray}
+.plugin_on {color: green}
+.new_cat_upload {margin: 20px 0; padding: 5px 10px 5px 10px; border: 1px solid gray;}
+.upload_file {margin: 20px 0; padding: 5px 10px 15px 10px; border: 1px solid gray;}
+.description_file {width: 380px}
+.cornerz {float: left; margin: 5px 5px 10px 5px; border: 1px #808080 solid; padding: 10px 5px; width: 230px; min-height: 230px; text-align: center; position: relative;}
+.edit_descr {width:220px; margin:5px auto}
+.edit_descr textarea {height:4em; margin-bottom:.5em}
+.cornerz label {font-weight:bold}
+.file_img {max-width: 100px; margin: 5px auto; display: block;}
+/* toolbox */
+.item {margin:20px 0 10px}
+.item h2 {padding:0 0 10px}
+.item p.input strong, .item p.textarea strong {display:inline-block; width:7em; vertical-align:middle}
+.item p.textarea strong {vertical-align:top; padding-top:.2em}
+.item p.input input[type='text'], .item p.input input[type='password'], .item textarea {width:350px}
+.item select {max-width:350px}
+.item p.short input[type='text'] {width:100px}
+.item p.checkbox {padding-left:7em}
+.item p.wleft strong {margin-left:-7em}
+.item p.input_submit {margin:0 0 0 7em}
+.item.usergroup p.input strong {width:11em}
+.item.usergroup p.input_submit {margin:0 0 0 11em}
+.item.usergroup p.checkbox {padding-left:11em}
+.item.usergroup p.wleft strong {margin-left:-11em}
+.br, .item p.br {margin-top:1.5em}
+.red {color:red}
+.float-parent {width:100%; overflow:hidden}
+/* plugins */
+.ushki {border: 1px solid #C3DAF9; padding: 10px; margin: 10px 0; background: #C3DAF9;}
+
+div.float-parent div.cornerz div.wrap {overflow: auto;}
+div.admin_files_nav strong {font-size: 1.5em;}
+
+p.nav{color:white;font-size:0;line-height:25px;margin:0;}p.nav a{background:#EEE;padding:5px 5px;margin:0 3px;font-size:10pt;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;white-space:nowrap;}p.nav a:hover{background:#9DAEB6;text-decoration:none;color:#395766;}
+p.nav a.current{background:#6C8A99;color:#fff;}p.nav a.current:hover{background:#9DAEB6;}

@@ -1,0 +1,128 @@
+// MaxSite CMS 
+// Copyright http://maxsite.org/
+// message.less
+// подключать - @import url('mixins/message.less');
+
+// использовать только копируя в каталог шаблона
+
+.message
+{
+
+	border: 1px solid #DBDBDB; 
+	margin: 4px 0 7px 0; 
+	padding: 10px 10px 10px 70px; 
+	min-height: 48px;
+	.border_radius(10px);
+	
+	&.note {
+		background: #DAE8EE url("../images/icons/note.png") no-repeat 10px 10px; 
+		border-color: #91A0A6; 
+		color: black;
+
+		&.small {
+			background-image: url("../images/icons/small/note.png");
+		}
+	}
+	
+	
+	&.alert {
+		background: #FFE8BF url("../images/icons/alert.png") no-repeat 10px 10px; 
+		border-color: #DECAA5; 
+		color: maroon;
+		
+		&.small {
+			background-image: url("../images/icons/small/alert.png"); 
+		}
+	}
+	
+	
+	&.idea {
+		background: #FAF6AC url("../images/icons/idea.png") no-repeat 10px 10px; 
+		border-color: #D5D18C; 
+		color: maroon;
+
+		&.small {
+			background-image: url("../images/icons/small/idea.png"); 
+			border-color: #D5D18C; 
+			color: maroon;
+		}
+	}
+	
+	
+	&.error {
+		background: #FB6C6C url("../images/icons/error.png") no-repeat 10px 10px; 
+		border-color: #CA5A5A; 
+		color: white;
+
+		&.small {
+			background-image: url("../images/icons/small/error.png");
+		}
+	}
+	
+	
+	&.ok {
+		background: #7FFF91 url("../images/icons/ok.png") no-repeat 10px 10px; 
+		border-color: #68CD76; 
+		color: #006600;
+
+		&.small {
+			background-image: url("../images/icons/small/ok.png"); 
+		}
+	}
+		
+	
+	&.about {
+		background: #A6D2FF url("../images/icons/about.png") no-repeat 10px 10px; 
+		border-color: #8FB3D8; 
+		color: navy;
+
+		&.small {
+			background-image: url("../images/icons/small/about.png");
+		}
+	}
+	
+	
+	&.mail {
+		background: #EAEAEA url("../images/icons/mail.png") no-repeat 10px 10px; 
+		color: #404040;
+
+		&.small {
+			background-image: url("../images/icons/small/mail.png");
+		}
+	}
+	
+	
+	&.home {
+		background: #EAEAEA url("../images/icons/home.png") no-repeat 10px 10px; 
+		color: #404040;
+
+		&.small {
+			background-image: url("../images/icons/small/home.png"); 
+		}
+	}
+	
+	
+	&.question {
+		background: #EAEAEA url("../images/icons/question.png") no-repeat 10px 10px; 
+		color: #404040;
+		
+		&.small {
+			background-image: url("../images/icons/small/question.png");
+		}
+	}
+	
+	&.noicon {
+		background-image: none; 
+		padding: 10px; 
+		min-height: 0;
+	}
+	
+	// мини версия сообщений 24px
+	&.small {
+		min-height: 0; 
+		padding: 5px 10px 5px 40px; 
+		background-position: 5px 2px;
+		background-repeat: no-repeat;
+	}
+	
+}

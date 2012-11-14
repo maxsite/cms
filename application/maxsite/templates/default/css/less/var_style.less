@@ -1,0 +1,197 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+
+
+// подключение хелпера LESS
+@import "include/helpers.less";
+
+// в своем шаблоне используйте другое подключение:
+// @import url('../../default/css/less/include/helpers.less');
+
+
+// дополнительные стили к style-all
+
+body {
+	background: #E0E0E0;
+}
+
+// ССЫЛКИ
+a {
+	color: #0E5FBF; 
+	text-decoration: underline;
+
+	&:hover {
+		color: red;
+	}
+	
+	div.widget & {
+		text-decoration: none;
+	} 
+	
+	div.sitemap & {
+		text-decoration: none;
+	} 
+	
+	div.type_comments & {
+		text-decoration: none;
+	} 
+	
+	div.page_other_pages & {
+		text-decoration: none;
+	}
+	
+	&.curent-page-cat {
+		.bold;
+	}
+}
+
+// ЗАГОЛОВКИ H1
+h1 {
+	color: #101010;
+	
+	a {
+		color: #101010;
+
+		&:hover {
+			color: red;
+		}
+	}
+	
+	&.category {
+		font-size: 2.0em; 
+		text-transform: uppercase; 
+		margin: 0 0 15px 0; 
+		padding: 5px 10px; 
+		background: #192849; 
+		color: white;
+		.border_radius(10px);
+	}
+}
+ 
+// СТРУКТУРА САЙТА
+
+@all_width: 960px;
+@sidebar_width: 250px;
+
+div.all-wrap {
+	width: @all_width; 
+	margin: 0 auto; 
+	background: white; 
+	.box_shadow(0, 0, 7px, #606060);
+}
+
+div.header {
+	width: @all_width; 
+	margin: 0 auto;
+}
+
+div.main {
+	width: @all_width; 
+	margin: 0 auto; 
+	background: white;
+}
+
+div.content {
+	width: @all_width - @sidebar_width; 
+	margin: 0 @sidebar_width 0 0; 
+	float: left;
+}
+
+div.content-wrap {
+	margin: 20px 30px 10px 20px;
+}
+
+div.sidebar {
+	width: @sidebar_width; 
+	float: right; 
+	margin: 20px 0 0 -@sidebar_width;
+}
+
+div.sidebar1-wrap {
+	margin-right: 10px;
+}
+
+div.footer {
+	width: 100%; 
+	clear: both; 
+	background: #192849; 
+	font-size: 0.9em; 
+	color: white;
+	
+	a {
+		color: white;
+	}
+}
+
+div.footer-wrap {
+	padding: 10px; 
+	margin: 0 auto;
+}
+
+
+// МЕНЮ ВЫПАДАЮЩЕЕ (только обрамляющий блок)
+div.MainMenu {
+	font-size: 10pt; 
+	padding-left: 10px; 
+	background: #192849;
+}
+
+// верхние пункты меню
+ul.menu li { 
+	a {
+		margin-right: 8px; 
+		color: white;
+	}
+	
+	a:hover {
+		background: #3A4356; 
+		color: white;
+	}
+	
+	&.selected a {
+		background: #374973;
+	}
+}
+
+
+// ЗАПИСИ ПО ТЕМЕ И КОЛ-ВО КОММЕНТАРИЕВ 
+// ОСТАВЬТЕ КОММЕНТАРИЙ!
+div.page_other_pages_header, 
+div.page_comments_count, 
+div.leave_a_comment {
+	font-weight: bold; 
+	margin: 10px 0; 
+	padding: 8px; 
+	background: #F0F0F0; 
+	.border(#DDD);
+	.border_radius(8px);
+}
+
+
+// ПАГИНАЦИЯ ТЕКУЩАЯ СТРАНИЦА 
+div.pagination strong {
+	background: #225DA3; 
+	color: white;
+}
+
+// ПЛАГИН ТАБЫ 
+ul.tabs-nav li {
+	&.elem {
+		background: #EEE; 
+		color: #888;
+	}
+	
+	&.elem:hover, 
+	&.tabs-current {
+		color: #3F454B; 
+		background: #BFC0CD;
+	}
+}
+
+// вывод рубрик на главной
+div.type_home_cat_block {
+	
+	div.header_home_cat {
+		.border_radius(10px);
+	}
+}

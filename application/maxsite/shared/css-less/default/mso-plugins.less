@@ -1,0 +1,286 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+// mso-plugins.less
+ 
+ 
+// plugins MaxSite CMS
+
+// plugin Pagination
+div.pagination {
+	margin: 25px 0 10px 0; 
+	font-size: .9em;
+	
+	strong {
+		padding: 3px 6px;
+	}
+	
+	a {
+		padding: 3px; 
+		line-height: 1.8em;
+	}
+}
+
+// plugin TagClouds
+div.tagclouds {
+	text-align: center; 
+	line-height: 1.6em; 
+	font-size: 8pt;
+	
+	span {
+		line-height: 1.6em;
+	}
+}
+
+// plugin CatClouds
+div.catclouds {
+	text-align: center;
+	
+	span {
+		line-height: 1.4em;
+	}
+}
+
+// plugin RATER
+#rater ul {
+	margin: 10px 0;
+}
+
+// plugin LastComment
+div.comments ul.last_comment li {
+	margin: 5px 0;
+}
+
+ul.last_comment {
+	em {
+		display: block; 
+		color: gray; 
+		text-align: right;
+	}
+	
+	li {
+		margin-bottom: 7px;
+	}
+}
+
+h2.last_comment {
+	font-size: 1.1em; 
+	font-weight: bold;
+}
+
+
+// plugin Twitter
+div.twitter {
+	p {
+		border-bottom: 1px solid gray; 
+		padding: 0 0 10px 0;
+	}
+	
+	a {font-weight: bold;}
+}
+
+// plugin AddZakl
+div.addzakl {
+	margin: 15px 0 0 0;
+	
+	img {
+		vertical-align: top;
+	}
+}
+
+// plugin LAST-PAGES
+div.last-pages ul.is_link {
+	
+	li.current_url_allcat {
+		display: block;
+	}
+	
+	li.current_url_cat {
+		display: block;
+	}
+	
+	li.current_url_page {
+		display: block;
+	}
+}
+
+
+// plugin CALENDAR
+div.calendar {
+	table {
+		width: 100%;
+	}
+	
+	td {
+		border: 1px solid white; 
+		text-align: center; 
+		padding: 1px; 
+		font-size: 8pt;
+	}
+	
+	tr.week td {
+		background: #D5D5E1;
+	}
+	
+	div.today {
+		background: #8591B7;
+	}
+	
+	div.today-content {
+		background: #8591B7;
+	}
+	
+	td a {
+		text-decoration: underline;
+	}
+}
+ 
+// plugin SITEMAP
+div.sitemap h3 {
+	margin: 15px 0 5px 0;
+}
+
+h2.sitemap {
+	margin: 25px 0 0 0; 
+	background: #DDD; 
+	padding: 3px;
+}
+
+// plugin PRE to OL
+div.pre {
+	background: #F0F0F0; 
+	padding: 5px; 
+	overflow: auto; 
+	margin: 0 0 10px 0;
+}
+
+ol.pre {
+	font-family: monospace; 
+	padding: 0; 
+	margin: 0 0 0 30px;
+	
+	li {
+		padding: 0; 
+		margin: 0; 
+		white-space: pre;
+		
+		&.odd {
+			background: none;
+		}
+	}
+	
+	span.php-comment {
+		color: gray;
+	}
+}
+
+// plugin FORMS
+
+
+form.plugin_forms {
+	p {
+		@first_width: 180px;
+	
+		span.ffirst, 
+		label.ffirst {
+			width: @first_width;
+		}
+		
+		span.ffirst.ftitle, 
+		label.ffirst.ftitle {
+			width: @first_width - 5px;
+		}
+		
+		span.ftitle, 
+		label.ftitle {
+			font-size: 0.9em;
+		}
+		
+		span.submit {
+			padding-top: 20px;
+		}
+		
+		&.nop {
+			margin-top: 0; 
+			margin-bottom: 5px;
+		}
+	}
+}
+
+div.forms-post h2 {
+	color: red; 
+	font-size: 18pt; 
+	margin: 20px 0;
+}
+
+// plugin random_gal_widget
+div.random_gal_widget {overflow: hidden;}
+
+// plugin samborsky_polls
+table.sp_polls th, 
+table.sp_polls td {
+	border: none;
+}
+
+// галерея lightbox
+div.gallery {
+	font-size: 0;
+	
+	img {
+		border: 1px solid silver; 
+		padding: 3px; 
+		margin: 3px;
+		
+		&:hover {
+			background: silver;
+		}
+	}
+}
+
+// plugin theme_switch
+div.theme_switch div.widget-content {
+	margin-left: 5px;
+}
+
+// plugin tabs
+div.tabs {width: 100%;}
+
+div.tabs-box.tabs-visible {display: block;}
+
+ul.tabs-nav {
+	margin: 0; 
+	padding: 0; 
+	width: 100%; 
+	list-style: none;
+
+	li.elem {
+		float: left; 
+		display: inline; 
+		position: relative; 
+		line-height: 1em; 
+		//height: 30px; 
+		margin: 0 2px 0 0; 
+		padding: 7px 15px; 
+		cursor: pointer; 
+		font-size: .9em;  
+		color: #777; 
+		.border_radius(5px, 5px, 0, 0);
+	}
+
+	li.elem:hover, 
+	li.tabs-current {
+		background: #f0f0f0; 
+		color: #222;
+	}
+}
+
+div.tabs-box {
+	display: none; 
+	background: #f0f0f0; 
+	padding: 10px; 
+	//.border_radius(0px, 5px, 5px, 5px);
+}
+
+// коррекция отступа если табы в теле записи
+div.page_content ul.tabs-nav {
+	margin-left: 0;
+}

@@ -1,0 +1,95 @@
+.jTPS .sortedColumn {
+	background: #f8f8f8;
+}
+.jTPS tfoot .pagination .pageSelector {
+	cursor: pointer;
+	border: 1px solid #808080;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-left: 5px;
+	text-align: center;
+	float: left;
+	background: #fff;
+}
+.jTPS tfoot .pagination .pageSelectorSeperator {
+	text-align: center;
+	margin-left: 7px;
+	color: #808080;
+	float: left;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-width: 1px;
+	cursor: default;
+}
+.jTPS tfoot .pagination .pageSelector:hover {
+	border: 1px solid #f90;
+}
+.jTPS tfoot .pagination .hilightPageSelector {
+	border: 1px solid #069 !important;
+	background: #069 !important;
+	color: #fff !important;
+	cursor: default !important;
+}
+.jTPS .hideTR {
+	display: none;
+}
+.jTPS .hidePageSelector {
+	display: none;
+}
+.jTPS .hilightRow {
+	background: #eee;
+	cursor: pointer;
+}
+.jTPS tfoot .selectPerPage .perPageSelector {
+	cursor: pointer;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.jTPS tfoot .selectPerPage .perPageSelected {
+	border-bottom: 2px solid #069;
+	background: #fff;
+}
+.jTPS tfoot .selectPerPage .perPageHilight {
+	border-bottom: 2px solid #f90;
+	background: #fff;
+}
+.jTPS tfoot .pagination, tfoot .paginationTitle, tfoot .selectPerPage {
+	float: right;
+	white-space: nowrap;
+	line-height: 25px;
+	vertical-align: middle;
+}
+.jTPS tfoot .status {
+	white-space: nowrap;
+	line-height: 25px;
+	vertical-align: middle;
+}
+.jTPS tfoot .paginationTitle {
+	padding-left:20px;
+}
+.jTPS .sortableHeader:hover {
+	cursor: pointer;
+	color: #808080;
+}
+.jTPS .sortAsc {
+	border-bottom: 1px solid #e3e3e3;
+	background: #eee url(bullet_arrow_up.png) center -4px no-repeat;
+}
+.jTPS .sortDesc {
+	border-bottom: 1px solid #e3e3e3;
+	background: #eee url(bullet_arrow_down.png) center -4px no-repeat;
+}
+.jTPS tfoot td {
+	padding: 5px;
+	background: #eee url(eeGrad2.gif) bottom repeat-x;
+}
+.jTPS thead th {
+	color: #000;
+/*	background: #f0f2f5 url(f0f2f5grad.gif) bottom repeat-x;*/
+	background: #eee url(eeGrad2.gif) bottom repeat-x;
+	border-bottom: 1px solid #ccc;
+	padding-top: 6px !important;
+}
+.jTPS tbody td {
+	border-bottom: 1px solid #e3e3e3;
+}

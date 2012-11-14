@@ -1,0 +1,72 @@
+@import url('../../../templates/default/css/less/include/helpers.less'); 
+
+@import url('../../../templates/default/css/less/include/mso-reset.less');
+@import url('../../../templates/default/css/less/include/mso-default.less');
+@import url('../../../templates/default/css/less/include/mso-forms.less');
+// @import url('../../../templates/default/css/less/include/mso-helpers.less');
+@import url('stock/mso-button/mso-button.less');
+
+body {
+	height: auto; 
+	background: #D8D8D8 url("images/bg.png");
+	color: #555;
+}
+
+a {
+	color: #616264;
+	
+	&:hover {
+		color: #c40;
+	}
+}
+
+#login {
+	position: relative; 
+	width: 380px; 
+	background: white url("images/maxsitelogo-white.gif") no-repeat 96% 4%; 
+	padding: 10px 15px; 
+	border: #ddd solid 2px;
+	margin: 100px auto; 
+	.border_radius(15px);
+	.box_shadow(0, 0, 15px);
+} 
+
+#site {
+	font-size: 9pt;
+}
+
+#cms_name { 
+	color: #888; 
+	font: 18pt Verdana, sans-serif; 
+	margin: 5px 0 0 0;
+	
+	span {
+		color: #DB7241;
+	}
+} 
+
+#entry {
+	font-size: 10pt; 
+	margin: 20px 0 5px 0;
+}
+
+#cms {
+	font-size: 9pt; 
+	margin: 20px 0 0px 0;
+}
+
+form.fform {
+	
+	button.flogin_submit {
+		
+		margin-top: 5px;
+		
+		&:before {
+			content: url("images/16_unlock.png");
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 10px;
+		}
+	
+	}
+}

@@ -1,0 +1,66 @@
+/*****
+ * Ссылка на архивы
+ */
+
+.sp_archive_url{
+	margin: 8px 0 0 0;
+}
+
+/*****
+ * Загрузка результатов
+ */
+
+.sp_polls_loader{
+	text-align: center;
+	display: none;
+}
+
+.sp_polls_loader img{
+	border: 0;
+	margin: 10px 0 0 0;
+}
+
+.sp_polls_loader p{
+	margin: 10px 3px 5px 3px;
+	padding: 1px;
+}
+
+/*****
+ * Таблица результатов
+ */
+
+.sp_results, .sp_polls {
+	width: 100%;
+	border: none;
+}
+
+.sp_results strong, .sp_polls strong {
+	font-weight: bold;	
+}
+
+.sp_results td, .sp_polls td {
+	padding: 2px 0 2px 0;
+	border: none;
+}
+
+.sp_results caption, .sp_polls caption{
+	text-align: left;
+}
+
+/******
+ * Архив голосований
+ */
+
+.samborspy_polls_archive th{
+	vertical-align: top;
+	text-align: left;
+}
+
+.samborspy_polls_archive td, .samborspy_polls_archive th{
+	padding: 0 5px 0px 5px;
+}
+
+.sp_polls_ajax_link{
+	text-decoration: none;
+	border-bottom: 1px dashed;
+}

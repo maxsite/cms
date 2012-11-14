@@ -1,0 +1,57 @@
+Примеры использования.
+
+
+Одиночная картинка:
+
+<a href="http://site/uploads/image1-mini.jpg" title="Название" class="lightbox"><img src="http://site/uploads/image1.jpg" alt=""></a>
+
+
+
+Несколько в одной галерее.
+
+<div class="gallery">
+	<a href="http://site/uploads/image1-mini.jpg" title="Название"><img src="http://site/uploads/image1.jpg" alt=""></a>
+	<a href="http://site/uploads/image2-mini.jpg" title="Название"><img src="http://site/uploads/image2.jpg" alt=""></a>
+	<a href="http://site/uploads/image3-mini.jpg" title="Название"><img src="http://site/uploads/image3.jpg" alt=""></a>
+</div>
+
+
+BBCODE
+
+- одиночная 
+[image=http://site/uploads/image1-mini.jpg Картинка1]http://site/uploads/image1.jpg[/image]
+[image=http://site/uploads/image1-mini.jpg]http://site/uploads/image1.jpg[/image]
+[image]http://site/uploads/image1.jpg[/image]
+
+
++ класс для изображения (в скобках)
+[image(left)=http://site/uploads/image1-mini.jpg Картинка1]http://site/uploads/image1.jpg[/image]
+[image(right)=http://site/uploads/image1-mini.jpg]http://site/uploads/image1.jpg[/image]
+[image(myCSSclass)]http://site/uploads/image1.jpg[/image]
+
+
+- галерея
+[gallery]
+	[gal=http://site/uploads/image1-mini.jpg Картинка1]http://site/uploads/image1.jpg[/gal]
+	[gal=http://site/uploads/image2-mini.jpg Картинка2]http://site/uploads/image2.jpg[/gal]
+	[gal=http://site/uploads/image3-mini.jpg Картинка3]http://site/uploads/image3.jpg[/gal]
+[/gallery]
+
+или 
+
+[gallery][galname]Название галереи[/galname]
+	[gal=http://site/uploads/image1-mini.jpg Картинка1]http://site/uploads/image1.jpg[/gal]
+	[gal=http://site/uploads/image2-mini.jpg Картинка2]http://site/uploads/image2.jpg[/gal]
+	[gal=http://site/uploads/image3-mini.jpg Картинка3]http://site/uploads/image3.jpg[/gal]
+[/gallery]
+
+
+- несколько галерей на одной странице (div style=galleryN)
+[gallery=1]
+	[gal...
+[/gallery]
+
+[gallery=2]
+	[gal...
+[/gallery]
+

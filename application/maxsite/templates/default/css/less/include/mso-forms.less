@@ -1,0 +1,171 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+// mso-forms.less
+// readme-forms.txt
+
+
+label {
+	cursor: pointer;
+}
+
+fieldset {
+	padding: 5px 10px; 
+	margin: 5px 0; 
+	.border(#ccc);
+	.border_radius(5px);
+}
+
+legend {
+	padding: 0 5px;
+}
+
+input, 
+select, 
+button {
+	vertical-align: middle;
+}
+
+textarea {
+	overflow: auto;
+}
+
+input[type="radio"], 
+input[type="checkbox"] {
+	margin: 0; 
+	padding: 0; 
+	position: relative; 
+	top: 1px; 
+	cursor: pointer; 
+	vertical-align: baseline;
+} 
+
+
+input, textarea, button {
+	&::-webkit-input-placeholder {
+		color: #999;
+	}
+	
+	&:-moz-placeholder {
+		color: #999;
+	}
+}
+
+
+form.fform {
+	p {
+	
+		@first: 90px; // размер первой ячейки или отступ (+5 на padding)
+		@width_submit: 100px; // размер ячейки для кнопки submit (-5px для кнопки на отступ)
+		@width_button: 50px; // размер ячейки для остальных кнопок (кнопка этой же ширины)
+		
+		display: table;
+		width: 100%;
+		padding: 3px 0;
+		margin: 0;
+		
+		span, label {
+			display: table-cell;
+			
+			vertical-align: middle;
+			
+			input[type="text"], 
+			input[type="email"], 
+			input[type="password"], 
+			input[type="url"], 
+			input[type="search"], 
+			input[type="number"], 
+			textarea,
+			select
+			{
+				-moz-box-sizing: border-box; 
+				-webkit-box-sizing: border-box; 
+				box-sizing: border-box;
+				width: 100%;
+				*width: auto; // ie7
+			}
+			
+			&.ftitle {
+				text-align: right;
+				padding-right: 5px;
+			}
+			
+			&.ffirst {
+				width: @first; // ширина первой ячейки
+			} 
+			
+			&.ffirst.ftitle {
+				width: @first - 5px; // корректировка для двойного класса ffirst.ftitle
+			
+			} 
+			
+			&.fbutton { // ячейка для кнопки
+				width: @width_button;
+			
+				button, input {
+					min-width: @width_button;
+				}
+			}
+			
+			&.fsubmit {// ячейка для кнопки submit
+				text-align: right;
+				width: @width_submit;
+				
+				button, input {
+					width: @width_submit - 5px;
+				}
+			} 
+			
+			&.ftop {
+				vertical-align: top;
+			}
+			
+			&.fcenter {
+				text-align: center;
+			}
+			
+			// пустая ячейка
+			&.fempty {
+				width: 5px;
+			} 
+			
+			// текстовая подсказка
+			&.fhint {
+				font-size: .9em; 
+				font-style: italic; 
+				color: #606060; 
+				padding-top: 0; 
+				padding-bottom: 5px;
+			}
+
+			// текстовая подсказка-заголовок
+			&.fheader {
+				font-weight: bold;
+			} 
+			
+			// отмена ячейки - обычный span и label
+			&.nocell {
+				display: inline;
+				width: auto;
+				padding: 0;
+			}
+		}
+		
+		
+		// обрамляющий label-блок для ячеек из span
+		// <p><label class="fwrap"><span> titul </span><span> input </span></label></p>
+		label.fwrap {
+				display: table;
+				width: 100%;
+			}
+		
+		// если нужен нулевой отступ padding
+		&.nop {
+			padding-top: 0;
+		} 
+		
+		// визуальный отступ для строки - для отбивки ряда кнопок
+		&.hr {
+			margin-top: 10px;
+		} 
+	}
+}

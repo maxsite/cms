@@ -1,0 +1,151 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+// mso-default.less
+
+ 
+body {
+	.f > arial;
+	font-size: 14px;
+}
+
+body, div, ul, ol, li, td, p, blockquote, code, pre, h1, h2, h3, h4, h5, h6 {
+	line-height: 1.5em;
+}
+
+p, pre, blockquote, ul, ol, table, dl {
+	margin: 0 0 10px 0;
+}
+
+ul {
+	margin-left: 15px;
+}
+
+ol {
+	margin-left: 20px;
+}
+
+sup, sub {
+	vertical-align: baseline; 
+	position: relative; 
+	font-size: .8em;
+}
+
+sup {
+	top: -0.4em;
+}
+
+sub {
+	bottom: -0.3em;
+}
+
+small {
+	font-size: .8em;
+}
+
+strong, b {
+	font-weight: bold;
+}
+
+em, i {
+	font-style: italic;
+}
+
+hr {
+	color: #CCC; 
+	background-color: #CCC; 
+	height: 1px; 
+	border-width: 0;
+}
+
+table {
+	width: 100%;
+
+	th, td {
+		border: 1px solid #CCC; 
+		padding: 2px 3px; 
+		vertical-align: top;
+	}
+	
+	th {
+		background: #e0e0e0; 
+		font-weight: bold;
+	}
+	
+	&.no-border, 
+	&.no-border td {
+		border: none; 
+		padding: 0;
+	}
+
+	&.zebra {
+		tr:nth-child(odd) td, 
+		tr:nth-child(odd) th {
+			background-color: #eee;
+		}
+		
+		tr:hover {
+			td {
+				background-color: #e0e0e0;
+			}
+		}
+	}
+}
+
+dt {
+	font-weight: bold;
+}
+
+dd {
+	margin-left: 15px;
+}
+
+pre {
+	background: #F4F4F4; 
+	border: 1px solid #eee;
+	padding: 7px; 
+	display: block; 
+	overflow: auto; 
+	line-height: 1.5em;
+	.f > mono; 
+}
+
+code {
+	background: #F4F4F4; 
+	border: 1px solid #CCC;
+	padding: 0 5px;
+}
+
+blockquote {
+	padding: 5px 5px 5px 25px; 
+	margin: 10px 0; 
+	border-left: 4px solid #DDD; 
+	color: #444;
+	
+	cite {
+		color: #888; 
+		display: inline-block; 
+		margin-top: 10px;
+	}
+}
+
+abbr, acronym {
+	cursor: help; 
+	border-bottom: 1px dashed #000;
+}
+
+img {
+	vertical-align: middle;
+}
+
+.break {
+	clear: both;
+}
+
+.clearfix:after {
+	content: '.'; 
+	display: block; 
+	clear: both; 
+	visibility: hidden; 
+	height: 0; 
+	line-height: 0;
+}

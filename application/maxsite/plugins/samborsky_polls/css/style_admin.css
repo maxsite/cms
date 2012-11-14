@@ -1,0 +1,67 @@
+.samborsky_polls_table {width:100%;border-collapse:collapse;}
+.admin-content .samborsky_polls_table th, .admin-content .samborsky_polls_table td {border:1px solid #fff;}
+.admin-content .samborsky_polls_table th {text-align:left;background-color:#ddd;padding:3px 8px 3px 20px;}
+.admin-content .samborsky_polls_table td {border-bottom:1px solid #c0c0c0;padding:3px 8px;margin:0;}
+.samborsky_polls_table td img {margin:0 2px;}
+
+.samborsky_polls_table th.polls_list_cell_id {width:15px;}
+.samborsky_polls_table th.polls_list_cell_qu {}
+.samborsky_polls_table th.polls_list_cell_votes {width:90px;}
+.samborsky_polls_table th.polls_list_cell_date {width:90px;}
+.samborsky_polls_table th.polls_list_cell_status {width:90px;}
+.samborsky_polls_table th.polls_list_cell_act {width:110px;}
+
+.samborsky_polls_table tr > td + td + td {text-align:right;}
+.samborsky_polls_table tr:hover {background-color:#ddd;}
+
+/* Сортировка+Пагинация */
+.jTPS tfoot .pagination .pageSelector {cursor:pointer;border:1px solid #808080;padding-left:5px;padding-right:5px;
+		margin-left:5px;text-align:center;float:left;background:#fff;}
+.jTPS tfoot .pagination .pageSelectorSeperator {text-align:center;margin-left:7px;color:#808080;float:left;padding-left:5px;
+		padding-right:5px;border-width:1px;cursor:default;}
+.jTPS tfoot .pagination .pageSelector:hover {border:1px solid #f90;}
+.jTPS tfoot .pagination .hilightPageSelector {border:1px solid #069 !important;background:#069 !important;
+		color:#fff !important;cursor:default !important;}
+.jTPS .hideTR {display:none;}
+.jTPS .hidePageSelector {display:none;}
+.jTPS .hilightRow {background:#eee;cursor:pointer;}
+.jTPS tfoot .selectPerPage .perPageSelector {cursor:pointer;padding-left:5px;padding-right:5px;}
+.jTPS tfoot .selectPerPage .perPageSelected {border-bottom:2px solid #069;background: #fff;}
+.jTPS tfoot .selectPerPage .perPageHilight {border-bottom:2px solid #f90;background:#fff;}
+.jTPS tfoot .pagination, tfoot .paginationTitle, tfoot .selectPerPage {float:right;white-space:nowrap;line-height:25px;
+		vertical-align:middle;}
+.jTPS tfoot .status {white-space:nowrap;line-height:25px;vertical-align:middle;}
+.jTPS tfoot .paginationTitle {padding-left:20px;}
+.jTPS tfoot td {padding:5px;background:#ddd url(eeGrad2.gif) bottom repeat-x;}
+.jTPS thead th {color:#000;background:#ddd;border-bottom:1px solid #ccc;}
+.jTPS thead th.sort {background:#ddd url(../img/arrow.gif) 0% 50% no-repeat;}
+.jTPS .sortableHeader:hover {cursor:pointer;color:#808080;}
+.jTPS thead th.sortAsc {border-bottom:1px solid #e3e3e3;background:#ddd url(../img/arrow_down.gif) 0% 50% no-repeat;}
+.jTPS thead th.sortDesc {border-bottom:1px solid #e3e3e3;background: #ddd url(../img/arrow_up.gif) 0% 50% no-repeat;}
+
+/* Сортировка. Конец */
+
+/* ------------------------------------------- */
+/* Добавление/Редактирование голосования       */
+/* ------------------------------------------- */
+
+/* Сортировка - преретягивание данных */
+#sortable_polls {list-style-type:none;margin:0;padding:0;width:100%;}
+#sortable_polls li {margin:0 3px 3px 3px;padding:5px;padding-left:30px;cursor:move;
+		background:#eee url(../img/arrow.gif) 5px 50% no-repeat;}
+#sortable_polls li img {position:relative;top:3px;margin-left:5px;cursor:pointer;}
+#sortable_polls input {font-size:100%;}
+#sortable_polls input.ans_text {width:80%}
+#sortable_polls input.ans_votes {width:10%}
+/* Сортировка. Конец */
+
+.polls_manage_ans a.add_ans p {margin-top:15px;padding-left:40px;background:url(../img/plus.png) 10px 50% no-repeat;cursor:pointer;}
+.polls_manage_date input, .polls_manage_protect select {font-size:100%;}
+
+/* ------------------------------------------- */
+/*        Логи                                 */
+/* ------------------------------------------- */
+ 
+table.samborsky_polls_list td {padding:3px 10px;}
+
+div.polls_addEdit_form textarea {width: 100%;}

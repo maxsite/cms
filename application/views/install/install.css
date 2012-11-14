@@ -1,0 +1,42 @@
+/* reset v1.0 | 2008-02-12 http://meyerweb.com/eric/tools/css/reset/ */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, lab1el, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent;}
+body {line-height: 1;}
+
+body {font-family: Verdana; font-size: 9pt; background: white;}
+
+a { color: #3182C0; text-decoration: none;}
+a:hover { color: #3182C0; text-decoration: underline; }
+
+p {margin: 4px 0px 7px 0px; line-height: 1.3em;}
+ul, ol {margin-left: 30px; }
+li {margin-bottom: 10px;}
+
+span {color: #3C5FB3;}
+
+p.ok {color: green; font-weight: bold;}
+p.ok span {color: #606060;}
+p.error {color: red;}
+p.error span {color: #606060;}
+p.f5 {background: red; color: white; text-align: center; padding: 5px;}
+p.f-name {margin: 10px 0;}
+p.f-name span {display: block; float: left; width: 150px; padding: 3px 0 0 0; margin: 0 5px 0 0; text-align: right;}
+p.f-desc {clear: both; margin-left: 155px; font-style: italic; color: #606060; font-size: 8pt;}
+p.f-ch {clear: both; margin: 15px 0 0 155px; color: #3C5FB3;}
+
+#container {width: 600px; margin: 40px auto; padding: 10px; border: 2px silver solid; text-align: left; background: #f0f0f0; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px;}
+#mysubmit {padding: 5px; font-weight: bold;}
+p.mysubmit-ok {text-align: center;}
+
+label {cursor: pointer;}
+input[type='checkbox'] {cursor: pointer; margin-top: 2px; vertical-align: middle;}
+
+h1 {font-size: 1.7em; color: #404040; background: #D5D5E1; padding: 10px 0; font-weight: normal; margin: 0 0 20px; text-align: center;}
+h2 {font-size: 1.3em; color: #404040; margin: 20px 0;}
+h2.error {color: red; text-align: center;}
+h3 {font-size: 1.2em;}
+
+h2.res {color: green; margin: 20px 80px 20px 80px;}
+p.res {margin: 7px 80px 7px 80px;}
+
+div.proverka {padding: 5px 10px; margin: 20px 0 20px 0; border-top: 3px double #a0a0a0; border-bottom: 3px double #a0a0a0; font-size: 8pt;}
+div.proverka p {margin: 7px 0;}

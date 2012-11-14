@@ -1,0 +1,27 @@
+@charset "utf-8";
+/* Spoiler plugin */
+
+a.spoiler_link_show,
+a.spoiler_link_hide
+{
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 12px;
+}
+
+a.spoiler_link_show 
+{
+    background-image:url('add.gif');
+}
+
+a.spoiler_link_hide 
+{
+    background-image:url('del.gif');
+}
+
+div.spoiler_div 
+{
+	background-color: #ddd;
+	margin: 3px;
+	padding: 2px;
+}

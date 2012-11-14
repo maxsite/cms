@@ -1,0 +1,28 @@
+body {color: #000; background-color: #d2d2d2; font: 15px Arial, "Liberation Sans", sans-serif; line-height:16px; word-spacing:0px;}
+a{color: #69be43;}
+a:hover {color: #69be43;}
+div.all-wrap {background: #fff; color: #000;}
+div.main {background: #fff; color: #000;}
+h1 {color: #69be43;}
+h1 a {color: #69be43;}
+h1 a:hover {color: #69be43;}
+h1.category {background: #fff; color: #d2d2d2; padding:0;}
+div.type_home_cat_block div.header_home_cat {background: #fff;}
+div.type_home_cat_block div.header_home_cat a {color: #000;}
+div.footer {background: #2d2d2d; color: white; font-size:12px;}
+h2.sitemap {background: #69be43;}
+textarea, select, input[type="text"], input[type="password"] {background: #E7F6D7; border: 1px solid #98C66F;}
+div.leave_a_comment {background: #BDF3A5; color: #69be43; border:none;}
+div.page_comments_count {background: #fff; color: #69be43; border:none;}
+div.comment-info {background: #fff; color: #76A639;}
+div.comments div.comments_content {background: #fff; color: #1A4613;}
+div.comment-form {background: #BDF3A5; color: #69be43; border:none;}
+div.page_other_pages_header {background: #fff; border-color: #fff; color: #69be43; font-weight:bold;}
+code, pre, blockquote {background: #E7F6D7; border: 1px solid #98C66F;}
+dt {background: #404040;}
+dd {background: #505050;}
+table th {background: #404040;}
+div.MainMenu {background: #69be43;}
+ul.menu li.selected a {background: #add877;}
+ul.menu li a:hover {background: #add877;}
+div.pagination strong {background: #69be43; color: white; padding: 3px 6px;}

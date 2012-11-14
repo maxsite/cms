@@ -1,0 +1,310 @@
+<h1>Заголовок H1</h1>
+
+<p>Далеко-далеко за словесными горами в <u>стране гласных</u> и согласных живут <s>рыбные тексты.</s> Вдали от всех живут они в буквенных домах на берегу <strong>Семантика</strong> большого языкового океана. Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми необходимыми правилами. Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот. Даже всемогущая <sub>пунктуация</sub> не имеет власти над рыбными текстами, ведущими <em>безорфографичный образ жизни</em>. Однажды одна маленькая строчка рыбного текста по имени <sup>Lorem ipsum</sup> решила выйти в большой мир грамматики.</p>
+
+<p> Великий Оксмокс предупреждал ее о злых запятых, диких знаках вопроса и коварных точках с запятой, но текст не дал сбить себя с толку. Он собрал семь своих заглавных букв, подпоясал инициал за пояс и пустился в дорогу. Взобравшись на первую вершину курсивных гор, бросил он последний взгляд назад, на силуэт своего родного города Буквоград, на заголовок деревни Алфавит и на подзаголовок своего переулка Строчка. Грустный реторический вопрос скатился по его щеке и он продолжил свой путь. По дороге встретил текст рукопись.</p>
+
+[h2(first)]Заголовок H2.first[/h2]
+
+<p> Она предупредила его: «В моей стране все переписывается по несколько раз. Единственное, что от меня осталось, это приставка «и». Возвращайся ты лучше в свою безопасную страну». Не послушавшись рукописи, наш текст продолжил свой путь. Вскоре ему повстречался коварный составитель рекламных текстов, напоивший его языком и речью и заманивший в свое агенство, которое использовало его снова и снова в своих проектах. И если его не переписали, то живет он там до сих пор. Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.</p>
+
+<h2>Заголовок H2</h2>
+
+<p>Однажды одна маленькая строчка рыбного текста по имени Lorem ipsum решила выйти в большой мир грамматики. Великий Оксмокс предупреждал ее о злых запятых, диких знаках вопроса и коварных точках с запятой, но текст не дал сбить себя с толку. Он собрал семь своих заглавных букв, подпоясал инициал за пояс и пустился в дорогу.</p>
+
+<h3>Заголовок H3</h3>
+<p> Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана. Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми необходимыми правилами. Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот. Даже всемогущая пунктуация не имеет власти над рыбными текстами, ведущими безорфографичный образ жизни. Однажды одна маленькая строчка рыбного текста по имени Lorem ipsum решила выйти в большой мир грамматики.</p>
+
+<h4>Заголовок H4</h4>
+<p>Sed magna elit, laoreet ac ornare sed, tempus a velit. Donec lobortis scelerisque urna, id malesuada sem tristique scelerisque! Etiam feugiat mi a diam mollis et bibendum dui placerat! Duis posuere ultrices euismod. Sed lacinia nulla sed nisl vestibulum in fringilla nulla congue. Suspendisse luctus convallis lacinia. Sed facilisis pharetra magna, a gravida tellus ultrices ut. Mauris eget semper elit. Donec euismod hendrerit lectus vitae sagittis.</p>
+
+<h5>Заголовок H5</h5>
+<p>Ut tempus auctor volutpat? Vestibulum molestie suscipit quam vitae sagittis. Sed vel metus eget ligula dapibus sagittis. Maecenas lacinia faucibus egestas. Curabitur eget mi magna, ac imperdiet dolor. Nulla bibendum nibh id lacus semper placerat. Duis tristique, urna nec interdum commodo, enim lectus posuere neque, eget congue mi nunc in dolor. Sed convallis odio tortor, vel consequat felis. Nulla facilisi. In hac habitasse platea dictumst. Sed fermentum interdum molestie! Curabitur metus mi, fermentum eget accumsan ac, aliquet non urna. Etiam diam odio, pretium vel luctus et, porta a quam.</p>
+
+<h6>Заголовок H6</h6>
+<p>Maecenas id dui lectus. Ut ipsum leo, laoreet sit amet pulvinar quis, mattis eu justo. Donec ac leo a neque porttitor tincidunt ac id elit. Nullam egestas, quam porttitor consequat ornare, lectus ipsum sagittis nisl, vel vestibulum libero felis ullamcorper quam. Nulla et est dui. Praesent vel bibendum ipsum. Proin id lectus mi.</p>
+
+<hr>
+
+<h2>Преформатированный текст (код) PRE</h2>
+
+<pre>
+&lt;html&gt;
+<br>	&lt;head&gt;
+<br>	&lt;/head&gt;
+<br>	&lt;body&gt;
+<br>		
+<br>	&lt;/body&gt;
+<br>&lt;/html&gt;
+</pre>
+
+
+<h2>Код CODE в тексте</h2>
+
+<p>When you call the <code>activate()</code> method on the <code>robotSnowman</code> object, the eyes glow.</p>
+
+<hr>
+
+<h2>Изображение в тексте IMG</h2>
+
+<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra, dui sit amet fringilla venenatis. <a href="#">Vestibulum lobortis</a> semper sem aliquet rhoncus. Donec fermentum, felis quis tincidunt sodales, sem quam adipiscing nibh, nec tincidunt augue sapien.</p>
+
+<img src="data:image/png;base64,/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAPAAA/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8AAEQgASwBLAwERAAIRAQMRAf/EAGYAAQEBAQEBAAAAAAAAAAAAAAADAgEECAEBAAAAAAAAAAAAAAAAAAAAABAAAgECBAQFBQEAAAAAAAAAAAECERIhMTIDcbHhsmGRwdFjIlLiE3MUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD6cAAAAAAAAAAAADOXADQAAAAAZb8wNAAAACbdmL0cgKAAAGJTpRLGTyQHYqmeLebA0AAAAAEW3sv4u3oBYCe5uW0SV05aY+vABCFuLdZvVICgAAAAAAAHmnP/AD4L6oS0x+38eQFdvbtrJu6ctUvbwAoAAAAAAABPc3LaJK6ctMffwAbe3bVyd05apenADGOy/h7egFwAAAAAAYnKmCVZPJAchC2reM3qkBQABJL9X8+3oBUAAAAZb8wCjTHNvNgaAAAAGErcFp5AbAAAAAAAAAAAAAAAAAAAAAAAAOAf/9k=" width="75" height="75" alt="Картинка классом left" title="Картинка классом left" class="left">
+
+
+<p>Mauris et magna at libero mollis tristique quis non massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec vitae ante dolor. Mauris tincidunt ultricies nunc eu mattis. Integer ornare vulputate semper? Nullam tempor placerat imperdiet. Nullam hendrerit sollicitudin sem, nec luctus lectus blandit sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet hendrerit urna. Sed lobortis lectus condimentum tellus consectetur facilisis. Nullam velit ipsum, pulvinar nec pellentesque sit amet, adipiscing ut eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas convallis, erat pharetra pulvinar bibendum; orci mi consequat quam, ut volutpat lectus ligula ut diam. </p>
+
+<img src="data:image/png;base64,/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAPAAA/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8AAEQgASwBLAwERAAIRAQMRAf/EAGYAAQEBAQEBAAAAAAAAAAAAAAADAgEECAEBAAAAAAAAAAAAAAAAAAAAABAAAgECBAQFBQEAAAAAAAAAAAECERIhMTIDcbHhsmGRwdFjIlLiE3MUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD6cAAAAAAAAAAAADOXADQAAAAAZb8wNAAAACbdmL0cgKAAAGJTpRLGTyQHYqmeLebA0AAAAAEW3sv4u3oBYCe5uW0SV05aY+vABCFuLdZvVICgAAAAAAAHmnP/AD4L6oS0x+38eQFdvbtrJu6ctUvbwAoAAAAAAABPc3LaJK6ctMffwAbe3bVyd05apenADGOy/h7egFwAAAAAAYnKmCVZPJAchC2reM3qkBQABJL9X8+3oBUAAAAZb8wCjTHNvNgaAAAAGErcFp5AbAAAAAAAAAAAAAAAAAAAAAAAAOAf/9k=" width="75" height="75" alt="Картинка классом right" title="Картинка классом right" class="right">
+
+<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra, dui sit amet fringilla venenatis. <a href="#">Vestibulum lobortis semper</a> sem aliquet rhoncus. Donec fermentum, felis quis tincidunt sodales, sem quam adipiscing nibh, nec tincidunt augue sapien. Etiam congue, magna vitae pellentesque accumsan, mi urna convallis erat; a posuere sapien dolor vel sapien. Vestibulum sed nunc ac nunc rutrum molestie! Sed nec arcu nunc, vitae hendrerit felis! In eleifend suscipit ligula, et ornare tellus varius placerat. Vivamus porta, sem at laoreet tempus, purus justo luctus lacus, non bibendum arcu quam a erat.</p>
+
+
+
+<h2>Цитаты BLOCKQUOTE</h2>
+
+<blockquote>
+<p>Quisque vehicula; neque id condimentum varius, metus nisl vehicula orci, sit amet malesuada massa ipsum ut orci. Ut tincidunt congue eleifend. Proin et eros nisi, eget sollicitudin lacus. Maecenas sit amet nibh et felis volutpat vulputate ut sed nisi. Praesent vestibulum, magna in accumsan lacinia, odio dolor laoreet nibh, non cursus nisl dui non augue?</p>
+<p><cite>- Duis justo quam <strong>CITE</strong></cite></p>
+</blockquote>
+
+
+<h2>Обычный список UL/LI</h2>
+<ul>
+	<li>Nulla lobortis semper libero, rutrum volutpat leo faucibus a. Fusce justo eros, porta at cursus eu, tincidunt ut magna. Nulla.</li>
+	<li>Vestibulum pretium sapien eget neque bibendum at auctor justo gravida. Nam dapibus, diam eu sodales aliquet, orci lorem auctor felis.</li>
+	<li>Proin ut neque ut quam vestibulum blandit. Phasellus tempus semper est, at malesuada leo suscipit.</li>
+	<li>Phasellus faucibus fringilla ligula, at ultrices arcu varius quis. Aliquam sollicitudin scelerisque bibendum. Proin sed.</li>
+</ul>
+
+<h2>Обычный вложенный список UL/LI</h2>
+<ul>
+	<li>Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.
+		<ul>
+			<li>Nulla lobortis semper libero, rutrum volutpat leo faucibus a. Fusce justo eros, porta at cursus eu, tincidunt ut magna. Nulla.</li>
+			<li>Vestibulum pretium sapien eget neque bibendum at auctor justo gravida. Nam dapibus, diam eu sodales aliquet, orci lorem auctor felis.</li>
+		</ul>
+	</li>
+
+	<li>Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана.
+		<ul>
+			<li>Nulla lobortis semper libero, rutrum volutpat leo faucibus a. Fusce justo eros, porta at cursus eu, tincidunt ut magna. Nulla.</li>
+			<li>Vestibulum pretium sapien eget neque bibendum at auctor justo gravida. Nam dapibus, diam eu sodales aliquet, orci lorem auctor felis.</li>
+		</ul>
+	</li>
+
+	<li> Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот.
+		<ul>
+			<li>Nulla lobortis semper libero, rutrum volutpat leo faucibus a. Fusce justo eros, porta at cursus eu, tincidunt ut magna. Nulla.</li>
+			<li>Vestibulum pretium sapien eget neque bibendum at auctor justo gravida. Nam dapibus, diam eu sodales aliquet, orci lorem auctor felis.</li>
+		</ul>
+	</li>
+	
+	<li> Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми необходимыми правилами.
+		<ul>
+			<li>Nulla lobortis semper libero, rutrum volutpat leo faucibus a. Fusce justo eros, porta at cursus eu, tincidunt ut magna. Nulla.</li>
+			<li>Vestibulum pretium sapien eget neque bibendum at auctor justo gravida. Nam dapibus, diam eu sodales aliquet, orci lorem auctor felis.</li>
+		</ul>
+	</li>
+</ul>
+
+
+<h2>Нумерованный список OL/LI</h2>
+<ol>
+<li>Curabitur ornare porttitor nunc, nec.</li>
+<li>Vivamus nisi arcu, tempus vel.</li>
+<li>In sit amet justo non.</li>
+<li>Aliquam nec bibendum libero. Phasellus.</li>
+</ol>
+
+<h2>Список определений (DL/DT/DD)</h2>
+
+<dl>
+	<dt>title</dt>
+	<dd>definition</dd>
+	<dd>definition</dd>
+	<dd>definition</dd>
+		
+	<dt>title</dt>
+	<dd>definition</dd>
+	<dd>definition</dd>
+	<dd>definition</dd>
+	
+	<dt>title</dt>
+	<dd>definition</dd>
+	<dd>definition</dd>
+	<dd>definition</dd>
+</dl>
+
+
+<h2>Таблица TABLE/TR/TH/TD</h2>
+
+<table>
+<tr>
+<th>Заголовок 1 TH</th>
+<th>Заголовок 2 TH</th>
+<th>Заголовок 3 TH</th>
+<th>Заголовок 4 TH</th>
+</tr>
+<tr>
+<td>Ячейка 1.1</td>
+<td>Ячейка 1.2</td>
+<td>Ячейка 1.3</td>
+<td>Ячейка 1.4</td>
+</tr>
+<tr>
+<td>Ячейка 2.1</td>
+<td>Ячейка 2.2</td>
+<td>Ячейка 2.3</td>
+<td>Ячейка 2.4</td>
+</tr>
+<tr>
+<td>Ячейка 3.1</td>
+<td>Ячейка 3.2</td>
+<td>Ячейка 3.3</td>
+<td>Ячейка 3.4</td>
+</tr>
+</table>
+
+
+<h2>Таблица TABLE.zebra (чередующиеся строки)</h2>
+
+<table class="zebra">
+<tr>
+<th>Заголовок 1 TH</th>
+<th>Заголовок 2 TH</th>
+<th>Заголовок 3 TH</th>
+<th>Заголовок 4 TH</th>
+</tr>
+<tr>
+<td>Ячейка 1.1</td>
+<td>Ячейка 1.2</td>
+<td>Ячейка 1.3</td>
+<td>Ячейка 1.4</td>
+</tr>
+<tr>
+<td>Ячейка 2.1</td>
+<td>Ячейка 2.2</td>
+<td>Ячейка 2.3</td>
+<td>Ячейка 2.4</td>
+</tr>
+<tr>
+<td>Ячейка 3.1</td>
+<td>Ячейка 3.2</td>
+<td>Ячейка 3.3</td>
+<td>Ячейка 3.4</td>
+</tr>
+<tr>
+<td>Ячейка 4.1</td>
+<td>Ячейка 4.2</td>
+<td>Ячейка 4.3</td>
+<td>Ячейка 4.4</td>
+</tr>
+</table>
+
+
+<h2>Пример формы .fform</h2>
+
+[html]
+<form class="fform" style="width: 100%">
+<fieldset>
+<legend>Пример формы</legend>
+
+<p>
+<span class="ffirst ftitle">Выбери:</span>
+<span>
+<select name="fields">
+<option selected="selected">Первый</option>
+<option>Второй</option>
+<option>Третий</option>
+</select>
+</span>
+</p>
+<hr>
+<p>
+<span class="ffirst ftitle">Отметь:</span>
+<label><input type="checkbox"> Первый</label>
+<label><input type="checkbox"> Второй</label>
+<label><input type="checkbox"> Третий</label>
+</p>
+<p>
+<span class="ffirst"></span>
+<span>Отметь и получи приз!</span>
+</p>
+<hr>
+<p>
+<span class="ffirst ftitle">Выбери:</span>
+<label><input type="radio" name="switch_radio[]"> Первый</label>
+<label><input type="radio" name="switch_radio[]"> Второй</label>
+<label><input type="radio" name="switch_radio[]"> Третий</label>
+<label><input type="radio" name="switch_radio[]"> Четвертый</label>
+
+</p>
+<hr>
+<p>
+<span class="ffirst ftitle ftop">Выбери:</span>
+
+<label class="ffirst nocell"><input type="radio" name="switch_radio2[]"> Первый</label>
+[br]<label class="ffirst nocell"><input type="radio" name="switch_radio2[]"> Второй</label>
+[br]<label class="ffirst nocell"><input type="radio" name="switch_radio2[]"> Третий</label>
+</p>
+
+<hr>
+
+<p>
+<label class="ffirst ftitle" for="f-email">Email:</label>
+<span><input type="email" placeholder="Укажите свой email" id="f-email"></span>
+
+<span class="fempty"></span>
+<span class="fbutton"><button type="button">copy</button></span>
+
+<label class="ftitle" for="f-password">Пароль:</label>
+<span><input type="password" placeholder="Ваш пароль" id="f-password"></span>
+</p>
+<p>
+<label class="ftitle ffirst" for="f-site2">Сайт:</label>
+<span><input type="url" placeholder="Адрес сайта" id="f-site2"></span>
+
+<span class="fempty"></span>
+
+<label class="ftitle" for="f-name">Имя:</label>
+<span><input type="text" id="f-name" placeholder="Ваше имя"></span>
+</p>
+
+<p>
+<label class="ftitle ffirst" for="f-site1">Cайт:</label>
+<span><input type="url" id="f-site1"></span>
+</p>
+
+<p>
+<label class="ffirst ftitle ftop" for="f-text1">Ваш текст:</label>
+<span><textarea id="f-text1"></textarea></span>
+</p>
+
+<p>
+<span class="ffirst"></span>
+<span><input type="search" placeholder="Введите фразу для поиска"></span>
+<span class="fbutton"><input type="submit" value="Поиск"></span>
+</p>
+
+<hr>
+
+<p>
+<span><input type="search" placeholder="Введите фразу для поиска"></span>
+<span class="fsubmit"><input type="submit" value="Поиск"></span>
+</p>
+
+<hr>
+
+<p><label>Сайт:<input type="text"></label></p>
+
+<p><label>Имя:<input type="text"></label></p>
+
+<p><label>Ваш текст:<textarea></textarea></label></p>
+
+<p><label><input type="checkbox"> Согласен с правилами</label></p> 
+
+<p><span><input type="submit" value="Отправить"> <input type="reset" value="Сброс"></span></p>
+ 
+</fieldset>
+</form>
+[/html]

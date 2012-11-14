@@ -1,0 +1,30 @@
+div.mkj_sc_box {
+	width: 80%;
+	text-align: center;
+	padding: 10px;
+	margin: 5px;
+	background: #EEEEEE;
+	border: 1px solid #DDDDDD;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	margin: 0 auto;
+}
+
+div.mkj_sc_box .title { font-weight: bold; }
+div.mkj_sc_box .varjs { border: 1px dashed #CCCCCC; }
+
+div.mkj_sc_box .var {
+	border: 1px solid #CCCCCC;
+	width: 40px;
+	height: 40px;
+	padding-left: 40px;
+}
+
+div.mkj_sc_box .error {
+	border: 1px solid #F80000;
+	margin: 10px 0 0 0;
+	padding: 5px;
+	text-align: justify;
+	color: #F80000;
+	font-weight: bold;
+}

@@ -1,0 +1,139 @@
+body {
+  background: #E0E0E0;
+}
+a {
+  color: #0E5FBF;
+  text-decoration: underline;
+}
+a:hover {
+  color: red;
+}
+div.widget a {
+  text-decoration: none;
+}
+div.sitemap a {
+  text-decoration: none;
+}
+div.type_comments a {
+  text-decoration: none;
+}
+div.page_other_pages a {
+  text-decoration: none;
+}
+a.curent-page-cat {
+  font-weight: bold;
+}
+h1 {
+  color: #101010;
+}
+h1 a {
+  color: #101010;
+}
+h1 a:hover {
+  color: red;
+}
+h1.category {
+  font-size: 2.0em;
+  text-transform: uppercase;
+  margin: 0 0 15px 0;
+  padding: 5px 10px;
+  background: #192849;
+  color: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+div.all-wrap {
+  width: 960px;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 0 7px #606060;
+  -o-box-shadow: 0 0 7px #606060;
+  -webkit-box-shadow: 0 0 7px #606060;
+  -moz-box-shadow: 0 0 7px #606060;
+}
+div.header {
+  width: 960px;
+  margin: 0 auto;
+}
+div.main {
+  width: 960px;
+  margin: 0 auto;
+  background: white;
+}
+div.content {
+  width: 710px;
+  margin: 0 250px 0 0;
+  float: left;
+}
+div.content-wrap {
+  margin: 20px 30px 10px 20px;
+}
+div.sidebar {
+  width: 250px;
+  float: right;
+  margin: 20px 0 0 -250px;
+}
+div.sidebar1-wrap {
+  margin-right: 10px;
+}
+div.footer {
+  width: 100%;
+  clear: both;
+  background: #192849;
+  font-size: 0.9em;
+  color: white;
+}
+div.footer a {
+  color: white;
+}
+div.footer-wrap {
+  padding: 10px;
+  margin: 0 auto;
+}
+div.MainMenu {
+  font-size: 10pt;
+  padding-left: 10px;
+  background: #192849;
+}
+ul.menu li a {
+  margin-right: 8px;
+  color: white;
+}
+ul.menu li a:hover {
+  background: #3A4356;
+  color: white;
+}
+ul.menu li.selected a {
+  background: #374973;
+}
+div.page_other_pages_header,
+div.page_comments_count,
+div.leave_a_comment {
+  font-weight: bold;
+  margin: 10px 0;
+  padding: 8px;
+  background: #F0F0F0;
+  border: #dddddd 1px solid;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+div.pagination strong {
+  background: #225DA3;
+  color: white;
+}
+ul.tabs-nav li.elem {
+  background: #EEE;
+  color: #888;
+}
+ul.tabs-nav li.elem:hover,
+ul.tabs-nav li.tabs-current {
+  color: #3F454B;
+  background: #BFC0CD;
+}
+div.type_home_cat_block div.header_home_cat {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}

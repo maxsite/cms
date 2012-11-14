@@ -1,0 +1,112 @@
+/* reset v1.0 | 2008-02-12 http://meyerweb.com/eric/tools/css/reset/ */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent;}
+body {line-height: 1;}
+ol, ul {list-style: none;}
+blockquote, q {quotes: none;}
+blockquote:before, blockquote:after, q:before, q:after {content: ''; content: none;} 
+:focus {outline: 0;}
+ins {text-decoration: none;}
+del {text-decoration: line-through;}
+table {border-collapse: collapse; border-spacing: 0;}
+
+
+/* my base default */
+body {font-family: Verdana, sans-serif; font-size: 9pt;}
+
+body, div, ul, ol, li, td, p, blockquote, code, pre, h1, h2, h3, h4, h5, h6 {line-height: 1.3em;}
+p, code, pre, blockquote, ul, ol, table, dl {margin: 4px 0 7px 0;}
+ol, ul {margin-left: 35px;}
+ul {list-style-type: disc;}
+ol {list-style-type: decimal;}
+sup, sub {vertical-align: baseline; position: relative; font-size: .8em}
+sup {top: -0.4em;}
+sub {bottom: -0.3em;}
+hr {color: #cccccc; background-color: #cccccc; height: 1px; border-width: 0;}
+table {width: 100%;}
+table th, table td {border: 1px solid #cccccc; padding: 2px 3px; vertical-align: top;}
+table th {background: #f4f4f4;}
+
+table.no-border, table.no-border td {border: none; padding: 0; vertical-align: top;}
+
+dt {margin-bottom: .2em; font-weight: bold; background: #E5E5E5; padding: 4px 10px;}
+dd {padding-left: 5em; margin-bottom: .4em; background: #F5F5F5;}
+code, pre, blockquote {background: #eeeeee; border: 1px solid silver;}
+code {padding: 1px 4px;}
+pre {padding: 4px; overflow: auto;}
+blockquote {padding: 4px 4px 4px 20px; margin-left: 30px; border-left: 4px solid #aaaaaa;}
+label {cursor: pointer;}
+
+img {vertical-align: middle;}
+
+/* поля форм */
+input, select {vertical-align: middle;}
+select, input, textarea, button {font-family: sans-serif;}
+textarea {overflow: auto;}
+input[type="submit"], input[type="reset"], input[type="button"] {}
+input[type="radio"], input[type="checkbox"] {margin: 0; padding: 0; position: relative; top: 1px; cursor: pointer; vertical-align: text-top;} 
+input[type="text"], input[type="password"], textarea, select {} 
+*+html input[type="submit"], *+html input[type="reset"], *+html input[type="button"]  {overflow: visible;} /*IE7*/
+
+span.cut {}
+div.break {clear: both;}
+
+
+
+/* ссылки */
+a {color: blue; text-decoration: none;}
+a:hover {color: red; text-decoration: underline;}
+
+a.current_url {font-weight: bold; }
+li.current_url a {font-weight: bold;}
+li.current_url li a {font-weight: bold;}
+
+
+/* база заголовков */
+h1 {font-size: 1.8em; margin: 0 0 5px 0; font-weight: normal; }
+h1.first {margin: 10px 0 5px 0;}
+
+h2 {font-size: 1.4em; margin: 15px 0 5px 0; font-weight: normal; }
+h2.first {margin: 5px 0 5px 0;}
+
+h3 {font-size: 1.0em; margin: 15px 0 5px 0;}
+h3.first {margin: 5px 0 5px 0;}
+
+h4 {font-size: 1.2em; margin: 15px 0 5px 0;}
+h4.first {margin: 5px 0 5px 0;}
+h5 {font-size: 1.1em; margin: 15px 0 5px 0;}
+h5.first {margin: 5px 0 5px 0;}
+h6 {font-size: 1.0em; margin: 15px 0 5px 0;}
+h6.first {margin: 5px 0 5px 0;}
+
+/* img */
+img.smiley {vertical-align: middle;}
+
+img.left {float: left; margin: 5px 10px 5px 0px;}
+img.right {float: right; margin: 5px 0 5px 10px;}
+img.center {margin: 0 auto; display: block;}
+img.border {border: 1px solid #3D61B6; }
+
+
+/* инфоблоки */
+div.message {position: relative; background: #FFFF60; border: 1px solid orange; color: black; margin: 4px 0 7px 0; padding: 10px 10px 10px 70px; min-height: 48px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px;}
+
+div.alert {position: relative; background: #FFE8BF; border: 1px solid #CD8500; color: maroon; margin: 4px 0 7px 0; padding: 10px 10px 10px 70px; min-height: 48px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px;}
+
+div.error {position: relative; background: #FF1919; border: 1px solid #8B0000; color: white; margin: 4px 0 7px 0; padding: 10px 10px 10px 70px; min-height: 48px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px;}
+
+div.ok {position: relative; background: #7FFF91; border: 1px solid #008B13; color: #006600; margin: 4px 0 7px 0; padding: 10px 10px 10px 70px; min-height: 48px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px;}
+
+div.about {position: relative; background: #A6D2FF; border: 1px solid #2A5A8B; color: navy; margin: 4px 0 7px 0; padding: 10px 10px 10px 70px; min-height: 48px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px;}
+
+div.noicon {background-image: none; padding: 10px;}
+
+div.red {background-color: red; color: white; border: 1px solid #8B0000;}
+div.yellow {background-color: yellow; color: black; border: 1px solid orange;}
+div.green {background-color: green; color: white; border: 1px solid #008B00;}
+div.blue {background-color: blue; color: white; border: 1px solid #00008B;}
+div.gray {background-color: gray; color: white; border: 1px solid black;}
+div.silver {background-color: silver; color: black; border: 1px solid gray;}
+
+
+
+

@@ -1,0 +1,12 @@
+/* если у вас свой файл стилей, то добавьте эти в свой css-файл шаблона */
+
+/* plugin tabs */
+div.tabs {width: 100%;}
+div.tabs-box.tabs-visible {display: block; }
+ul.tabs-nav {margin: 0; padding: 0; height: 30px; width: 100%; list-style: none;}
+ul.tabs-nav li.elem {float: left; display: inline; position: relative; line-height: 30px; height: 30px; margin: 0 1px 0 0; padding: 0 10px; cursor: pointer; background: #DDD; color: #808080; border-radius: 8px 8px 0 0; font-size: .9em;}
+ul.tabs-nav li.elem:hover {color: white; background: #96AABE;}
+ul.tabs-nav li.tabs-current {color: Lemonchiffon; background: Lightslategray;}
+div.tabs-box {display: none; border: 1px solid #DDD; background: #EFEFEF; padding: 10px; border-radius: 0 8px 0 0;}
+	
+	

@@ -1,0 +1,9 @@
+#slider-header {width: 100%!important; height: 250px!important; overflow: hidden;}
+.nivoSlider {position: relative;} 
+.nivoSlider img {position: absolute; top: 0; left: 0; display: none;} 
+.nivo-slice {display: block; position: absolute; z-index: 5; height: 100%;}
+.nivo-box {display: block; position: absolute; z-index: 5;}
+.nivo-directionNav a {position: absolute; top: 45%; z-index: 9; cursor: pointer;} 
+.nivo-prevNav, .nivo-nextNav {padding: 5px; background: #192849; color: white; text-decoration: none; opacity: 0.8;}
+.nivo-prevNav {left: 0;}
+.nivo-nextNav {right: 0;}

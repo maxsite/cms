@@ -1,0 +1,1 @@
+Для корректной работы плагина необходимо переименовать файл /uploads/smiles/rasberry.gif в /uploads/smiles/raspberry.gif

@@ -1,0 +1,121 @@
+/* -------------------------------------------------------------------
+// markItUp!
+// By Jay Salvat - http://markitup.jaysalvat.com/
+// ------------------------------------------------------------------*/
+
+
+.bbcode .picture a {background-image:url(images/picture.png); }
+.bbcode .image_add a {background-image:url(images/image_add.png); }
+.bbcode .link a	{background-image:url(images/link.png); }
+
+.bbcode .colors a {background-image:url(images/colors.png); }
+	.bbcode .colors ul {width:108px; padding:1px;}
+	.bbcode .colors  li {border:1px solid white; width:25px;height:25px;overflow:hidden;padding:0; margin:0; float:left;}
+	.bbcode .colors ul a {width:25px; height:25px;}
+	.bbcode .colors ul a:hover {background-color:none;}
+
+	.bbcode .colors .col-yellow a {background:yellow;}
+	.bbcode .colors .col-orange a {background:orange;}
+	.bbcode .colors .col-red a {background:red}
+	.bbcode .colors .col-blue a {background:blue;}
+	.bbcode .colors .col-purple a {background:purple;}
+	.bbcode .colors .col-green a {background:green;}
+	.bbcode .colors .col-white a {background:white;}
+	.bbcode .colors .col-gray a {background:gray;}
+	.bbcode .colors .col-black a {background:black;}
+	.bbcode .colors .col-cyan a {background:cyan;}
+	.bbcode .colors .col-lime a {background:lime;}
+	.bbcode .colors .col-select a {background: url(images/select_colors.png) no-repeat 5px 5px;}
+	
+	
+	
+.bbcode .smiles a {background-image:url(images/grin.gif); }
+	.bbcode .smiles ul {width:420px; padding:1px;}
+	.bbcode .smiles  li {border: none; width:21px;height:21px;overflow:hidden;padding:0; margin:0; float:left;}
+	.bbcode .smiles ul a {width:21px; height:21px;}
+	.bbcode .smiles ul a:hover {background-color:none;}
+	.bbcode .smiles .col1-0 a {background:white; color: black; padding: 1px;}
+	
+.bbcode .fonts a	{ background-image:url(images/fonts.png); }
+.bbcode .list-bullet a	{ background-image:url(images/list-bullet.png); }
+.bbcode .list-numeric a	{ background-image:url(images/list-numeric.png); }
+.bbcode .list-item a	{ background-image:url(images/list-item.png); }
+
+.bbcode .code a	{ background-image:url(images/highlight.png); }
+
+.bbcode .clean a	{ background-image:url(images/clean.png); }
+.bbcode .preview a { background-image:url(images/preview.png); }
+.bbcode .php a { background-image:url(images/php.png); }
+.bbcode .csharp a { background-image:url(images/csharp.png); }
+.bbcode .text a { background-image:url(images/text.png); }
+.bbcode .html-pre a { background-image:url(images/html-pre.png); }
+.bbcode .css a { background-image:url(images/css.png); }
+.bbcode .delphi a { background-image:url(images/delphi.png); }
+.bbcode .js a { background-image:url(images/js.png); }
+.bbcode .sql a { background-image:url(images/sql.png); }
+.bbcode .xml a { background-image:url(images/xml.png); }
+.bbcode .left a { background-image:url(images/left.png); }
+.bbcode .right a { background-image:url(images/right.png); }
+.bbcode .center a { background-image:url(images/center.png); }
+.bbcode .justify a { background-image:url(images/justify.png); }
+.bbcode .br a { background-image:url(images/br.png); }
+.bbcode .break a { background-image:url(images/separator.png); }
+.bbcode .h1 a { background-image:url(images/h1.png); }
+.bbcode .h2 a { background-image:url(images/h2.png); }
+.bbcode .h3 a { background-image:url(images/h3.png); }
+.bbcode .h4 a { background-image:url(images/h4.png); }
+.bbcode .h5 a { background-image:url(images/h5.png); }
+.bbcode .h6 a { background-image:url(images/h6.png); }
+.bbcode .cut a { background-image:url(images/cut.png); }
+.bbcode .flash a { background-image:url(images/flash.png); }
+.bbcode .audio a { background-image:url(images/audio.png); }
+
+.bbcode .separator a { background-image:url(images/document_break.png); }
+.bbcode .paragraph a { background-image:url(images/paragraph.png); }
+
+.bbcode .bold a	{background-image:url(images/bold.png); }
+.bbcode .italic a {background-image:url(images/italic.png); }
+.bbcode .underline a {background-image:url(images/underline.png); }
+.bbcode .stroke a {background-image:url(images/stroke.png); }
+.bbcode .sup a {background-image:url(images/sup.png); }
+.bbcode .sub a {background-image:url(images/sub.png); }
+.bbcode .small a {background-image:url(images/small.png); }
+
+.bbcode .quote a { background-image:url(images/document_quote.png); }
+.bbcode .abbr a { background-image:url(images/abbr.png); }
+.bbcode .cite a { background-image:url(images/cite.png); }
+.bbcode .address a { background-image:url(images/address.png); }
+.bbcode .dfn a { background-image:url(images/dfn.png); }
+.bbcode .dl a { background-image:url(images/dl.png); }
+.bbcode .hr a { background-image:url(images/hr-line.png); }
+.bbcode .html-code a { background-image:url(images/html.png); }
+.bbcode .table a { background-image:url(images/table.png); }
+.bbcode .table-add a { background-image:url(images/table_add.png); }
+.bbcode .table-row-insert a { background-image:url(images/table_row_insert.png); }
+.bbcode .table-select a { background-image:url(images/table_select.png); }
+.bbcode .table-go a { background-image:url(images/table_go.png); }
+
+
+.bbcode .text-padding-left a { background-image:url(images/text_padding_left.png); }
+.bbcode .text-padding-center a { background-image:url(images/text_padding_center.png); }
+.bbcode .text-padding-right a { background-image:url(images/text_padding_right.png); }
+.bbcode .text-padding-justify a { background-image:url(images/text_padding_justify.png); }
+
+.bbcode .text-smallcaps a { background-image:url(images/text_smallcaps.png); }
+
+.bbcode .movies a { background-image:url(images/movies.png); }
+
+.bbcode .page-red a { background-image:url(images/page_red.png); }
+
+.bbcode .script-edit a { background-image:url(images/script_edit.png); }
+
+.bbcode .qsave a { background-image:url(images/qsave.png); }
+.bbcode .fullscreen a { background-image:url(images/fullscreen.png); }
+
+.bbcode .qrepl a { background-image:url(images/replace.png); }
+
+.bbcode .help a { background-image:url(images/help.png); }
+
+.bbcode .code1 a { background-image:url(images/code.png); }
+
+.bbcode .add a { background-image:url(images/add.png); }

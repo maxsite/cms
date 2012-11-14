@@ -1,0 +1,66 @@
+Пример использования
+====================
+
+mso_admin_plugin_options('my_plugin', 'plugins', 
+	array(
+	
+		'f1' => array(
+						'type' => 'text', 
+						'name' => 'название', 
+						'description' => 'описание', 
+						'default' => ''
+					),
+					
+		'f1_hidden' => array(
+						'type' => 'text',
+						'itype' => 'hidden', // скрытый input hidden; можно другие типы
+						'name' => 'название', 
+						'description' => 'описание', 
+						'default' => ''
+					),					
+					
+		'f2' => array(
+						'type' => 'textarea', 
+						'name' => 'название', 
+						'description' => 'описание', 
+						'default' => '',
+						'group_start' => '<hr>', // начало группы опций
+						
+					),		
+								
+		'f3' => array(
+						'type' => 'checkbox', 
+						'name' => 'название', 
+						'description' => 'описание', 
+						'default' => '1', // для чекбоксов только 1 и 0
+						'group_end' => '<hr>', // конец группы выводим
+						
+					),		
+
+		// заголовок группы опций - не передается как опция, служит только для визуального разделения опций
+		'temp' => array(
+						'type' => 'info', # нужно указать такой тип!
+						'title' => 'Тут какой-то Заголовок', 
+						'text' => 'Тут какой-то текст', 
+						'id' => 'myInfo', // можно указать для блока ID 
+						'class' => 'myInfo24', // можно указать для блока css-class 
+					),
+									
+		'f4' => array(
+						'type' => 'select', 
+						'name' => 'название', 
+						'description' => 'описание',
+						'values' => '0.00||Гринвич (0) # 1.00||что-то # 2.00||Киев (+2) # 3.00||Москва (+3)',  // правила для select как в ini-файлах
+						'default' => '2.00'
+					),
+					
+		'f5' => array(
+						'type' => 'radio', 
+						'name' => 'название', 
+						'description' => 'описание',
+						'values' => 'HTML # BB-CODES',  // правила для radio как в ini-файлах
+						'default' => 'BB-CODES',
+						'delimer' => ' ',
+					),	
+		)
+);

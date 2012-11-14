@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* Spoiler plugin */
+
+div.spoiler_div
+{
+	background-color: #ddd;
+	margin: 3px;
+	padding: 2px;
+}

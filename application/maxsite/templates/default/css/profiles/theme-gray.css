@@ -1,0 +1,32 @@
+body {color: #404040; background-color: #F0F0F0;}
+a {color: #808080;}
+a:hover {color: #AAAAAA;}
+div.all {margin-top: 20px;}
+div.all-wrap {color: #404040; border-radius: 10px 10px 0 0;} 
+div.main {color: #404040;}
+h1 {color: #808080;}
+h1 a {color: #808080;}
+h1 a:hover {color: #A0A0A0;}
+h1.category {background: none; color: #404040; padding: 0;}
+div.type_home_cat_block div.header_home_cat {background: #DDDDDD;}
+div.type_home_cat_block div.header_home_cat a {color: #404040;}
+div.footer-wrap {background: #F0F0F0; color: #808080;}
+div.footer a {color: #808080;}
+h2.sitemap {background: #DDDDDD; color: white;}
+textarea, select, input[type="text"], input[type="password"] {background: #EEEEEE; border: 1px solid silver;}
+div.leave_a_comment {background: #DDDDDD; border-color: #DDDDDD; color: #404040;}
+div.page_comments_count {background: #DDDDDD; border-color: #DDDDDD; color: #404040;}
+div.comment-info {background: white; color: #808080;}
+div.comments div.comments_content {background: white; color: #404040;}
+div.comment-form {background: #DDDDDD; color: #404040;}
+div.page_other_pages_header {background: #DDDDDD; border-color: #DDDDDD; color: #404040;}
+code, pre, blockquote {background: #F0F0F0; color: #404040; border: 1px solid silver;}
+dt {background: #404040;}
+dd {background: #505050;}
+table th {background: #404040;}
+div.MainMenu {background: #F0F0F0; color: #808080;}
+ul.menu li a {color: #808080;}
+ul.menu li.selected a {background: white;}
+ul.menu li a:hover {background: white; color: #AAAAAA;}
+ul.menu li.group ul li a {background:  #EEEEEE; color: #808080;}
+div.pagination strong {background: #808080;}

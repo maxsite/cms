@@ -1,0 +1,11 @@
+Russian language files for CodeIgniter 1.6.3
+Translated by Alexander Makarov (http://rmcreative.ru/)
+Based on Russian language files for CodeIgniter 1.51 by Shulga Alexei (alexei.shulga at gmail.com)
+
+---
+
+Русские языковые файлы для CodeIgniter 1.6.3
+Перевод: Александр Макаров (http://rmcreative.ru/)
+Основан на русском переводя для CodeIgniter 1.51, выполненном Шульга Алексеем (alexei.shulga at gmail.com)
+
+Последнюю версию можно найти в файловом архиве http://rmcreative.ru/, либо на http://code-igniter.ru/.

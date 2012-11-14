@@ -1,0 +1,42 @@
+@charset "utf-8";
+/* Spoiler plugin */
+
+div.spoiler_div
+{
+	background-color: #ddd;
+	margin: 2px;
+	padding: 2px;
+}
+
+/* Вид кнопки  */
+a.spoiler_link_show
+{ 
+	color: #0066A7; 
+    border-style: solid; 
+    border-color:#666;
+    border-width: 1px; 
+    padding: 1px 3px; 
+    text-decoration: none;
+}
+/* Вид кнопки, которую уже нажали */
+a.spoiler_link_hide
+{ 
+    background-color: #D2EAF6; 
+    color: #0066A7; 
+    border-style: solid; 
+    border-color: #B7D8EE; 
+    border-width: 1px; 
+    padding: 1px 3px; 
+    text-decoration: none;
+}
+/* Вид кнопки, над которыми находится курсор мыши */
+a.spoiler_link_show:hover, a.spoiler_link_hide:hover
+{ 
+    background-color: #D2EAF6; 
+    color: #0066A7;  
+    border-style: solid; 
+    border-color: #B7D8EE; 
+    border-width: 1px;  
+    padding: 1px 3px; 
+    text-decoration: none;
+}

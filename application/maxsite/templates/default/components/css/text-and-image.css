@@ -1,0 +1,4 @@
+div.component-text-and-image { font-family: Georgia; font-size: 14pt; font-style: italic; color: #404040; }
+div.component-text-and-image-wrap { margin: 5px 10px; padding: 10px; border-bottom: 1px silver dashed; }
+div.component-text-and-image h3 { font-size: 20pt; font-weight: normal; }
+div.component-text-and-image img { padding: 3px; border: 1px silver solid; }

@@ -1,0 +1,17 @@
+Options +FollowSymLinks
+Options -Indexes
+DirectoryIndex index.php index.html
+AddDefaultCharset UTF-8
+
+#php_flag register_globals off
+#php_value memory_limit 16M
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteBase /
+RewriteCond $1 !^(index\.php|uploads|robots\.txt|favicon\.ico)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+# RewriteRule ^(.*)$ /index.php?/$1 [L,QSA]
+</IfModule>

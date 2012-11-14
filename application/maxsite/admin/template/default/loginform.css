@@ -1,0 +1,66 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+table{border-collapse:collapse;border-spacing:0;}
+body{font-family:Verdana,Arial,sans-serif;font-size:10pt;background:#E0E0E0;}
+body,div,ul,ol,li,td,p,blockquote,code,pre,h1,h2,h3,h4,h5,h6{line-height:1.4em;}
+p,pre,blockquote,ul,ol,table,dl{margin:4px 0 7px 0;}
+ol,ul{margin-left:15px;}
+sup,sub{vertical-align:baseline;position:relative;font-size:.8em;}
+sup{top:-0.4em;}
+sub{bottom:-0.3em;}
+small{font-size:.8em;}
+strong,b{font-weight:bold;}
+em,i{font-style:italic;}
+hr{color:#CCC;background-color:#CCC;height:1px;border-width:0;}
+table{width:100%;}table th,table td{border:1px solid #CCC;padding:2px 3px;vertical-align:top;}
+table th{background:#EEE;font-weight:bold;}
+table.no-border,table.no-border td{border:none;padding:0;}
+table.zebra tr:nth-child(odd) td,table.zebra tr:nth-child(odd) th{background-color:#f0f0f0;}
+table.zebra tr:hover td,table.zebra tr:hover th{background-color:#f6f6f6;}
+dt{font-weight:bold;}
+dd{margin-left:15px;}
+pre{background:#F4F4F4;border:1px solid #CCC;padding:7px;display:block;overflow:auto;font-family:"Courier New",monospace;line-height:1.5em;}
+code{background:#F4F4F4;border:1px solid #CCC;padding:0 5px;}
+blockquote{padding:0 4px 0 20px;margin:10px 0;border-left:4px solid #DDD;color:#444;}blockquote cite{color:#888;display:inline-block;margin-top:10px;}
+abbr,acronym{cursor:help;border-bottom:1px dashed #000;}
+img{vertical-align:middle;}
+.break{clear:both;}
+.clearfix:after{content:'.';display:block;clear:both;visibility:hidden;height:0;line-height:0;}
+label{cursor:pointer;}
+fieldset{padding:5px 10px;margin:5px 0;border:#cccccc 1px solid;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
+legend{padding:0 5px;}
+input,select,button{vertical-align:middle;}
+textarea{overflow:auto;}
+input[type="radio"],input[type="checkbox"]{margin:0;padding:0;position:relative;top:1px;cursor:pointer;vertical-align:baseline;}
+input::-webkit-input-placeholder,textarea::-webkit-input-placeholder,button::-webkit-input-placeholder{color:#999;}
+input:-moz-placeholder,textarea:-moz-placeholder,button:-moz-placeholder{color:#999;}
+form.fform p{display:table;width:100%;padding:3px 0;margin:0;}form.fform p span,form.fform p label{display:table-cell;vertical-align:middle;}form.fform p span input[type="text"],form.fform p label input[type="text"],form.fform p span input[type="email"],form.fform p label input[type="email"],form.fform p span input[type="password"],form.fform p label input[type="password"],form.fform p span input[type="url"],form.fform p label input[type="url"],form.fform p span input[type="search"],form.fform p label input[type="search"],form.fform p span input[type="number"],form.fform p label input[type="number"],form.fform p span textarea,form.fform p label textarea,form.fform p span select,form.fform p label select{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;*width:auto;}
+form.fform p span.ftitle,form.fform p label.ftitle{text-align:right;padding-right:5px;}
+form.fform p span.ffirst,form.fform p label.ffirst{width:90px;}
+form.fform p span.ffirst.ftitle,form.fform p label.ffirst.ftitle{width:85px;}
+form.fform p span.fbutton,form.fform p label.fbutton{width:50px;}form.fform p span.fbutton button,form.fform p label.fbutton button,form.fform p span.fbutton input,form.fform p label.fbutton input{min-width:50px;}
+form.fform p span.fsubmit,form.fform p label.fsubmit{text-align:right;width:100px;}form.fform p span.fsubmit button,form.fform p label.fsubmit button,form.fform p span.fsubmit input,form.fform p label.fsubmit input{width:95px;}
+form.fform p span.ftop,form.fform p label.ftop{vertical-align:top;}
+form.fform p span.fcenter,form.fform p label.fcenter{text-align:center;}
+form.fform p span.fempty,form.fform p label.fempty{width:5px;}
+form.fform p span.fhint,form.fform p label.fhint{font-size:.9em;font-style:italic;color:#606060;padding-top:0;padding-bottom:5px;}
+form.fform p span.fheader,form.fform p label.fheader{font-weight:bold;}
+form.fform p span.nocell,form.fform p label.nocell{display:inline;width:auto;padding:0;}
+form.fform p label.fwrap{display:table;width:100%;}
+form.fform p.nop{padding-top:0;}
+form.fform p.hr{margin-top:10px;}
+button:focus,input:focus,select:focus,textarea:focus{box-shadow:0 0 7px #0066ff;-o-box-shadow:0 0 7px #0066ff;-webkit-box-shadow:0 0 7px #0066ff;-moz-box-shadow:0 0 7px #0066ff;}
+input[type="file"]:focus,input[type="file"]:active,input[type="radio"]:focus,input[type="radio"]:active,input[type="checkbox"]:focus,input[type="checkbox"]:active{-webkit-box-shadow:none;-moz-box-shadow:none;-o-box-shadow:none;box-shadow:none;}
+button,input[type="reset"],input[type="submit"],input[type="button"]{-webkit-appearance:none;-webkit-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;border-radius:4px;-webkit-background-clip:padding;-moz-background-clip:padding;-ms-background-clip:padding-box;-o-background-clip:padding-box;background-clip:padding-box;background:#ddd;background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #dddddd));background-image:-webkit-linear-gradient(#ffffff, #dddddd);background-image:-moz-linear-gradient(#ffffff, #dddddd);background-image:-o-linear-gradient(#ffffff, #dddddd);background-image:-ms-linear-gradient(#ffffff, #dddddd);background-image:linear-gradient(#ffffff, #dddddd);border:1px solid;border-color:#ddd #bbb #999;cursor:pointer;color:#333333;font:bold 12px/1.3 Arial,sans-serif;outline:0;overflow:visible;padding:3px 10px;text-shadow:white 0 1px 1px;}
+button:hover,input[type="reset"]:hover,input[type="submit"]:hover,input[type="button"]:hover{background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(1px, #eeeeee), color-stop(100%, #cccccc));background-image:-webkit-linear-gradient(#ffffff, #eeeeee 1px, #cccccc);background-image:-moz-linear-gradient(#ffffff, #eeeeee 1px, #cccccc);background-image:-o-linear-gradient(#ffffff, #eeeeee 1px, #cccccc);background-image:-ms-linear-gradient(#ffffff, #eeeeee 1px, #cccccc);background-image:linear-gradient(#ffffff, #eeeeee 1px, #cccccc);}
+button:active,input[type="reset"]:active,input[type="submit"]:active,input[type="button"]:active{background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(1px, #dddddd), color-stop(100%, #eeeeee));background-image:-webkit-linear-gradient(#ffffff, #dddddd 1px, #eeeeee);background-image:-moz-linear-gradient(#ffffff, #dddddd 1px, #eeeeee);background-image:-o-linear-gradient(#ffffff, #dddddd 1px, #eeeeee);background-image:-ms-linear-gradient(#ffffff, #dddddd 1px, #eeeeee);background-image:linear-gradient(#ffffff, #dddddd 1px, #eeeeee);-webkit-box-shadow:inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;-moz-box-shadow:inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;-o-box-shadow:inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;box-shadow:inset rgba(0, 0, 0, 0.25) 0 1px 2px 0;border-color:#999 #bbb #ddd;}
+body{height:auto;background:#d8d8d8 url("images/bg.png");color:#555;}
+a{color:#616264;}a:hover{color:#c40;}
+#login{position:relative;width:380px;background:#ffffff url("images/maxsitelogo-white.gif") no-repeat 96% 4%;padding:10px 15px;border:#ddd solid 2px;margin:100px auto;-webkit-border-radius:15px;-moz-border-radius:15px;border-radius:15px;box-shadow:0 0 15px #888888;-o-box-shadow:0 0 15px #888888;-webkit-box-shadow:0 0 15px #888888;-moz-box-shadow:0 0 15px #888888;}
+#site{font-size:9pt;}
+#cms_name{color:#888;font:18pt Verdana,sans-serif;margin:5px 0 0 0;}#cms_name span{color:#DB7241;}
+#entry{font-size:10pt;margin:20px 0 5px 0;}
+#cms{font-size:9pt;margin:20px 0 0px 0;}
+form.fform button.flogin_submit{margin-top:5px;}form.fform button.flogin_submit:before{content:url("images/16_unlock.png");display:inline-block;vertical-align:middle;margin-right:10px;}

@@ -1,0 +1,374 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+// mso-style.less
+
+// ссылки
+a.current_url, 
+a.curent-page-cat, 
+li.current_url a,
+li.current_url li a,
+li.current-page
+{
+	font-weight: bold;
+}
+
+
+// рубрика если для главной вывод блоками рубрик
+div.type_home_cat_block {
+	margin-top: 15px;
+	
+	div.header_home_cat {
+		font-size: 1.5em; 
+		margin: 0; 
+		padding: 5px 10px; 
+		background: #EEE;
+		
+		a {
+			text-decoration: none;
+		} 
+	} 
+	
+	ul.home-cat-block {
+		margin: 5px 0 20px 30px;
+	}
+	
+	div.description {
+		font-size: .9em; 
+		font-style: italic; 
+		margin-bottom: 5px;
+	}
+	
+	div.description-cat {
+		font-size: 0.9em; 
+		font-weight: bold; 
+		margin: 5px;
+	}
+}
+
+
+// верхняя запись на главной
+div.home_top h1 {
+	margin-top: 0;
+}
+
+// последняя запись на главной
+div.home_page_last h1 {
+	margin-top: 0;
+}
+
+// описание рубрики на странице рубрики
+div.category_desc {
+	margin: 0 0 20px 0; 
+	font-weight: bold;
+}
+
+
+// виджеты
+
+// заголовок виджета
+h2.box,
+div.widget_header {
+	font-size: 24px; 
+}
+
+div.widget {
+	margin-bottom: 25px;
+	
+	table th, 
+	table td {
+		border: none; 
+		vertical-align: bottom;
+	} 
+}
+
+// списки в виджетах
+ul.is_link {
+	li li { // подподпункты
+		margin-left: 15px; 
+	}
+}
+
+ul.category {color: gray;}
+ul.links div {
+	margin: 0 0 5px 0; 
+	font-style: italic; 
+	color: gray; 
+	line-height: 1em; 
+	font-size: .9em;
+}
+
+
+
+// --- только для pages ---
+
+// отступы между записями на главной
+div.page_only {
+	margin-bottom: 15px; 
+	padding-bottom: 15px; 
+	border-bottom: 1px silver solid;
+} 
+
+// отступ на одиночной не нужен
+div.type_page div.page_only {
+	margin-bottom: 0; 
+	padding-bottom: 0; 
+	border-bottom: none;
+} 
+
+div.type_contact div.page_only {
+	margin-bottom: 0; 
+	padding-bottom: 0; 
+	border-bottom: none;
+} 
+
+div.info {
+	margin: 0 0 10px 0;
+	color: #777;
+}
+
+// верхняя запись на главной
+
+// верхний блок на главной
+div.home_top {
+	border-bottom: 1px solid #ccc; 
+	margin-bottom: 10px;
+} 
+
+// для текста
+
+// списки в тексте
+div.page_content ul, 
+div.page_content ol {
+	margin-left: 40px;
+} 
+
+// обсудить
+div.comments-link {
+	margin: 10px 0 0 0; 
+	text-align: right;
+} 
+
+// записи по теме
+div.page_other_pages {
+	margin: 20px 0;
+
+	ul {
+		list-style-type: square;
+	}
+}
+
+
+// --- дефолтные pages MaxSite CMS ---
+
+// форма логина
+div.type_loginform {
+	div.loginform {
+		margin: 10px auto; 
+		background: #fcfcff; 
+		padding: 10px 15px; 
+		border: #dce0e7 solid 1px; 
+		line-height: 1.2em; 
+		.border_radius(5px);
+	} 
+	
+	div.login-form-auth {
+		clear: both; 
+		margin: -26px 0 15px 0; 
+		font-size: .8em; 
+		text-align: right;
+	}
+	
+	p.header {
+		text-align: center; 
+		font-size: 1.3em; 
+		background: #959595; 
+		padding: 5px; 
+		color: white; 
+		.border_radius(5px);
+	}
+	
+	div.form-end {
+		text-align: right; 
+		font-size: .9em;
+	}
+}
+
+// плагин форма логина
+div.widget form.flogin {
+	
+	input.flogin_user, 
+	input.flogin_password {
+
+	}
+	
+	input.flogin_submit {
+		margin-top: 7px;
+	}
+}
+
+
+// форма поиска
+input {
+	&.s {
+		cursor: pointer;
+	}
+	
+	&.submit {
+		cursor: pointer;
+	}
+}
+
+// COMMENT FORM
+div.comment-form {
+	margin: 10px 0; 
+	padding: 10px; 
+	background: #F0F0F0; 
+	.border(#DDD); 
+	// .border_radius(8px);
+	
+	textarea {
+		width: 100%; 
+		margin: 5px 0;
+	}
+	
+	div.comments-auth {
+		margin: 10px 0; 
+		padding: 10px;
+		.border(#DDD); 
+		.border_radius(8px);
+	}
+}
+
+// СООБЩЕНИЯ О КОММЕНТАРИИ
+div.comment-ok {
+	background: #40A040; 
+	margin: 10px 0; 
+	color: white; 
+	padding: 10px; 
+	text-align: center; 
+	font-weight: bold; 
+	.border_radius(10px);
+}
+
+div.comment-error {
+	background: #FF4040; 
+	margin: 10px 0;  
+	color: white; 
+	padding: 10px; 
+	text-align: center; 
+	font-weight: bold; 
+	.border_radius(10px);
+}
+
+
+// комментарии
+div.comments {
+
+	margin: 20px 0 0 0;
+	
+	ol {
+		list-style-type: none;
+		margin: 0;
+	}
+	
+	li {
+		margin: 0 0 30px 0;
+		padding: 10px;
+		
+		// нечётный коммент
+		&.odd {
+			background: #eee;
+		}
+		
+		// чётный
+		&.even {
+
+		}
+		
+		// юзер
+		&.users {
+
+		}
+		
+		// комюзер
+		&.comusers {
+
+		}
+		
+		// аноним
+		&.anonim {
+
+		}
+		
+	}
+	
+	div.comment-info {
+		margin: 0 0 0 100px;
+		.bold;
+	}
+
+	img.gravatar {
+		//margin: -20px 0 0 0 !important;
+		padding: 0;
+	}
+	
+	div.comments_content {
+		margin: 10px 0 0 100px;
+	}
+	
+	span.num_comment{
+		display: inline-block;
+		float: right;
+		color: #999;
+	}
+	
+	span.date{
+		font-size: .8em;
+	}
+	
+	blockquote {
+		margin-left: 0; 
+		padding: 5px 15px; 
+		border-left: 2px gray solid;
+		.italic;
+	}
+}
+
+// comusers
+form.comusers-form {
+	
+	h3 {
+		text-align: center; 
+		font-size: 1.3em; 
+		background: #959595; 
+		padding: 5px; 
+		color: white; 
+		font-weight: normal;
+		.border_radius(5px);
+	}
+	
+	p {
+		@first_width: 220px;
+	
+		span.ffirst, 
+		label.ffirst {
+			width: @first_width;
+		}
+		
+		span.ffirst.ftitle, 
+		label.ffirst.ftitle {
+			width: @first_width - 5px;
+		}
+		
+		span.ftitle, 
+		label.ftitle {
+			font-weight: bold; 
+			font-size: 0.9em;
+		}
+		
+		span.submit {
+			padding-top: 20px;
+		}
+	}
+}
+

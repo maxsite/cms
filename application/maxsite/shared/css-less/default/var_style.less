@@ -1,0 +1,65 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+
+@import url('../mixins/helpers.less'); // основные хелперы
+
+// дополнительные стили к style-all-mini
+// файл используется, только если отсутствует var_style.css шаблона
+
+
+body {
+	background: #777;
+}
+
+// СТРУКТУРА САЙТА
+
+@all_width: 960px;
+@sidebar_width: 250px;
+
+div.all-wrap {
+	width: @all_width; 
+	margin: 0 auto; 
+	background: white; 
+}
+
+div.header {
+	width: @all_width; 
+	margin: 0 auto;
+}
+
+div.main {
+	width: @all_width; 
+	margin: 0 auto; 
+	background: white;
+}
+
+div.content {
+	width: @all_width - @sidebar_width; 
+	margin: 0 @sidebar_width 0 0; 
+	float: left;
+}
+
+div.content-wrap {
+	margin: 20px 30px 10px 20px;
+}
+
+div.sidebar {
+	width: @sidebar_width; 
+	float: right; 
+	margin: 20px 0 0 -@sidebar_width;
+}
+
+div.sidebar1-wrap {
+	margin-right: 10px;
+}
+
+div.footer {
+	width: 100%; 
+	clear: both; 
+}
+
+div.footer-wrap {
+	padding: 20px 20px 10px 20px; 
+	margin: 0 auto;
+}
+

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">  
+	<title>Справка по использованию BB-code</title>
+	
+	<style>
+		body{color:#333; font-family: Verdana, Geneva, Arial, Helvetica, sans-serif; font-size: 13px; background: url(bg58.gif); margin: 0; padding: 0;}
+		table{padding: 20px; margin:0 0 40px 0; border-spacing: 0px; border:1px dashed #dcdcdc; border-radius: 7px; background: #fbfcfd; width: 940px;}
+		th{background: #deedc8; text-align: left; font-size: 110%; padding:4px;}
+		td{padding:4px; border: 1px dashed #dcdcdc}
+		span{color: #1a80ec; text-shadow: 1px 1px 3px #bbb; font-weight: 700;}
+		i{color: #006f01; font-style: normal;}
+
+		#main{width: 940px; margin: 20px auto; padding: 20px; background: white; border-radius: 7px; border: 11px #ddd solid; box-shadow: 0 0 7px #222;}
+		.zagolovok{font-size: 24px; text-align: center; border-bottom: 2px solid #777; padding-bottom: 20px; margin-bottom: 40px; text-shadow: 1px 1px 3px #999;}
+		.podzagolovok{font-size: 20px; text-shadow: 1px 1px 2px #999; margin: 0 0 10px 0; color: #556b2f;}
+		.kurs{font-style: italic; color: #333;}
+		.primer{padding:0 20px; margin:0; border:1px dotted #dcdcdc; border-radius: 7px; background: #deedc8; box-shadow: 1px 1px 3px #bbb;}
+	</style>
+</head>
+
+<body><div id="main">
+
+<h1 class="zagolovok">Справочник BB-code</h1>
+
+<h2 class="podzagolovok">Работа с текстом:</h2>
+<table>
+	<tr><th>BB-код</th><th>Описание</th><th>Пример</th><th>Представление в HTML</th></tr>
+	<tr><td><span>[b]</span>текст<span>[/b]</span></td><td>Важный текст, полужирный</td><td><strong>текст</strong></td><td><i>&lt;strong&gt;</i>текст<i>&lt;/strong&gt;</i></td></tr>
+	<tr><td><span>[i]</span>текст<span>[/i]</span></td><td>Важный текст, курсив</td><td><em>текст</em></td><td><i>&lt;em&gt;</i>текст<i>&lt;/em&gt;</i></td></tr>
+	<tr><td><span>[bold]</span>текст<span>[/bold]</span></td><td>Просто полужирный</td><td><b>текст</b></td><td><i>&lt;b&gt;</i>текст<i>&lt;/b&gt;</i></td></tr>
+	<tr><td><span>[italic]</span>текст<span>[/italic]</span></td><td>Просто курсив</td><td><i class="kurs">текст</i></td><td><i>&lt;i&gt;</i>текст<i>&lt;/i&gt;</i></td></tr>
+	<tr><td><span>[u]</span>текст<span>[/u]</span></td><td>Подчёркнутый текст</td><td><u>текст</u></td><td><i>&lt;u&gt;</i>текст<i>&lt;/u&gt;</i></td></tr>
+	<tr><td><span>[s]</span>текст<span>[/s]</span></td><td>Зачеркнутый</td><td><s>текст</s></td><td><i>&lt;s&gt;</i>текст<i>&lt;/s&gt;</i></td></tr>
+	<tr><td><span>[sup]</span>текст<span>[/sup]</span></td><td>Верхний индекс</td><td><sup>текст</sup></td><td><i>&lt;sup&gt;</i>текст<i>&lt;/sup&gt;</i></td></tr>
+	<tr><td><span>[sub]</span>текст<span>[/sub]</span></td><td>Нижний индекс</td><td><sub>текст</sub></td><td><i>&lt;sub&gt;</i>текст<i>&lt;/sub&gt;</i></td></tr>
+	<tr><td><span>[small]</span>текст<span>[/small]</span></td><td>Уменьшенный шрифт</td><td><small>текст</small></td><td><i>&lt;small&gt;</i>текст<i>&lt;/small&gt;</i></td></tr>
+	<tr><td><span>[p]</span>текст<span>[/p]</span></td><td>Абзац</td><td></td><td><i>&lt;p&gt;</i>текст<i>&lt;/p&gt;</i></td></tr>
+	<tr><td><span>[color=цвет]</span>текст<span>[/color]</span></td><td>Цвет текста</td><td></td><td><i>&lt;span style=&quot;color:цвет&quot;&gt;</i>текст<i>&lt;/span&gt;</i></td></tr>
+	<tr><td><span>[size=10pt]</span>текст<span>[/size]</span></td><td>Размер шрифта</td><td></td><td><i>&lt;span style=&quot;font-size:10pt&quot;&gt;</i>текст<i>&lt;/span&gt;</i></td></tr>
+	<tr><td><span>[div=стиль]</span>текст<span>[/div]</span></td><td>style для блока</td><td></td><td><i>&lt;div style=&quot;стиль&quot;&gt;</i>текст<i>&lt;/div&gt;</i></td></tr>
+	<tr><td><span>[p=стиль]</span>текст<span>[/p]</span></td><td>style для абзаца</td><td></td><td><i>&lt;p style=&quot;стиль&quot;&gt;</i>текст<i>&lt;/p&gt;</i></td></tr>
+	<tr><td><span>[span=стиль]</span>текст<span>[/span]</span></td><td>style для текста</td><td></td><td><i>&lt;span style=&quot;стиль&quot;&gt;</i>текст<i>&lt;/span&gt;</i></td></tr>
+</table>
+
+<h2 class="podzagolovok">Выравнивание:</h2>
+<table>
+	<tr><th>BB-код</th><th>Описание</th><th>Представление в HTML</th></tr>
+	<tr><td><span>[left]</span>текст<span>[/left]</span></td><td>Выравнивание в блоке влево</td><td><i>&lt;div style=&quot;text-align: left;&quot;&gt;</i>текст<i>&lt;/div&gt;</i></td></tr>
+	<tr><td><span>[right]</span>текст<span>[/right]</span></td><td>Выравнивание в блоке вправо</td><td><i>&lt;div style=&quot;text-align: right;&quot;&gt;</i>текст<i>&lt;/div&gt;</i></td></tr>
+	<tr><td><span>[center]</span>текст<span>[/center]</span></td><td>Выравнивание в блоке по центру</td><td><i>&lt;div style=&quot;text-align: center;&quot;&gt;</i>текст<i>&lt;/div&gt;</i></td></tr>
+	<tr><td><span>[justify]</span>текст<span>[/justify]</span></td><td>Выравнивание в блоке по ширине</td><td><i>&lt;div style=&quot;text-align: justify;&quot;&gt;</i>текст<i>&lt;/div&gt;</i></td></tr>
+	<tr><td><span>[left стиль]</span>текст<span>[/left] </span></td><td>Выравнивание в блоке влево</td><td><i>&lt;div style=&quot;text-align: left; стиль&quot;&gt;</i>текст<i>&lt;/div&gt;</i></td></tr>
+	<tr><td><span>[right стиль]</span>текст<span>[/right]</span></td><td>Выравнивание в блоке вправо</td><td><i>&lt;div style=&quot;text-align: right; стиль&quot;&gt;</i>текст<i>&lt;/div&gt;</i></td></tr>
+	<tr><td><span>[center стиль]</span>текст<span>[/center]</span></td><td>Выравнивание в блоке по центру</td><td><i>&lt;div style=&quot;text-align: center; стиль&quot;&gt;</i>текст<i>&lt;/div&gt;</i></td></tr>
+	<tr><td><span>[justify стиль]</span>текст<span>[/justify]</span></td><td>Выравнивание в блоке по ширине</td><td><i>&lt;div style=&quot;text-align: justify; стиль&quot;&gt;</i>текст<i>&lt;/div&gt;</i></td></tr>
+	<tr><td><span>[pleft]</span>текст<span>[/pleft]</span></td><td>Выравнивание в абзаце влево</td><td><i>&lt;p style=&quot;text-align: left;&quot;&gt;</i>текст<i>&lt;/p&gt;</i></td></tr>
+	<tr><td><span>[pright]</span>текст<span>[/pright]</span></td><td>Выравнивание в абзаце вправо</td><td><i>&lt;p style=&quot;text-align: right;&quot;&gt;</i>текст<i>&lt;/p&gt;</i></td></tr>
+	<tr><td><span>[pcenter]</span>текст<span>[/pcenter]</span></td><td>Выравнивание в абзаце по центру</td><td><i>&lt;p style=&quot;text-align: center;&quot;&gt;</i>текст<i>&lt;/p&gt;</i></td></tr>
+	<tr><td><span>[pjustify]</span>текст<span>[/pjustify]</span></td><td>Выравнивание в абзаце по ширине</td><td><i>&lt;p style=&quot;text-align: justify;&quot;&gt;</i>текст<i>&lt;/p&gt;</i></td></tr>
+</table>
+
+<h2 class="podzagolovok">Заголовки:</h2>
+<table>
+	<tr><th>BB-код</th><th>Описание</th><th>Пример</th><th>Представление в HTML</th></tr>
+	<tr><td><span>[h1]</span>текст<span>[/h1]</span></td><td>Заголовок 1-го уровня</td><td><h1>текст</h1></td><td><i>&lt;h1&gt;</i>текст<i>&lt;/h1&gt;</i></td></tr>
+	<tr><td><span>[h2]</span>текст<span>[/h2]</span></td><td>Заголовок 2-го уровня</td><td><h2>текст</h2></td><td><i>&lt;h2&gt;</i>текст<i>&lt;/h2&gt;</i></td></tr>
+	<tr><td><span>[h3]</span>текст<span>[/h3]</span></td><td>Заголовок 3-го уровня</td><td><h3>текст</h3></td><td><i>&lt;h3&gt;</i>текст<i>&lt;/h3&gt;</i></td></tr>
+	<tr><td><span>[h4]</span>текст<span>[/h4]</span></td><td>Заголовок 4-го уровня</td><td><h4>текст</h4></td><td><i>&lt;h4&gt;</i>текст<i>&lt;/h4&gt;</i></td></tr>
+	<tr><td><span>[h5]</span>текст<span>[/h5]</span></td><td>Заголовок 5-го уровня</td><td><h5>текст</h5></td><td><i>&lt;h5&gt;</i>текст<i>&lt;/h5&gt;</i></td></tr>
+	<tr><td><span>[h6]</span>текст<span>[/h6]</span></td><td>Заголовок 6-го уровня</td><td><h6>текст</h6></td><td><i>&lt;h6&gt;</i>текст<i>&lt;/h6&gt;</i></td></tr>
+	<tr><td><span>[h1(класс)]</span>текст<span>[/h1]</span></td><td>Заголовок 1-го уровня с классом. Аналогично для h2-h6.</td><td></td><td><i>&lt;h1 class=&quot;класс&quot;&gt;</i>текст<i>&lt;/h1&gt;</i></td></tr>
+</table>
+
+<h2 class="podzagolovok">Списки:</h2>
+<table>
+	<tr><th>BB-код</th><th>Описание</th><th>Представление в HTML</th></tr>
+	<tr><td><span>[list]</span>список<span>[/list]</span></td><td>Маркированный список</td><td><i>&lt;ul&gt;</i>список<i>&lt;/ul&gt;</i></td></tr>
+	<tr><td><span>[ul]</span>список<span>[/ul]</span></td><td>Маркированный список</td><td><i>&lt;ul&gt;</i>список<i>&lt;/ul&gt;</i></td></tr>
+	<tr><td><span>[ol]</span>список<span>[/ol]</span></td><td>Нумерованный список</td><td><i>&lt;ol&gt;</i>список<i>&lt;/ol&gt;</i></td></tr>
+	<tr><td><span>[*]</span>текст</td><td>Элемент списка</td><td><i>&lt;li&gt;</i>текст</td></tr>
+	<tr><td><span>[*]</span>текст<span>[/*]</span></td><td>Элемент списка</td><td><i>&lt;li&gt;</i>текст<i>&lt;/li&gt;</i></td></tr>
+<tr><td colspan="3"><div class="primer">
+	<p><b>ПРИМЕР СПИСКА:</b></p>
+	<p>&nbsp;&nbsp;&nbsp;<span>	[list]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>	[*]</span>первый</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>	[*]</span>второй</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>	[*]</span>третий</p>
+	<p>&nbsp;&nbsp;&nbsp;<span>	[/list]</span></p>
+</div></td></tr></table>
+
+<h2 class="podzagolovok">Разное:</h2>
+<table>
+	<tr><th>BB-код</th><th>Описание</th><th>Пример</th><th>Представление в HTML</th></tr>
+	<tr><td><span>[br]</span></td><td>Принудительный перенос строки</td><td></td><td><i>&lt;br clear=&quot;all&quot;&gt;</i></td></tr>
+	<tr><td><span>[code]</span>текст<span>[/code]</span></td><td>Код</td><td><code>текст</code></td><td><i>&lt;code&gt;</i>текст<i>&lt;/code&gt;</i></td></tr>
+	<tr><td><span>[pre]</span>текст<span>[/pre]</span></td><td>Преформатированный текст</td><td><pre>текст</pre></td><td><i>&lt;pre&gt;</i>текст<i>&lt;/pre&gt;</i></td></tr>
+	<tr><td><span>[abbr]</span>абревиатура<span>[/abbr]</span></td><td>Абревиатура</td><td><abbr>абревиатура</abbr></td><td><i>&lt;abbr&gt;</i>абревиатура<i>&lt;/abbr&gt;</i></td></tr>
+	<tr><td><span>[abbr описание]</span>...<span>[/abbr]</span></td><td>Абревиатура с описанием</td><td><abbr title="описание">абревиатура</abbr></td><td><i>&lt;abbr title=&quot;описание&quot;&gt;</i>абревиатура<i>&lt;/abbr&gt;</i></td></tr>
+	<tr><td><span>[q]</span>цитата в строке<span>[/q]</span></td><td>Цитата</td><td><q>цитата</q></td><td><i>&lt;q&gt;</i>цитата в строке<i>&lt;/q&gt;</i></td></tr>
+	<tr><td><span>[q свойства]</span>цитата в строке<span>[/q]</span></td><td>Цитата со свойствами</td><td></td><td><i>&lt;q свойства&gt;</i>цитата в строке<i>&lt;/q&gt;</i></td></tr>
+	<tr><td><span>[cite]</span>Сноска<span>[/cite]</span></td><td>Сноска</td><td><cite>сноска</cite></td><td><i>&lt;cite&gt;</i>Сноска<i>&lt;/cite&gt;</i></td></tr>	
+	<tr><td><span>[cite свойства]</span>Сноска<span>[/cite]</span></td><td>Сноска со свойствами</td><td></td><td><i>&lt;cite свойства&gt;</i>Сноска<i>&lt;/cite&gt;</i></td></tr>
+	<tr><td><span>[address]</span>адрес<span>[/address]</span></td><td>Адрес</td><td><address>адрес</address></td><td><i>&lt;address&gt;</i>адрес<i>&lt;/address&gt;</i></td></tr>
+	<tr><td><span>[address свойства]</span>адрес<span>[/address]</span></td><td>Адрес со свойствами</td><td></td><td><i>&lt;address свойства&gt;</i>адрес<i>&lt;/address&gt;</i></td></tr>
+	<tr><td><span>[dfn]</span>Новый термин<span>[/dfn]</span></td><td></td><td></td><td><i>&lt;dfn&gt;</i>Новый термин<i>&lt;/dfn&gt;</i></td></tr>
+	<tr><td><span>[dfn свойства]</span>Новый термин<span>[/dfn]</span></td><td></td><td></td><td><i>&lt;dfn свойства&gt;</i>Новый термин<i>&lt;/dfn&gt;</i></td></tr>
+	<tr><td><span>[del]</span>удаленный текст<span>[/del]</span></td><td></td><td></td><td><i>&lt;del&gt;</i>удаленный текст<i>&lt;/del&gt;</i></td></tr>
+	<tr><td><span>[del свойства]</span>удаленный текст<span>[/del]</span></td><td></td><td></td><td><i>&lt;del свойства&gt;</i>удаленный текст<i>&lt;/del&gt;</i></td></tr>
+	<tr><td><span>[ins]</span>Добавленный текст<span>[/ins]</span></td><td></td><td></td><td><i>&lt;ins&gt;</i>Добавленный текст<i>&lt;/ins&gt;</i></td></tr>
+	<tr><td><span>[ins свойства]</span>Добавленный текст<span>[/ins]</span></td><td></td><td></td><td><i>&lt;ins свойства&gt;</i>Добавленный текст<i>&lt;/ins&gt;</i></td></tr>
+	<tr><td><span>[dl]</span>Список определений<span>[/dl]</span></td><td></td><td></td><td><i>&lt;dl&gt;</i>Список определений<i>&lt;/dl&gt;</i></td></tr>
+	<tr><td><span>[dl свойства]</span>Список определений<span>[/dl]</span></td><td></td><td></td><td><i>&lt;dl свойства&gt;</i>Список определений<i>&lt;/dl&gt;</i></td></tr>
+	<tr><td><span>[dt]</span>Определение<span>[/dt]</span></td><td></td><td></td><td><i>&lt;dt&gt;</i>Определение<i>&lt;/dt&gt;</i></td></tr>
+	<tr><td><span>[dt свойства]</span>Определение<span>[/dt]</span></td><td></td><td></td><td><i>&lt;dt свойства&gt;</i>Определение<i>&lt;/dt&gt;</i></td></tr>
+	<tr><td><span>[dd]</span>Описание<span>[/dd]</span></td><td></td><td></td><td><i>&lt;dd&gt;</i>Описание<i>&lt;/dd&gt;</i></td></tr>
+	<tr><td><span>[dd свойства]</span>Описание<span>[/dd]</span></td><td></td><td></td><td><i>&lt;dd свойства&gt;</i>Описание<i>&lt;/dd&gt;</i></td></tr>
+	<tr><td><span>[quote]</span>текст<span>[/quote]</span></td><td>Цитата</td><td></td><td><i>&lt;blockquote&gt;</i>текст<i>&lt;/blockquote&gt;</i</td></tr>
+	<tr><td><span>[div(class)]</span>текст<span>[/div]</span></td><td></td><td></td><td><i>&lt;div class=&quot;class&quot;&gt;</i>текст<i>&lt;/div&gt;</i></td></tr>
+	<tr><td><span>[div атрибуты]</span>текст<span>[/div]</span></td><td></td><td></td><td><i>&lt;div атрибуты&gt;</i>текст<i>&lt;/div&gt;</i></td></tr>
+	<tr><td><span>[span(class)]</span>текст<span>[/span]</span></td><td></td><td></td><td><i>&lt;span class=&quot;class&quot;&gt;</i>текст<i>&lt;/span&gt;</i></td></tr>
+	<tr><td><span>[span атрибуты]</span>текст<span>[/span]</span></td><td></td><td></td><td><i>&lt;span атрибуты&gt;</i>текст<i>&lt;/span&gt;</i></td></tr>
+	<tr><td><span>[text-demo]</span></td><td>Подключает файл text-demo.txt (можно использовать для проверки стилей шаблона)</td><td></td><td></td></tr>
+</table>
+
+<h2 class="podzagolovok">Работа с картинками:</h2>
+<table>
+	<tr><th>BB-код</th><th>Описание</th><th>Представление в HTML</th></tr>
+	<tr><td><span>[img]</span>адрес<span>[/img]</span></td><td>Картинка</td><td><i>&lt;img src=&quot;адрес&quot;&gt;</i></td></tr>
+	<tr><td><span>[img=300x500]</span>адрес<span>[/img]</span></td><td>Картинка с размерами</td><td><i>&lt;img src=&quot;адрес&quot; style=&quot;width: 300px; height: 500px&quot;&gt;</i></td></tr>
+	<tr><td><span>[imgleft]</span>адрес<span>[/imgleft]</span></td><td>Картинка влево</td><td><i>&lt;img src=&quot;адрес&quot; style=&quot;float: left; margin: 0 10px 0 0;&quot;&gt;</i></td></tr>
+	<tr><td><span>[imgright]</span>адрес<span>[/imgright]</span></td><td>Картинка вправо</td><td><i>&lt;img src=&quot;адрес&quot; style=&quot;float: right; margin: 0 0 0 10px;&quot;&gt;</i></td></tr>
+	<tr><td><span>[imgcenter]</span>адрес<span>[/imgcenter]</span></td><td>Картинка по центру</td><td><i>&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;адрес&quot;&gt;&lt;/div&gt;</i></td></tr>
+	<tr><th colspan="3"><center>Аналогичные, только с названиями/всплывающими подсказками. <b>В названии нельзя использовать кавычки!</b></center></th></tr>
+	<tr><td><span>[img Название]</span>адрес<span>[/img]</span></td><td></td><td></td></tr>
+	<tr><td><span>[imgleft Название]</span>адрес<span>[/imgleft]</span></td><td></td><td></td></tr>
+	<tr><td><span>[imgright Название]</span>адрес<span>[/imgright]</span></td><td></td><td></td></tr>
+	<tr><td><span>[imgcenter Название]</span>адрес<span>[/imgcenter]</span></td><td></td><td></td></tr>
+	<tr><td><span>[imgleft=300x500]</span>адрес<span>[/imgleft]</span></td><td>Картинка с размерами влево</td><td></td></tr>
+	<tr><td><span>[imgright=300x500]</span>адрес<span>[/imgright]</span></td><td>Картинка с размерами вправо</td><td></td></tr>
+	<tr><td><span>[img(cssClass)]</span>адрес<span>[/img]</span></td><td>Картинка с указанным css-классом</td><td></td></tr>
+	<tr><td><span>[img(cssClass) Описание]</span>адрес<span>[/img]</span></td><td>Картинка с указанным css-классом и описанием</td><td></td></tr>
+	<tr><th colspan="3"><center>Миниатюра (адрес-mini) со ссылкой на оригинал</center></th></tr>
+	<tr><td><span>[imgmini=_адрес-mini]</span>адрес<span>[/imgmini]</span></td><td>Открыть в новом окне</td><td><i>&lt;a href=&quot;адрес&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;адрес-mini&quot;&gt;&lt;/a&gt;</i></td></tr>
+	<tr><td><span>[imgmini=адрес-mini]</span>адрес<span>[/imgmini]</span></td><td>Открыть в том же окне</td><td><i>&lt;a href=&quot;адрес&quot;&gt;&lt;img src=&quot;адрес-mini&quot;&gt;&lt;/a&gt;</i></td></tr>
+</table>
+
+
+
+<h2 class="podzagolovok">Работа с ссылками:</h2>
+<table>
+	<tr><th>BB-код</th><th>Представление в HTML</th></tr>
+    <tr><td><span>[url]</span>http://maxsite.org/<span>[/url]</span></td><td><i>&lt;a href=&quot;http://maxsite.org/&quot;&gt;</i>http://maxsite.org/<i>&lt;/a&gt;</i></td></tr>
+	<tr><td><span>[url=http://maxsite.org/]</span>Блог Макса<span>[/url]</span></td><td><i>&lt;a href=&quot;http://maxsite.org/&quot;&gt;</i>Блог Макса<i>&lt;/a&gt;</i></td></tr>
+	<tr><td><span>[url=http://maxsite.org/ rel=&quot;nofollow&quot;]</span>Блог Макса<span>[/url]</span></td><td><i>&lt;a href=&quot;http://maxsite.org/&quot; rel=&quot;nofollow&quot;&gt;</i>Блог Макса<i>&lt;/a&gt;</i></td></tr>
+	<tr><td><span>[url rel=&quot;nofollow&quot;]</span>http://maxsite.org/<span>[/url]</span></td><td><i>&lt;a href=&quot;http://maxsite.org/&quot; rel=&quot;nofollow&quot;&gt;</i>http://maxsite.org/<i>&lt;/a&gt;</i></td></tr>
+</table>
+
+<h2 class="podzagolovok">Работа с таблицей:</h2>
+	<div class="otdel">
+	<div class="primer">
+	<p><b>ПРИМЕР ТАБЛИЦЫ:</b></p>
+	<p>&nbsp;&nbsp;&nbsp;<span>[table]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[tr]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[td]</span>1-я ячейка 1-й строки<span>[/td]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[td]</span>2-я ячейка 1-й строки<span>[/td]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[td]</span>3-я ячейка 1-й строки<span>[/td]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[/tr]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[tr]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[td]</span>1-я ячейка 2-й строки<span>[/td]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[td]</span>2-я ячейка 2-й строки<span>[/td]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[td]</span>3-я ячейка 2-й строки<span>[/td]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[/tr]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[tr]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[td]</span>1-я ячейка 3-й строки<span>[/td]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[td]</span>2-я ячейка 3-й строки<span>[/td]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[td]</span>3-я ячейка 3-й строки<span>[/td]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>[/tr]</span></p>
+	<p>&nbsp;&nbsp;&nbsp;<span>[/table]</span></p>
+	</div><br />
+	<table><tr><td><p>В таблице можно указывать произвольные стили, классы и т.п.:</p>
+	<p><span>[table class=&quot;red&quot; style=&quot;border: 1px solid red&quot;]</span></p>
+	<p>	...</p>
+	<p><span>[tr rowspan=&quot;2&quot;]</span></p>
+	<p><span>[td style=&quot;font-size: 18pt&quot;]</span></p></td></tr></table>
+</div>
+
+</div></body>
+</html>

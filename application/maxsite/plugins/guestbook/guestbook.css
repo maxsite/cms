@@ -1,0 +1,10 @@
+div.guestbook_form {}
+
+h2.guestbook { margin: 20px 0 10px 0;}
+
+table.guestbook {width: 100%; margin: 5px 0;}
+table.guestbook td {vertical-align: top; padding: 3px;}
+table.guestbook td.header {text-align: right; background: gray; color: white;}
+table.guestbook td.t1 {width: 100px; text-align: right; background: silver;}
+table.guestbook td.t2 {border-bottom: 1px solid #EEEEEE;}
+table.guestbook td.space {padding: 0; height: 7px;}

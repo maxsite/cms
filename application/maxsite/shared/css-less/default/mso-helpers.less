@@ -1,0 +1,156 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+
+ 
+// HELPERS - можно использовать в своих записях
+// .message - подключается из отдельного микса
+
+// text colors
+.red {color: red;}
+.blue {color: blue;}
+.green {color: green;}
+.gray {color: gray;}
+.black {color: black;}
+.white {color: white;}
+.yellow {color: yellow;}
+
+// text-style
+.normal {
+	font-weight: normal; 
+	font-style: normal; 
+	text-decoration: none;
+}
+
+.bold {font-weight: bold;}
+.italic {font-style: italic;}
+.underline {text-decoration: underline;}
+.overline {text-decoration: overline;}
+.strike {text-decoration: line-through;}
+
+// background colors
+.bg-red {background-color: red;}
+.bg-blue {background-color: blue;}
+.bg-green {background-color: green;}
+.bg-gray {background-color: gray;}
+.bg-black {background-color: black;}
+.bg-white {background-color: white;}
+.bg-yellow {background-color: yellow;}
+
+// align
+div.left {float: left;}
+div.right {float: right;}
+.text-left {text-align: left;}
+.text-right {text-align: right;}
+.text-center {text-align: center;}
+.text-justify {text-align: justify;}
+
+// width
+.w100 {width: 100%;}
+.w75 {width: 75%;}
+.w70 {width: 70%;}
+.w60 {width: 60%;}
+.w50 {width: 50%;}
+.w40 {width: 40%;}
+.w33 {width: 33.33%;}
+.w30 {width: 30%;}
+.w25 {width: 25%;}
+
+// margins
+.margin0 {margin: 0;}
+.margin5 {margin: 5px;}
+.margin10 {margin: 10px;}
+.margin15 {margin: 15px;}
+.margin20 {margin: 20px;}
+.margin30 {margin: 30px;}
+
+.margin-center {
+	margin-right: auto; 
+	margin-left: auto;
+}
+
+.margin-top10 {margin-top: 10px;}
+.margin-right10 {margin-right: 10px;}
+.margin-bottom10 {margin-bottom: 10px;}
+.margin-left10 {margin-left: 10px;}
+
+.margin-tb0 {
+	margin-top: 0; 
+	margin-bottom: 0;
+}
+
+.margin-tb10 {
+	margin-top: 10px; 
+	margin-bottom: 10px;
+}
+
+.margin-lr0 {
+	margin-left: 0; 
+	margin-right: 0;
+}
+
+.margin-lr10 {
+	margin-left: 10px; 
+	margin-right: 10px;
+}
+
+// paddings
+.padding0 {padding: 0;}
+.padding5 {padding: 5px;}
+.padding10 {padding: 10px;}
+.padding15 {padding: 15px;}
+.padding20 {padding: 20px;}
+.padding30 {padding: 30px;}
+
+.padding-tb0 {
+	padding-top: 0; 
+	padding-bottom: 0;
+}
+
+.padding-lr0 {
+	padding-left: 0; 
+	padding-right: 0;
+}
+
+// display 
+.d-none {display: none;}
+.d-block {display: block;}
+.d-inline {display: inline;}
+.d-inline-block {display: inline-block;}
+
+.over-hidden {overflow: hidden}
+
+// border-radius 
+.radius5 {.border_radius(5px);}
+.radius8 {.border_radius(8px);}
+.radius10 {.border_radius(10px);}
+
+div.no-border-radius, 
+.radius0 {
+	.border_radius(0);
+}
+
+.no-border {border: none!important;}
+
+// box-shadow
+.box-shadow {.box_shadow(0, 0, 7px, #BBB)}
+.box-shadow-none {.box_shadow(none)}
+
+
+// fonts 
+.arial {font-family: Arial, Verdana, sans-serif;}
+.verdana {font-family: Verdana, Arial, sans-serif;}
+.segoe {font-family: "Segoe UI", Verdana, Arial, sans-serif;}
+.georgia {font-family: Georgia, "Times New Roman", serif;}
+.times {font-family: "Times New Roman", Georgia, serif;}
+.courier {font-family: "Courier New", monospace;}
+
+
+// img
+img {
+	&.smiley {vertical-align: middle;}
+	&.left {float: left; margin: 5px 10px 5px 0;}
+	&.right {float: right; margin: 5px 0 5px 10px;}
+	&.center {margin: 0 auto; display: block;}
+	&.border {border: 1px solid #3D61B6; }
+	&.gravatar {padding: 0 10px 10px 0; background: white;}
+}

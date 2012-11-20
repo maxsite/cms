@@ -10,7 +10,7 @@
 <div class="comment-form">
 
 	<form method="post" class="fform">
-		<input type="hidden" name="comments_page_id" value="<?= $page_id ?>">
+		<input type="hidden" name="comments_page_id" value="<?= $page['page_id'] ?>">
 		<?= mso_form_session('comments_session') ?>
 
 		<div class="comments-textarea">

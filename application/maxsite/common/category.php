@@ -802,5 +802,11 @@ function mso_get_cat_from_id($id = 0, $find_key = false)
 	return '';
 }
 
+# получаем по указанному $slug значение ключа рубрики
+# если $slug = '' то берем второй сегмент
+function mso_get_cat_key($find_key = 'category_name', $slug = '')
+{
+	return mso_get_cat_from_id(mso_get_cat_from_slug($slug), $find_key);
+}
 
 # end file

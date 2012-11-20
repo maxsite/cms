@@ -7,30 +7,31 @@
 
 mso_page_view_count_first(); // для подсчета количества прочтений страницы
 
-// параметры для получения страниц
-$par = array( 'cut'=>false, 'cat_order'=>'category_id_parent', 'cat_order_asc'=>'asc', 'type'=>false ); 
+$par = array( 
+	'cut' => false, 
+	'cat_order' => 'category_id_parent', 
+	'cat_order_asc' => 'asc', 
+	'type' => false); 
 
-// подключаем кастомный вывод, где можно изменить массив параметров $par для своих задач
 if ($f = mso_page_foreach('page-mso-get-pages')) require($f); 
 
 $pages = mso_get_pages($par, $pagination); // получим все
 
-if ($f = mso_page_foreach('page-head-meta')) require($f);
+if ($f = mso_page_foreach('page-head-meta')) 
+{
+	require($f);
+}
 else
 { 
-	// в титле следует указать формат вывода | заменяется на  » true - использовать только page_title
 	mso_head_meta('title', $pages, '%page_title%'); // meta title страницы
 	mso_head_meta('description', $pages); // meta description страницы
 	mso_head_meta('keywords', $pages); // meta keywords страницы
 }
 	
 	
-// теперь сам вывод
+if (!$pages and mso_get_option('page_404_http_not_found', 'templates', 1) ) 
+	header('HTTP/1.0 404 Not Found'); 
 
-if (!$pages and mso_get_option('page_404_http_not_found', 'templates', 1) ) header('HTTP/1.0 404 Not Found'); 
-
-
-# начальная часть шаблона
 if ($f = mso_page_foreach('page-main-start')) 
 {
 	require($f);
@@ -45,82 +46,90 @@ echo NR . '<div class="type type_page">' . NR;
 
 if ($f = mso_page_foreach('page-do')) require($f);
 
-if ($pages) // есть страницы
+if ($pages)
 { 	
-	foreach ($pages as $page) : // выводим в цикле
+	$p = new Page_out();
 
+	$p->format('title', '<h1>', '</h1>', false);
+	$p->format('date', 'D, j F Y г.', '<span><time datetime="[page_date_publish]">', '</time></span>');
+	$p->format('cat', ' -&gt; ', '<br><span>' . tf('Рубрика') . ': ', '</span>');
+	$p->format('tag', ' | ', '<br><span>' . tf('Метки') . ': ', '</span>');
+	$p->format('feed', tf('Комментарии по RSS'), ' | <span>', '</span>');
+	$p->format('edit', 'Edit', ' | <span>', '</span>');
+	$p->format('view_count', '<br><span>' . tf('Просмотров') . ': ', '</span>');
+
+	foreach ($pages as $page)
+	{
 		if ($f = mso_page_foreach('page')) 
 		{
-			require($f); // подключаем кастомный вывод
+			require($f);
 			
 			// здесь комментарии
 			if ($fn = mso_find_ts_file('type/page/units/page-comments.php')) require($fn);
 
-			continue; // следующая итерация
+			continue;
 		}
-
 		
-		extract($page);
-		# pr($page);
-		echo NR . '<div class="page_only"><div class="wrap">' . NR;
-			
+		$p->load($page);
+		
+		$p->div_start('page_only', 'wrap', '<article>');
+		
 			if ($f = mso_page_foreach('info-top')) 
 			{
-				require($f); // подключаем кастомный вывод
+				require($f);
 			}
 			else
 			{
-				mso_page_title($page_slug, $page_title, '<h1>', '</h1>', false);
-				echo '<div class="info info-top">';
+				$p->html(NR . '<header>');
+					$p->line('[title]');
 					
-					mso_page_date($page_date_publish, 
-									array(	'format' => tf('D, j F Y г.'), // 'd/m/Y H:i:s'
-											'days' => tf('Понедельник Вторник Среда Четверг Пятница Суббота Воскресенье'),
-											'month' => tf('января февраля марта апреля мая июня июля августа сентября октября ноября декабря')), 
-									'<span>', '</span>');
-					mso_page_cat_link($page_categories, ' -&gt; ', '<br><span>' . tf('Рубрика') . ':</span> ', '');
-					mso_page_tag_link($page_tags, ' | ', '<br><span>' . tf('Метки') . ':</span> ', '');
-					mso_page_view_count($page_view_count, '<br><span>' . tf('Просмотров') . ':</span> ', '');
-					mso_page_meta('nastr', $page_meta, '<br><span>' . tf('Настроение') . ':</span> ', '');
-					mso_page_meta('music', $page_meta, '<br><span>' . tf('В колонках звучит') . ':</span> ', '');
-					if ($page_comment_allow) mso_page_feed($page_slug, tf('комментарии по RSS'), '<br><span>' . tf('Подписаться на').'</span> ', '', true);
-					mso_page_edit_link($page_id, tf('Edit page'), '<br>[', ']');
-				echo '</div>';
+					$p->div_start('info info-top');
+						$p->line('[date][feed][edit][cat][tag][view_count]');
+					$p->div_end('info info-top');
+				$p->html('</header>');
 			}
 			
 			if ($f = mso_page_foreach('page-content')) 
 			{
-				require($f); // подключаем кастомный вывод
+				require($f);
 			}
 			else
 			{
-				echo '<div class="page_content type_' . getinfo('type'). '">';
+				$p->div_start('page_content type_' . getinfo('type'));
 				
-					mso_page_content($page_content);
+					$p->content('', '');
+					
 					if ($f = mso_page_foreach('info-bottom')) require($f); // подключаем кастомный вывод
-					mso_page_content_end();
-					echo '<div class="break"></div>';
 					
-					// связанные страницы по родителям
-					if ($page_nav = mso_page_nav($page_id, $page_id_parent))
-						echo '<div class="page_nav">' . $page_nav . '</div>';
+					$p->html('<aside>');
 					
-					// блок "Еще записи этой рубрики"
-					if ($f = mso_page_foreach('page-other-pages')) require($f);
-						else mso_page_other_pages($page_id, $page_categories);
+						mso_page_content_end();
+						
+						$p->clearfix();
+						
+						// связанные страницы по родителям
+						if ($page_nav = mso_page_nav($p->val('page_id'), $p->val('page_id_parent')))
+						{
+							$p->div($page_nav, 'page_nav');
+						}
+						
+						// блок "Еще записи по теме"
+						if ($f = mso_page_foreach('page-other-pages')) require($f);
+							else mso_page_other_pages($p->val('page_id'), $p->val('page_categories'));
+							
+					$p->html('</aside>');
 					
-				echo '</div>';
+				$p->div_end('page_content type_' . getinfo('type'));
 			}
 
-		
-		echo NR . '</div></div><!--div class="page_only"-->' . NR;
+		$p->div_end('page_only', 'wrap', '</article>');
 		
 		if ($f = mso_page_foreach('page-only-end')) require($f);
 		
 		// здесь комментарии
 		if ($fn = mso_find_ts_file('type/page/units/page-comments.php')) require($fn);
 			
-	endforeach;
+	} // end foreach
 
 }
 else 
@@ -139,9 +148,8 @@ else
 
 if ($f = mso_page_foreach('page-posle')) require($f);
 
-echo NR . '</div><!-- class="type type_page" -->' . NR;
+echo NR . '</div><!-- /div.type type_page -->' . NR;
 
-# конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	
 # end file

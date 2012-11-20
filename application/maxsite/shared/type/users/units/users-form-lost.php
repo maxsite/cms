@@ -19,10 +19,10 @@ else
 	mso_head_meta('title', tf('Восстановление пароля') . '. '.  getinfo('title')); // meta title страницы
 }
 
-if (!$comuser_info and mso_get_option('page_404_http_not_found', 'templates', 1) ) header('HTTP/1.0 404 Not Found'); 
+if (!$comuser_info and mso_get_option('page_404_http_not_found', 'templates', 1) ) 
+	header('HTTP/1.0 404 Not Found'); 
 
-// теперь сам вывод
-# начальная часть шаблона
+
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
 echo NR . '<div class="type type_users_form_lost">' . NR;
@@ -85,7 +85,6 @@ else
 
 echo NR . '</div><!-- class="type type_users_form_lost" -->' . NR;
 
-# конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	
-?>
+# end file

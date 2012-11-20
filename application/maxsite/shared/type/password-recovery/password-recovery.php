@@ -17,7 +17,6 @@ else
 	mso_head_meta('title', tf('Восстановление пароля') . '. '.  getinfo('title')); // meta title страницы
 }
 
-// if (!$comuser_info and mso_get_option('page_404_http_not_found', 'templates', 1) ) header('HTTP/1.0 404 Not Found'); 
 
 // теперь сам вывод
 # начальная часть шаблона
@@ -57,4 +56,4 @@ echo NR . '</div><!-- class="type type_password_recovery" -->' . NR;
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	
-?>
+# end file

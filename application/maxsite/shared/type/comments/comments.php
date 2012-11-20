@@ -92,4 +92,4 @@ echo NR . '</div><!-- class="type type_comments" -->' . NR;
 
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 
-?>
+# end file

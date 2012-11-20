@@ -16,7 +16,6 @@ if ($imgs)
 {
 	$img = $imgs[array_rand($imgs, 1)]; // случайный выбор
 	
-	// вывод блока слайдера
 	echo '<div class="image-rand">';
 	echo NR . '<img src="' . $img . '" alt="" title="">';
 	echo '</div>';

@@ -7,9 +7,8 @@
 
 require_once( getinfo('common_dir') . 'comments.php' ); 
 
-// mso_get_comuser(0, array( 'limit'=> 20, 'tags'=>'<img><strong><em><i><b><u><s><font><pre><code><blockquote>' ) );
-
-$comuser_info = mso_get_comuser(mso_segment(2)); // получим всю информацию о комюзере - номер в сегменте url
+// получим всю информацию о комюзере - номер в сегменте url
+$comuser_info = mso_get_comuser(mso_segment(2)); 
 
 if ($f = mso_page_foreach('users-head-meta')) require($f);
 else
@@ -29,7 +28,7 @@ if ($comuser_info)
 {
 	extract($comuser_info[0]);
 	
-	if ($f = mso_page_foreach('users')) require($f); // подключаем кастомный вывод
+	if ($f = mso_page_foreach('users')) require($f);
 	else
 	{
 		$avatar_info = $comuser_info[0];
@@ -83,14 +82,11 @@ if ($comuser_info)
 			
 			foreach ($comments as $comment)
 			{
-				//if ($comment['comments_approved']) // только отмодерированные
-				//{
-					echo '<li><span><a href="' . getinfo('siteurl') . 'page/' . mso_slug($comment['page_slug']) . '#comment-' . $comment['comments_id'] . '" name="comment-' . $comment['comments_id'] . '">' . $comment['page_title'] . '</a>';
-					// echo ' | ' . $comments_url;
-					echo '</span><br>' . $comment['comments_date'];
-					echo '</span><br>' . $comment['comments_content'];
-					echo '</li>';
-				//}
+				echo '<li><span><a href="' . getinfo('siteurl') . 'page/' . mso_slug($comment['page_slug']) . '#comment-' . $comment['comments_id'] . '" name="comment-' . $comment['comments_id'] . '">' . $comment['page_title'] . '</a>';
+				// echo ' | ' . $comments_url;
+				echo '</span><br>' . $comment['comments_date'];
+				echo '</span><br>' . $comment['comments_content'];
+				echo '</li>';
 			}
 			
 			echo '</ul>';
@@ -104,7 +100,7 @@ else
 {
 	if ($f = mso_page_foreach('pages-not-found')) 
 	{
-		require($f); // подключаем кастомный вывод
+		require($f);
 	}
 	else // стандартный вывод
 	{
@@ -118,5 +114,5 @@ echo NR . '</div><!-- class="type type_users" -->' . NR;
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
-	
-?>
+
+# end file

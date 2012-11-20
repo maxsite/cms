@@ -108,7 +108,7 @@ function pagination_go($r = array())
 				$r['format'],
 				$out);
 		
-		echo NR . '<div class="pagination">' . $out . '</div>' . NR;
+		echo NR . '<div class="pagination"><nav>' . $out . '</nav></div>' . NR;
 	}
 	
 	return $r_orig;

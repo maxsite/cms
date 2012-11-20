@@ -14,6 +14,7 @@ if ($mso_install and !function_exists('mb_strlen') ) require('mbstring.php');
 
 
 define("NR", "\n"); // перенос строки
+define("NR2", "\n\n"); // двойной перенос строки
 define("TAB", "\t"); // табулятор
 define("NT", "\n\t"); // перенос + табулятор
 

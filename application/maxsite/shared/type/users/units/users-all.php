@@ -66,4 +66,4 @@ echo NR . '</div><!-- class="type type_users_all" -->' . NR;
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	
-?>
+# end file

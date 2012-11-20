@@ -23,7 +23,7 @@ echo '<span><a id="comments"></a></span>';
 require_once( getinfo('common_dir') . 'comments.php' ); // функции комментариев
 
 // если был отправлен новый коммент, то обрабатываем его и выводим сообщение в случае ошибки
-if ($out = mso_get_new_comment( array('page_title'=>$page_title) ))
+if ($out = mso_get_new_comment( array('page_title'=>$page['page_title']) ))
 {
 	$out .= mso_load_jquery('jquery.scrollto.js');
 	$out .= '<script>$(document).ready(function(){$.scrollTo("#comments", 500);})</script>';
@@ -33,7 +33,7 @@ if ($out = mso_get_new_comment( array('page_title'=>$page_title) ))
 
 
 // получаем все разрешенные комментарии
-$comments = mso_get_comments($page_id);
+$comments = mso_get_comments($page['page_id']);
 
 
 // в сессии проверяем может быть только что отправленный комментарий
@@ -42,7 +42,7 @@ if (isset($MSO->data['session']['comments']) and $MSO->data['session']['comments
 	$anon_comm = $MSO->data['session']['comments']; // массив: id-коммент
 	
 	// получаем комментарии для этого юзера
-	$an_comments = mso_get_comments($page_id, array('anonim_comments'=>$anon_comm));
+	$an_comments = mso_get_comments($page['page_id'], array('anonim_comments'=>$anon_comm));
 	
 	// добавляем в вывод
 	if ($an_comments) $comments = array_merge($comments, $an_comments);
@@ -51,18 +51,21 @@ if (isset($MSO->data['session']['comments']) and $MSO->data['session']['comments
 if (is_login()) $edit_link = getinfo('siteurl') . 'admin/comments/edit/';
 	else $edit_link = '';
 
-if ($comments or $page_comment_allow) echo NR . '<div class="type type_page_comments">' . NR;
+if ($comments or $page['page_comment_allow']) echo NR . '<div class="type type_page_comments">' . NR;
 
-if ($f = mso_page_foreach('page-comments-do-list')) require($f); // подключаем кастомный вывод
+if ($f = mso_page_foreach('page-comments-do-list')) require($f);
 
 if ($page_text_ok and $comments) // есть страницы
 { 	
 
-	if ($f = mso_page_foreach('page-comments-do')) require($f); // подключаем кастомный вывод
+	if ($f = mso_page_foreach('page-comments-do')) require($f);
 	else 
 	{
 		echo '<div class="comments">';
-		echo mso_get_val('page_comments_count_start', '<h3 class="comments">') . tf('Комментариев') . ': ' . count($comments) . mso_get_val('page_comments_count_end', '</h3>');
+		
+		echo mso_get_val('page_comments_count_start', '<h3 class="comments">') 
+			. tf('Комментариев') . ': ' . count($comments) 
+			. mso_get_val('page_comments_count_end', '</h3>');
 	}
 	
 	echo '<ol>';
@@ -75,7 +78,7 @@ if ($page_text_ok and $comments) // есть страницы
 		
 		if ($f = mso_page_foreach('page-comments')) 
 		{
-			require($f); // подключаем кастомный вывод
+			require($f);
 			continue; // следующая итерация
 		}
 		
@@ -121,7 +124,7 @@ if ($page_text_ok and $comments) // есть страницы
 		
 		if ($f = mso_page_foreach('page-comments-out')) 
 		{
-			require($f); // подключаем кастомный вывод
+			require($f);
 		}
 		else
 		{
@@ -151,20 +154,29 @@ if ($page_text_ok and $comments) // есть страницы
 	echo '</div>' . NR;
 }
 
-if ($f = mso_page_foreach('page-comments-posle-list')) require($f); // подключаем кастомный вывод
+if ($f = mso_page_foreach('page-comments-posle-list')) require($f);
 
-if ($page_comment_allow and $page_text_ok)
+if ($page['page_comment_allow'] and $page_text_ok)
 {
 	// если запрещены комментарии и от анонимов и от комюзеров, то выходим
 	if ( mso_get_option('allow_comment_anonim', 'general', '1') 
 		or mso_get_option('allow_comment_comusers', 'general', '1') )  
 	{
-		if ($f = mso_page_foreach('page-comment-form-do')) require($f); // подключаем кастомный вывод
-		else echo '<div class="break"></div>' . mso_get_val('leave_a_comment_start', '<h3 class="comments">') . mso_get_option('leave_a_comment', 'templates', tf('Оставьте комментарий!')). mso_get_val('leave_a_comment_end', '</h3>');
+		if ($f = mso_page_foreach('page-comment-form-do')) 
+		{
+			require($f);
+		}
+		else 
+		{
+			echo '<div class="clearfix"></div>' 
+				. mso_get_val('leave_a_comment_start', '<h3 class="comments">') 
+				. mso_get_option('leave_a_comment', 'templates', tf('Оставьте комментарий!'))
+				. mso_get_val('leave_a_comment_end', '</h3>');
+		}
 		
 		if ($f = mso_page_foreach('page-comment-form')) 
 		{
-			require($f); // подключаем кастомный вывод
+			require($f);
 		}
 		else 
 		{
@@ -173,6 +185,7 @@ if ($page_comment_allow and $page_text_ok)
 	}
 }
 
-if ($comments or $page_comment_allow) echo NR . '</div><!-- class="type type_page_comments" -->' . NR;
+if ($comments or $page['page_comment_allow']) 
+	echo NR . '</div><!-- /div.type type_page_comments -->' . NR;
 
-?>
+# end file

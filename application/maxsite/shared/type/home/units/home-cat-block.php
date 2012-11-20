@@ -99,7 +99,7 @@ if (mso_get_option('home_last_page', 'templates', '0'))
 										array(	'format' => tf('D, j F Y г.'), // 'd/m/Y H:i:s'
 												'days' => tf('Понедельник Вторник Среда Четверг Пятница Суббота Воскресенье'),
 												'month' => tf('января февраля марта апреля мая июня июля августа сентября октября ноября декабря')), 
-										'<span>', '</span>');
+										'<span><time datetime="' . $page_date_publish . '">', '</time></span>');
 						mso_page_cat_link($page_categories, ' -&gt; ', '<br><span>' . tf('Рубрика') . ':</span> ', '');
 						mso_page_tag_link($page_tags, ' | ', '<br><span>' . tf('Метки') . ':</span> ', '');
 						mso_page_view_count($page_view_count, '<br><span>' . tf('Просмотров') . ':</span> ', '');

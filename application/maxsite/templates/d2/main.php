@@ -22,7 +22,7 @@ if ($fn = mso_fe('custom/head-section.php')) require($fn); // подключен
 ?>
 
 <div class="all"><div class="all-wrap">
-	<div class="section header-main">
+	<div class="header-main">
 
 		<?php if (function_exists('ushka')) echo ushka('header-pre'); ?>
 
@@ -51,7 +51,7 @@ if ($fn = mso_fe('custom/head-section.php')) require($fn); // подключен
 
 		<?php if (function_exists('ushka')) echo ushka('header-out'); ?>
 
-		<div class="section article main"><div class="main-wrap">
+		<div class="main"><div class="main-wrap">
 			<?php 
 				if ($fn = mso_fe('custom/content-start.php')) require($fn);
 				if (function_exists('ushka')) echo ushka('content-start');
@@ -79,15 +79,15 @@ if ($fn = mso_fe('custom/head-section.php')) require($fn); // подключен
 				if ($fn = mso_fe('custom/sidebars.php')) require($fn);
 				else
 				{
-					echo NR . '<div class="aside sidebar sidebar1"><div class="sidebar1-wrap">';
+					echo NR . '<div class="sidebar sidebar1"><div class="sidebar1-wrap">';
 					mso_show_sidebar('1');
-					echo NR . '</div></div><!-- /div.sidebar1-wrap /div.aside sidebar sidebar1 -->';
+					echo NR . '</div></div><!-- /div.sidebar1-wrap /div.sidebar sidebar1 -->';
 				}
 			?>
 
 			<div class="clearfix"></div>
-		</div></div><!-- /div.main-wrap /div.section article main -->
-	</div><!-- /div.section header-main -->
+		</div></div><!-- /div.main-wrap /div.main -->
+	</div><!-- /div.header-main -->
 
 	<div class="footer-do-separation"></div>
 	<?php if (function_exists('ushka')) echo ushka('footer-pre'); ?>

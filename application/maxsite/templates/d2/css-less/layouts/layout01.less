@@ -10,8 +10,19 @@
 		@sidebar: 250px // сайдбар
 	)
 {
-	div.all {
+	
+	body {
 
+	}
+
+	div.all {
+		background: #01589B;
+	}
+	
+	div.all-wrap {
+		width: @content;
+		margin: 0 auto;
+		background: white;
 	}
 	
 	div.header {
@@ -26,21 +37,25 @@
 	}
 	
 	div.content {
+		width: @content - @sidebar;
+		float: left;
 		
 		div.content-wrap {
-
+			margin: 20px 40px 20px 20px;
 		}
 	}
 	
 	div.sidebar1 {
-
+		width: @sidebar;
+		float: right;
+		
 		div.sidebar1-wrap {
-
+			margin: 20px 20px 20px 0;
 		}
 	}
 	
 	div.footer {
-		
+	
 		div.footer-wrap {
 
 		}

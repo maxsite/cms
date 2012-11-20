@@ -6,25 +6,24 @@
  */
 
 
-	$title_contact = mso_get_option('title_contact', 'templates', tf('Обратная связь'));
-	
-	mso_head_meta('title', $title_contact); //  meta title страницы
+$title_contact = mso_get_option('title_contact', 'templates', tf('Обратная связь'));
 
-	if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
+mso_head_meta('title', $title_contact); //  meta title страницы
 
-	echo NR . '<div class="type type_contact"><div class="page_only"><div class="wrap">' . NR;
-?>
+if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-<h1><?= $title_contact ?></h1>
+echo NR . '<div class="type type_contact"><div class="page_only"><div class="wrap">' . NR;
 
-<?php
-	echo '<div class="page_content">';
-	
-	echo mso_get_option('prew_contact', 'templates', '');
-	
-	if ($f = mso_page_foreach('contact-do')) require($f); // подключаем кастомный вывод
 
-	$form_def = '[form]
+echo '<h1>' . $title_contact . '</h1>';
+
+echo '<div class="page_content">';
+
+echo mso_get_option('prew_contact', 'templates', '');
+
+if ($f = mso_page_foreach('contact-do')) require($f); // подключаем кастомный вывод
+
+$form_def = '[form]
 [subject=Пожелания по сайту # Нашел ошибку на сайте # Подскажите, пожалуйста]
 
 [field]
@@ -54,29 +53,28 @@ attr = style="height: 200px"
 
 [/form]';
 	
-	$form_def = str_replace("\r", "", $form_def);
-	$form_def = str_replace("\n", "_NR_", $form_def);
-	
-	
-	$form = mso_get_option('form_contact', 'templates', $form_def);
-	
-	//pr($form);
+$form_def = str_replace("\r", "", $form_def);
+$form_def = str_replace("\n", "_NR_", $form_def);
 
-	// используем плагин Forms
-	if (!function_exists('forms_content'))
-	{
-		require_once(getinfo('plugins_dir') . 'forms/index.php');
-	}
+
+$form = mso_get_option('form_contact', 'templates', $form_def);
+
+//pr($form);
+
+// используем плагин Forms
+if (!function_exists('forms_content'))
+{
+	require_once(getinfo('plugins_dir') . 'forms/index.php');
+}
 	
 	
-	
-	echo forms_content(str_replace("_NR_", "\n", $form));
-	
-	echo mso_get_option('post_contact', 'templates', '');
-	
-	if ($f = mso_page_foreach('contact-posle')) require($f); // подключаем кастомный вывод
-	
-	echo '</div>'; //  class="page_content"
+echo forms_content(str_replace("_NR_", "\n", $form));
+
+echo mso_get_option('post_contact', 'templates', '');
+
+if ($f = mso_page_foreach('contact-posle')) require($f); // подключаем кастомный вывод
+
+echo '</div>'; //  class="page_content"
 
 echo NR . '</div></div><!-- class="page_only" --></div><!-- class="type type_contact" -->' . NR;
 

@@ -7,12 +7,6 @@
 
 require_once( getinfo('common_dir') . 'comments.php' );
 
-# всё делаем по-новому, чтобы для доступа к странице нужно было пройти авторизацию
-# вначале выводим логин и пароль
-# если авторизация пройдена, значит выводим страницу с формой
-# если авторизация не пройдена, то опять выводим форму
-
-
 # обработка отправленных данных - возвращает результат
 $res_post = mso_comuser_edit(); 
 
@@ -35,7 +29,6 @@ else
 if (!$comuser_info and mso_get_option('page_404_http_not_found', 'templates', 1) ) header('HTTP/1.0 404 Not Found'); 
 
 // теперь сам вывод
-# начальная часть шаблона
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
 echo NR . '<div class="type type_users_form">' . NR;
@@ -89,9 +82,6 @@ if ($comuser_info)
 				
 				echo '<p><span class="ffirst ftitle">'. tf('Ваш пароль'). '</span><span><input type="password" name="flogin_password" class="flogin_password"></span></p>';
 				
-		
-				
-				//echo '<p><span class="ffirst"></span><span><a href="' . getinfo('siteurl') . 'users/' . $comusers_id . '/lost">' . tf('Я забыл пароль') . '</a></span></p>';
 			}
 			else
 			{
@@ -121,20 +111,6 @@ if ($comuser_info)
 				
 				echo '<p><span class="ffirst ftitle ftop">'. tf('О себе'). ' ('. tf('HTML удаляется'). ')</span><span><textarea name="f_comusers_description">'. NR 
 					. htmlspecialchars(strip_tags($comusers_description)) . '</textarea></span></p>';
-				
-				
-				/*
-				// если включено любое уведомление, то меняем флаг на «Подписаться»
-				
-				echo '<p><span class="ffirst ftitle">'. tf('Уведомления'). '</span><span>' 
-						
-						. form_dropdown('f_comusers_notify', 
-						
-							array('0'=> tf('Без уведомлений'), '1'=> tf('Подписаться')), $comusers_notify, '') 
-						
-						. '</span></p>';
-				*/
-
 
 				
 				// поскольку чекбоксы не передаются, если они не отмечены, 
@@ -148,17 +124,14 @@ if ($comuser_info)
 				echo '<p><span class="ffirst ftitle">'. tf('Уведомления'). '</span><label>' 
 					. '<input type="checkbox" name="f_comusers_meta[subscribe_my_comments]" value="1"' . $check . '>'
 					. ' '. tf('новые комментарии, где я участвую') . '</label></p>';
-				
-				
+
 				echo '<input type="hidden" value="0" name="f_comusers_meta[subscribe_other_comments]">';
-				
 				
 				$check = (isset($comusers_meta['subscribe_other_comments']) and $comusers_meta['subscribe_other_comments']=='1') ? ' checked="checked"' : '';
 				
 				echo '<p class="nop"><span class="ffirst"></span><label>' 
 					. '<input type="checkbox" name="f_comusers_meta[subscribe_other_comments]" value="1"' . $check . '>'
 					. ' '. tf('новые комментарии, где я не участвую') . '</label>';
-				
 				
 				echo '<input type="hidden" value="0" name="f_comusers_meta[subscribe_new_pages]">';
 				
@@ -167,7 +140,6 @@ if ($comuser_info)
 				echo '<p class="nop"><span class="ffirst"></span><label>' 
 					. '<input type="checkbox" name="f_comusers_meta[subscribe_new_pages]" value="1"' . $check . '>'
 					. ' '. tf('новые записи сайта') . '</label></p>';
-					
 					
 				echo '<input type="hidden" value="0" name="f_comusers_meta[subscribe_admin]">';
 				
@@ -178,7 +150,6 @@ if ($comuser_info)
 					. ' '. tf('рассылка администратора') . '</label></p>';
 					
 			}
-			
 			
 			if ($login_form)
 			{
@@ -194,15 +165,14 @@ if ($comuser_info)
 		}
 		
 	} // mso_page_foreach
-
 }
 else
 {
 	if ($f = mso_page_foreach('pages-not-found')) 
 	{
-		require($f); // подключаем кастомный вывод
+		require($f);
 	}
-	else // стандартный вывод
+	else
 	{
 		echo '<h1>' . tf('404. Ничего не найдено...') . '</h1>';
 		echo '<p>' . tf('Извините, пользователь с указанным номером не найден.') . '</p>';
@@ -215,4 +185,4 @@ echo NR . '</div><!-- class="type type_users_form" -->' . NR;
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	
-?>
+# end file

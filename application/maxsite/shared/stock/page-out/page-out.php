@@ -97,7 +97,14 @@ class Page_out
 					'Читать дальше',
 					'',
 					''
-				)
+				),
+				
+			'view_count' => array
+				(
+					'',
+					''
+				),	
+				
 		);
 		
 		$this->formats = $this->def_formats;
@@ -172,7 +179,14 @@ class Page_out
 	{
 		if (isset($this->formats[$key][$numarg-1]))
 		{
-			return $this->formats[$key][$numarg-1];
+			// в форматировании могут встречаться специальные замены
+			$f = $this->formats[$key][$numarg-1];
+			
+			// пока указываем некоторые, потом нужно будет подумать как сделать замены по всем ключам val
+			$f = str_replace('[page_date_publish]', $this->val('page_date_publish'), $f);
+			$f = str_replace('[page_count_comments]', $this->val('page_count_comments'), $f);
+			
+			return $f;
 		}
 		else
 		{
@@ -195,6 +209,7 @@ class Page_out
 		$date = '';
 		$read = '';
 		$feed = '';
+		$view_count = '';
 		
 		// title
 		if (strpos($out, '[title]') !== false)
@@ -313,14 +328,28 @@ class Page_out
 		// mso_page_feed($page_slug = '', $page_title = 'Подписаться', $do = '<p>', $posle = '</p>', $link = true, $echo = true, $type = 'page'
 		if (strpos($out, '[feed]') !== false)
 		{
-			$feed = mso_page_feed(
-				$this->val('page_slug'), // данные из $page
-				$this->get_formats_args('feed', 1), // 'Подписаться'
-				$this->get_formats_args('feed', 2), // $do
-				$this->get_formats_args('feed', 3), // $posle
-				true,
-				false);
-		}			
+			// подписку по rss ставим только если есть разрешение в page_comment_allow
+			if ($this->val('page_comment_allow'))
+				$feed = mso_page_feed(
+					$this->val('page_slug'), // данные из $page
+					$this->get_formats_args('feed', 1), // 'Подписаться'
+					$this->get_formats_args('feed', 2), // $do
+					$this->get_formats_args('feed', 3), // $posle
+					true,
+					false);
+		}		
+		
+		// view_count
+		// mso_page_view_count($page_view_count = 0, $do = '<span>Прочтений:</span> ', $posle = '', $echo = true)
+		if (strpos($out, '[view_count]') !== false)
+		{
+				$view_count = mso_page_view_count(
+					$this->val('page_view_count'), // данные из $page
+					$this->get_formats_args('view_count', 1), // $do Прочтений
+					$this->get_formats_args('view_count', 2), // $posle
+					false);
+		}
+		
 		
 		$out = str_replace('[title]', $title, $out);
 		$out = str_replace('[autor]', $autor, $out);
@@ -331,6 +360,7 @@ class Page_out
 		$out = str_replace('[date]', $date, $out);
 		$out = str_replace('[read]', $read, $out);
 		$out = str_replace('[feed]', $feed, $out);
+		$out = str_replace('[view_count]', $view_count, $out);
 		
 		if ($out) 
 		{
@@ -421,11 +451,17 @@ class Page_out
 		
 		foreach ($args as $class)
 		{
-			$out .= NR . '<div class="' . $class . '">';
+			// если аргумент начинается с <, значит это какой-то тэг
+			// его выводим как есть
+			
+			if ( 0 === strpos($class, '<'))
+				$out .= NR . $class;
+			else
+				$out .= NR . '<div class="' . $class . '">';
 		}
 		
 		return $this->out($out);
-	}	
+	}
 	
 	// аналогичная div_start(), только закрывающая
 	function div_end($class = '')
@@ -447,12 +483,19 @@ class Page_out
 		
 		foreach ($args as $class)
 		{
-			$out .= '</div>';
+			if (0 === strpos($class, '<'))
+				$out .= $class;
+			else
+				$out .= '</div>';
 			
 			if ($class)
-				$out_comment .= ' /div.' . $class;
+			{
+				$out_comment .= ' /.' . $class;
+			}
 			else
+			{
 				$out_comment .= ' /div';
+			}
 		}
 		
 		return $this->out(NR . $out . '<!--' . $out_comment . '-->' . NR . NR);
@@ -833,5 +876,82 @@ class Columns
 	}	
 	
 } // end  class Columns 
+
+
+
+# получение адреса первой картинки IMG в тексте
+# адрес обрабатывается, чтобы сформировать адрес полный (full), миниатюра (mini) и превью (prev)
+# результат записит от значения $res
+# если $res = true => найденный адрес или $default
+# если $res = 'mini' => адрес mini
+# если $res = 'prev' => адрес prev
+# если $res = 'full' => адрес full
+# если $res = 'all' => массив из всех сразу:
+#  		[full] => http://сайт/uploads/image.jpg
+#  		[mini] => http://сайт/uploads/mini/image.jpg
+#  		[prev] => http://сайт/uploads/_mso_i/image.jpg
+if (!function_exists('mso_get_first_image_url'))
+{
+	function mso_get_first_image_url($text = '', $res = true, $default = '')
+	{
+		$pattern = '!<img.*?src="(.*?)"!i';
+		
+		//$pattern = '!<img.+src=[\'"]([^\'"]+)[\'"].*>!i';
+		
+		preg_match_all($pattern, $text, $matches);
+		
+		//pr($matches);
+		if (isset($matches[1][0])) 
+		{
+			$url = $matches[1][0];
+			if(empty($url)) $url = $default;
+		}
+		else
+			$url = $default;
+		
+		//_pr($url,1);
+		if (strpos($url, '/uploads/smiles/') !== false) return ''; // смайлики исключаем
+		
+		if ($res === true) return $url;
+		
+		$out = array();
+
+		// если адрес не из нашего uploads, то отдаем для всех картинок исходный адрес
+		if (strpos($url, getinfo('uploads_url')) === false) 
+		{
+			$out['mini'] = $out['full'] = $out['prev'] = $url;
+			
+			if ($res == 'mini' or $res == 'prev' or $res == 'full') return $out['mini'];
+				else return $out;
+		
+		}
+		
+		if (strpos($url, '/mini/') !== false) // если в адресе /mini/ - это миниатюра
+		{
+			$out['mini'] = $url;
+			$out['full'] = str_replace('/mini/', '/', $url);
+			$out['prev'] = str_replace('/mini/', '/_mso_i/', $url);
+		}
+		elseif(strpos($url, '/_mso_i/') !== false) // если в адресе /_mso_i/ - это превью 100х100
+		{
+			$out['prev'] = $url;
+			$out['full'] = str_replace('/_mso_i/', '/', $url);
+			$out['mini'] = str_replace('/_mso_i/', '/mini/', $url);
+		}
+		else // обычная картинка
+		{
+			$fn = end(explode("/", $url)); // извлекаем имя файла
+			$out['full'] = $url;
+			$out['mini'] = str_replace($fn, 'mini/' . $fn, $url);
+			$out['prev'] = str_replace($fn, '_mso_i/' . $fn, $url);
+		}
+		
+		if ($res == 'mini') return $out['mini'];
+		elseif ($res == 'prev') return $out['prev'];
+		elseif ($res == 'full') return $out['full'];
+		else return $out;
+	}
+}
+
 
 # end file

@@ -4,3 +4,4 @@
 	category/category.php
 	и т.п.
 
+Все type-файлы см. в shared/type/.

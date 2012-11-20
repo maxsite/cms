@@ -103,8 +103,19 @@ class Page_out
 				(
 					'',
 					''
+				),
+				
+			'meta_description' => array
+				(
+					'<div class="meta_description">',
+					'</div>'
 				),	
 				
+			'meta_title' => array
+				(
+					'<div class="meta_title">',
+					'</div>'
+				),
 		);
 		
 		$this->formats = $this->def_formats;
@@ -210,6 +221,8 @@ class Page_out
 		$read = '';
 		$feed = '';
 		$view_count = '';
+		$meta_description = '';
+		$meta_title = '';
 		
 		// title
 		if (strpos($out, '[title]') !== false)
@@ -350,6 +363,28 @@ class Page_out
 					false);
 		}
 		
+		// мета description, если есть
+		if (strpos($out, '[meta_description]') !== false)
+		{
+			if ($meta_description = $this->meta_val('description'))
+			{
+				$meta_description = $this->get_formats_args('meta_description', 1) // $do
+									. $meta_description
+									. $this->get_formats_args('meta_description', 2); // $posle
+			}
+		}
+		
+		// мета title, если есть
+		if (strpos($out, '[meta_title]') !== false)
+		{
+			if ($meta_title = $this->meta_val('meta_title'))
+			{
+				$meta_title = $this->get_formats_args('meta_title', 1) // $do
+									. $meta_description
+									. $this->get_formats_args('meta_title', 2); // $posle
+			}
+		}
+		
 		
 		$out = str_replace('[title]', $title, $out);
 		$out = str_replace('[autor]', $autor, $out);
@@ -361,6 +396,8 @@ class Page_out
 		$out = str_replace('[read]', $read, $out);
 		$out = str_replace('[feed]', $feed, $out);
 		$out = str_replace('[view_count]', $view_count, $out);
+		$out = str_replace('[meta_description]', $meta_description, $out);
+		$out = str_replace('[meta_title]', $meta_title, $out);
 		
 		if ($out) 
 		{

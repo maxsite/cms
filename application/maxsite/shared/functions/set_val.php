@@ -24,14 +24,9 @@
 	mso_set_val('show_rss_text_start', '<p class="show_rss_text">');
 	mso_set_val('show_rss_text_end', '</p>');
 	
-	// Рубрика-заголовок в home-cat-block
-	mso_set_val('home_full_text_cat_start', '<div class="header_home_cat">');
-	mso_set_val('home_full_text_cat_end', '</div>');
-	
 	// Еще записи по теме
 	mso_set_val('page_other_pages_start', '<div class="page_other_pages_header">');
 	mso_set_val('page_other_pages_end', '</div>');
-
 
 	// можно указать css-класс для BODY
 	if (is_type('home')) mso_set_val('body_class', 'body-home');

@@ -63,9 +63,9 @@ if ($page_text_ok and $comments) // есть страницы
 	{
 		echo '<div class="comments">';
 		
-		echo mso_get_val('page_comments_count_start', '<h3 class="comments">') 
+		echo mso_get_val('page_comments_count_start', '<div class="page_comments_count">') 
 			. tf('Комментариев') . ': ' . count($comments) 
-			. mso_get_val('page_comments_count_end', '</h3>');
+			. mso_get_val('page_comments_count_end', '</div>');
 	}
 	
 	echo '<ol>';
@@ -129,7 +129,7 @@ if ($page_text_ok and $comments) // есть страницы
 		else
 		{
 			echo 
-				mso_avatar($comment)
+				mso_avatar($comment, 'class="gravatar"')
 				
 				. '<div class="comment-info">' 
 					. $comment_url 
@@ -169,9 +169,9 @@ if ($page['page_comment_allow'] and $page_text_ok)
 		else 
 		{
 			echo '<div class="clearfix"></div>' 
-				. mso_get_val('leave_a_comment_start', '<h3 class="comments">') 
+				. mso_get_val('leave_a_comment_start', '<div class="leave_a_comment">') 
 				. mso_get_option('leave_a_comment', 'templates', tf('Оставьте комментарий!'))
-				. mso_get_val('leave_a_comment_end', '</h3>');
+				. mso_get_val('leave_a_comment_end', '</div>');
 		}
 		
 		if ($f = mso_page_foreach('page-comment-form')) 

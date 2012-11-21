@@ -24,25 +24,28 @@ div.type_home_cat_block {
 		background: #EEE;
 		
 		a {
-			text-decoration: none;
+
 		} 
 	} 
 	
-	ul.home-cat-block {
+	// описание рубрики
+	div.description-cat {
+		font-size: 0.9em; 
+		font-weight: bold; 
+		margin: 5px 10px;
+	}
+	
+	ul.list {
 		margin: 5px 0 20px 30px;
 	}
 	
-	div.description {
+	// описание записи
+	div.meta_description {
 		font-size: .9em; 
 		font-style: italic; 
 		margin-bottom: 5px;
 	}
-	
-	div.description-cat {
-		font-size: 0.9em; 
-		font-weight: bold; 
-		margin: 5px;
-	}
+
 }
 
 
@@ -108,17 +111,20 @@ div.page_only {
 	border-bottom: 1px silver solid;
 } 
 
-// отступ на одиночной не нужен
-div.type_page div.page_only {
+// отступ на некоторых не нужны
+div.type_page div.page_only, // одиночная
+div.type_contact div.page_only, // конакты
+div.home_top_page div.page_only // top-запись на главной
+{
 	margin-bottom: 0; 
 	padding-bottom: 0; 
 	border-bottom: none;
 } 
 
-div.type_contact div.page_only {
-	margin-bottom: 0; 
-	padding-bottom: 0; 
-	border-bottom: none;
+// верхняя запись на главной
+div.home_top {
+	border-bottom: 1px solid #ccc; 
+	margin-bottom: 10px;
 } 
 
 div.info {
@@ -126,13 +132,6 @@ div.info {
 	color: #777;
 }
 
-// верхняя запись на главной
-
-// верхний блок на главной
-div.home_top {
-	border-bottom: 1px solid #ccc; 
-	margin-bottom: 10px;
-} 
 
 // для текста
 
@@ -224,7 +223,6 @@ div.comment-form {
 	padding: 10px; 
 	background: #F0F0F0; 
 	.border(#DDD); 
-	// .border_radius(8px);
 	
 	textarea {
 		width: 100%; 
@@ -308,7 +306,7 @@ div.comments {
 	}
 
 	img.gravatar {
-		//margin: -20px 0 0 0 !important;
+		float: left;
 		padding: 0;
 	}
 	

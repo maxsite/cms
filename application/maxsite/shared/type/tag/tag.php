@@ -55,11 +55,11 @@ if ($pages) // есть страницы
 		}
 		else 
 		{
-			mso_get_val('show_rss_text_start', '<h3 class="category">') 
+			mso_get_val('show_rss_text_start', '<p class="show_rss_text">') 
 			. '<a href="' . getinfo('siteurl') . mso_segment(1) . '/' 
 			. mso_segment(2) . '/feed">'
 			. tf('Подписаться на эту метку по RSS'). '</a>' 
-			.  mso_get_val('show_rss_text_end', '</h3>');
+			.  mso_get_val('show_rss_text_end', '</p>');
 		}
 	}
 	

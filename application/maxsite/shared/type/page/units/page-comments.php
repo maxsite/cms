@@ -68,7 +68,7 @@ if ($page_text_ok and $comments) // есть страницы
 			. mso_get_val('page_comments_count_end', '</div>');
 	}
 	
-	echo '<ol>';
+	echo '<section>';
 	
 	static $num_comment = 0; // номер комментария по порядку - если нужно выводить в type_foreach-файле
 	
@@ -95,7 +95,7 @@ if ($page_text_ok and $comments) // есть страницы
 		
 		$comments_date = mso_date_convert('Y-m-d в H:i:s', $comments_date);
 		
-		echo NR . '<li class="' . $class . '">';
+		echo NR . '<article class="' . $class . '">';
 		
 		$comment_url = '<span class="url">' . $comments_url . '</span>';
 		
@@ -146,11 +146,11 @@ if ($page_text_ok and $comments) // есть страницы
 		
 		echo '<div class="clearfix"></div>';
 		
-		echo '</li>'; 
+		echo '</article>'; 
 		
 	}
 	
-	echo '</ol>';
+	echo '</section>';
 	echo '</div>' . NR;
 }
 

@@ -6,14 +6,75 @@
 // здесь все элементы, что меняются по размеру 
 
 
+// эффект при смене размеров
+div.all-wrap,
+div.content,
+div.sidebar1
+{
+	.transition(width .5s);
+}
+
+
 // от 769px до 960px
 @media (min-width: 769px) and (max-width: 960px) 
 {
-	
+	.layout(768px, 200px);
 }
 
 // до 768px
 @media (max-width: 768px) 
 {
+	div.all-wrap {
+		width: 100%;
+	}
+	
+	div.content {
+		width: 100%;
+		float: none;
+		
+		div.content-wrap {
+			margin: 20px;
+		}
+	}
+	
+	div.sidebar1 {
+		width: 100%;
+		float: none;
+		
+		div.sidebar1-wrap {
+			margin: 20px;
+			
+			background: #f0f0f0;
+			
+		}
+	}
+	
+	
+	div.MainMenu {
+		height: auto; 
+	}
+
+	ul.menu {
+		float: none;
+		
+		li {
+			float: none;
+			display: block;
+			width: auto;
+			height: auto !important;
+			position: relative;
+			padding: 0;
+		
+			ul {
+				float: none;
+				display: block;
+				position: relative;
+				height: auto;
+				width: auto;
+				left: 0px;
+				padding: 0 0 0 20px;
+			}
+		}
+	}
 	
 }

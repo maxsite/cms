@@ -1,0 +1,64 @@
+// MaxSite CMS 
+// Copyright http://maxsite.org/
+// подключать - @import url('components/logo-ns-descr-icons.less');
+
+
+// компонент 
+div.logo-ns-descr-icons {
+	
+    div.wrap {
+		height: 90px;
+		margin: 0 auto;
+		background: #F5F5F5;
+	}
+
+	div.r1 {
+		.left;
+		width: 80px;
+		
+		img {
+			margin: 10px 0 0 20px;
+		}
+	}
+	
+    
+	div.r2 {
+		.left;
+		width: auto;
+		
+		div.name_site {
+
+			margin: 20px 0 0 25px;
+			.f > size(19px);
+			.f > upper;
+			.bold;
+			
+			a {
+				.f > underline(none);
+			}
+			
+		}
+		
+		div.description_site {
+			.f > i;
+			.f > size(14px);
+			margin: 0 0 10px 25px;
+		}
+	}
+	
+	div.r3 {
+		.right;
+		width: auto;
+		
+		// социконки отдельно
+		@import url('components/social.less');
+		.social("../images/social/", 16px, 16px, 80);
+		
+		// или можно отдельно
+		div.social {
+			padding: 15px 10px 0  0; // выровнять
+		}
+		
+	}
+ 
+}

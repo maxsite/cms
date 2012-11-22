@@ -11,18 +11,15 @@
 	)
 {
 	
-	body {
-
-	}
-
 	div.all {
-		background: #01589B;
+		.bg(#888, 'pattern_030.png');
 	}
 	
 	div.all-wrap {
 		width: @content;
 		margin: 0 auto;
 		background: white;
+		
 	}
 	
 	div.header {
@@ -55,9 +52,15 @@
 	}
 	
 	div.footer {
-	
+		background: #555;
+		
 		div.footer-wrap {
-
+			padding: 20px;
+			color: #aaa;
+			
+			a {
+				color: #aaa;
+			}
 		}
 	}
 } // .layout

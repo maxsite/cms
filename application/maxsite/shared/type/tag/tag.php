@@ -38,7 +38,7 @@ if (!$pages and mso_get_option('page_404_http_not_found', 'templates', 1) )
 
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="type type_tag">' . NR;
+echo NR . '<div class="type type_tag"><section>' . NR;
 
 if ($f = mso_page_foreach('tag-do')) 
 		require($f);
@@ -97,7 +97,7 @@ else
 if ($f = mso_page_foreach('tag-posle')) require($f);
 
 
-echo NR . '</div><!-- class="type type_tag" -->' . NR;
+echo NR . '</section></div><!-- class="type type_tag" -->' . NR;
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

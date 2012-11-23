@@ -186,7 +186,7 @@ if (!function_exists('default_out_profiles'))
 # $option - опция
 # $def_component - компонент по умолчанию
 # пример использования
-# if ($fn = get_component_fn('default_header_component2', 'menu')) require($fn);
+# if ($fn = get_component_fn('header_component2', 'menu')) require($fn);
 if (!function_exists('get_component_fn'))
 {
 	function get_component_fn($option = '', $def_component = '')
@@ -209,7 +209,7 @@ if (!function_exists('get_component_fn'))
 # css-файл компонента находится в общем css-каталоге шаблона с именем компонента, например menu.php и menu.css
 if (!function_exists('out_component_css'))
 {
-	function out_component_css($component_options = array('default_header_component1', 'default_header_component2', 'default_header_component3', 'default_header_component4', 'default_header_component5', 'default_footer_component1', 'default_footer_component2', 'default_footer_component3', 'default_footer_component4', 'default_footer_component5'))
+	function out_component_css($component_options = array('header_component1', 'header_component2', 'header_component3', 'header_component4', 'header_component5', 'footer_component1', 'footer_component2', 'footer_component3', 'footer_component4', 'footer_component5'))
 	{
 		
 		// проходимся по всем заданным опциям

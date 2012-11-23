@@ -1,0 +1,33 @@
+// MaxSite CMS 
+// Copyright http://maxsite.org/
+// подключать - @import url('components/menu-icons.less');
+
+
+// компонент 
+div.menu-icons {
+	
+	.bg(#eee);
+	
+    div.wrap {
+	
+	}
+    
+	div.r1 {
+		.left;
+	}
+	
+	div.r2 {
+		.right;
+		width: auto;
+		
+		// социконки отдельно
+		@import url('components/social.less');
+		.social("../images/social/", 16px, 16px, 80);
+		
+		// или можно отдельно
+		div.social {
+			padding: 10px 10px 0  0; // выровнять
+		}
+	}
+ 
+}

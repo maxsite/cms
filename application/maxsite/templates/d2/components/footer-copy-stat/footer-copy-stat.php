@@ -1,30 +1,27 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 /*
-(c) http://maxsite.org/
+	(c) http://max-3000.com/
 
 	Файл: footer-copy-stat.php
 
 	Расположение: footer
 	
 	CSS-стили: 
-		components/footer-copy-stat.less
-	
 		var_style.less:
-			>	@import url('components/footer-copy-stat.less');
+			> @import url('components/footer-copy-stat.less');
 		
 	PHP-связи: 
 		custom/header_components.php
-			>	require(getinfo('template_dir') . 'components/footer-copy-stat.php');
+			> if ($fn = mso_fe('components/footer-copy-stat/footer-copy-stat.php')) require($fn);
 */
 
-$p = new Page_out;
+$pt = new Page_out;
 
-$p->div_start('footer-copy-stat', 'wrap');
+$pt->div_start('footer-copy-stat', 'wrap');
 
-	$p->div('&copy; ' . getinfo('name_site') . ', ' . date('Y'), 'copyright');
+	$pt->div('&copy; ' . getinfo('name_site') . ', ' . date('Y'), 'copyright');
 	
-	$p->div_start('statistic');
+	$pt->div_start('statistic');
 		
 		$CI = & get_instance();	
 		
@@ -35,15 +32,17 @@ $p->div_start('footer-copy-stat', 'wrap');
 	
 		if (is_login())
 		{
-			echo $p->link(getinfo('siteurl') . 'admin', tf('Управление'))
+			echo $pt->link(getinfo('siteurl') . 'admin', tf('Управление'))
 				. ' | '
-				. $p->link(getinfo('siteurl') . 'logout', tf('Выйти'));
+				. $pt->link(getinfo('siteurl') . 'logout', tf('Выйти'));
 		}
 		else
 		{
-			echo $p->link(getinfo('siteurl') . 'login', tf('Вход'));
+			echo $pt->link(getinfo('siteurl') . 'login', tf('Вход'));
 		}
 		
-	$p->div_end('statistic');
+	$pt->div_end('statistic');
 
-$p->div_end('footer-copy-stat', 'wrap');
+$pt->div_end('footer-copy-stat', 'wrap');
+
+# end file

@@ -5,13 +5,13 @@
  * (c) http://max-3000.com/
  *
  * Александр Шиллинг
- * (c) http://maxsite.thedignity.biz
+ * (c) http://alexanderschilling.net
  */
 
 # функция автоподключения плагина
 function dignity_rss_autoload($args = array())
 {
-	mso_register_widget('dignity_rss_widget', t('RSS подписка')); # регистрируем виджет
+	mso_register_widget('dignity_rss_widget', t('RSS подписка', __FILE__)); # регистрируем виджет
 }
 
 # функция выполняется при деинсталяции плагина
@@ -39,16 +39,16 @@ function dignity_rss_widget($num = 1)
 	else $options['feed_url'] = getinfo('rss_url');
 
 	if (isset($options['google_text']) ) $options['google_text'] = $options['google_text'];
-	else $options['google_text'] = t('Читать RSS через Google');
+	else $options['google_text'] = t('Читать RSS через Google', __FILE__);
 
 	if (isset($options['yandex_text']) ) $options['yandex_text'] = $options['yandex_text'];
-	else $options['yandex_text'] = t('Читать RSS через Яндекс');
+	else $options['yandex_text'] = t('Читать RSS через Яндекс', __FILE__);
 
 	if (isset($options['rss_text']) ) $options['rss_text'] = $options['rss_text'];
 	else $options['rss_text'] = t('RSS лента');
 
 	if (isset($options['rss_to_email']) ) $options['rss_to_email'] = $options['rss_to_email'];
-	else $options['rss_to_email'] = t('RSS-лента на E-Mail');
+	else $options['rss_to_email'] = t('RSS-лента на E-Mail', __FILE__);
 
 	if (isset($options['textposle']) ) $options['textposle'] = '<p>' . $options['textposle'] . '</p>';
 	else $options['textposle'] = '';
@@ -67,13 +67,13 @@ function dignity_rss_widget_form($num = 1)
 	// получаем опции 
 	$options = mso_get_option($widget, 'plugins', array());
 	
-	if ( !isset($options['header']) ) $options['header'] = t('Подписка на новости');
+	if ( !isset($options['header']) ) $options['header'] = t('Подписка на новости', __FILE__);
 	if ( !isset($options['textdo']) ) $options['textdo'] = '';
 	if ( !isset($options['feed_url']) ) $options['feed_url'] = getinfo('rss_url');
-	if ( !isset($options['google_text']) ) $options['google_text'] = t('Читать блог через Google');
-	if ( !isset($options['yandex_text']) ) $options['yandex_text'] = t('Читать блог через Яндекс');
-	if ( !isset($options['rss_text']) ) $options['rss_text'] = t('RSS лента');
-	if ( !isset($options['rss_to_email']) ) $options['rss_to_email'] = t('Получать RSS-ленту на почту');
+	if ( !isset($options['google_text']) ) $options['google_text'] = t('Читать блог через Google', __FILE__);
+	if ( !isset($options['yandex_text']) ) $options['yandex_text'] = t('Читать блог через Яндекс', __FILE__);
+	if ( !isset($options['rss_text']) ) $options['rss_text'] = t('RSS лента', __FILE__);
+	if ( !isset($options['rss_to_email']) ) $options['rss_to_email'] = t('Получать RSS-ленту на почту', __FILE__);
 	if ( !isset($options['textposle']) ) $options['textposle'] = '';
 	
 	// вывод самой формы
@@ -81,21 +81,21 @@ function dignity_rss_widget_form($num = 1)
 	$CI->load->helper('form');
 	
 	
-	$form = mso_widget_create_form(t('Заголовок'), form_input( array( 'name'=>$widget . 'header', 'value'=>$options['header'] ) ), '');
+	$form = mso_widget_create_form(t('Заголовок', __FILE__), form_input( array( 'name'=>$widget . 'header', 'value'=>$options['header'] ) ), '');
 	
-	$form .= mso_widget_create_form(t('Текст вначале'), form_textarea( array( 'name'=>$widget . 'textdo', 'value'=>$options['textdo'] ) ), '');
+	$form .= mso_widget_create_form(t('Текст вначале', __FILE__), form_textarea( array( 'name'=>$widget . 'textdo', 'value'=>$options['textdo'] ) ), '');
 	
-	$form .= mso_widget_create_form(t('Адрес RSS-Feed'), form_input( array( 'name'=>$widget . 'feed_url', 'value'=>$options['feed_url'] ) ), '');
+	$form .= mso_widget_create_form(t('Адрес RSS-Feed', __FILE__), form_input( array( 'name'=>$widget . 'feed_url', 'value'=>$options['feed_url'] ) ), '');
 	
-	$form .= mso_widget_create_form(t('Текст для Google'), form_input( array( 'name'=>$widget . 'google_text', 'value'=>$options['google_text'] )) , '');
+	$form .= mso_widget_create_form(t('Текст для Google', __FILE__), form_input( array( 'name'=>$widget . 'google_text', 'value'=>$options['google_text'] )) , '');
 	
-	$form .= mso_widget_create_form(t('Текст для Яндекс'), form_input( array( 'name'=>$widget . 'yandex_text', 'value'=>$options['yandex_text'] ) ), '');
+	$form .= mso_widget_create_form(t('Текст для Яндекс', __FILE__), form_input( array( 'name'=>$widget . 'yandex_text', 'value'=>$options['yandex_text'] ) ), '');
 	
-	$form .= mso_widget_create_form(t('Текст RSS ленты'), form_input( array( 'name'=>$widget . 'rss_text', 'value'=>$options['rss_text'] ) ), '');
+	$form .= mso_widget_create_form(t('Текст RSS ленты', __FILE__), form_input( array( 'name'=>$widget . 'rss_text', 'value'=>$options['rss_text'] ) ), '');
 	
-	$form .= mso_widget_create_form(t('Текст RSS-лента на почту'), form_input( array( 'name'=>$widget . 'rss_to_email', 'value'=>$options['rss_to_email'] ) ), '');
+	$form .= mso_widget_create_form(t('Текст RSS-лента на почту', __FILE__), form_input( array( 'name'=>$widget . 'rss_to_email', 'value'=>$options['rss_to_email'] ) ), '');
 	
-	$form .= mso_widget_create_form(t('Текст в конце'), form_textarea( array( 'name'=>$widget . 'textposle', 'value'=>$options['textposle'] ) ), '');
+    $form .= mso_widget_create_form(t('Текст в конце', __FILE__), form_textarea( array( 'name'=>$widget . 'textposle', 'value'=>$options['textposle'] ) ), '');
 	
 	return $form;
 }
@@ -140,10 +140,10 @@ function dignity_rss_widget_custom($options = array(), $num = 1)
 	$path = getinfo('plugins_url') . 'dignity_rss/img/'; # путь к картинкам
 	$rss_google = 'http://fusion.google.com/add?feedurl=' . $feed_url;
 	$rss_yandex = 'http://lenta.yandex.ru/settings.xml?name=feed&amp;url=' . $feed_url;
-	$rss_google_read = '<p><a href="' .$rss_google  . '" rel="nofollow"><img src="' . $path . 'google.png"></a> <a href="' . $rss_google . '" rel="nofollow">' . $google_text . '</a></p>';
-	$rss_yandex_read = '<p><a href="' .$rss_yandex  . '" rel="nofollow"><img src="' . $path . 'yandex.png"></a> <a href="' . $rss_yandex . '" rel="nofollow">' . $yandex_text . '</a></p>';
-	$rss_mail = '<p><a href="http://www.rss2email.ru?rss=' . $feed_url . '" title="' . $rss_to_email . '" rel="nofollow"><img src="' . $path . 'email.png"></a> <a href="http://www.rss2email.ru?rss=' . $feed_url . '" title="' . $rss_to_email . '" rel="nofollow">' . $rss_to_email . '</a></p>';
-	$rss_f = '<p><a href="' . $feed_url . '"><img src="' . $path . 'rss.png"></a>' . ' <a href="' . $feed_url . '">' . $rss_text . '</a></p>';
+	$rss_google_read = '<p><a href="' .$rss_google  . '" rel="nofollow"><img src="' . $path . 'google.png" alt=""></a> <a href="' . $rss_google . '" rel="nofollow">' . $google_text . '</a></p>';
+	$rss_yandex_read = '<p><a href="' .$rss_yandex  . '" rel="nofollow"><img src="' . $path . 'yandex.png" alt=""></a> <a href="' . $rss_yandex . '" rel="nofollow">' . $yandex_text . '</a></p>';
+	$rss_mail = '<p><a href="http://www.rss2email.ru?rss=' . $feed_url . '" title="' . $rss_to_email . '" rel="nofollow"><img src="' . $path . 'email.png" alt=""></a> <a href="http://www.rss2email.ru?rss=' . $feed_url . '" title="' . $rss_to_email . '" rel="nofollow">' . $rss_to_email . '</a></p>';
+	$rss_f = '<p><a href="' . $feed_url . '"><img src="' . $path . 'rss.png" alt=""></a>' . ' <a href="' . $feed_url . '">' . $rss_text . '</a></p>';
 	
 	return $header . $textdo . $rss_f . $rss_google_read . $rss_yandex_read . $rss_mail . $textposle;
 }

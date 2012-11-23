@@ -200,3 +200,4 @@ $lang['Если вы уже зарегистрированы как коммен
 $lang['Ваш комментарий']='Your comment';
 $lang['Аватарка (с http://, размер 80x80px)']='Avatar(with http://, size 80x80px)';
 $lang['Его последние комментарии']='His recent comments';
+$lang['Шаблон для MaxSite CMS'] = 'Template for MaxSite CMS';

@@ -1,12 +1,12 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 
 $info = array(
-	'name' => t('RSS-подписка'),
-	'description' => t('Виджет для вывода RSS подписки'),
-	'version' => '1.6',
-	'author' => 'Александр Шиллинг',
-	'plugin_url' => 'http://dignityinside.org/',
-	'author_url' => 'http://dignityinside.org/',
+	'name' => t('RSS-подписка', __FILE__),
+	'description' => t('Виджет для вывода RSS подписки', __FILE__),
+	'version' => '1.7',
+	'author' => t('Александр Шиллинг', __FILE__),
+	'plugin_url' => 'http://alexanderschilling.net/',
+	'author_url' => 'http://alexanderschilling.net/',
 	'group' => 'template'
 );
 

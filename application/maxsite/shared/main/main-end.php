@@ -6,9 +6,9 @@
  */
 
 
-global $MAIN_OUT;
+global $CONTENT_OUT;
 
-$MAIN_OUT = ob_get_contents();
+$CONTENT_OUT = ob_get_contents();
 ob_end_clean();
 
 require(getinfo('template_dir') . 'main.php');

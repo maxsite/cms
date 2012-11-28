@@ -17,7 +17,7 @@
 			>	@import url('components/menu-icons.less');
 		
 	PHP-связи: 
-			>	require(getinfo('template_dir') . 'components/menu-icons/menu-icons.php');
+			>	if ($fn = mso_fe('components/menu-icons/menu-icons.php')) require($fn);
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода

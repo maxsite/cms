@@ -8,15 +8,15 @@
 # функция автоподключения плагина
 function editor_markitup_autoload($args = array())
 {
-	mso_hook_add('editor_custom', 'editor_markitup'); # хук на подключение своего редактора
-	//mso_hook_add('admin_page_form_q_files', 'editor_markitup_q_files'); # форма быстрой загрузки файлов
+	// mso_hook_add('editor_custom', 'editor_markitup'); # хук на подключение своего редактора
+	// mso_hook_add('admin_page_form_q_files', 'editor_markitup_q_files'); # форма быстрой загрузки файлов
 }
 
 # функция выполняется при деинсталяции плагина
 function editor_markitup_uninstall($args = array())
 {	
-	mso_delete_option('editor_markitup', 'plugins' ); // удалим созданные опции
-	return $args;
+	//mso_delete_option('editor_markitup', 'plugins' ); // удалим созданные опции
+	// return $args;
 }
 
 function editor_markitup($args = array()) 
@@ -39,8 +39,8 @@ function editor_markitup($args = array())
 		$editor_config['previewPosition'] = 'previewPosition: "after",';
 	
 	
-	$editor_config['url'] = getinfo('plugins_url') . 'editor_markitup/';
-	$editor_config['dir'] = getinfo('plugins_dir') . 'editor_markitup/';
+	$editor_config['url'] = getinfo('admin_url') . 'plugins/editor_markitup/';
+	$editor_config['dir'] = getinfo('admin_dir') . 'plugins/editor_markitup/';
 
 	if (isset($args['content'])) $editor_config['content'] = $args['content'];
 	else $editor_config['content'] = '';
@@ -67,12 +67,13 @@ function editor_markitup($args = array())
 
 
 	// смайлы - код из comment_smiles
-	$image_url=getinfo('uploads_url').'smiles/';
+	$image_url = getinfo('uploads_url').'smiles/';
 	$CI = & get_instance();
 	$CI->load->helper('smiley_helper');
-	$smileys=_get_smiley_array();
+	$smileys = _get_smiley_array();
 	$used = array();
 	$smiles = '';
+	
 	foreach ($smileys as $key => $val)
 	{
 		// Для того, чтобы для смайлов с одинаковыми картинками (например :-) и :))
@@ -82,7 +83,7 @@ function editor_markitup($args = array())
 		  continue;
 		}
 		
-		$im = "<img src='" . $image_url.$smileys[$key][0] . "' title='" . $key . "'>";
+		$im = "<img src='" . $image_url . $smileys[$key][0] . "' title='" . $key . "'>";
 		$smiles .= '{name:"' .  addcslashes($im, '"') . '", notitle: "1", replaceWith:"' . $key . '", className:"col1-0" },' . NR;
 		
 		$used[$smileys[$key][0]] = TRUE;
@@ -102,17 +103,6 @@ function editor_markitup_mso_options()
 {
 	mso_admin_plugin_options('editor_markitup', 'plugins', 
 		array(
-			/*
-			'editor' => array(
-							'type' => 'radio', 
-							'name' => 'Редактор', 
-							'description' => 'Выберите тип редактора. Для отображения BB-code на сайте требуется включить плагин <strong>BBCode</strong>',
-							'values' => 'HTML # BB-CODE', 
-							'default' => 'BB-CODE',
-							'delimer' => '&nbsp;&nbsp;&nbsp;&nbsp;',
-						),	
-			)
-			*/
 			'preview' => array(
 							'type' => 'radio', 
 							'name' => t('Режим предпросмотра текста'), 

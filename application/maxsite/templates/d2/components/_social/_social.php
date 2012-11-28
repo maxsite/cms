@@ -28,6 +28,7 @@ if ($social and isset($social[0]))
 		'evernote' => 'Evernote',
 		'facebook' => 'Facebook',
 		'gplus' => 'Google+',
+		'github' => 'Github',
 		'last_fm' => 'Last FM',
 		'linked_in' => 'Linked In',
 		'mail' => 'Mail.ru',

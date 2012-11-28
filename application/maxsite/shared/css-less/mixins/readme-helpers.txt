@@ -52,6 +52,7 @@
 .border_right(#C0C0C0, 1px, solid); 
 .border_bottom(#C0C0C0, 1px, solid); 
 .border_left(#C0C0C0, 1px, solid); 
+.border(none);
 
 .box_shadow(@x, @y, 3px, #888); // тень блока
 .box_shadow(none); // отключить тень

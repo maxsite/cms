@@ -39,16 +39,19 @@ div.type_home_cat_block {
 		margin: 5px 0 20px 30px;
 	}
 	
-	// описание записи
+
+
+}
+
+// описание записи на главной, если они списком
+div.type_home {
 	div.meta_description {
 		font-size: .9em; 
 		font-style: italic; 
 		margin-bottom: 5px;
 	}
-
 }
-
-
+	
 // верхняя запись на главной
 div.home_top h1 {
 	margin-top: 0;
@@ -219,10 +222,10 @@ input {
 
 // COMMENT FORM
 div.comment-form {
-	margin: 10px 0; 
-	padding: 10px; 
-	background: #F0F0F0; 
-	.border(#DDD); 
+	margin: 20px 0; 
+	// padding: 10px; 
+	// background: #F0F0F0; 
+	// .border(#DDD); 
 	
 	textarea {
 		width: 100%; 
@@ -264,14 +267,15 @@ div.comments {
 
 	margin: 20px 0 0 0;
 	
-
 	article {
-		margin: 0 0 30px 0;
-		padding: 10px;
+		margin: 0 0 20px 0;
+		padding: 10px 20px 20px 20px;
+		
+		border-bottom: 1px solid #ddd;
 		
 		// нечётный коммент
 		&.odd {
-			background: #eee;
+			// background: #eee;
 		}
 		
 		// чётный

@@ -24,13 +24,15 @@ if ($fn = mso_fe('custom/head-section.php')) require($fn); // подключен
 <div class="all"><div class="all-wrap">
 	<div class="header-main">
 
-		<?php if (function_exists('ushka')) echo ushka('header-pre'); ?>
+		<?php 
+			if (function_exists('ushka')) echo ushka('header-pre'); 
+			if ($fn = mso_fe('custom/header-pre.php')) require($fn);
+		?>
 
 		<div class="header"><div class="header-wrap">
 			<?php 
-				if ($fn = mso_fe('custom/header-start.php')) require($fn);
-			
 				if (function_exists('ushka')) echo ushka('header-start');
+				if ($fn = mso_fe('custom/header-start.php')) require($fn);
 				
 				if ($fn = mso_fe('custom/header_components.php')) require($fn);
 				else
@@ -43,7 +45,6 @@ if ($fn = mso_fe('custom/head-section.php')) require($fn); // подключен
 				}
 
 				if (function_exists('ushka')) echo ushka('header-end');
-
 				if ($fn = mso_fe('custom/header-end.php')) require($fn);
 
 			?>
@@ -53,25 +54,25 @@ if ($fn = mso_fe('custom/head-section.php')) require($fn); // подключен
 
 		<div class="main"><div class="main-wrap">
 			<?php 
-				if ($fn = mso_fe('custom/content-start.php')) require($fn);
-				if (function_exists('ushka')) echo ushka('content-start');
+				if (function_exists('ushka')) echo ushka('main-start');
+				if ($fn = mso_fe('custom/main-start.php')) require($fn);
 			?>
 
 			<div class="content"><div class="content-wrap">
 				<?php 
 			
-					if (function_exists('ushka')) echo ushka('main-out-start');
-					if ($fn = mso_fe('custom/main-out-start.php')) require($fn);
+					if (function_exists('ushka')) echo ushka('content-start');
+					if ($fn = mso_fe('custom/content-start.php')) require($fn);
 					
-					if ($fn = mso_fe('custom/main-out.php')) require($fn);
+					if ($fn = mso_fe('custom/content-out.php')) require($fn);
 					else
 					{ 
-						global $MAIN_OUT; 
-						echo $MAIN_OUT; 
+						global $CONTENT_OUT; 
+						echo $CONTENT_OUT; 
 					}
 					
-					if (function_exists('ushka')) echo ushka('main-out-end');
-					if ($fn = mso_fe('custom/main-out-end.php')) require($fn);
+					if (function_exists('ushka')) echo ushka('content-end');
+					if ($fn = mso_fe('custom/content-end.php')) require($fn);
 				?>
 			</div></div><!-- /div.content-wrap /div.content -->
 
@@ -83,6 +84,10 @@ if ($fn = mso_fe('custom/head-section.php')) require($fn); // подключен
 					mso_show_sidebar('1');
 					echo NR . '</div></div><!-- /div.sidebar1-wrap /div.sidebar sidebar1 -->';
 				}
+
+				
+				if (function_exists('ushka')) echo ushka('main-end');
+				if ($fn = mso_fe('custom/main-end.php')) require($fn);
 			?>
 
 			<div class="clearfix"></div>
@@ -94,9 +99,8 @@ if ($fn = mso_fe('custom/head-section.php')) require($fn); // подключен
 
 	<div class="footer"><div class="footer-wrap">
 		<?php 
-			if ($fn = mso_fe('custom/footer-start.php')) require($fn);
-			
 			if (function_exists('ushka')) echo ushka('footer-start');
+			if ($fn = mso_fe('custom/footer-start.php')) require($fn);
 			
 			if ($fn = mso_fe('custom/footer_components.php')) require($fn);
 			else
@@ -109,7 +113,6 @@ if ($fn = mso_fe('custom/head-section.php')) require($fn); // подключен
 			}
 			
 			if (function_exists('ushka')) echo ushka('footer-end');
-			
 			if ($fn = mso_fe('custom/footer-end.php')) require($fn);
 		?>
 	</div></div><!-- /div.footer-wrap /div.footer -->

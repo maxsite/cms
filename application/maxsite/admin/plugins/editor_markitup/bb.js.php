@@ -10,7 +10,7 @@
 myBbcodeSettings = {
 	nameSpace:	"bbcode", // Useful to prevent multi-instances CSS conflict
 	
-	previewParserPath: "<?= getinfo('ajax') . base64_encode('plugins/editor_markitup/preview-ajax.php') ?>",
+	previewParserPath: "<?= getinfo('ajax') . base64_encode('admin/plugins/editor_markitup/preview-ajax.php') ?>",
 	// previewInWindow: 'width=960, height=800, resizable=yes, scrollbars=yes',
 	
 	<?= $editor_config['preview'] ?>
@@ -277,12 +277,12 @@ miu = {
 	
 	help_bb: function()
 	{
-		window.open('<?= getinfo('siteurl') ?>application/maxsite/plugins/bbcode/bbcode-help.html');
+		window.open('<?= getinfo('plugins_url') ?>bbcode/bbcode-help.html');
 	},
 
 	select_colors: function()
 	{
-		window.open('<?= getinfo('siteurl') ?>application/maxsite/plugins/editor_markitup/color-table.html');
+		window.open('<?= getinfo('admin_url') ?>plugins/editor_markitup/color-table.html');
 	},
 	
 }

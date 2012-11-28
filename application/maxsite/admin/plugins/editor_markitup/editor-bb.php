@@ -4,9 +4,9 @@
 <?php require('bb.js.php') ?>
 </script>
 
-<?php echo '<script src="'. getinfo('plugins_url') . 'editor_markitup/jquery.markitup.js"></script>'; ?>
-<?php echo '<link rel="stylesheet" href="'. getinfo('plugins_url') . 'editor_markitup/style.css">'; ?>
-<?php echo '<link rel="stylesheet" href="'. getinfo('plugins_url') . 'editor_markitup/bb.style.css">'; ?>
+<?php echo '<script src="'. getinfo('admin_url') . 'plugins/editor_markitup/jquery.markitup.js"></script>'; ?>
+<?php echo '<link rel="stylesheet" href="'. getinfo('admin_url') . 'plugins/editor_markitup/style.css">'; ?>
+<?php echo '<link rel="stylesheet" href="'. getinfo('admin_url') . 'plugins/editor_markitup/bb.style.css">'; ?>
 
 <?php
 	$auto_id = mso_segment(3); // номер страницы по сегменту url
@@ -15,7 +15,7 @@
 ?>
 	
 <script language="javascript">
-	autosaveurl = '<?= getinfo('ajax') . base64_encode('plugins/editor_markitup/autosave-post-ajax.php') ?>';
+	autosaveurl = '<?= getinfo('ajax') . base64_encode('admin/plugins/editor_markitup/autosave-post-ajax.php') ?>';
 	autosaveid = '<?= $auto_id ?>';
 
 	$(document).ready(function() 

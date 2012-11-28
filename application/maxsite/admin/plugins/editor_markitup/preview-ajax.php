@@ -16,7 +16,7 @@ if ( $post = mso_check_post(array('data')) )
 	$output = mso_hook('content_content', $output);
 	
 	// стили вначале подключаем базу из preview.css
-	$css_link = '<link rel="stylesheet" href="' . getinfo('plugins_url') . 'editor_markitup/preview.css" type="text/css" media="screen">';
+	$css_link = '<link rel="stylesheet" href="' . getinfo('admin_url') . 'plugins/editor_markitup/preview.css" type="text/css" media="screen">';
 
 	// теперь остальные по алгоритму default 2
 	$css_link .= NT . '<link rel="stylesheet" href="'; 
@@ -62,7 +62,6 @@ if ( $post = mso_check_post(array('data')) )
 <!DOCTYPE HTML>
 <html><head>
 	<meta charset="UTF-8">
-	<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=8"><![endif]-->
 	<title>Предпросмотр</title>
 	{$css_link}
 	<style>

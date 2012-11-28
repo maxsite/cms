@@ -450,7 +450,7 @@
 	# есть ли хук на редактор: если да, то получаем эту функцию
 	# если нет, то отображаем стандартный editor_jw
 	if (mso_hook_present('editor_custom')) mso_hook('editor_custom', $ad_config);
-		else editor_jw($ad_config);;
+		else editor_markitup($ad_config);
 	
 	
 	

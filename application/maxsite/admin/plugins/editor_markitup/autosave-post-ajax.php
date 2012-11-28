@@ -7,9 +7,9 @@
 		$text = $post['text'];
 		$id = $post['id']; // номер записи
 		
-		$fn = mso_add_float_option('autosave-' . $id, $text, '', false, '.txt', false); // и в float-опции без серилизации
+		$fn = mso_add_float_option('autosave-' . $id . '-' . mso_md5($id), $text, '', false, '.txt', false); // и в float-опции без серилизации
 		
 		echo getinfo('uploads_url') . $fn;
 	}
 	
-?>
+# end file

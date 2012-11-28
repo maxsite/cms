@@ -16,7 +16,7 @@
 			>	@import url('components/menu-search.less');
 		
 	PHP-связи: 
-			>	require(getinfo('template_dir') . 'components/menu-search/menu-search.php');
+			>	if ($fn = mso_fe('components/menu-search/menu-search.php')) require($fn);
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода

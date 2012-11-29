@@ -68,6 +68,7 @@ if (!class_exists('Maxsite'))
 				($method == 'search') or
 				($method == 'tag') or
 				($method == 'comments') or
+				($method == 'contact') or
 				($method == 'loginform')
 				)
 			{
@@ -190,7 +191,9 @@ if (!class_exists('Maxsite'))
 						
 						$this->_view_i('page');
 					}
-					else 
+					// поиск в рубриках по-умолчанию отключен
+					// чтобы его включить нужно указать yes
+					elseif ($this->config->item('mso_permalink_slug_cat') === "yes") 
 					{
 						// теперь тоже самое, только с рубрикой
 						$this->db->select('category_id');
@@ -210,6 +213,10 @@ if (!class_exists('Maxsite'))
 						{
 							$this->_view_i('page_404');
 						}
+					}
+					else
+					{
+						$this->_view_i('page_404');
 					}
 				}
 				else $this->_view_i('page_404');

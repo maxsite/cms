@@ -58,7 +58,7 @@ div.wysiwyg ul.panel {background: #EAF3FA !important}
 *+html .editor_button input { overflow: visible;	padding: 1px 6px; }
 
 
-div.admin-footer {clear: both; background: #464646 url(images/maxsitelogo-gray.png) 20px 45% no-repeat; color: #999; padding: 20px 20px 20px 75px; border-top: 20px solid #FFF; height: 1%;}
+div.admin-footer {clear: both; background: #464646 url(images/maxsitelogo.png) 20px 45% no-repeat; color: #999; padding: 20px 20px 20px 75px; border-top: 20px solid #FFF; height: 1%;}
 div.admin-footer a {color: white;}
 div.admin-footer p {margin: 0;}
 

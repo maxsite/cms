@@ -69,7 +69,7 @@ function sitemap($arg = '')
 	
 	if ($pages)
 	{
-		$out .= '<div class="page_content"><div class="sitemap">' . NR . mso_hook('sitemap_do');
+		$out .= '<div class="page_content"><div class="sitemap sitemap_list">' . NR . mso_hook('sitemap_do');
 		
 		$out .= '<div class="sitemap-link"><a href="' . getinfo('siteurl') . 'sitemap/cat">' . tf('Группировка по рубрикам') . '</a>' . NR . '</div>';
 		
@@ -154,7 +154,7 @@ function sitemap_cat($arg = '')
 
 	$out = '';
 	
-	$out .= '<div class="page_content sitemap">' . NR . mso_hook('sitemap_do');
+	$out .= '<div class="page_content sitemap sitemap_cat">' . NR . mso_hook('sitemap_do');
 		
 	$out .= '<div class="sitemap-link"><a href="' . getinfo('siteurl') . 'sitemap">' . tf('Группировка по датам') . '</a>' . NR . '</div>';
 	

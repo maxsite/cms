@@ -68,6 +68,7 @@
 .bgg(@color: green); 
 
 .bg(@color, @file); // включая url-картинку background: @color url("../images/backgrounds/@{file}");
+.bgu(@file, @attr: no-repeat) // background: url(@file) @attr;
 
 .background_gradient(#555, #333); // линейный градиент вертикальный
 

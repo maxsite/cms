@@ -295,6 +295,12 @@ function bbcode_custom($text = '')
 		# [span(class) атрибуты]текст[/span]
 		'~\[span\((.*?)\) (.*?)\](.*?)\[\/span\]~si' 	=> '<span class="$1" $2>$3</span>',
 		
+		# специальные замены - значение формируется атоматом
+		'~\[getinfo siteurl\]~si' => getinfo('siteurl'), // адрес сайта
+		'~\[getinfo template_url\]~si' => getinfo('template_url'), // адрес шаблона
+		'~\[getinfo uploads_url\]~si' => getinfo('uploads_url'), // адрес uploads
+		'~\[getinfo shared_url\]~si' => getinfo('shared_url'), // адрес uploads
+		
 	);
 
 	if (strpos($text, '[text-demo]') !== false) // есть вхождение [text-demo]

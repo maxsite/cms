@@ -3,7 +3,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{di
 blockquote,q{quotes:none;}
 blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
 table{border-collapse:collapse;border-spacing:0;}
-body{font-family:Verdana,Arial,sans-serif;font-size:10pt;background:#E0E0E0;}
+body{font-family:Verdana,Arial,sans-serif;font-size:10pt;}
 body,div,ul,ol,li,td,p,blockquote,code,pre,h1,h2,h3,h4,h5,h6{line-height:1.4em;}
 p,pre,blockquote,ul,ol,table,dl{margin:4px 0 7px 0;}
 ol,ul{margin-left:15px;}
@@ -82,8 +82,8 @@ form.fform p.hr{margin-top:10px;}
 .bg-black{background-color:black;}
 .bg-white{background-color:white;}
 .bg-yellow{background-color:yellow;}
-.left{float:left;}
-.right{float:right;}
+div.left{float:left;}
+div.right{float:right;}
 .text-left{text-align:left;}
 .text-right{text-align:right;}
 .text-center{text-align:center;}
@@ -158,7 +158,7 @@ h3{font-size:1.2em;margin:15px 0 5px 0;font-weight:bold;}
 h4{font-size:1.1em;margin:15px 0 5px 0;font-weight:bold;}
 h5{font-size:1.0em;margin:15px 0 5px 0;font-weight:bold;}
 h6{font-size:.9em;margin:15px 0 5px 0;font-weight:bold;}
-div.admin-header{font-size:12pt;box-shadow:0 3px 3px #888888;-o-box-shadow:0 3px 3px #888888;-webkit-box-shadow:0 3px 3px #888888;-moz-box-shadow:0 3px 3px #888888;background:#395766;color:#dddddd;text-shadow:1px 1px 1px #000000;}div.admin-header div.r{padding:10px 0 10px 10px;margin:0 10px 20px 0;background:url("images/maxsitelogo-blue.png") no-repeat right center;}
+div.admin-header{font-size:12pt;box-shadow:0 3px 3px #888888;-o-box-shadow:0 3px 3px #888888;-webkit-box-shadow:0 3px 3px #888888;-moz-box-shadow:0 3px 3px #888888;background:#395766;color:#dddddd;text-shadow:1px 1px 1px #000000;}div.admin-header div.r{padding:10px 0 10px 10px;margin:0 10px 20px 0;background:url("images/maxsitelogo.png") no-repeat right center;}
 div.admin-header h1{font-size:16pt;padding:5px 0 0 0;display:inline;color:#dddddd;}div.admin-header h1:after{content:" → ";}
 div.admin-header h1 a{color:#dddddd;}
 div.admin-menu{width:190px;float:left;}div.admin-menu div.r{padding-left:10px;}

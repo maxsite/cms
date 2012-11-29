@@ -494,7 +494,12 @@ class Page_out
 			if ( 0 === strpos($class, '<'))
 				$out .= NR . $class;
 			else
-				$out .= NR . '<div class="' . $class . '">';
+			{
+				if ($class) 
+					$out .= NR . '<div class="' . $class . '">';
+				else
+					$out .= NR . '<div>';
+			}
 		}
 		
 		return $this->out($out);

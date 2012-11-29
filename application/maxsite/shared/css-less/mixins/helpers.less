@@ -283,6 +283,11 @@
 	background: @color url("../images/backgrounds/@{file}");
 }
 
+.bgu(@file, @attr: no-repeat)
+{
+	background: url(@file) @attr;
+}
+
 .bgr(@color: red) {
 	background-color: @color;
 }

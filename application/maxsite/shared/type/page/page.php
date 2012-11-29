@@ -95,7 +95,7 @@ if ($pages)
 			}
 			else
 			{
-				$p->div_start('page_content type_' . getinfo('type'));
+				$p->div_start('page_content type_' . getinfo('type') . '_content');
 				
 					$p->content('', '');
 					
@@ -119,7 +119,7 @@ if ($pages)
 							
 					$p->html('</aside>');
 					
-				$p->div_end('page_content type_' . getinfo('type'));
+				$p->div_end('page_content type_' . getinfo('type') . '_content');
 			}
 
 		$p->div_end('page_only', 'wrap', '</article>');

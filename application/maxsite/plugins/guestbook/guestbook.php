@@ -118,7 +118,7 @@ if ( $post = mso_check_post(array('f_session_id', 'f_submit_guestbook', 'f_field
 else
 {
 	// тут форма, если не было post
-	echo '<div class="guestbook_form"><form action="" method="post">' . mso_form_session('f_session_id');
+	echo '<div class="guestbook_form"><form method="post">' . mso_form_session('f_session_id');
 	
 	echo '<table style="width: 100%;">';
 	
@@ -251,4 +251,4 @@ mso_hook('pagination', $pag);
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	
-?>
+# end file

@@ -4,6 +4,9 @@
  * MaxSite CMS
  * (c) http://max-3000.com/
  */
+
+// на странице пагинации next запись не выводим
+if (mso_current_paged() > 1) return; 
  
 $par = array( 
 		'limit' => 1, 

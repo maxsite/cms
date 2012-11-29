@@ -22,7 +22,7 @@ $p->format('comments', tf('Обсудить'), tf('Читать коммента
 // исключенные записи
 $exclude_page_id = mso_get_val('exclude_page_id');
 
-$p->div_start(mso_get_val('container_class'));
+$p->div_start(mso_get_val('container_class', ''));
 
 foreach ($pages as $page)
 {
@@ -46,7 +46,13 @@ foreach ($pages as $page)
 				$p->line('[title]');
 				
 				$p->div_start('info info-top');
-					$p->line('[date][feed][edit][cat][tag][view_count]');
+					
+					// feed записи выводится только на page
+					if (is_type('page'))
+						$p->line('[date][feed][edit][cat][tag][view_count]');
+					else
+						$p->line('[date][edit][cat][tag][view_count]');
+						
 				$p->div_end('info info-top');
 				
 			$p->html('</header>');
@@ -58,7 +64,7 @@ foreach ($pages as $page)
 		}
 		else
 		{
-			$p->div_start('page_content type_' . getinfo('type'));
+			$p->div_start('page_content type_' . getinfo('type') . '_content');
 	
 				$p->content('', '');
 				
@@ -71,7 +77,7 @@ foreach ($pages as $page)
 					$p->line('[comments]');
 				$p->html('</aside>');
 				
-			$p->div_end('page_content type_' . getinfo('type'));
+			$p->div_end('page_content type_' . getinfo('type') . '_content');
 		}
 	
 	$p->div_end('page_only', 'wrap', '</article>');

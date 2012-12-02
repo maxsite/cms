@@ -10,3 +10,8 @@ div.pagination
 {
 	display: none;
 }
+
+div.main {
+	margin:0;
+	padding: 0;
+}

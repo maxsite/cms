@@ -1,0 +1,38 @@
+
+// bootstrap
+.bs {
+
+	// Pagination 2
+	pagination2(@color: @BS_LINK_COLOR, @bg_color: #f5f5f5, @hover_bg_color: #eee, @align: center) 
+	{
+		& {
+			text-align: @align;
+		}
+
+		a {
+			display: inline-block;
+			padding: 5px 14px;
+			
+			color: @color;
+
+			.bg(@bg_color);
+			.border(#ddd);
+			.border_radius(15px);
+			.f > underline(none);
+			
+			.transition(all 0.3s 0s);
+			
+			&:hover {
+				.f > underline(none);
+				.bg(@hover_bg_color);
+				color: @BS_LINK_COLOR_HOVER;
+			}
+		}
+	}
+	
+	
+} // end .bs (bootstrap)
+
+
+
+

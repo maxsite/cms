@@ -45,7 +45,7 @@ else
 
 	mso_head_meta('title', tf('Последние комментарии').' — ' . getinfo('title') ); //  meta title страницы
 
-	require(getinfo('template_dir') . 'main-start.php');
+	if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 	
 	echo NR . '<div class="type type_comments">' . NR;
 

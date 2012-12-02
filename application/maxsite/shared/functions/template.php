@@ -11,94 +11,13 @@
  *
  */
 
- 
-# функция возвращает массив $path_url-файлов по указанному $path - каталог на сервере
-# $full_path - нужно ли возвращать полный адрес (true) или только имя файла (false)
-# $exts - массив требуемых расширений. По-умолчанию - картинки
-if (!function_exists('get_path_files'))
-{
-	function get_path_files($path = '', $path_url = '', $full_path = true, $exts = array('jpg', 'jpeg', 'png', 'gif', 'ico'))
-	{
-		// если не указаны пути, то отдаём пустой массив
-		if (!$path or !$path_url) return array();
-		if (!is_dir($path)) return array(); // это не каталог
-
-		$CI = & get_instance(); // подключение CodeIgniter
-		$CI->load->helper('directory'); // хелпер для работы с каталогами
-		$files = directory_map($path, true); // получаем все файлы в каталоге
-		if (!$files) return array();// если файлов нет, то выходим
-
-		$all_files = array(); // результирующий массив с нашими файлами
-		
-		// функция directory_map возвращает не только файлы, но и подкаталоги
-		// нам нужно оставить только файлы. Делаем это в цикле
-		foreach ($files as $file)
-		{
-			if (@is_dir($path . $file)) continue; // это каталог
-			
-			$ext = substr(strrchr($file, '.'), 1);// расширение файла
-			
-			// расширение подходит?
-			if (in_array($ext, $exts))
-			{
-				if (strpos($file, '_') === 0) continue; // исключаем файлы, начинающиеся с _
-				
-				// добавим файл в массив сразу с полным адресом
-				if ($full_path)
-					$all_files[] = $path_url . $file;
-				else
-					$all_files[] = $file;
-			}
-		}
-		
-		natsort($all_files); // отсортируем список для красоты
-		
-		return $all_files;
-	}
-}
-
-# возвращает подкаталоги в указаном каталоге. 
-# можно указать исключения из каталогов в $exclude 
-# в $need_file можно указать обязательный файл в подкаталоге 
-# если $need_file = true то обязательный php-файл в подкаталоге должен совпадать с именем подкаталога
-# например для /menu/ это menu.php 
-if (!function_exists('mso_get_dirs'))
-{
-	function mso_get_dirs($path, $exclude = array(), $need_file = false)
-	{
-		$CI = & get_instance(); // подключение CodeIgniter
-		$CI->load->helper('directory'); // хелпер для работы с каталогами
-		$all_dirs = directory_map($path, true);
-		
-		$dirs = array();
-		foreach ($all_dirs as $d)
-		{
-			// нас интересуют только каталоги
-			if (is_dir($path . $d) and !in_array($d, $exclude))
-			{
-				if (strpos($d, '_') === 0) continue; // исключаем файлы, начинающиеся с _
-				if (strpos($d, '-') === 0) continue; // исключаем файлы, начинающиеся с -
-				
-				// если указан обязщательный файл, то проверяем его существование
-				if($need_file ===true and !file_exists($path . $d . '/' . $d . '.php')) continue;
-				if($need_file !== true and $need_file and !file_exists($path . $d . '/' . $need_file)) continue;
-				
-				$dirs[] = $d;
-			}
-		}
-		
-		natcasesort($dirs);
-		
-		return $dirs;
-	}
-}
 
 # возвращает файлы для favicon
 if (!function_exists('default_favicon'))
 {
 	function default_favicon()
 	{
-		$all = get_path_files(getinfo('template_dir') . 'images/favicons/', getinfo('template_url') . 'images/favicons/', false);
+		$all = mso_get_path_files(getinfo('template_dir') . 'images/favicons/', getinfo('template_url') . 'images/favicons/', false);
 		return implode($all, '#');
 	}
 }
@@ -108,7 +27,7 @@ if (!function_exists('default_components'))
 {
 	function default_components()
 	{
-		static $all = false; // запоминаем результат, чтобы несколько раз не вызывать функцию get_path_files
+		static $all = false; // запоминаем результат, чтобы несколько раз не вызывать функцию mso_get_path_files
 		
 		if ($all === false)
 		{
@@ -124,7 +43,7 @@ if (!function_exists('default_profiles'))
 {
 	function default_profiles()
 	{
-		$all = get_path_files(getinfo('template_dir') . 'css/profiles/', getinfo('template_url') . 'css/profiles/', false, array('css'));
+		$all = mso_get_path_files(getinfo('template_dir') . 'css/profiles/', getinfo('template_url') . 'css/profiles/', false, array('css'));
 		return implode($all, '#');
 	}
 }
@@ -134,7 +53,7 @@ if (!function_exists('default_header_logo'))
 {
 	function default_header_logo()
 	{
-		$all = get_path_files(getinfo('template_dir') . 'images/logos/', getinfo('template_url') . 'images/logos/', false);
+		$all = mso_get_path_files(getinfo('template_dir') . 'images/logos/', getinfo('template_url') . 'images/logos/', false);
 		return implode($all, '#');
 	}
 }
@@ -353,96 +272,6 @@ if (!function_exists('mso_default_head_section'))
 		
 		echo NR . '</head>';
 		if (!$_POST) flush();
-	}
-}
-
-
-/* 
-Вспомогательная функция mso_section_to_array
-преобразование входящего текста опции в массив
-по каждой секции по указанному патерну
-Вход:
-
-[slide]
-link = ссылка изображения
-title = подсказка
-img = адрес картинки
-text = текст с html без переносов. h3 для заголовка
-p_line1 = пагинация 1 линия
-p_line2 = пагинация 2 линия
-[/slide]
-
-Паттерн (по правилам php):
-	'!\[slide\](.*?)\[\/slide\]!is'
-
-Выход:
-
-Array
-(
-	[0] => Array
-		(
-			[link] => ссылка изображения
-			[title] => подсказка
-			[img] => адрес картинки
-			[text] => текст с html без переносов. h3 для заголовка
-			[p_line1] => пагинация 1 линия
-			[p_line2] => пагинация 2 линия
-		)
- )
-
-$array_default - стартовый массив опций на случай, если в опции нет обязательного ключа
-например 
-array('link'=>'', 'title'=>'', 'img'=>'', 'text'=>'', 'p_line1'=>'', 'p_line2'=>'')
-
-Если $simple = true, то вхродящий паттерн используется как слово из которого
-будет автоматом сформирован корректный паттерн по шаблону [слово]...[/слово]
-
-*/
-
-if (!function_exists('mso_section_to_array'))
-{
-	function mso_section_to_array($text, $pattern, $array_default = array(), $simple = false)
-	{
-	
-		if ($simple) $pattern = '!\[' . $pattern . '\](.*?)\[\/' . $pattern . '\]!is';
-		
-		// $array_result - массив каждой секции (0 - все вхождения)
-		if (preg_match_all($pattern, $text, $array_result))
-		{
-			// массив слайдов в $array_result[1]
-			// преобразуем его в массив полей
-			
-			$f = array(); // массив для всех полей
-			$i = 0; // счетчик 
-			foreach($array_result[1] as $val)
-			{
-				$val = trim($val);
-				
-				if (!$val) continue;
-				
-				$val = str_replace(' = ', '=', $val);
-				$val = str_replace('= ', '=', $val);
-				$val = str_replace(' =', '=', $val);
-				$val = explode("\n", $val); // разделим на строки
-				
-				$ar_val = array();
-				
-				$f[$i] = $array_default;
-				
-				foreach ($val as $pole)
-				{
-					$ar_val = explode('=', $pole); // строки разделены = type = select
-					if ( isset($ar_val[0]) and isset($ar_val[1]))
-						$f[$i][$ar_val[0]] = $ar_val[1];
-				}
-				
-				$i++;
-			}
-			
-			return $f;
-		}
-		
-		return array(); // не найдено
 	}
 }
 

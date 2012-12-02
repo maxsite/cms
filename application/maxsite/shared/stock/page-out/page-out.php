@@ -411,22 +411,33 @@ class Page_out
 		}
 	}
 	
+	// только получаем контент через mso_page_content()
+	function get_content()
+	{
+		ob_start();
+		mso_page_content($this->val('page_content'));
+		$page_content = ob_get_contents();
+		ob_end_clean();
+		
+		return $page_content;
+	}
+	
 	// вывод контента
 	function content($do = '<div class="page_content">', $posle = '</div>')
 	{
-		return $this->out(NR . $do . $this->val('page_content') . $posle);
+		return $this->out(NR . $do . $this->get_content() . $posle);
 	}
 	
 	// обрезка контента по кол-ву слов
 	function content_words($max_words = 15, $cut = '', $do = '<div class="page_content">', $posle = '</div>')
 	{
-		return $this->out(NR . $do . mso_str_word(strip_tags($this->val('page_content')), $max_words) . $cut . $posle);
+		return $this->out(NR . $do . mso_str_word(strip_tags($this->get_content()), $max_words) . $cut . $posle);
 	}
 	
 	// обрезка контента по кол-ву символов
 	function content_chars($max_chars = 100, $cut = '', $do = '<div class="page_content">', $posle = '</div>')
 	{
-		return $this->out(NR . $do . mb_substr(strip_tags($this->val('page_content')), 0, $max_chars, 'UTF-8') . $cut . $posle);
+		return $this->out(NR . $do . mb_substr(strip_tags($this->get_content()), 0, $max_chars, 'UTF-8') . $cut . $posle);
 	}
 	
 	// вывод мета - только значение мета по return

@@ -4079,7 +4079,6 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 			if (filemtime($less_file) < filemtime($css_file))
 			{
 				// отдаём из кэша
-				
 				if ($css_url) 
 				{
 					// в виде имени файла
@@ -4100,15 +4099,31 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 	if ($fc_all)
 	{
 		require_once(getinfo('common_dir') . 'less/lessc.inc.php');
+
+		$compiler = new lessc;
 		
-		$compiler = new lessc();
-		// $compiler->importDir = dirname($less_file); // старый API
+		// возможно есть php-файл для своих функций
+		// строится как исходный + .php
+		// пример http://leafo.net/lessphp/docs/#custom_functions
+		if (file_exists($less_file . '.php')) require_once($less_file . '.php');
+		
 		$compiler->addImportDir(dirname($less_file)); // новый 0.3.7 api
 		$compiler->indentChar = "\t";
 		
+		// в тексте исходного файла $fc_all может быть php-код
+		ob_start();
+		eval( '?>' . $fc_all . '<?php ');
+		$fc_all = ob_get_contents();
+		ob_end_clean();
+		
+		// в коде могут быть специальные команды 
+		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_BLOCKS;', 'blocks');
+		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_COMPONENTS;', 'components');
+		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_PLUGINS;', 'plugins');
+		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_TYPE;', 'type');
+		
 		try
 		{
-			//$out = $compiler->parse($fc_all); // старый API
 			$out = $compiler->compile($fc_all); // новый 0.3.7 api
 		}
 		catch (Exception $ex) 
@@ -4152,6 +4167,30 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 			// в виде содержимого
 			return $out;
 		}
+	}
+}
+
+# служебная функция для less 
+# возвращает строки с @import url(less-файл)
+# $in - входный less-текст
+# $find - строка поиска и замены, например @MSO_IMPORT_ALL_COMPONENTS;
+# $dir - каталог в css-less шаблона, например components
+# если вхождения нет, возвращается исходный $in
+function _mso_less_import_all($in, $find, $dir)
+{
+	if (strpos($in, $find) !== false)
+	{
+		$m = '';
+		
+		$files = mso_get_path_files(getinfo('template_dir') . 'css-less/' . $dir . '/', $dir . '/', true, array('less'));
+		
+		foreach($files as $file) $m .= NR . '@import url("' . $file . '");';
+		
+		return str_replace($find, $m, $in);
+	}
+	else
+	{
+		return $in;
 	}
 }
 
@@ -4218,7 +4257,7 @@ function mso_dispatcher()
 # приоритет имеет файл в шаблоне, после в shared
 # если файл не найден, то возвращается $default
 # иначе полный путь, годный для require()
-# if ($fn = mso_find_ts_file('type/page-comments.php')) require($fn);
+# if ($fn = mso_find_ts_file('type/page_404/page_404.php')) require($fn);
 function mso_find_ts_file($fn, $default = false)
 {
 	$fn1 = getinfo('template_dir') . $fn; // путь в шаблоне
@@ -4230,6 +4269,166 @@ function mso_find_ts_file($fn, $default = false)
 }
 
 
+# функция возвращает массив $path_url-файлов по указанному $path - каталог на сервере
+# $full_path - нужно ли возвращать полный адрес (true) или только имя файла (false)
+# $exts - массив требуемых расширений. По-умолчанию - картинки
+function mso_get_path_files($path = '', $path_url = '', $full_path = true, $exts = array('jpg', 'jpeg', 'png', 'gif', 'ico'))
+{
+	// если не указаны пути, то отдаём пустой массив
+	if (!$path) return array();
+	if (!is_dir($path)) return array(); // это не каталог
+
+	$CI = & get_instance(); // подключение CodeIgniter
+	$CI->load->helper('directory'); // хелпер для работы с каталогами
+	$files = directory_map($path, true); // получаем все файлы в каталоге
+	if (!$files) return array();// если файлов нет, то выходим
+
+	$all_files = array(); // результирующий массив с нашими файлами
+	
+	// функция directory_map возвращает не только файлы, но и подкаталоги
+	// нам нужно оставить только файлы. Делаем это в цикле
+	foreach ($files as $file)
+	{
+		if (@is_dir($path . $file)) continue; // это каталог
+		
+		$ext = substr(strrchr($file, '.'), 1);// расширение файла
+		
+		// расширение подходит?
+		if (in_array($ext, $exts))
+		{
+			if (strpos($file, '_') === 0) continue; // исключаем файлы, начинающиеся с _
+			if (strpos($file, '-') === 0) continue; // исключаем файлы, начинающиеся с -
+			
+			// добавим файл в массив сразу с полным адресом
+			if ($full_path)
+				$all_files[] = $path_url . $file;
+			else
+				$all_files[] = $file;
+		}
+	}
+	
+	natsort($all_files); // отсортируем список для красоты
+	
+	return $all_files;
+}
+
+
+# возвращает подкаталоги в указаном каталоге. 
+# можно указать исключения из каталогов в $exclude 
+# в $need_file можно указать обязательный файл в подкаталоге 
+# если $need_file = true то обязательный php-файл в подкаталоге должен совпадать с именем подкаталога
+# например для /menu/ это menu.php 
+function mso_get_dirs($path, $exclude = array(), $need_file = false)
+{
+	$CI = & get_instance(); // подключение CodeIgniter
+	$CI->load->helper('directory'); // хелпер для работы с каталогами
+	$all_dirs = directory_map($path, true);
+	
+	$dirs = array();
+	foreach ($all_dirs as $d)
+	{
+		// нас интересуют только каталоги
+		if (is_dir($path . $d) and !in_array($d, $exclude))
+		{
+			if (strpos($d, '_') === 0) continue; // исключаем файлы, начинающиеся с _
+			if (strpos($d, '-') === 0) continue; // исключаем файлы, начинающиеся с -
+			
+			// если указан обязщательный файл, то проверяем его существование
+			if($need_file ===true and !file_exists($path . $d . '/' . $d . '.php')) continue;
+			if($need_file !== true and $need_file and !file_exists($path . $d . '/' . $need_file)) continue;
+			
+			$dirs[] = $d;
+		}
+	}
+	
+	natcasesort($dirs);
+	
+	return $dirs;
+}
+
+
+/* 
+Преобразование входящего текста опции в массив
+по каждой секции по указанному патерну
+Вход:
+
+[slide]
+link = ссылка изображения
+title = подсказка
+img = адрес картинки
+text = текст с html без переносов. h3 для заголовка
+p_line1 = пагинация 1 линия
+p_line2 = пагинация 2 линия
+[/slide]
+
+Паттерн (по правилам php):
+	'!\[slide\](.*?)\[\/slide\]!is'
+
+Выход:
+
+Array
+(
+	[0] => Array
+		(
+			[link] => ссылка изображения
+			[title] => подсказка
+			[img] => адрес картинки
+			[text] => текст с html без переносов. h3 для заголовка
+			[p_line1] => пагинация 1 линия
+			[p_line2] => пагинация 2 линия
+		)
+ )
+
+$array_default - стартовый массив опций на случай, если в опции нет обязательного ключа
+например 
+array('link'=>'', 'title'=>'', 'img'=>'', 'text'=>'', 'p_line1'=>'', 'p_line2'=>'')
+
+Если $simple = true, то вхродящий паттерн используется как слово из которого
+будет автоматом сформирован корректный паттерн по шаблону [слово]...[/слово]
+*/
+function mso_section_to_array($text, $pattern, $array_default = array(), $simple = false)
+{
+
+	if ($simple) $pattern = '!\[' . $pattern . '\](.*?)\[\/' . $pattern . '\]!is';
+	
+	// $array_result - массив каждой секции (0 - все вхождения)
+	if (preg_match_all($pattern, $text, $array_result))
+	{
+		// массив слайдов в $array_result[1]
+		// преобразуем его в массив полей
+		
+		$f = array(); // массив для всех полей
+		$i = 0; // счетчик 
+		foreach($array_result[1] as $val)
+		{
+			$val = trim($val);
+			
+			if (!$val) continue;
+			
+			$val = str_replace(' = ', '=', $val);
+			$val = str_replace('= ', '=', $val);
+			$val = str_replace(' =', '=', $val);
+			$val = explode("\n", $val); // разделим на строки
+			
+			$ar_val = array();
+			
+			$f[$i] = $array_default;
+			
+			foreach ($val as $pole)
+			{
+				$ar_val = explode('=', $pole); // строки разделены = type = select
+				if ( isset($ar_val[0]) and isset($ar_val[1]))
+					$f[$i][$ar_val[0]] = $ar_val[1];
+			}
+			
+			$i++;
+		}
+		
+		return $f;
+	}
+	
+	return array(); // не найдено
+}
 
 # профилирование - старт
 # первый параметр метка

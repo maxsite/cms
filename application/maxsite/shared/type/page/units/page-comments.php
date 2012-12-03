@@ -65,6 +65,8 @@ if ($page_text_ok and $comments) // есть страницы
 		
 		echo mso_get_val('page_comments_count_start', '<div class="page_comments_count">') 
 			. tf('Комментариев') . ': ' . count($comments) 
+			. ' <span class="page_comments_rss"><a href="' . mso_page_url($page['page_slug']). '/feed">'
+			. mso_get_val('page_comments_rss', 'RSS') . '</a></span>'
 			. mso_get_val('page_comments_count_end', '</div>');
 	}
 	

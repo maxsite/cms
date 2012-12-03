@@ -54,7 +54,7 @@ if ($pages)
 	$p->format('date', 'D, j F Y г.', '<span><time datetime="[page_date_publish]">', '</time></span>');
 	$p->format('cat', ' -&gt; ', '<br><span>' . tf('Рубрика') . ': ', '</span>');
 	$p->format('tag', ' | ', '<br><span>' . tf('Метки') . ': ', '</span>');
-	$p->format('feed', tf('Комментарии по RSS'), ' | <span>', '</span>');
+	//$p->format('feed', tf('Комментарии по RSS'), ' | <span>', '</span>');
 	$p->format('edit', 'Edit', ' | <span>', '</span>');
 	$p->format('view_count', '<br><span>' . tf('Просмотров') . ': ', '</span>');
 
@@ -84,7 +84,7 @@ if ($pages)
 					$p->line('[title]');
 					
 					$p->div_start('info info-top');
-						$p->line('[date][feed][edit][cat][tag][view_count]');
+						$p->line('[date][edit][cat][tag][view_count]');
 					$p->div_end('info info-top');
 				$p->html('</header>');
 			}

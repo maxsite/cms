@@ -4,7 +4,7 @@
 	(c) http://max-3000.com/
 	
 	вывод соцсететй иконками
-	стили задаются в social.less
+	стили задаются в _social.less
 	Файл использовать в других компонентах
 	
 	if ($fn = mso_fe('components/_social/_social.php')) require($fn);

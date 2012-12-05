@@ -15,13 +15,13 @@
 </head>
 
 <body>
+<div class="all"><div class="wrap">
 
-<div id="login">
-	<p id="site"><a href="<?= getinfo('siteurl') ?>" title="<?= t('Вернуться к сайту') ?>"><?= getinfo('name_site') ?></a></p>
-	<p id="cms_name"><span>M</span>ax<span>S</span>ite CMS</p>
-	<p id="entry"><?= t('Для входа в админ-панель введите логин и пароль') ?></p>
-
-<?php 
+	<div class="logo"><a href="http://max-3000.com/" target="_blank"><img src="<?=  getinfo('admin_url') . 'template/' . mso_get_option('admin_template', 'general', 'default') . '/images/logo.png'; ?>" width="206" height="38" alt="<?= t('Система управления сайтом MaxSite CMS') ?>" title="<?= t('Система управления сайтом MaxSite CMS') ?>"></a></div>
+	
+	<div class="welcome"><?= t('Вход в админ-панель') ?></div>
+	
+	<?php 
 	if (!is_login())
 	{
 		$redirect_url = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : getinfo('siteurl') . mso_current_url();
@@ -29,17 +29,22 @@
 		mso_remove_hook('login_form_auth'); # удалим все хуки для авторизации
 				
 		mso_login_form(array( 
-			'login'=>t('Логин'), 
-			'password'=> t('Пароль'), 
-			'submit'=>'', 
-			'submit_value'=> t('Войти'),
-			'form_end'=>'<br clear="all">',
+				'login' => '', 
+				'password' => '', 
+				'submit' => '', 
+				'submit_value' => t('Войти'),
+				'login_add' => ' placeholder="' . t('логин') . '"',
+				'password_add' => ' placeholder="' . t('пароль') . '"',
 			),
 			$redirect_url);
 	}
-?>
+	
+	
+	?>
+	
+	<div class="goto-site"><a href="<?= getinfo('siteurl') ?>"><?= t('Вернуться к сайту') ?></a></div>
+	
+</div></div>
 
-	<p id="cms">&copy; <a href="http://max-3000.com/" target="_blank" title="<?= t('Система управления сайтом MaxSite CMS') ?>">MaxSite CMS</a>, 2008&ndash;<?= date('Y') ?></p>
-</div>
 </body>
 </html>

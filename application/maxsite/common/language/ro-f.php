@@ -29,7 +29,7 @@ $lang['Комментарий требует модерации']='Comentariul n
 $lang['Пользователь']='Utilizator';
 $lang['Комюзер']='Comuser';
 $lang['Администрировать комментарий вы можете по ссылке']='Puteţi administra comentariul prin link-ul';
-$lang['Ошибка сессии! Обновите страницу']='Eroarea sesiunii! Reîncarcaţi pagina';
+$lang['Ошибка сессии! Обновите страницу']='Eroarea sesiunii! Reîncărcați pagina';
 $lang['Ошибка!']='Eroare!';
 $lang['Ошибка! Неверно введены нижние символы!']='Eroare! Simbolurile de mai jos au fost introduse incorect!';
 $lang['Обнаружена XSS-атака!']='S-a depistat un atac XSS!';
@@ -38,7 +38,7 @@ $lang['Ошибка, нет полезного текста!']='Eroare! Lipseşt
 $lang['Ваш комментарий определен как спам и удален.']='Comentariu Dvs. a fost calificat drept SPAM şi a fost şters.';
 $lang['Похоже, вы уже отправили этот комментарий...']='Se pare că acest comentariu a fost deja adăugat...';
 $lang['Ошибка добавления комментария']='Eroare la adăugarea comentariului';
-$lang['Error allow_comment_comusers']='Comentariile de la comusere la moment nu se acceptă.';
+$lang['Error allow_comment_comusers']='Comentariile de la comusers la moment nu se acceptă.';
 $lang['Нужно указать Email']='E-mail trebuie indicat';
 $lang['Нужно указать пароль']='Parola trebuie indicată';
 $lang['Ошибочный Email']='E-mail incorect';
@@ -114,7 +114,7 @@ $lang['Читать комментарии']='Citeşte comentarii';
 $lang['404. Ничего не найдено...']='404. Nimic nu s-a găsit...';
 $lang['Извините, ничего не найдено']='Ne pare rău, nimic nu s-a găsit';
 $lang['Подписаться на эту рубрику по RSS']='Abonare la această rubrică prin RSS';
-$lang['Последние комментарии']='Ultimile comentarii';
+$lang['Последние комментарии']='Ultimele comentarii';
 $lang['Подписаться по RSS']='Abonare prin RSS';
 $lang['Список комментаторов']='Lista comentatorilor';
 $lang['Обратная связь']='Feedback';
@@ -192,8 +192,8 @@ $lang['HTML удаляется']='HTML va fi şters';
 $lang['Уведомления']='Avize';
 $lang['Без уведомлений']='Fără avize';
 $lang['Подписаться']='Abonare';
-$lang['новые комментарии, где я участвую']='comantarii noi, unde eu particip';
-$lang['новые комментарии, где я не участвую']='comantarii noi, unde eu nu particip';
+$lang['новые комментарии, где я участвую']='comentarii noi, unde eu particip';
+$lang['новые комментарии, где я не участвую']='comentarii noi, unde eu nu particip';
 $lang['новые записи сайта']='articole noi pe site';
 $lang['рассылка администратора']='newsletter de la administrator';
 $lang['Я забыл пароль']='Am uitat parola';
@@ -219,13 +219,13 @@ $lang['Используйте нормальные имена.']='Folosiţi nume
 $lang['Если вы уже зарегистрированы как комментатор или хотите зарегистрироваться, укажите пароль и свой действующий email. <br><em>(При регистрации на указанный адрес придет письмо с кодом активации и ссылкой на ваш персональный аккаунт, где вы сможете изменить свои данные, включая адрес сайта, ник, описание, контакты и т.д.)</em>']='Dacă v-aţi înregistrat anterior, sau doriţi să vă înregistraţi acum, indtroduceţi parola şi adresa e-mail validă. <br><em>(Imediat veţi primi mesajul cu codul de activare şi link-ul spre pagina Dvs. personală. Acolo veţi putea indica datele Dvs., inclusiv adresa site-ului, pseudonimul, descriere, etc.)</em>';
 $lang['Ваш комментарий']='Comentariul Dvs';
 $lang['Аватарка (с http://, размер 80x80px)']='Avatar (cu http://, dimensiunea 80x80px)';
-$lang['Его последние комментарии']='Ultimile comentarii ai lui';
+$lang['Его последние комментарии']='Ultimele comentarii ai lui';
 
 /**
  * Language for MaxSite CMS (c) http://max-3000.com/  plugins/comment_button
  */
 
-$lang['Полужирный']='Semigras';
+$lang['Полужирный']='Semigros';
 $lang['Курсив']='Cursiv';
 $lang['Подчеркнутый']='Subliniat';
 $lang['Зачеркнутый']='Tăiat';
@@ -239,7 +239,7 @@ $lang['Код или преформатированный текст']='Cod sau 
 $lang['Обратная связь']='Feedback';
 $lang['Тема письма']='Subiectul';
 $lang['Неверный email!']='E-mail incorect!';
-$lang['Неверная сумма антиспама']='Suma antispam incorectă!';
+$lang['Неверная сумма антиспама']='Suma anti-spam incorectă!';
 $lang['Заполните все необходимые поля!']='Completaţi toate câmpuri mandatorii!';
 $lang['IP-адрес:']='Adresa IP:';
 $lang['Отправлено со страницы:']='Expediat de la pagina:';
@@ -250,6 +250,13 @@ $lang['Обязательное поле']='Câmp mandatoriu';
 $lang['Отправить копию письма на ваш e-mail']='Copia mesajului sa se trimită la e-mail Dvs.';
 $lang['Отправить']='Trimite';
 $lang['Очистить форму']='Anulează';
+$lang['Ваше имя*']='Numele Dvs.*';
+$lang['Ваш email*']='E-mail Dvs.*';
+$lang['Ваше имя']='Numele Dvs.';
+$lang['Ваш email']='E-mail Dvs.';
+
+$lang['Укажите свой ответ']='Introduceţi răspunsul Dvs.';
+
 
 /**
  * Language for MaxSite CMS (c) http://max-3000.com/ plugins/maxsite_auth
@@ -259,7 +266,7 @@ $lang['Перейти к сайту']='Trecere spre site-ul';
 $lang['Для авторизации необходимо войти на сайт']='Pentru a vă autentifica trebuie să întraţi pe site';
 $lang['Логин:']='Utilizator:';
 $lang['Пароль:']='Parola:';
-$lang['Доступ к авторизации запрещен']='Acces la utentificare este restricţionat';
+$lang['Доступ к авторизации запрещен']='Acces la autentificare este restricţionat';
 $lang['Не задан ответный email']='E-mail de răspuns nu este indicat';
 $lang['Не задан ответный пароль']='Parola de răspuns nu este indicată';
 $lang['Нет данных']='Nu-s datele';
@@ -276,3 +283,6 @@ $lang['Короткий пароль']='Parola e prea scurtă';
 $lang['Воспользуйтесь картой сайта']='Folosiţi harta site-ului';
 $lang['Группировка по рубрикам']='Grupare după rubrica';
 $lang['Группировка по датам']='Grupare după data';
+
+$lang['Шаблон для MaxSite CMS'] = 'Şablonul pentru MaxSite CMS';
+$lang['Отсутствует'] = 'Lipseşte';

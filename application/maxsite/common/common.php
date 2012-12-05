@@ -1887,6 +1887,9 @@ function mso_login_form($conf = array(), $redirect = '', $echo = true)
 	$submit_end = (isset($conf['submit_end'])) ? $conf['submit_end'] : '';
 	$form_end = (isset($conf['form_end'])) ? $conf['form_end'] : '';
 	
+	$login_add = (isset($conf['login_add'])) ? $conf['login_add'] : '';
+	$password_add = (isset($conf['password_add'])) ? $conf['password_add'] : '';
+	
 	$login_form_auth_title = (isset($conf['login_form_auth_title'])) ? $conf['login_form_auth_title'] : tf('Вход через:') . ' ';
 
 	$action = $MSO->config['site_url'] . 'login';
@@ -1907,13 +1910,13 @@ function mso_login_form($conf = array(), $redirect = '', $echo = true)
 		
 		<p>
 			<label><span class="nocell ftitle">{$login}</span>
-			<input type="text" value="" name="flogin_user" class="flogin_user">
+			<input type="text" value="" name="flogin_user" class="flogin_user"{$login_add}>
 			</label>
 		</p>
 		
 		<p>
 			<label><span class="nocell ftitle">{$password}</span>
-			<input type="password" value="" name="flogin_password" class="flogin_password">
+			<input type="password" value="" name="flogin_password" class="flogin_password"{$password_add}>
 			</label>
 		</p>
 		

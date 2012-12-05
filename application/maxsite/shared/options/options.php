@@ -19,7 +19,7 @@ require_once( getinfo('common_dir') . 'inifile.php' );
 if (mso_check_post_ini()) echo '<div class="update">' . t('Обновлено!') . '</div>';
 
 // получим список всех файлов из options
-$files = get_path_files(getinfo('template_dir') . 'options/', getinfo('template_dir') . 'options/', true, array('ini'));
+$files = mso_get_path_files(getinfo('template_dir') . 'options/', getinfo('template_dir') . 'options/', true, array('ini'));
 
 // загоним их в один массив
 $options = array();

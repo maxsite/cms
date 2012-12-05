@@ -14,7 +14,7 @@ else
 $img = $subdir . mso_get_option('component_image_select', 'templates', '');
 
 echo '<div class="image-select">'
-	. '<img src="' . $img . '" alt="" title="">';
+	. '<img src="' . $img . '" alt="" title="">'
 	. '</div>';
 
 # end file

@@ -113,7 +113,7 @@ function spoiler_head($args = array())
 	if ($options['style'] != '')
 	{
 		echo '
-		<link rel="stylesheet" href="' . getinfo('plugins_url') . 'spoiler/style/'.$options['style']. '">';
+		<link rel="stylesheet" href="' . getinfo('plugins_url') . 'spoiler/style/' . $options['style'] . '">';
 	}	
 	
 	echo '	

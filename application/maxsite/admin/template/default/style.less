@@ -9,18 +9,8 @@
 
 
 // http://fortawesome.github.com/Font-Awesome/
-
-@font-face {
-    font-family: 'FontAwesome';
-    src: url('stock/font-awesome/fontawesome-webfont.eot');
-    src: url('stock/font-awesome/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
-         url('stock/font-awesome/fontawesome-webfont.woff') format('woff'),
-         url('stock/font-awesome/fontawesome-webfont.ttf') format('truetype'),
-         url('stock/font-awesome/fontawesome-webfont.svgz#FontAwesomeRegular') format('svg'),
-         url('stock/font-awesome/fontawesome-webfont.svg#FontAwesomeRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+@FONTAWESOMEPATH: '../../../shared/css-less/fonts/font-awesome';
+@import url('../../../shared/css-less/fonts/font-awesome/font-awesome.less'); // подключение микса
 
 
 body {
@@ -245,14 +235,21 @@ ul.admin-menu {
 			&.admin-menu-home a:before { content: "\f05a"; }
 			&.admin-menu-logout a:before { content: "\f08b"; }
 			&.admin-menu-go_site a:before { content: "\f064"; }
-			&.admin-menu-sidebars a:before { content: "\f01c"; }
-			&.admin-menu-plugins a:before { content: "\f06d"; }
-			&.admin-menu-template_options a:before { content: "\f009"; }
+			&.admin-menu-sidebars a:before { content: "\f0ae"; }
+			&.admin-menu-plugins a:before { content: "\f08d"; }
+			&.admin-menu-template_options a:before { content: "\f09d"; }
 			&.admin-menu-comments a:before { content: "\f086"; }
 			&.admin-menu-comusers a:before { content: "\f007"; }
-			&.admin-menu-users_group a:before { content: "\f091"; }
-			&.admin-menu-users_my_profile a:before { content: "\f084"; }
-			&.admin-menu-users a:before { content: "\f070"; }
+			&.admin-menu-users_group a:before { content: "\f0e3"; }
+			&.admin-menu-users_my_profile a:before { content: "\f005"; }
+			&.admin-menu-users a:before { content: "\f0c0"; }
+			
+			&.admin-menu-theme_switch a:before { content: "\f074"; }
+			&.admin-menu-plugin_antispam a:before { content: "\f0e9"; }
+			&.admin-menu-plugin_down_count a:before { content: "\f012"; }
+			&.admin-menu-guestbook a:before { content: "\f087"; }
+			&.admin-menu-redirect a:before { content: "\f0c1"; }
+			&.admin-menu-plugin_ushki a:before { content: "\f085"; }
 			
 		}
 	}

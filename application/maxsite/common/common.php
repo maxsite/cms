@@ -147,7 +147,6 @@ function getinfo($info = '')
 				else $out = '';
 				break;
 				
-				
 		case 'name_site' :
 				$out = htmlspecialchars(mso_get_option('name_site', 'general'));
 				break;
@@ -207,7 +206,6 @@ function getinfo($info = '')
 		case 'uri_get' :
 				$out = $MSO->data['uri_get'];
 				break;
-
 				
 		case 'cache_dir' :
 				$out = $MSO->config['cache_dir'];
@@ -233,7 +231,11 @@ function getinfo($info = '')
 				$out = $MSO->config['base_url'] . 'shared/';
 				break;
 				
-	endswitch;
+		case 'base_dir' : // каталог /maxsite/
+				$out = $MSO->config['base_dir'];
+				break;		
+
+		endswitch;
 
 	return $out;
 }
@@ -4099,6 +4101,15 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 	if (file_exists($less_file)) $fc_all = file_get_contents($less_file);
 		else return; // нет файла, выходим
 
+	// проверка на разрешение записывать css-файл
+	if (file_exists($css_file) and !is_writable($css_file)) 
+	{
+		// и что делать???
+		return tf('LESS: результирующий css-файл не имеет разрешений на запись.'); 
+		// die(tf('Нет возможности выполнить less-компиляцию: ') . $css_file); 
+	}
+	
+	
 	if ($fc_all)
 	{
 		require_once(getinfo('common_dir') . 'less/lessc.inc.php');
@@ -4124,6 +4135,7 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_COMPONENTS;', 'components');
 		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_PLUGINS;', 'plugins');
 		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_TYPE;', 'type');
+		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_ELEMENTS;', 'elements');
 		
 		try
 		{

@@ -14,15 +14,17 @@
 @import url('layouts/layout01.less'); // структура сайта
 @import url('menu.less'); // все меню сайта
 @import url('mixins/message.less'); // сообщения .message
-@import url('mixins/button.less'); // красивые кнопки
+//@import url('mixins/button.less'); // красивые кнопки
 
 // @import url('frameworks/bootstrap/base.less'); // базовые стили фреймворка
 
 // специальные MaxSite CMS команды-строки для автоматического подключения 
-// всех less-файлов из /blocks/, /components/, /plugins/, /type/
+// всех less-файлов из /blocks/, /components/, /plugins/, /type/, /elements/
 @MSO_IMPORT_ALL_BLOCKS;
 @MSO_IMPORT_ALL_COMPONENTS;
 @MSO_IMPORT_ALL_PLUGINS;
 @MSO_IMPORT_ALL_TYPE;
+@MSO_IMPORT_ALL_ELEMENTS;
+
 
 @import url('responsive.less');

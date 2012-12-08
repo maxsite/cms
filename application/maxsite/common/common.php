@@ -4131,11 +4131,15 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 		ob_end_clean();
 		
 		// в коде могут быть специальные команды 
+		// less-файлы в указанных каталогах
 		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_BLOCKS;', 'blocks');
 		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_COMPONENTS;', 'components');
 		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_PLUGINS;', 'plugins');
 		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_TYPE;', 'type');
-		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_ELEMENTS;', 'elements');
+		
+		// less-файлы в подкаталогах
+		// главный style.less
+		$fc_all = _mso_less_import_all_dir($fc_all, '@MSO_IMPORT_ALL_ELEMENTS;', 'elements');
 		
 		try
 		{
@@ -4208,6 +4212,34 @@ function _mso_less_import_all($in, $find, $dir)
 		return $in;
 	}
 }
+
+# служебная функция для less 
+# возвращает строки с @import url(less-файл)
+# параметры аналогичны _mso_less_import_all()
+# Поиск осуществляется по подкаталогам каталога $dir
+# основной файл в подкаталоге style.less
+function _mso_less_import_all_dir($in, $find, $dir)
+{
+	if (strpos($in, $find) !== false)
+	{
+		$m = '';
+		
+		// получаем список подкаталогов
+		$all_dirs = mso_get_dirs(getinfo('template_dir') . 'css-less/' . $dir . '/', array(), 'style.less');
+		
+		foreach($all_dirs as $d)
+		{
+			$m .= NR . '@import url("' . $dir . '/' . $d . '/style.less");';
+		}
+
+		return str_replace($find, $m, $in);
+	}
+	else
+	{
+		return $in;
+	}
+}
+
 
 # формирует <style> из указанного адреса 
 function mso_load_style($url = '')
@@ -4349,7 +4381,7 @@ function mso_get_dirs($path, $exclude = array(), $need_file = false)
 			if (strpos($d, '-') === 0) continue; // исключаем файлы, начинающиеся с -
 			
 			// если указан обязщательный файл, то проверяем его существование
-			if($need_file ===true and !file_exists($path . $d . '/' . $d . '.php')) continue;
+			if($need_file === true and !file_exists($path . $d . '/' . $d . '.php')) continue;
 			if($need_file !== true and $need_file and !file_exists($path . $d . '/' . $need_file)) continue;
 			
 			$dirs[] = $d;

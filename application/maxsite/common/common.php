@@ -4097,7 +4097,8 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 			}
 		}
 	}
-
+	
+	
 	if (file_exists($less_file)) $fc_all = file_get_contents($less_file);
 		else return; // нет файла, выходим
 
@@ -4223,7 +4224,7 @@ function _mso_less_import_all_dir($in, $find, $dir)
 	if (strpos($in, $find) !== false)
 	{
 		$m = '';
-		
+
 		// получаем список подкаталогов
 		$all_dirs = mso_get_dirs(getinfo('template_dir') . 'css-less/' . $dir . '/', array(), 'style.less');
 		
@@ -4369,28 +4370,33 @@ function mso_get_dirs($path, $exclude = array(), $need_file = false)
 {
 	$CI = & get_instance(); // подключение CodeIgniter
 	$CI->load->helper('directory'); // хелпер для работы с каталогами
-	$all_dirs = directory_map($path, true);
-	
-	$dirs = array();
-	foreach ($all_dirs as $d)
+	if ($all_dirs = directory_map($path, true))
 	{
-		// нас интересуют только каталоги
-		if (is_dir($path . $d) and !in_array($d, $exclude))
+		$dirs = array();
+		foreach ($all_dirs as $d)
 		{
-			if (strpos($d, '_') === 0) continue; // исключаем файлы, начинающиеся с _
-			if (strpos($d, '-') === 0) continue; // исключаем файлы, начинающиеся с -
-			
-			// если указан обязщательный файл, то проверяем его существование
-			if($need_file === true and !file_exists($path . $d . '/' . $d . '.php')) continue;
-			if($need_file !== true and $need_file and !file_exists($path . $d . '/' . $need_file)) continue;
-			
-			$dirs[] = $d;
+			// нас интересуют только каталоги
+			if (is_dir($path . $d) and !in_array($d, $exclude))
+			{
+				if (strpos($d, '_') === 0) continue; // исключаем файлы, начинающиеся с _
+				if (strpos($d, '-') === 0) continue; // исключаем файлы, начинающиеся с -
+				
+				// если указан обязщательный файл, то проверяем его существование
+				if($need_file === true and !file_exists($path . $d . '/' . $d . '.php')) continue;
+				if($need_file !== true and $need_file and !file_exists($path . $d . '/' . $need_file)) continue;
+				
+				$dirs[] = $d;
+			}
 		}
+		
+		natcasesort($dirs);
+		
+		return $dirs;
 	}
-	
-	natcasesort($dirs);
-	
-	return $dirs;
+	else
+	{
+		return array();
+	}
 }
 
 

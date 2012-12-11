@@ -1,8 +1,8 @@
 // MaxSite CMS
 // Copyright http://max-3000.com/
-// подключать - @import url('menus/menu01.less');
+// подключать - @import url('menus/menu02.less');
 
-.bg(#eee);
+.bg(#111);
 
 // только верхние пункты
 ul.menu > li > a {
@@ -11,14 +11,15 @@ ul.menu > li > a {
 	.f > size(12px);
 	padding: 0 10px;
 	.transition(background-color 0.3s 0s ease-out);
+	color: white;
 }
 
 // выделенный пункт и при наведении - только верхние
 ul.menu > li.selected > a, 
 ul.menu > li > a:hover 
 {
-	.bg(#ddd);
-	color: #222;
+	.bg(#444);
+	color: #ccc;
 }
 
 // только подпункты

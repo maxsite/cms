@@ -5,112 +5,101 @@
 
 // использовать только копируя в каталог шаблона
 
+// переменные для цветов
+
+@MESSAGE_COLOR_DEFAULT: #E9E9E9;
+@MESSAGE_COLOR_TEXT_DEFAULT: #505050;
+
+@MESSAGE_COLOR_NOTE: #44AAC8;
+@MESSAGE_COLOR_TEXT_NOTE: #111;
+
+@MESSAGE_COLOR_ALERT: #F89406;
+@MESSAGE_COLOR_TEXT_ALERT: #fff;
+
+@MESSAGE_COLOR_IDEA: #FAF6AC;
+@MESSAGE_COLOR_TEXT_IDEA: #111;
+
+@MESSAGE_COLOR_ERROR: #D64B45;
+@MESSAGE_COLOR_TEXT_ERROR: #fff;
+
+@MESSAGE_COLOR_OK: #58B158;
+@MESSAGE_COLOR_TEXT_OK: #fff;
+
+@MESSAGE_COLOR_ABOUT: #EAEAEA;
+@MESSAGE_COLOR_TEXT_ABOUT: #111;
+
+@MESSAGE_COLOR_MAIL: #EAEAEA;
+@MESSAGE_COLOR_TEXT_MAIL: #111;
+
+@MESSAGE_COLOR_HOME: #EAEAEA;
+@MESSAGE_COLOR_TEXT_HOME: #111;
+
+@MESSAGE_COLOR_QUESTION: #EAEAEA;
+@MESSAGE_COLOR_TEXT_QUESTION: #111;
+
+
+// вспомогательный хелпер
+.message_box(@icon, @bg: #E9E9E9, @text: #555)
+{
+	background: @bg url("../images/icons/@{icon}.png") no-repeat 15px center; 
+	color: @text;
+	
+	&.small {
+		background-image: url("../images/icons/small/@{icon}.png"); 
+	}
+
+}
+
 .message
 {
-
-	border: 1px solid #DBDBDB; 
-	margin: 4px 0 7px 0; 
-	padding: 10px 10px 10px 70px; 
-	min-height: 48px;
-	.border_radius(10px);
+	margin: 0 0 10px 0;
+	padding: 15px 10px 15px 70px;
+	min-height: 32px;
+	.border_radius(8px);
 	
-	&.note {
-		background: #DAE8EE url("../images/icons/note.png") no-repeat 10px 10px; 
-		border-color: #91A0A6; 
-		color: black;
-
-		&.small {
-			background-image: url("../images/icons/small/note.png");
-		}
-	}
+	background: @MESSAGE_COLOR_DEFAULT; 
+	color: @MESSAGE_COLOR_TEXT_DEFAULT;
 	
-	
-	&.alert {
-		background: #FFE8BF url("../images/icons/alert.png") no-repeat 10px 10px; 
-		border-color: #DECAA5; 
-		color: maroon;
-		
-		&.small {
-			background-image: url("../images/icons/small/alert.png"); 
-		}
-	}
-	
-	
-	&.idea {
-		background: #FAF6AC url("../images/icons/idea.png") no-repeat 10px 10px; 
-		border-color: #D5D18C; 
-		color: maroon;
-
-		&.small {
-			background-image: url("../images/icons/small/idea.png"); 
-			border-color: #D5D18C; 
-			color: maroon;
-		}
-	}
-	
-	
-	&.error {
-		background: #FB6C6C url("../images/icons/error.png") no-repeat 10px 10px; 
-		border-color: #CA5A5A; 
-		color: white;
-
-		&.small {
-			background-image: url("../images/icons/small/error.png");
-		}
-	}
-	
+	.bold;
 	
 	&.ok {
-		background: #7FFF91 url("../images/icons/ok.png") no-repeat 10px 10px; 
-		border-color: #68CD76; 
-		color: #006600;
-
-		&.small {
-			background-image: url("../images/icons/small/ok.png"); 
-		}
+		.message_box('ok', @MESSAGE_COLOR_OK, @MESSAGE_COLOR_TEXT_OK);
+		.text_shadow(0, -1px, 0, rgba(0, 0, 0, 0.25));
 	}
-		
+
+	&.note {
+		.message_box('note', @MESSAGE_COLOR_NOTE, @MESSAGE_COLOR_TEXT_NOTE);
+	}
+	
+	&.alert {
+		.message_box('alert', @MESSAGE_COLOR_ALERT, @MESSAGE_COLOR_TEXT_ALERT);
+	}
+	
+	&.idea {
+		.message_box('idea', @MESSAGE_COLOR_IDEA, @MESSAGE_COLOR_TEXT_IDEA);
+	}
+	
+	&.error {
+		.message_box('error', @MESSAGE_COLOR_ERROR, @MESSAGE_COLOR_TEXT_ERROR);
+		.text_shadow(0, -1px, 0, rgba(0, 0, 0, 0.25));
+	}
 	
 	&.about {
-		background: #A6D2FF url("../images/icons/about.png") no-repeat 10px 10px; 
-		border-color: #8FB3D8; 
-		color: navy;
-
-		&.small {
-			background-image: url("../images/icons/small/about.png");
-		}
+		.message_box('about', @MESSAGE_COLOR_ABOUT, @MESSAGE_COLOR_TEXT_ABOUT);
 	}
-	
 	
 	&.mail {
-		background: #EAEAEA url("../images/icons/mail.png") no-repeat 10px 10px; 
-		color: #404040;
-
-		&.small {
-			background-image: url("../images/icons/small/mail.png");
-		}
+		.message_box('mail', @MESSAGE_COLOR_MAIL, @MESSAGE_COLOR_TEXT_MAIL);
 	}
-	
 	
 	&.home {
-		background: #EAEAEA url("../images/icons/home.png") no-repeat 10px 10px; 
-		color: #404040;
-
-		&.small {
-			background-image: url("../images/icons/small/home.png"); 
-		}
+		.message_box('home', @MESSAGE_COLOR_HOME, @MESSAGE_COLOR_TEXT_HOME);
 	}
-	
 	
 	&.question {
-		background: #EAEAEA url("../images/icons/question.png") no-repeat 10px 10px; 
-		color: #404040;
-		
-		&.small {
-			background-image: url("../images/icons/small/question.png");
-		}
+		.message_box('question', @MESSAGE_COLOR_QUESTION, @MESSAGE_COLOR_TEXT_QUESTION);
 	}
-	
+
 	&.noicon {
 		background-image: none; 
 		padding: 10px; 
@@ -119,9 +108,9 @@
 	
 	// мини версия сообщений 24px
 	&.small {
-		min-height: 0; 
-		padding: 5px 10px 5px 40px; 
-		background-position: 5px 2px;
+		min-height: 20px; 
+		padding: 7px 10px 7px 50px; 
+		background-position: 10px center;
 		background-repeat: no-repeat;
 	}
 	

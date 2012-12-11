@@ -8,3 +8,68 @@
 body {
 	
 }
+
+a {
+	color: @LINK_COLOR; 
+	
+	&:hover {
+		color: @LINK_COLOR_HOVER;
+	}
+	
+	div.widget &:hover {
+	} 
+	
+	div.sitemap & {
+	} 
+	
+	div.type_comments & {
+	} 
+	
+	div.page_other_pages & {
+	}
+	
+	&.curent-page-cat {
+		.bold;
+	}
+}
+
+h1 {
+	color: @H1_COLOR;
+	
+	a {
+		color: @H1_LINK_COLOR;
+	
+		&:hover {
+			color: @H1_LINK_COLOR_HOVER;
+		}
+	}
+	
+	&.category {
+		margin: 0 0 15px 0; 
+		border-bottom: 2px solid #DDD;
+	}
+}
+
+h2 {
+
+}
+
+h3 {
+
+}
+
+h4 {
+
+}
+
+h5 {
+
+}
+
+h6 {
+
+}
+
+blockquote {
+
+}

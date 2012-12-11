@@ -1,28 +1,28 @@
 <h1>Заголовок H1</h1>
 
-<p>Далеко-далеко за словесными горами в <u>стране гласных</u> и согласных живут <s>рыбные тексты.</s> Вдали от всех живут они в буквенных домах на берегу <strong>Семантика</strong> большого языкового океана. Маленький ручеек Даль журчит по всей стране и обеспечивает ее <a href="#">всеми необходимыми правилами</a>. Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот. Даже всемогущая <sub>пунктуация</sub> не имеет власти над рыбными текстами, ведущими <em>безорфографичный образ жизни</em>. Однажды одна маленькая строчка рыбного текста по имени <sup>Lorem ipsum</sup> решила выйти в большой мир грамматики.</p>
+<p>Далеко-далеко за словесными горами в <u>стране гласных</u> и согласных живут <s>рыбные тексты</s>. Вдали от всех живут они в буквенных домах на берегу <strong>Семантика</strong> большого языкового океана. Маленький ручеек Даль журчит по всей стране и обеспечивает ее <a href="#">всеми необходимыми правилами</a>. Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот. Даже всемогущая <sub>пунктуация</sub> не имеет власти над рыбными текстами, ведущими <em>безорфографичный образ жизни</em>. Однажды одна маленькая строчка рыбного текста по имени <sup>Lorem ipsum</sup> решила выйти в большой мир грамматики.</p>
 
-<p> Великий Оксмокс предупреждал ее о злых запятых, диких знаках вопроса и коварных точках с запятой, но текст не дал сбить себя с толку. Он собрал семь своих заглавных букв, подпоясал инициал за пояс и пустился в дорогу. Взобравшись на первую вершину курсивных гор, бросил он последний взгляд назад, на силуэт своего родного города Буквоград, на заголовок деревни Алфавит и на подзаголовок своего переулка Строчка. Грустный реторический вопрос скатился по его щеке и он продолжил свой путь. По дороге встретил текст рукопись.</p>
+<p> [span(label info)]Информация[/span] Великий Оксмокс предупреждал ее о злых запятых, диких знаках вопроса и коварных точках с запятой, но текст не дал сбить себя с толку. Он собрал семь своих заглавных букв, подпоясал инициал за пояс и пустился в дорогу.</p> 
 
 [h2(first)]Заголовок H2.first[/h2]
 
-<p> Она предупредила его: «В моей стране все переписывается по несколько раз. Единственное, что от меня осталось, это приставка «и». Возвращайся ты лучше в свою безопасную страну». Не послушавшись рукописи, наш текст продолжил свой путь. Вскоре ему повстречался коварный составитель рекламных текстов, напоивший его языком и речью и заманивший в свое агенство, которое использовало его снова и снова в своих проектах. И если его не переписали, то живет он там до сих пор. Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты.</p>
+<p> Она предупредила его: «В моей стране все переписывается по несколько раз. Единственное, что от меня осталось, это приставка «и». Возвращайся ты лучше в свою безопасную страну».</p>
 
 <h2>Заголовок H2</h2>
 
-<p>Однажды одна маленькая строчка рыбного текста по имени Lorem ipsum решила выйти в большой мир грамматики. Великий Оксмокс предупреждал ее о злых запятых, диких знаках вопроса и коварных точках с запятой, но текст не дал сбить себя с толку. Он собрал семь своих заглавных букв, подпоясал инициал за пояс и пустился в дорогу.</p>
+<p>Однажды одна маленькая строчка рыбного текста по имени Lorem ipsum решила выйти в большой мир грамматики. </p>
 
 <h3>Заголовок H3</h3>
-<p> Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана. Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми необходимыми правилами. Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот. Даже всемогущая пунктуация не имеет власти над рыбными текстами, ведущими безорфографичный образ жизни. Однажды одна маленькая строчка рыбного текста по имени Lorem ipsum решила выйти в большой мир грамматики.</p>
+<p> Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана. Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми необходимыми правилами.</p>
 
 <h4>Заголовок H4</h4>
-<p>Sed magna elit, laoreet ac ornare sed, tempus a velit. Donec lobortis scelerisque urna, id malesuada sem tristique scelerisque! Etiam feugiat mi a diam mollis et bibendum dui placerat! Duis posuere ultrices euismod. Sed lacinia nulla sed nisl vestibulum in fringilla nulla congue. Suspendisse luctus convallis lacinia. Sed facilisis pharetra magna, a gravida tellus ultrices ut. Mauris eget semper elit. Donec euismod hendrerit lectus vitae sagittis.</p>
+<p>Sed magna elit, laoreet ac ornare sed, tempus a velit. Donec lobortis scelerisque urna, id malesuada sem tristique scelerisque! Etiam feugiat mi a diam mollis et bibendum dui placerat!</p>
 
 <h5>Заголовок H5</h5>
-<p>Ut tempus auctor volutpat? Vestibulum molestie suscipit quam vitae sagittis. Sed vel metus eget ligula dapibus sagittis. Maecenas lacinia faucibus egestas. Curabitur eget mi magna, ac imperdiet dolor. Nulla bibendum nibh id lacus semper placerat. Duis tristique, urna nec interdum commodo, enim lectus posuere neque, eget congue mi nunc in dolor. Sed convallis odio tortor, vel consequat felis. Nulla facilisi. In hac habitasse platea dictumst. Sed fermentum interdum molestie! Curabitur metus mi, fermentum eget accumsan ac, aliquet non urna. Etiam diam odio, pretium vel luctus et, porta a quam.</p>
+<p>Ut tempus auctor volutpat? Vestibulum molestie suscipit quam vitae sagittis. Sed vel metus eget ligula dapibus sagittis. Maecenas lacinia faucibus egestas. Curabitur eget mi magna, ac imperdiet dolor.</p>
 
 <h6>Заголовок H6</h6>
-<p>Maecenas id dui lectus. Ut ipsum leo, laoreet sit amet pulvinar quis, mattis eu justo. Donec ac leo a neque porttitor tincidunt ac id elit. Nullam egestas, quam porttitor consequat ornare, lectus ipsum sagittis nisl, vel vestibulum libero felis ullamcorper quam. Nulla et est dui. Praesent vel bibendum ipsum. Proin id lectus mi.</p>
+<p>Maecenas id dui lectus. Ut ipsum leo, laoreet sit amet pulvinar quis, mattis eu justo. Donec ac leo a neque porttitor tincidunt ac id elit.</p>
 
 <hr>
 
@@ -55,9 +55,6 @@
 <p>Mauris et magna at libero mollis tristique quis non massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec vitae ante dolor. Mauris tincidunt ultricies nunc eu mattis. Integer ornare vulputate semper? Nullam tempor placerat imperdiet. Nullam hendrerit sollicitudin sem, nec luctus lectus blandit sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet hendrerit urna. Sed lobortis lectus condimentum tellus consectetur facilisis. Nullam velit ipsum, pulvinar nec pellentesque sit amet, adipiscing ut eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas convallis, erat pharetra pulvinar bibendum; orci mi consequat quam, ut volutpat lectus ligula ut diam. </p>
 
 <img src="data:image/png;base64,/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAPAAA/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8AAEQgASwBLAwERAAIRAQMRAf/EAGYAAQEBAQEBAAAAAAAAAAAAAAADAgEECAEBAAAAAAAAAAAAAAAAAAAAABAAAgECBAQFBQEAAAAAAAAAAAECERIhMTIDcbHhsmGRwdFjIlLiE3MUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD6cAAAAAAAAAAAADOXADQAAAAAZb8wNAAAACbdmL0cgKAAAGJTpRLGTyQHYqmeLebA0AAAAAEW3sv4u3oBYCe5uW0SV05aY+vABCFuLdZvVICgAAAAAAAHmnP/AD4L6oS0x+38eQFdvbtrJu6ctUvbwAoAAAAAAABPc3LaJK6ctMffwAbe3bVyd05apenADGOy/h7egFwAAAAAAYnKmCVZPJAchC2reM3qkBQABJL9X8+3oBUAAAAZb8wCjTHNvNgaAAAAGErcFp5AbAAAAAAAAAAAAAAAAAAAAAAAAOAf/9k=" width="75" height="75" alt="Картинка классом right" title="Картинка классом right" class="right">
-
-<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra, dui sit amet fringilla venenatis. <a href="#">Vestibulum lobortis semper</a> sem aliquet rhoncus. Donec fermentum, felis quis tincidunt sodales, sem quam adipiscing nibh, nec tincidunt augue sapien. Etiam congue, magna vitae pellentesque accumsan, mi urna convallis erat; a posuere sapien dolor vel sapien. Vestibulum sed nunc ac nunc rutrum molestie! Sed nec arcu nunc, vitae hendrerit felis! In eleifend suscipit ligula, et ornare tellus varius placerat. Vivamus porta, sem at laoreet tempus, purus justo luctus lacus, non bibendum arcu quam a erat.</p>
-
 
 
 <h2>Цитаты BLOCKQUOTE</h2>
@@ -201,6 +198,106 @@
 </tr>
 </table>
 
+
+
+
+<h2>Label</h2>
+
+<table class="zebra">
+<tr>
+<th>Пример</th>
+<th>CSS/HTML</th>
+<th>BB-код</th>
+</tr>
+<tr>
+<td class="padding5"><span class="label">default</span></td>
+<td class="padding5">&lt;span class="label"&gt;default&lt;/span&gt;</td>
+<td class="padding5">&#91;span(label)&#93;default&#91;/span&#93;</td>
+</tr>
+<tr>
+<td class="padding5"><span class="label success">success</span></td>
+<td class="padding5">&lt;span class="label success"&gt;success&lt;/span&gt;</td>
+<td class="padding5">&#91;span(label success)&#93;success&#91;/span&#93;</td>
+</tr>
+<tr>
+<td class="padding5"><span class="label warning">warning</span></td>
+<td class="padding5">&lt;span class="label warning"&gt;warning&lt;/span&gt;</td>
+<td class="padding5">&#91;span(label warning)&#93;warning&#91;/span&#93;</td>
+</tr>
+<tr>
+<td class="padding5"><span class="label important">important</span></td>
+<td class="padding5">&lt;span class="label important"&gt;important&lt;/span&gt;</td>
+<td class="padding5">&#91;span(label important)&#93;important&#91;/span&#93;</td>
+</tr>
+<tr>
+<td class="padding5"><span class="label info">info</span></td>
+<td class="padding5">&lt;span class="label info"&gt;info&lt;/span&gt;</td>
+<td class="padding5">&#91;span(label info)&#93;info&#91;/span&#93;</td>
+</tr>
+<tr>
+<td class="padding5"><span class="label inverse">inverse</span></td>
+<td class="padding5">&lt;span class="label inverse"&gt;inverse&lt;/span&gt;</td>
+<td class="padding5">&#91;span(label inverse)&#93;inverse&#91;/span&#93;</td>
+</tr>
+</table>
+
+
+
+<h2>Message</h2>
+<p>Пример использования:</p> 
+<pre>
+&lt;div class="message ok"&gt;текст&lt;/div&gt;
+<br>
+&#91;div(message ok)&#93;текст&#91;/div&#93;
+</pre>
+
+<div class="message noicon">message noicon</div>
+<div class="message ok">message ok</div>
+<div class="message note">message note</div>
+<div class="message alert">message alert</div>
+<div class="message idea">message idea</div>
+<div class="message error">message error</div>
+<div class="message about">message about</div>
+<div class="message mail">message mail</div>
+<div class="message home">message home</div>
+<div class="message question">message question</div>
+
+<h2>Message small</h2>
+
+<p>Пример использования:</p> 
+<pre>
+&lt;div class="message ok small"&gt;текст&lt;/div&gt;
+<br>
+&#91;div(message ok small)&#93;текст&#91;/div&#93;
+</pre>
+
+<div class="message ok small">message ok small</div>
+<div class="message note small">message note small</div>
+<div class="message alert small">message alert small</div>
+<div class="message idea small">message idea small</div>
+
+<div class="message error small">message error small</div>
+<div class="message about small">message about small</div>
+<div class="message mail small">message mail small</div>
+<div class="message home small">message home small</div>
+<div class="message question small">message question small</div>
+
+
+<h2>Табы</h2>
+
+<div class="tabs_widget tabs_widget_000">
+	<div class="tabs">
+		<ul class="tabs-nav">
+			<li class="elem tabs-current"><span>Один</span></li>
+			<li class="elem"><span>Два</span></li>
+			<li class="elem"><span>Три</span></li>
+		</ul>
+		<div class="clearfix"></div>
+		<div class="tabs-box tabs-visible">текст первый</div>
+		<div class="tabs-box">текст второй</div>
+		<div class="tabs-box">текст третий</div>
+	</div>
+</div>
 
 <h2>Пример формы .fform</h2>
 

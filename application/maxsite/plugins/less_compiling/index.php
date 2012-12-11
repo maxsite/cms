@@ -9,7 +9,7 @@
 # функция автоподключения плагина
 function less_compiling_autoload()
 {
-	mso_hook_add( 'init', 'less_compiling_init'); # хук на init
+	mso_hook_add( 'init', 'less_compiling_init', 5); # хук на init с низким приоритетом
 }
 
 # функция выполняется при активации (вкл) плагина
@@ -76,6 +76,7 @@ function less_compiling_init($args = array())
 	
 	foreach ($files as $file) // перебираем каждую строчку
 	{
+	
 		$row = explode('|', $file); // + | файл.less | файл.css | nomini nocache
 		$row = array_map('trim', $row);
 		

@@ -1,5 +1,7 @@
 Вывод изображений слайдером/каруселью из заданного каталога
 
+Опции слайдера
+
 $('#slider').nivoSlider({
 	effect:'random', // Specify sets like: 'fold,fade,sliceDown'
 	slices:15, // For slice animations

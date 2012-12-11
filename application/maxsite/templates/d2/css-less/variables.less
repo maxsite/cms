@@ -1,7 +1,7 @@
 // MaxSite CMS
 // Copyright http://max-3000.com/
 
-// «Глобальные» переменные. Все имена прописными (большими) буквами!
+// Глобальные переменные. Все имена прописными (большими) буквами!
 
 @CONTENT_WIDTH: 960px; // вся полезная ширина сайта (контент + сайдбар)
 @SIDEBAR_WIDTH: 250px; // ширина основного сайдбара
@@ -9,8 +9,9 @@
 @LINK_COLOR: #0E97BF; // цвет ссылок
 @LINK_COLOR_HOVER: darken(@LINK_COLOR, 15%); // цвет при наведении
 
-@H1_COLOR: #333; // цвет h1
-@H1_LINK_COLOR: #333; // цвет h1-ссылки
+@H1_COLOR: #444; // цвет h1
+@H1_LINK_COLOR: @LINK_COLOR_HOVER; // цвет h1-ссылки
+@H1_LINK_COLOR_HOVER: @LINK_COLOR_HOVER; // цвет h1-ссылки при наведении
 
 @COLOR_FOCUS: #0066ff; // цвет фокуса элементов в mixins/button.less
 

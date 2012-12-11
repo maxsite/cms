@@ -86,24 +86,24 @@ function shjs_mso_options()
 		'
 	Плагин делает код более привлекательным и наглядным. Для использования следует указать его в виде: </p>
 <pre>
-	&lt;pre class="sh_php"&gt; тут PHP-код &lt;/pre&gt;
-	&lt;pre class="sh_css"&gt; тут CSS-код &lt;/pre&gt;
-	&lt;pre class="sh_html"&gt; тут HTML-код &lt;/pre&gt;
-	&lt;pre class="sh_javascript"&gt; тут JavaScript-код &lt;/pre&gt;
+&lt;pre class="sh_php"&gt; тут PHP-код &lt;/pre&gt;
+&lt;pre class="sh_css"&gt; тут CSS-код &lt;/pre&gt;
+&lt;pre class="sh_html"&gt; тут HTML-код &lt;/pre&gt;
+&lt;pre class="sh_javascript"&gt; тут JavaScript-код &lt;/pre&gt;
 </pre>
 	<br>
 	<p class="info">Если у вас включён плагин <strong>BBCode</strong>, то можно использовать так:</p>
 <pre>
-	[pre class="sh_php"] тут PHP-код [/pre]
-	[pre class="sh_css"] тут CSS-код [/pre]
-	[pre class="sh_html"] тут HTML-код [/pre]
-	[pre class="sh_javascript"] тут JavaScript-код [/pre]
+[pre class="sh_php"] тут PHP-код [/pre]
+[pre class="sh_css"] тут CSS-код [/pre]
+[pre class="sh_html"] тут HTML-код [/pre]
+[pre class="sh_javascript"] тут JavaScript-код [/pre]
 </pre>
 	<br>
 	<p class="info">Если указать язык по-умолчанию, то можно не указывать class:</p>
 <pre>
-	&lt;pre&gt; тут код &lt;/pre&gt;
-	[pre] тут код [/pre]
+&lt;pre&gt; тут код &lt;/pre&gt;
+[pre] тут код [/pre]
 </pre><br>'
 	);
 

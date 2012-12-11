@@ -63,7 +63,7 @@
 	// выводим две таблицы - верхняя - активные плагины, внизу неактивные
 	// поэтому загоняем цикл вывода в отдельную функцию 
 	
-	function _create_table($active_plugins = true)
+	function _create_table($active_plugins = true, &$opt_url)
 	{
 		global $MSO;
 		
@@ -72,6 +72,8 @@
 		$CI->load->helper('directory');
 		
 		$plugins_dir = $MSO->config['plugins_dir'];
+		
+		$opt_url = array();
 		
 		// все каталоги в массиве $dirs
 		$dirs = directory_map($plugins_dir, true);
@@ -92,6 +94,7 @@
 			if (!$active_plugins and in_array($dir, $MSO->active_plugins)) continue;
 			
 			$info_f = $plugins_dir . $dir . '/info.php';
+			
 			
 			if (file_exists($info_f))
 			{
@@ -134,14 +137,25 @@
 						// $status = '<span style="color: green;"><strong>' . t('вкл') . '</strong></span>';
 						
 						if (function_exists($dir . '_mso_options'))
+						{
 							// есть опции
 							$status = '<a title="' . t('Настройки плагина') . '" href="' . getinfo('site_admin_url') . 'plugin_options/' . $dir . '">' . t('опции') . '</a>';
-						else 
+							
+							$opt_url[] = '<a href="' . getinfo('site_admin_url') . 'plugin_options/' . $dir . '">' . $dir . '</a>  ';
+						}
+						else
+						{
 							$status = ' ';
+						}
 						
 						$dir = '<label for="f_check_submit_' . $dir . '"><span class="plugin_on">' . $dir . '</span></label>';
 						
-						if ($options_url) $status .= ' <a href="' . $options_url . '" title="' . t('Настройки плагина') . '">' . t('опции') . '</a>';
+						if ($options_url) 
+						{	
+							$status .= ' <a href="' . $options_url . '" title="' . t('Настройки плагина') . '">' . t('опции') . '</a>';
+							
+							$opt_url[] = '<a href="' . $options_url . '">' . $dir0 . '</a>  ';
+						}
 						
 					}
 					else
@@ -178,7 +192,9 @@
 	}
 	
 	$CI->table->set_caption('<h2>'.t('Активные плагины') . '</h2>');
-	$flag_present_plugins = _create_table(true);
+	
+	$flag_present_plugins = _create_table(true, $opt_url);
+	
 	
 	if ($flag_present_plugins) 
 	{
@@ -206,7 +222,7 @@
 	
 	// заголовки
 	$CI->table->set_heading(' ', t('Каталог'), ' ', t('Название'), t('Версия'), t('Автор'), t('Описание'));
-	$flag_present_plugins = _create_table(false);
+	$flag_present_plugins = _create_table(false, $temp);
 	
 	if ($flag_present_plugins) 
 	{
@@ -225,9 +241,15 @@
 		});
 		</script>';
 		
+	// быстрые настройки плагинов
+
+	echo '<p><strong>Настройки плагинов:</strong> '
+		. str_replace('  ', ' | ', trim(implode(' ', $opt_url)))
+		.'</p>';
+
 	// добавляем форму, а также текущую сессию
 	echo '<form method="post">' . mso_form_session('f_session_id');
 	echo $table1 . $table2; // вывод таблиц
 	echo '</form>';
 	
-?>
+# end file

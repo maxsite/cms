@@ -35,3 +35,5 @@ $pt->div_start('menu-search', 'wrap');
 	$pt->clearfix();
 
 $pt->div_end('menu-search', 'wrap');
+
+# end file

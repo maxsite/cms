@@ -12,14 +12,18 @@ div.sidebar1
 {
 	.transition(width .3s);
 }
- 
-@media (min-width: 769px) and (max-width: 960px) 
-{
-	@import url('responsive/responsive-769-960.less');
+
+@media (min-width: 1200px) {
+	@import url('responsive/responsive-min-1200.less');
 }
 
-
-@media (max-width: 768px) 
+@media (min-width: 768px) and (max-width: 959px) 
 {
-	@import url('responsive/responsive-max-768.less');
+	@import url('responsive/responsive-768-959.less');
 }
+
+@media (max-width: 767px) 
+{
+	@import url('responsive/responsive-max-767.less');
+}
+

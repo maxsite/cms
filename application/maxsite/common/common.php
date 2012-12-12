@@ -4399,6 +4399,20 @@ function mso_get_dirs($path, $exclude = array(), $need_file = false)
 	}
 }
 
+# Функция возвращает полный путь к файлу
+# если файла нет, то возвращается false
+# если второй парметр == false, используется каталог текущего шаблона
+# if ($fn = mso_fe('stock/page_out/page-out.php')) require($fn);
+function mso_fe($file, $dir = false)
+{
+	if ($dir === false) $dir = getinfo('template_dir');
+	
+	$file = $dir . $file;
+	
+	if (file_exists($file)) return $file;
+		else return false;
+}
+
 
 /* 
 Преобразование входящего текста опции в массив

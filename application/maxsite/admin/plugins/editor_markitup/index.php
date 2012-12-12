@@ -5,19 +5,6 @@
  * (c) http://max-3000.com/
  */
 
-# функция автоподключения плагина
-function editor_markitup_autoload($args = array())
-{
-	// mso_hook_add('editor_custom', 'editor_markitup'); # хук на подключение своего редактора
-	// mso_hook_add('admin_page_form_q_files', 'editor_markitup_q_files'); # форма быстрой загрузки файлов
-}
-
-# функция выполняется при деинсталяции плагина
-function editor_markitup_uninstall($args = array())
-{	
-	//mso_delete_option('editor_markitup', 'plugins' ); // удалим созданные опции
-	// return $args;
-}
 
 function editor_markitup($args = array()) 
 {

@@ -47,10 +47,24 @@ function less_compiling_mso_options()
 							'description' => '', 
 							'default' => 1
 						),
+			
+			'only_users_enabled' => array(
+							'type' => 'checkbox', 
+							'name' => t('Выполнять компиляцию только для авторов и админов'), 
+							'description' => '',
+							'default' => 1
+						),
+						
+			'admin_enabled' => array(
+							'type' => 'checkbox', 
+							'name' => t('Разрешить выполнять компиляцию при работе в админ-панели'), 
+							'description' => '',
+							'default' => 0
+						),
 						
 			'files' => array(
 							'type' => 'textarea', 
-							'name' => t('Файлы'), 
+							'name' => t('Файлы для компиляции'), 
 							'description' => t('Формат (разделитель | ) <pre>+ | файл.less | файл.css | mini cache</pre> <b>+</b> или <b>-</b> Включение или отключение строчки<br><b>файл.less</b> - исходный файл (путь задается относительно каталога /maxsite/)<br><b>файл.css</b> - конечный файл (путь задается относительно каталога /maxsite/)<br>опции через пробел: <b>mini/nomini</b> - сжимать, <b>cache/nocache</b> - использовать кэш.<br>По-умолчанию используется сжатие и кэширование<br><br>Пример:<pre>+ | plugins/my/style.less | plugins/my/style.css | cache mini</pre><br>Результирующий css-файл должен иметь права, разрешающие его перезапись и/или создание (обычно 666).'),
 							'default' => ''
 						),
@@ -68,8 +82,19 @@ function less_compiling_init($args = array())
 	$options = mso_get_option('plugin_less_compiling', 'plugins', array());
 	if (!isset($options['enabled']) ) return $args; // нет опций
 	if (!$options['enabled']) return $args; // выключено
-	if (!$options['files']) return $args; // не заданы файлы
 	
+	// Выполнять компиляцию только для админов и авторов
+	if (!isset($options['only_users_enabled'])) $options['only_users_enabled'] = true;
+	if ($options['only_users_enabled'] and !is_login()) return $args;
+	
+	// Выполнять компиляцию при работе в админ-панели
+	if (!isset($options['admin_enabled'])) $options['admin_enabled'] = false;
+	
+	// не компилировать в админке
+	if (!$options['admin_enabled'] and mso_segment(1) == 'admin') return $args; 
+	
+	
+	if (!$options['files']) return $args; // не заданы файлы
 	
 	$files = explode("\n", $options['files']); // разобъем по строкам
 	if (!$files) return $args; // пустой массив

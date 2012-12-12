@@ -157,7 +157,7 @@ myBbcodeSettings = {
 
 		{separator:'---------------'},
 
-		{name:'<?= t('Преформатированный текст с подсветкой синтаксиса') ?>', openBlockWith:'[pre]', closeBlockWith:'[/pre]', className:"code", dropMenu: [
+		{name:'<?= t('Подсветка синтаксиса') ?>', openBlockWith:'[pre]', closeBlockWith:'[/pre]', className:"code", dropMenu: [
 			{name:'<?= t('Обычный текст') ?>', openBlockWith:'[pre]', closeBlockWith:'[/pre]', className:"text" },
 			{name:'<?= t('PHP-код') ?>', openBlockWith:'[pre lang=php]', closeBlockWith:'[/pre]', className:"php" },
 			{name:'<?= t('HTML-код') ?>', openBlockWith:'[pre lang=html]', closeBlockWith:'[/pre]', className:"html-pre" },
@@ -188,7 +188,7 @@ myBbcodeSettings = {
 			{name:'<?= t('Выполнить PHP-код') ?>', openBlockWith:'[php]', closeBlockWith:'[/php]', className:"php"},
 			<?php } ?>
 
-			{name:'<?= t('Выполнить HTML-код') ?>', openBlockWith:'[html]', closeBlockWith:'[/html]', className:"html-code"}, 
+			{name:'<?= t('Выполнить HTML/JS-код') ?>', openBlockWith:'[html]', closeBlockWith:'[/html]', className:"html-code"}, 
 
 			<?php if (function_exists('ushka')) { ?>
 			{separator:'---------------' },
@@ -198,7 +198,7 @@ myBbcodeSettings = {
 			
 			<?php if (function_exists('down_count_content')) { ?>
 			{separator:'---------------' },
-			{name:'<?= t('Счетчик перехода') ?>', openBlockWith:'[dc]', closeBlockWith:'[/dc]', className:"add"}, 
+			{name:'<?= t('Счетчик переходов') ?>', openBlockWith:'[dc]', closeBlockWith:'[/dc]', className:"add"}, 
 			<?php } ?>
 
 			<?php if (function_exists('audioplayer_content')) { ?>
@@ -232,8 +232,12 @@ myBbcodeSettings = {
 
 		{separator:'---------------' },
 
-		{name:'<?= t('Отрезать для анонса') ?>', replaceWith:'[cut]\n', className:"separator"}, 
-
+		{name:'<?= t('Отметить конец анонса') ?>', replaceWith:'\n[cut]\n', className:"separator", dropMenu: [
+			{name:'<?= t('Отрезать анонс') ?>', replaceWith:'\n[xcut]\n', className:"separator2"},
+		]}, 
+			
+			
+			
 		{separator:'---------------' },
 
 		{name:'<?= t('Быстрое сохранение текста') ?>', className:'qsave', key:"S", beforeInsert:function(markItUp) { miu.save(markItUp) }},
@@ -258,7 +262,7 @@ miu = {
 			{
 				var dd = new Date();
 				$('span.autosave-editor').html('<a target="_blank" href="' + response + '"><?= t('Сохранено в') ?> ' + dd.toLocaleTimeString() + '</a>');
-				alert("<?= t('Сохранено!') ?>");
+				// alert("<?= t('Сохранено!') ?>");
 				
 			});
 	},

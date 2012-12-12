@@ -151,9 +151,7 @@ if (!function_exists('mso_default_head_section'))
 {
 	function mso_default_head_section($options = array())
 	{
-	
 		// ob_start(); # задел на будущее - буферизация
-	// <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=8"><![endif]-->
 		echo 
 '<!DOCTYPE HTML>
 <html' . mso_get_val('head_section_html_add') . '><head>' . mso_hook('head-start') . '
@@ -332,23 +330,6 @@ if (!function_exists('mso_add_file'))
 			elseif ($ext == 'less') echo NT . '<link rel="stylesheet/less" href="' . getinfo('template_url') . $fn . '" type="text/css">';
 			
 		}
-	}
-}
-
-
-# Функция возвращает путь к файлу относительно текущего шаблона
-# если файла нет, то возвращается false
-# 	if ($fn = mso_fe('stock/page_out/page-out.php')) require($fn);
-if (!function_exists('mso_fe'))
-{
-	function mso_fe($file)
-	{
-		$file = getinfo('template_dir') . $file;
-
-		if (file_exists($file)) 
-			return $file;
-		else 
-			return false;
 	}
 }
 

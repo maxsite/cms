@@ -9,13 +9,9 @@ global $MSO;
 
 $dir_admin = $MSO->config['admin_dir'];
 
-
 if (!is_login())
 {
-	// require($dir_admin . 'template/loginform.php');
-	
 	require($dir_admin . 'template/' . mso_get_option('admin_template', 'general', 'default') .  '/loginform.php');
-	
 }
 else
 {
@@ -30,8 +26,6 @@ else
 	
 	if (file_exists($fn)) require($fn);
 		else require($dir_admin . 'template/default/template.php');
-	
-	
 }
 
 # end file

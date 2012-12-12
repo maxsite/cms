@@ -71,6 +71,7 @@
 .bbcode .audio a { background-image:url(images/audio.png); }
 
 .bbcode .separator a { background-image:url(images/document_break.png); }
+.bbcode .separator2 a { background-image:url(images/separator.png); }
 .bbcode .paragraph a { background-image:url(images/paragraph.png); }
 
 .bbcode .bold a	{background-image:url(images/bold.png); }

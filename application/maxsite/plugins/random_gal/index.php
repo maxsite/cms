@@ -414,7 +414,7 @@ function random_gal_mso_options()
 			'slug_gallery' => array(
 							'type' => 'text', 
 							'name' => t('Короткая ссылка на вывод галерей'),
-							'description' => t('Укажите ссылку по которой будут выводиться галереи. Например:') . ' <strong>gallery</strong> -&gt; <a href="' . getinfo('site_url') . 'gallery">' . getinfo('site_url') . '<strong>gallery</strong></a>', 
+							'description' => t('Укажите ссылку по которой будут выводиться галереи. Например:') . ' <strong>gallery</strong> -&gt; <a href="' . getinfo('site_url') . 'gallery" target="_blank">' . getinfo('site_url') . '<strong>gallery</strong></a>', 
 							'default' => 'gallery'
 						),
 						

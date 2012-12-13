@@ -67,8 +67,15 @@
 			}
 		}
 	}
+	
+	// стили для no-sidebar (это main-шаблон вывода записи без сайдбара)
+	body.no-sidebar div.content {
+		width: 100%;
+		float: none;
+	}
+	
+	
 } // .layout
 
 
 .layout(@CONTENT_WIDTH, @SIDEBAR_WIDTH);
-

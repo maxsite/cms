@@ -65,8 +65,22 @@ foreach ($pages as $page)
 		else
 		{
 			$p->div_start('page_content type_' . getinfo('type') . '_content');
-	
-				$p->content('', '');
+				
+				if ($f = mso_page_foreach('content')) require($f);
+				else
+				{
+					// вывод миниатюры перед записью
+					if ($image_for_page = thumb_generate(
+							$p->meta_val('image_for_page'), 
+							mso_get_option('image_for_page_width', 'templates', 280),
+							mso_get_option('image_for_page_height', 'templates', 210)
+						))
+					{
+						echo $p->img($image_for_page, mso_get_option('image_for_page_css_class', 'templates', 'image_for_page'), '', $p->val('page_title'));
+					}
+					
+					$p->content('', '');
+				}
 				
 				if ($f = mso_page_foreach('info-bottom')) require($f);
 				

@@ -526,6 +526,7 @@ function _mso_require_functions_file($args = '')
 	global $MSO;
 	
 	$functions_file = $MSO->config['templates_dir'] . $MSO->config['template'] . '/functions.php';
+	
 	if (file_exists($functions_file))
 	{
 		require_once($functions_file);

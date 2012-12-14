@@ -7,6 +7,9 @@
 */
 
 
+if (!class_exists('Page_out'))
+{
+
 class Page_out 
 {
 	protected $formats = array(); // массив форматов функций
@@ -708,12 +711,15 @@ class Page_out
 	
 } // end  class Page_out 
 
-
+} // if (!class_exists('Page_out'))
 
 
 /*
 	Класс для вывода записей в колонках
 */
+
+if (!class_exists('Columns'))
+{
 
 class Columns 
 {
@@ -832,4 +838,5 @@ class Columns
 	
 } // end  class Columns 
 
+} // if (!class_exists('Columns'))
 # end file

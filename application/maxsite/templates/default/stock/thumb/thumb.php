@@ -9,6 +9,8 @@
  			
 */
 
+if (!class_exists('Thumb'))
+{
 
 class Thumb 
 {
@@ -333,4 +335,5 @@ function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 
 	return $img;
 }
 
+} // if (!class_exists('Thumb'))
 # end file

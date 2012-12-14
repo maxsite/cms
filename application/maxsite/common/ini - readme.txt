@@ -35,6 +35,7 @@ delimer = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 Для типа textarea можно указать количество строк в виде «rows = N». По-умолчанию отображается 7 строк.
 
 Для типа textfield можно указать кавычку (") в виде _QUOT_ - он автоматически пербразуется в &quot; 
+Для типа textfield можно дополнительно задать параметр textfield_type, который будет использван в качестве type элемента input.
 
 В описании можно использовать параметры section и section_description, которые выводятся отдельной строкой перед этой секцией в таблице вывода. Поле section выводится в первой ячейке таблицы (ключ, название), section_description - второй (описание).
 
@@ -73,6 +74,14 @@ description = "Короткое название сайта. Это описан
 default = ""
 section = "Сайт"
 section_description = "Задайте базовое описание сайта"
+
+[Пароль]
+options_key = parol
+options_type = general
+type = textfield
+textfield_type = password
+description = "Укажите пароль"
+default = ""
 
 [Описание сайта]
 options_key = description

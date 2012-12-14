@@ -1,0 +1,104 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+// подключать - @import url('components/slidesjs.less');
+
+// слайдер slidesjs
+
+div.slidesjs {
+
+	@slidesjs_img_height: 300px; // высота изображения
+	
+	position: relative;
+	height: @slidesjs_img_height + 40px; // + высота полоски пагинации
+	margin: 0 0 20px 0;
+
+
+	div.slides_container {
+		height: @slidesjs_img_height; 
+		width: 100%; 
+	}
+	
+	div.slide {
+		
+		width: 100%;
+
+		div.r2 {
+			height: 80px;
+			bottom: -85px;
+			z-index: 500;
+			position: absolute;
+			left: 0;
+			padding: 5px 10px 0 10px;
+			background: #000;
+			background: rgba(0,0,0,.5);
+			width: 100%;
+			border-top: 1px solid #777;
+			
+			h3 {
+				margin: 5px 10px;
+				font-size: 13pt;
+				color: white;
+				
+				a {
+					color: white;
+				}
+			}
+			
+			p {
+				margin: 0 10px;
+				color: white;
+			}
+		}
+	}
+	
+	a.prev, a.next  {
+		display: block; 
+		width: 21px; 
+		height: 21px; 
+		position: absolute; 
+		bottom: 7px;
+	} 
+	
+	a.prev {
+		left: 10px; 
+		background: url("../components/slidesjs/images/arrow-prev.png") no-repeat;
+	}
+	
+	a.next {
+		left: 33px; 
+		background: url("../components/slidesjs/images/arrow-next.png") no-repeat;
+	}
+	
+	ul.pagination {
+		list-style:none; 
+		display: block; 
+		background: #EEE; // фоновая полоска пагинации
+		margin: 0;
+		padding: 5px 0; 
+		text-align: right; 
+		height: 30px; 
+		line-height: 30px; 
+	}
+	
+	ul.pagination li {
+		display:inline;
+	}
+	
+	ul.pagination li a {
+		color: white; 
+		margin: 0 1px; 
+		padding: 7px 10px; 
+		background: #bbb; 
+		text-decoration: none;
+	}
+	
+	ul.pagination li.slides_current a {
+		background: #777;
+	}
+	
+	// нет пагинации
+	&.no-pagination {
+		height: @slidesjs_img_height;
+	}
+	
+}

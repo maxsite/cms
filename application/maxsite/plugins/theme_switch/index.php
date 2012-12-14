@@ -11,7 +11,7 @@ function theme_switch_autoload($args = array())
 {
 	mso_hook_add( 'admin_init', 'theme_switch_admin_init'); # хук на админку
 	mso_register_widget('theme_switch_widget', t('Шаблоны сайта')); # регистрируем виджет
-	mso_hook_add( 'init', 'theme_switch_init'); # хук на init
+	mso_hook_add( 'init', 'theme_switch_init', 50); # хук на init с высоким приоритетом
 	mso_hook_add( 'body_start', 'theme_switch_body_start'); # хук на body_start
 }
 

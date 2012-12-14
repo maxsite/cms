@@ -64,7 +64,17 @@ foreach($all_component as $dir)
 	if (file_exists($file))
 	{
 		$add = mso_get_ini_file($file);
-		$options = array_merge($options, $add);
+		
+		// чтобы позволить испльзовать в компонентах одинаковые названия опций,
+		// добавим к названию имя компонета в скобках
+		$a1 = array();
+		
+		foreach($add as $key => $val)
+		{
+			$a1[$key . ' (' . $dir . ')'] = $val; 
+		}
+		
+		$options = array_merge($options, $a1);
 	}
 }
 

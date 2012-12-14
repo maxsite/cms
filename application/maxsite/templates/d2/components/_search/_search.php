@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
 
-	Файл: search.php
+	Файл: _search.php
 
 	Описание: Форма поиска. Подкомпонет.
 		

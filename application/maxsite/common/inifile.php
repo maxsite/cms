@@ -188,7 +188,6 @@ function mso_view_ini($all = false)
 		if ( !isset($row['default']) ) $default = '';
 			else $default = _mso_ini_check_php(stripslashes(htmlspecialchars(trim($row['default']))));
 		
-
 		// получаем текущее значение опции из массива $all_options
 		$options_present = false;
 		$value = t($default); // нет значения, поэтому берем дефолт
@@ -216,7 +215,13 @@ function mso_view_ini($all = false)
 		if ($type == 'textfield')
 		{
 			$value = str_replace('_QUOT_', '&quot;', $value);
-			$f .= '<input type="text" name="' . $name_f . '" value="' . $value . '">' . NR;
+			
+			// в этом типе может быть свой type для input
+			if ( !isset($row['textfield_type']) ) $textfield_type = 'text';
+				else $textfield_type = stripslashes($row['textfield_type']);
+			
+			
+			$f .= '<input type="' . $textfield_type . '" name="' . $name_f . '" value="' . $value . '">' . NR;
 		}
 		elseif ($type == 'textarea')
 		{

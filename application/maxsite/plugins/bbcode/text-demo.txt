@@ -54,8 +54,6 @@
 
 <p>Mauris et magna at libero mollis tristique quis non massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec vitae ante dolor. Mauris tincidunt ultricies nunc eu mattis. Integer ornare vulputate semper? Nullam tempor placerat imperdiet. Nullam hendrerit sollicitudin sem, nec luctus lectus blandit sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet hendrerit urna. Sed lobortis lectus condimentum tellus consectetur facilisis. Nullam velit ipsum, pulvinar nec pellentesque sit amet, adipiscing ut eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas convallis, erat pharetra pulvinar bibendum; orci mi consequat quam, ut volutpat lectus ligula ut diam. </p>
 
-<img src="data:image/png;base64,/9j/4AAQSkZJRgABAgAAZABkAAD/7AARRHVja3kAAQAEAAAAPAAA/+4ADkFkb2JlAGTAAAAAAf/bAIQABgQEBAUEBgUFBgkGBQYJCwgGBggLDAoKCwoKDBAMDAwMDAwQDA4PEA8ODBMTFBQTExwbGxscHx8fHx8fHx8fHwEHBwcNDA0YEBAYGhURFRofHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8f/8AAEQgASwBLAwERAAIRAQMRAf/EAGYAAQEBAQEBAAAAAAAAAAAAAAADAgEECAEBAAAAAAAAAAAAAAAAAAAAABAAAgECBAQFBQEAAAAAAAAAAAECERIhMTIDcbHhsmGRwdFjIlLiE3MUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD6cAAAAAAAAAAAADOXADQAAAAAZb8wNAAAACbdmL0cgKAAAGJTpRLGTyQHYqmeLebA0AAAAAEW3sv4u3oBYCe5uW0SV05aY+vABCFuLdZvVICgAAAAAAAHmnP/AD4L6oS0x+38eQFdvbtrJu6ctUvbwAoAAAAAAABPc3LaJK6ctMffwAbe3bVyd05apenADGOy/h7egFwAAAAAAYnKmCVZPJAchC2reM3qkBQABJL9X8+3oBUAAAAZb8wCjTHNvNgaAAAAGErcFp5AbAAAAAAAAAAAAAAAAAAAAAAAAOAf/9k=" width="75" height="75" alt="Картинка классом right" title="Картинка классом right" class="right">
-
 
 <h2>Цитаты BLOCKQUOTE</h2>
 

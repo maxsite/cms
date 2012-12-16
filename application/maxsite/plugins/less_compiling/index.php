@@ -65,7 +65,7 @@ function less_compiling_mso_options()
 			'files' => array(
 							'type' => 'textarea', 
 							'name' => t('Файлы для компиляции'), 
-							'description' => t('Формат (разделитель | ) <pre>+ | файл.less | файл.css | mini cache</pre> <b>+</b> или <b>-</b> Включение или отключение строчки<br><b>файл.less</b> - исходный файл (путь задается относительно каталога /maxsite/)<br><b>файл.css</b> - конечный файл (путь задается относительно каталога /maxsite/)<br>опции через пробел: <b>mini/nomini</b> - сжимать, <b>cache/nocache</b> - использовать кэш.<br>По-умолчанию используется сжатие и кэширование<br><br>Пример:<pre>+ | plugins/my/style.less | plugins/my/style.css | cache mini</pre><br>Результирующий css-файл должен иметь права, разрешающие его перезапись и/или создание (обычно 666).'),
+							'description' => t('Формат (разделитель | ) <pre>+ | файл.less | файл.css | mini cache</pre> <b>+</b> Включение строчки<br><b>-</b> Выключение строчки<br><b>*шаблон</b> Компиляция только в указанном шаблоне (например: *d2 | ...)<br><b>файл.less</b> - исходный файл (путь задается относительно каталога /maxsite/)<br><b>файл.css</b> - конечный файл (путь задается относительно каталога /maxsite/)<br>опции через пробел: <b>mini/nomini</b> - сжимать, <b>cache/nocache</b> - использовать кэш.<br>По-умолчанию используется сжатие и кэширование<br><br>Пример:<pre>+ | plugins/my/style.less | plugins/my/style.css | cache mini</pre><br>Результирующий css-файл должен иметь права, разрешающие его перезапись и/или создание (обычно 666).'),
 							'default' => ''
 						),
 						
@@ -108,7 +108,18 @@ function less_compiling_init($args = array())
 		// должно быть как минимум 3 непустых элемента
 		if (isset($row[0]) and isset($row[1]) and isset($row[2]) and $row[0] and $row[1] and $row[2]) 
 		{
-			if ($row[0] !== '+') continue; // должен быть +
+			if ($row[0] == '-' ) continue; // должен быть + или *
+			
+			if ( strpos($row[0], '*') === 0) // компиляция только в указанном шаблоне
+			{
+				// если текущий шаблон не равен указанному, то выходим 
+				if (getinfo('template') != substr($row[0], 1)) 
+				{
+					//pr(1);
+					continue;
+				}
+			}
+			
 			
 			$less_file = getinfo('base_dir') . $row[1];
 			$css_file = getinfo('base_dir') . $row[2];

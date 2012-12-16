@@ -82,10 +82,10 @@ if ($comuser_info)
 			
 			foreach ($comments as $comment)
 			{
-				echo '<li><span><a href="' . getinfo('siteurl') . 'page/' . mso_slug($comment['page_slug']) . '#comment-' . $comment['comments_id'] . '" name="comment-' . $comment['comments_id'] . '">' . $comment['page_title'] . '</a>';
+				echo '<li><span><a href="' . getinfo('siteurl') . 'page/' . mso_slug($comment['page_slug']) . '#comment-' . $comment['comments_id'] . '" id="comment-' . $comment['comments_id'] . '">' . $comment['page_title'] . '</a>';
 				// echo ' | ' . $comments_url;
 				echo '</span><br>' . $comment['comments_date'];
-				echo '</span><br>' . $comment['comments_content'];
+				echo '<br>' . $comment['comments_content'];
 				echo '</li>';
 			}
 			

@@ -11,114 +11,114 @@
 // ШРИФТ
 .f()
 {
-	verdana()
+	.verdana()
 	{
 		font-family: Verdana, Arial, Helvetica, sans-serif; 
 	}
 	
-	arial()
+	.arial()
 	{
 		font-family: Arial, Helvetica, Verdana, sans-serif; 
 	}
 	
-	tahoma()
+	.tahoma()
 	{
 		font-family: Tahoma, Arial, Helvetica, Verdana, sans-serif; 
 	}
 	
-	georgia()
+	.georgia()
 	{
 		font-family: Georgia, "Times New Roman", serif; 
 	}
 	
-	times()
+	.times()
 	{
 		font-family: "Times New Roman", Georgia, serif; 
 	}
 	
-	segoe()
+	.segoe()
 	{
 		font-family: "Segoe UI", Verdana, Arial, sans-serif; 
 	}
 	
-	helvetica()
+	.helvetica()
 	{
 		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	}
 	
-	serif(@name: Georgia)
+	.serif(@name: Georgia)
 	{
 		font-family: @name, "Times New Roman", Times, serif;
 	}
 	
-	sans(@name: Arial)
+	.sans(@name: Arial)
 	{
 		font-family: @name, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	}
 	
-	cursive(@name: "Comic Sans")
+	.cursive(@name: "Comic Sans")
 	{
 		font-family:@name, cursive;
 	}
 	
-	mono(@name: Courier New)
+	.mono(@name: "Courier New")
 	{
 		font-family: @name, Monaco, Menlo, Consolas, "Courier New", monospace;
 	}
 	
-	f(@name, @s: serif)
+	.f(@name, @s: serif)
 	{
 		font-family: @name, @s;
 	}
 	
-	size(@size: 9pt)
+	.size(@size: 9pt)
 	{
 		font-size: @size;
 	}
 	
-	normal()
+	.normal()
 	{
 		font-weight: normal;
 		font-style: normal;
 		text-decoration: none;
 	}	
 	
-	bold(@bold: bold)
+	.bold(@bold: bold)
 	{
 		font-weight: @bold;
 	}
 	
-	color(@color)
+	.color(@color)
 	{
 		color: @color;
 	}
 	
-	italic(@italic: italic)
+	.italic(@italic: italic)
 	{
 		font-style: @italic;
 	}
 	
-	i(@italic: italic)
+	.i(@italic: italic)
 	{
 		font-style: @italic;
 	}
 	
-	style(@style = normal)
+	.style(@style: normal)
 	{
-		font-style: normal;
+		font-style: @style;
 	}
 	
-	upper()
+	.upper()
 	{
 		text-transform: uppercase;
 	}
 	
-	lower()
+	.lower()
 	{
 		text-transform: lower;
 	}
 	
-	underline(@underline: underline)
+	.underline(@underline: underline)
 	{
 		text-decoration: @underline;
 	}

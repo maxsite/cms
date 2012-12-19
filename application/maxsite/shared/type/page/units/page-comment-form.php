@@ -7,6 +7,25 @@
 
 ?>
 
+<?php
+	// если запрещены комментарии от анонимов и при этом нет залогиненности, то форму при простой фрме не выводим
+	if ( !mso_get_option('allow_comment_anonim', 'general', '1') and !is_login() and !is_login_comuser() and mso_get_option('form_comment_easy', 'general', '0')) 
+	{
+	
+		if (mso_get_option('allow_comment_comusers', 'general', '1')) 
+		{
+			$s = tf('Вы можете <a href="#LOG#">войти</a> под своим логином или <a href="#REG#"> зарегистрироваться</a> на сайте.');
+			
+			$s = str_replace('#LOG#', getinfo('site_url') . 'login', $s);
+			$s = str_replace('#REG#', getinfo('site_url') . 'registration', $s);
+			
+			echo '<p><span>' . $s . '</span></p>';
+		}
+	
+		return;
+	}
+?>
+
 <div class="comment-form">
 
 	<form method="post" class="fform">

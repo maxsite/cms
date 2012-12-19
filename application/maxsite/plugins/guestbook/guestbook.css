@@ -1,7 +1,5 @@
-div.guestbook_form {}
-
+div.guestbook_form table td {border: none;}
 h2.guestbook { margin: 20px 0 10px 0;}
-
 table.guestbook {width: 100%; margin: 5px 0;}
 table.guestbook td {vertical-align: top; padding: 3px;}
 table.guestbook td.header {text-align: right; background: gray; color: white;}

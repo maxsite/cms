@@ -5,9 +5,9 @@
  * (c) http://max-3000.com/
  */
 
-global $CONTENT_OUT;
+global $CONTENT_OUT, $MAIN_OUT; // $MAIN_OUT - только для совместимости со старыми шаблонами. Не использовать!
 
-$CONTENT_OUT = ob_get_contents();
+$CONTENT_OUT = $MAIN_OUT = ob_get_contents();
 ob_end_clean();
 
 // если есть custom/main-template.php, то испольузм его

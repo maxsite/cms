@@ -10,16 +10,14 @@ function guestbook_css($a = array())
 	if (file_exists(getinfo('template_dir') . 'guestbook.css')) $css = getinfo('stylesheet_url') . 'guestbook.css';
 		else $css = getinfo('plugins_url') . 'guestbook/guestbook.css';
 		
-	echo '<link rel="stylesheet" href="' . $css . '" type="text/css" media="screen">' . NR;
+	echo '<link rel="stylesheet" href="' . $css . '">' . NR;
 	
 	return $a;
 }
 
 # начальная часть шаблона
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
-
 $CI = & get_instance();
-
 $options = mso_get_option('plugin_guestbook', 'plugins', array());
 
 if ( !isset($options['fields_arr']) ) 

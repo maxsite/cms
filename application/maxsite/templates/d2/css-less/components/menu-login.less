@@ -1,0 +1,45 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+// подключать - @import url('components/menu-login.less');
+
+	
+// компонент 
+div.menu-login {
+	
+	.bg(#eee); // фон совпадает с фоном меню
+
+	div.wrap {
+	}
+
+
+	div.r1 {
+		.left;
+	}
+	
+	div.r2 {
+		.right;
+		padding: 5px 20px 0 0;
+		
+		// форма логина
+		// появляется в .dropdown-menu
+		form {
+			padding: 10px 15px 0 15px;
+			width: 200px;
+			
+			input {
+				width: 195px;
+			}
+			
+			p.user {}
+			p.password {}
+			p.submit {}
+			
+			span.registration {
+				display: inline-block;
+				float: right;
+			}
+			
+		}
+		
+	}
+}

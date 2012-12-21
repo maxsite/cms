@@ -18,11 +18,25 @@ require_once( getinfo('common_dir') . 'inifile.php' );
 // проверка на обновление POST
 if (mso_check_post_ini()) echo '<div class="update">' . t('Обновлено!') . '</div>';
 
-// получим список всех файлов из options
-$files = mso_get_path_files(getinfo('template_dir') . 'options/', getinfo('template_dir') . 'options/', true, array('ini'));
 
-// загоним их в один массив
 $options = array();
+
+// если переменная = true, то подгружаем дефолтные опции из shared/options/default/ 
+if (mso_get_val('get_options_default', true))
+{
+	// получим список всех файлов из options
+	$files = mso_get_path_files(getinfo('shared_dir') . 'options/default/', getinfo('shared_dir') . 'options/default/', true, array('ini'));
+
+	foreach($files as $file)
+	{
+		$add = mso_get_ini_file($file);
+		$options = array_merge($options, $add);
+	}
+	
+}
+
+// получим список всех файлов из options шаблона
+$files = mso_get_path_files(getinfo('template_dir') . 'options/', getinfo('template_dir') . 'options/', true, array('ini'));
 
 foreach($files as $file)
 {

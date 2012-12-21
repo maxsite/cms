@@ -17,7 +17,7 @@ if (is_login()) // юзер
 {
 	$out = '
 		
-	<a href="#" data-dropdown="#dropdown-1">' . t('Привет,') . ' ' . getinfo('users_nik') . '!</a>
+	<a href="#" data-dropdown="#dropdown-1" class="dropdown">' . t('Привет,') . ' ' . getinfo('users_nik') . '!</a>
 
 	<div id="dropdown-1" class="dropdown-menu has-tip anchor-right">
 	<ul>
@@ -44,7 +44,7 @@ elseif ($comuser = is_login_comuser()) // комюзер
 		else $cun = t('Привет,') . ' ' . $comuser['comusers_nik'] . '!';
 
 	$out = '
-	<a href="#" data-dropdown="#dropdown-1">' . $cun . '</a>
+	<a href="#" data-dropdown="#dropdown-1" class="dropdown">' . $cun . '</a>
 
 	<div id="dropdown-1" class="dropdown-menu has-tip anchor-right">
 	<ul>
@@ -63,13 +63,19 @@ else // нет залогирования, выводим форму
 	
 	// если разрешены регистрации, то выводим ссылку
 	if (mso_get_option('allow_comment_comusers', 'general', '1'))
-			$registration = ' <span class="registration"><a href="' . getinfo('siteurl') . 'registration">' . tf('Регистрация') . '</a></span>';
-		else 
-			$registration = '';
+	{
+		$registration = ' <span class="registration"><a href="' . getinfo('siteurl') . 'registration">' . tf('Регистрация') . '</a></span>';
+		$reg_text = t('Вход / Регистрация');
+	}
+	else 
+	{
+		$registration = '';
+		$reg_text = t('Вход');
+	}
 	
 	$out = '
 			
-	<a href="#" data-dropdown="#dropdown-1">' . t('Вход') . '</a>
+	<a href="#" data-dropdown="#dropdown-1" class="dropdown">' . $reg_text . '</a>
 
 	<div id="dropdown-1" class="dropdown-menu has-tip anchor-right">
 	<ul><li>

@@ -60,7 +60,8 @@ if ($pages) // есть страницы
 				. htmlspecialchars(mso_get_cat_key('category_name')) 
 				. '</h1>';
 		}
-
+		
+		
 		if ( mso_get_option('category_show_rss_text', 'templates', 1) )
 		{
 			if ($f = mso_page_foreach('category-show-rss-text'))
@@ -88,6 +89,9 @@ if ($pages) // есть страницы
 			// описание рубрики
 			if ($category_desc = mso_get_cat_key('category_desc'))
 				echo '<div class="category_desc">' . $category_desc . '</div>';
+			
+			if (function_exists('ushka')) echo ushka('category_' . mso_get_cat_key('category_slug'));
+			
 		}
 	
 	echo '</header>' . NR2;

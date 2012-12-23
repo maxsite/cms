@@ -157,6 +157,7 @@ if (!function_exists('mso_default_head_section'))
 <html' . mso_get_val('head_section_html_add') . '><head>' . mso_hook('head-start') . '
 	<meta charset="UTF-8">
 	<title>' . mso_head_meta('title') . '</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="generator" content="MaxSite CMS">
 	<meta name="description" content="' . mso_head_meta('description') . '">
 	<meta name="keywords" content="' . mso_head_meta('keywords') . '">

@@ -690,6 +690,14 @@ class Page_out
 		return $this->out(NR . '<div class="cell' . $class . '"><div class="wrap">' . $text . '</div></div>');
 	}
 	
+	// выводим ячейку в качестве пустого разделителя
+	function cell_sep($text = '&nbsp;', $class = 'sep')
+	{
+		if ($class) $class = ' class="' . $class . '"';
+		
+		return $this->out(NR . '<div' . $class . '>' . $text . '</div>');
+	}
+	
 	// старт cell
 	function cell_start($class = '')
 	{

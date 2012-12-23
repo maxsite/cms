@@ -1,0 +1,45 @@
+// MaxSite CMS
+// Copyright http://max-3000.com/
+// @import url('blocks/columns.less');
+
+// колонки 
+div.columns {
+	@col_padding: 30px; // растояние между колонками
+	
+	margin-right: -@col_padding;
+	
+	// контент колонки
+	div.column-content {
+		overflow: hidden;
+		margin-right: @col_padding;
+		margin-bottom: 20px;
+	}
+}
+
+// box модель - аля-таблица
+div.box {
+	display: table;
+	width: 100%;
+	border-collapse: collapse;
+	
+	div.row {
+		display: table-row;
+		
+		div.cell {
+			display: table-cell;
+			vertical-align: top;
+		}
+	}
+}
+
+// специфичые для шаблона стили ячеек
+div.cell.c1 {
+	width: 115px;
+	padding-top: 5px;
+}
+
+div.cell.c3 {
+	width: 215px;
+	padding-top: 10px;
+	.align(right);
+}

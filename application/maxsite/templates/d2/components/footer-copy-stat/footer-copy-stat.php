@@ -26,7 +26,7 @@ $pt->div_start('footer-copy-stat', 'wrap');
 		$CI = & get_instance();	
 		
 		echo sprintf(
-					tf('Работает на <a href="http://max-3000.com/">MaxSite CMS</a> | Шаблон: <a href="http://maxsite.org/">MAX</a> | Время: {elapsed_time} | SQL: %s | Память: {memory_usage}')
+					tf('Работает на <a href="http://max-3000.com/">MaxSite CMS</a> | Время: {elapsed_time} | SQL: %s | Память: {memory_usage}')
 						, $CI->db->query_count) 
 				. '<!--global_cache_footer--> | ';
 	

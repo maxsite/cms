@@ -95,48 +95,59 @@ if ($pages)
 			}
 			else
 			{
-				$p->div_start('page_content type_' . getinfo('type') . '_content');
-					
-					if ($f = mso_page_foreach('content')) require($f);
-					else
-					{
-						// вывод миниатюры перед записью
-						if ($image_for_page = thumb_generate(
-								$p->meta_val('image_for_page'), 
-								mso_get_option('image_for_page_width', 'templates', 280),
-								mso_get_option('image_for_page_height', 'templates', 210)
-							))
+				if ($f = mso_page_foreach('page-content-' . getinfo('type'))) 
+				{
+					require($f);
+				}
+				else
+				{
+					$p->div_start('page_content type_' . getinfo('type') . '_content');
+						
+						if ($f = mso_page_foreach('content')) require($f);
+						else
 						{
-							echo $p->img($image_for_page, mso_get_option('image_for_page_css_class', 'templates', 'image_for_page'), '', $p->val('page_title'));
-						}
-						
-						$p->content('', '');
-						$p->clearfix();
-					}
-					
-					if ($f = mso_page_foreach('info-bottom')) require($f); // подключаем кастомный вывод
-					
-					$p->html('<aside>');
-					
-						mso_page_content_end();
-						
-						$p->clearfix();
-						
-						// связанные страницы по родителям
-						if ($page_nav = mso_page_nav($p->val('page_id'), $p->val('page_id_parent')))
-						{
-							$p->div($page_nav, 'page_nav');
-						}
-						
-						// блок "Еще записи по теме"
-						if ($f = mso_page_foreach('page-other-pages')) require($f);
-							else mso_page_other_pages($p->val('page_id'), $p->val('page_categories'));
+							// если show_thumb_type_ТИП вернул false, то картинку не ставим
+							// show_thumb - если нужно отключить для всех типов
+							if ( mso_get_val('show_thumb', true)
+								and mso_get_val('show_thumb_type_' . getinfo('type'), true) )
+							{
+								// вывод миниатюры перед записью
+								if ($image_for_page = thumb_generate(
+										$p->meta_val('image_for_page'), 
+										mso_get_option('image_for_page_width', 'templates', 280),
+										mso_get_option('image_for_page_height', 'templates', 210)
+									))
+								{
+									echo $p->img($image_for_page, mso_get_option('image_for_page_css_class', 'templates', 'image_for_page'), '', $p->val('page_title'));
+								}
+							}
 							
-					$p->html('</aside>');
-					
-				$p->div_end('page_content type_' . getinfo('type') . '_content');
+							$p->content('', '');
+							$p->clearfix();
+						}
+						
+						if ($f = mso_page_foreach('info-bottom')) require($f);
+						
+						$p->html('<aside>');
+							
+							mso_page_content_end();
+							
+							$p->clearfix();
+							
+							// связанные страницы по родителям
+							if ($page_nav = mso_page_nav($p->val('page_id'), $p->val('page_id_parent')))
+								$p->div($page_nav, 'page_nav');
+							
+							// блок "Еще записи по теме"
+							if ($f = mso_page_foreach('page-other-pages')) require($f);
+								else mso_page_other_pages($p->val('page_id'), $p->val('page_categories'));
+								
+						$p->html('</aside>');
+						
+					$p->div_end('page_content type_' . getinfo('type') . '_content');
+				}
 			}
-
+			
 		$p->div_end('page_only', 'wrap', '</article>');
 		
 		if ($f = mso_page_foreach('page-only-end')) require($f);

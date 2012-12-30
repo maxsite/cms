@@ -660,7 +660,7 @@ function _mso_sql_build_page($r, &$pag)
 	
 	if (!$r['all_fields'])
 	{
-		$CI->db->select('page.page_id, page_type_name, page_slug, page_title, page_date_publish, page_status, users_nik, page_content, page_view_count, page_rating, page_rating_count, page_password, page_comment_allow, page_id_parent, users_avatar_url, page.page_id_autor, users_description, users_login');
+		$CI->db->select('page.page_id, page_type_name, page_slug, page_title, page_date_publish, page_last_modified, page_status, users_nik, page_content, page_view_count, page_rating, page_rating_count, page_password, page_comment_allow, page_id_parent, users_avatar_url, page.page_id_autor, users_description, users_login');
 	}
 	else
 	{

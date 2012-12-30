@@ -2748,11 +2748,12 @@ function mso_load_jquery($plugin = '', $path = '')
 
 # формируем li-элементы для меню
 # элементы представляют собой текст, где каждая строчка один пункт
-# каждый пункт делается так:  http://ссылка | название | подсказка | class
+# каждый пункт делается так:  http://ссылка | название | подсказка | class | class_для_span
 # на выходе так:
 # <li class="selected"><a href="url"><span>ссылка</span></a></li>
 # если первый символ [ то это открывает группу ul 
 # если ] то закрывает - позволяет создавать многоуровневые меню
+# если адрес равен # то ссылка не формируется, только текст <li class=""><span>ссылка</span></li>
 function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = false)
 {
 	# добавить ссылку на admin
@@ -2793,7 +2794,7 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 	foreach ($menu as $elem)
 	{
 		# разобъем строчку по адрес | название
-		$elem = explode('|', $elem);
+		$elem = explode('|', trim($elem));
 		
 		# должно быть два элемента
 		if (count($elem) > 1 )
@@ -2804,8 +2805,9 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 			if (isset($elem[2])) $title = ' title="' . htmlspecialchars(trim($elem[2])) . '"';
 			else $title = '';
 			
-			
-			
+			// если адрес = ## то не выводим ссылку
+			$a_link = ($url != '##'); 
+				
 			// нет в адресе http:// - значит это текущий сайт
 			if (($url != '#') and strpos($url, 'http://') === false and strpos($url, 'https://') === false) 
 			{
@@ -2823,6 +2825,10 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 			
 			// возможно указан css-класс
 			if (isset($elem[3])) $class .= ' ' . trim($elem[3]);
+			
+			// возможно указан class_для_span
+			if (isset($elem[4])) $class_span = ' class="' . trim($elem[4]) . '"';
+				else $class_span = '';
 
 			# для первого элемента добавляем класс first
 			if ($i == 1) $class .= ' first';
@@ -2843,8 +2849,17 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 				$group_num++;
 				$class .= ' group-num-' . $group_num;
 				
-				$out .= '<li class="group' . $class . '"><a href="' . $url . '"' . $title . '><span>' . $name . '</span></a>' 
-						. NR . '<ul>' . NR;
+				if ($a_link)
+				{
+					$out .= '<li class="group' . $class . '"><a href="' . $url . '"' . $title . '><span' .$class_span . '>' . $name . '</span></a>' 
+							. NR . '<ul>' . NR;
+				}
+				else
+				{
+					$out .= '<li class="group' . $class . '"><span' .$class_span . '>' . $name . '</span>' 
+							. NR . '<ul>' . NR;
+				}
+				
 				
 				$group_in = false;
 				$group_in_first = true;
@@ -2853,7 +2868,14 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 			{
 				if ($group_elem > 0 and array_key_exists($i, $menu) and isset($menu[$n+1]) and trim($menu[$n+1]) == ']' ) $class .= ' group-last';
 				
-				$out .= '<li class="' . trim($class) . '"><a href="' . $url . '"' . $title . '><span>' . $name . '</span></a></li>' . NR;
+				if ($a_link)
+				{
+					$out .= '<li class="' . trim($class) . '"><a href="' . $url . '"' . $title . '><span' .$class_span . '>' . $name . '</span></a></li>' . NR;
+				}
+				else
+				{
+					$out .= '<li class="' . trim($class) . '"><span' .$class_span . '>' . $name . '</span></li>' . NR;
+				}
 			}
 			
 			

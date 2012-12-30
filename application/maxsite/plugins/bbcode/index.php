@@ -9,21 +9,23 @@
 # функция автоподключения плагина
 function bbcode_autoload($args = array())
 {
-	//mso_create_allow('bbcode_edit', t('Админ-доступ к настройкам') . ' ' . t('bbcode'));
 	$options = mso_get_option('plugin_bbcode', 'plugins', array());
+	
 	if (!array_key_exists('bbcode_level', $options)) $options['bbcode_level'] = 1;
+	
 	if ( ($options['bbcode_level'] == 1) or ($options['bbcode_level'] == 3) ) mso_hook_add( 'content', 'bbcode_custom', 20); # хук на вывод контента
+	
 	if ( ($options['bbcode_level'] == 2) or ($options['bbcode_level'] == 3) ) mso_hook_add( 'comments_content', 'bbcode_custom', 20);
 	
-	mso_hook_add( 'editor_content', 'bbcode_editor_content'); // обработка текста для визуалього редактора
+	mso_hook_add('editor_content', 'bbcode_editor_content'); // обработка текста для визуального редактора
 	
 }
 
 # функция выполняется при деинсталяции плагина
 function bbcode_uninstall($args = array())
 {
-	 mso_delete_option('plugin_bbcode', 'plugins' ); // удалим созданные опции
-	// mso_remove_allow('bbcode_edit'); // удалим созданные разрешения
+	mso_delete_option('plugin_bbcode', 'plugins' ); // удалим созданные опции
+
 	return $args;
 }
 
@@ -316,8 +318,43 @@ function bbcode_custom($text = '')
 
 	$text = preg_replace(array_keys($preg), array_values($preg), $text);
 	
-  return $text;
+	# другие сложные патерны и замены
+	
+	// создание ul/li списка по принципу меню
+	$pattern = '~\[create_list\((.*?)\)\](.*?)\[/create_list\]~si'; // с указаным css-классом
+	$text = preg_replace_callback($pattern, 'bbcode_create_list_callback', $text);
+	
+	$pattern = '~\[create_list\](.*?)\[/create_list\]~si'; // без класса
+	$text = preg_replace_callback($pattern, 'bbcode_create_list_callback', $text);	
 
+	
+	// по хуку bbcode можно выполнить свои замены
+	$text = mso_hook('bbcode', $text);
+	
+	return $text;
+}
+
+# callback-функция для create_list
+function bbcode_create_list_callback($matches)
+{
+	// содержимое create_list в $matches[1]
+	
+	// два параметра, значит указан css-класс
+	if (isset($matches[2])) $text = $matches[2];
+		else $text = $matches[1];
+		
+	$arr1 = array('<p>', '</p>', '',   '<br />', '<br>', '&nbsp;', '&amp;', '&lt;', '&gt;', '&quot;');
+	$arr2 = array('',    '',     "\t", "\n",     "\n",   ' ',      '&',     '<',    '>',    '"');
+	
+	$text = trim(str_replace($arr1, $arr2, $text));
+	
+	// указан css-класс
+	if (isset($matches[2]) and $matches[1]) $class = ' class="' . $matches[1] . '"';
+		else $class = '';
+	
+	$text = '<ul' . $class . '>' . mso_menu_build($text) . '</ul>';
+	
+	return $text;
 }
 
 function bbcode_editor_content_callback($matches)

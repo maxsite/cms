@@ -664,7 +664,7 @@
 		$page_menu_order = isset($data['page_menu_order']) ? (int) $data['page_menu_order'] : 0;
 
 
-		$page_id_autor = isset($data['page_id_autor']) ? (int) $data['page_id_autor'] : -1;
+		$page_id_autor = isset($data['page_id_autor']) ? (int) $data['page_id_autor'] : 0;
 
 		// нужно проверить вообще есть ли такой юзер $page_id_autor
 		$CI->db->select('users_id');
@@ -672,7 +672,7 @@
 		$CI->db->where(array('users_id'=>$page_id_autor));
 		$query = $CI->db->get();
 		if (!$query->num_rows()) // нет
-			$page_id_autor = '-1';
+			$page_id_autor = 0;
 
 		if ($page_id_autor != $user_data['users_id']) // смена авторства - проверим разрешения
 		{
@@ -915,7 +915,7 @@
 		$page_menu_order = isset($data['page_menu_order']) ? (int) $data['page_menu_order'] : 0;
 
 
-		$page_id_autor = isset($data['page_id_autor']) ? (int) $data['page_id_autor'] : -1;
+		$page_id_autor = isset($data['page_id_autor']) ? (int) $data['page_id_autor'] : 0;
 
 		// нужно проверить вообще есть ли такой юзер $page_id_autor
 		$CI->db->select('users_id');
@@ -923,7 +923,7 @@
 		$CI->db->where(array('users_id'=>$page_id_autor));
 		$query = $CI->db->get();
 		if (!$query->num_rows()) // нет
-			$page_id_autor = '-1';
+			$page_id_autor = 0;
 
 		if ($page_id_autor != $user_data['users_id']) // смена авторства - проверим разрешения
 		{

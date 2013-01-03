@@ -42,7 +42,7 @@ elseif ($comuser = is_login_comuser()) // комюзер
 
 	if (!$comuser['comusers_nik']) $cun = t('Привет!');
 		else $cun = t('Привет,') . ' ' . $comuser['comusers_nik'] . '!';
-
+	
 	$out = '
 	<a href="#" data-dropdown="#dropdown-1" class="dropdown">' . $cun . '</a>
 

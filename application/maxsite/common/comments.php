@@ -264,9 +264,9 @@ function mso_email_message_new_comment($id = 0, $data = array(), $page_title = '
 			. getinfo('site_admin_url') . 'comments/edit/' . $id . NR . NR;
 	}
 
-	$text .= 'Автор IP: ' . $data['comments_author_ip'] . NR;
-	$text .= 'Referer: ' . $_SERVER['HTTP_REFERER'] . NR;
-	$text .= 'Дата: ' . $data['comments_date'] . NR;
+	$text .= tf('Автор IP: ') . $data['comments_author_ip'] . NR;
+	$text .= tf('Referer: ') . $_SERVER['HTTP_REFERER'] . NR;
+	$text .= tf('Дата: ') . $data['comments_date'] . NR;
 
 	if (isset($data['comments_users_id'])) $text .= tf('Пользователь'). ': ' . $data['comments_users_id'] . NR;
 	elseif (isset($data['comments_comusers_id']))
@@ -284,12 +284,12 @@ function mso_email_message_new_comment($id = 0, $data = array(), $page_title = '
 		{
 			$comusers = $query->row();
 			$text .= ', ник: ' . $comusers->comusers_nik . ', email: ' . $comusers->comusers_email . NR;
-			$text .= 'Профиль: ' . getinfo('siteurl') . 'users/' . $data['comments_comusers_id'] . NR;
+			$text .= tf('Профиль: ') . getinfo('siteurl') . 'users/' . $data['comments_comusers_id'] . NR;
 		}
 	}
 	elseif (isset($data['comments_author_name'])) $text .= tf('Аноним'). ': ' . $data['comments_author_name'] . NR;
 
-	$text .= NR . 'Текст: ' . NR . $data['comments_content'] . NR;
+	$text .= NR . tf('Текст: ') . NR . $data['comments_content'] . NR;
 
 	$text .= NR . tf('Администрировать комментарий вы можете по ссылке'). ': ' . NR
 			. getinfo('site_admin_url') . 'comments/edit/' . $id . NR;
@@ -310,27 +310,27 @@ function mso_email_message_new_comuser($comusers_id = 0, $ins_data = array(), $c
 	// comusers_password
 	// comusers_activate_key
 
-	$subject = 'Регистрация на ' . getinfo('title');
+	$subject = tf('Регистрация на ') . getinfo('title');
 	if (!$comusers_activate_auto)
 	{
 		// текст нужна активация
-		$text = 'Вы или кто-то еще зарегистрировал ваш адрес на сайте "' . getinfo('name_site') . '" - ' . getinfo('siteurl') . NR ;
-		$text .= 'Если это действительно сделали вы, то вам нужно подтвердить эту регистрацию. Для этого следует пройти по ссылке: ' . NR;
+		$text = tf('Вы или кто-то еще зарегистрировал ваш адрес на сайте "') . getinfo('name_site') . '" - ' . getinfo('siteurl') . NR ;
+		$text .= tf('Если это действительно сделали вы, то вам нужно подтвердить эту регистрацию. Для этого следует пройти по ссылке: ') . NR;
 		$text .= getinfo('siteurl') . 'users/' . $comusers_id . NR . NR;
-		$text .= 'И ввести следующий код для активации: '. NR;
+		$text .= tf('И ввести следующий код для активации: '). NR;
 		$text .= $ins_data['comusers_activate_key'] . NR. NR;
-		$text .= '(Сохраните это письмо, поскольку код активации может понадобиться для смены пароля.)' . NR . NR;
-		$text .= 'Если же регистрацию выполнили не вы, то просто удалите это письмо.' . NR;
+		$text .= tf('(Сохраните это письмо, поскольку код активации может понадобиться для смены пароля.)') . NR . NR;
+		$text .= tf('Если же регистрацию выполнили не вы, то просто удалите это письмо.') . NR;
 	}
 	else
 	{
 		// автоактивация
-		$text = 'Спасибо за регистрацию на сайте "' . getinfo('name_site') . '" - ' . getinfo('siteurl') . NR ;
-		$text .= 'Ваша страница: ' . NR;
+		$text = tf('Спасибо за регистрацию на сайте "') . getinfo('name_site') . '" - ' . getinfo('siteurl') . NR ;
+		$text .= tf('Ваша страница: ') . NR;
 		$text .= getinfo('siteurl') . 'users/' . $comusers_id . NR . NR;
-		$text .= 'Ваш код активации: '. NR;
+		$text .= tf('Ваш код активации: '). NR;
 		$text .= $ins_data['comusers_activate_key'] . NR. NR;
-		$text .= 'Сохраните это письмо, поскольку код активации может понадобиться для смены пароля.' . NR . NR;
+		$text .= tf('Сохраните это письмо, поскольку код активации может понадобиться для смены пароля.') . NR . NR;
 	}
 	
 	return mso_mail($email, $subject, $text, $email); // поскольку это регистрация, то отправитель - тот же email
@@ -365,6 +365,7 @@ function mso_get_new_comment($args = array())
 		// если найдена xss-атака, то не публиковать комментарий
 		if ( !isset($args['xss_clean_die']) )		$args['xss_clean_die'] = false;
 		
+		// запрещенные слова как имя автора
 		if ( !isset($args['noword']) )		$args['noword'] = array('.com', '.ru', '.net', '.org', '.info', '.ua', 
 																	'.su', '.name', '/', 'www.', 'http', ':', '-', '"',
 																	'«', '»', '%', '<', '>', '&', '*', '+', '\'' );
@@ -419,7 +420,7 @@ function mso_get_new_comment($args = array())
 		}
 		
 		// если указано рубить коммент при обнаруженной xss-атаке 
-		if ($args['xss_clean_die'] and $mso_xss_clean($post['comments_content'], true, false) === true)
+		if ($args['xss_clean_die'] and mso_xss_clean($post['comments_content'], true, false) === true)
 		{
 			return '<div class="' . $args['css_error']. '">' . tf('Обнаружена XSS-атака!'). '</div>';
 		}

@@ -98,6 +98,18 @@ if (!function_exists('default_out_profiles'))
 			if ($css_out) 
 				echo NR . '<style>' . $css_out . '</style>' . NR;
 		}
+		
+		// здесь же выводим css-профиль записи
+		// он задан через метаполе
+		global $page;
+		
+		if (is_type('page') and isset($page) and $page)
+		{
+			if ($page_css_profiles = mso_page_meta_value('page_css_profiles', $page['page_meta']))
+			{
+				mso_add_file('css/profiles/' . $page_css_profiles);
+			}
+		}
 	}
 }
 
@@ -247,7 +259,7 @@ if (!function_exists('mso_default_head_section'))
 		mso_add_file('css/add_style.css');
 		
 		default_out_profiles();
-
+		
 		if ($fn = mso_fe('custom/head.php')) require($fn);
 		if ($fn = mso_page_foreach('head')) require($fn);
 		if (function_exists('ushka')) echo ushka('head');

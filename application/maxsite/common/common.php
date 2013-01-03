@@ -2754,6 +2754,7 @@ function mso_load_jquery($plugin = '', $path = '')
 # если первый символ [ то это открывает группу ul 
 # если ] то закрывает - позволяет создавать многоуровневые меню
 # если адрес равен # то ссылка не формируется, только текст <li class=""><span>ссылка</span></li>
+# если пункт меню равен --- то формируется разделитель li.divider Имеет смысл только в подпунктах
 function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = false)
 {
 	# добавить ссылку на admin
@@ -2906,6 +2907,11 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 				$group_in = false;
 				$group_work = false;
 				$out .= '</ul>' . NR . '</li>' . NR;
+			}
+			
+			if ($elem[0] == '---') // разделитель
+			{
+				$out .= '<li class="divider"><span></span></li>' . NR;
 			}
 			
 		}
@@ -4404,7 +4410,7 @@ function mso_get_dirs($path, $exclude = array(), $need_file = false)
 				if (strpos($d, '_') === 0) continue; // исключаем файлы, начинающиеся с _
 				if (strpos($d, '-') === 0) continue; // исключаем файлы, начинающиеся с -
 				
-				// если указан обязщательный файл, то проверяем его существование
+				// если указан обязательный файл, то проверяем его существование
 				if($need_file === true and !file_exists($path . $d . '/' . $d . '.php')) continue;
 				if($need_file !== true and $need_file and !file_exists($path . $d . '/' . $need_file)) continue;
 				

@@ -12,24 +12,26 @@
 			{
 				$menu .= NR . '[';
 				$menu .= NR . 'admin | ' . getinfo('users_nik') . ' | Админ-панель | icon icon-admin';
-				$menu .= NR . 'admin/page_new | Создать запись';
-				$menu .= NR . 'admin/page | Список записей';
-				$menu .= NR . 'admin/cat | Рубрики';
-				$menu .= NR . 'admin/plugins | Плагины';
-				$menu .= NR . 'admin/files | Загрузки';
-				$menu .= NR . 'admin/sidebars | Сайдбары';
-				$menu .= NR . 'admin/options | Основные настройки';
-				$menu .= NR . 'admin/template_options | Настройка шаблона';
-				$menu .= NR . 'http://max-3000.com/page/faq | ЧАВО для новичков';
-				$menu .= NR . 'http://max-3000.com/help | Центр помощи';
-				$menu .= NR . 'http://forum.max-3000.com/ | Форум поддержки';
+				$menu .= NR . 'admin/page_new | Создать запись | | icon page_new';
+				$menu .= NR . 'admin/page | Список записей | | icon page';
+				$menu .= NR . 'admin/cat | Рубрики | | icon cat';
+				$menu .= NR . 'admin/plugins | Плагины | | icon plugins';
+				$menu .= NR . 'admin/files | Загрузки | | icon files';
+				$menu .= NR . 'admin/sidebars | Сайдбары | | icon sidebars';
+				$menu .= NR . 'admin/options | Основные настройки | | icon options';
+				$menu .= NR . 'admin/template_options | Настройка шаблона | | icon template_options';
+				$menu .= NR . '---';
+				$menu .= NR . 'http://max-3000.com/page/faq | ЧАВО для новичков | | icon faq';
+				$menu .= NR . 'http://max-3000.com/help | Центр помощи | | icon help';
+				$menu .= NR . 'http://forum.max-3000.com/ | Форум поддержки | | icon forum';
 				
 				if (function_exists('ushka')) 
 				{
 					$menu .= NR . ushka('main-menu-admin');
 				}
 				
-				$menu .= NR . 'logout | Выход';
+				$menu .= NR . '---';
+				$menu .= NR . 'logout | Выход | | icon logout';
 				
 				$menu .= NR . ']';
 			}
@@ -44,11 +46,16 @@
 				else
 					$menu .= NR . '# | Ваши ссылки';
 				
-				$menu .= NR . 'users/' . $comuser['comusers_id'] . ' | Своя страница';
-				$menu .= NR . 'http://max-3000.com/page/faq | ЧАВО для новичков';
-				$menu .= NR . 'http://max-3000.com/help | Центр помощи';
-				$menu .= NR . 'http://forum.max-3000.com/ | Форум поддержки';
-				$menu .= NR . 'logout | Выход';
+				$menu .= NR . 'users/' . $comuser['comusers_id'] . ' | Своя страница | | icon users';
+				
+				$menu .= mso_hook('main_menu_add_comuser');
+				
+				$menu .= NR . '---';
+				$menu .= NR . 'http://max-3000.com/page/faq | ЧАВО для новичков | | icon faq';
+				$menu .= NR . 'http://max-3000.com/help | Центр помощи | | icon help';
+				$menu .= NR . 'http://forum.max-3000.com/ | Форум поддержки | | icon forum';
+				$menu .= NR . '---';
+				$menu .= NR . 'logout | Выход | | icon logout';
 				$menu .= NR . ']';
 
 			}

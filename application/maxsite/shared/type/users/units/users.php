@@ -74,7 +74,12 @@ if ($comuser_info)
 		
 		
 		if (getinfo('comusers_id') == $comusers_id )
-			echo '<p><a href="' . getinfo('siteurl') . 'users/' . $comusers_id . '/edit">'. tf('Редактировать персональные данные'). '</a></p>';
+		{
+			echo '<p><a href="' . getinfo('siteurl') . 'users/' . $comusers_id . '/edit">'. tf('Редактировать данные'). '</a></p>';
+		}
+		
+		// хук, по которому можно вывести дополнительные данные
+		mso_hook('users_add_out', $comuser_info[0]);
 		
 		if ($comments) // есть комментарии
 		{

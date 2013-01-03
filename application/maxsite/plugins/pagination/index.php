@@ -6,10 +6,9 @@
  */
 
 
-function pagination_autoload($a = array()) 
+function pagination_autoload() 
 {
 	mso_hook_add('pagination', 'pagination_go', 10);
-	return $a;
 }
 
 

@@ -1,3 +1,4 @@
+// форма входа в адмн-панель
 
 @import url('../../../shared/css-less/mixins/helpers.less'); 
 @import url('../../../shared/css-less/default/mso-reset.less'); // сброс стилей
@@ -5,78 +6,58 @@
 @import url('../../../shared/css-less/default/mso-forms.less'); // формы
 
 body {
-	.background_gradient(#444, #888);
+	background: #BDCCD3 url("images/pattern_012.png");
+	color: #555;
 }
 
 div.all {
-	width: 380px;
+	width: 330px;
 	margin: 0 auto;
 	
 	> div.wrap {
 		margin: 80px 0 0 0;
-		padding: 30px 30px 0 30px;
-		
-		.background_gradient(#B21D1D, darken(#B21D1D, 20%));
-		
-		.border_radius(10px);
-		.border(#aaa);
-		.box_shadow(0, 0, 5px, #eee);
+		padding-bottom: 40px;
+		.bg(#fff);
+		.box_shadow(0, 0, 2px, #999);
 	}
 }
 
 div.logo {
-	text-align: center;
+	.bg(#395766);
+	padding: 15px 0 15px 25px;
 }
-
-div.welcome {
-	color: #fff;
-	margin: 40px 0 10px 0;
-	.f > size(18px);
-	text-align: center;
-}
-
 
 form.fform {
+	
+	margin: 35px 0 0 0;
+	padding: 0 25px;
 	
 	input.flogin_user,
 	input.flogin_password
 	{
-		.f > size(16px);
-		
-
-		padding: 10px 15px 10px 40px;
-		margin: 5px 0 5px 0;
-		
-		color: #eee;
-		.border_radius(5px);
-		.border(#9F6363);
-		
+		.f > size(14px);
+		padding: 5px;
+		margin: 0 0 15px 0;
+		.border(#ddd);
 		.transition(all 0.5s 0s ease);
 		
 		&:focus, 
 		&:hover
 		{
-			.box_shadow(0, 0, 7px, white);
-			.bg(#922929);
+			.box_shadow(0, 0, 3px, #3399FF);
 		}
-
 	}
 	
 	input.flogin_user {
-		background: #7B1414 url("images/16_users.png") no-repeat 10px 13px;
 	}
 	
 	input.flogin_password {
-		background: #7B1414 url("images/16_settings.png") no-repeat 10px 13px;
 	}
-	
-	
 	
 	button.flogin_submit {
 		
-		margin-top: 30px;
-		width: 140px;
-		height: 40px;
+		margin-top: 15px;
+		height: 30px;
 		
 		&:before {
 			content: url("images/16_unlock.png");
@@ -84,26 +65,20 @@ form.fform {
 			vertical-align: middle;
 			margin-right: 10px;
 		}
-	
 	}
-
 }
 
 div.goto-site {
-	padding-left: 120px;
-	margin-top: -35px;
-	padding-bottom: 50px;
-	
-	
+	margin-top: -30px;
+	padding-right: 25px;
 	text-align: right;
 	
 	a {
-		color: #eee;
+		color: #777;
 		.f > underline(none);
 		
 		&:hover {
 			.f > underline();
 		}
 	}
-
 }

@@ -17,9 +17,8 @@
 <body>
 <div class="all"><div class="wrap">
 
-	<div class="logo"><a href="http://max-3000.com/" target="_blank"><img src="<?=  getinfo('admin_url') . 'template/' . mso_get_option('admin_template', 'general', 'default') . '/images/logo.png'; ?>" width="206" height="38" alt="<?= t('Система управления сайтом MaxSite CMS') ?>" title="<?= t('Система управления сайтом MaxSite CMS') ?>"></a></div>
+	<div class="logo"><a href="http://max-3000.com/" target="_blank"><img src="<?=  getinfo('admin_url') . 'template/' . mso_get_option('admin_template', 'general', 'default') . '/images/logo.png'; ?>" alt="<?= t('Система управления сайтом MaxSite CMS') ?>" title="<?= t('Система управления сайтом MaxSite CMS') ?>"></a></div>
 	
-	<div class="welcome"><?= t('Вход в админ-панель') ?></div>
 	
 	<?php 
 	if (!is_login())
@@ -29,12 +28,12 @@
 		mso_remove_hook('login_form_auth'); # удалим все хуки для авторизации
 				
 		mso_login_form(array( 
-				'login' => '', 
-				'password' => '', 
+				'login' => t('Логин'), 
+				'password' => t('Пароль'), 
 				'submit' => '', 
 				'submit_value' => t('Войти'),
-				'login_add' => ' placeholder="' . t('логин') . '"',
-				'password_add' => ' placeholder="' . t('пароль') . '"',
+				'login_add' => ' placeholder="' . t('ваш логин') . '"',
+				'password_add' => ' placeholder="' . t('ваш пароль') . '"',
 			),
 			$redirect_url);
 	}
@@ -43,7 +42,7 @@
 	?>
 	
 	<div class="goto-site"><a href="<?= getinfo('siteurl') ?>"><?= t('Вернуться к сайту') ?></a></div>
-	
+	<div class="clearfix"></div>
 </div></div>
 
 </body>

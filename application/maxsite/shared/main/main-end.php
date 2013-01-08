@@ -17,9 +17,6 @@ if ($fn = mso_fe('custom/main-template.php'))
 }
 else
 {
-
-	
-	
 	// main-шаблон вывода находится в meta-поле page_template
 	// это определено в shared/meta/meta.ini
 	if (is_type('page') and isset($pages) and isset($pages[0]))
@@ -36,10 +33,22 @@ else
 	{
 		// возможно есть main-файл по type
 		// в main/type/home/main.php
-		
 		if ($fn = mso_fe('main/type/' . getinfo('type') . '/main.php')) 
 		{	
 			mso_set_val('main_file', $fn); // выставляем путь к файлу
+		}
+		else
+		{
+			// возможно указана опця
+			// main_template_TYPE 
+			// опции заданы в ini-файлах
+			if ($page_template = mso_get_option('main_template_' . getinfo('type'), 'templates', ''))
+			{
+				if ($fn = mso_fe('main/' . $page_template . '/main.php')) 
+				{	
+					mso_set_val('main_file', $fn); // выставляем путь к файлу
+				}
+			}
 		}
 	}
 	

@@ -79,7 +79,7 @@ class Page_out
 					''
 				),
 
-			'author' => array
+			'autor' => array
 				(
 					'',
 					'',

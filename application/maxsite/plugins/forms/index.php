@@ -50,6 +50,21 @@ function forms_content_callback($matches)
 	else
 		$subject = tf('Обратная связь');
 	
+	// имя, как оно будет показано в форме
+	$r = preg_match_all('!\[name_title=(.*?)\]!is', $text, $all);
+	if ($r)
+		$name_title = trim(implode(' ', $all[1]));
+	else
+		$name_title = tf('Ваше имя');
+	
+	
+	// email, как он будет показан в форме
+	$r = preg_match_all('!\[email_title=(.*?)\]!is', $text, $all);
+	if ($r)
+		$email_title = trim(implode(' ', $all[1]));
+	else
+		$email_title = tf('Ваше имя');
+	
 	
 	// куда редиректить после отправки
 	$r = preg_match_all('!\[redirect=(.*?)\]!is', $text, $all);
@@ -59,7 +74,7 @@ function forms_content_callback($matches)
 		$redirect = '';
 	
 	
-	// eirf к форме
+	// ушка к форме
 	$r = preg_match_all('!\[ushka=(.*?)\]!is', $text, $all);
 	if ($r)
 		$ushka = trim(implode(' ', $all[1]));
@@ -284,14 +299,14 @@ function forms_content_callback($matches)
 		}
 		else // нет post
 		{
-			$out .= forms_show_form($f, $ushka, $forms_subscribe, $reset, $subject);
+			$out .= forms_show_form($f, $ushka, $forms_subscribe, $reset, $subject, $name_title, $email_title);
 		}
 	}
 
 	return $out;
 }
 
-function forms_show_form($f = array(), $ushka = '', $forms_subscribe = true, $reset = true, $subject = '')
+function forms_show_form($f = array(), $ushka = '', $forms_subscribe = true, $reset = true, $subject = '', $name_title = '', $email_title = '')
 {
 	$out = '';
 
@@ -345,9 +360,22 @@ function forms_show_form($f = array(), $ushka = '', $forms_subscribe = true, $re
 	$out .= '<input type="hidden" name="forms_antispam2" value="' . $antispam2 * 765 . '">';
 	
 	// обязательные поля
-	$out .= '<p><label class="ffirst ftitle" title="' . tf('Обязательное поле') . '" for="id-' . ++$id . '">' . tf('Ваше имя*') . '</label><span><input name="forms_name" type="text" value="" placeholder="' . tf('Ваше имя') . '" required id="id-' . $id . '"></span></p>';
-	
-	$out .= '<p><label class="ffirst ftitle" title="' . tf('Обязательное поле') . '" for="id-' . ++$id . '">' . tf('Ваш email*') . '</label><span><input name="forms_email" type="email" value="" placeholder="' . tf('Ваш email') . '" required id="id-' . $id . '"></span></p>';
+	if ($name_title)
+	{
+		$out .= '<p><label class="ffirst ftitle" title="' . tf('Обязательное поле') . '" for="id-' . ++$id . '">' . $name_title . '</label><span><input name="forms_name" type="text" value="" placeholder="' . $name_title . '" required id="id-' . $id . '"></span></p>';
+	}
+	else 
+	{
+		$out .= '<p><label class="ffirst ftitle" title="' . tf('Обязательное поле') . '" for="id-' . ++$id . '">' . tf('Ваше имя*') . '</label><span><input name="forms_name" type="text" value="" placeholder="' . tf('Ваше имя') . '" required id="id-' . $id . '"></span></p>';
+	}
+	if ($email_title)
+	{
+		$out .= '<p><label class="ffirst ftitle" title="' . tf('Обязательное поле') . '" for="id-' . ++$id . '">' . $email_title . '</label><span><input name="forms_email" type="email" value="" placeholder="' . $email_title . '" required id="id-' . $id . '"></span></p>';
+	}
+	else 
+	{
+		$out .= '<p><label class="ffirst ftitle" title="' . tf('Обязательное поле') . '" for="id-' . ++$id . '">' . tf('Ваш email*') . '</label><span><input name="forms_email" type="email" value="" placeholder="' . tf('Ваш email') . '" required id="id-' . $id . '"></span></p>';
+	}
 	
 	
 	// тут указанные поля в $f

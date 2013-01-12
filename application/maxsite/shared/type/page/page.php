@@ -134,6 +134,8 @@ if ($pages)
 							
 							$p->clearfix();
 							
+							if ($f = mso_page_foreach('page-content-end')) require($f);
+							
 							// связанные страницы по родителям
 							if ($page_nav = mso_page_nav($p->val('page_id'), $p->val('page_id_parent')))
 								$p->div($page_nav, 'page_nav');

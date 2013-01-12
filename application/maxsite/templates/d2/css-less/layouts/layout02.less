@@ -16,26 +16,29 @@
 	}
 	
 	div.all {
-		margin: 0 auto;
-		width: 100%;
-		max-width: @content;
-		.bg(#fff);
+	
 	}
 	
 	div.all-wrap {
+		width: @content;
+		margin: 0 auto;
+		background: white;
 		
 	}
 	
 	div.header {
 
+		div.header-wrap {
+
+		}
 	}
 	
 	div.main {
-		
+
 	}
 	
 	div.content {
-		width: @RATIO_CONTENT;
+		width: @content - @sidebar;
 		float: left;
 		
 		div.content-wrap {
@@ -44,11 +47,11 @@
 	}
 	
 	div.sidebar1 {
-		width: @RATIO_SIDEBAR;
-		float: left;
+		width: @sidebar;
+		float: right;
 		
 		div.sidebar1-wrap {
-			margin: 20px 20px 0 0;
+			margin: 20px 20px 20px 0;
 		}
 	}
 	
@@ -66,18 +69,12 @@
 	}
 	
 	// стили для no-sidebar (это main-шаблон вывода записи без сайдбара)
-	body.no-sidebar {
-	
-		div.content {
-			width: 100%;
-			float: none;
-			
-			div.content-wrap {
-				margin: 20px;
-			}
-		}
+	body.no-sidebar div.content {
+		width: 100%;
+		float: none;
 	}
-		
+	
+	
 } // .layout
 
 

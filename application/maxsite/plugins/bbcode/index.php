@@ -327,6 +327,9 @@ function bbcode_custom($text = '')
 	$pattern = '~\[create_list\](.*?)\[/create_list\]~si'; // без класса
 	$text = preg_replace_callback($pattern, 'bbcode_create_list_callback', $text);	
 
+	// [show Вопрос] текст [/show]
+	$pattern = '~\[show (.*?)\](.*?)\[\/show\]~si';
+	$text = preg_replace_callback($pattern, 'bbcode_show_callback', $text);	
 	
 	// по хуку bbcode можно выполнить свои замены
 	$text = mso_hook('bbcode', $text);
@@ -355,6 +358,44 @@ function bbcode_create_list_callback($matches)
 	$text = '<ul' . $class . '>' . mso_menu_build($text) . '</ul>';
 	
 	return $text;
+}
+
+
+function bbcode_show_callback($matches)
+{
+	static $js = false;
+	static $id = 0; // id требуется для работы showhide.jquery.js
+	
+	$out = '';
+	$id++;
+	
+	if (!$js)
+	{
+		$out .=  mso_load_jquery('jquery.cookie.js');
+		$out .=  mso_load_jquery('showhide.jquery.js');
+		
+		$out .= ' <script>
+$(function () {
+$("dd.show-text").hide(); $.showHide({ blockElem: "div.show", blockinElem: "dd.show-text", clickElem: "a.link", cookieName: "show-' . str_replace('/', '-', mso_current_url()) . '" });
+});
+</script> ' ;
+		
+		$js = true;
+	}
+	
+	$out .= '<div class="show"><dl>'
+				. '<dt class="show-header"><a href="#" class="link">' 
+				. $matches[1] 
+				. '</a></dt>'
+				
+				. '<dd class="show-text" id="show' . $id . '">'
+				. $matches[2]
+				. '</dd>'
+				
+			. '</dl></div>' . NR;
+	
+	return $out;
+	
 }
 
 function bbcode_editor_content_callback($matches)

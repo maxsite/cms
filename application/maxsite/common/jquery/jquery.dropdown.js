@@ -4,7 +4,7 @@
  * Inspired by Bootstrap: http://twitter.github.com/bootstrap/javascript.html#dropdowns
  *
  * Copyright 2011 Cory LaViska for A Beautiful Site, LLC. (http://abeautifulsite.net/)
- *
+ * http://labs.abeautifulsite.net/jquery-dropdown/
  * Dual licensed under the MIT or GPL Version 2 licenses
  *
 */
@@ -53,9 +53,11 @@ if(jQuery) (function($) {
 			.css({
 				left: dropdown.hasClass('anchor-right') ? 
 					trigger.offset().left - (dropdown.outerWidth() - trigger.outerWidth()) + hOffset : trigger.offset().left + hOffset,
-				top: trigger.offset().top + trigger.outerHeight() + vOffset
+				top: trigger.position().top + trigger.outerHeight() + vOffset
 			})
 			.show();
+		
+		// MAX: trigger.offset().top >>> trigger.position().top
 		
 		trigger.addClass('dropdown-open');
 		

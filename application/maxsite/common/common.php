@@ -1647,6 +1647,7 @@ function mso_auto_tag($pee, $pre_special_chars = false)
 	$pee = str_replace("<p></p>", "", $pee); 
 	$pee = str_replace("<p><p>", "<p>", $pee); 
 	$pee = str_replace("</p></p>", "</p>", $pee); 
+	$pee = str_replace("</script></p>", "</script>", $pee); 
 	
 	# блочные тэги
 	$allblocks = '(?:table|thead|tfoot|caption|colgroup|center|tbody|tr|td|th|div|dl|dd|dt|ul|ol|li|pre|code|select|form|map|area|blockquote|address|math|style|input|embed|h1|h2|h3|h4|h5|h6|hr|p)';

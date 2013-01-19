@@ -49,8 +49,8 @@
 		$(settings.blockElem).click(function(e) {
 			if ($(e.target).is(settings.clickElem)) {
 				var el = $(settings.blockinElem, this); 
-				el.toggle();
-				updateCookie(el);
+				el.toggle(200, function(){ updateCookie(el); } );
+				//updateCookie(el);
 			}
 			return false;
 		});

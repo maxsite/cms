@@ -336,7 +336,6 @@ function forms_show_form($f = array(), $ushka = '', $forms_subscribe = true, $re
 	// обязательные поля
 	if ($name_title)
 	{
-		
 		$out .= '<p><label class="ffirst ftitle" title="' . tf('Обязательное поле') . '" for="id-' . ++$id . '">' . $name_title . '*</label><span><input name="forms_name" type="text" value="' . $pvalue . '" placeholder="' . $name_title . '" required id="id-' . $id . '"></span></p>';
 	}
 	else 
@@ -345,7 +344,7 @@ function forms_show_form($f = array(), $ushka = '', $forms_subscribe = true, $re
 	}
 
 	
-	if (!isset($_POST['forms_email']) or !$pvalue = mso_clean_str($_POST['forms_email'], 'xss|email')) $pvalue = '';
+	if (!isset($_POST['forms_email']) or !$pvalue = mso_clean_str($_POST['forms_email'], 'base|email')) $pvalue = '';
 	
 	if ($email_title)
 	{

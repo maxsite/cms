@@ -195,6 +195,9 @@ myBbcodeSettings = {
 			{name:'<?= t('Ушка') ?>', openBlockWith:'[ushka=[![<?= t('Имя ушки') ?>]!]]', closeBlockWith:'', className:"add"}, 
 			<?php } ?>
 			
+			{separator:'---------------' },
+			{name:'<?= t('Показать/спрятать (show)') ?>', openBlockWith:'[show [![<?= t('Заголовок блока') ?>]!]]', closeBlockWith:'[/show]', className:"add"}, 
+
 			
 			<?php if (function_exists('down_count_content')) { ?>
 			{separator:'---------------' },

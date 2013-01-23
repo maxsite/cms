@@ -319,6 +319,49 @@ div.box div.row div.cell {
   display: table-cell;
   vertical-align: top;
 }
+div.onerow .col {
+  float: left;
+  margin-left: 3%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+div.onerow .col:first-of-type {
+  margin-left: 0;
+}
+div.onerow .w1-1 {
+  width: 100%;
+}
+div.onerow .w1-2 {
+  width: 48.5%;
+}
+div.onerow .w1-3 {
+  width: 31.333333333333%;
+}
+div.onerow .w2-3 {
+  width: 65.66666667%;
+}
+div.onerow .w1-4 {
+  width: 22.75%;
+}
+div.onerow .w2-4 {
+  width: 48.5%;
+}
+div.onerow .w3-4 {
+  width: 74.25%;
+}
+div.onerow .w1-5 {
+  width: 17.6%;
+}
+div.onerow .w2-5 {
+  width: 38.2%;
+}
+div.onerow .w3-5 {
+  width: 58.8%;
+}
+div.onerow .w4-5 {
+  width: 79.4%;
+}
 div.cell.c1 {
   width: 115px;
   padding-top: 5px;
@@ -841,5 +884,10 @@ div.sidebar1 {
     margin: 0;
     padding: 20px;
     background: #f0f0f0;
+  }
+  div.onerow .col {
+    float: none;
+    margin-left: 0;
+    width: 100%;
   }
 }

@@ -38,7 +38,6 @@ text = текст с html без переносов
 link = http://max-3000.com/
 img = TEMPLATE_URL/images/placehold/960x300.png
 [/slide]
-
 ';
 
 
@@ -46,7 +45,7 @@ $slides0 = mso_get_option('slidesjs', 'templates', $slides_def);
 
 if (!$slides0) return; // слайды не определены - выходим
 
-$slides0 = str_replace('TEMPLATE_URL', getinfo('template_url'), $slides0);
+$slides0 = str_replace('TEMPLATE_URL/', getinfo('template_url'), $slides0);
 
 // ищем вхождение [slide] ... [slide]
 // указываем дефолтные атрибуты полей слайдера

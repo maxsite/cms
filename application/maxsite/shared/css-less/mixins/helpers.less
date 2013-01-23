@@ -363,7 +363,11 @@
 	transition: @transition;
 }
 
-
+.box_sizing(@box: border-box){
+	-webkit-box-sizing: @box;
+	-moz-box-sizing: @box;
+	box-sizing: @box;
+}
 
 // служебные миксы
 // загрузка другого less-файла заменяет @import

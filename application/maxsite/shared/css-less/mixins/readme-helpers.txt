@@ -83,3 +83,5 @@
 .op(100); // прозрачность
 
 .transition(background-color 0.3s 0s ease); // трансформация
+
+.box_sizing(border-box); // боксовая модель

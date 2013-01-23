@@ -1,8 +1,8 @@
 div.guestbook_form table td {border: none;}
 h2.guestbook { margin: 20px 0 10px 0;}
 table.guestbook {width: 100%; margin: 5px 0;}
-table.guestbook td {vertical-align: top; padding: 3px;}
-table.guestbook td.header {text-align: right; background: gray; color: white;}
-table.guestbook td.t1 {width: 100px; text-align: right; background: silver;}
-table.guestbook td.t2 {border-bottom: 1px solid #EEEEEE;}
-table.guestbook td.space {padding: 0; height: 7px;}
+table.guestbook td {vertical-align: top;  padding: 5px 20px;}
+table.guestbook td.header {text-align: right; background: #ccc; color: #222;}
+table.guestbook td.t1 {width: 100px; text-align: right; background: #eee; padding-right: 10px;}
+table.guestbook td.t2 {}
+table.guestbook td.space {padding: 0; height: 10px; border-left: none; border-right: none;}

@@ -74,19 +74,31 @@ if ($pages)
 		
 		$p->div_start('page_only', 'wrap', '<article>');
 		
-			if ($f = mso_page_foreach('info-top')) 
+			// у page в записи может быть метаполе info-top-custom
+			// где указываетеся свой файл вывода
+			// файл указывается в type_foreach/info-top/файл.php
+			$info_top_custom = $p->meta_val('info-top-custom');
+
+			if ($info_top_custom and $f = mso_fe('type_foreach/info-top/' . $info_top_custom) )
 			{
 				require($f);
 			}
-			else
+			else // нет метаполя - типовой вывод
 			{
-				$p->html(NR . '<header>');
-					$p->line('[title]');
-					
-					$p->div_start('info info-top');
-						$p->line('[date][edit][cat][tag][view_count]');
-					$p->div_end('info info-top');
-				$p->html('</header>');
+				if ($f = mso_page_foreach('info-top')) 
+				{
+					require($f);
+				}
+				else
+				{
+					$p->html(NR . '<header>');
+						$p->line('[title]');
+						
+						$p->div_start('info info-top');
+							$p->line('[date][edit][cat][tag][view_count]');
+						$p->div_end('info info-top');
+					$p->html('</header>');
+				}
 			}
 			
 			if ($f = mso_page_foreach('page-content')) 

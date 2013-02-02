@@ -314,7 +314,7 @@ function mso_email_message_new_comuser($comusers_id = 0, $ins_data = array(), $c
 	if (!$comusers_activate_auto)
 	{
 		// текст нужна активация
-		$text = tf('Вы или кто-то еще зарегистрировал ваш адрес на сайте "') . getinfo('name_site') . '" - ' . getinfo('siteurl') . NR ;
+		$text = tf('Вы или кто-то еще зарегистрировал ваш адрес на сайте') . ' "' . getinfo('name_site') . '" — ' . getinfo('siteurl') . NR ;
 		$text .= tf('Если это действительно сделали вы, то вам нужно подтвердить эту регистрацию. Для этого следует пройти по ссылке: ') . NR;
 		$text .= getinfo('siteurl') . 'users/' . $comusers_id . NR . NR;
 		$text .= tf('И ввести следующий код для активации: '). NR;
@@ -325,7 +325,7 @@ function mso_email_message_new_comuser($comusers_id = 0, $ins_data = array(), $c
 	else
 	{
 		// автоактивация
-		$text = tf('Спасибо за регистрацию на сайте "') . getinfo('name_site') . '" - ' . getinfo('siteurl') . NR ;
+		$text = tf('Спасибо за регистрацию на сайте') . ' "' . getinfo('name_site') . '" — ' . getinfo('siteurl') . NR ;
 		$text .= tf('Ваша страница: ') . NR;
 		$text .= getinfo('siteurl') . 'users/' . $comusers_id . NR . NR;
 		$text .= tf('Ваш код активации: '). NR;

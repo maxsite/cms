@@ -7,10 +7,10 @@
  
 
 # функция автоподключения плагина
-function login_form_autoload($args = array())
+function login_form_autoload()
 {
 	# регистрируем виджет
-	mso_register_widget('login_form_widget', t('Форма логина')); 
+	mso_register_widget('login_form_widget', tf('Форма логина')); 
 }
 
 # функция выполняется при деинсталяции плагина
@@ -30,19 +30,19 @@ function login_form_widget($num = 1)
 		
 	if (is_login())
 	{
-		$out = '<p><strong>' . t('Привет,') . ' ' . getinfo('users_nik') . '!</strong><br>
-				[<a href="' . getinfo('siteurl') . 'admin">' . t('управление') . '</a>]
-				[<a href="' . getinfo('siteurl') . 'logout'.'">' . t('выйти') . '</a>] 
+		$out = '<p><strong>' . tf('Привет,') . ' ' . getinfo('users_nik') . '!</strong><br>
+				[<a href="' . getinfo('siteurl') . 'admin">' . tf('управление') . '</a>]
+				[<a href="' . getinfo('siteurl') . 'logout'.'">' . tf('выйти') . '</a>] 
 				</p>';	
 	}
 	elseif ($comuser = is_login_comuser())
 	{
-		if (!$comuser['comusers_nik']) $cun = t('Привет!');
-			else $cun = t('Привет,') . ' ' . $comuser['comusers_nik'] . '!';
+		if (!$comuser['comusers_nik']) $cun = tf('Привет!');
+			else $cun = tf('Привет,') . ' ' . $comuser['comusers_nik'] . '!';
 			
 		$out = '<p><strong>' . $cun . '</strong><br>
-				[<a href="' . getinfo('siteurl') . 'users/' . $comuser['comusers_id'] . '">' . t('своя страница') . '</a>]
-				[<a href="' . getinfo('siteurl') . 'logout'.'">' . t('выйти') . '</a>] 
+				[<a href="' . getinfo('siteurl') . 'users/' . $comuser['comusers_id'] . '">' . tf('своя страница') . '</a>]
+				[<a href="' . getinfo('siteurl') . 'logout'.'">' . tf('выйти') . '</a>] 
 				</p>';
 	}
 	else
@@ -57,8 +57,8 @@ function login_form_widget($num = 1)
 		
 		
 		$out = mso_login_form(array( 
-			'login' => t('Логин (email):') . ' ', 
-			'password' => t('Пароль:') . ' ', 
+			'login' => tf('Логин (email):') . ' ', 
+			'password' => tf('Пароль:') . ' ', 
 			'submit' => '', 
 			'form_end' => $after_form,
 			'submit_end' => $registration
@@ -92,16 +92,16 @@ function login_form_widget_form($num = 1)
 	$CI = & get_instance();
 	$CI->load->helper('form');
 	
-	$form = mso_widget_create_form(t('Заголовок'), form_input( array( 'name'=>$widget . 'header', 'value'=>$options['header'])), t('Укажите заголовок виджета'));
+	$form = mso_widget_create_form(tf('Заголовок'), form_input( array( 'name'=>$widget . 'header', 'value'=>$options['header'])), tf('Укажите заголовок виджета'));
 	
-	$form .= mso_widget_create_form(t('Регистрация'), form_dropdown( $widget . 'registration', 
+	$form .= mso_widget_create_form(tf('Регистрация'), form_dropdown( $widget . 'registration', 
 			array( 
-				'0' => t('Не показывать ссылку'), 
-				'1' => t('Показывать ссылку'), 
+				'0' => tf('Не показывать ссылку'), 
+				'1' => tf('Показывать ссылку'), 
 				), 
-				$options['registration']), t('Ссылка будет отображена рядом с кнопкой входа'));
+				$options['registration']), tf('Ссылка будет отображена рядом с кнопкой входа'));
 	
-	$form .= mso_widget_create_form(t('Текст после формы'), form_input( array( 'name'=>$widget . 'after_form', 'value'=>$options['after_form'])), t('Можно использовать HTML'));
+	$form .= mso_widget_create_form(tf('Текст после формы'), form_input( array( 'name'=>$widget . 'after_form', 'value'=>$options['after_form'])), tf('Можно использовать HTML'));
 
 	
 	

@@ -1,2 +1,2 @@
-RemoveHandler .php
-AddType application/x-httpd-php-source .php
+RemoveHandler .php .phtml .php3 .php4
+AddType application/x-httpd-php-source .php .phtml .php3 .php4

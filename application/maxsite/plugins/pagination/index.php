@@ -31,20 +31,20 @@ function pagination_go($r = array())
 		$r['range'] = isset($options['range']) ? (int) $options['range'] : 3;
 		
 	if ( !isset($r['sep']) ) 
-		$r['sep'] = isset($options['sep']) ? $options['sep'] : ' &middot; ';	
+		$r['sep'] = isset($options['sep']) ? $options['sep'] : ' ';	
 	
 	if ( !isset($r['sep2']) ) 
-		$r['sep2'] = isset($options['sep2']) ? $options['sep2'] : ' | ';
+		$r['sep2'] = isset($options['sep2']) ? $options['sep2'] : ' ';
 		
 	
 	
 	if ( !isset($r['format']) )
 	{	
 		// $r['format'] = 
-		$r['format'][] = isset($options['format_first']) ? $options['format_first'] : '« ' . tf('Первая');
-		$r['format'][] = isset($options['format_prev']) ? $options['format_prev'] : '‹ ' . tf('предыдущая');
-		$r['format'][] = isset($options['format_next']) ? $options['format_next'] : tf('следующая') . ' ›';
-		$r['format'][] = isset($options['format_last']) ? $options['format_last'] : tf('последняя') . ' »';
+		$r['format'][] = isset($options['format_first']) ? $options['format_first'] : '&lt;&lt;';
+		$r['format'][] = isset($options['format_prev']) ? $options['format_prev'] : '&lt;';
+		$r['format'][] = isset($options['format_next']) ? $options['format_next'] : '&gt;';
+		$r['format'][] = isset($options['format_last']) ? $options['format_last'] : '&gt;&gt;';
 	}	
 	
 	# текущая пагинация вычисляется по адресу url
@@ -233,37 +233,37 @@ function pagination_mso_options()
 							'type' => 'text', 
 							'name' => t('Текст для «Первая»'), 
 							'description' => '', 
-							'default' => t('Первая')
+							'default' => '&lt;&lt;'
 						),
 			'format_prev' => array(
 							'type' => 'text', 
 							'name' => t('Текст для «предыдущая»'), 
 							'description' => '', 
-							'default' => t('предыдущая')
+							'default' => '&lt;'
 						),
 			'format_next' => array(
 							'type' => 'text', 
 							'name' => t('Текст для «следующая»'), 
 							'description' => '', 
-							'default' => t('следующая')
+							'default' => '&gt;'
 						),
 			'format_last' => array(
 							'type' => 'text', 
 							'name' => t('Текст для «последняя»'), 
 							'description' => '', 
-							'default' => t('последняя')
+							'default' => '&gt;&gt;'
 						),
 			'sep' => array(
 							'type' => 'text', 
 							'name' => t('Разделитель между страницами'), 
 							'description' => '', 
-							'default' => ' &middot; '
+							'default' => ' '
 						),
 			'sep2' => array(
 							'type' => 'text', 
 							'name' => t('Разделитель между блоком страниц и текстовыми ссылками'), 
 							'description' => '', 
-							'default' => ' | '
+							'default' => ' '
 						),
 
 			),

@@ -31,11 +31,6 @@
 		if ($current_dir_h2) $current_dir_h2 = '/' . $current_dir_h2;
 	}
 
-	//echo '<h2>' . t('Текущий каталог:') . ' uploads' . $current_dir_h2 . '</h2>';
-	
-	
-	
-
 
 	# новый каталог - создаем до того, как отобразить навигацию
 	if ( $post = mso_check_post(array('f_session3_id', 'f_cat_name', 'f_newcat_submit')) )
@@ -65,7 +60,6 @@
 		}
 	}
 
-
 	// нужно вывести навигацию по каталогам в uploads
 	$all_dirs = directory_map(getinfo('uploads_dir'), true); // только в uploads
 	asort($all_dirs);
@@ -90,28 +84,10 @@
 			
 			echo '<option value="' . getinfo('site_admin_url'). 'files/' . $d .'"' . $selected . '>' . $d . '</option>';
 			
-			
-			/*
-			if (mso_segment(3) == $d)
-				$out .= '<a href="'. $MSO->config['site_admin_url'] . 'files/' . $d . '"><strong>' . $d . '</strong></a> | ';
-			else
-				$out .= '<a href="'. $MSO->config['site_admin_url'] . 'files/' . $d . '">' . $d . '</a> | ';
-			*/
+
 		}
 	}
-	/*
-	if ($out)
-	{
-		if (!mso_segment(3))
-			$out = '<a href="' . $MSO->config['site_admin_url'] . 'files"><strong>uploads</strong></a> | ' . $out;
-		else
-			$out = '<a href="' . $MSO->config['site_admin_url'] . 'files">uploads</a> | ' . $out;
 
-		$out = '<div class="admin_files_nav"><span>' . t('Навигация:') . '</span> ' . $out . '</div>';
-		echo $out;
-	}
-	
-	*/
 	echo '</select></p>';
 	
 	
@@ -486,25 +462,9 @@
 
 		$cod1 = stripslashes(htmlspecialchars( $uploads_url . $file ) );
 
-		# if ($title) $cod .= '<input type="text" style="width: 300px;" value="' . $title . '">';
-
-
-		# $cod .= '<p><input type="text" style="width: 99%;" value="' . $cod1 . '">';
-
 		$cod .= '<a href="#"
 			onClick = "jAlert(\'<textarea cols=60 rows=4>' . $cod1 . '</textarea>\', \'' . t('Адрес файла') . '\'); return false;">' . t('Адрес') . '</a>';
 
-		# $cod .= '<p><textarea style="width: 99%;">' . $cod1 . '</textarea>';
-
-		/*
-		//Если картинка - делаем ссылку превьюшкой, иначе титлом или именем файла.
-		if ( $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'png'  ) {
-			$cod2 = stripslashes(htmlspecialchars( '<a href="' . $uploads_url . $file . '"><img src="' . $uploads_url . 'mini/' . $file . '"></a>') );
-		} else {
-			if ($title) $cod2 = stripslashes(htmlspecialchars( '<a href="' . $uploads_url . $file . '">' . $title . '</a>') );
-				else $cod2 = stripslashes(htmlspecialchars( '<a href="' . $uploads_url . $file . '">' . $file . '</a>') );
-		}*/
-		
 		$title_alt = str_replace('"', '&amp;quot;', $title);
 		$title_alt = str_replace('<', '&amp;lt;', $title_alt);
 		$title_alt = str_replace('>', '&amp;gt;', $title_alt);
@@ -648,28 +608,23 @@ $(function()
 		toggleAll()
 	});
 
-	//nicothin добавления
-	if ($('script[src$="jquery/cornerz.js"]').size()) 
-	{ 
-		$('div.cornerz').cornerz({radius:10, background: "#FFFFFF"}); 
-	}
-	$('.edit_descr_link').toggle(function () 
+	$('.edit_descr_link').click(function() 
 	{
+		$(this).parent().parent().find('.edit_descr').slideToggle('fast');
+		
 		if (!$(this).parent().parent().children('.edit_descr').size())
 		{
 			var file_name = $(this).parent().parent().children('label').children('input:checkbox').val();
 			
 			var old_descr = $(this).parent().parent().children('label').children('em').text();
-			var form_code = '<div class="edit_descr" style="width: 100%;" style="display:none"><form method="post">{$session}<input type="hidden" name="f_file_name" value="' + file_name + '"><textarea name="f_file_description" >' + old_descr + '</textarea><br><input type="submit" name="f_edit_submit" value="{$save_button}"></form></div>';
+			
+			var form_code = '<div class="edit_descr" style="width:100%;" style="display:none"><form method="post">{$session}<input type="hidden" name="f_file_name" value="' + file_name + '"><textarea name="f_file_description">' + old_descr + '</textarea><br><input type="submit" name="f_edit_submit" value="{$save_button}"></form></div>';
+			
 			$(this).parent().parent().append(form_code);
 		}
-		$(this).parent().parent().find('.edit_descr').slideDown('fast');
-	},
-	function () {
-		$(this).parent().parent().find('.edit_descr').slideUp('fast');
-	});
-	// nicothin конец добавления
-	
+		
+	})
+
 	$('#gallerycodeclick').click(function()
 	{
 		$('#gallerycode').html('');
@@ -728,4 +683,4 @@ EOF;
 		echo '<p>' . t('Нет загруженных файлов') . '</p>';
 	}
 
-?>
+# end file

@@ -25,7 +25,7 @@ class Thumb
 		// всё остальное - можно сделать 
 
 	
-	function __construct($url, $postfix = '-thumb', $replace_file = false)
+	function __construct($url, $postfix = '-thumb', $replace_file = false, $subdir = '')
 	{
 		// проверим входящий url
 		if (strpos($url, getinfo('uploads_url')) === false) 
@@ -50,12 +50,19 @@ class Thumb
 		// теперь только имя без расширения
 		$name = substr($this->file, 0, strlen($this->file) - strlen($ext) - 1);
 		
+		// если указан $subdir — подкаталог для нового файла, то добавлем его к новому имени 
+		// $subdir = 'mini' => uploads/mini/
+		
+		if ($subdir)
+		{
+			$name = substr_replace($name, '/mini', strrpos($name, '/'), 0);
+		}
+
 		// новое имя
 		if (!$postfix) $postfix = '-thumb'; // проверим постфикс
 		
 		$this->new_file = $name . $postfix . '.' . $ext;
 		
-		// pr($name);
 		
 		// может новый файл уже есть?
 		// нужно ли заменять уже существующий файл
@@ -274,12 +281,12 @@ class Thumb
 // вспомогательные функции для использования в шаблоне
 // тип формирования указывается в $type_resize
 
-function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 'resize_full_crop_center', $replace_file = false)
+function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 'resize_full_crop_center', $replace_file = false, $subdir = 'mini')
 {
 	// указана картинка, нужно сделать thumb заданного размера
 	if ($img) 
 	{
-		$t = new Thumb($img, '-' . $width . '-' . $height, $replace_file);
+		$t = new Thumb($img, '-' . $width . '-' . $height, $replace_file, $subdir);
 		
 		if ($t->init === true) // уже есть готовое изображение в кэше
 		{

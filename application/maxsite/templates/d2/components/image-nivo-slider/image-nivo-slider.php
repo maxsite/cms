@@ -17,17 +17,22 @@ else
 shuffle($imgs); // случайный порядок
 
 echo mso_load_jquery('jquery.nivo.slider.js') . '
-<script type="text/javascript">
+<script>
 	$(window).load(function() {
-		$("div.nivoSlider").nivoSlider({controlNav:false, pauseTime:4000, prevText: "&lt;", nextText: "&gt;"});
+		$("div.nivoSlider").nivoSlider({
+			controlNav:false, 
+			pauseTime:3000, 
+			prevText: "&lt;", 
+			nextText: "&gt;"
+		});
 	});
 </script>
 ';
 
 // вывод блока слайдера
-echo '<div class="nivoSlider">';
+echo '<div class="image-nivo-slider"><div class="nivoSlider">';
 	foreach ($imgs as $img) echo NR . '<img src="' . $img . '" alt="" title="">';
-echo '</div>';
+echo '</div></div>';
 	
 
 # end file

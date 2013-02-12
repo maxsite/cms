@@ -354,7 +354,7 @@
 	.opacity(@opacity);
 }
 
-// перехорды
+// переходы
 .transition(@transition) {
 	-webkit-transition: @transition;
 	-moz-transition: @transition;
@@ -369,8 +369,17 @@
 	box-sizing: @box;
 }
 
+.transform(@transform) {
+	-webkit-transform: @arguments;
+	-moz-transform: @arguments;
+	-o-transform: @arguments;
+	-ms-transform: @arguments;
+	transform: @arguments;
+}
+
 // служебные миксы
 // загрузка другого less-файла заменяет @import
+// не использовать!
 .load_less(@file, @dir: components)
 {
 	@import url("@{dir}/@{file}.less");

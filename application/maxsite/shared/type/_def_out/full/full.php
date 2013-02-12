@@ -36,21 +36,29 @@ foreach ($pages as $page)
 	$p->load($page);
 
 	$p->div_start('page_only', 'wrap', '<article>');
-	
-		if ($f = mso_page_foreach('info-top')) 
+		
+		// для типа может быть свой info-top
+		if ($f = mso_page_foreach('info-top-' . getinfo('type'))) 
 		{
 			require($f);
 		}
 		else
 		{
-			$p->html(NR . '<header>');
-				$p->line('[title]');
-				
-				$p->div_start('info info-top');
-					$p->line('[date][edit][cat][tag][view_count]');
-				$p->div_end('info info-top');
-				
-			$p->html('</header>');
+			if ($f = mso_page_foreach('info-top'))
+			{
+				require($f);
+			}
+			else
+			{
+				$p->html(NR . '<header>');
+					$p->line('[title]');
+					
+					$p->div_start('info info-top');
+						$p->line('[date][edit][cat][tag][view_count]');
+					$p->div_end('info info-top');
+					
+				$p->html('</header>');
+			}
 		}
 		
 		if ($f = mso_page_foreach('page-content')) 
@@ -89,8 +97,14 @@ foreach ($pages as $page)
 						$p->content('', '');
 						$p->clearfix();
 					}
+
+					// для page возможен свой info-bottom
+					if ($f = mso_page_foreach('info-bottom-' . getinfo('type'))) 
+					{
+						require($f);
+					}
+					elseif ($f = mso_page_foreach('info-bottom')) require($f);
 					
-					if ($f = mso_page_foreach('info-bottom')) require($f);
 					
 					$p->html('<aside>');
 					

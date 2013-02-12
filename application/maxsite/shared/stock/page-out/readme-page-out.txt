@@ -4,8 +4,8 @@
  
 	# пример 1
 	
-	// подключение библиотеки
-	require_once(getinfo('shared_dir') . 'stock/page-out/page-out.php');
+	// подключение библиотеки автоматом или
+	// require_once(getinfo('shared_dir') . 'stock/page-out/page-out.php');
 	
 	
 	// подготавливаем объект для вывода записей
@@ -28,7 +28,7 @@
 		# $p->format('cat', ', ', '', ''); // разделитель, до, после
 		# $p->format('tag', ', ', '', ''); // разделитель, до, после
 		# $p->format('feed', 'Подписаться', '', ''); // титул, до, после
-		# $p->format('author', '', ''); // до, после
+		# $p->format('autor', '', ''); // до, после
 		# $p->format('edit', 'Редактировать', '', ''); // титул, до, после
 		# $p->format('read', 'Читать дальше', '', ''); // титул, до, после
 		# $p->format('comments', 'Обсудить', 'Посмотреть комментарии', '', ''); // без комментариев, есть комментарии, до, после
@@ -102,7 +102,7 @@
  
 	# пример 2
 	
-	require_once(getinfo('shared_dir') . 'stock/page-out/page-out.php');
+	// require_once(getinfo('shared_dir') . 'stock/page-out/page-out.php');
 	
 	$p = new Page_out;
  

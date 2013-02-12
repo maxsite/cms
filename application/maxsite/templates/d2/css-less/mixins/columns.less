@@ -32,6 +32,7 @@ div.box {
 	}
 }
 
+
 // колоночная верстка с 3% отступом
 // http://wbloger.com/uploads/screenshot/screen-2013-01-20-52-000.png
 div.onerow {
@@ -44,6 +45,9 @@ div.onerow {
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
+		
+		// .border();
+		// .align(center);
 	}
 	
 	.col:first-of-type {
@@ -91,6 +95,81 @@ div.onerow {
 	}
 	
 	.w4-5 {
+		width: 79.4%;
+	}
+}
+
+
+
+// вспомогательный микс для .col()
+// Для любого блока: .col > .w3_5; 
+._col() 
+{
+	float: left;
+	margin-left: 3%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	
+	&:first-of-type {
+		margin-left: 0;
+	}
+}
+	
+.col()
+{
+	.w1_1() {
+		._col;
+		width: 100%;
+	}
+	
+	.w1_2() {
+		._col;
+		width: 48.5%;
+	}
+	
+	.w1_3() {
+		._col();
+		width: 31.333333333333%;
+	}
+
+	.w2_3() {
+		._col();
+		width: 65.66666667%;
+	}	
+	
+	.w1_4() {
+		._col();
+		width: 22.75%;
+	}
+	
+	.w2_4() {
+		._col();
+		width: 48.5%;
+	}
+	
+	.w3_4() {
+		._col();
+		width: 74.25%;
+	}
+	
+	.w1_5() {
+		._col();
+		width: 17.6%;
+	}
+	
+	.w2_5() {
+		._col();
+		width: 38.2%;
+	}
+	
+	.w3_5() {
+		._col();
+		width: 58.8%;
+	}
+	
+	.w4_5() {
+		._col();
 		width: 79.4%;
 	}
 }

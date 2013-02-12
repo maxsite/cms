@@ -85,19 +85,27 @@ if ($pages)
 			}
 			else // нет метаполя - типовой вывод
 			{
-				if ($f = mso_page_foreach('info-top')) 
+				// для типа page может быть свой info-top
+				if ($f = mso_page_foreach('info-top-page')) 
 				{
 					require($f);
 				}
 				else
 				{
-					$p->html(NR . '<header>');
-						$p->line('[title]');
-						
-						$p->div_start('info info-top');
-							$p->line('[date][edit][cat][tag][view_count]');
-						$p->div_end('info info-top');
-					$p->html('</header>');
+					if ($f = mso_page_foreach('info-top')) 
+					{
+						require($f);
+					}
+					else
+					{
+						$p->html(NR . '<header>');
+							$p->line('[title]');
+							
+							$p->div_start('info info-top');
+								$p->line('[date][edit][cat][tag][view_count]');
+							$p->div_end('info info-top');
+						$p->html('</header>');
+					}
 				}
 			}
 			
@@ -138,7 +146,13 @@ if ($pages)
 							$p->clearfix();
 						}
 						
-						if ($f = mso_page_foreach('info-bottom')) require($f);
+						// для page возможен свой info-bottom
+						if ($f = mso_page_foreach('info-bottom-page')) 
+						{
+							require($f);
+						}
+						elseif ($f = mso_page_foreach('info-bottom')) require($f);
+						
 						
 						$p->html('<aside>');
 							

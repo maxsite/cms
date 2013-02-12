@@ -31,6 +31,11 @@ a {
 	&.curent-page-cat {
 		.bold;
 	}
+	
+	// посещенная ссылка только в пределах content
+	div.content &:visited {
+		color: @LINK_COLOR_VISITED;
+	}
 }
 
 h1 {

@@ -2029,6 +2029,78 @@ function mso_page_other_pages($page_id = 0, $page_categories = array())
 
 }
 
+# получить следующую и предыдущую запись после указанной
+# происходит учет рубрики
+# возвращает масив $out['prev'] и $out['next']. 
+# Если записей нет, то ключи равны false
+function mso_next_prev_page($r = array())
+{
+	$out = array();
+	
+	if (!isset($r['page_id']) or !isset($r['page_categories']) or !isset($r['page_date_publish']))
+	{
+		$out['next'] = false;
+		$out['prev'] = false;
+		
+		return $out;
+	}
+	
+	// передаем дату отдельно, она используется в function_add_custom_sql
+	mso_set_val('_sql_next_prev_pages_page_date_publish', $r['page_date_publish']);
+	
+	// вначале next
+	if ( $pages = mso_get_pages(array(
+			'content' => false,
+			'cat_id' => implode(',', $r['page_categories']),
+			'order_asc' => 'asc',
+			'limit' => 1,
+			'pagination' => false,
+			'custom_type' => 'home',
+			'function_add_custom_sql' => '_sql_next_page',
+			'get_page_categories' => false,
+			'get_page_meta_tags' => false,
+			'get_page_count_comments' => false,
+			'exclude_page_id' => $r['page_id'] ), $temp) 
+		) 
+		$out['next'] = $pages[0];
+	else
+		$out['next'] = false;
+	
+	// теперь prev
+	if ( $pages = mso_get_pages(array(
+			'content' => false,
+			'cat_id' => implode(',', $r['page_categories']),
+			'order_asc' => 'desc',
+			'limit' => 1,
+			'pagination' => false,
+			'custom_type' => 'home',
+			'function_add_custom_sql' => '_sql_prev_page',
+			'get_page_categories' => false,
+			'get_page_meta_tags' => false,
+			'get_page_count_comments' => false,
+			'exclude_page_id' => $r['page_id'] ), $temp) 
+		) 
+		$out['prev'] = $pages[0];
+	else
+		$out['prev'] = false;
+	
+	
+	return $out;
+}
+
+# вспомогательная функция для next mso_next_prev_page
+function _sql_next_page()
+{
+	$CI = & get_instance();
+	$CI->db->where('page_date_publish > ', mso_get_val('_sql_next_prev_pages_page_date_publish'));
+}
+
+# вспомогательная функция для prev mso_next_prev_page
+function _sql_prev_page()
+{
+	$CI = & get_instance();
+	$CI->db->where('page_date_publish < ', mso_get_val('_sql_next_prev_pages_page_date_publish'));
+}
 
 
 # end file

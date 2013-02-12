@@ -7,6 +7,9 @@ a:hover {
 a.curent-page-cat {
   font-weight: bold;
 }
+div.content a:visited {
+  color: #990099;
+}
 h1 {
   color: #444;
 }

@@ -11,7 +11,6 @@
 	// проверим разрешение на редактирование записей
 	if (!mso_check_allow('admin_page_edit')) die('no allow');
 	
-	
 	if ( $post = mso_check_post(array('params', 'id')) )
 	{
 		mso_checkreferer(); // защищаем реферер

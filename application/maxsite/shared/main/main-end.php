@@ -19,6 +19,7 @@ else
 {
 	// main-шаблон вывода находится в meta-поле page_template
 	// это определено в shared/meta/meta.ini
+	// если метаполе не задано, то может использоваться main/type/page/main.php
 	if (is_type('page') and isset($pages) and isset($pages[0]))
 	{
 		if ($page_template = mso_page_meta_value('page_template', $pages[0]['page_meta']))
@@ -27,6 +28,10 @@ else
 			{	
 				mso_set_val('main_file', $fn); // выставляем путь к файлу
 			}
+		}
+		elseif ($fn = mso_fe('main/type/page/main.php')) 
+		{	
+			mso_set_val('main_file', $fn); // выставляем путь к файлу
 		}
 	}
 	else
@@ -51,7 +56,6 @@ else
 			}
 		}
 	}
-	
 }
 
 $fn_main = mso_get_val('main_file', getinfo('template_dir') . 'main.php');

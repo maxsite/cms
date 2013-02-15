@@ -139,7 +139,7 @@
 				"' . getinfo('ajax') . base64_encode('admin/plugins/admin_page/bsave-post-ajax.php') . '",
 				{
 					params: $("#form_editor").serialize(),
-					id: ' . mso_segment(3) . ',
+					id: ' . ( mso_segment(3) ?  mso_segment(3) : 0 ) . '
 				},
 				function(data)
 				{

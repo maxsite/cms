@@ -47,16 +47,21 @@ z-index:5;
 overflow:hidden;
 }
 .nivo-box img { display:block; }
+
 .nivo-directionNav a {
 position:absolute;
 top:45%;
 z-index:9;
 cursor:pointer;
-padding: 10px; 
+padding: 10px 5px; 
 background: #444; 
 color: white; 
 text-decoration: none; 
+opacity: 0.1;
+}
+.nivo-directionNav a:hover {
 opacity: 0.7;
+color: white;
 }
 .nivo-prevNav {
 left:0px;

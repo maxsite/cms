@@ -2733,7 +2733,7 @@ function mso_load_jquery($plugin = '', $path = '')
 		{
 			$jquery_type = mso_get_option('jquery_type', 'general', 'self');
 			
-			$version = '1.9.1';
+			$version = '1.8.2';
 			
 			if ($jquery_type == 'google') $url = 'http://ajax.googleapis.com/ajax/libs/jquery/' . $version . '/jquery.min.js'; // Google Ajax API CDN 
 			elseif ($jquery_type == 'microsoft') $url = 'http://ajax.aspnetcdn.com/ajax/jQuery/jquery-' . $version . '.min.js'; // Microsoft CDN

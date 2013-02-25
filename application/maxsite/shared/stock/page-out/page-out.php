@@ -194,8 +194,20 @@ class Page_out
 			$f = $this->formats[$key][$numarg-1];
 			
 			// пока указываем некоторые, потом нужно будет подумать как сделать замены по всем ключам val
-			$f = str_replace('[page_date_publish]', $this->val('page_date_publish'), $f);
 			$f = str_replace('[page_count_comments]', $this->val('page_count_comments'), $f);
+			
+			$f = str_replace('[page_date_publish]', $this->val('page_date_publish'), $f);
+			
+			// [page_date_publish_iso] формирует дату согласно ISO8601
+			$dp = mso_date_convert(DATE_ISO8601, $this->val('page_date_publish'), false, false, false);
+			$f = str_replace('[page_date_publish_iso]', $dp, $f);
+			
+			if ($this->val('page_last_modified'))
+			{
+				$f = str_replace('[page_last_modified]', $this->val('page_last_modified'), $f);
+				$dp = mso_date_convert(DATE_ISO8601, $this->val('page_last_modified'), false, false, false);
+				$f = str_replace('[page_last_modified_iso]', $dp, $f);
+			}
 			
 			return $f;
 		}

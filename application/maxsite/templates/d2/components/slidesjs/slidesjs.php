@@ -100,7 +100,7 @@ if (!mso_get_option('slidesjs_prev_next', 'templates', 1) and  !mso_get_option('
 // формируем html-код слайдера
 ?>
 
-<div class="slidesjs<?= $class_no_pag ?>">
+<div class="slidesjs<?= $class_no_pag ?>"><div class="wrap">
 	<div class="slides_container">
 	<?php foreach ($slides as $slide) { ?>
 			<div class="slide"><div class="slide-wrap">
@@ -121,8 +121,10 @@ if (!mso_get_option('slidesjs_prev_next', 'templates', 1) and  !mso_get_option('
 	</div>
 	
 	<?php if (mso_get_option('slidesjs_prev_next', 'templates', 1)) { ?>
+	<div class="prev-next">
 		<a href="#" class="prev"></a>
 		<a href="#" class="next"></a>
+	</div>
 	<?php } ?>
 				
-</div>
+</div></div>

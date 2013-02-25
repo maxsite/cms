@@ -258,6 +258,7 @@ function random_gal_widget_custom($options = array(), $num = 1)
 		if (!is_dir($dir)) return ''; // нет каталога
 		
 		$fn_mso_descritions = $dir0 . '_mso_i/_mso_descriptions.dat';
+		
 		if (file_exists( $fn_mso_descritions )) 
 		{
 			// массив данных: fn => описание 
@@ -267,8 +268,10 @@ function random_gal_widget_custom($options = array(), $num = 1)
 		
 		
 		$files = directory_map($dir, true); // все файлы в каталоге
+		
 		if (!$files) $files = array();
 		
+
 		foreach ($files as $file)
 		{
 			if (@is_dir($dir . $file)) continue; // это каталог
@@ -299,17 +302,24 @@ function random_gal_widget_custom($options = array(), $num = 1)
 				else $go = true;
 				
 				if ($go)
-					$all_files[$one_dir . $file] = 
-						array(
-							'file' => $file, 
-							'dir' => $one_dir, 
-							'descritions' => str_replace('#', '', $description),
-							'datefile' => filemtime($dir . $file), 
-						);
+				{
+					// проверим реально ли существует файл
+					if (file_exists( getinfo('uploads_dir') . $one_dir . $file)) 
+					{
+						$all_files[$one_dir . $file] = 
+							array(
+								'file' => $file, 
+								'dir' => $one_dir, 
+								'descritions' => str_replace('#', '', $description),
+								'datefile' => filemtime($dir . $file), 
+							);
+					}
+				}
 			}
 		}
 	}
 	
+
 	if ($options['sort'] == 'random') shuffle($all_files); // перемешиваем массив
 	elseif ($options['sort'] == 'name_file') // отсортируем по ['file']
 	{

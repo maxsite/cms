@@ -29,10 +29,21 @@ else
 				mso_set_val('main_file', $fn); // выставляем путь к файлу
 			}
 		}
-		elseif ($fn = mso_fe('main/type/page/main.php')) 
+		elseif ($fn = mso_fe('main/type/page/main.php')) // предопределенный файл
 		{	
 			mso_set_val('main_file', $fn); // выставляем путь к файлу
 		}
+		else
+		{	
+			if($page_template = mso_get_option('main_template_page', 'templates', '')) // опция
+			{
+				if ($fn = mso_fe('main/' . $page_template . '/main.php')) 
+				{	
+					mso_set_val('main_file', $fn); // выставляем путь к файлу
+				}
+			}
+		}
+		
 	}
 	else
 	{
@@ -58,9 +69,26 @@ else
 	}
 }
 
-$fn_main = mso_get_val('main_file', getinfo('template_dir') . 'main.php');
+$fn_main = mso_get_val('main_file', '');
 
-if (file_exists($fn_main)) require($fn_main);
-	else require(getinfo('template_dir') . 'main.php');
+if ($fn_main and file_exists($fn_main)) 
+{
+	require($fn_main);
+}
+else 
+{
+	$fn_main = getinfo('template_dir') . 'main.php';
+	
+	// может быть задан main-файл по-умолчанию в опции main_template_default
+	if ($page_template = mso_get_option('main_template_default', 'templates', ''))
+	{
+		if ($fn = mso_fe('main/' . $page_template . '/main.php')) 
+		{	
+			$fn_main = $fn; // выставляем путь к файлу
+		}
+	}
+	
+	require($fn_main);
+}
 
 # end file

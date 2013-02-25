@@ -10,7 +10,7 @@ if (!$pages) return;
 $p = new Page_out();
 
 $p->format('title', '', '', true);
-$p->format('date', 'j F Y', '<span><time datetime="[page_date_publish]">', '</time></span>');
+$p->format('date', 'j F Y', '<span><time datetime="[page_date_publish_iso]">', '</time></span>');
 
 // исключенные записи
 $exclude_page_id = mso_get_val('exclude_page_id');

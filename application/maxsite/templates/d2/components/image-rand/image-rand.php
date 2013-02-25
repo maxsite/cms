@@ -16,9 +16,9 @@ if ($imgs)
 {
 	$img = $imgs[array_rand($imgs, 1)]; // случайный выбор
 	
-	echo '<div class="image-rand">'
+	echo '<div class="image-rand"><div class="wrap">'
 		. '<img src="' . $img . '" alt="" title="">'
-		. '</div>';
+		. '</div></div>';
 }
 
 # end file

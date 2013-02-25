@@ -4,7 +4,15 @@
 	вывод изображений слайдером/каруселью из заданного каталога
 */
 
-	
+// где выводить записи
+$nivo_slider_output = mso_get_option('nivo_slider_output', 'templates', array());
+
+if (!$nivo_slider_output)  return; // ничего не отмечено - нигде не показывать
+
+if (!in_array(getinfo('type'), $nivo_slider_output)) return;
+	elseif (mso_current_paged() > 1) return; // на страницах пагинации не показывать (или показывать?..)
+
+
 $subdir = mso_get_option('default_header_image', 'templates', false);
 
 if ($subdir === false) return; // не определены опции
@@ -16,12 +24,14 @@ else
 
 shuffle($imgs); // случайный порядок
 
+$nivo_slider_play = (int) mso_get_option('nivo_slider_play', 'templates', 4000);
+
 echo mso_load_jquery('jquery.nivo.slider.js') . '
 <script>
 	$(window).load(function() {
 		$("div.nivoSlider").nivoSlider({
 			controlNav:false, 
-			pauseTime:3000, 
+			pauseTime:' . $nivo_slider_play . ', 
 			prevText: "&lt;", 
 			nextText: "&gt;"
 		});

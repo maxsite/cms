@@ -51,7 +51,7 @@ if ($pages)
 	$p = new Page_out();
 
 	$p->format('title', '<h1>', '</h1>', false);
-	$p->format('date', 'D, j F Y г.', '<span><time datetime="[page_date_publish]">', '</time></span>');
+	$p->format('date', 'D, j F Y г.', '<span><time datetime="[page_date_publish_iso]">', '</time></span>');
 	$p->format('cat', ' -&gt; ', '<br><span>' . tf('Рубрика') . ': ', '</span>');
 	$p->format('tag', ' | ', '<br><span>' . tf('Метки') . ': ', '</span>');
 	//$p->format('feed', tf('Комментарии по RSS'), ' | <span>', '</span>');

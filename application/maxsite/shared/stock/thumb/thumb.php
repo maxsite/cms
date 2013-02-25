@@ -53,11 +53,20 @@ class Thumb
 		// если указан $subdir — подкаталог для нового файла, то добавлем его к новому имени 
 		// $subdir = 'mini' => uploads/mini/
 		
+		// pr($name);
+		
 		if ($subdir)
 		{
-			$name = substr_replace($name, '/mini', strrpos($name, '/'), 0);
+			$name = substr_replace($name, '/mini/', strrpos($name, '/'), 0);
 		}
 
+		// удаляем возможные лишние слеши
+		$name = str_replace('//', '/', $name); // двойной слеш
+		$pos_sl = strpos($name, '/'); // в начале имени
+		if ($pos_sl !== false and $pos_sl === 0) $name = substr($name, 1);
+		
+		// pr($name);
+		
 		// новое имя
 		if (!$postfix) $postfix = '-thumb'; // проверим постфикс
 		

@@ -11,10 +11,18 @@ if ($subdir == '-template-')  // каталог шаблона
 else
 	$subdir = getinfo('uploads_url') . $subdir . '/'; // каталог в uploads
 
-$img = $subdir . mso_get_option('component_image_select', 'templates', '');
+$img = '<img src="' . $subdir . mso_get_option('component_image_select', 'templates', '') . '" alt="" title="">';
 
-echo '<div class="image-select">'
-	. '<img src="' . $img . '" alt="" title="">'
-	. '</div>';
+// ссылка на главную
+$component_image_select_link_home = mso_get_option('component_image_select_link_home', 'templates', true);
+
+if ($component_image_select_link_home and !is_type('home'))
+{
+	$img = '<a href="' . getinfo('site_url') . '">' . $img . '</a>';
+}
+
+echo '<div class="image-select"><div class="wrap">'
+	. $img
+	. '</div></div>';
 
 # end file

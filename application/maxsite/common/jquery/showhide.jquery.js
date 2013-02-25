@@ -51,8 +51,8 @@
 				var el = $(settings.blockinElem, this); 
 				el.toggle(200, function(){ updateCookie(el); } );
 				//updateCookie(el);
+				return false;
 			}
-			return false;
 		});
 	}
 })(jQuery);

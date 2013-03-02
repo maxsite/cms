@@ -96,6 +96,9 @@ div.MainMenu ul.menu li.group ul li.group > a span {
 div.MainMenu2 {
   background-color: #e0e0e0;
 }
+div.MainMenu3 {
+  background-color: #ddd;
+}
 .message {
   margin: 0 0 10px 0;
   padding: 15px 10px 15px 70px;

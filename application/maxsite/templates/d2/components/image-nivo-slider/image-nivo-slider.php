@@ -7,11 +7,14 @@
 // где выводить записи
 $nivo_slider_output = mso_get_option('nivo_slider_output', 'templates', array());
 
-if (!$nivo_slider_output)  return; // ничего не отмечено - нигде не показывать
+if (!$nivo_slider_output) return; // ничего не отмечено - нигде не показывать
 
-if (!in_array(getinfo('type'), $nivo_slider_output)) return;
-	elseif (mso_current_paged() > 1) return; // на страницах пагинации не показывать (или показывать?..)
 
+if (!in_array('all', $nivo_slider_output)) // не отмечено выводить везде
+{
+	if (!in_array(getinfo('type'), $nivo_slider_output)) return;
+		elseif (mso_current_paged() > 1) return; // на страницах пагинации не показывать (или показывать?..)
+}
 
 $subdir = mso_get_option('default_header_image', 'templates', false);
 

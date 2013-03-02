@@ -23,6 +23,7 @@ $logo = getinfo('stylesheet_url') . 'images/logos/' . mso_get_option('default_he
 
 $logo = '<img src="' . $logo . '" alt="' . getinfo('name_site') . '" title="' . getinfo('name_site') . '">';
 
+if (!is_type('home')) $logo = $pt->link(getinfo('siteurl'), $logo);
 
 // вывод
 $pt->div_start('logo-ns-descr-icons', 'wrap');

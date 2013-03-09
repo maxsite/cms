@@ -49,6 +49,9 @@ function dignity_rss_widget($num = 1)
 
 	if (isset($options['rss_to_email']) ) $options['rss_to_email'] = $options['rss_to_email'];
 	else $options['rss_to_email'] = t('RSS-лента на E-Mail', __FILE__);
+	
+	if (isset($options['rss_to_email_login']) ) $options['rss_to_email_login'] = $options['rss_to_email_login'];
+	else $options['rss_to_email_login'] = '';
 
 	if (isset($options['textposle']) ) $options['textposle'] = '<p>' . $options['textposle'] . '</p>';
 	else $options['textposle'] = '';
@@ -74,6 +77,7 @@ function dignity_rss_widget_form($num = 1)
 	if ( !isset($options['yandex_text']) ) $options['yandex_text'] = t('Читать блог через Яндекс', __FILE__);
 	if ( !isset($options['rss_text']) ) $options['rss_text'] = t('RSS лента', __FILE__);
 	if ( !isset($options['rss_to_email']) ) $options['rss_to_email'] = t('Получать RSS-ленту на почту', __FILE__);
+	if ( !isset($options['rss_to_email_login']) ) $options['rss_to_email_login'] = '';
 	if ( !isset($options['textposle']) ) $options['textposle'] = '';
 	
 	// вывод самой формы
@@ -82,8 +86,6 @@ function dignity_rss_widget_form($num = 1)
 	
 	
 	$form = mso_widget_create_form(t('Заголовок', __FILE__), form_input( array( 'name'=>$widget . 'header', 'value'=>$options['header'] ) ), '');
-	
-	$form .= mso_widget_create_form(t('Текст вначале', __FILE__), form_textarea( array( 'name'=>$widget . 'textdo', 'value'=>$options['textdo'] ) ), '');
 	
 	$form .= mso_widget_create_form(t('Адрес RSS-Feed', __FILE__), form_input( array( 'name'=>$widget . 'feed_url', 'value'=>$options['feed_url'] ) ), '');
 	
@@ -95,6 +97,10 @@ function dignity_rss_widget_form($num = 1)
 	
 	$form .= mso_widget_create_form(t('Текст RSS-лента на почту', __FILE__), form_input( array( 'name'=>$widget . 'rss_to_email', 'value'=>$options['rss_to_email'] ) ), '');
 	
+	$form .= mso_widget_create_form(t('Ваш логин в  <a href="http://feedburner.google.com/" target="_blank">feedburner</a>', __FILE__), form_input( array( 'name'=>$widget . 'rss_to_email_login', 'value'=>$options['rss_to_email_login'] ) ), t('Используется для оформления подписки на email. Активируйте в своем аккаунте feedburner разрешение для подписки на email.', __FILE__));
+	
+	$form .= mso_widget_create_form(t('Текст вначале', __FILE__), form_textarea( array( 'name'=>$widget . 'textdo', 'value'=>$options['textdo'] ) ), '');
+
     $form .= mso_widget_create_form(t('Текст в конце', __FILE__), form_textarea( array( 'name'=>$widget . 'textposle', 'value'=>$options['textposle'] ) ), '');
 	
 	return $form;
@@ -119,6 +125,7 @@ function dignity_rss_widget_update($num = 1)
 	$newoptions['yandex_text'] = mso_widget_get_post($widget . 'yandex_text');
 	$newoptions['rss_text'] = mso_widget_get_post($widget . 'rss_text');
 	$newoptions['rss_to_email'] = mso_widget_get_post($widget . 'rss_to_email');
+	$newoptions['rss_to_email_login'] = mso_widget_get_post($widget . 'rss_to_email_login');
 	$newoptions['textposle'] = mso_widget_get_post($widget . 'textposle');
 	
 	if ( $options != $newoptions ) 
@@ -137,12 +144,33 @@ function dignity_rss_widget_custom($options = array(), $num = 1)
 	$yandex_text = $options['yandex_text'];
 	$rss_text = $options['rss_text'];
 	$rss_to_email = $options['rss_to_email'];
+	$rss_to_email_login = $options['rss_to_email_login'];
+	
 	$path = getinfo('plugins_url') . 'dignity_rss/img/'; # путь к картинкам
+	
 	$rss_google = 'http://fusion.google.com/add?feedurl=' . $feed_url;
+	
 	$rss_yandex = 'http://lenta.yandex.ru/settings.xml?name=feed&amp;url=' . $feed_url;
+	
 	$rss_google_read = '<p><a href="' .$rss_google  . '" rel="nofollow"><img src="' . $path . 'google.png" alt=""></a> <a href="' . $rss_google . '" rel="nofollow">' . $google_text . '</a></p>';
+	
 	$rss_yandex_read = '<p><a href="' .$rss_yandex  . '" rel="nofollow"><img src="' . $path . 'yandex.png" alt=""></a> <a href="' . $rss_yandex . '" rel="nofollow">' . $yandex_text . '</a></p>';
-	$rss_mail = '<p><a href="http://www.rss2email.ru?rss=' . $feed_url . '" title="' . $rss_to_email . '" rel="nofollow"><img src="' . $path . 'email.png" alt=""></a> <a href="http://www.rss2email.ru?rss=' . $feed_url . '" title="' . $rss_to_email . '" rel="nofollow">' . $rss_to_email . '</a></p>';
+	
+	// $rss_mail = '<p><a href="http://www.rss2email.ru?rss=' . $feed_url . '" title="' . $rss_to_email . '" rel="nofollow"><img src="' . $path . 'email.png" alt=""></a> <a href="http://www.rss2email.ru?rss=' . $feed_url . '" title="' . $rss_to_email . '" rel="nofollow">' . $rss_to_email . '</a></p>';
+	
+	// http://feedburner.google.com/fb/a/mailverify?uri=maxsiteorg
+	if ($rss_to_email_login)
+	{
+		$url = 'http://feedburner.google.com/fb/a/mailverify?uri=' . $rss_to_email_login;
+		
+		$rss_mail = '<p><a href="' . $url . '" title="' . $rss_to_email . '" rel="nofollow"><img src="' . $path . 'email.png" alt=""></a> <a href="' . $url . '" title="' . $rss_to_email . '" rel="nofollow">' . $rss_to_email . '</a></p>';
+	
+	}
+	else
+	{
+		$rss_mail = '';
+	}
+	
 	$rss_f = '<p><a href="' . $feed_url . '"><img src="' . $path . 'rss.png" alt=""></a>' . ' <a href="' . $feed_url . '">' . $rss_text . '</a></p>';
 	
 	return $header . $textdo . $rss_f . $rss_google_read . $rss_yandex_read . $rss_mail . $textposle;

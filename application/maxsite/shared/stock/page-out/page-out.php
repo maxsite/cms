@@ -230,6 +230,7 @@ class Page_out
 		$tag = '';
 		$edit = '';
 		$date = '';
+		$date_last_modified = '';
 		$read = '';
 		$feed = '';
 		$view_count = '';
@@ -336,6 +337,20 @@ class Page_out
 				false);
 		}
 		
+		if (strpos($out, '[date_last_modified]') !== false)
+		{
+			if ($this->val('page_last_modified'))
+			{
+				$date_last_modified = mso_page_date(
+					$this->val('page_last_modified'), // данные из $page
+						array('format' => tf($this->get_formats_args('date_last_modified', 1)), // 'd/m/Y H:i:s'
+								'days' => tf('Понедельник Вторник Среда Четверг Пятница Суббота Воскресенье'),
+								'month' => tf('января февраля марта апреля мая июня июля августа сентября октября ноября декабря')), 
+					$this->get_formats_args('date_last_modified', 2), // $do
+					$this->get_formats_args('date_last_modified', 3), // $posle
+					false);
+			}
+		}
 		
 		// read
 		// mso_page_title($page_slug = '', $page_title = 'no title', $do = '<h1>', $posle = '</h1>', $link = true, $echo = true, $type = 'page'
@@ -405,6 +420,7 @@ class Page_out
 		$out = str_replace('[tag]', $tag, $out);
 		$out = str_replace('[edit]', $edit, $out);
 		$out = str_replace('[date]', $date, $out);
+		$out = str_replace('[date_last_modified]', $date_last_modified, $out);
 		$out = str_replace('[read]', $read, $out);
 		$out = str_replace('[feed]', $feed, $out);
 		$out = str_replace('[view_count]', $view_count, $out);

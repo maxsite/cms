@@ -181,7 +181,6 @@
 	-webkit-border-radius: @arguments;
 	-moz-border-radius: @arguments;
 	border-radius: @arguments;
-	//behavior: url(/PIE.php);
 }
 
 .border_radius(@radius)
@@ -189,7 +188,13 @@
 	-webkit-border-radius: @radius;
 	-moz-border-radius: @radius;
 	border-radius: @radius;
-	//behavior: url(/PIE.php);
+}
+
+.border_radius(none)
+{
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
 }
 
 // border
@@ -349,10 +354,25 @@
 	opacity: @opacity / 100;
 }
 
+// аналог opacity
 .op(@opacity: 100)
 {
 	.opacity(@opacity);
 }
+
+// аналог rgba(R,G,B, op) только с #RRGGBB
+.op_color(@color: #abc, @opacity: .5)
+{
+	color: rgba(red(@color), green(@color), blue(@color), @opacity);
+}
+
+// цвет фона и его прозрачность
+.bg_op(@color: #abc, @opacity: .5)
+{
+	background-color: @color;
+	.opacity(@opacity * 100); 
+}
+
 
 // переходы
 .transition(@transition) {
@@ -376,6 +396,9 @@
 	-ms-transform: @arguments;
 	transform: @arguments;
 }
+
+
+
 
 // служебные миксы
 // загрузка другого less-файла заменяет @import

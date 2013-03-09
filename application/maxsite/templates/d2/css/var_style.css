@@ -332,6 +332,9 @@ div.onerow .col {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+div.onerow .col img.thumb {
+  width: 100%;
+}
 div.onerow .col:first-of-type {
   margin-left: 0;
 }
@@ -345,7 +348,7 @@ div.onerow .w1-3 {
   width: 31.333333333333%;
 }
 div.onerow .w2-3 {
-  width: 65.66666667%;
+  width: 65.666666666667%;
 }
 div.onerow .w1-4 {
   width: 22.75%;
@@ -367,6 +370,60 @@ div.onerow .w3-5 {
 }
 div.onerow .w4-5 {
   width: 79.4%;
+}
+div.onerow .w1-6 {
+  width: 14.166666666667%;
+}
+div.onerow .w2-6 {
+  width: 31.333333333333%;
+}
+div.onerow .w3-6 {
+  width: 48.5%;
+}
+div.onerow .w4-6 {
+  width: 65.666666666667%;
+}
+div.onerow .w5-6 {
+  width: 82.833333333333%;
+}
+div.onerow .w1-7 {
+  width: 11.714285714286%;
+}
+div.onerow .w2-7 {
+  width: 26.428571428571%;
+}
+div.onerow .w3-7 {
+  width: 41.142857142857%;
+}
+div.onerow .w4-7 {
+  width: 55.857142857143%;
+}
+div.onerow .w5-7 {
+  width: 70.571428571429%;
+}
+div.onerow .w6-7 {
+  width: 85.285714285714%;
+}
+div.onerow .w1-8 {
+  width: 9.875%;
+}
+div.onerow .w2-8 {
+  width: 22.75%;
+}
+div.onerow .w3-8 {
+  width: 35.625%;
+}
+div.onerow .w4-8 {
+  width: 48.5%;
+}
+div.onerow .w5-8 {
+  width: 61.375%;
+}
+div.onerow .w6-8 {
+  width: 74.25%;
+}
+div.onerow .w7-8 {
+  width: 87.125%;
 }
 div.cell.c1 {
   width: 115px;

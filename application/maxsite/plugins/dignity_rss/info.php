@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('RSS-подписка', __FILE__),
 	'description' => t('Виджет для вывода RSS подписки', __FILE__),
-	'version' => '1.7',
+	'version' => '1.8',
 	'author' => t('Александр Шиллинг', __FILE__),
 	'plugin_url' => 'http://alexanderschilling.net/',
 	'author_url' => 'http://alexanderschilling.net/',

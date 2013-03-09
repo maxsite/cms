@@ -142,7 +142,7 @@ if ( ! function_exists('delete_files'))
 				}
 				else
 				{
-					unlink($path.DIRECTORY_SEPARATOR.$filename);
+					@unlink($path.DIRECTORY_SEPARATOR.$filename);
 				}
 			}
 		}

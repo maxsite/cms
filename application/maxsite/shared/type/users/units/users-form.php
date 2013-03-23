@@ -95,9 +95,16 @@ if ($comuser_info)
 				
 				echo '<p><span class="ffirst ftitle">'. tf('Отображаемый ник'). '</span><span><input type="text" name="f_comusers_nik" value="' . $comusers_nik . '"></span></p>';
 				
-				echo '<p><span class="ffirst ftitle">'. tf('Сайт (с http://)'). '</span><span><input type="text" name="f_comusers_url" value="' . $comusers_url . '"></p>';
+				if (mso_get_option('comusers_url', 'templates', 1))
+					echo '<p><span class="ffirst ftitle">'. tf('Сайт (с http://)'). '</span><span><input type="text" name="f_comusers_url" value="' . $comusers_url . '"></p>';
+				else
+					echo '<input type="hidden" name="f_comusers_url" value="' . $comusers_url . '">';
+					
 				
-				echo '<p><span class="ffirst ftitle">'. tf('Аватарка (с http://, 80x80px)'). '</span><span><input type="text" name="f_comusers_avatar_url" value="' . $comusers_avatar_url . '"></p>';
+				if (mso_get_option('gravatar_only', 'templates', 0))
+					echo '<input type="hidden" name="f_comusers_avatar_url" value="' . $comusers_avatar_url . '">';
+				else
+					echo '<p><span class="ffirst ftitle">'. tf('Аватарка (с http://, 80x80px)'). '</span><span><input type="text" name="f_comusers_avatar_url" value="' . $comusers_avatar_url . '"></p>';
 				
 				echo '<p><span class="ffirst ftitle">'. tf('ICQ'). '</span><span><input type="text" name="f_comusers_icq" value="' . $comusers_icq . '"></p>';
 				

@@ -364,19 +364,17 @@ function bbcode_create_list_callback($matches)
 function bbcode_show_callback($matches)
 {
 	static $js = false;
-	static $id = 0; // id требуется для работы showhide.jquery.js
 	
 	$out = '';
-	$id++;
 	
 	if (!$js)
 	{
 		$out .=  mso_load_jquery('jquery.cookie.js');
-		$out .=  mso_load_jquery('showhide.jquery.js');
+		$out .=  mso_load_jquery('jquery.showhide.js');
 		
 		$out .= ' <script>
 $(function () {
-$("dd.show-text").hide(); $.showHide({ blockElem: "div.show", blockinElem: "dd.show-text", clickElem: "a.link", cookieName: "show-' . str_replace('/', '-', mso_current_url()) . '" });
+$.cookie.json = true; $("div.show").showHide({time: 400, useID: false, clickElem: "a.link", foldElem: "dd.show-text", visible: false});
 });
 </script> ' ;
 		
@@ -388,7 +386,7 @@ $("dd.show-text").hide(); $.showHide({ blockElem: "div.show", blockinElem: "dd.s
 				. $matches[1] 
 				. '</a></dt>'
 				
-				. '<dd class="show-text" id="show' . $id . '">'
+				. '<dd class="show-text">'
 				. $matches[2]
 				. '</dd>'
 				

@@ -1869,6 +1869,10 @@ function mso_avatar($comment, $img_add = 'style="float: left; margin: 5px 10px 1
 	extract($comment);
 
 	$avatar_url = '';
+
+	// если отмечана опция «Только граватарки», то обнуляем указанный адрес комюзера
+	if (mso_get_option('gravatar_only', 'templates', 0)) $comusers_avatar_url = '';
+	
 	if ($comusers_avatar_url) $avatar_url = $comusers_avatar_url;
 	elseif ($users_avatar_url) $avatar_url = $users_avatar_url;
 	

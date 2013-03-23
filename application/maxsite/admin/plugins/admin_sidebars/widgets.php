@@ -55,23 +55,14 @@
 <?php
 
 	echo mso_load_jquery('jquery.cookie.js');
-	echo mso_load_jquery('showhide.jquery.js');
+	echo mso_load_jquery('jquery.showhide.js');
 	
 	echo '
 <script>
-
 $(function () {
-
-	$("div.admin_widgets").hide();
-	
-	$.showHide({
-		blockElem: ".admin-edit-widgets-form",
-		blockinElem: ".admin_widgets",
-		clickElem: ".link",
-		cookieName: "admin-sidebars-widgets",
-	});
+	$.cookie.json = true; 
+	$(".admin-edit-widgets-form").showHide({time: 400, useID: false, clickElem: ".link", foldElem: ".admin_widgets", visible: false});
 });
-
 </script>
 ';
 	

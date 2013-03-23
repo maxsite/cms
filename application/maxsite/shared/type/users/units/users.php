@@ -81,6 +81,8 @@ if ($comuser_info)
 		// хук, по которому можно вывести дополнительные данные
 		mso_hook('users_add_out', $comuser_info[0]);
 		
+		if ($f = mso_page_foreach('users-add')) require($f);
+		
 		if ($comments) // есть комментарии
 		{
 			echo '<br><h2>'. tf('Комментарии'). '</h2><ul>';

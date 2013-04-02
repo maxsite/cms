@@ -1,0 +1,20 @@
+// MaxSite CMS
+// Copyright http://max-3000.com/
+
+div.image-select {
+
+	> div.wrap {
+		width: 100%;
+		margin: 0 auto;
+		max-width: @CONTENT_WIDTH;
+	}
+	
+	body.no-sidebar & > div.wrap {
+		max-width: @MAIN_NO_SB_WIDTH;
+	}
+	
+	img {
+		width: 100%;
+		height: auto;
+	}
+}

@@ -6,29 +6,63 @@
 // компонент 
 div.ns-menu-block {
 	
-	.bg(#eee); // фон совпадает с фоном меню
+	.bg(#444);
 
 	> div.wrap {
-	
+		width: 100%;
+		margin: 0 auto;
+		max-width: @CONTENT_WIDTH;
 	}
-
+	
+	body.no-sidebar & > div.wrap {
+		max-width: @MAIN_NO_SB_WIDTH;
+	}
+	
 	div.r1 {
-		.left;
-		padding: 5px 30px 0 20px;
-		.f > size(18px);
+		.column_width(1, 7, 3%);
+		.f > .size(16px);
+		padding: 9px 0 0 10px;
+		color: #fff;
+		.bold;
 		
 		a {
-			.f > underline(none);
+			.f > .underline(none);
 		}
 	}
 
 	div.r2 {
-		.left;
+		.column_width(5, 7, 3%);
 	}
 	
 	div.r3 {
-		.right;
+		.column_width(1, 7, 3%);
 		text-align: right;
-		padding: 5px 20px 0 0;
+		padding: 10px 10px 0 0;
+		color: #fff;
+	}
+	
+	@media @MOBILE 
+	{
+		div.r1 {
+			width: 100%;
+			float: none;
+			padding: 10px;
+			margin: 0;
+		}
+		
+		div.r2 {
+			width: 100%;
+			float: none;
+			margin: 0;
+			
+			div.MainMenu {
+				height: auto;
+			}
+		}
+		
+		div.r3 {
+			float: none;
+			width: auto;
+		}
 	}
 }

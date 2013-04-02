@@ -29,14 +29,14 @@ $slides_def = '
 header = заголовок1
 text = текст с html без переносов
 link = http://maxsite.org/
-img = TEMPLATE_URL/images/placehold/960x300.png
+img = TEMPLATE_URL/images/placehold/1140x300.png
 [/slide]
 
 [slide]
 header = заголовок2
 text = текст с html без переносов
 link = http://max-3000.com/
-img = TEMPLATE_URL/images/placehold/960x300.png
+img = TEMPLATE_URL/images/placehold/1140x300.png
 [/slide]
 ';
 

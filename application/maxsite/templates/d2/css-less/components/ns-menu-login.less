@@ -1,37 +1,52 @@
 // MaxSite CMS 
 // Copyright http://max-3000.com/
-// подключать - @import url('components/ns-menu-login.less');
 
-	
-// компонент 
 div.ns-menu-login {
 	
-	.bg(#eee); // фон совпадает с фоном меню
+	.bg(#444);
 
 	> div.wrap {
+		width: 100%;
+		margin: 0 auto;
+		max-width: @CONTENT_WIDTH;
+	}
 	
+	body.no-sidebar & > div.wrap {
+		max-width: @MAIN_NO_SB_WIDTH;
 	}
 
 	div.r1 {
-		.left;
-		padding: 5px 30px 0 20px;
-		.f > size(18px);
+		.column_width(1, 7, 3%);
+		.f > .size(16px);
+		padding: 9px 0 0 10px;
+		color: #fff;
+		.bold;
 		
 		a {
-			.f > underline(none);
+			.f > .underline(none);
 		}
 	}
 
 	div.r2 {
-		.left;
+		.column_width(5, 7, 3%);
 	}
 	
 	div.r3 {
-		.right;
-		padding: 5px 20px 0 0;
+		.column_width(1, 7, 3%);
+		
+		padding: 10px 0 0 0;
 		
 		// форма логина
 		// появляется в .dropdown-menu
+		a.dropdown {
+			display: inline-block;
+			.right;
+			margin-right: 5px;
+			color: #fff;
+			.f > .underline(none);
+			.border_bottom(#ddd, 1px, dashed);
+		}
+		
 		form {
 			padding: 10px 15px 0 15px;
 			width: 200px;
@@ -48,8 +63,38 @@ div.ns-menu-login {
 				display: inline-block;
 				float: right;
 			}
-			
 		}
 		
 	}
+	
+	@media @MOBILE 
+	{
+		div.r1 {
+			width: 100%;
+			float: none;
+			padding: 10px;
+			margin: 0;
+		}
+		
+		div.r2 {
+			width: 100%;
+			float: none;
+			margin: 0;
+			
+			div.MainMenu {
+				height: auto;
+			}
+		}
+		
+		div.r3 {
+			float: none;
+			width: auto;
+			padding: 0;
+			
+			a.dropdown {
+				margin: 0 10px 10px 0;
+			}
+		}
+	}
+	
 }

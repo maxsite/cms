@@ -1,28 +1,65 @@
 // MaxSite CMS 
 // Copyright http://max-3000.com/
-// подключать - @import url('components/footer-3-sidebars.less');
 
 
 // три колонки в сайдбаре
 // уже стоят классы w33 left 
 div.footer-sidebars {
+	
+	
+	.bg(#777);
+		
+	width: 100%;
+	margin: 0 auto;
+	max-width: @CONTENT_WIDTH;
 
+	> div.wrap {
+	
+		padding: 30px 30px 10px 30px;
+	}
+	
+	color: #fff;
+	
+	a {
+		color: #fff;
+	}
+	
 	div.footer-sidebar1 {
+		.column_width(1, 3, 3%);
+		
 		> div.wrap {
-			margin: 0 20px 0 0;
 		}
 	}
 	
 	div.footer-sidebar2 {
+		.column_width(1, 3, 3%);
+		
 		> div.wrap {
-			margin: 0 10px;
 		}
 	}
 	
 	div.footer-sidebar3 {
+		.column_width(1, 3, 3%);
+		
 		> div.wrap {
-			margin: 0 0 0 20px;
 		}
+	}
+	
+	@media @MOBILE 
+	{
+		div.footer-sidebar1,
+		div.footer-sidebar2,
+		div.footer-sidebar3
+		{
+			float: none;
+			margin: 0;
+			width: 100%;
+			padding: 0;
+			
+			> div.wrap {
+			}
+		}
+	
 	}
  
 }

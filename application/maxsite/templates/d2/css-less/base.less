@@ -1,7 +1,5 @@
 // MaxSite CMS
 // Copyright http://max-3000.com/
-// @import url('base.less');
-
 
 // Базовый шрифт и оформление 
 
@@ -32,14 +30,16 @@ a {
 		.bold;
 	}
 	
-	// посещенная ссылка только в пределах content
-	div.content &:visited {
+	// посещенная ссылка только в пределах контента
+	div.page_content &:visited {
 		color: @LINK_COLOR_VISITED;
 	}
 }
 
 h1 {
 	color: @H1_COLOR;
+	.f > .georgia;
+	.f > .italic;
 	
 	a {
 		color: @H1_LINK_COLOR;

@@ -1,24 +1,27 @@
 // MaxSite CMS 
 // Copyright http://max-3000.com/
-// подключать - @import url('components/menu-icons.less');
 
 
-// компонент 
 div.menu-icons {
 	
-	.bg(#eee);
-
+	.bg(#444);
+	
 	> div.wrap {
-
+		width: 100%;
+		margin: 0 auto;
+		max-width: @CONTENT_WIDTH;
+	}
+	
+	body.no-sidebar & > div.wrap {
+		max-width: @MAIN_NO_SB_WIDTH;
 	}
 
 	div.r1 {
-		.left;
+		.column_width(5, 7, 3%);
 	}
 
 	div.r2 {
-		.right;
-		width: auto;
+		.column_width(2, 7, 3%);
 		
 		// социконки отдельно
 		@import url('components/_social.less');
@@ -26,8 +29,23 @@ div.menu-icons {
 		
 		// или можно отдельно
 		div.social {
-			padding: 10px 10px 0  0; // выровнять
+			padding: 12px 10px 0  0;
 		}
 	}
- 
+	
+	@media @MOBILE 
+	{
+		div.r1, div.r2 {
+			width: 100%;
+			margin: 0;
+		}
+		
+		div.r2 {
+			div.social {
+				padding: 4px 0 0 10px;
+				.align(left);
+			}
+		}
+	}
+	
 }

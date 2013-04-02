@@ -26,7 +26,7 @@ $pt = new Page_out; // подготавливаем объект для выво
 $pt->div_start('menu-icons', 'wrap');
 
 	$pt->div_start('r1');
-		if ($fn = mso_fe('components/menu/menu.php')) require($fn);
+		if ($fn = mso_fe('components/_menu/_menu.php')) require($fn);
 	$pt->div_end('r1');
 	
 	$pt->div_start('r2');	

@@ -2,7 +2,7 @@
 
 
 <div class="MainMenu"><div class="wrap">
-	<nav><ul class="menu">
+	<nav><ul class="menu menu_responsive">
 	
 		<?php
 

@@ -31,7 +31,7 @@ $pt->div_start('ns-menu-login', 'wrap');
 	$pt->div($name_site, 'r1');	
 		
 	$pt->div_start('r2');
-		if ($fn = mso_fe('components/menu/menu.php')) require($fn);
+		if ($fn = mso_fe('components/_menu/_menu.php')) require($fn);
 	$pt->div_end('r2');
 	
 	$pt->div_start('r3');

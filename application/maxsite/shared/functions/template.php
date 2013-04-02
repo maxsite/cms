@@ -264,8 +264,19 @@ if (!function_exists('mso_default_head_section'))
 		if ($fn = mso_page_foreach('head')) require($fn);
 		if (function_exists('ushka')) echo ushka('head');
 		
+		// autoload js-файлов
+		if ($autoload_js = mso_get_path_files(getinfo('template_dir') . 'js/autoload/', getinfo('template_url') . 'js/autoload/', true, array('js')))
+		{
+			foreach($autoload_js as $fn_js)
+			{
+				echo NT .'<script src="' . $fn_js . '"></script>';
+			}
+		}
+		
 		if (mso_fe('js/my.js')) 
-			echo '	<script src="' . getinfo('template_url') . 'js/my.js"></script>';
+			echo NT . '<script src="' . getinfo('template_url') . 'js/my.js"></script>';
+		
+		
 		
 		if ($my_style = mso_get_option('my_style', 'templates', '')) 
 			echo NR . '<!-- custom css-my_style -->' . NR . '<style>' . NR . $my_style . '</style>';

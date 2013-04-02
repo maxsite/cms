@@ -1,33 +1,55 @@
 // MaxSite CMS
 // Copyright http://max-3000.com/
-// подключать - @import url('menus/menu01.less');
 
-.bg(#eee);
+@menu_height: 40px;
 
-// только верхние пункты
-ul.menu > li > a {
-	.f > bold;
-	.f > upper;
-	.f > size(12px);
-	padding: 0 10px;
-	.transition(background-color 0.3s 0s ease-out);
-}
 
-// выделенный пункт и при наведении - только верхние
-ul.menu > li.selected > a, 
-ul.menu > li > a:hover 
-{
-	.bg(#ddd);
-	color: #222;
-}
 
-// только подпункты
-ul.menu li.group ul li > a {
-	.transition(background-color 0.3s 0s ease-out);
-	.f > size(12px);
-}
+height: @menu_height;
 
-// под-подпункт
-ul.menu li.group ul li.group > a span  {
-	background: url("../images/bullets/menu-down-right.png") no-repeat right center;
+ul.menu {
+
+	li {
+		height: @menu_height;
+		line-height: @menu_height;
+	}
+
+	// только верхние пункты
+	> li > a {
+		.f > .upper;
+		.f > .size(14px);
+		padding: 0 15px;
+		.transition(background 0.3s 0s ease-out);
+		color: #B1B1B1;
+		
+		height: @menu_height;
+		line-height: @menu_height;
+		margin-right: 1px;
+	}
+
+	// выделенный пункт и при наведении - только верхние
+	> li.selected > a, 
+	> li > a:hover 
+	{
+		.bg(#737373);
+		color: #fff;
+	}
+
+	// только подпункты
+	li.group ul li > a {
+		.transition(background-color 0.3s 0s ease-out);
+		.f > .size(12px);
+	}
+
+	// под-подпункт
+	li.group ul li.group > a span  {
+		background: url("../images/bullets/menu-down-right.png") no-repeat right center;
+	}
+
+	li.group ul {
+		// тень выпадающего блока
+		.box_shadow(0px, 3px, 3px, rgba(0,0,0, 0.4));
+		.bg(#ddd);
+	}
+
 }

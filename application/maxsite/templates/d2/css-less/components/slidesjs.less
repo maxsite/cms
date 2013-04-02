@@ -1,8 +1,5 @@
 // MaxSite CMS 
 // Copyright http://max-3000.com/
-// подключать - @import url('components/slidesjs.less');
-
-// слайдер slidesjs
 
 div.slidesjs {
 
@@ -10,16 +7,26 @@ div.slidesjs {
 	
 	position: relative;
 	height: @slidesjs_img_height + 40px; // + высота полоски пагинации
-
+	
+	> div.wrap {
+		width: 100%;
+		margin: 0 auto;
+		max-width: @CONTENT_WIDTH;
+		.bg(#eee);
+	}
+	
+	body.no-sidebar & > div.wrap {
+		max-width: @MAIN_NO_SB_WIDTH;
+	}
+	
 	div.slides_container {
 		height: @slidesjs_img_height; 
-		width: 100%; 
 	}
 	
 	div.slide {
 		
 		width: 100%;
-
+		
 		div.r2 {
 			height: 80px;
 			bottom: -85px;
@@ -49,21 +56,23 @@ div.slidesjs {
 		}
 	}
 	
+	div.prev-next {
+		width: 50px;
+		float: left; 
+		padding-top: 7px;
+	}
+	
 	a.prev, a.next  {
-		display: block; 
+		display: inline-block; 
 		width: 21px; 
 		height: 21px; 
-		position: absolute; 
-		bottom: 7px;
 	} 
 	
 	a.prev {
-		left: 10px; 
 		background: url("../components/slidesjs/images/arrow-prev.png") no-repeat;
 	}
 	
 	a.next {
-		left: 33px; 
 		background: url("../components/slidesjs/images/arrow-next.png") no-repeat;
 	}
 	
@@ -76,7 +85,16 @@ div.slidesjs {
 		text-align: right; 
 		height: 30px; 
 		line-height: 30px; 
+		
+		width: 100%;
+		margin: 0 auto;
+		max-width: @CONTENT_WIDTH;
 	}
+	
+	body.no-sidebar & ul.pagination {
+		max-width: @MAIN_NO_SB_WIDTH;
+	}
+	
 	
 	ul.pagination li {
 		display:inline;

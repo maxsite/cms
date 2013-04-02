@@ -4432,7 +4432,7 @@ function mso_get_dirs($path, $exclude = array(), $need_file = false)
 
 # Функция возвращает полный путь к файлу
 # если файла нет, то возвращается false
-# если второй парметр == false, используется каталог текущего шаблона
+# если второй параметр == false, используется каталог текущего шаблона
 # if ($fn = mso_fe('stock/page_out/page-out.php')) require($fn);
 function mso_fe($file, $dir = false)
 {
@@ -4483,10 +4483,23 @@ array('link'=>'', 'title'=>'', 'img'=>'', 'text'=>'', 'p_line1'=>'', 'p_line2'=>
 
 Если $simple = true, то вхродящий паттерн используется как слово из которого
 будет автоматом сформирован корректный паттерн по шаблону [слово]...[/слово]
+
+Если опция содержит html-код или несколько строк, то её следует обрамить между _START_ и _END_
+Например:
+
+...
+text = _START_
+ текст в несколько строк
+ <span class="red">красный текст</span>
+_END_
+...
+
 */
+
 function mso_section_to_array($text, $pattern, $array_default = array(), $simple = false)
 {
-
+	$text = preg_replace_callback('!_START_(.*?)_END_!is', '_mso_section_to_array_replace_start', $text);
+	
 	if ($simple) $pattern = '!\[' . $pattern . '\](.*?)\[\/' . $pattern . '\]!is';
 	
 	// $array_result - массив каждой секции (0 - все вхождения)
@@ -4500,7 +4513,7 @@ function mso_section_to_array($text, $pattern, $array_default = array(), $simple
 		foreach($array_result[1] as $val)
 		{
 			$val = trim($val);
-			
+
 			if (!$val) continue;
 			
 			$val = str_replace(' = ', '=', $val);
@@ -4516,16 +4529,37 @@ function mso_section_to_array($text, $pattern, $array_default = array(), $simple
 			{
 				$ar_val = explode('=', $pole); // строки разделены = type = select
 				if ( isset($ar_val[0]) and isset($ar_val[1]))
-					$f[$i][$ar_val[0]] = $ar_val[1];
+				{
+					$f[$i][$ar_val[0]] = preg_replace_callback('!\[base64\](.*?)\[\/base64\]!is', '_mso_section_to_array_replace_end', $ar_val[1]);
+				}
 			}
 			
 			$i++;
 		}
-		
+
 		return $f;
 	}
 	
 	return array(); // не найдено
+}
+
+# callback-функция для mso_section_to_array
+# заменяет html между _START_ и _END_ на base64 кодирование
+function _mso_section_to_array_replace_start($matches)
+{
+	$m = '[base64]' . base64_encode(trim($matches[1])) . '[/base64]';
+	
+	// уберем = поскольку этот символ используется в опции как разделитель
+	$m = str_replace('=', '_RAVNO_', $m); 
+	
+	return $m;
+}
+
+# callback-функция для mso_section_to_array
+# обратная функция преобразования [base64] в html
+function _mso_section_to_array_replace_end($matches)
+{	
+	return base64_decode(str_replace('_RAVNO_', '=', $matches[1]));
 }
 
 # профилирование - старт

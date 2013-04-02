@@ -113,7 +113,7 @@
 				$percent = round($percent,2);
 				
 				$CI->table->add_row("{$a->a_answer} ({$a->a_votes}) {$percent}%");
-				$CI->table->add_row("<img src=\"$line\" style=\"border-left: 1px solid #7cbeeb;\" width=\"{$percent_width}%\" height=\"10\">");
+				$CI->table->add_row('<img src="' . $line . '" style="border-left: 1px solid #7cbeeb; height: 10px; width: ' .$percent_width .'%">');
 			}
 			
 			$total = number_format($this->data->q_totalvoters,0,' ',' ');

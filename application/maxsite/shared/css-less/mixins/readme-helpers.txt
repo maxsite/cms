@@ -1,30 +1,30 @@
 Шрифт .f()
 
-.f > verdana; // Verdana, Arial, Helvetica, sans-serif
-.f > arial; // Arial, Helvetica, Verdana, sans-serif
-.f > tahoma; // Tahoma, Arial, Helvetica, Verdana, sans-serif
-.f > georgia; // Georgia, "Times New Roman", serif
-.f > times; // "Times New Roman", Georgia, serif
-.f > segoe; // "Segoe UI", Verdana, Arial, sans-serif
-.f > helvetica; // "Helvetica Neue", Helvetica, Arial, sans-serif
+.f > .verdana; // Verdana, Arial, Helvetica, sans-serif
+.f > .arial; // Arial, Helvetica, Verdana, sans-serif
+.f > .tahoma; // Tahoma, Arial, Helvetica, Verdana, sans-serif
+.f > .georgia; // Georgia, "Times New Roman", serif
+.f > .times; // "Times New Roman", Georgia, serif
+.f > .segoe; // "Segoe UI", Verdana, Arial, sans-serif
+.f > .helvetica; // "Helvetica Neue", Helvetica, Arial, sans-serif
 
-.f > serif(Georgia); // любой произвольный serif, "Times New Roman", Times, serif
-.f > sans(Arial); // любой произвольный sans-serif, "Helvetica Neue", Helvetica, Arial, sans-serif
-.f > cursive(Comic Sans); // любой произвольный cursive
-.f > mono(Courier New); // любой произвольный mono, Monaco, Menlo, Consolas, "Courier New", monospace
+.f > .serif(Georgia); // любой произвольный serif, "Times New Roman", Times, serif
+.f > .sans(Arial); // любой произвольный sans-serif, "Helvetica Neue", Helvetica, Arial, sans-serif
+.f > .cursive(Comic Sans); // любой произвольный cursive
+.f > .mono(Courier New); // любой произвольный mono, Monaco, Menlo, Consolas, "Courier New", monospace
 
-.f > f(@name, serif); // font-family: @name, serif;
+.f > .f(@name, serif); // font-family: @name, serif;
 
-.f > size(9pt);
-.f > normal; // убрать жирность и курсив font-weight: normal;
-.f > bold(bold); // можно указать жирность: bold | bolder | lighter | normal
-.f > color(цвет);
-.f > i(italic); // italic
-.f > italic(italic); // italic
-.f > style(normal); // font-style: normal | italic | oblique
-.f > upper; // верхний регистр
-.f > lower; // нижний
-.f > underline(underline); // подчеркивание: underline | blink | line-through | overline | underline | none 
+.f > .size(9pt);
+.f > .normal; // убрать жирность и курсив font-weight: normal;
+.f > .bold(bold); // можно указать жирность: bold | bolder | lighter | normal
+.f > .color(цвет);
+.f > .i(italic); // italic
+.f > .italic(italic); // italic
+.f > .style(normal); // font-style: normal | italic | oblique
+.f > .upper; // верхний регистр
+.f > .lower; // нижний
+.f > .underline(underline); // подчеркивание: underline | blink | line-through | overline | underline | none 
 
 
 .bold; // полужирный
@@ -81,6 +81,9 @@
 
 .opacity(100); // прозрачность
 .op(100); // прозрачность
+
+.op_color(@color: #abc, @opacity: .5) // аналог rgba(R,G,B, op) только с #RRGGBB
+.bg_op(@color: #abc, @opacity: .5) // цвет фона и его прозрачность
 
 .transition(background-color 0.3s 0s ease); // трансформация
 

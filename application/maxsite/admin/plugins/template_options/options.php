@@ -19,7 +19,15 @@
 	if (mso_check_post_ini()) echo '<div class="update">' . t('Обновлено!', 'templates') . '</div>';
 	
 	// получим ini-файл
-	$all = mso_get_ini_file( getinfo('templates_dir') . 'default/options.ini'); // можно использовать дефолтный
+	if (file_exists( getinfo('templates_dir') . 'default/options.ini'))
+	{
+		// можно использовать дефолтный
+		$all = mso_get_ini_file( getinfo('templates_dir') . 'default/options.ini'); 
+	}
+	else
+	{
+		$all = array();
+	}
 	
 	if (file_exists(getinfo('template_dir') . 'options.ini'))
 	{

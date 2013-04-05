@@ -3060,7 +3060,7 @@ function mso_create_list($a = array(), $options = array(), $child = false)
 		// если есть, то ставим css-класс curent-page-cat
 		$curent_page_cat_class = is_page_cat($elem_slug, false, false) ? ' class="curent-page-cat"' : '';
 
-		$link = '<a' . $options['nofollow'] . ' href="' . $url . '" title="' . mso_strip($title) . '"' .$curent_page_cat_class . '>';
+		$link = '<a' . $options['nofollow'] . ' href="' . $url . '" title="' . htmlspecialchars($title) . '"' .$curent_page_cat_class . '>';
 
 		if (isset($elem[$options['descr']])) $descr = $elem[$options['descr']];
 		else $descr = '';

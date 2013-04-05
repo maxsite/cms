@@ -25,7 +25,7 @@ h1.category {
   margin: 0 0 15px 0;
   border-bottom: 2px solid #DDD;
 }
-div.all {
+body {
   background: #ddd url("../images/backgrounds/pattern_113.png");
 }
 div.main {

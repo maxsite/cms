@@ -13,9 +13,8 @@ div.logo-ns-descr-banner {
 		.border_bottom(#eee, 1px);
 	}
 
-	body.no-sidebar & > div.wrap {
-		max-width: @MAIN_NO_SB_WIDTH;
-	}
+	// стили для разных main-шаблонов в отдельном файле 
+	@import url('components/_main-width.less');
 	
 	div.r1 {
 		.column_width(1, 10, 3%);

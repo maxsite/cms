@@ -2,9 +2,9 @@
 // Copyright http://max-3000.com/
 
 
-// три колонки в сайдбаре
-// уже стоят классы w33 left 
-div.footer-3-sidebars {
+// 5 колонок в сайдбаре
+// уже стоят классы w20 left 
+div.footer-5-sidebars {
 	
 	> div.wrap {
 		width: 100%;
@@ -21,31 +21,48 @@ div.footer-3-sidebars {
 	
 	div.footer-sidebar1 {
 		
-		.column_width(1, 3, 3%);
+		.column_width(1, 5, 3%);
 		
 		> div.wrap {
 		}
 	}
 	
 	div.footer-sidebar2 {
-		.column_width(1, 3, 3%);
+		.column_width(1, 5, 3%);
 		
 		> div.wrap {
 		}
 	}
 	
 	div.footer-sidebar3 {
-		.column_width(1, 3, 3%);
+		.column_width(1, 5, 3%);
 		
 		> div.wrap {
 		}
 	}
 	
+	div.footer-sidebar4 {
+		.column_width(1, 5, 3%);
+		
+		> div.wrap {
+		}
+	}	
+	
+	div.footer-sidebar5 {
+		.column_width(1, 5, 3%);
+		
+		> div.wrap {
+		}
+	}
+	
+	
 	@media @MOBILE 
 	{
 		div.footer-sidebar1,
 		div.footer-sidebar2,
-		div.footer-sidebar3
+		div.footer-sidebar3,
+		div.footer-sidebar4,
+		div.footer-sidebar5
 		{
 			float: none;
 			margin: 0;

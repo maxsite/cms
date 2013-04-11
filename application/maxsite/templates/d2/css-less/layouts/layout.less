@@ -99,7 +99,7 @@ div.footer {
 }
 
 
-// стили для no-sidebar (это main-шаблон вывода записи без сайдбара)
+// стили для no-sidebar (main-шаблон вывода записи без сайдбара)
 body.no-sidebar {
 	
 	div.main {
@@ -125,8 +125,22 @@ body.no-sidebar {
 
 }
 
-// нижние 3 сайдбара
-body.sidebar-bottom {
+// стили для left-sidebar (сайдбар слева)
+body.left-sidebar {
 
+	div.content {
+		float: right;
+		
+		div.content-wrap {
+			margin: 20px 30px 30px 0px;
+		}
+	}
+
+	div.sidebar1 {
+		float: left;
+		
+		div.sidebar1-wrap {
+			padding: 20px 0 0 30px;
+		}
+	}
 }
-

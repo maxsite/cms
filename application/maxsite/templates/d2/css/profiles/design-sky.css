@@ -1,0 +1,5 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+	mso_set_val('body_class', mso_get_val('body_class', '') . ' design-sky');
+	
+?>

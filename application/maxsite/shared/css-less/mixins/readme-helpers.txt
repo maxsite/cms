@@ -88,5 +88,6 @@
 .transition(background-color 0.3s 0s ease); // трансформация
 
 .box_sizing(border-box); // боксовая модель
+.box(); // аналог .box_sizing
 
 .transform(); // трансформация CSS3

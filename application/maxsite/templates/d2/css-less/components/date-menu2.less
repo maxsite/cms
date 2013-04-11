@@ -1,10 +1,9 @@
 // MaxSite CMS 
 // Copyright http://max-3000.com/
 
-
-div.menu-search {
+div.date-menu2 {
 	
-	.bg(#444);
+	.bg(#111);
 	
 	> div.wrap {
 		width: 100%;
@@ -16,42 +15,41 @@ div.menu-search {
 	@import url('components/_main-width.less');
 	
 	div.r1 {
-		.column_width(5, 7, 3%);
-	}
-	
-	div.r2 {
 		.column_width(2, 7, 3%);
-		padding: 5px 0 0 0;
+		color: #ddd;
+		.f > size(13px);
+		padding-top: 7px;
 		
-		div.search {
-			input[type="search"] {
-				height: 24px;
-				.border(#004F67);
-			}
-			
-			button {
-				height: 26px;
+	}
+
+	div.r2 {
+		.column_width(5, 7, 3%);
+		
+		div.MainMenu2 {
+
+			ul.menu {
+				float: right;
+				
+				a {
+				}
 			}
 		}
-		
 	}
-	
 	
 	@media @MOBILE 
 	{
-		div.r1, div.r2 {
-			width: 100%;
-			margin: 0;
+		div.r1 {
+			width: auto;
 		}
 		
-		div.r2 div.search {
-			margin: 10px;
+		div.r2 {
+			width: auto;
+			float: right;
 		}
 	}
 	
 	// дизайн sky — включается как css-профиль
 	body.design-sky & {
-		.bg(#41587B);
+		.bg(#233248);
 	}
 }
-

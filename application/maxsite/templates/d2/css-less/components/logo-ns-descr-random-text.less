@@ -1,7 +1,7 @@
 // MaxSite CMS
 // Copyright http://max-3000.com/
 
-div.logo-ns-descr-icons {
+div.logo-ns-descr-random-text {
 	
 	> div.wrap {
 		.bg(#f4f4f4);
@@ -55,14 +55,17 @@ div.logo-ns-descr-icons {
 	div.r3 {
 		.column_width(3, 10, 3%);
 		
-		// социконки отдельно
-		@import url('components/_social.less');
-		.social("../images/social/", 16px, 16px, 80);
-		
-		// или можно отдельно
-		div.social {
-			padding: 15px 10px 0  0;
+		div.random-text {
+			color: #555;
+			.f > .size(13px);
+			.align(right);
+			margin-right: 20px;
+			
+			div.author {
+				.f > .i;
+			}
 		}
+			
 	}
 	
 	@media @MOBILE 

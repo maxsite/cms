@@ -7,10 +7,26 @@ div.MainMenu3 {
 		width: 100%;
 		margin: 0 auto;
 		max-width: @CONTENT_WIDTH;
+		
+		.bg(#777);
 	}
 	
-	body.no-sidebar & > div.wrap {
-		max-width: @MAIN_NO_SB_WIDTH;
+	// стили для разных main-шаблонов в отдельном файле 
+	@import url('components/_main-width.less');
+	
+	ul.menu li a {
+		color: #ddd;
+	
+		&:hover {
+			.bg(transparent);
+			color: #fff;
+		}
 	}
- 
+	
+	// дизайн sky — включается как css-профиль
+	body.design-sky & {
+		> div.wrap {
+			.bg(#233248);
+		}
+	}
 }

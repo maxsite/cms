@@ -15,9 +15,8 @@ div.slidesjs {
 		.bg(#eee);
 	}
 	
-	body.no-sidebar & > div.wrap {
-		max-width: @MAIN_NO_SB_WIDTH;
-	}
+	// стили для разных main-шаблонов в отдельном файле 
+	@import url('components/_main-width.less');
 	
 	div.slides_container {
 		height: @slidesjs_img_height; 

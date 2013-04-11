@@ -79,10 +79,15 @@ function mso_check_post_ini()
 			$key = $key_type[0];
 			$type = $key_type[1];
 			
-			mso_add_option($key, $val, $type); // добавляем опцию
+			// pr($key . ' ' . $val . ' ' . $type, 1);
+			
+			// добавляем опцию без mso_refresh_options();
+			mso_add_option($key, $val, $type, false); 
 		}
 		
+		mso_refresh_options();
 		mso_flush_cache();
+		
 		// посколько у нас всегда true, то результат не анализируем
 		return true;
 	}

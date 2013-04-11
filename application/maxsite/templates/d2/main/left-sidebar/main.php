@@ -13,7 +13,8 @@ if ($fn = mso_fe('custom/head-section.php')) require($fn); // подключен
 
 ?>
 
-<body<?= (mso_get_val('body_class')) ? ' class="' . mso_get_val('body_class') . '"' : ''; ?>>
+<body class="left-sidebar <?= mso_get_val('body_class') ?>">
+
 <!-- end header -->
 <?php 
 	mso_hook('body_start');

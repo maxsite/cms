@@ -19,8 +19,11 @@ $slidesjs_output = mso_get_option('slidesjs_output', 'templates', array());
 
 if (!$slidesjs_output)  return; // ничего не отмечено - нигде не показывать
 
-if (!in_array(getinfo('type'), $slidesjs_output)) return;
-	elseif (mso_current_paged() > 1) return; // на страницах пагинации не показывать (или показывать?..)
+if (!in_array('all', $slidesjs_output)) // не отмечено выводить везде
+{
+	if (!in_array(getinfo('type'), $slidesjs_output)) return;
+		elseif (mso_current_paged() > 1) return; // на страницах пагинации не показывать (или показывать?..)
+}
 
 
 // опции слайдера

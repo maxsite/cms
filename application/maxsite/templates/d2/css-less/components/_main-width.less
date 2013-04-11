@@ -1,0 +1,9 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+
+// вспомогательный файл, где прописаны стили main-шаблонов
+// Использовать только внутри родительского блока: @import url('components/_main-width.less');
+
+body.no-sidebar & > div.wrap {
+	max-width: @MAIN_NO_SB_WIDTH;
+}

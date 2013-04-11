@@ -16,12 +16,12 @@ if (!in_array('all', $nivo_slider_output)) // не отмечено выводи
 		elseif (mso_current_paged() > 1) return; // на страницах пагинации не показывать (или показывать?..)
 }
 
-$subdir = mso_get_option('default_header_image', 'templates', false);
+$subdir = mso_get_option('nivo_slider_dir', 'templates', false);
 
 if ($subdir === false) return; // не определены опции
 
 if ($subdir == '-template-')  // каталог шаблона
-	$imgs = mso_get_path_files(getinfo('template_dir') . 'images/headers/', getinfo('template_url') . 'images/headers/');
+	$imgs = mso_get_path_files(getinfo('template_dir') . 'images/nivo-slider/', getinfo('template_url') . 'images/nivo-slider/');
 else
 	$imgs = mso_get_path_files(getinfo('uploads_dir') . $subdir . '/', getinfo('uploads_url') . $subdir . '/'); // каталог в uploads
 

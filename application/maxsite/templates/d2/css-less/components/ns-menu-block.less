@@ -14,9 +14,8 @@ div.ns-menu-block {
 		max-width: @CONTENT_WIDTH;
 	}
 	
-	body.no-sidebar & > div.wrap {
-		max-width: @MAIN_NO_SB_WIDTH;
-	}
+	// стили для разных main-шаблонов в отдельном файле 
+	@import url('components/_main-width.less');
 	
 	div.r1 {
 		.column_width(1, 7, 3%);
@@ -64,5 +63,10 @@ div.ns-menu-block {
 			float: none;
 			width: auto;
 		}
+	}
+	
+	// дизайн sky — включается как css-профиль
+	body.design-sky & {
+		.bg(#41587B);
 	}
 }

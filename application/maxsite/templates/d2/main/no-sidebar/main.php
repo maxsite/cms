@@ -41,7 +41,7 @@ if ($fn = mso_fe('custom/head-section.php')) require($fn); // подключен
 				if ($fn = mso_fe('custom/header_components.php')) require($fn);
 				else
 				{
-					if ($fn = get_component_fn('header_component1', 'menu')) require($fn);
+					if ($fn = get_component_fn('header_component1', 'menu-only')) require($fn);
 					if ($fn = get_component_fn('header_component2')) require($fn);
 					if ($fn = get_component_fn('header_component3')) require($fn);
 					if ($fn = get_component_fn('header_component4')) require($fn);

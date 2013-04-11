@@ -73,6 +73,20 @@ else // нет залогирования, выводим форму
 		$reg_text = t('Вход');
 	}
 	
+	
+	// возможен вход через соцсеть
+	$hook_login_form_auth = mso_hook_present('login_form_auth') ? '<span class="login-form-auth-title">' . tf('Вход через:') . ' </span>' . mso_hook('login_form_auth') : '';
+	
+	if ($hook_login_form_auth)
+	{
+		$hook_login_form_auth = trim(str_replace('[end]', '     ', $hook_login_form_auth));
+		$hook_login_form_auth = '<p class="login-form-auth">' . str_replace('     ', ', ', $hook_login_form_auth) . '</p>';
+	}
+	else
+	{
+		$hook_login_form_auth = '';
+	}
+	
 	$out = '
 			
 	<a href="#" data-dropdown="#dropdown-1" class="dropdown">' . $reg_text . '</a>
@@ -85,7 +99,8 @@ else // нет залогирования, выводим форму
 			
 			<p class="user"><input type="text" value="" name="flogin_user" placeholder="' . t('email/логин') .'"></p>
 			<p class="password"><input type="password" value="" name="flogin_password" placeholder="' . t('пароль') .'"></p>
-			<p class="submit"><button type="submit" name="flogin_submit">Вход</button>' . $registration . '</p>
+			<p class="submit"><button type="submit" name="flogin_submit">Вход</button>' . $registration . '</p>'
+			. $hook_login_form_auth . '
 		</form>
 	</li></ul>
 	</div>';

@@ -12,7 +12,7 @@ $info = array(
 	'author' => 'MAX',
 	'template_url' => 'http://max-3000.com/',
 	'author_url' => 'http://maxsite.org/',
-	'maxsite-min-version' => '0.82'
+	'maxsite-min-version' => '0.83'
 );
 
 # end file

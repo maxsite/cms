@@ -107,7 +107,21 @@ if (!function_exists('default_out_profiles'))
 		{
 			if ($page_css_profiles = mso_page_meta_value('page_css_profiles', $page['page_meta']))
 			{
-				mso_add_file('css/profiles/' . $page_css_profiles);
+				$fn = 'css/profiles/' . $page_css_profiles;
+			
+				$link = strpos($page_css_profiles, 'theme-'); // это theme- ?
+				
+				if ($link !== false and $link === 0)
+				{
+					mso_add_file($fn); // подключаем внешими стилями
+				}
+				else
+				{
+					if ($css_out = mso_out_css_file($fn, false, false)) // получение и обработка CSS из файла
+					{
+						echo NR . '<style>' . $css_out . '</style>' . NR;
+					}
+				}
 			}
 		}
 	}

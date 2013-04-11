@@ -949,7 +949,9 @@ function mso_refresh_options()
 
 
 # добавление в таблицу опций options
-function mso_add_option($key, $value, $type = 'general')
+# при указании $refresh = false не происходит обновление опций из базы,
+# 	использовать для вызове mso_add_option в цикле. После вызвать mso_refresh_options()
+function mso_add_option($key, $value, $type = 'general', $refresh = true)
 {
 	$CI = & get_instance();
 	
@@ -980,7 +982,7 @@ function mso_add_option($key, $value, $type = 'general')
 		$CI->db->insert('options', $data);
 	}
 
-	mso_refresh_options(); # обновляем опции из базы
+	if ($refresh) mso_refresh_options(); # обновляем опции из базы
 
 	return true;
 }

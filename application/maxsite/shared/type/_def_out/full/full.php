@@ -90,7 +90,14 @@ foreach ($pages as $page)
 									mso_get_option('image_for_page_height', 'templates', 210)
 								))
 							{
-								echo $p->img($image_for_page, mso_get_option('image_for_page_css_class', 'templates', 'image_for_page'), '', $p->val('page_title'));
+								if (mso_get_option('image_for_page_link', 'templates', 1))
+								{
+									echo $p->page_url(true) . $p->img($image_for_page, mso_get_option('image_for_page_css_class', 'templates', 'image_for_page'), '', $p->val('page_title')) . '</a>';
+								}
+								else
+								{
+									echo $p->img($image_for_page, mso_get_option('image_for_page_css_class', 'templates', 'image_for_page'), '', $p->val('page_title'));
+								}
 							}
 						}
 						

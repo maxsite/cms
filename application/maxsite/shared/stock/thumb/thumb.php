@@ -20,11 +20,11 @@ class Thumb
 	protected $image_info = array(); // информация об изображении
 
 	var $init = ''; // возврат при инициализации
-		// true - есть готовое новое изобаржение (в кэше)
+		// true - есть готовое новое изображение (в кэше)
 		// false - ошибка 
 		// всё остальное - можно сделать 
+		
 
-	
 	function __construct($url, $postfix = '-thumb', $replace_file = false, $subdir = '')
 	{
 		// проверим входящий url
@@ -80,6 +80,13 @@ class Thumb
 			// есть, отдаем его url
 			$this->init = true;
 			$this->new_img = getinfo('uploads_url') . $this->new_file;
+			return;
+		}
+		
+		if (!file_exists(getinfo('uploads_dir') . $this->file))
+		{
+			$this->init = false; // нет исходного файла
+			
 			return;
 		}
 		
@@ -303,7 +310,8 @@ function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 
 		}
 		elseif($t->init === false) // входящий адрес ошибочен
 		{
-			$img = false; // ошибка
+			// $img = false; // ошибка
+			$img = $def_img; // ставим дефолтное изображение 
 		}
 		else
 		{	
@@ -341,7 +349,7 @@ function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 
 			$img = $t->new_img; // url-адрес готового изображения
 		}
 	}
-	else // у записи не укажано метаполе, ставим дефолт 
+	else // у записи не указано метаполе, ставим дефолт 
 	{
 		$img = $def_img;
 	}

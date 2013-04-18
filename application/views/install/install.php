@@ -95,13 +95,13 @@
 			echo '<p>' . t('При отстутствии ошибок вам будет предложено указать начальные данные.', 'install') . '</p>';
 			
 			echo '<p><a href="' . getinfo('site_url') . 'install/2">' . t('Перейти к установке', 'install') . '</a>';
-			echo ' | <a target="_blank" href="' . getinfo('site_url') . t('install-ru.txt', 'install') . '">' . t('Инструкция по установке', 'install') . '</a></p>';
+			echo ' | <a target="_blank" href="' . getinfo('site_url') . '_mso_add/' . t('install-ru.txt', 'install') . '">' . t('Инструкция по установке', 'install') . '</a></p>';
 		}
 		else
 		{
 			echo '<p class="error">' . t('Ошибка! Неверно настроены ЧПУ!', 'install') . '</p>';
 			
-			echo '<p>' . t('Данная ошибка означает, что у вас неверно настроен файл <strong>.htaccess</strong>. Прочтите', 'install') . '<a href="' .  getinfo('site_url') . t('install-ru.txt', 'install') . '">' . t('инструкцию', 'install') . '</a>' . t('по установке.', 'install') . '</p>';
+			echo '<p>' . t('Данная ошибка означает, что у вас неверно настроен файл <strong>.htaccess</strong>. Прочтите', 'install') . '<a href="' .  getinfo('site_url') . '_mso_add/' . t('install-ru.txt', 'install') . '">' . t('инструкцию', 'install') . '</a>' . t('по установке.', 'install') . '</p>';
 			
 			echo '<p>' . t('После изменений вы можете', 'install') . ' <a href="' . getinfo('site_url') . 'install/2">' . t('попробовать снова', 'install') . '</a>.</p>';
 			

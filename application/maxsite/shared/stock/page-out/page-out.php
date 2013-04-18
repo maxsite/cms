@@ -858,7 +858,7 @@ class Columns
 	protected $cut_num_col = 1; // номер колонки
 	protected $cut_close_div = false; // признак закрытого DIV
 	
-	function __construct($cols_count = 3, $pages_count = 1, $_echo = true)
+	function __construct($cols_count = 3, $pages_count = 1, $class = 'columns', $_echo = true)
 	{
 		// запомним
 		$this->cols_count = $cols_count;
@@ -871,8 +871,8 @@ class Columns
 		$this->cut = ceil($pages_count/$cols_count); // кол-во записей в одной колонке
 		
 		// основной контейнер
-		if ($this->_echo) echo NR . NR . '<div class="columns"><div class="columns-wrap">';
-				else return NR . NR . '<div class="columns"><div class="columns-wrap">';
+		if ($this->_echo) echo NR . NR . '<div class="' . $class . '"><div class="' . $class . '-wrap">';
+				else return NR . NR . '<div class="' . $class . '"><div class="' . $class . '-wrap">';
 
 	}
 	

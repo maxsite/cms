@@ -459,7 +459,9 @@
 					'users_nik' => $users_login,
 					'users_email' => $users_email,
 					'users_groups_id' => $users_groups_id,
-					'users_password' => $users_password
+					'users_password' => $users_password,
+					'users_date_registr' => date('Y-m-d H:i:s'),
+					'users_last_visit' => date('Y-m-d H:i:s'),
 					);
 
 				$res = ($CI->db->insert('users', $ins_data)) ? '1' : '0';

@@ -1,0 +1,34 @@
+// MaxSite CMS
+// Copyright http://max-3000.com/
+
+
+div.logo-block {
+
+	> div.wrap {
+		.bg(#f4f4f4);
+		width: 100%;
+		margin: 0 auto;
+		max-width: @CONTENT_WIDTH;
+	}
+	
+	// стили для разных main-шаблонов в отдельном файле 
+	@import url('components/_main-width.less');
+	
+	div.r1 {
+		width: auto;
+		float: left;
+		padding: 10px;
+	}
+
+	div.r2 {
+		width: auto;
+		float: right;
+		padding: 10px;
+	}
+	
+	@media @MOBILE 
+	{
+
+	}
+
+}

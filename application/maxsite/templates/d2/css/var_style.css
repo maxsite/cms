@@ -899,6 +899,25 @@ div.image-select img {
   width: 100%;
   height: auto;
 }
+div.logo-block > div.wrap {
+  background-color: #f4f4f4;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1140px;
+}
+body.no-sidebar div.logo-block > div.wrap {
+  max-width: 1140px;
+}
+div.logo-block div.r1 {
+  width: auto;
+  float: left;
+  padding: 10px;
+}
+div.logo-block div.r2 {
+  width: auto;
+  float: right;
+  padding: 10px;
+}
 div.logo-ns-descr-banner > div.wrap {
   background-color: #f4f4f4;
   width: 100%;

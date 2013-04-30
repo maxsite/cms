@@ -25,6 +25,7 @@
 .f > .upper; // верхний регистр
 .f > .lower; // нижний
 .f > .underline(underline); // подчеркивание: underline | blink | line-through | overline | underline | none 
+.f > .small_caps(); // капитель
 
 
 .bold; // полужирный

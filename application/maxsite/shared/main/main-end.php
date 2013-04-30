@@ -77,7 +77,9 @@ if ($fn_main and file_exists($fn_main))
 }
 else 
 {
-	$fn_main = getinfo('template_dir') . 'main.php';
+	// main.php может находиться в каталоге main/ или в основном каталоге шаблона
+	if ($fn = mso_fe('main/main.php')) $fn_main = $fn;
+		else $fn_main = getinfo('template_dir') . 'main.php';
 	
 	// может быть задан main-файл по-умолчанию в опции main_template_default
 	if ($page_template = mso_get_option('main_template_default', 'templates', ''))

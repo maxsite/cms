@@ -124,7 +124,12 @@
 		text-decoration: @underline;
 	}
 	
-		
+	.small_caps(@s: small-caps)
+	{
+		font-variant: @s;
+	}
+	
+	
 	// дубль этих-же миксов, только без точки в начале имени — совместимость с less.js
 	// не используйте эти варианты — миксы без точки будут удалены в будущей версии MaxSite CMS
 	
@@ -240,6 +245,7 @@
 		text-decoration: @underline;
 	}
 	
+
 
 } // .f
 
@@ -357,10 +363,9 @@
 .box_shadow(param, @attr) 
 {
 	-o-box-shadow: @attr;
-	-webkit-box-shadow:@attr;
+	-webkit-box-shadow: @attr;
 	-moz-box-shadow: @attr;
 	box-shadow: @attr;
-	//behavior: url(/PIE.php);
 }
 
 .box_shadow(@x: 0, @y: 0, @blur: 3px, @color:#888) 
@@ -369,21 +374,20 @@
 	-webkit-box-shadow: @arguments;
 	-moz-box-shadow: @arguments;
 	box-shadow: @arguments;
-	//behavior: url(/PIE.php);
 }
 
 .box_shadow_inset(@x: 0, @y: 0, @blur: 3px, @color: #888) 
 {
-	box-shadow: inset @arguments;
 	-moz-box-shadow: inset @arguments;
 	-webkit-box-shadow: inset @arguments;
+	box-shadow: inset @arguments;
 }
 
 .box_shadow_inset(none) 
 {
-	box-shadow: inset none;
 	-moz-box-shadow: inset none;
 	-webkit-box-shadow: inset none;
+	box-shadow: inset none;
 }
 
 // тень текста

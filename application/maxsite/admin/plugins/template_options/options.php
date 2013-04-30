@@ -18,6 +18,9 @@
 	// проверка на обновление POST
 	if (mso_check_post_ini()) echo '<div class="update">' . t('Обновлено!', 'templates') . '</div>';
 	
+	$all = array();
+	
+	/*
 	// получим ini-файл
 	if (file_exists( getinfo('templates_dir') . 'default/options.ini'))
 	{
@@ -26,8 +29,8 @@
 	}
 	else
 	{
-		$all = array();
 	}
+	*/
 	
 	if (file_exists(getinfo('template_dir') . 'options.ini'))
 	{

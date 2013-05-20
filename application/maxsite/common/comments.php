@@ -1340,7 +1340,7 @@ function mso_comuser_lost($args = array())
 	// если опция есть, значит восстанавливаем без учета id комюзера
 	if (!isset($args['password_recovery'])) $password_recovery = false;
 	else $password_recovery = true;
-	
+
 	
 	# id комюзера, который в сессии - какой комюзер
 	# если комюзер залогинен, то будет $id_session
@@ -1349,8 +1349,10 @@ function mso_comuser_lost($args = array())
 			$id_session = $MSO->data['session']['comuser']['comusers_id'];
 	else $id_session = false;
 	
+	
 	if ( $post = mso_check_post(array('f_session_id', 'f_submit', 'f_comusers_email')) ) // это активация
 	{
+	
 		# защита рефера
 		mso_checkreferer();
 
@@ -1369,6 +1371,7 @@ function mso_comuser_lost($args = array())
 		}
 		
 		$comusers_email = trim($post['f_comusers_email']);
+		
 		if (!$comusers_email) return '<div class="' . $args['css_error']. '">' . tf('Нужно указать email'). '</div>';
 
 		if (!mso_valid_email($comusers_email)) return '<div class="' . $args['css_error']. '">' . tf('Ошибочный email'). '</div>';
@@ -1422,11 +1425,17 @@ function mso_comuser_lost($args = array())
 				return '<div class="' . $args['css_error']. '">' . tf('Данный email не зарегистрирован или не активирован'). '</div>';
 			}
 		}
-		elseif ($comusers_email and $comusers_new_password and !$comusers_activate_key) // нет пароля, но есть код
+		elseif ($comusers_email and $comusers_new_password and !$comusers_activate_key) 
+				// указан email, новый пароля, но не указан код активации
+		{
 			return '<div class="' . $args['css_error']. '">' . tf('Для установки нового пароля нужно заполнить все поля!'). '</div>';
-		elseif ($comusers_email and !$comusers_new_password and $comusers_activate_key) // нет пароля, но есть код
+		}
+		elseif ($comusers_email and !$comusers_new_password and $comusers_activate_key) 
+		{
+			// указан email и код активации, но не указан новый пароль
+			
 			return '<div class="' . $args['css_error']. '">' . tf('Для установки нового пароля нужно заполнить все поля!'). '</div>';
-
+		}
 
 		// если указано поле активации и новый пароль, то сверяем код активации с базой + email + id и если все верно,
 		// то обновляем пароль

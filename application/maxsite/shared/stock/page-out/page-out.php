@@ -23,6 +23,7 @@ class Page_out
 	var $cur_cells = 1; // текущая ячейка
 	var $close_box_grid = false; // признак, что div-строка box_grid не закрыта
 	
+	var $thumb = ''; // миниатюра для [thumb]
 	
 	function __construct()
 	{
@@ -78,7 +79,13 @@ class Page_out
 					'',
 					''
 				),
-
+				
+			'comments_count' => array
+				(
+					'',
+					''
+				),
+				
 			'autor' => array
 				(
 					'',
@@ -125,6 +132,7 @@ class Page_out
 	function load($page = array())
 	{
 		$this->page = $page;
+		$this->thumb = '';
 		
 		$this->num++; // счетчик увеличим
 		$this->last = ($this->num >= $this->max) ; // ставим признак true, если это последняя запись
@@ -226,6 +234,7 @@ class Page_out
 		$title = '';
 		$autor = '';
 		$comments = '';
+		$comments_count = ''; // только колво комментариев числом
 		$cat = '';
 		$tag = '';
 		$edit = '';
@@ -236,6 +245,7 @@ class Page_out
 		$view_count = '';
 		$meta_description = '';
 		$meta_title = '';
+		
 		
 		// title
 		if (strpos($out, '[title]') !== false)
@@ -284,6 +294,12 @@ class Page_out
 				'page_count_comments' => $this->val('page_count_comments') // колво комментов
 				)
 			);
+		}
+		
+		// только колво комментариев
+		if (strpos($out, '[comments_count]') !== false)
+		{
+			$comments_count = $this->get_formats_args('comments_count', 1) . $this->val('page_count_comments') . $this->get_formats_args('comments_count', 2);
 		}
 		
 		// mso_page_cat_link($cat = array(), $sep = ', ', $do = '', $posle = '', $echo = true, $type = 'category', $link = true
@@ -416,6 +432,7 @@ class Page_out
 		$out = str_replace('[title]', $title, $out);
 		$out = str_replace('[autor]', $autor, $out);
 		$out = str_replace('[comments]', $comments, $out);
+		$out = str_replace('[comments_count]', $comments_count, $out);
 		$out = str_replace('[cat]', $cat, $out);
 		$out = str_replace('[tag]', $tag, $out);
 		$out = str_replace('[edit]', $edit, $out);
@@ -426,6 +443,8 @@ class Page_out
 		$out = str_replace('[view_count]', $view_count, $out);
 		$out = str_replace('[meta_description]', $meta_description, $out);
 		$out = str_replace('[meta_title]', $meta_title, $out);
+		
+		$out = str_replace('[thumb]', $this->thumb, $out);
 		
 		if ($out) 
 		{

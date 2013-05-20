@@ -1852,9 +1852,9 @@ div.tabs ul.tabs-nav li.elem {
   background-image: -webkit-linear-gradient(top,#5e5e5e,#aaa);
   background-image: -o-linear-gradient(top,#5e5e5e,#aaa);
   background-image: linear-gradient(top,#5e5e5e,#aaa);
-  box-shadow: inset 0 -2px 5px #5e5e5e;
   -moz-box-shadow: inset 0 -2px 5px #5e5e5e;
   -webkit-box-shadow: inset 0 -2px 5px #5e5e5e;
+  box-shadow: inset 0 -2px 5px #5e5e5e;
 }
 div.tabs ul.tabs-nav li.elem:hover {
   background-color: #adadad;
@@ -1878,9 +1878,9 @@ div.tabs ul.tabs-nav li.tabs-current {
   background-image: -webkit-linear-gradient(top,#efefef,#F2F2F2);
   background-image: -o-linear-gradient(top,#efefef,#F2F2F2);
   background-image: linear-gradient(top,#efefef,#F2F2F2);
-  box-shadow: inset 0 3px 3px #a6a6a6;
   -moz-box-shadow: inset 0 3px 3px #a6a6a6;
   -webkit-box-shadow: inset 0 3px 3px #a6a6a6;
+  box-shadow: inset 0 3px 3px #a6a6a6;
   -webkit-transition: all 0.2s 0s ease-out;
   -moz-transition: all 0.2s 0s ease-out;
   -ms-transition: all 0.2s 0s ease-out;

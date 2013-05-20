@@ -8,8 +8,8 @@
 require_once( getinfo('common_dir') . 'comments.php' );
 
 
-$res_post = mso_comuser_lost(); // обработка отправленных данных - возвращает результат
-
+//$res_post = mso_comuser_lost(); // обработка отправленных данных - возвращает результат
+$res_post = mso_comuser_edit(); 
 
 $comuser_info = mso_get_comuser(mso_segment(2)); // получим всю информацию о комюзере
 
@@ -44,10 +44,18 @@ if ($comuser_info)
 		// если актвация не завершена, то вначале требуем её завершить
 		if ($comusers_activate_string != $comusers_activate_key) // нет активации
 		{
-			echo '<form method="post">' . mso_form_session('f_session_id');
-			echo '<p><span style="color: red; font-weight: bold;" class="users-form">'. tf('Введите ключ активации'). ':</span> 
-				 <input type="text" style="width: 200px;" class="users-form" name="f_comusers_activate_key"> ';
-			echo '<input type="submit" name="f_submit[' . $comusers_id . ']" value="'. tf('Готово'). '"></p></form>';
+			echo '<form method="post" class="fform">' . mso_form_session('f_session_id');
+			
+			echo '
+				<p><span class="ftitle w30">' . tf('Ваш email'). '</span><span><input type="email" name="f_comusers_email"></span></p>
+				
+				<p><span class="ftitle w30">' . tf('Введите ключ активации'). '</span><span><input type="text" name="f_comusers_activate_key"></span></p>
+				
+				<p><span class="w30"></span><span><input type="submit" name="f_submit[' . $comusers_id . ']" value="' .  tf('Готово') . '"></span></p>
+				
+				</form>
+				';
+				 
 			
 			echo '<p>' . tf('В случае проблем с активацией (не пришел ключ, указали ошибочный email), обращайтесь к администратору по email:') . ' <em>' . mso_get_option('admin_email', 'general', '-') . '</em></p>';
 			

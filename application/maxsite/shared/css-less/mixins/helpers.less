@@ -394,7 +394,7 @@
 .text_shadow(@x: 0, @y: 0, @blur: 3px, @color:#888)
 {
 	text-shadow: @arguments;
-	filter: e(%("dropshadow(color=%d, offx=%d, offy=%d)", @color, @horizontal, @vertical)); // IE9 and down
+	filter: e(%("dropshadow(color=%d, offx=%d, offy=%d)", @color, @x, @y)); // IE9 and down
 }
 
 

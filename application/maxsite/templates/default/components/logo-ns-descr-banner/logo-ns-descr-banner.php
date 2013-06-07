@@ -23,7 +23,13 @@
 
 $pt = new Page_out; // подготавливаем объект для вывода
 
-$logo = getinfo('stylesheet_url') . 'images/logos/' . mso_get_option('default_header_logo', 'templates', 'logo01.png');
+// если в опции явно указан адрес лого, то берем его
+$logo = trim(mso_get_option('default_header_logo_custom', 'templates', false));
+
+if (!$logo)
+{	
+	$logo = getinfo('stylesheet_url') . 'images/logos/' . mso_get_option('default_header_logo', 'templates', 'logo01.png');
+}
 
 $logo = '<img src="' . $logo . '" alt="' . getinfo('name_site') . '" title="' . getinfo('name_site') . '">';
 

@@ -15,7 +15,9 @@ if (is_type('page') and $p->val('page_type_name') == 'blog')
 				array(
 					'page_id' => $p->val('page_id'),
 					'page_categories' => $p->val('page_categories'),
-					'page_date_publish' => $p->val('page_date_publish')
+					'page_date_publish' => $p->val('page_date_publish'),
+					// 'use_category' => false, // не учитывать рубрики 
+					// 'reverse' => true, // поменять местами пункты
 				));
 	
 	$np_out = '';

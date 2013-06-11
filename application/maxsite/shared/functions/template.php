@@ -249,7 +249,11 @@ if (!function_exists('mso_default_head_section'))
 		
 		} // else style.php
 		
-		echo NT . '<link rel="stylesheet" href="' . getinfo('template_url') . 'css/print.css" media="print">';
+		
+		if (mso_fe('css/print.css'))
+		{
+			echo NT . '<link rel="stylesheet" href="' . getinfo('template_url') . 'css/print.css" media="print">';
+		}
 		
 		// если есть fonts.css, то подключаем его
 		// файл специально используется для подгрузки шрифтов через @import 

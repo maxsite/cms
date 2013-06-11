@@ -2057,10 +2057,44 @@ function mso_next_prev_page($r = array())
 	// передаем дату отдельно, она используется в function_add_custom_sql
 	mso_set_val('_sql_next_prev_pages_page_date_publish', $r['page_date_publish']);
 	
-	// вначале next
+	// $r['use_category'] — если нужно учитывать рубрику
+	if (!isset($r['use_category'])) $r['use_category'] = true;
+
+	
+	if ($r['use_category'])
+	{
+		// рубрики
+		$cat = $r['page_categories'];
+		
+		// если несколько рубрик, то ищем те, в которых
+		// category_id_parent не равен 0 — это подрубрики
+		// если такие есть, то по ним и делаем навигаци
+		if (count($r['page_categories']) > 1)
+		{
+			$all_cat = mso_cat_array_single(); // все рубрики
+			
+			foreach($r['page_categories'] as $id)
+			{
+				if ($all_cat[$id]['parents'] > 0)
+				{
+					$cat = array($id);
+					break;
+				}
+			}
+		}
+		
+		$cat = implode(',', $cat);
+	}
+	else
+	{
+		$cat = ''; // рубрика не учитывается
+	}
+	
+	
+	// next
 	if ( $pages = mso_get_pages(array(
 			'content' => false,
-			'cat_id' => implode(',', $r['page_categories']),
+			'cat_id' => $cat,
 			'order_asc' => 'asc',
 			'limit' => 1,
 			'pagination' => false,
@@ -2075,10 +2109,10 @@ function mso_next_prev_page($r = array())
 	else
 		$out['next'] = false;
 	
-	// теперь prev
+	// prev
 	if ( $pages = mso_get_pages(array(
 			'content' => false,
-			'cat_id' => implode(',', $r['page_categories']),
+			'cat_id' => $cat,
 			'order_asc' => 'desc',
 			'limit' => 1,
 			'pagination' => false,
@@ -2094,6 +2128,15 @@ function mso_next_prev_page($r = array())
 		$out['prev'] = false;
 	
 	
+	// $r['reverse'] — меняем местами пункты
+	if (isset($r['reverse']) and $r['reverse'])
+	{
+		$o = array();
+		$o['next'] = $out['prev'];
+		$o['prev'] = $out['next'];
+		$out = $o;
+	}
+
 	return $out;
 }
 

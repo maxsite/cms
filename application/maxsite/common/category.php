@@ -405,12 +405,14 @@ function _get_child($type = 'page', $parent_id = 0, $order = 'category_menu_orde
 # массив можно использовать для быстрого доступа к параметрам рубрик
 # автоматом вычисляются родители (parents) и дочерние элементы (childs)
 # дополнительный параметр level указывает на левый отступ от края списка
-function mso_cat_array_single($type = 'page', $order = 'category_name', $asc = 'ASC', $type_page = '', $cache = true)
+# $pages_detail = true — формировать детальный список записей
+function mso_cat_array_single($type = 'page', $order = 'category_name', $asc = 'ASC', $type_page = '', $cache = true, $pages_detail = true)
 {
 	if ($cache) // можно кэшировать
 	{
+		
 		// возможно, что этот список уже сформирован, поэтому посмотрим в кэше
-		$cache_key = mso_md5( __FUNCTION__ . $type . $order . $asc . $type_page );
+		$cache_key = mso_md5( __FUNCTION__ . $type . $order . $asc . $type_page . ($pages_detail ? '1' : '0') );
 		
 		$k = mso_get_cache($cache_key);
 		
@@ -530,26 +532,31 @@ function mso_cat_array_single($type = 'page', $order = 'category_name', $asc = '
 	else $cats_post = array();
 	//pr($cats_post);
 
-	foreach ($cats_post as $key=>$val) 
-	{
-		if ($type == 'page') 
+	
+	
+		foreach ($cats_post as $key=>$val) 
 		{
-			// в ключ pages доабвляем номера всех страниц рубрики
-			$cat[$val['category_id']]['pages'][] = $val['page_id'];
-			
-			// в ключ pages_detail массив данных записей: id, титул, дата, ссылка
-			$cat[$val['category_id']]['pages_detail'][$val['page_id']] = array(
-				'page_id'=>$val['page_id'],
-				'page_title'=>$val['page_title'],
-				'page_date_publish'=>$val['page_date_publish'],
-				'page_slug'=>$val['page_slug'],
-				);
+			if ($type == 'page') 
+			{
+				// в ключ pages добавляем номера всех страниц рубрики
+				$cat[$val['category_id']]['pages'][] = $val['page_id'];
+				
+				if ($pages_detail)
+				{
+					// в ключ pages_detail массив данных записей: id, титул, дата, ссылка
+					$cat[$val['category_id']]['pages_detail'][$val['page_id']] = array(
+						'page_id'=>$val['page_id'],
+						'page_title'=>$val['page_title'],
+						'page_date_publish'=>$val['page_date_publish'],
+						'page_slug'=>$val['page_slug'],
+						);
+				}
+			}
+			else
+			{
+				$cat[$val['category_id']]['links'][] = $val['links_id'];
+			}
 		}
-		else
-		{
-			$cat[$val['category_id']]['links'][] = $val['links_id'];
-		}
-	}
 
 
 	if ($cache) mso_add_cache($cache_key, $cat); // сразу в кэш добавим
@@ -779,7 +786,9 @@ function mso_get_cat_url_from_id($id = 0)
 # если второй параметр = false, то возвращается полный массив указанной рубрики
 function mso_get_cat_from_id($id = 0, $find_key = false)
 {
-	$all_cats = mso_cat_array_single();
+	static $all_cats = false;
+	
+	if ($all_cats === false) $all_cats = mso_cat_array_single();
 	
 	if (is_array($id) and count($id)>0) $id = $id[0];
 	

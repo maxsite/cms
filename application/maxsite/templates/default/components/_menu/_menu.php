@@ -51,10 +51,10 @@
 				$menu .= mso_hook('main_menu_add_comuser');
 				
 				$menu .= NR . '---';
-				$menu .= NR . 'http://max-3000.com/page/faq | ЧАВО для новичков | | icon faq';
-				$menu .= NR . 'http://max-3000.com/help | Центр помощи | | icon help';
-				$menu .= NR . 'http://forum.max-3000.com/ | Форум поддержки | | icon forum';
-				$menu .= NR . '---';
+				// $menu .= NR . 'http://max-3000.com/page/faq | ЧАВО для новичков | | icon faq';
+				// $menu .= NR . 'http://max-3000.com/help | Центр помощи | | icon help';
+				// $menu .= NR . 'http://forum.max-3000.com/ | Форум поддержки | | icon forum';
+				// $menu .= NR . '---';
 				$menu .= NR . 'logout | Выход | | icon logout';
 				$menu .= NR . ']';
 

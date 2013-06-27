@@ -1797,9 +1797,11 @@ function mso_slug($slug)
 		"„"=>"",
 
 		);
-
-		$slug = strtolower(strtr(trim($slug), $repl));
-
+		
+		$slug = strtr(trim($slug), $repl);
+		$slug = htmlentities($slug); // если есть что-то из юникода
+		$slug = strtr(trim($slug), $repl);
+		
 		# разрешим расширение .html
 		$slug = str_replace('.htm', '@HTM@', $slug);
 		$slug = str_replace('.', '', $slug);

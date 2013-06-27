@@ -1,6 +1,6 @@
 Font Awesome (c) http://fortawesome.github.com/Font-Awesome/
 
-Список всех иконок: http://fortawesome.github.com/Font-Awesome/#all-icons
+Список всех иконок: http://fortawesome.github.io/Font-Awesome/icons/
 
 
 Подключение в своём less-файле. Главное указать верный путь.

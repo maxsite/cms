@@ -48,6 +48,13 @@ input, textarea, button {
 	&:-moz-placeholder {
 		color: #999;
 	}
+    
+	&::-moz-placeholder { /* Fx19+ */
+		color: #999;
+    }
+    &:-ms-input-placeholder { /* IE10 */
+		color: #999;
+    }
 }
 
 

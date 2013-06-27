@@ -425,7 +425,10 @@
 	# из неё получается $all_meta = '<p>Нет</p>';
 	require($MSO->config['admin_plugins_dir'] . 'admin_page/all_meta.php');
 	
-	
+	# закладка файлы вынесена отдельно
+	# её результат — переменная $all_files
+	require($MSO->config['admin_plugins_dir'] . 'admin_page/all-files.php');
+		
 	$f_status_draft = $f_status_private = '';
 	$f_status_publish = 'checked';
 	

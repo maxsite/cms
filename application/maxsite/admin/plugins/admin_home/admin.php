@@ -7,12 +7,12 @@
 <ul>
 	<li><a href="http://max-3000.com/"><?= t('Официальный сайт') ?></a></li>
 	<li><a href="http://max-3000.com/help"><?= t('Центр помощи') ?></a></li>
-	<li><a href="http://max-3000.com/github"><?= t('MaxSite CMS на GitHub') ?></a></li>
 	<li><a href="http://max-3000.com/page/faq"><?= t('ЧАВО по MaxSite CMS для новичков') ?></a></li>
+	<li><a href="http://book.max-3000.com/"><?= t('Книга по MaxSite CMS') ?></a></li>
 	<li><a href="http://forum.max-3000.com/"><?= t('Форум поддержки') ?></a></li>
+	<li><a href="http://max-3000.com/github"><?= t('MaxSite CMS на GitHub') ?></a></li>
+	<li><a href="http://forum.max-3000.com/viewforum.php?f=13"><?= t('Шаблоны для MaxSite CMS') ?></a></li>
 	<li><a href="http://alexanderschilling.net/plugins"><?= t('Каталог плагинов') ?></a></li>
-	<li><a href="http://alexanderschilling.net/themes"><?= t('Каталог шаблонов') ?></a></li>
-	
 </ul>
 
 <p><?= t('Ваша версия <strong>MaxSite CMS</strong>') ?>: <?= getinfo('version') ?></p>

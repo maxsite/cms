@@ -17,74 +17,126 @@
 	// по сегменту определяем текущий каталог в uploads
 	// если каталога нет, скидываем на дефолтный ''
 
-	$current_dir = $current_dir_h2 = mso_segment(3);
+	$current_dir = $segments = mso_segment(3);
 	if ($current_dir) $current_dir .= '/';
-
+	
+	if ($current_sub_dir = mso_segment(4))
+	{
+		$current_dir .= $current_sub_dir . '/';
+		$segments .= '/' . $current_sub_dir;
+	}
+	
 	$path = getinfo('uploads_dir') . $current_dir;
-	if ( ! is_dir($path) ) // нет каталога
+	
+	if (!is_dir($path) ) // нет каталога
 	{
 		$path = getinfo('uploads_dir');
-		$current_dir = $current_dir_h2 = '';
+		$current_dir = '';
+		$current_sub_dir = '';
 	}
-	else
-	{
-		if ($current_dir_h2) $current_dir_h2 = '/' . $current_dir_h2;
-	}
-
 
 	# новый каталог - создаем до того, как отобразить навигацию
 	if ( $post = mso_check_post(array('f_session3_id', 'f_cat_name', 'f_newcat_submit')) )
 	{
 		mso_checkreferer();
 
-		$f_cat_name = mso_slug($post['f_cat_name']);
-
-		if (!$f_cat_name)
-			echo '<div class="error">' . t('Нужно ввести имя каталога') . '</div>';
+		// возможно указан подкаталог через /
+		$f_cat_name = str_replace('/', '__mso_sub__', $post['f_cat_name']);
+		$f_cat_name = str_replace('.', '', $f_cat_name); // точки не может быть вовсе
+		$f_cat_name = mso_slug($f_cat_name);
+		
+		$f_cat_name = trim(str_replace('__mso_sub__', ' ', $f_cat_name));
+		
+		// подкаталог может быть только один
+		// делаем через массив — так проще
+		$f_cat_name = explode(' ', $f_cat_name);
+		$f_cat_name = array_slice($f_cat_name, 0, 2); // срез — максимум 2 сегмента
+		
+		// pr($f_cat_name);
+		
+		// базовый каталог должен уже быть создан
+		if (isset($f_cat_name[1]) and $f_cat_name[1] 
+			and !is_dir( getinfo('uploads_dir') . $f_cat_name[0])
+		) 
+		{
+			echo '<div class="error">' . sprintf(t('Вначале создайте каталог <strong>%s</strong>!'), $f_cat_name[0]) . '</div>';
+		}
 		else
 		{
-			$new_dir = getinfo('uploads_dir') . $f_cat_name;
-
-			if ( is_dir($new_dir) ) // уже есть
+			$f_cat_name = implode('/', $f_cat_name);
+			
+			//_pr($f_cat_name);
+			
+			if (!$f_cat_name)
 			{
-				echo '<div class="error">' . t('Такой каталог уже есть!') . '</div>';
+				echo '<div class="error">' . t('Нужно ввести имя каталога') . '</div>';
 			}
 			else
 			{
-				@mkdir($new_dir, 0777); // нет каталога, пробуем создать
-				@mkdir($new_dir . '/_mso_i', 0777); // нет каталога, пробуем создать
-				@mkdir($new_dir . '/mini', 0777); // нет каталога, пробуем создать
-				echo '<div class="update">' . sprintf(t('Каталог <strong>%s</strong> создан!'), $f_cat_name)
-					. '</div>';
+				$new_dir = getinfo('uploads_dir') . $f_cat_name;
+
+				if ( is_dir($new_dir) ) // уже есть
+				{
+					echo '<div class="error">' . sprintf(t('Каталог <strong>%s</strong> уже существует!'), $f_cat_name) . '</div>';
+				}
+				else
+				{
+					@mkdir($new_dir, 0777); // нет каталога, пробуем создать
+					@mkdir($new_dir . '/_mso_i', 0777); // нет каталога, пробуем создать
+					@mkdir($new_dir . '/mini', 0777); // нет каталога, пробуем создать
+					echo '<div class="update">' . sprintf(t('Каталог <strong>%s</strong> создан!'), $f_cat_name)
+						. '</div>';
+				}
 			}
 		}
 	}
 
 	// нужно вывести навигацию по каталогам в uploads
-	$all_dirs = directory_map(getinfo('uploads_dir'), true); // только в uploads
-	asort($all_dirs);
+	$all_dirs = directory_map(getinfo('uploads_dir'), 3); // карта каталога uploads — до 3 уровня
+	
+	ksort($all_dirs);
+	
 	$out = '';
 	
+	// pr($all_dirs);
 	
 	echo '<p class="admin_files_nav"><b>' . t('Каталог:') . '</b> ';
 	
 	echo '<select class="admin_file_filtr">';
-	
-	$selected = (mso_segment(3)) ? '' : ' selected';
-	
+
+	$selected = ($segments) ? '' : ' selected';
 	echo '<option value="' . getinfo('site_admin_url') . 'files"' . $selected . '>uploads</option>';
 	
-	foreach ($all_dirs as $d)
+	foreach ($all_dirs as $n=>$d)
 	{
-		// это каталог
-		if (is_dir( getinfo('uploads_dir') . $d) and $d != '_mso_float' and $d != 'mini' and $d != '_mso_i' and $d != 'smiles')
-		{
-			
-			$selected = (mso_segment(3) == $d) ? ' selected' : '';
-			
-			echo '<option value="' . getinfo('site_admin_url'). 'files/' . $d .'"' . $selected . '>' . $d . '</option>';
-			
+		// нам нужны только каталоги
+		if (!is_array($d)) continue; // каталоги — это массив
+		if ($n == 'mini' or $n == '_mso_i' or $n == '_mso_float' or $n == 'smiles') continue; // эти нас не интересуют
 
+		if ($n != '_pages') // этот не выводим
+		{
+			$selected = ($segments == $n) ? ' selected' : '';
+			echo '<option value="' . getinfo('site_admin_url'). 'files/' . $n . '"' . $selected . '>' . $n . '</option>';
+		}
+		
+		// посмотрим, что там за подкаталоги 
+		foreach ($d as $n1=>$d1)
+		{
+			if (!is_array($d1)) continue; // каталоги — это массив
+			if ($n1 == 'mini' or $n1 == '_mso_i') continue; // эти нас не интересуют
+			
+			if ($n != '_pages') // если это _pages, то добавляем только текущий подкаталог
+			{
+				$selected = ($segments == $n . '/' . $n1) ? ' selected' : '';
+				echo '<option value="' . getinfo('site_admin_url'). 'files/' . $n . '/' . $n1 .'"' . $selected . '>' . $n . '/' . $n1 . '</option>';
+			}
+			else
+			{
+				if ($selected = ($segments == $n . '/' . $n1) ? ' selected' : '')
+				{
+					echo '<option value="' . getinfo('site_admin_url'). 'files/' . $n . '/' . $n1 .'"' . $selected . '>' . $n . '/' . $n1 . '</option>';
+				}
+			}
 		}
 	}
 
@@ -112,7 +164,7 @@
 	if (!file_exists( $fn_mso_descritions )) // файла нет, нужно его создать
 		write_file($fn_mso_descritions, serialize(array())); // записываем в него пустой массив
 
-	if (file_exists( $fn_mso_descritions )) // файла нет, нужно его создать
+	if (file_exists( $fn_mso_descritions )) 
 	{
 		// массив данных: fn => описание )
 		$mso_descritions = unserialize( read_file($fn_mso_descritions) ); // получим из файла все описания
@@ -203,7 +255,8 @@
 		require_once( getinfo('common_dir') . 'uploads.php' ); // функции загрузки 
 		
 		// параметры для mso_upload
-		$mso_upload_ar1 = array( // конфиг CI-библиотеки upload
+		// конфиг CI-библиотеки upload
+		$mso_upload_ar1 = array( 
 				'upload_path' => getinfo('uploads_dir') . $current_dir,
 				'allowed_types' => $allowed_types,
 			);
@@ -265,8 +318,8 @@
 	echo '
 		<div class="new_cat_upload">
 		<form method="post">' . mso_form_session('f_session3_id') .
-		'<p><b>'. t('Новый каталог'). ':</b> <input type="text" name="f_cat_name" value="">
-		<input type="submit" name="f_newcat_submit" value="'. t('Создать'). '" onClick="if(confirm(\'' . t('Создать каталог в uploads?') . '\')) {return true;} else {return false;}" ></p>
+		'<p><b>' . t('Новый каталог'). ':</b> <input type="text" name="f_cat_name" value="">
+		<input type="submit" name="f_newcat_submit" value="' . t('Создать') . '" onClick="if(confirm(\'' . t('Создать каталог в uploads?') . '\')) {return true;} else {return false;}" ></p>
 		</form></div>';
 
 	// размер
@@ -333,7 +386,6 @@
 		echo '<input type="file" name="f_userfile[]" size="90">';
 		if ($i < $admin_files_field_count) echo '<br>';
 	}	
-	
 	
 	
 	echo '&nbsp;<input type="submit" name="f_upload_submit" value="' . t('Загрузить') . '">&nbsp;<input type="reset" value="' . t('Сбросить') . '"></p>

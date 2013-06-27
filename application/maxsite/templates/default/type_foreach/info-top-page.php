@@ -9,6 +9,8 @@
 */
 
 // следующая-предыдущая запись
+$np_out = '';
+
 if (is_type('page') and $p->val('page_type_name') == 'blog')
 {
 	$np = mso_next_prev_page(
@@ -19,8 +21,6 @@ if (is_type('page') and $p->val('page_type_name') == 'blog')
 					// 'use_category' => false, // не учитывать рубрики 
 					// 'reverse' => true, // поменять местами пункты
 				));
-	
-	$np_out = '';
 	
 	if ($np['next'])
 	{

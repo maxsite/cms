@@ -1,0 +1,61 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+// tabs.less
+// подключать - @import url('mixins/tabs.less');
+
+// использовать только копируя в каталог шаблона
+
+// Использование:
+// @import url('mixins/tabs.less');
+// div.tabs {
+//	 .tabs(gray);
+// }
+
+.tabs(
+	@nav_tab: #5A85DD, // основной цвет табов
+	@box_bg: #F2F2F2, // фон содержимого
+	@nav_text: white, // цвет текста табов
+	@box_text: gray // цвет текста текущего таба
+)
+{
+	ul.tabs-nav { // навигация
+		
+		margin-left: 10px;
+		
+		li.elem { // пункт навигации
+			margin: 0 2px 0 0;
+			padding: 10px 15px;
+			color: @nav_text;
+			.bold;
+			.background_gradient(darken(@nav_tab, 30%), @nav_tab);
+			.box_shadow_inset(0, -2px, 5px, darken(@nav_tab, 30%));
+			
+			&:hover { // при наведении
+				.background_gradient(lighten(@nav_tab, 3%), lighten(@nav_tab, 1%));
+			}
+		}
+		
+		li.tabs-current { // текущий пункт
+			
+			color: @box_text;
+			
+			.background_gradient(darken(@box_bg, 1%), @box_bg);				
+			.box_shadow_inset(0, 3px, 3px, darken(@box_bg, 30%));
+			
+			.transition(all 0.2s 0s ease-out);
+			
+			&:hover { // при наведении
+				color: darken(@box_text, 30%);
+				
+				.background_gradient(darken(@box_bg, 3%), @box_bg);
+			}
+		}
+	}
+	
+	div.tabs-box { // содержимое каждого элемента
+		background: @box_bg;
+		.border_radius(5px);
+		.box_shadow(0, 0, 3px, darken(@box_bg, 30%));
+	}
+	
+} // .tabs

@@ -150,6 +150,7 @@ function admin_page_hide_blocks($arg = array())
 		</script>
 		';
 		
+		
 		//		$("li.admin-menu-page a").text("' . t('Список/правка') . '");
 	}
 }

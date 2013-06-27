@@ -432,27 +432,20 @@ table.new_or_edit {
 			.border(#3C769D);
 		}
 		
+		div.page_meta_container {
+				margin: 20px 0 10px 0;
+		}
+			
 		div.page_meta {
 			
 			h3 {
-				margin: 25px 0 0 0;
+				margin: 5px 0 0 0;
+				font-size: 11pt;
 			}
 			
 			p {
-				margin: 0;
-			}
-			
-			div {
-				background: #F0F0F0;
-				padding: 5px;
-				margin: 10px 0;
-				.border(1px, #C7C7C7);
-				.border_radius(10px);
-				
-				h3 {
-					margin: 0;
-					font-size: 10pt;
-				}
+				margin: 0 0 15px 0;
+				color: #555;
 			}
 			
 			input[type="text"], 
@@ -466,7 +459,48 @@ table.new_or_edit {
 				width: 99%;
 			}
 			
+			div.tabs {wid1th: 100%;}
+			
+			div.tabs-box.tabs-visible {display: block; }
+			
+			ul.tabs-nav {margin: 0; padding: 0; height: 30px; width: 100%; list-style: none;}
+			
+			ul.tabs-nav li.elem {
+				float: left; 
+				display: inline; 
+				position: relative; 
+				line-height: 30px; 
+				height: 30px; 
+				margin: 0 1px 0 0; 
+				padding: 0 10px; 
+				cursor: pointer; 
+				background: #BAC6CC; 
+				color: #395766; 
+				border-radius: 8px 8px 0 0; 
+				font-size: .9em;
+			}
+			
+			ul.tabs-nav li.elem:hover {
+				color: #fff; 
+				background: #648593;
+			}
+			
+			ul.tabs-nav li.tabs-current {
+				color: #fff; 
+				background: #5A7682;
+			}
+			
+			div.tabs-box {
+				display: none; 
+				border: 1px solid #DDD; 
+				background: #EFEFEF; 
+				padding: 10px; 
+				border-radius: 0 8px 0 0;
+			}
+			
 		}
+		
+		
 	}
 	
 	td.page_info {
@@ -888,6 +922,8 @@ div.pagination {
 	}
 	
 }
+
+
 
 
 // маленькое меню

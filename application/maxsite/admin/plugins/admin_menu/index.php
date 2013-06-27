@@ -16,10 +16,12 @@ function admin_menu_autoload($args = array())
 # выводит меню в админке
 function admin_menu_menu($args = array()) 
 {
-	global $admin_menu, $MSO;
+	global $admin_menu, $admin_menu_bread, $MSO;
 	
 	$admin_url = getinfo('site_admin_url');
-		
+	
+	$admin_menu_bread = ''; // хлебные крошки
+	
 	$nr = "\n";
 	$out = '';
 	
@@ -50,12 +52,17 @@ function admin_menu_menu($args = array())
 	
 	foreach ($admin_menu1 as $key => $value)
 	{
+		
 		$out .= $nr . '<ul class="admin-menu admin-menu-' . ($key ? $key : 'beginning') . '">';
-		$out .= $nr . '<li class="admin-menu-top"><a href="#" class="admin-menu-section">' . _mso_del_menu_pod($value['']) . '</a>';
-
+		
+		$out .= $nr . '<li class="admin-menu-top"><a href="#" class="admin-menu-section admin-menu-section-' . ($key ? $key : 'beginning') . '">' . _mso_del_menu_pod($value['']) . '</a>';
+		
+		
 		if (count($value)>1 )
 		{
+			
 			$out .= $nr . '    <ul class="admin-submenu">';
+			
 			foreach ($value as $url => $name)
 			{
 				if ( $value[''] == $name ) continue;
@@ -63,6 +70,11 @@ function admin_menu_menu($args = array())
 				if ($url == $cur_url or $url == $cur_url2) 
 				{
 					$selected = ' class="admin-menu-selected admin-menu-' . mso_slug($url) . '"';
+					
+					if (!$admin_menu_bread) // хлебные крошки
+					{
+						$admin_menu_bread = _mso_del_menu_pod($value['']) . ' &gt; ' . _mso_del_menu_pod($name);
+					}
 				}
 				else 
 				{

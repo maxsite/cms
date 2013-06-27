@@ -184,10 +184,10 @@ if ($pages) // есть страницы
 	
 	echo '</ul>';
 	
-	echo '</div></div></div>';
-	
 	mso_hook('pagination', $pagination);
 }
+
+if ($pages or $categories or $tags) echo '</div></div></div>';
 
 if (!$pages and !$categories and !$tags)
 {

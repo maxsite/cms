@@ -163,7 +163,7 @@
 			<div class="page_status">
 				
 				<a style="display: block; float: right;" href="'. $MSO->config['site_admin_url'] 
-						. 'files" target="_blank" class="page_files">' . t('Страница «Загрузки»') . '</a>
+						. 'files" target="_blank" class="page_files">' . t('Загрузки') . '</a>
 						
 				<p class="page_status">
 					<label><input name="f_status[]" type="radio" ' . $f_status_publish . ' value="publish" id="f_status_publish"> ' . t('Опубликовать') . '</label> 
@@ -175,13 +175,29 @@
 				<input type="submit" name="' . $name_submit . '" value="' . t('Готово') . '" class="wymupdate"> ' . $f_bsave . ' <span class="autosave-editor"></span>
 			</div>
 			
-			<div>' 
+			<div class="page_meta_container">' 
+				. mso_load_jquery('jquery.cookie.js')
+				. mso_load_script(getinfo('plugins_url'). 'tabs/tabs.js')
 				. mso_hook('admin_page_form_q_files') 
 				. mso_hook('admin_page_form_pre_all_meta') 
 				. '<div class="block_page page_meta">
-					<h3>' . t('Дополнительные поля') . '</h3>
+					<div class="tabs_widget tabs_widget_000">
+					<div class="tabs">
+						<ul class="tabs-nav">
+							<li class="elem tabs-current"><span>' . t('Дополнительные поля') . '</span></li>
+							<li class="elem"><span>Файлы</span></li>
+						</ul>
+						<div class="clearfix"></div>
+						<div class="tabs-box tabs-visible">
 					' . $all_meta . '
+						</div>
+						<div class="tabs-box">
+						' . $all_files . '
+						</div>
+					</div>
+					
 					' . mso_hook('admin_page_form_add_all_meta') . '
+				</div>
 				</div>
 			</div>
 			<input type="submit" name="' . $name_submit . '" value="' . t('Готово') . '" class="wymupdate">

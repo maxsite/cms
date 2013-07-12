@@ -1,0 +1,53 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+
+div.date-menu {
+	
+	> div.wrap {
+	}
+	
+	// стили для разных main-шаблонов в отдельном файле 
+	@import url('components/_main-width.less');
+	
+	div.r1 {
+		.column_width(2, 7, 3%);
+		.f > size(13px);
+		padding: 8px 0 0 30px;
+	}
+
+	div.r2 {
+		.column_width(5, 7, 3%);
+		
+		div.MainMenu {
+			
+			> div.wrap {
+				border: none;
+			}
+			
+			ul.menu {
+				float: right;
+			}
+		}
+	}
+	
+	@media @MOBILE 
+	{
+		div.r1 {
+			width: auto;
+		}
+		
+		div.r2 {
+			width: auto;
+			float: right;
+		}
+	}
+}
+
+div.date-menu {
+	.bg(@MENU_COLOR_BG);
+
+	div.r1 {
+		color: #fff;
+	}
+
+}

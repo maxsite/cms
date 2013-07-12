@@ -8,8 +8,8 @@
 	$plugin_url = $MSO->config['site_admin_url'] . 'sidebars';
 	
 	// само меню
-	$a  = mso_admin_link_segment_build($plugin_url, '', t('Настройки сайдбаров'), 'select') . ' | ';
-	$a .= mso_admin_link_segment_build($plugin_url, 'widgets', t('Настройка виджетов'), 'select');
+	$a  = mso_admin_link_segment_build($plugin_url, '', t('Настройки сайдбаров'), 'select', 'sidebars-set') . ' ';
+	$a .= mso_admin_link_segment_build($plugin_url, 'widgets', t('Настройка виджетов'), 'select', 'sidebars-widgets');
 	
 	echo $a;
 ?>

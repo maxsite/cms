@@ -40,14 +40,14 @@
 ?>
 	<h1><?= t('Плагины') ?></h1>
 	<p class="info"><?= t('Плагины расширяют стандартные возможности сайта. Здесь вы можете включить или отключить плагины. Если вы деинсталируете плагин, то это удаляет его настройки, что позволяет избежать «замусоривания» базы данных.') ?></p>
-	<p class="info"><?= t('Другие плагины вы можете найти на форуме <a href="http://forum.max-3000.com/viewforum.php?f=6">MaxSite CMS</a> или в <a href="http://alexanderschilling.net/plugins">каталоге плагинов</a>.') ?></p>
+	<p class="info"><?= t('Другие плагины вы можете найти на форуме в <a href="http://forum.max-3000.com/viewforum.php?f=17">каталоге плагинов</a>.') ?></p>
 
 <?php
 	// для вывода будем использовать html-таблицу
 	$CI->load->library('table');
 	
 	$tmpl = array (
-					'table_open'		  => '<table class="page tablesorter" border="0" width="99%" id="pagetable">',
+					'table_open'		  => '<table class="page tablesorter" id="pagetable">',
 					'row_alt_start'		  => '<tr class="alt">',
 					'cell_alt_start'	  => '<td class="alt">',
 			  );
@@ -114,7 +114,7 @@
 						'options_url' => getinfo('site_admin_url') . 'plugin_XXX', // ссылка на страницу опций
 					*/
 					
-					$name = isset($info['name']) ? mso_strip($info['name']) : '';
+					$name = $name_plu = isset($info['name']) ? mso_strip($info['name']) : '';
 					$version = isset($info['version']) ? $info['version'] : '';
 					$description = isset($info['description']) ? $info['description'] : '';
 					$author = isset($info['author']) ? mso_strip($info['author']) : '';
@@ -141,7 +141,7 @@
 							// есть опции
 							$status = '<a title="' . t('Настройки плагина') . '" href="' . getinfo('site_admin_url') . 'plugin_options/' . $dir . '">' . t('опции') . '</a>';
 							
-							$opt_url[] = '<a href="' . getinfo('site_admin_url') . 'plugin_options/' . $dir . '">' . $dir . '</a>  ';
+							$opt_url[] = '<a href="' . getinfo('site_admin_url') . 'plugin_options/' . $dir . '" title="' .htmlspecialchars($name_plu) . '">' . $dir . '</a>  ';
 						}
 						else
 						{
@@ -154,7 +154,7 @@
 						{	
 							$status .= ' <a href="' . $options_url . '" title="' . t('Настройки плагина') . '">' . t('опции') . '</a>';
 							
-							$opt_url[] = '<a href="' . $options_url . '">' . $dir0 . '</a>  ';
+							$opt_url[] = '<a href="' . $options_url . '" title="' .htmlspecialchars($name_plu) . '">' . $dir0 . '</a>  ';
 						}
 						
 					}
@@ -202,8 +202,8 @@
 	
 		# добавим строчку для дополнительного действия
 		$table1 .= '<p>
-					<input type="submit" name="f_deactivate_submit" value="&nbsp;- &nbsp;&nbsp;' . t('Выключить') . '">
-					<input type="submit" name="f_uninstall_submit" value="&nbsp;x&nbsp;&nbsp;' . t('Деинсталировать') . '">
+					<button type="submit" name="f_deactivate_submit" class="i plugin-deactivate">' . t('Выключить') . '</button>
+					<button type="submit" name="f_uninstall_submit" class="i plugin-uninstall">' . t('Деинсталировать') . '</button>
 					</p>';
 	
 	}
@@ -229,7 +229,7 @@
 		$table2 = $CI->table->generate(); // вывод подготовленной таблицы
 	
 		# добавим строчку для дополнительного действия
-		$table2 .= '<p><input type="submit" name="f_activate_submit" value="&nbsp;+ &nbsp;&nbsp;' . t('Включить') . '"></p>';
+		$table2 .= '<p><button type="submit" name="f_activate_submit" class="i plugin-activate">' . t('Включить') . '</button></p>';
 	}
 	else $table2 = '';
 		
@@ -243,8 +243,8 @@
 		
 	// быстрые настройки плагинов
 
-	echo '<p><strong>Настройки плагинов:</strong> '
-		. str_replace('  ', ' | ', trim(implode(' ', $opt_url)))
+	echo '<p class="nav"><strong>' . t('Настройки') . '</strong> '
+		. str_replace('  ', '<span class="sep"> </span>', trim(implode(' ', $opt_url)))
 		.'</p>';
 
 	// добавляем форму, а также текущую сессию

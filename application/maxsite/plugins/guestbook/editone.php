@@ -10,8 +10,8 @@
 	# сделаем меню горизонтальное в текущей закладке
 	// основной url этого плагина - жестко задается
 	$plugin_url = getinfo('site_admin_url') . 'guestbook';
-	$a  = mso_admin_link_segment_build($plugin_url, '', t('Настройки гостевой книги'), 'select') . ' | ';
-	$a .= mso_admin_link_segment_build($plugin_url, 'edit', t('Редактирование отзывов'), 'select');
+	$a  = mso_admin_link_segment_build($plugin_url, '', t('Настройки гостевой книги'), 'select', 'i book') . ' ';
+	$a .= mso_admin_link_segment_build($plugin_url, 'edit', t('Все отзывы'), 'select', 'i comments-all');
 	echo $a;
 ?>
 </div>
@@ -141,12 +141,52 @@ if ($query->num_rows() > 0)
 			}
 			elseif ($key != 'text') // для всех кроме text - input
 			{
-				$val_out = '<input name="f_fields_guestbook[' . $key . ']" type="text" style="width: 99%;" value="' . $val . '">';
+				$val_out = '<input name="f_fields_guestbook[' . $key . ']" type="text" value="' . $val . '">';
 			}
 			else
 			{
-				$val_out = '<textarea name="f_fields_guestbook[' . $key . ']" style="width: 99%; height: 200px;">' . $val . '</textarea>';
+				$val_out = '<textarea name="f_fields_guestbook[' . $key . ']" rows="10">' . $val . '</textarea>';
 			}
+			
+			$key = str_replace( 
+				array(
+					'id', 
+					'ip', 
+					'browser', 
+					'date', 
+					'name', 
+					'text', 
+					'title', 
+					'email', 
+					'icq', 
+					'site', 
+					'phone', 
+					'custom1', 
+					'custom2', 
+					'custom3', 
+					'custom4', 
+					'custom5',
+					'approved'
+					),
+				array(
+					'ID', 
+					'IP', 
+					'Браузер', 
+					'Дата', 
+					'Имя', 
+					'Текст', 
+					'Заголовок', 
+					'Email', 
+					'ICQ', 
+					'Сайт', 
+					'Телефон', 
+					'Custom1', 
+					'Custom2', 
+					'Custom3', 
+					'Custom4', 
+					'Custom5',
+					'Модерация'
+				), $key);
 			
 			$CI->table->add_row('<strong>' . $key . '</strong>', $val_out);
 		}
@@ -155,12 +195,11 @@ if ($query->num_rows() > 0)
 
 	echo '<form action="" method="post">' . mso_form_session('f_session_id');
 	echo $CI->table->generate(); // вывод подготовленной таблицы
-	echo '<input type="submit" name="f_submit_guestbook" value="' . t('Изменить', 'admin') . '" style="margin: 10px 0;">';
-	echo ' <input type="submit" name="f_submit_guestbook_delete" onClick="if(confirm(\'' . t('Удалить отзыв?') . '\')) {return true;} else {return false;}" value="' . t('Удалить отзыв') . '">';
+	echo ' <button type="submit" name="f_submit_guestbook_delete" class="i delete" onClick="if(confirm(\'' . t('Удалить отзыв?') . '\')) {return true;} else {return false;}">' . t('Удалить отзыв') . '</button>';
+	echo '<button type="submit" name="f_submit_guestbook" class="i save" style="margin: 10px 0;">' . t('Сохранить') . '</button>';
 	echo '</form>';
 
 }
 
 
-
-?>
+# end file

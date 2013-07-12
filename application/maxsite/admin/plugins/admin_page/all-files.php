@@ -42,15 +42,39 @@ if ($n = mso_segment(3)) // указан N номер записи
 	}
 	
 	
-	$all_files = '<a href="' . getinfo('site_admin_url') . 'files/' . $current_dir . '" target="_blank">' . t('Управление файлами') . '</a> | <a href="#" id="all-files-update">' . t('Обновить') . '</a> <div class="clearfix"></div>';
+	$all_files = '<div class="all-files-nav"><a href="' . getinfo('site_admin_url') . 'files/' . $current_dir . '" target="_blank" class="goto-files">' . t('Управление файлами') . '</a> <a href="#" id="all-files-update" class="all-files-update">' . t('Обновить') . '</a></div>';
 	
 	// скрипт выполняет аякс
 	// первый раз при загрузке страницы
 	// после по клику на ссылке Обновить
+	
+	// для лайтбокса проверяем наличие функции из плагина lightbox_head
+	
+	if (!function_exists('lightbox_head')) $lightbox = '';
+	else
+	{
+		$url = getinfo('plugins_url') . 'lightbox/';
+		$t_izob = t('Изображение');
+		$t_iz = t('из');
+		
+		$lightbox = <<<EOF
+				var lburl = "{$url}images/";
+				$("a.lightbox").lightBox({
+					imageLoading: lburl+"lightbox-ico-loading.gif",
+					imageBtnClose: lburl+"lightbox-btn-close.gif",
+					imageBtnPrev: lburl+"lightbox-btn-prev.gif",
+					imageBtnNext: lburl+"lightbox-btn-next.gif",
+					imageBlank: lburl+"lightbox-blank.gif",
+					txtImage: "{$t_izob}",
+					txtOf: "{$t_iz}",
+				});
+EOF;
+	}
+	
+	
 	$all_files .= '
 <script>
 	$(function(){
-		
 		$.post(
 			"' . getinfo('ajax') . base64_encode('admin/plugins/admin_page/all-files-update-ajax.php') . '",
 			{
@@ -59,6 +83,7 @@ if ($n = mso_segment(3)) // указан N номер записи
 			function(data)
 			{
 				$("#all-files-result").html(data);
+				' . $lightbox . '
 			}
 		);
 	
@@ -74,16 +99,29 @@ if ($n = mso_segment(3)) // указан N номер записи
 				function(data)
 				{
 					$("#all-files-result").html(data);
+					' . $lightbox . '
 				}
 			);
 			return false;
 		});
 	});
+	
+	function addImgPage(img, t) {
+		var e = $("input[name=\'f_options[image_for_page]\']");
+		if ( e.length > 0 ) 
+		{
+			e.val(img);
+			alert("' . t('Установлено:') . ' " + img);
+		}
+	}
+	
 </script>
 
-<div id="all-files-result"></div>
-';
+<script src="'. getinfo('plugins_url') . 'comment_smiles/comment_smiles.js"></script>
 
+<div id="all-files-result">Загрузка...</div>
+
+';
 }
 else
 {

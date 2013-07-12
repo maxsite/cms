@@ -1,4 +1,4 @@
-<?php 
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 
 	if( !is_array($list = mso_get_option('samborsky_ping_list','plugins')) ){
 		$list = array();
@@ -12,12 +12,14 @@
 			$list[$key] = trim($value);
 		}
 
-		mso_add_option('samborsky_ping_list',array_unique($list),'plugins');
+		mso_add_option('samborsky_ping_list', array_unique($list),'plugins');
 	}
 	
 	$string_lists = '';
-	foreach( $list as $key => $value ){
-		if( !empty($value) ){
+	foreach( $list as $key => $value )
+	{
+		if( !empty($value) )
+		{
 			$string_lists .= $value . "\n";
 		}
 	}
@@ -29,15 +31,15 @@
 Список пинг сервисов (дубли удалятся)
 <br>
 <form action="" method="post">
-	<textarea name="samborsky_ping_list" style="width: 80%; height: 200px;"><?= $string_lists ?></textarea>
-	<p><input type="submit" value="Сохранить" name="save_submit"></p>
+	<textarea name="samborsky_ping_list" rows="10"><?= $string_lists ?></textarea>
+	<p><button type="submit" class="i save" name="save_submit">Сохранить</button></p>
 </form>
 
 
 <br><br>
-Ручной запуск пингов
+
 <form action="" method="post">
-	<p><input type="submit" value="Запустить" name="submit_ping_start"></p>
+	<p><button type="submit" class="i execute" name="submit_ping_start">Ручной запуск пингов</button></p>
 </form>
 
 <?
@@ -52,7 +54,7 @@
 		$CI->load->library('table');
 		$CI->table->add_row('<strong>№</strong>','<strong>Сервис</strong>','<strong>Результат</strong>');
 		$CI->table->set_template(array(
-			'table_open' => '<table width="90%" border="0" cellpadding="0" cellspacing="6">'
+			'table_open' => '<table border="0" cellpadding="0" cellspacing="6">'
 		));
 
 		$CI->load->library('xmlrpc');

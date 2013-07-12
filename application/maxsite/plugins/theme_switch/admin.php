@@ -21,9 +21,9 @@
 		$options['templates'] = $post['f_templates'];
 		
 		$options['show_panel'] = isset($post['f_show_panel']) ? 1 : 0;
-		$options['height_img'] = (int) $post['f_height_img'];
+		//$options['height_img'] = (int) $post['f_height_img'];
 		
-		if ($options['height_img'] < 1 or $options['height_img'] > 500) $options['height_img'] = 125;
+		//if ($options['height_img'] < 1 or $options['height_img'] > 500) $options['height_img'] = 125;
 		
 		// переделаем массив в [default] => Default из info.php [name]
 		foreach ($options['templates'] as $dir=>$val)
@@ -73,20 +73,21 @@ $(this).bind('mousemove', function(e){
 .tooltip{
 	position: absolute;
 	width: 260px;
-	height: 235px;
-	color: #333333;
+	height: 260px;
+	color: #333;
 	padding: 3px 0;
 	background: #FFFFFF;
 	border: 1px solid silver;
 	text-align: center;
-	-webkit-box-shadow: #606060 0px 0px 7px; -moz-box-shadow: #606060 0px 0px 7px; box-shadow: #606060 0px 0px 7px; behavior: url(/PIE.php);
-	-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; behavior: url(/PIE.php);
+	box-shadow: #606060 0px 0px 7px;
+	border-radius: 5px;
 }
 .tooltip span{
 	display: block;
 	font-weight: bold;
 	color: vavy;
 	font-size: 1.5em;
+	margin: 10px 0 0 0;
 }
 </style>
 
@@ -105,13 +106,14 @@ $(this).bind('mousemove', function(e){
 		
 		if ($options['show_panel']) $checked = ' checked="checked"';
 			else $checked = '';
-		$form .= '<p><label><input type="checkbox" name="f_show_panel"' . $checked . '> ' . t('Отображать верхнюю панель') . '</label></p>';
+		$form .= '<p><label><input type="checkbox" name="f_show_panel"' . $checked . '> ' . t('Отображать верхнюю панель') . '</label></p><hr>';
 		
+		/*
 		$form .= '<p><label>' 
 				. t('Высота изображений в верхней панели')
 				. ' <input type="text" name="f_height_img" size="4" value="' . $options['height_img'] . '"> ' 
 				. ' px</label></p><hr>';
-		
+		*/
 
 		// получаем все шаблоны на диске
 		// выводим их списком с чекбоксами
@@ -134,7 +136,11 @@ $(this).bind('mousemove', function(e){
 				}
 				else $iname = 'not info.php!';
 				
-				if (file_exists( $templates_dir . $dir . '/screenshot.jpg' ))
+				if (file_exists( $templates_dir . $dir . '/screenshot.png' ))
+				{
+					$scr = '<img src=' . getinfo('templates_url') . $dir . '/screenshot.png>';
+				}
+				elseif (file_exists( $templates_dir . $dir . '/screenshot.jpg' ))
 				{
 					$scr = '<img src=' . getinfo('templates_url') . $dir . '/screenshot.jpg>';
 				}
@@ -148,7 +154,7 @@ $(this).bind('mousemove', function(e){
 
 		echo '<form method="post">' . mso_form_session('f_session_id');
 		echo $form;
-		echo '<input type="submit" name="f_submit" value="' . t('Сохранить изменения') . '" style="margin: 25px 0 5px 0;">';
+		echo '<button type="submit" name="f_submit" class="i save">' . t('Сохранить изменения') . '</button>';
 		echo '</form>';
 
 ?>

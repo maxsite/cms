@@ -27,16 +27,30 @@ $block = mso_get_option('ns-menu-block-block', 'templates', '');
 
 if (!is_type('home')) $name_site = $pt->link(getinfo('siteurl'), $name_site);
 
+// цвет в опции
+if ($style_ns = mso_get_option('ns-menu-block-name_site-color', 'templates', ''))
+{
+	$style_ns = 'color: #' . $style_ns;
+}
+
+// цвет в опции
+if ($style_bl = mso_get_option('ns-menu-block-block-color', 'templates', ''))
+{
+	$style_bl = 'color: #' . $style_bl;
+}
+
 // вывод
 $pt->div_start('ns-menu-block', 'wrap');
 	
-	$pt->div($name_site, 'r1');	
-		
+	$pt->div($name_site, 'r1', 'div', $style_ns);	
+	
+	// ns-menu-block-name_site-color
+	
 	$pt->div_start('r2');
 		if ($fn = mso_fe('components/_menu/_menu.php')) require($fn);
 	$pt->div_end('r2');
 	
-	$pt->div($block, 'r3');	
+	$pt->div($block, 'r3', 'div', $style_bl);	
 	
 	$pt->clearfix();
 

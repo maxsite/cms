@@ -35,14 +35,14 @@
 		if ( !isset($options['all']) ) $options['all'] = '';
 		if ( !isset($options['all404']) ) $options['all404'] = '';
 
-		echo '<form action="" method="post">' . mso_form_session('f_session_id');
-		echo '<textarea name="f_all" style="width: 100%; height: 300px;">' .  $options['all'] . '</textarea>';
+		echo '<form method="post">' . mso_form_session('f_session_id');
+		echo '<textarea name="f_all" rows="10">' .  $options['all'] . '</textarea>';
 		
-		echo '<br><br><p class="info">' . t('Здесь можно указать редиректы, которые сработают только при несуществующем типе данных (custom_page_404).') . '</p>';
+		echo '<p class="info">' . t('Здесь можно указать редиректы, которые сработают только при несуществующем типе данных (custom_page_404).') . '</p>';
 
-		echo '<textarea name="f_all404" style="width: 100%; height: 300px;">' .  $options['all404'] . '</textarea>';
+		echo '<textarea name="f_all404" rows="10">' .  $options['all404'] . '</textarea>';
 		
-		echo '<br><br><input type="submit" name="f_submit" value="' . t('Сохранить изменения') . '">';
+		echo '<button type="submit" name="f_submit" class="i save">' . t('Сохранить изменения') . '</button>';
 		echo '</form>';
 
 ?>

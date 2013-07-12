@@ -1,0 +1,117 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+// message.less
+// подключать - @import url('mixins/message.less');
+
+// использовать только копируя в каталог шаблона
+
+// переменные для цветов
+
+@MESSAGE_COLOR_DEFAULT: #E9E9E9;
+@MESSAGE_COLOR_TEXT_DEFAULT: #505050;
+
+@MESSAGE_COLOR_NOTE: #44AAC8;
+@MESSAGE_COLOR_TEXT_NOTE: #111;
+
+@MESSAGE_COLOR_ALERT: #F89406;
+@MESSAGE_COLOR_TEXT_ALERT: #fff;
+
+@MESSAGE_COLOR_IDEA: #FAF6AC;
+@MESSAGE_COLOR_TEXT_IDEA: #111;
+
+@MESSAGE_COLOR_ERROR: #D64B45;
+@MESSAGE_COLOR_TEXT_ERROR: #fff;
+
+@MESSAGE_COLOR_OK: #58B158;
+@MESSAGE_COLOR_TEXT_OK: #fff;
+
+@MESSAGE_COLOR_ABOUT: #EAEAEA;
+@MESSAGE_COLOR_TEXT_ABOUT: #111;
+
+@MESSAGE_COLOR_MAIL: #EAEAEA;
+@MESSAGE_COLOR_TEXT_MAIL: #111;
+
+@MESSAGE_COLOR_HOME: #EAEAEA;
+@MESSAGE_COLOR_TEXT_HOME: #111;
+
+@MESSAGE_COLOR_QUESTION: #EAEAEA;
+@MESSAGE_COLOR_TEXT_QUESTION: #111;
+
+
+// вспомогательный хелпер
+.message_box(@icon, @bg: #E9E9E9, @text: #555)
+{
+	background: @bg url("../images/icons/@{icon}.png") no-repeat 15px center; 
+	color: @text;
+	
+	&.small {
+		background-image: url("../images/icons/small/@{icon}.png"); 
+	}
+
+}
+
+.message
+{
+	margin: 0 0 10px 0;
+	padding: 15px 10px 15px 70px;
+	min-height: 32px;
+	.border_radius(8px);
+	
+	background: @MESSAGE_COLOR_DEFAULT; 
+	color: @MESSAGE_COLOR_TEXT_DEFAULT;
+	
+	.bold;
+	
+	&.ok {
+		.message_box('ok', @MESSAGE_COLOR_OK, @MESSAGE_COLOR_TEXT_OK);
+		.text_shadow(0, -1px, 0, rgba(0, 0, 0, 0.25));
+	}
+
+	&.note {
+		.message_box('note', @MESSAGE_COLOR_NOTE, @MESSAGE_COLOR_TEXT_NOTE);
+	}
+	
+	&.alert {
+		.message_box('alert', @MESSAGE_COLOR_ALERT, @MESSAGE_COLOR_TEXT_ALERT);
+	}
+	
+	&.idea {
+		.message_box('idea', @MESSAGE_COLOR_IDEA, @MESSAGE_COLOR_TEXT_IDEA);
+	}
+	
+	&.error {
+		.message_box('error', @MESSAGE_COLOR_ERROR, @MESSAGE_COLOR_TEXT_ERROR);
+		.text_shadow(0, -1px, 0, rgba(0, 0, 0, 0.25));
+	}
+	
+	&.about {
+		.message_box('about', @MESSAGE_COLOR_ABOUT, @MESSAGE_COLOR_TEXT_ABOUT);
+	}
+	
+	&.mail {
+		.message_box('mail', @MESSAGE_COLOR_MAIL, @MESSAGE_COLOR_TEXT_MAIL);
+	}
+	
+	&.home {
+		.message_box('home', @MESSAGE_COLOR_HOME, @MESSAGE_COLOR_TEXT_HOME);
+	}
+	
+	&.question {
+		.message_box('question', @MESSAGE_COLOR_QUESTION, @MESSAGE_COLOR_TEXT_QUESTION);
+	}
+
+	&.noicon {
+		background-image: none; 
+		padding: 10px; 
+		min-height: 0;
+	}
+	
+	// мини версия сообщений 24px
+	&.small {
+		min-height: 20px; 
+		padding: 7px 10px 7px 50px; 
+		background-position: 10px center;
+		background-repeat: no-repeat;
+	}
+	
+}

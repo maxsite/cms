@@ -14,13 +14,12 @@
 	if (function_exists('ushka')) echo ushka('имя ушки');
 ?&gt;
 </pre>
-<br>
+
 <p class="info"><?= t('Вы можете вывести произвольную ушку прямо в тексте. Данный код выведет ушку «reklama»:') ?></p>
 
 <pre>
 [ushka=reklama]
 </pre>
-<br>
 
 <?php
 
@@ -87,37 +86,54 @@
 		
 		echo '<form method="post">' . mso_form_session('f_session_id') . '
 		<p><strong>' . t('Новая ушка:') . '</strong> ' . ' <input name="f_ushka_new" type="text" value="">
-		<button type="submit" name="f_submit_new">' . t('Добавить новую ушку') . '</button></p>
+		<button type="submit" name="f_submit_new" class="i add-new">' . t('Добавить новую ушку') . '</button></p>
 		</form>';
 		
 		$form = '';
 		
+		$form .=  mso_load_jquery('jquery.cookie.js')
+			. mso_load_jquery('jquery.showhide.js')
+			. '
+<script>
+$(function () {
+$.cookie.json = true; $("div.show").showHide({time: 200, useID: false, clickElem: "a.link", foldElem: "dd.show-text", visible: true});
+});
+</script>
+';
+		
 		foreach ($ushki as $id => $us)
 		{
-			$form .= '<div class="ushki">';
-			
 			$sel_html = $sel_php = '';
 			
 			if ($us['type'] == 'php') $sel_php = ' selected="selected" ';
 				else $sel_html = ' selected="selected" ';
 			
-			
-			$form .= '<p class="ushki_title"><input name="f_ushka['.$id.'][name]" type="text" value="'. $us['name'] . '"  style="width: 400px;">
-				<select style="width: 150px;" name="f_ushka[' . $id . '][type]"><option value="html"' . $sel_html . '/>TEXT/HTML</option><option value="php"' . $sel_php . '>PHP</option></select>
-				<label><input name="f_ushka[' . $id . '][delete]" type="checkbox"> ' . t('Удалить') . '</label>
-			</p>';
-			
-			$form .= '<p><textarea name="f_ushka[' . $id . '][text]">' . htmlspecialchars($us['text']) . '</textarea>';
-			
-			$form .= '</div>';
+			$form .= 
+				'<div class="ushka show"><dl>
+					<dt class="show-header"><a href="#" class="link">' . $us['name'] . '</a></dt>'
+					. '<dd class="show-text">'
+						. '<p class="ushki_title"> 
+							<input name="f_ushka['.$id.'][name]" type="text" class="ushka_name" value="'. $us['name'] . '">
+							<select name="f_ushka[' . $id . '][type]">
+								<option value="html"' . $sel_html . '>TEXT/HTML</option>
+								<option value="php"' . $sel_php . '>PHP</option>
+							</select>
+							<label><input name="f_ushka[' . $id . '][delete]" type="checkbox"> ' . t('Удалить') . '</label>
+						</p>
+						<textarea name="f_ushka[' . $id . '][text]">' . htmlspecialchars($us['text']) . '</textarea>
+					</dd>
+					
+				</dl></div>
+				';
 		}
 		
 		if ($form)
 		{
-			echo '<h2>' . t('Ушки') . '</h2><form method="post">' . mso_form_session('f_session_id');
+			echo '<form method="post">' . mso_form_session('f_session_id');
+			echo '<div class="plugin-ushki">';
 			echo $form;
-			echo '<p class="br"><button type="submit" name="f_submit">' . t('Сохранить изменения') . '</button>';
-			echo '</form>';
+			echo '<button type="submit" name="f_submit" class="i save">' . t('Сохранить изменения') . '</button>';
+			echo '</div></form>';
 		}
 
 ?>

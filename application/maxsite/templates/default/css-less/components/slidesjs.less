@@ -1,0 +1,146 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+
+div.slidesjs {
+
+	@slidesjs_img_height: 300px; // высота изображения
+	
+	position: relative;
+	height: @slidesjs_img_height + 40px; // + высота полоски пагинации
+	
+	> div.wrap {
+		margin: 0 30px;
+	}
+	
+	// стили для разных main-шаблонов в отдельном файле 
+	@import url('components/_main-width.less');
+	
+	div.slides_container {
+		height: @slidesjs_img_height; 
+	}
+	
+	div.slide {
+		width: 100%;
+		
+		img {
+				height: 100%;
+				width: auto;
+		}
+			
+		div.r2 {
+			height: 80px;
+			bottom: -85px;
+			z-index: 500;
+			position: absolute;
+			left: 0;
+			padding: 5px 10px 0 10px;
+			width: 100%;
+			
+			h3 {
+				margin: 5px 10px;
+				font-size: 13pt;
+				
+				a {}
+			}
+			
+			p {
+				margin: 0 10px;
+			}
+		}
+	}
+	
+	div.prev-next {
+		width: 50px;
+		float: left; 
+		padding-top: 7px;
+	}
+	
+	a.prev, a.next  {
+		display: inline-block; 
+		width: 21px; 
+		height: 21px; 
+	} 
+	
+	a.prev {
+		background: url("../components/slidesjs/images/arrow-prev.png") no-repeat;
+	}
+	
+	a.next {
+		background: url("../components/slidesjs/images/arrow-next.png") no-repeat;
+	}
+	
+	ul.pagination {
+		list-style:none; 
+		display: block; 
+		padding: 5px 0; 
+		text-align: right; 
+		height: 30px; 
+		line-height: 30px; 
+		margin: 0 30px;
+	}
+	
+	body.no-sidebar & ul.pagination {
+		max-width: @MAIN_NO_SB_WIDTH;
+	}
+	
+	ul.pagination li {
+		display:inline;
+	}
+	
+	ul.pagination li a {
+		margin: 0 1px; 
+		padding: 7px 10px; 
+		text-decoration: none;
+	}
+	
+	ul.pagination li.slides_current a {
+	}
+	
+	// нет пагинации
+	&.no-pagination {
+		height: @slidesjs_img_height;
+	}
+}
+
+
+div.slidesjs {
+
+	> div.wrap {
+		.bg(#eee);
+	}
+	
+	div.slide {
+		
+		div.r2 {
+			background: #000;
+			background: rgba(0,0,0,.5);
+			border-top: 1px solid rgba(0,0,0,.1);
+			
+			h3 {
+				color: white;
+				
+				a {
+					color: white;
+				}
+			}
+			
+			p {
+				color: white;
+			}
+		}
+	}
+	
+	ul.pagination {
+		background: #EEE; // фоновая полоска пагинации
+	}
+	
+	ul.pagination li a {
+		color: white; 
+		background: #bbb; 
+	}
+	
+	ul.pagination li.slides_current a {
+		background: #777;
+	}
+
+}

@@ -1,7 +1,12 @@
-  function addSmile(t){
+  function addSmile(t, elem_id){
     // Derived from Alex King's JS Quicktags code (http://www.alexking.org/). Released under LGPL license. IE support. Modified Max (http://maxsite.org/). Cutted by quantum (http://maxsitecms.ru/).
     
-    var comment = document.getElementById('comments_content');
+	if (!elem_id) 
+	{ 
+		elem_id = 'comments_content'; 
+	}
+	
+    var comment = document.getElementById(elem_id);
     
     if (document.selection) {
       comment.focus();

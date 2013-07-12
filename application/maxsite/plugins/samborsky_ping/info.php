@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Пинги'),
 	'description' => t('Пинг поисковиков и ping-сервисов через XMLRPC'),
-	'version' => '1.03',
+	'version' => '1.2',
 	'author' => 'Евгений Самборский',
 	'plugin_url' => 'http://www.samborsky.com/samborsky_ping/',
 	'author_url' => 'http://www.samborsky.com/',

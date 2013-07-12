@@ -512,20 +512,22 @@ class Page_out
 	
 	// полный аналог div
 	// чтобы не так резало глаза div
-	function tag($text = '', $class = '', $tag = 'div')
+	function tag($text = '', $class = '', $tag = 'div', $style = '')
 	{
 		if ($class) $class = ' class="' . $class . '"';
+		if ($style) $style = ' style="' . $style . '"';
 		
-		return $this->out('<' . $tag . $class . '>' . $text . '</' . $tag . '>');
+		return $this->out('<' . $tag . $class . $style . '>' . $text . '</' . $tag . '>');
 	}
 	
 	// вывод div с указанным css-классом
 	// или можно указать свой
-	function div($text = '', $class = '', $tag = 'div')
+	function div($text = '', $class = '', $tag = 'div', $style = '')
 	{
 		if ($class) $class = ' class="' . $class . '"';
+		if ($style) $style = ' style="' . $style . '"';
 		
-		return $this->out('<' . $tag . $class . '>' . $text . '</' . $tag . '>');
+		return $this->out('<' . $tag . $class . $style . '>' . $text . '</' . $tag . '>');
 	}
 	
 	// вывод открывающих div с указанным css-классом

@@ -190,7 +190,7 @@
 			$all_meta .= '<div class="page_meta_block ' . $page_type . '">' . $key . NR . $f . '</div>';
 		}
 		else
-			$all_meta .= '<div>' . $key . NR . $f . '</div>';
+			$all_meta .= '<div class="page_meta_block">' . $key . NR . $f . '</div>';
 		
 	}
 

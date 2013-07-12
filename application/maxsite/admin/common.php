@@ -94,7 +94,8 @@ function mso_admin_content()
 # построение ссылки с учетом указанного 3-го сегмента 
 # admin / options / tri
 # можно стоить меню в плагинах админки. Можно указать класс выбранной ссылки
-function mso_admin_link_segment_build($plu_url, $segment, $title, $class_link)
+# $class_add — дополнительный класс к ссылке
+function mso_admin_link_segment_build($plu_url, $segment, $title, $class_link, $class_add = '')
 {
 	global $MSO;
 	
@@ -103,11 +104,20 @@ function mso_admin_link_segment_build($plu_url, $segment, $title, $class_link)
 		$seg = $MSO->data['uri_segment'][3];
 	else $seg = false;
 	
-	// если сегменты совпадают, то ссылку выделяем классом
-	if ($seg == $segment) $class_link = ' class="' . $class_link . '"';
-		else $class_link = '';
 	
-	$out = '<a href="' . $plu_url .'/' . $segment . '"' . $class_link . '>' . $title . '</a>';
+	$class = '';
+	
+	// если сегменты совпадают, то ссылку выделяем классом
+	if ($seg == $segment)
+	{
+		$class = $class_link . ' ';
+	}
+	
+	$class = trim($class . ' ' . $class_add);
+	
+	if ($class) $class = ' class="' . $class . '"'; 
+	
+	$out = '<a href="' . $plu_url .'/' . $segment . '"' . $class . '>' . $title . '</a>';
 	
 	return $out;
 }

@@ -21,6 +21,9 @@ function template_options_admin_init($args = array())
 	mso_admin_menu_add('options', $this_plugin_url, t('Шаблон'), 2);
 	mso_admin_url_hook ($this_plugin_url, 'template_options_admin_page');
 	
+	//mso_hook_add_dinamic( 'mso_admin_header', ' return $args . "' . t('Настройка шаблона') . '"; ' );
+	//mso_hook_add_dinamic( 'admin_title', ' return "' . t('Настройка шаблона') . ' - " . $args; ' );
+	
 	return $args;
 }
 
@@ -30,6 +33,9 @@ function template_options_admin_page($args = array())
 	global $MSO;
 	
 	if ( !mso_check_allow('template_options_admin') ) return $args;
+	
+	mso_hook_add_dinamic( 'mso_admin_header', ' return $args . "' . t('Настройка шаблона') . '"; ' );
+	mso_hook_add_dinamic( 'admin_title', ' return "' . t('Настройка шаблона') . ' - " . $args; ' );
 	
 	# options/options.php
 	$fn1 = $MSO->config['templates_dir'] . $MSO->config['template'] . '/options/options.php';

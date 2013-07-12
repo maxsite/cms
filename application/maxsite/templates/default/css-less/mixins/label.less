@@ -1,0 +1,53 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+// label.less
+// подключать - @import url('mixins/label.less');
+
+// использовать только копируя в каталог шаблона
+
+// цвета взяты из bootstrap 
+
+// span.label
+// span.label.success
+
+// вспомогательный микс
+.label(@bg, @color: #fff)
+{
+	.bg(@bg);
+	color: @color;
+}
+
+span.label {
+
+	.label(#999);
+	
+	display: inline-block;
+	.text_shadow(0, -1px, 0, rgba(0, 0, 0, 0.25));
+	.border_radius(3px);
+	padding: 0 5px;
+	
+	&.default {
+		.label(#999);
+	}
+	
+	&.success {
+		.label(#468847);
+	}
+	
+	&.warning {
+		.label(#F89406);
+	}
+	
+	&.important {
+		.label(#B94A48);
+	}
+	
+	&.info {
+		.label(#3A87AD);
+	}
+	
+	&.inverse {
+		.label(#333);
+	}
+
+}

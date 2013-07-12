@@ -86,6 +86,7 @@
 <p class="info"><?= t('C помощью этого плагина вы можете организовать рассылку email-сообщений по списку.') ?></p>
 
 <?php
+
 		$options = mso_get_option($options_key, 'plugins', array());
 		if ( !isset($options['maillist']) ) $options['maillist'] = '';
 		if ( !isset($options['subject']) ) $options['subject'] = '';
@@ -93,24 +94,22 @@
 		if ( !isset($options['message']) ) $options['message'] = '';
 		if ( !isset($options['from']) ) $options['from'] = mso_get_option('admin_email_server', 'general', '');
 
-		echo '<form action="" method="post">' . mso_form_session('f_session_id');
+		echo '<form class="fform" method="post">' . mso_form_session('f_session_id');
 
-		echo '<p><strong>' . t('Тема письма:') . '</strong></p><input name="f_subject" type="text" style="width: 100%" value="' 
-			. $options['subject'] . '">';
+		echo '<p><span class="fheader">' . t('Тема письма:') . '</span></p><p><span><input name="f_subject" type="text" value="' 
+			. $options['subject'] . '"></span></p>';
 
-		echo '<p><strong>' . t('От кого (email):') . '</strong></p><input name="f_from" type="text" style="width: 100%" value="' 
-			. $options['from'] . '">';
+		echo '<p class="hr"><span class="fheader">' . t('От кого (email):') . '</span></p><p><span><input name="f_from" type="text" style="width: 100%" value="' . $options['from'] . '"></span></p>';
 
-		echo '<p><strong>' . t('Файл вложения (путь к файлу в «uploads»):') . '</strong></p><input name="f_files" type="text" style="width: 100%" value="' . $options['files'] . '">';
+		echo '<p class="hr"><span class="fheader">' . t('Файл вложения (путь к файлу в «uploads»):') . '</span></p><p><span><input name="f_files" type="text" value="' . $options['files'] . '"></span></p>';
 		
-		echo '<p><strong>' . t('Текст письма:') . '</strong></p><textarea name="f_message" style="width: 100%; height: 200px;">' 
-			. htmlspecialchars($options['message']) . '</textarea>';
+		echo '<p class="hr"><span class="fheader">' . t('Текст письма:') . '</span></p><p><span><textarea name="f_message" rows="10">' . htmlspecialchars($options['message']) . '</textarea></span></p>';
 
-		echo '<p><strong>' . t('Список рассылки (один email в строке):') . '</strong></p><textarea name="f_list" style="width: 100%; height: 200px;">' . htmlspecialchars($options['maillist']). '</textarea>';
+		echo '<p class="hr"><span class="fheader">' . t('Список рассылки (один email в строке):') . '</span></p><p><span><textarea name="f_list" rows="10">' . htmlspecialchars($options['maillist']). '</textarea></span></p>';
 		
 		
-		echo '<br><input type="submit" name="f_submit_send" value="' . t('Разослать') . '" style="margin: 25px 0 5px 0;">';
-		echo '<input type="submit" name="f_save_list" value="' . t('Только сохранить список') . '" style="margin: 25px 0 5px 0;">';
+		echo '<p class="hr"><span><button type="submit" name="f_submit_send" class="i send">' . t('Разослать') . '</button>';
+		echo '<button type="submit" name="f_save_list" class="i save">' . t('Только сохранить список') . '</button></span></p>';
 		echo '</form>';
 		
-?>
+# end file

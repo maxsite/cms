@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Ушки'),
 	'description' => t('Ушки позволяют размещать произвольный код/текст на сайте.'),
-	'version' => '1.3',
+	'version' => '1.4',
 	'author' => 'Максим',
 	'plugin_url' => 'http://max-3000.com/',
 	'author_url' => 'http://maxsite.org/',

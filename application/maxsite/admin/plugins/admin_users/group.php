@@ -194,7 +194,7 @@
 			$data_table[] = $r; // добавим строчку
 		}
 		
-		$dop = '<p class="br"><input type="submit" name="f_submit" value="' . t('Изменить разрешения') . '"></p>';
+		$dop = '<button type="submit" name="f_submit" class="i save">' . t('Сохранить') . '</button>';
 		
 		
 		echo mso_load_jquery('jquery.tablesorter.js') . '
@@ -211,6 +211,14 @@
 		echo '</form>';
 		
 		
+		// добавляем форму, а также текущую сессию
+		echo '<form method="post" class="fform">' . mso_form_session('f_session_id');
+		
+		echo '<p class="hr"><strong>' . t('Добавить группу') . ' </strong>
+					<input type="text" name="f_new">
+					<button type="submit" name="f_new_submit" class="i add-new">' . t('Добавить') . '</button>
+				</p>';
+		
 		$delete = '';
 		foreach ($us as $row) 
 		{
@@ -219,20 +227,17 @@
 			
 			//$name = urldecode($name);
 			$id = $row['groups_id'];
-			$delete .= '<label><input type="checkbox" name="f_delete_check[' . $id . ']"> ' . $name . '</label><br>';
+			$delete .= '<p><label><input type="checkbox" name="f_delete_check[' . $id . ']"> ' . $name . '</label></p>';
 		}
 		
 		if ($delete) 
 		{
-			$delete = '<p class="input checkbox wleft br"><strong>' . t('Удалить группы') . ' </strong>' . $delete . '</p><p class="input_submit"><input type="submit" name="f_delete_submit" value="' . t('Удалить отмеченные группы') . '" onClick="if(confirm(\'' . t('Уверены?') . '\')) {return true;} else {return false;}" ></p>';
+			echo '<h3>' . t('Удаление групп') . ' </h3>'
+				. $delete 
+				. '<br><button type="submit" name="f_delete_submit" class="i delete" onClick="if(confirm(\'' . t('Уверены?') . '\')) {return true;} else {return false;}">' . t('Удалить') . '</button>';
 		}
+	
 		
-		$delete = '<div class="item usergroup"><h2>' . t('Добавить/Удалить группу пользователей') . '</h2><p class="input"><strong>' . t('Добавить группу') . ' </strong><input type="text" name="f_new"> <input type="submit" name="f_new_submit" value="' . t('Создать новую группу') . '"></p> 
-		' . $delete . '</div>';
-		
-		// добавляем форму, а также текущую сессию
-		echo '<form method="post">' . mso_form_session('f_session_id');
-		echo $delete;
 		echo '</form>';
 	}
 	else // $all
@@ -240,4 +245,4 @@
 		echo'<div class="error">' . t('Пока нет ни одного действия...') . '</div>';
 	}
 	
-?>
+# end file

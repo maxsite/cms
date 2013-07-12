@@ -58,52 +58,61 @@ if ( $post = mso_check_post(array('dir')) )
 		if (isset($mso_descritions[$file]))
 		{
 			$title = $mso_descritions[$file];
-			if ($title) $title_f = '<em>' . htmlspecialchars($title) . '</em><br>';
+			// if ($title) $title_f = '<em>' . htmlspecialchars($title) . '</em><br>';
 		}
 		
 		if ($this_img and file_exists($uploads_dir . '/mini/' . $file)) 
 		{
 			$mini = $uploads_url . '/mini/' . $file;
-			$mini = '<a target="_blank" href="' . $uploads_url. '/' . $file . '"><img class="left" src="' . $mini . '" title="' . $title . '"></a> ';
+			
+			$mini_100 = $uploads_url . '/_mso_i/' . $file;
+			
+			$mini = '<a class="lightbox" target="_blank" title="' . $title . '" href="' . $uploads_url. '/' . $file . '"><img src="' . $mini_100 . '"></a> ';
 		}
 		else 
 		{
-			$mini = '<img class="left" src="' . getinfo('admin_url') . 'plugins/admin_files/document_plain.png">';
+			$mini = '<img src="' . getinfo('admin_url') . 'plugins/admin_files/document_plain.png">';
 		}
 		
 		if ($this_img)
 		{
 			if ($title)
 			{
-				$img = '[img ' . $title . ']' . $uploads_url . '/' . $file . '[/img]';
+				$img = '\n[img ' . $title . ']' . $uploads_url . '/' . $file . '[/img]\n';
 				
-				$image = '[image=' . $uploads_url . '/mini/' . $file . ' ' . $title . ']' . $uploads_url . '/' . $file . '[/image]';
+				$image = '\n[image=' . $uploads_url . '/mini/' . $file . ' ' . $title . ']' . $uploads_url . '/' . $file . '[/image]\n';
 			}
 			else
 			{
-				$img = '[img]' . $uploads_url . '/' . $file . '[/img]';
+				$img = '\n[img]' . $uploads_url . '/' . $file . '[/img]\n';
 				
-				$image = '[image=' . $uploads_url . '/mini/' . $file . ']' . $uploads_url . '/' . $file . '[/image]';
+				$image = '\n[image=' . $uploads_url . '/mini/' . $file . ']' . $uploads_url . '/' . $file . '[/image]\n';
 			}
 		}
 		
-		$all_files_res .= '<hr><p>' 
+		$all_files_res .= '<div class="all-files-image">' 
 					. $mini 
-					. $title_f 
-					. '<input class="w75" title="' . t('Адрес файла') . '" value="' . $uploads_url . '/' . $file . '">';
+					. '<span title="' . t('Адрес файла') . '" onclick="jAlert(\'<textarea cols=70 rows=3>' . $uploads_url . '/' . $file . '</textarea>\', \'' . t('Адрес файла') . '\'); return false;">Адрес</span>';
 					
 		if ($this_img)			
 		{
-			$all_files_res .= 
-					  '<br><input class="w75" title="' . t('Изображение') . '" value="' . $img . '">'
-					. '<br><input class="w75" title="' . t('Миниатюра') . '" value="' . $image . '">';
+			$all_files_res .= '
+					<span title="' . t('Изображение') . '" onclick="addSmile(\'' . $img . '\', \'f_content\');">[img]</span>
+					<span title="' . t('Миниатюра') . '" onclick="addSmile(\'' . $image . '\', \'f_content\');">[image]</span>
+					
+					<span title="' . t('Использовать как изображение записи') . '" onclick="addImgPage(\'' . $uploads_url . '/' . $file . '\');">+</span>
+					';
+					
+					
 		}
 		
-		$all_files_res .= '</p><div class="clearfix"></div>'; 
+		
+		$all_files_res .= '</div>'; 
 		
 	}
 	
-	echo $all_files_res;
+	
+	echo $all_files_res . '<div class="break"></div>';
 }
 
 # end file

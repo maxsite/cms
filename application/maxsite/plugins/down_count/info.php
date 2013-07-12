@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Счетчик переходов'),
 	'description' => t('Подсчет количества переходов по ссылке. Обрамите нужную ссылку в [dc]...[/dc]'),
-	'version' => '1.2',
+	'version' => '1.3',
 	'author' => 'Максим, Wave',
 	'plugin_url' => 'http://max-3000.com/',
 	'author_url' => 'http://maxsite.org/',

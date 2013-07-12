@@ -59,7 +59,7 @@
 		
 		echo '<form method="post">' . mso_form_session('f_session_id');
 		echo $form;
-		echo '<button type="submit" name="f_submit" style="margin: 25px 0 5px 0;">' . t('Сохранить изменения') . '</button>';
+		echo '<button type="submit" name="f_submit" class="i save">' . t('Сохранить изменения') . '</button>';
 		echo '</form>';
 		
 		// выведем ниже формы всю статистику

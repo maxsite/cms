@@ -1730,8 +1730,8 @@ function mso_comuser_auth($data)
 			else
 			{
 				// email есть но пароль ошибочный
-				if ($die) die(tf('Переданный пароль является ошибочным для нашего сайта'));
-					else return tf('Данный email уже зарегистрирован на сайте. Для входа нужно указать верный пароль.');
+				if ($die) die('Данный email уже зарегистрирован <a href="' . getinfo('siteurl') . '">на сайте</a>. Для входа нужно указать верный пароль. Вы можете <a href="' . getinfo('siteurl') . 'password-recovery">восстановить пароль</a>.');
+					else return 'Данный email уже зарегистрирован <a href="' . getinfo('siteurl') . '">на сайте</a>. Для входа нужно указать верный пароль. Вы можете <a href="' . getinfo('siteurl') . 'password-recovery">восстановить пароль</a>.';
 			}
 		}
 		else

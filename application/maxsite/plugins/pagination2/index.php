@@ -22,19 +22,20 @@ function pagination2_go($r = array())
 	$options = mso_get_option('pagination2', 'plugins', array() ); // получаем опции
 	
 	if ( !isset($r['old']) ) 
-		$r['old'] = isset($options['old']) ? $options['old'] : t('Старее »»»');
+		$r['old'] = isset($options['old']) ? $options['old'] : t('Старее &gt;&gt;');
 	
 	if ( !isset($r['new']) ) 
-		$r['new'] = isset($options['new']) ? $options['new'] : t('««« Новее');
+		$r['new'] = isset($options['new']) ? $options['new'] : t('&lt;&lt; Новее');
 
 	
 	if ( !isset($r['sep']) ) // разделитель
-		$r['sep'] = isset($options['sep']) ? $options['sep'] : t(' | ');
+		$r['sep'] = isset($options['sep']) ? $options['sep'] : '';
 		
 
 	# раньше - позже
 	if ($ran1 = mso_url_paged_inc($r['maxcount'], -1)) 
 			$ran1 = '<span class="new"><a href="' . $ran1 . '" title="' . $r['new'] . '">' . $r['new'] . '</a></span>';
+			
 	if ($ran2 = mso_url_paged_inc($r['maxcount'], 1))  
 			$ran2 = '<span class="old"><a href="' . $ran2 . '" title="' . $r['old'] . '">' . $r['old'] . '</a></span>';
 	
@@ -42,7 +43,7 @@ function pagination2_go($r = array())
 
 	$out = $ran1 . $r['sep'] . $ran2;
 	
-	if ($out) echo NR . '<div class="pagination pagination2">' . $out . '</div>' . NR;
+	if ($out) echo NR . '<div class="pagination2">' . $out . '</div>' . NR;
 	
 	return $r_orig;
 }
@@ -64,19 +65,19 @@ function pagination2_mso_options()
 							'type' => 'text', 
 							'name' => t('Записи старее'), 
 							'description' => t('Текст ссылок для старых записей'), 
-							'default' => t('Старее »»»')
+							'default' => t('Старее &gt;&gt;')
 						),
 			'new' => array(
 							'type' => 'text', 
 							'name' => t('Записи новее'), 
 							'description' => t('Текст ссылки на новые записи'), 
-							'default' => t('««« Новее')
+							'default' => t('&lt;&lt; Новее')
 						), 
 			'sep' => array(
 							'type' => 'text', 
 							'name' => t('Разделитель'), 
 							'description' => t('Укажите разделитель'), 
-							'default' => ' | '
+							'default' => ''
 						)
 			),
 		t('Настройки плагина пагинации'), // титул

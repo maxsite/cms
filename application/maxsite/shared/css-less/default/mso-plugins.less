@@ -20,6 +20,26 @@ div.pagination {
 	}
 }
 
+div.pagination2 {
+	margin: 25px 0 10px 0; 
+	font-size: .9em;
+	
+	a {
+		.f > .underline(none);
+	}
+	
+	span.new {
+		display: inline-block;
+		.left;
+	}
+	
+	span.old {
+		display: inline-block;
+		.right;
+	}
+	
+}
+
 // plugin TagClouds
 div.tagclouds {
 	text-align: center; 
@@ -288,5 +308,30 @@ div.page_content ul.tabs-nav {
 div.guestbook_form {
 	table td {
 		border: none;
+	}
+}
+
+// Theme switch
+div.theme-switch-panel {
+	width: 100%; 
+	overflow: auto; 
+	white-space: nowrap; 
+	background: #111;
+	padding: 5px 0;
+	
+	img {
+		height: 100px;
+		width: auto;
+		margin: 0 10px 0 0;
+		.op(30);
+		
+		&:hover {
+			.op(100);
+		}
+	}
+	
+	a.current img {
+		border: 3px solid #fff;
+		.op(100);
 	}
 }

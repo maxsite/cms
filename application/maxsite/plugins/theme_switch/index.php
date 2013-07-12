@@ -230,7 +230,7 @@ function theme_switch_body_start($args = '')
 	if ( !isset($opt['show_panel']) or !$opt['show_panel']) return $args; // не отмечена панель
 	if ( !isset($opt['templates']) ) return $args; // нет выбранных шаблонов
 	
-	$height_img = isset($opt['height_img']) ? $opt['height_img'] : 125; 
+	// $height_img = isset($opt['height_img']) ? $opt['height_img'] : 125; 
 	
 	$current_template = getinfo('template');
 	
@@ -239,6 +239,8 @@ function theme_switch_body_start($args = '')
 	// извраты со счетчиками, чтобы сделать красивый скролинг к выбранному элементу
 	$i = 1;
 	$i_cur = 1;
+	
+	
 	foreach($opt['templates'] as $key=>$val)
 	{
 		if ($key == $current_template) 
@@ -250,9 +252,14 @@ function theme_switch_body_start($args = '')
 		
 		$class = trim($class . ' img' . $i);
 		
+		if (file_exists(getinfo('templates_dir') . $key . '/screenshot.png' )) $fn = 'screenshot.png';
+		else $fn = 'screenshot.jpg';
+		
 		
 		$imgs  .= '<a href="' . getinfo('siteurl') . '?theme=' . $key . '" title="' . $val 
-			. '" class="' . $class . '"><img src=' . getinfo('templates_url') . $key . '/screenshot.jpg></a>';
+			. '" class="' . $class . '"><img src=' . getinfo('templates_url') . $key . '/' . $fn . '></a>';
+			
+		
 		$i++;
 	}
 	
@@ -266,41 +273,18 @@ function theme_switch_body_start($args = '')
 	{
 		require($fn_info);
 		
-		$info_template .= '<p>' . t('Шаблон:') . ' <strong>' .$info['name'] . '</strong></p>';
-		$info_template .= '<p>' . t('Версия:') . ' <strong>' .$info['version'] . '</strong></p>';
+		$info_template .= $info['name'] . ' ' . $info['version'];
 	}
-	
 	
 	$out = mso_load_jquery('jquery.scrollto.js') . '
 	
-	<style>
-		div.theme_switch_panel_main {width: 100%; height: ' . ($height_img + 35) . 'px;}
-		
-		div.theme_switch_panel_info {width: 15%; height: 100%; float: left; overflow: hidden; color: black; background: #DB3A3A; background: -moz-linear-gradient(180deg, white, #EEEEEE, gray); text-shadow: 0px 0px 2px white; box-shadow: -5px 0 3px gray;}
-		div.theme_switch_panel_info p {margin: 3px 0 2px 10px;  font-size: 10pt; line-height: 1em;}
-		
-		div.theme_switch_panel {width: 85%; float: left; height: 100%; overflow: auto; white-space: nowrap; background: white;}
-		div.theme_switch_panel_wrap {padding: 5px;}
-		
-		div.theme_switch_panel img {height: ' . $height_img . 'px; width: auto; margin: 2px 6px; vertical-align: middle; border: 1px solid gray; -webkit-box-shadow: 3px 3px 3px gray; box-shadow: 3px 3px 3px gray; }
-		div.theme_switch_panel a.current img {border: 1px solid orange; -webkit-box-shadow: 0px 0px 12px orange; box-shadow: 0px 0px 12px orange; }
-		div.theme_switch_panel a:hover img {border: 1px solid #DB3A3A; -webkit-box-shadow: 0px 0px 12px #DB3A3A; box-shadow: 0px 0px 12px #DB3A3A;}
-	</style>
-	
-	<div class="theme_switch_panel_main">
-		<div class="theme_switch_panel_info">
-			<br>' . $info_template . '
-		</div><!-- div class=theme_switch_panel_info -->
-		<div class="theme_switch_panel"><div class="theme_switch_panel_wrap">
-		'
+	<div class="theme-switch-panel"><div class="wrap">'
 		. $imgs
-		. '
-		</div></div><!-- div class=theme_switch_panel -->
-	</div><!-- div class=theme_switch_panel_main -->
+	. '</div></div><!-- div class=theme-switch-panel -->
 	
 	<script>
-		$("div.theme_switch_panel").scrollTo("a.current img", 500);
-		$("div.theme_switch_panel").scrollTo("a.img' . $i_go . ' img", 800);
+		$("div.theme-switch-panel").scrollTo("a.current img", 500);
+		$("div.theme-switch-panel").scrollTo("a.img' . $i_go . ' img", 800);
 	</script>
 	
 	';

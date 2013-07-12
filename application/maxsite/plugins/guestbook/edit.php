@@ -11,8 +11,8 @@
 	# сделаем меню горизонтальное в текущей закладке
 	// основной url этого плагина - жестко задается
 	$plugin_url = getinfo('site_admin_url') . 'guestbook';
-	$a  = mso_admin_link_segment_build($plugin_url, '', t('Настройки гостевой книги'), 'select') . ' | ';
-	$a .= mso_admin_link_segment_build($plugin_url, 'edit', t('Редактирование отзывов'), 'select');
+	$a  = mso_admin_link_segment_build($plugin_url, '', t('Настройки гостевой книги'), 'select', 'i book') . ' ';
+	$a .= mso_admin_link_segment_build($plugin_url, 'edit', t('Все отзывы'), 'select', 'i comments-all');
 	echo $a;
 ?>
 </div>
@@ -37,7 +37,7 @@ $tmpl = array (
 $CI->table->set_template($tmpl); // шаблон таблицы
 
 // заголовки
-$CI->table->set_heading('id', 'date, ip, browser', 'name', 'text', 'title', 'email', 'icq', 'site', 'phone', 'custom1', 'custom2', 'custom3', 'custom4', 'custom5'); 
+$CI->table->set_heading('ID', 'Дата, IP, Браузер', 'Имя', 'Текст', 'Заголовок', 'Email', 'ICQ', 'Сайт', 'Тел.', 'Custom1', 'Custom2', 'Custom3', 'Custom4', 'Custom5'); 
 
 
 // тут последние отзывы с пагинацией
@@ -93,7 +93,7 @@ if ($query->num_rows() > 0)
 				. '<br><br>' . $book['guestbook_browser'],
 				
 				htmlspecialchars($book['guestbook_name']),
-				str_replace("\n", "<br>", htmlspecialchars($book['guestbook_text'])),
+				mso_str_word(str_replace("\n", "<br>", htmlspecialchars($book['guestbook_text'])), 30),
 				htmlspecialchars($book['guestbook_title']),
 				htmlspecialchars($book['guestbook_email']),
 				htmlspecialchars($book['guestbook_icq']),

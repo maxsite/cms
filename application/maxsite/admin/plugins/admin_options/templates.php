@@ -35,12 +35,19 @@
 	
 	$current_template = $MSO->config['template'];
 	
-	echo '<h3>' . t('Текущий шаблон:') . ' <em>' . $current_template . '</em></h3>';
+	echo '
+		<div class="template_current">
+		<h3>' . t('Текущий шаблон:') . ' ' . $current_template . '</h3>';
 	
-	if (file_exists($templates_dir . $current_template . '/screenshot.jpg'))
+	
+	if (file_exists($templates_dir . $current_template . '/screenshot.png'))
 	{
-		echo '<img class="template_current" src="' . $MSO->config['templates_url'] . $current_template . '/screenshot.jpg' . '" width="250" height="200" alt="" title="">';
-	}	
+		echo '<img src="' . $MSO->config['templates_url'] . $current_template . '/screenshot.png' . '" width="250" height="200">';
+	}
+	elseif (file_exists($templates_dir . $current_template . '/screenshot.jpg'))
+	{
+		echo '<img src="' . $MSO->config['templates_url'] . $current_template . '/screenshot.jpg' . '" width="250" height="200">';
+	}
 	
 	if (file_exists($templates_dir . $current_template . '/info.php'))
 	{
@@ -48,14 +55,21 @@
 		echo '<p><a href="' . $info['template_url'] . '">' . $info['name'] . ' ' . $info['version'] . '</a>';
 		echo '<br>' . $info['description'];
 		echo '<br>' . t('Автор:') . ' <a href="' . $info['author_url'] . '">' . $info['author'] . '</a>';
+		
+		if (isset($info['maxsite-min-version'])) echo '<br>' . t('Версия MaxSite CMS:') . ' ' . $info['maxsite-min-version'];
+		
 		echo '</p>';
 	}
-		
+	
+	echo '</div>';
+	
+	
+	
 	// все каталоги в массиве $dirs
 	$dirs = directory_map($templates_dir, true);
 	
 	echo '<form method="post">' . mso_form_session('f_session_id');
-	echo '<div class="float-parent options_templates">';
+	echo '<div class="options-templates">';
 	
 	foreach ($dirs as $dir)
 	{
@@ -68,11 +82,13 @@
 		if (file_exists($index))
 		{
 			$out = '<div class="template">';
-			//$out .= '<h2>' . $dir . '</h2>';
 			
-			$screenshot = $templates_dir . $dir . '/screenshot.jpg';
-			
-			if (file_exists($screenshot))
+			if (file_exists($templates_dir . $dir . '/screenshot.png'))
+			{
+				$screenshot = $MSO->config['templates_url'] . $dir . '/screenshot.png';
+				$out .= '<img src="' . $screenshot . '" width="250" height="200" alt="' . $dir . '" title="' . $dir . '">';
+			}
+			elseif (file_exists($templates_dir . $dir . '/screenshot.jpg'))
 			{
 				$screenshot = $MSO->config['templates_url'] . $dir . '/screenshot.jpg';
 				$out .= '<img src="' . $screenshot . '" width="250" height="200" alt="' . $dir . '" title="' . $dir . '">';
@@ -92,14 +108,14 @@
 				$out .= '</p>';
 			}
 			
-			$out .= '<input type="submit" name="f_submit[' . $dir . ']" value="' . t('Выбрать этот шаблон') . '" style="margin: 10px;">';
+			$out .= '<button type="submit" name="f_submit[' . $dir . ']" class="i set-template">' . t('Выбрать этот шаблон') . '</button>';
+			
 			$out .= '</div>';
 
 			echo $out;
 		}
 	}
 
-	echo '</div>';
-	echo '</form>';
+	echo '</div></form>';
 	
 ?>

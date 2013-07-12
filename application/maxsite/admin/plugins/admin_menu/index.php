@@ -20,7 +20,7 @@ function admin_menu_menu($args = array())
 	
 	$admin_url = getinfo('site_admin_url');
 	
-	$admin_menu_bread = ''; // хлебные крошки
+	$admin_menu_bread = array(); // хлебные крошки
 	
 	$nr = "\n";
 	$out = '';
@@ -53,39 +53,52 @@ function admin_menu_menu($args = array())
 	foreach ($admin_menu1 as $key => $value)
 	{
 		
-		$out .= $nr . '<ul class="admin-menu admin-menu-' . ($key ? $key : 'beginning') . '">';
+		// обрамляющий ul.admin-menu — выводим в конце цикла, чтобы задать css-классы
+		$out_block_css_class = 'admin-menu admin-menu-' . ($key ? $key : 'beginning');
 		
-		$out .= $nr . '<li class="admin-menu-top"><a href="#" class="admin-menu-section admin-menu-section-' . ($key ? $key : 'beginning') . '">' . _mso_del_menu_pod($value['']) . '</a>';
+		$out1 = $nr . '<li class="admin-menu-top"><a href="#" class="admin-menu-section admin-menu-section-' . ($key ? $key : 'beginning') . '">' . _mso_del_menu_pod($value['']) . '</a>';
 		
 		
 		if (count($value)>1 )
 		{
 			
-			$out .= $nr . '    <ul class="admin-submenu">';
+			$out1 .= $nr . '<ul class="admin-submenu">';
 			
 			foreach ($value as $url => $name)
 			{
 				if ( $value[''] == $name ) continue;
+
 				
 				if ($url == $cur_url or $url == $cur_url2) 
 				{
 					$selected = ' class="admin-menu-selected admin-menu-' . mso_slug($url) . '"';
 					
+					$out_block_css_class .= ' admin-menu-top-selected';
+					
 					if (!$admin_menu_bread) // хлебные крошки
 					{
-						$admin_menu_bread = _mso_del_menu_pod($value['']) . ' &gt; ' . _mso_del_menu_pod($name);
+						$admin_menu_bread[] = _mso_del_menu_pod($value['']);
+						$admin_menu_bread[] = _mso_del_menu_pod($name);
 					}
+				}
+				elseif ($key == 'page' and $cur_url2 == 'page_edit') // редактирование записи
+				{
+					$out_block_css_class .= ' admin-menu-top-selected';
+					$selected = ' class="admin-menu-' . mso_slug($url) . '"';
 				}
 				else 
 				{
 					$selected = ' class="admin-menu-' . mso_slug($url) . '"';
 				}
 				
-				$out .= $nr . '      <li' . $selected . ' title="' . _mso_del_menu_pod($name) . '"><a href="' . $admin_url . $url . '">' . _mso_del_menu_pod($name) . '</a></li>';
+				$out1 .= $nr . '      <li' . $selected . ' title="' . _mso_del_menu_pod($name) . '"><a href="' . $admin_url . $url . '">' . _mso_del_menu_pod($name) . '</a></li>';
 			}
-			$out .= $nr . '    </ul>';
+			$out1 .= $nr . '    </ul>';
 		}
-		$out .= $nr . '  </li>' . $nr . '</ul>' . $nr;
+		
+		$out1 .= $nr . '  </li>';
+		
+		$out .= $nr . '<ul class="' . $out_block_css_class . '">' . $out1 . '</ul>' . $nr;
 	}
 
 	return $out;

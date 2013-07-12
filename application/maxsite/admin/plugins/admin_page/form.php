@@ -19,19 +19,22 @@
 				$("input.f_header").attr("sh", 1);
 				$("input.f_header").attr("title", "' . t('Для перехода в полноэкранный режим нажмите F2') . '");
 				
-				$("td.page_info").show();
-				$("div.block_page").show();
-				$("div.admin-menu").show();
-				$("div.admin-header").show();
-				$("div.admin-footer").show();
-				$("h1").show();
-				$("p.ret-to-pages").show();
+				$("div.header").show();
+				$("div.sidebar").show();
+				$("div.footer").show();
+				
 				$("div.update").show();
 				$("div.error").show();
 				
-				$("div.admin-content").css("margin-left", $("div.admin-content").attr("sh-margin-left"));
-				$("div.admin-content").css("background", $("div.admin-content").attr("sh-background"));
-				$("div.admin-content").css("border-left", $("div.admin-content").attr("sh-border-left"));
+				$("h1").show();
+				$("p.ret-to-pages").show();
+				
+				$("div.content").css("margin-left", $("div.content").attr("sh-margin-left"));
+				$("div.content").css("background", $("div.content").attr("sh-background"));
+				$("div.content").css("border-left", $("div.content").attr("sh-border-left"));
+				$("div.all").css("background", $("div.all").attr("sh-background"));
+				
+				$("#f_content").css("height", $("#f_content").attr("sh-height"));
 				
 			}
 			else
@@ -40,24 +43,29 @@
 				
 				$("input.f_header").attr("title", "' . t('Для возврата в обычный режим нажмите F2') . '");
 				
-				$("td.page_info").hide();
-				$("div.block_page").hide();
-				$("div.admin-menu").hide();
-				$("div.admin-header").hide();
-				$("div.admin-footer").hide();
-				$("h1").hide();
-				$("p.ret-to-pages").hide();
+				$("div.header").hide();
+				$("div.footer").hide();
+				$("div.sidebar").hide();
+				
 				$("div.update").hide();
 				$("div.error").hide();
+				$("h1").hide();
+				$("p.ret-to-pages").hide();
 				
-				$("div.admin-content").attr("sh-margin-left", $("div.admin-content").css("margin-left"));
-				$("div.admin-content").css("margin-left", "0");
+				$("div.content").attr("sh-margin-left", $("div.content").css("margin-left"));
+				$("div.content").css("margin-left", "0");
 				
-				$("div.admin-content").attr("sh-background", $("div.admin-content").css("background"));
-				$("div.admin-content").css("background", "white");
+				$("div.content").attr("sh-background", $("div.content").css("background"));
+				$("div.content").css("background", "white");
 				
-				$("div.admin-content").attr("sh-border-left", $("div.admin-content").css("border-left"));
-				$("div.admin-content").css("border-left", "none");
+				$("div.content").attr("sh-border-left", $("div.content").css("border-left"));
+				$("div.content").css("border-left", "none");
+				
+				$("#f_content").attr("sh-height", $("#f_content").css("height"));
+				$("#f_content").css("height", 600);
+				
+				$("div.all").attr("sh-background", $("div.all").css("background"));
+				$("div.all").css("background", "white");
 			}
 		
 		}
@@ -81,33 +89,6 @@
 	});
 
 	$(function(){
-		function select_page_type()
-		{
-			var page_type_id = $("div.page_post_type input:checked").val();
-			var page_type_obj = ' . $page_type_js_obj . ';
-			var page_type_name = "";
-
-			$.each(page_type_obj, function(key, val)
-			{
-				if(page_type_id == val)
-				{
-					page_type_name = key;
-				}
-			});
-
-			$("div.page_meta div.page_meta_block").hide();
-			
-			var d = "div.page_meta div." + page_type_name;
-
-			$(d).show();
-		}
-
-		select_page_type();
-
-		$("div.page_post_type input").click(function()
-		{
-			select_page_type();
-		});
 		
 		$("#set_current_time").click(function()
 		{
@@ -150,124 +131,113 @@
 		});
 	});
 	
-	
 	</script>
 	
-	<table class="new_or_edit">
-	<tr>
-		<td class="editor_and_meta">
-		<input type="text" value="' . $f_header . '" name="f_header" class="f_header" title="' . t('Для перехода в полноэкранный режим нажмите F2') . '">' . $fses;
+	<div class="new_or_edit">
+		<div class="page-header">
+		<input value="' . $f_header . '" name="f_header" class="f_header" title="' . t('Заголовок записи') . '" placeholder="' . t('Укажите заголовок') . '"></div>'
+		. $fses;
 	
 	# после
 	$posle = '
 			<div class="page_status">
-				
-				<a style="display: block; float: right;" href="'. $MSO->config['site_admin_url'] 
-						. 'files" target="_blank" class="page_files">' . t('Загрузки') . '</a>
 						
 				<p class="page_status">
 					<label><input name="f_status[]" type="radio" ' . $f_status_publish . ' value="publish" id="f_status_publish"> ' . t('Опубликовать') . '</label> 
 					<label><input name="f_status[]" type="radio" ' . $f_status_draft . ' value="draft" id="f_status_draft"> ' . t('Черновик') . '</label> 
 					<label><input name="f_status[]" type="radio" ' . $f_status_private . ' value="private" id="f_status_private"> ' . t('Личное') . '</label>
+					
+					<a class="page_files" href="'. $MSO->config['site_admin_url'] . 'files" target="_blank" >' . t('Загрузки') . '</a>
+					
 				</p>
 									
 				' . $f_return . '
-				<input type="submit" name="' . $name_submit . '" value="' . t('Готово') . '" class="wymupdate"> ' . $f_bsave . ' <span class="autosave-editor"></span>
+				<button type="submit" name="' . $name_submit . '" class="i save">' . t('Готово') . '</button> ' . $f_bsave . ' <span class="autosave-editor"></span>
 			</div>
 			
 			<div class="page_meta_container">' 
 				. mso_load_jquery('jquery.cookie.js')
 				. mso_load_script(getinfo('plugins_url'). 'tabs/tabs.js')
-				. mso_hook('admin_page_form_q_files') 
-				. mso_hook('admin_page_form_pre_all_meta') 
-				. '<div class="block_page page_meta">
-					<div class="tabs_widget tabs_widget_000">
-					<div class="tabs">
-						<ul class="tabs-nav">
-							<li class="elem tabs-current"><span>' . t('Дополнительные поля') . '</span></li>
-							<li class="elem"><span>Файлы</span></li>
-						</ul>
-						<div class="clearfix"></div>
-						<div class="tabs-box tabs-visible">
-					' . $all_meta . '
+
+				. mso_hook('admin_page_form_pre_all_meta')
+				
+				. '<div class="tabs_widget tabs_widget_000">
+				
+						<div class="tabs">
+							<ul class="tabs-nav">
+								<li class="elem tabs-current i i-cat"><span>' . t('Рубрики и метки') . '</span></li>
+								<li class="elem i i-meta"><span>' . t('Дополнительные поля') . '</span></li>
+								<li class="elem i i-other"><span>' . t('Прочее') . '</span></li>
+								<li class="elem i i-files"><span>' . t('Файлы') . '</span></li>
+							</ul>
+							<div class="clearfix"></div>
+							<div class="tabs-box tabs-visible all-cat">' 
+								. '<div class="page_cat">'
+									. $all_cat 
+								. '</div>'
+								. '<div class="page_tags">
+										<h3>' . t('Метки (через запятую)') . '</h3>
+										<textarea name="f_tags" id="f_tags">' . $f_tags . '</textarea>
+										' . $f_all_tags . '
+									</div>
+									<div class="break"></div>
+									'
+							. '</div>
+							
+							
+							<div class="tabs-box all-meta">' . $all_meta . mso_hook('admin_page_form_add_all_meta') . '</div>
+							
+							<div class="tabs-box other fform">
+								' . mso_hook('admin_page_form_add_block_1') . '
+								
+								<p><label class="fwrap"><span class="ffirst ftitle">Короткая ссылка:</span><span><input type="text" value="' . $f_slug . '" name="f_slug" class="f_slug" title="' . t('Короткая ссылка') . '"></span></label></p>
+								
+								<p><span class="ffirst ftitle ftop">' . t('Тип страницы:') . '</span><span>' . $all_post_types . '</span></p>
+								
+								<p><span class="ffirst ftitle">Обсуждение:</span>
+									<label><input name="f_comment_allow" type="checkbox" ' . $f_comment_allow . '> ' . t('Разрешить комментирование') . '</label>
+
+									<label><input name="f_feed_allow" type="checkbox" ' . $f_feed_allow . '> ' . t('Публикация в RSS') . '</label>
+								</p>
+
+								<p><label class="fwrap"><span class="ffirst ftitle">' . t('Пароль для чтения:') . '</span><span><input type="text" value="' . $f_password . '" name="f_password"></span></label></p>
+								
+								
+								<p><label class="fwrap"><span class="ffirst ftitle">' . t('Порядок:') . '</span><span><input type="number" value="' . $page_menu_order . '" name="f_menu_order"></span></label></p>
+									
+								<p><label class="fwrap"><span class="ffirst ftitle">' . t('Автор:') . '</span><span>' . $all_users . '</span></label></p>
+								
+								<p class="page_all_parent"><label class="fwrap"><span class="ffirst ftitle">' . t('Родительская страница:') . '</span><span>' . $all_pages . '</span></label></p>
+								
+								<p class="ends">
+									<span class="ffirst ftitle ftop">' . t('Дата публикации:') . '</span>
+								
+									<span><input name="f_date_change" id="f_date_change" type="checkbox" ' . $f_date_change . '> ' . t('Изменить дату') . '
+									
+									<a href="#" style="font-size: 1.5em; text-decoration: none;" id="set_current_time" title="' . t('Установить текущее время компьютера') . '">&#9685;</a>
+									
+									<br>' . $date_y . ' ' . $date_m . ' ' . $date_d . '
+										&nbsp;&nbsp; — &nbsp;&nbsp;' . $time_h . ' : ' . $time_m . ' : ' . $time_s . '
+										<br><em>' . $date_time . '</em>
+									</span>
+								</p>
+							
+							</div><!-- /div.tabs-box.tabs-other -->
+							
+							<div class="tabs-box all-files">' . $all_files . '</div>
+							
 						</div>
-						<div class="tabs-box">
-						' . $all_files . '
-						</div>
-					</div>
 					
-					' . mso_hook('admin_page_form_add_all_meta') . '
+					
 				</div>
-				</div>
-			</div>
-			<input type="submit" name="' . $name_submit . '" value="' . t('Готово') . '" class="wymupdate">
-			
-		</td>
-		
-		<td class="page_info">
-			' . mso_hook('admin_page_form_add_block_1') . '
-			<div class="block_page page_all_cat">
-				<h3>' . t('Рубрика') . '</h3>
-				<div class="cat_page">' . $all_cat . '</div>
 			</div>
 			
-			<div class="block_page page_tags">
-				<h3>' . t('Метки (через запятую)') . '</h3>
-				<p><textarea name="f_tags" id="f_tags" style="width: 99%;">' . $f_tags . '</textarea></p>
-				' . $f_all_tags . '
-			</div>
-			
-			<div class="block_page page_slug">
-				<h3>' . t('Короткая ссылка') . '</h3>
-				<p><input type="text" value="' . $f_slug . '" name="f_slug" style="width: 99%;"></p>
-			</div>
-
-			<div class="block_page page_discus">
-				<h3>' . t('Обсуждение') . '</h3>
-				<p><label><input name="f_comment_allow" type="checkbox" ' . $f_comment_allow . '> ' . t('Разрешить комментирование') . '</label></p>
-				<p><label><input name="f_feed_allow" type="checkbox" ' . $f_feed_allow . '> ' . t('Публикация в RSS') . '</label></p>
-				<!--p><input name="f_ping_allow" type="checkbox" ' . $f_ping_allow . '> ' . t('Разрешить пинг') . '</p-->
-			</div>
-
-			<div class="block_page page_date">
-				<h3>' . t('Дата публикации') . '</h3>
-				<p><label><input name="f_date_change" id="f_date_change" type="checkbox" ' . $f_date_change . '> ' . t('Изменить дату') . '</label> 
-				
-				<a href="#" style="font-size: 1.2em; text-decoration: none;" id="set_current_time" title="' . t('Установить текущее время компьютера') . '">&#9685;</a>
-				
-				</p>
-				<p>' . $date_y . ' - ' . $date_m . ' - ' . $date_d . '</p>
-				<p>' . $time_h . ' : ' . $time_m . ' : ' . $time_s . '</p>
-				<p><em>' . $date_time . '</em></p>
-			</div>
-			
-			<div class="block_page page_post_type">
-				<h3>' . t('Тип страницы') . '</h3>
-				' . $all_post_types . '
-			</div>			
-			
-			<div class="block_page page_password">
-				<h3>' . t('Пароль для чтения') . '</h3>
-				<p><input type="text" value="' . $f_password . '" name="f_password" style="width: 99%;"></p>
-			</div>
-			
-			<div class="block_page page_menu_order">
-				<h3>' . t('Порядок') . '</h3>
-				<p><input type="text" value="' . $page_menu_order . '" name="f_menu_order" style="width: 99%;"></p>
-			</div>
-				
-			<div class="block_page page_all_parent">
-				<h3>' . t('Родительская страница') . '</h3>
-				<p>' . $all_pages . '</p>
-			</div>
-			
-			<div class="block_page page_all_users">
-				<h3>' . t('Автор') . '</h3>
-				<p>' . $all_users . '</p>
-			</div>
-		</td>
-	</tr>
-	</table>
+			<button type="submit" name="' . $name_submit . '" class="i save">' . t('Сохранить') . '</button>
+	
+	</div><!-- /div.new_or_edit -->
 	';
+	
+	// $posle = 'posle</div><!-- /div.new_or_edit -->';
+	//$do = 'do';
 
 ?>

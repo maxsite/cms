@@ -26,7 +26,8 @@
 	border:none;
 	border-top:1px solid #3C769D;	
 	width:100%;
-	clear:both; display:block;
+	/* clear:both; */ 
+	display:block;
 	line-height:20px;
 	overflow:auto;
 }

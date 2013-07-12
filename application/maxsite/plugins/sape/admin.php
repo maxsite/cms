@@ -50,9 +50,9 @@
 	
 ?>
 <h1>Настройка Sape.ru</h1>
-<p>С помощью этой страницы вы можете настроить свою работу с <a href="http://www.sape.ru/r.aa92aef9c6.php" target="_blank">sape.ru</a>. Перед началом работы вам следует выполнить следующие действия:</p>
+<p>С помощью этой страницы вы можете настроить свою работу с <a href="http://maxsite.org/many" target="_blank">sape.ru</a>. Перед началом работы вам следует выполнить следующие действия:</p>
 <ol>
-<li>Скачать с <a href="http://www.sape.ru/r.aa92aef9c6.php" target="_blank">sape.ru</a> архив с вашим кодом для загрузки на сервер.
+<li>Скачать с <a href="http://maxsite.org/many" target="_blank">sape.ru</a> архив с вашим кодом для загрузки на сервер.
 <li>Распаковать архив. Внутри него будет лежать папка с именем вроде такого: «8df7s4sd2if89as5v34vbez3e2».
 <li>Загрузите эту папку на ваш сервер в корень(!!!) вашего сайта.
 <li>Установите права на эту папку «777» (разрешающие запись).
@@ -88,9 +88,9 @@
 
 <p><strong>Примечание</strong>. Если вы размещаете код через виджеты, то при включенной проверке в виджете появится текст «Код sape.ru установлен верно!»</p>
 
-<p>После проверки кода, вы можете войти в свой аккаунт на sape.ru и добавить свой сайт. В течение некоторого времени, робот <a href="http://www.sape.ru/r.aa92aef9c6.php" target="_blank">sape.ru</a> его проиндексирует.</p>
+<p>После проверки кода, вы можете войти в свой аккаунт на sape.ru и добавить свой сайт. В течение некоторого времени, робот <a href="http://maxsite.org/many" target="_blank">sape.ru</a> его проиндексирует.</p>
 
-<p><strong>Обратите внимание! Помощь по установке кода <a href="http://www.sape.ru/r.aa92aef9c6.php" target="_blank">sape.ru</a>, любые подсказки и разъяснения по этому поводу я оказываю только на платной основе.</strong></p>
+<p><strong>Обратите внимание! Помощь по установке кода <a href="http://maxsite.org/many" target="_blank">sape.ru</a>, любые подсказки и разъяснения по этому поводу я оказываю только на платной основе.</strong></p>
 <br>
 
 <?php
@@ -117,7 +117,7 @@
 		$checked_articles = $options['articles'] ? ' checked="checked" ' : '';
 		
 		$form = '';
-		$form .= '<p><strong>Ваш номер/код в <a href="http://www.sape.ru/r.aa92aef9c6.php" target="_blank">sape.ru</a>:</strong> ' . ' <input name="f_kod" type="text" style="width: 300px;" value="' . $options['kod'] . '"></p>';
+		$form .= '<p><strong>Ваш номер/код в <a href="http://maxsite.org/many" target="_blank">sape.ru</a>:</strong> ' . ' <input name="f_kod" type="text" style="width: 300px;" value="' . $options['kod'] . '"></p>';
 		
 		$form .= '<p><label><input name="f_start" type="checkbox"' . $checked_start . '> Включить плагин</label></p>';
 		$form .= '<p><label><input name="f_context" type="checkbox"' . $checked_context . '> Использовать контекстные ссылки</label></p>';
@@ -140,9 +140,9 @@
 		<br>В этом поле укажите произвольный адрес. Этот адрес нужно указать в настройках сапы в «Шаблонах статей». Шаблон для сапы будет сгенерирован автоматически.</p>';		
 		
 		
-		echo '<form action="" method="post">' . mso_form_session('f_session_id');
+		echo '<form method="post">' . mso_form_session('f_session_id');
 		echo $form;
-		echo '<input type="submit" name="f_submit" value=" Сохранить изменения " style="margin: 25px 0 5px 0;">';
+		echo '<button type="submit" name="f_submit" class="i save">Сохранить изменения</button>';
 		echo '</form>';
 
 ?>

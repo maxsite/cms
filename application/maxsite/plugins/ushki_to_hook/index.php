@@ -55,21 +55,21 @@ function ushki_to_hook_mso_options()
 							'name' => t('Задайте хуки и ушки'), 
 							'description' => t('
 							Например: 
-							<pre>	content_end | page_bottom</pre>
+							<pre>content_end | page_bottom</pre>
 							- где <strong>«content_end»</strong> - хук по которому сработает ушка <strong>«page_bottom»</strong>.
 							
 							<br><br>Если необходимо задать приоритет хука, то он указывается третьим параметром (стандарт: 10, чем больше, тем раньше сработает хук), например: 
-							<pre>	content_end | page_bottom | 20</pre>
+							<pre>content_end | page_bottom | 20</pre>
 							
 							<br>Указанная ушка используется только как исходный PHP-код, который сработает в динамически созданной функции указанного хука. В ушке следует выбрать тип «TEXT/HTML» (не используйте тип «PHP»!), но при этом не использовать открывающий <strong>&lt;?php</strong>, например
 			
-							<br><br><pre>	content_content | my_page | 20</pre>
+							<br><br><pre>content_content | my_page | 20</pre>
 							 
 							<br>И ушка «my_page» (тип «TEXT/HTML»).
 							
 <br><br><pre>
-	$args = "Мой текст" . $args;
-	return $args;
+$args = "Мой текст" . $args;
+return $args;
 </pre>
 							
 							<br>В ушке будет доступна переменная $args, которая является первым параметром динамической функции. 
@@ -77,12 +77,12 @@ function ushki_to_hook_mso_options()
 							<hr>
 							<br><strong>Технические детали.</strong> Заданные хук и ушка преобразуются в функцию 
 <br><br><pre>
-	_ushki_to_hook_ХУК_УШКА($args = "")
-	{
-		ТЕКСТ УШКИ
-	}
+_ushki_to_hook_ХУК_УШКА($args = "")
+{
+	ТЕКСТ УШКИ
+}
 	
-	mso_hook_add(ХУК, _ushki_to_hook_ХУК_УШКА, ПРИОРИТЕТ);
+mso_hook_add(ХУК, _ushki_to_hook_ХУК_УШКА, ПРИОРИТЕТ);
 </pre>
 							<br>после чего этот код выполняется через <strong>eval()</strong>.
 							'), 

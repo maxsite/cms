@@ -34,27 +34,29 @@
 
 	$form = '';
 
-	$form .= '<h2>' . t('Настройки') . '</h2>';
-
 	$chk = $options['allowlate'] ? ' checked="checked"  ' : '';
-	$form .= '<p><label><input name="f_allowlate" type="checkbox" ' . $chk . '> <strong>' . t('Ссылаться ли на более поздние записи') . '</strong></label><br>';
-	$form .= t('Если отмечено, ссылаемся на любые записи кроме как из будущего. Иначе только на записи с более ранней датой, чем текущая запись.'). '</p>';
+	
+	$form .= '<p class="hr"><label><input name="f_allowlate" type="checkbox" ' . $chk . '> ' . t('Ссылаться ли на более поздние записи') . '</label></p>';
+	
+	$form .= '<p class="fhint">' . t('Если отмечено, ссылаемся на любые записи кроме как из будущего. Иначе только на записи с более ранней датой, чем текущая запись.'). '</p>';
 
-	$form .= '<p>&nbsp;</p><p><label><input name="f_linkcount" type="text" value="' . $options['linkcount'] . '"> <strong>' . t('Количество внутренних ссылок') . '</strong></label><br>';
-	$form .= t('Количество внутренних ссылок на одной странице (ссылаться не больше чем на х страниц. 0 — без ограничений).'). '</p>';
+	$form .= '<p class="hr"><label class="fheader" for="f_linkcount">' . t('Количество внутренних ссылок') . '</label></p>
+			<p><span><input name="f_linkcount" id="f_linkcount" type="text" value="' . $options['linkcount'] . '"></span></p>';
+	
+	$form .= '<p class="fhint">' . t('Количество внутренних ссылок на одной странице (ссылаться не больше чем на X страниц. 0 — без ограничений).'). '</p>';
 
-	$form .= '<p>&nbsp;</p><p><label><input name="f_wordcount" type="text" value="' . $options['wordcount'] . '"> <strong>' . t('Ограничение вхождений слов') . '</strong></label><br>';
-	$form .= t('0 — без ограничений. 1 — только первое одинаковое слово делать ссылкой. Дальнейшее не реализовано.'). '</p>';
+	$form .= '<p class="hr"><label class="fheader" for="f_wordcount">' . t('Ограничение вхождений слов') . '</label></p>
+		<p><span><input name="f_wordcount" id="f_wordcount" type="text" value="' . $options['wordcount'] . '"></span></p>';
+	
+	$form .= '<p class="fhint">' . t('0 — без ограничений. 1 — только первое одинаковое слово делать ссылкой. Дальнейшее не реализовано.'). '</p>';
 
-	$form .= '<br><br><h2>' . t('Стоп-слова') . '</h2>';
-	$form .= '<p>' . t('Список слов через пробел, которые не будут становиться ссылками.') . '</p>';
-	$form .= '<textarea name="f_stopwords" rows="7" style="width: 99%;">';
-	$form .= htmlspecialchars($options['stopwords']);
-	$form .= '</textarea>';
+	$form .= '<p class="hr header"><span>' . t('Стоп-слова') . '</span></p>';
+	$form .= '<p><textarea name="f_stopwords" rows="10">' . htmlspecialchars($options['stopwords']) . '</textarea></p>';
+	$form .= '<p class="fhint">' . t('Список слов через пробел, которые не будут становиться ссылками.') . '</p>';
 
-	echo '<form action="" method="post">' . mso_form_session('f_session_id');
+	echo '<form class="fform" method="post">' . mso_form_session('f_session_id');
 	echo $form;
-	echo '<br><input type="submit" name="f_submit" value="' . t('Сохранить изменения') . '" style="margin: 25px 0 5px 0;">';
+	echo '<br><button type="submit" name="f_submit" class="i save">' . t('Сохранить изменения') . '</button>';
 	echo '</form>';
 
-?>
+# end file

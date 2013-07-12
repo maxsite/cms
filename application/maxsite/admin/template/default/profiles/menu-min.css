@@ -1,3 +1,23 @@
-div.admin-menu{width:38px;overflow:hidden;}div.admin-menu div.r{white-space:nowrap;}
-div.admin-menu li>a.admin-menu-section{display:none;}
-div.admin-content{margin-left:50px;}
+div.all {
+	background-image:url(../images/all-bg-menu-min.png);
+}
+div.sidebar {
+	width: 35px; 
+	overflow: hidden; 
+	font-size: 15px;
+}
+
+div.sidebar div.sidebar-wrap {
+	white-space:nowrap;
+}
+
+div.sidebar li>a.admin-menu-section {
+	display:none;
+}
+
+div.content {
+	margin-left: 40px;
+}
+div.sidebar ul.admin-menu ul.admin-submenu li a {
+	padding-left: 10px;
+}

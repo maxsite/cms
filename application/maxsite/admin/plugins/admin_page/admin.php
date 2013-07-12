@@ -46,39 +46,14 @@
 			{
 				echo '<div class="error">' . t('Ошибка при удалении') . ' ('. $result['description'] . ')</div>';
 			}
-			
-			/*
-			$CI->db->select('page_id');
-			$CI->db->where(array('page_id'=>$page_id));
-			$query = $CI->db->get('page');
-			if ($query->num_rows() == 0) // нет такого
-			{
-				echo '<div class="error">Ошибочный номер страницы</div>';
-			}
-			else 
-			{	// теперь можно удалять
-				// при удалении страницы нужно сразу удалить её, рубрики и мета
-				// потом будут еще и комментарии
-				
-				$CI->db->where( array('page_id'=>$page_id) );
-				$CI->db->delete('cat2obj');
-				
-				$CI->db->where( array ('meta_id_obj' => $page_id, 'meta_table' => 'page') );
-				$CI->db->delete('meta');
-				
-				$CI->db->where( array('page_id'=>$page_id) ); 
-				$CI->db->delete('page');
-				
-				echo '<div class="update">Страница удалена</div>';
-			}
-			*/
+
 		}
 	}
 	
 
 ?>
-<h1><?= t('Страницы') ?></h1>
-<p class="info"><?= t('Список всех записей') ?></p>
+<h1><?= t('Записи') ?></h1>
+<p class="info"><?= t('Все записи сайта. Используйте фильтр по рубрикам, типу или статусу для быстрого поиска нужной записи.') ?></p>
 
 <?php
 
@@ -135,19 +110,6 @@
 				. t('Рубрика')
 				. ':</strong> ';
 		
-		/*
-		if (mso_segment(3) and mso_segment(3) != 'next')
-		{
-			echo '<a class="no_filtr" href="' . getinfo('site_admin_url') . 'page">' . t('Без фильтра') . '</a> ';
-		}
-		else
-		{
-			echo '<a class="current" href="' . getinfo('site_admin_url') . 'page">' . t('Без фильтра') . '</a> ';
-		
-		}
-		*/
-		
-		
 		require_once( getinfo('common_dir') . 'category.php' ); // функции рубрик
 		
 		$all_cats = mso_cat_array_single('page', 'category_id', 'ASC', ''); // все рубрики для вывода кол-ва записей
@@ -166,18 +128,7 @@
 			
 			echo '<option value="' . getinfo('site_admin_url'). 'page/category/' . $nav['category_id'] .'"' . $selected . '>' . $nav['category_name'] . ' ('. count($all_cats[$nav['category_id']]['pages']) . ')</option>';
 		
-			/*
-			if ($cat_segment_id != $nav['category_id']) 
-			{
-				echo ' <a href="' . getinfo('site_admin_url'). 'page/category/' . $nav['category_id'] .'">'
-					. $nav['category_name'] 
-					. ' <small>('.  count($all_cats[$nav['category_id']]['pages']) . ')</small></a> ';
-			} 
-			else 
-			{
-				echo ' <a class="current" href="' . getinfo('site_admin_url') . 'page/category/' . $nav['category_id'] . '">' . $nav['category_name'] . ' <small>('.  count($all_cats[$nav['category_id']]['pages']) . ')</small></a> ';
-			}
-			*/
+
 		}
 
 		echo '</select>';
@@ -219,21 +170,6 @@
 			
 			if ($selected) $type_segment_name = $nav['page_type_name'];
 			
-			/*
-		
-			if ($type_segment_id != $nav['page_type_id']) 
-			{
-				echo ' <a href="' . getinfo('site_admin_url') . 'page/type/' . $nav['page_type_id'] . '">' . $nav['page_type_name']. '</a> ';
-			}
-			else 
-			{
-				$type_segment_name = $nav['page_type_name'];
-				
-				echo ' <a class="current" href="' . getinfo('site_admin_url') . 'page/type/' . $nav['page_type_id'] . '">' . $nav['page_type_name'] . '</a> ';
-			}
-			*/
-			
-			
 		}
 		
 		echo '</select>';
@@ -257,13 +193,6 @@
 			
 		echo '<option value="' . getinfo('site_admin_url'). 'page/status/' . $status .'"' . $selected . '>' . t($status) . '</option>';
 		
-		/*
-		if (mso_segment(4) == $status)
-			echo '<a class="current" href="' . getinfo('site_admin_url') . 'page/status/' . $status . '">' . t($status) . '</a> ';
-		else
-			echo '<a href="' . getinfo('site_admin_url') . 'page/status/' . $status . '">' . t($status) . '</a> ';
-		*/
-			
 	}
 	
 	echo '</select>';
@@ -316,8 +245,6 @@
 	{ 	
 		foreach ($pages as $page) // выводим в цикле
 		{
-			// pr($page);
-			// $act = '<a href="' . $this_url . $page['page_id'] . '">Изменить</a>';
 			
 			$page['page_title'] = htmlspecialchars($page['page_title']);
 			
@@ -328,7 +255,7 @@
 				$qhint = mb_substr($qhint, 0, 250, 'UTF-8') . '...';
 			}
 			
-			$qhint = htmlspecialchars(str_replace("\n", "", $qhint));
+			$qhint = htmlspecialchars(str_replace("\n", " ", $qhint));
 			
 			
 			if (!$page['page_title']) $page['page_title'] = 'no-title';
@@ -362,7 +289,7 @@
 			if ($cats) $title .= '<br>' . t('Рубрика:') . ' ' . $cats;
 			if ($tags) $title .= '<br>' . t('Метки:') . ' ' . $tags;
 			
-			$title .= '<p class="admin_page_qhint"><small>' . $qhint . '</small></p>';
+			$title .= '<p class="admin_page_qhint">' . $qhint . '</p>';
 			
 			// $date_p = '<span title="Дата и время сохранения записи">' . $page['page_date_publish'] . '</span>'; // это время публикации как установлено на сервере
 			
@@ -395,14 +322,13 @@
 
 		$pagination['type'] = '';
 		$pagination['range'] = 10;
-		//echo '<br>';
 		mso_hook('pagination', $pagination);
 
 		
 		echo '<form method="post">' . mso_form_session('f_session_id');
 		echo '<h2 class="br">' . t('Удалить страницу') . '</h2><p>';
 		echo $all_pages;
-		echo ' <input type="submit" name="f_submit" value="' . t('Удалить') . '" onClick="if(confirm(\'' . t('Удалить страницу?') . '\')) {return true;} else {return false;}" ></p>';
+		echo ' <button type="submit" name="f_submit" class="i delete-page" onClick="if(confirm(\'' . t('Удалить страницу?') . '\')) {return true;} else {return false;}" >' . t('Удалить') . '</button></p>';
 		echo '</form>';
 
 	}

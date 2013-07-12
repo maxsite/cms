@@ -146,53 +146,46 @@
 		
 		$CI->load->helper('form');
 		
-		echo '<div class="item new_user">';
 
-		echo '<h2 class="br">' . t('Создать нового автора') . '</h2>';
+		echo '<h3>' . t('Создать нового автора') . '</h3>';
+		echo '<p class="info">' . t('Если данные некорректны, то пользователь создан не будет. Для нового пользователя-админа нужно обновить разрешения.') . '</p>';		
 		
-		echo '<form method="post" class="fform admin_users">' . mso_form_session('f_session_id');
+		echo '<form method="post" class="fform">' . mso_form_session('f_session_id');
 		
-		echo '<p>' . t('Если данные некорректны, то пользователь создан не будет. Для нового пользователя-админа нужно обновить разрешения.') . '</p>';		
+		echo '<p><label class="fwrap"><span class="ffirst1 ftitle">' . t('Логин') . ' </span><span>' . form_input( array('name'=>'f_user_login')) . '</span></label></p>';
 		
-		$form .= '<p><label class="fwrap"><span class="ftitle">' . t('Логин') . ' </span><span>' . form_input( array('name'=>'f_user_login')) . '</span></label></p>';
+		echo '<p><label class="fwrap"><span class="ffirst1 ftitle">E-mail</span><span>'. form_input( array( 'name'=>'f_user_email' ) ) . '</span></label></p>';
 		
-		$form .= '<p><label class="fwrap"><span class="ftitle">E-mail</span><span>'. form_input( array( 'name'=>'f_user_email' ) ) . '</span></label></p>';
+		echo '<p><label class="fwrap"><span class="ffirst1 ftitle">' . t('Пароль') . ' </span><span>'. form_input( array( 'name'=>'f_user_password' ) ) . '</span></label></p>';
 		
-		$form .= '<p><label class="fwrap"><span class="ftitle">' . t('Пароль') . ' </span><span>'. form_input( array( 'name'=>'f_user_password' ) ) . '</span></label></p>';
+		echo '<p><label class="fwrap"><span class="ffirst1 ftitle">' . t('Группа') . ' </span><span>' . form_dropdown('f_user_group', $groups, '') . '</span></label></p>';	
 		
-		$form .= '<p><label class="fwrap"><span class="ftitle">' . t('Группа') . ' </span><span>' . form_dropdown('f_user_group', $groups, '') . '</span></label></p>';	
+		echo '<p class="hr"><span class="ffirst1 ftitle"></span><span><button type="submit" name="f_submit" class="i add-new">' . t('Создать автора') . '</button></span></p>';
 		
-		$form .=  '<p class="hr"><span class="ftitle"></span><span><input type="submit" name="f_submit" value="' . t('Создать автора') . '"></span></p>';
-		
-		echo $form;
 		
 		echo '</form>';
-		
-		echo '</div>';
 	}
 
 	if ($all_users and mso_check_allow('edit_delete_users') ) // если разрешено удалять юзеров
 	{
 		$CI->load->helper('form');
 		
-		echo '<div class="item delete_user">';
 		
-		echo '<h2 class="br">' . t('Удалить автора') . '</h2>';
+		echo '<h3>' . t('Удалить автора') . '</h3>';
 		
-		echo '<form method="post" class="fform admin_users">' . mso_form_session('f_session_id');
+		echo '<form method="post" class="fform">' . mso_form_session('f_session_id');
 		
-		echo '<p><label class="fwrap"><span class="ftitle">' . t('Удалить') . '</span><span>' . form_dropdown('f_user_delete', $all_users, '', '') . '</span></label></p>';
+		echo '<p><label class="fwrap"><span class="ffirst1 ftitle">' . t('Удалить') . '</span><span>' . form_dropdown('f_user_delete', $all_users, '', '') . '</span></label></p>';
 		
-		echo '<p><span class="ftitle"></span><label><input type="checkbox" name="f_delete_user_comments"> ' . t('Удалить все комментарии автора. Иначе комментарии отметятся как анонимные.') . '</label></p>';
+		echo '<p><span class="ffirst1"></span><label><input type="checkbox" name="f_delete_user_comments"> ' . t('Удалить все комментарии автора. Иначе комментарии отметятся как анонимные.') . '</label></p>';
 		
-		echo '<p><span class="ftitle"></span><label><input type="checkbox" name="f_delete_user_pages"> ' . t('Удалить все страницы автора. Иначе у страниц автором станет администратор.') . '</label></p>';
+		echo '<p><span class="ffirst1"></span><label><input type="checkbox" name="f_delete_user_pages"> ' . t('Удалить все страницы автора. Иначе у страниц автором станет администратор.') . '</label></p>';
 		
-		echo '<p class="hr"><span class="ftitle"></span><span><input type="submit" name="f_delete_submit" value="' . t('Удалить автора') . '" onClick="if(confirm(\'' . t('Удалить автора сайта?') . '\')) {return true;} else {return false;}"></span></p>';
+		echo '<p class="hr"><span class="ffirst1"></span><span><button type="submit" name="f_delete_submit" class="i delete" onClick="if(confirm(\'' . t('Удалить автора сайта?') . '\')) {return true;} else {return false;}">' . t('Удалить автора') . '</button></span></p>';
 		
 		echo '</form>';
 		
-		echo '</div>';
 	}
 
 
-?>
+# end file

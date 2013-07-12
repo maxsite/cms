@@ -1,0 +1,50 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+
+div.menu-icons {
+
+	> div.wrap {
+	}
+	
+	// стили для разных main-шаблонов в отдельном файле 
+	@import url('components/_main-width.less');
+	
+	div.r1 {
+		.column_width(5, 7, 3%);
+	}
+
+	div.r2 {
+		.column_width(2, 7, 3%);
+
+		.social_grands > .set(25px, 1px);
+		.social_grands > .hover_bg();
+		.social_grands > .round();
+		
+		div.social {
+			padding: 5px 10px 0  0;
+		}
+	}
+	
+	@media @MOBILE 
+	{
+		div.r1, div.r2 {
+			width: 100%;
+			margin: 0;
+		}
+		
+		div.r2 {
+			div.social {
+				padding: 4px 0 0 10px;
+				.align(left);
+			}
+		}
+	}
+}
+
+div.menu-icons {
+	.bg(@MENU_COLOR_BG);
+	
+	div.r2 {
+		.social_grands > .color(#ddd, transparent);
+	}
+}

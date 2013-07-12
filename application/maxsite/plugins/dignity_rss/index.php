@@ -99,7 +99,7 @@ function dignity_rss_widget_form($num = 1)
 	
 	$form .= mso_widget_create_form(t('Ваш логин в  <a href="http://feedburner.google.com/" target="_blank">feedburner</a>', __FILE__), form_input( array( 'name'=>$widget . 'rss_to_email_login', 'value'=>$options['rss_to_email_login'] ) ), t('Используется для оформления подписки на email. Активируйте в своем аккаунте feedburner разрешение для подписки на email.', __FILE__));
 	
-	$form .= mso_widget_create_form(t('Текст вначале', __FILE__), form_textarea( array( 'name'=>$widget . 'textdo', 'value'=>$options['textdo'] ) ), '');
+	$form .= mso_widget_create_form(t('Текст в начале', __FILE__), form_textarea( array( 'name'=>$widget . 'textdo', 'value'=>$options['textdo'] ) ), '');
 
     $form .= mso_widget_create_form(t('Текст в конце', __FILE__), form_textarea( array( 'name'=>$widget . 'textposle', 'value'=>$options['textposle'] ) ), '');
 	

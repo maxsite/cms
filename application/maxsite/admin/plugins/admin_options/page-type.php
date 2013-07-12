@@ -73,15 +73,15 @@
 
 ?>
 
-<h1><?= t('Типы страниц') ?></h1>
-<p class="info"><?= t('Типы страниц предназначены для того, чтобы вы могли группировать свои записи по своему усмотрению. Однако для того, чтобы задействовать дополнительные типы страниц, необходимо чтобы ваш шаблон знал об этих типах. Обычно это требует дополнительного программирования. Стандартно в <strong>MaxSite CMS</strong> используются типы <strong>«blog»</strong> - для отображения записей в обратном хронологическом порядке; а также <strong>«static»</strong> - для прочих статичных страниц.') ?></p>
+<h1><?= t('Типы страниц/записей') ?></h1>
+<p class="info"><?= t('Типы страниц предназначены для дополнительной группировки записей. Стандартно в <strong>MaxSite CMS</strong> используются типы <strong>«blog»</strong> - для отображения записей в обратном хронологическом порядке, а также <strong>«static»</strong> - для прочих статичных страниц. Для того, чтобы задействовать новые типы страниц, скорее всего потребуется отдельное программирование шаблона. Перед создание нового типа, учитывайте что его удаление будет невозможно.') ?></p>
 
 <?php
 	// для вывода будем использовать html-таблицу
 	$CI->load->library('table');
 
 	$tmpl = array (
-                    'table_open'          => '<table class="page" border="0" width="99%"><colgroup width="30"><colgroup style="width: 150px"><colgroup><colgroup style="width: 200px">',
+                    'table_open'          => '<table class="page"><colgroup width="30"><colgroup style="width: 150px"><colgroup><colgroup style="width: 150px">',
                     'row_alt_start'		  => '<tr class="alt">',
 					'cell_alt_start'	  => '<td class="alt">',
               );
@@ -101,26 +101,21 @@
 		$name = $row['page_type_name'];
 		$desc = htmlspecialchars($row['page_type_desc'], ENT_QUOTES);
 
-		//$desc = '<input style="width: 99%;" type="text" name="f_desc[' . $id . ']" value="' . $desc . '">';
 		$desc = '<input type="text" name="f_desc[' . $id . ']" value="' . $desc . '">';
-
-		$act = '<input type="submit" name="f_edit_submit[' . $id . ']" value="' . t('Изменить') . '">';
+		$act = '<button type="submit" name="f_edit_submit[' . $id . ']" class="i save">' . t('Сохранить') . '</button>';
 
 		$CI->table->add_row($id, $name, $desc, $act);
 	}
 
-	# добавим строчку для добавления нового типа
-	//$name = '<b>' . t('Новый тип') . '</b><br><input style="width: 99%;" type="text" name="f_new_name" value="">';
-	$name = '<b>' . t('Новый тип') . '</b><br><input type="text" name="f_new_name" value="">';
-	//$desc = '<b>' . t('Описание') . '</b><br><input style="width: 99%;" type="text" name="f_new_desc" value="">';
-	$desc = '<b>' . t('Описание') . '</b><br><input type="text" name="f_new_desc" value="">';
-	$act = '<input type="submit" name="f_new_submit" value="' . t('Добавить новый тип') . '">';
-
-	$CI->table->add_row('', $name, $desc, $act);
-
 	// добавляем форму, а также текущую сессию
-	echo '<form method="post">' . mso_form_session('f_session_id');
+	echo '<form method="post" class="fform">' . mso_form_session('f_session_id');
 	echo $CI->table->generate(); // вывод подготовленной таблицы
+	
+	# добавим строчку для добавления нового типа
+	echo '<p><span class="ffirst1 ftitle">' . t('Новый тип') . '</span><span><input type="text" name="f_new_name"></span></p>';
+	echo '<p><span class="ffirst1 ftitle">' . t('Описание') . '</span><span><input type="text" name="f_new_desc"></span></p>';
+	echo '<p><span class="ffirst1"></span><span><button type="submit" name="f_new_submit" class="i add-new">' . t('Добавить новый тип') . '</button></span></p>';
+	
 	echo '</form>';
 
-?>
+# end file

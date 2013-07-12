@@ -16,7 +16,6 @@ function _mso_install_sqlfile($sql_file)
 
 function mso_install_newsite($arg = array())
 {
-	
 	$CI = & get_instance();	
 	$prefix = $CI->db->dbprefix;
 	
@@ -50,7 +49,8 @@ function mso_install_newsite($arg = array())
 	mso_add_option('keywords', '', 'general');
 	
 	
-	if ($arg['demoposts']) {
+	if ($arg['demoposts']) 
+	{
 		$sql_file = FCPATH . '/' . APPPATH . 'views/install/demo.sql';
 		$sql = _mso_install_sqlfile($sql_file);
 		foreach($sql as $s)
@@ -72,4 +72,4 @@ function mso_install_newsite($arg = array())
 	return $res;
 }
 
-?>
+# end file

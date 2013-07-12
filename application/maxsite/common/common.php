@@ -457,6 +457,7 @@ function mso_initalizing()
 		{
 			// есть что-то
 			$row = $query->row();
+			
 			// сразу выставим группу
 			$MSO->data['session']['users_groups_id'] = $row->users_groups_id;
 		}
@@ -510,7 +511,6 @@ function mso_initalizing()
 		}
 	}
 	else $CI->session->userdata['comuser'] = 0;
-
 
 	# дефолтные хуки
 	mso_hook_add('init', '_mso_require_functions_file'); // подключение functions.php текущего шаблона
@@ -1801,6 +1801,7 @@ function mso_slug($slug)
 		$slug = strtr(trim($slug), $repl);
 		$slug = htmlentities($slug); // если есть что-то из юникода
 		$slug = strtr(trim($slug), $repl);
+		$slug = strtolower($slug);
 		
 		# разрешим расширение .html
 		$slug = str_replace('.htm', '@HTM@', $slug);
@@ -1812,11 +1813,11 @@ function mso_slug($slug)
 
 		$slug = str_replace('-', ' ', $slug);
 		$slug = str_replace(' ', '-', trim($slug));
+	
 	}
 	else $slug = mso_hook('slug', $slug);
 
 	$slug = mso_hook('slug_posle', $slug);
-	
 	return $slug;
 }
 
@@ -3578,8 +3579,9 @@ function _mso_login()
 					'users_show_smiles' => $userdata[0]['users_show_smiles'],
 					'users_time_zone' => $userdata[0]['users_time_zone'],
 					'users_language' => $userdata[0]['users_language'],
+					'users_avatar_url' => $userdata[0]['users_avatar_url'],
+					'users_email' => $userdata[0]['users_email'],
 					// 'users_levels_id' => $userdata[0]['users_levels_id'],
-					// 'users_avatar_url' => $userdata[0]['users_avatar_url'],
 					// 'users_skins' => $userdata[0]['users_skins']
 				);
 				
@@ -3653,7 +3655,8 @@ function _mso_login()
 					'users_show_smiles' => $userdata[0]['users_show_smiles'],
 					'users_time_zone' => $userdata[0]['users_time_zone'],
 					'users_language' => $userdata[0]['users_language'],
-					// 'users_avatar_url' => $userdata[0]['users_avatar_url'],
+					'users_avatar_url' => $userdata[0]['users_avatar_url'],
+					'users_email' => $userdata[0]['users_email'],
 					// 'users_levels_id' => $userdata[0]['users_levels_id'],
 					// 'users_skins' => $userdata[0]['users_skins']
 				);

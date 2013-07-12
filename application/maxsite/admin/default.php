@@ -14,7 +14,7 @@ function mso_admin_menu_default($args = array())
 	# вначале нужно добавить все главные меню в той последовательности, которая нужна
 
 	mso_admin_menu_add('', '', t('Начало') );
-	mso_admin_menu_add('page', '', t('Страницы'));
+	mso_admin_menu_add('page', '', t('Содержимое'));
 	mso_admin_menu_add('options', '', t('Настройки'));
 	mso_admin_menu_add('users', '', t('Пользователи'));
 	mso_admin_menu_add('plugins', '', t('Плагины'));
@@ -45,11 +45,17 @@ function mso_admin_footer_default($args = '')
 	$CI = & get_instance(); 
 	$query_count = $CI->db->query_count;
 	$ver = $MSO->version;
-	$out = '<p>' . t('Страница создавалась {elapsed_time} секунд. Потребление памяти: {memory_usage}. Запросов MySQL:') . ' '
-	. $query_count . '. '
-	. t('Работает на <a href="http://max-3000.com/">MaxSite CMS</a>.'). ' ' 
-	. t('Версия') . ' '
-	. $ver . ' [<a href="' . $MSO->config['site_url'] . 'logout'.'">' . t('выйти') . '</a>]</p>';
+	$out = '<p>' 
+	. t('Работает на <a href="http://max-3000.com/">MaxSite CMS</a> ')
+	. ' ' 
+	. $ver 
+	// . '. <a class="footer-logout" href="' . $MSO->config['site_url'] . 'logout'.'">' . t('Выход') . '</a>'
+	. '. <span class="footer-stat">'
+	. t('Статистика: {elapsed_time} сек., {memory_usage}, MySQL:') 
+	. ' '
+	. $query_count 
+	//. '. '
+	. '</span></p>';
 	
 	return $out;
 }

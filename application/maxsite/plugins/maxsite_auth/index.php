@@ -84,11 +84,57 @@ function maxsite_auth_mso_options()
 							'name' => t('Пароль'), 
 							'description' => t('Укажите пароль, который будет использоваться для регистрации и входа на других сайтах. Не указывайте здесь пароль от своего сайта!'), 
 							'default' => ''
+						),
+			'unique' => array(
+							'type' => 'checkbox', 
+							'name' => t('Делать уникальные пароли для каждого сайта'), 
+							'description' => t('В этом случае для каждого сайта будет создан уникальный пароль на основе его адреса и вашего пароля. Для «прямого» входа на чужом сайте вы можете сгенерировать полученный пароль через приведенную ниже форму. Вы можете использовать его также для восстановления на чужом сайте.'), 
+							'default' => '0'
 						),			
+						
 			),
-		t('Настройки плагина Maxsite Auth'), // титул
-		t('С помощью этого плагина вы можете осуществлять авторизацию на других сайтах с помощью своего. Достаточно лишь предварительно задать адрес email и пароль, которые будут передаваться на исходный сайт, где вы автоматически будете зарегистрированы или авторизованы как комюзер (комментатор).')   // инфо
+		t('Настройка Maxsite Auth'), // титул
+		t('С помощью Maxsite Auth вы можете осуществлять авторизацию на других сайтах с помощью своего. Достаточно лишь предварительно задать email и пароль, которые будут передаваться на исходный сайт, где вы автоматически будете зарегистрированы или авторизованы как комюзер (комментатор).')   // инфо
 	);
+	
+	
+	echo '<br>';
+	
+	if ( $post = mso_check_post(array('f_url_submit', 'f_url')) )
+	{
+		$url = mb_strtolower($post['f_url']);
+		
+		$options = mso_get_option('plugin_maxsite_auth', 'plugins', array());
+		
+		if (!$url)
+		{
+			echo '<div class="error">' . t('Нужно указать адрес сайта') . '</div>';
+		}
+		elseif (!isset($options['password']) or !$options['password'])
+		{
+			echo '<div class="error">' . t('Следует указать свой пароль') . '</div>';
+		}
+		elseif (!isset($options['unique']) or !$options['unique'])
+		{
+			echo '<div class="error">' . t('Вы не отметили создание уникального пароля для каждого сайта') . '</div>';
+		}
+		else
+		{
+			$pas = $url;
+			$pas = convert_uuencode(mso_md5($options['password'] . $pas));
+			$pas = mb_strtolower($pas);
+			$pas = mso_slug($pas);
+			$pas = substr($pas, 1, 20);
+			
+			echo '<div class="update">' . t('Пароль для ') . $url . ' — <input type="text" value="' . $pas . '"></div>';
+		}
+	}
+	
+	echo '<form method="post" class="fform">' . mso_form_session('f_session_id') . '
+		<p class="hr head"><label class="fheader" for="f_url">' . t('Укажите адрес сайта (с http://), для которого необходимо узнать свой пароль') . '</label></p>
+		<p><span><input type="text" name="f_url" id="f_url"></span></p>
+		<p><span><button type="submit" name="f_url_submit" class="i execute">' . t('Узнать пароль для сайта') . '</button></span></p>
+		</form>';
 }
 
 
@@ -106,15 +152,15 @@ function maxsite_auth_custom($args = array())
 		$redirect_url = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : getinfo('siteurl');
 		
 		echo '<html><head>
-		<title>Авторизация</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		</head><body>
-			<form method="post" action="' . getinfo('site_url'). 'maxsite-auth-form-post">
-				<input type="hidden" name="redirect_url" value="' . urlencode($redirect_url) . '">
-				Укажите адрес сайта (с http://): <input type="text" name="url" value="" size="80">
-				<button type="submit">' . tf('Перейти к сайту') . '</button>
-			</form>
-		</body></html>';
+<meta charset="UTF-8">
+<title>Авторизация</title>
+</head><body>
+	<form method="post" action="' . getinfo('site_url'). 'maxsite-auth-form-post">
+		<input type="hidden" name="redirect_url" value="' . urlencode($redirect_url) . '">
+		Укажите адрес своего сайта (с http://): <input type="text" name="url" value="" size="80">
+		<button type="submit">' . tf('Перейти к сайту') . '</button>
+	</form>
+</body></html>';
 		
 		die(); // Форма ОК
 	}
@@ -149,10 +195,10 @@ function maxsite_auth_custom($args = array())
 		if (!is_login()) // нет логина - нужно вывести форму логина
 		{
 			echo '<html><head>
-		<title>Авторизация</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		</head><body>
-			<div class="loginform">' . tf('Для авторизации необходимо войти на сайт') . '<br>';
+<meta charset="UTF-8">
+<title>Авторизация</title>
+</head><body>
+	<div class="loginform">' . tf('Для авторизации необходимо войти на сайт') . '<br>';
 			
 			mso_login_form(array( 'login'=>tf('Логин:') . ' ', 'password'=>tf('Пароль:') . ' ', 'submit'=>''), getinfo('siteurl') . mso_current_url());
 			
@@ -168,6 +214,7 @@ function maxsite_auth_custom($args = array())
 			$options = mso_get_option('plugin_maxsite_auth', 'plugins', array());
 			if (!isset($options['email']) or !$options['email']) die(tf('Не задан ответный email')); 
 			if (!isset($options['password']) or !$options['password']) die(tf('Не задан ответный пароль'));
+			if (!isset($options['unique'])) $options['unique'] = 0; // делать уникальный пароль
 			
 			// смотрятся входные get-данные (расшифровка из base64) адрес-сайт1
 			$data64 = mso_segment(2);
@@ -219,8 +266,25 @@ function maxsite_auth_custom($args = array())
 			// он должен быть фиксированным для одного сайта
 			$my_key = substr(mso_md5(getinfo('siteurl')), 1, 5);
 			
+			$pas = $data_siteurl;
+			
+			// делать пароль уникальным
+			if ($options['unique'])
+			{
+				//pr($options['password']); // указанный пароль
+				// pr($data_siteurl); // для какого сайта
+				
+				$pas = mb_strtolower($pas);
+				$pas = convert_uuencode(mso_md5($options['password'] . $pas));
+				$pas = mb_strtolower($pas);
+				$pas = mso_slug($pas);
+				$pas = substr($pas, 1, 20);
+
+				// _pr($pas);
+			}
+			
 			// шифруем на основе двух ключей
-			$my_email_pass = $CI->encrypt->encode($options['email'] . '##' . $options['password'], $data_key . $my_key);
+			$my_email_pass = $CI->encrypt->encode($options['email'] . '##' . $pas, $data_key . $my_key);
 
 			$data = getinfo('siteurl') . '##'
 					. $data_siteurl . '##'
@@ -232,14 +296,14 @@ function maxsite_auth_custom($args = array())
 			// pr($CI->encrypt->decode($my_email_pass, $data_key . $my_key));
 			
 			echo '<html><head>
-		<title>Авторизация</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		</head><body>
-			<form method="post" action="' . $data_siteurl . 'maxsite-auth-reply">
-				<input type="hidden" name="data" value="' . base64_encode($data) . '">
-				<button type="submit">' . tf('Подтвердить авторизацию') . '</button>
-			</form>
-			</body></html>';
+<meta charset="UTF-8">
+<title>Авторизация</title>
+</head><body>
+<form method="post" action="' . $data_siteurl . 'maxsite-auth-reply">
+	<input type="hidden" name="data" value="' . base64_encode($data) . '">
+	<button type="submit">' . tf('Подтвердить авторизацию для') . ' ' . $data_siteurl . '</button>
+</form>
+</body></html>';
 
 			die(); // выход ОК
 		}
@@ -287,7 +351,7 @@ function maxsite_auth_custom($args = array())
 			
 			*/
 			
-			// pr($data_1);
+			//pr($data_1);
 			
 			$data_siteurl = $data_1[0]; // сайт где была сделана авторизация = реферер
 			$my_siteurl = $data_1[1]; // сайт с которого был отправлен запрос на авторизацию - должен быть равен текущему

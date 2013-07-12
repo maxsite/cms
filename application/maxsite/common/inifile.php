@@ -216,7 +216,6 @@ function mso_view_ini($all = false)
 			$name_f = '';
 		
 		
-		
 		if ($type == 'textfield')
 		{
 			$value = str_replace('_QUOT_', '&quot;', $value);
@@ -227,6 +226,12 @@ function mso_view_ini($all = false)
 			
 			
 			$f .= '<input type="' . $textfield_type . '" name="' . $name_f . '" value="' . $value . '">' . NR;
+		}
+		elseif ($type == 'color')
+		{
+			$f .= mso_load_jquery('jscolor.js', getinfo('common_url') . 'jquery/jscolor/');
+			
+			$f .= '<input type="text" name="' . $name_f . '" value="' . $value . '" class="color">' . NR;
 		}
 		elseif ($type == 'textarea')
 		{
@@ -407,11 +412,11 @@ function mso_view_ini($all = false)
 	
 	$out .= '<form action="' . mso_current_url(true) . '" method="post">' . mso_form_session('f_session_id');
 	$out .= '<a id="atop"></a><input type="hidden" value="1" name="f_ini">'; // доп. поле - индикатор, что это ini-форма
-	if ($nav) $out .= '<p class="nav">' . str_replace('    ', ' | ', trim($nav)) . '</p>';
+	if ($nav) $out .= '<p class="nav">' . str_replace('    ', '<span class="sep"></span>', trim($nav)) . '</p>';
 	
 	$out .= $table; // вывод подготовленной таблицы
 	
-	$out .= NR . '<p class="br"><a id="abottom"></a><input type="submit" name="f_submit" value="' . t('Сохранить') . '"></p>';
+	$out .= NR . '<a id="abottom"></a><button type="submit" name="f_submit" class="i save">' . t('Сохранить') . '</button>';
 	$out .= '</form>';
 	
 	$out .= mso_load_jquery('jquery.cookie.js') . "

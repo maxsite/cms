@@ -48,8 +48,8 @@ function admin_options_admin($args = array())
 		return $args;
 	}
 	
-	mso_hook_add_dinamic( 'mso_admin_header', ' return $args . t("Основные настройки"); ' );
-	mso_hook_add_dinamic( 'admin_title', ' return t("Основные настройки") . " - " . $args; ' );
+	mso_hook_add_dinamic( 'mso_admin_header', ' return $args . t("Основные настройки сайта"); ' );
+	mso_hook_add_dinamic( 'admin_title', ' return t("Основные настройки сайта") . " - " . $args; ' );
 	
 	require($MSO->config['admin_plugins_dir'] . 'admin_options/admin.php');
 }

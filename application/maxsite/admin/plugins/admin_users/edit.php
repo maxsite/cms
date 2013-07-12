@@ -83,15 +83,13 @@
 		
 	}
 
-
-	
 	# вспомогательная функция
 	# имя поле значение
 	function _mso_add_row($title, $field, $val)
 	{
 		$CI = & get_instance();
 		$CI->table->add_row($title, 
-			form_input( array( 'name'=>$field, 'style'=>'width: 99%',
+			form_input( array( 'name'=>$field, 'style'=>'',
 			'value'=>$val ) ) );
 	}
 		
@@ -115,7 +113,7 @@
 			$CI->load->library('table');
 			
 			$tmpl = array (
-						'table_open'		  => '<table class="page" border="0" width="99%">
+						'table_open'		  => '<table class="page">
 						<colgroup><colgroup>',
 						'row_alt_start'		  => '<tr class="alt">',
 						'cell_alt_start'	  => '<td class="alt">',
@@ -153,10 +151,10 @@
 				_mso_add_row(t('URL аватара'), 'f_avatar_url', $row['users_avatar_url']);
 				
 				
-				$CI->table->add_row(t('Описание'), '<textarea name="f_description" cols="90" rows="3">' . htmlspecialchars($row['users_description']) . '</textarea>');
+				$CI->table->add_row(t('Описание'), '<textarea name="f_description" rows="3">' . htmlspecialchars($row['users_description']) . '</textarea>');
 				
 				if ( mso_check_allow('edit_users_admin_note') )
-					$CI->table->add_row(t('Примечание админа'), '<textarea name="f_admin_note" cols="90" rows="3">' . htmlspecialchars($row['users_admin_note']) . '</textarea>');
+					$CI->table->add_row(t('Примечание админа'), '<textarea name="f_admin_note" rows="3">' . htmlspecialchars($row['users_admin_note']) . '</textarea>');
 			
 				// ДР это три поля
 				$y = mso_date_convert('Y', $row['users_date_birth']);
@@ -212,20 +210,20 @@
 					'-10.00'=>'-10:00', 
 					'-11.00'=>'-11:00',
 					'-12.00'=>'-12:00'
-					), $tz, ' style="width: 99%;" ' ) );
+					), $tz, '' ) );
 				
 
 				$CI->table->add_row(t('Смайлики'), 
-					form_dropdown('f_show_smiles', array('0'=>t('Прятать'), '1'=>t('Отображать')), $row['users_show_smiles'], ' style="width: 300px;" '));
+					form_dropdown('f_show_smiles', array('0'=>t('Прятать'), '1'=>t('Отображать')), $row['users_show_smiles'], ''));
 				
 	
 				###!!! что за уведомления? для чего???
 				$CI->table->add_row(t('Уведомления'), 
-					form_dropdown('f_notify', array('0'=>t('Без уведомлений'), '1'=>t('Подписаться')), $row['users_notify'], ' style="width: 300px;" '));
+					form_dropdown('f_notify', array('0'=>t('Без уведомлений'), '1'=>t('Подписаться')), $row['users_notify'], ''));
 				
 				###!!! языки взять из CodeIgniter !!!
 				$CI->table->add_row(t('Язык'), 
-					form_dropdown('f_language', array('ru'=>t('Русский'), 'en'=> t('Английский'), 'ua'=>'' . t('Украинский')), $row['users_language'], ' style="width: 300px;" '));	
+					form_dropdown('f_language', array('ru'=>t('Русский'), 'en'=> t('Английский'), 'ua'=>'' . t('Украинский')), $row['users_language'], ''));	
 				
 				
 				###!!! группу доделать !!!
@@ -241,10 +239,10 @@
 						$groups[$rw['groups_id']] = $rw['groups_name'];
 				
 					$CI->table->add_row(t('Группа'), 
-					form_dropdown('f_groups_id', $groups, $row['groups_id'], ' style="width: 300px;" '));			
+					form_dropdown('f_groups_id', $groups, $row['groups_id'], ''));			
 				}
 				
-				_mso_add_row(t('Новый пароль (только английские символы, длина > 6 символов)'), 'f_new_password', '');
+				_mso_add_row(t('Новый пароль'), 'f_new_password', '');
 				_mso_add_row(t('Подтвердите пароль'), 'f_new_confirm_password', '');
 
 
@@ -256,7 +254,7 @@
 			
 			echo '<form method="post">' . mso_form_session('f_session_id');
 			echo $CI->table->generate();
-			echo '<p class="br"><input type="submit" name="f_submit[' . $id . ']" value="' . t('Изменить') . '"></p>';
+			echo '<p><button type="submit" name="f_submit[' . $id . ']" class="i save">' . t('Сохранить') . '</button>';
 			echo '</form>';
 		}
 		else echo '<div class="error">' . t('Ошибочный запрос') . '</div>';

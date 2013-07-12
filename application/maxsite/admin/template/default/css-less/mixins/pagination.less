@@ -1,0 +1,72 @@
+// MaxSite CMS
+// Copyright http://max-3000.com/
+
+.pagination(
+
+	// текущая страница
+	@current_bg: #444,
+	@current_color: #fff,
+	
+	// остальные пункты
+	@pag_bg: #999,
+	@pag_color: #eee,
+	
+	// при наведении
+	@pag_bg_hover: #777,
+	@pag_color_hover: #fff,
+	
+	// цвет по-умолчанию
+	@def_color: #777,
+	
+	// скругление
+	@pag_border_radius: 2px,
+	
+	// размеры
+	@pag_width: 30px,
+	@pag_height: 30px,
+	
+)
+{
+	color: @def_color;
+	
+	a, strong {
+		padding: 0;
+		display: inline-block;
+		text-align: center;
+		width: @pag_width;
+		height: @pag_height;
+		line-height: @pag_height;
+		.border_radius(@pag_border_radius);
+		color: @current_color;
+		.bg(@current_bg);
+		.bold(normal);
+	}
+	
+	a {
+		text-decoration: none;
+		
+		color: @pag_color;
+		.bg(@pag_bg);
+		
+		&:hover {
+			color: @pag_color_hover;
+			.bg(@pag_bg_hover);
+		}
+	
+		&.pagination-first,
+		&.pagination-prev,
+		// &.pagination-end,
+		&.pagination-next,
+		&.pagination-last {
+			&:hover {
+			}
+		}
+		
+		&.pagination-next {
+		}
+	}
+	
+	span {
+		display: none;
+	}
+}

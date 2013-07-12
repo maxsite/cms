@@ -31,7 +31,7 @@
 	{
 		mso_checkreferer(); // проверка на чужой реферер
 		
-		if ($_POST['mysubmit']) 
+		if (isset($_POST['mysubmit'])) 
 		{
 			$username = isset ($_POST['username']) ? mso_strip($_POST['username'], true) : false;
 			$userpassword = isset ($_POST['userpassword']) ? mso_strip($_POST['userpassword'], true) : false;
@@ -50,10 +50,9 @@
 			
 			if ( $step === 3 ) 
 			{
+
 				require_once (APPPATH . 'views/install/install-common.php');
-				
-				//require_once ('install-common.php');
-				
+
 				$res = mso_install_newsite( array('username'=>$username, 
 										   'userpassword'=>mso_md5($userpassword), 
 										   'userpassword_orig'=>$userpassword, 
@@ -74,7 +73,7 @@
 ?><!DOCTYPE HTML>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
 	<title>Install MaxSite CMS</title>
 	<meta name="generator" content="MaxSite CMS">
 	<link rel="stylesheet" href="<?=$MSO->data['url_css']?>" type="text/css" media="screen">
@@ -87,7 +86,9 @@
 <?php 
 	if ( $step == 1) // первый шаг
 	{ 
-		echo '<h1>' . t('Добро пожаловать в программу установки <a href="http://max-3000.com/">MaxSite CMS</a>', 'install') . '</h1>';
+		echo '<h1>' . t('Добро пожаловать в программу установки <a href="http://max-3000.com/">MaxSite CMS</a>!', 'install') . '</h1>';
+		
+		echo '<div class="wrap">';
 		
 		if (mso_current_url() == 'install/1' or mso_current_url() == '')
 		{
@@ -111,14 +112,17 @@
 			echo '<li><strong>REQUEST_METHOD:</strong> ' . $_SERVER['REQUEST_METHOD'] . '</li>';
 			echo '</ul>';
 		}
+		
+		echo '</div>';
 	}
 
 	if ( $step == 2 ) // второй шаг настройки
-	{  ?>
-	
-	<h1><?= t('Добро пожаловать в программу установки <a href="http://max-3000.com/">MaxSite CMS</a>', 'install') ?></h1>
-	<?= $error ?>
-	<?php 
+	{
+		echo '<h1>'. t('Установка <a href="http://max-3000.com/">MaxSite CMS</a>', 'install') . '</h1>';
+		
+		echo '<div class="wrap">';
+		
+		echo $error;
 		
 		$this->load->helper('form');
 
@@ -129,7 +133,7 @@
 								'id'=>'username', 
 								'value'=>$username,
 								'maxlength'=>'100',
-								'size'=>'50',
+								'size'=>'60',
 								'style'=>'float: left;'))
 			. '</label></p><p class="f-desc">' . t('Английские буквы, цифры, без пробелов', 'install') .  '</p>';
 	
@@ -138,7 +142,7 @@
 								'id'=>'userpassword', 
 								'value'=>$userpassword,
 								'maxlength'=>'100',
-								'size'=>'50',
+								'size'=>'60',
 								'style'=>'float: left;'))
 			. '</label></p><p class="f-desc">' . t('Английские буквы, цифры, без пробелов. Минимум 6 символов', 'install') .  '</p>';					
 	
@@ -147,7 +151,7 @@
 								'id'=>'useremail', 
 								'value'=>$useremail,
 								'maxlength'=>'100',
-								'size'=>'50',
+								'size'=>'60',
 								'style'=>'float: left;'))
 			. '</label></p><p class="f-desc">' . t('На него отправится сообщение с паролем', 'install') .  '</p>';						
 						
@@ -156,7 +160,7 @@
 								'id'=>'namesite', 
 								'value'=>$namesite,
 								'maxlength'=>'100',
-								'size'=>'50',
+								'size'=>'60',
 								'style'=>'float: left;'))
 			. '</label></p><p class="f-desc">' . t('Укажите название своего сайта', 'install') .  '</p>';					
 
@@ -172,6 +176,7 @@
 		// сразу выполним проверку на все права файла 
 		// 
 		$show_button = true;
+		
 		echo '<div class="proverka">';
 		
 		
@@ -282,11 +287,14 @@
 			
 		echo '</div>';
 		
-		if ($show_button) echo '<p class="mysubmit-ok">' . form_submit('mysubmit', t('Установить MaxSite CMS', 'install'), 'id="mysubmit"') . '</p>';
-			else echo '<p class="f5">' . t('Исправьте замечания и обновите эту страницу в браузере (F5)', 'install') . '</p>';
+		if ($show_button) echo '<p class="mysubmit-ok"><button type="submit" name="mysubmit" id="mysubmit">' . t('Установить MaxSite CMS', 'install') . '</button></p>';
+		else 
+			echo '<p class="f5">' . t('Исправьте замечания и обновите эту страницу в браузере (F5)', 'install') . '</p>';
 		
 		echo form_close();
-
+		
+		echo '</div>';
+		
 	} // конец первого шага
 	
 	
@@ -294,35 +302,37 @@
 	if ($step == 3) 
 	{
 	
-	$text = t('Ваш новый сайт создан: ', 'install') . getinfo('siteurl') . NR;
-	$text .= t('Для входа воспользуйтесь данными:', 'install') . NR;
-	$text .= t('Логин: ', 'install') . $username . NR;
-	$text .= t('Пароль: ', 'install') . $userpassword . NR . NR . NR;
-	$text .= t('Сайт поддержки: http://max-3000.com/', 'install');
-	
-	mso_flush_cache(); // сбросим кэш
+		$text = t('Ваш новый сайт создан: ', 'install') . getinfo('siteurl') . NR;
+		$text .= t('Для входа воспользуйтесь данными:', 'install') . NR;
+		$text .= t('Логин: ', 'install') . $username . NR;
+		$text .= t('Пароль: ', 'install') . $userpassword . NR . NR . NR;
+		$text .= t('Сайт поддержки: http://max-3000.com/', 'install');
+		
+		mso_flush_cache(); // сбросим кэш
 
-	if (isset($res)) 
-	{ 
+		if (isset($res)) 
+		{ 
+			echo '<h1>' . t('Поздравляем! Всё готово!', 'install') . '</h1>';
+			
+			echo '<h2 class="res">' . t('Ваша информация', 'install') . '</h2>';
+			echo $res;
+			echo '<p class="res"><a href="' . getinfo('siteurl') . '">' . t('Переход к сайту', 'install') . '</a></p>
+				<p class="res">' . t('Не забудьте открыть файл «application/maxsite/mso_config.php» и измените', 'install') . ' <em>$mso_install = true;</em></p>';
+		
+			// поскольку это инсталяция, то отправитель - тот же email
+			@mso_mail($useremail, t('Новый сайт на MaxSite CMS', 'install'), $text, $useremail); 
+		}
+		else // if (isset($res))
+		{ 
+			echo '<h2 class="error">' . t('Ошибка установки', 'install') . '</h2>
+			 <p style="text-align: center;"><a href="' . getinfo('siteurl') . '">' . t('Вернитесь в начало', 'install') . '</a></p>';
+		} // if (isset($res))
+	
+
+	} // конец третьего шага 
+
 ?>
 	
-	<h1><?= t('Поздравляем! Всё готово!', 'install') ?></h1>
-	<h2 class="res"><?= t('Ваша информация', 'install') ?></h2>
-	<?= $res ?>
-	<br><p class="res"><a href="<?= getinfo('siteurl') ?>"><?= t('Переход к сайту', 'install') ?></a></p>
-	<p class="res"><?= t('Не забудьте открыть файл «application/maxsite/mso_config.php» и измените', 'install') ?> <em>$mso_install = true;</em></p>
-	<?php 
-		// поскольку это инсталяция, то отправитель - тот же email
-		@mso_mail($useremail, t('Новый сайт на MaxSite CMS', 'install'), $text, $useremail); 
-	
-	}
-	else { // if (isset($res))
-		echo '<h2 class="error">' . t('Ошибка установки', 'install') . '</h2>
-		 <p style="text-align: center;"><a href="' . getinfo('siteurl') . '">' . t('Вернитесь в начало', 'install') . '</a></p>';
-	}; // if (isset($res))
-	
-	?>
-<?php } // конец третьего шага ?>
 </div><!-- div id="container" -->
 </body>
 </html>

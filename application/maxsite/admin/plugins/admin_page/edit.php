@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<h1><?= t('Редактирование страницы') ?></h1>
+<h1><?= t('Редактирование записи') ?></h1>
 <p class="ret-to-pages"><a href="<?= $MSO->config['site_admin_url'] . 'page' ?>"><?= t('Cписок записей') ?></a>
 
 <?php
@@ -158,7 +158,7 @@
 		$all_post_types = '';
 		$query = $CI->db->get('page_type');
 		
-		$page_type_js_obj = '{'; // для скрытия метаполей в зависимости от типа записи
+		//$page_type_js_obj = '{'; // для скрытия метаполей в зависимости от типа записи
 		
 		foreach ($query->result_array() as $row)
 		{
@@ -167,15 +167,15 @@
 			
 			$page_type_desc = $row['page_type_desc'] ? ' <em>(' . t($row['page_type_desc']) . ')</em>' : '';
 			
-			$all_post_types .= '<p><label><input name="f_page_type[]" type="radio" ' . $che 
-									. ' value="' . $row['page_type_id'] . '"> ' 
-									. $row['page_type_name'] . $page_type_desc . '</label></p>';
-			$page_type_js_obj .= $row['page_type_name'] . ':' . $row['page_type_id'] . ',';						
+			$all_post_types .= '<label class="nocell"><input name="f_page_type[]" type="radio" ' . $che 
+								. ' value="' . $row['page_type_id'] . '"> ' 
+								. $row['page_type_name'] . $page_type_desc . '</label><br>';
+			//$page_type_js_obj .= $row['page_type_name'] . ':' . $row['page_type_id'] . ',';						
 									
 		}
 		
-		$page_type_js_obj .= '}';
-		$page_type_js_obj = str_replace(',}', '}', $page_type_js_obj);
+		//$page_type_js_obj .= '}';
+		//$page_type_js_obj = str_replace(',}', '}', $page_type_js_obj);
 
 	
 		
@@ -213,7 +213,7 @@
 		}
 		
 		$CI->load->helper('form');
-		$all_users = form_dropdown('f_user_id', $all_users, $f_user_id, ' style="width: 99%;" ');
+		$all_users = form_dropdown('f_user_id', $all_users, $f_user_id);
 		
 		
 		$f_status_draft = $f_status_private = $f_status_publish = '';
@@ -232,7 +232,7 @@
 		$date_time = t('Сохранено:') . ' ' . $page_date_publish;
 		
 		$date_time .= '<br>' . t('На блоге как:') . ' ' . mso_date_convert('Y-m-d H:i:s', $page_date_publish);
-		$date_time .= '<br>' . t('Тек. время:') . ' ' . date('Y-m-d H:i:s');
+		$date_time .= '<br>' . t('Текущее время:') . ' ' . date('Y-m-d H:i:s');
 		
 		$date_cur_y = date('Y', $date_cur);
 		$date_cur_m = date('m', $date_cur);
@@ -250,9 +250,9 @@
 		$date_all_d = array();
 		for ($i=1; $i<32; $i++) $date_all_d[$i] = $i;
 		
-		$date_y = form_dropdown('f_date_y', $date_all_y, $date_cur_y, ' style="margin-top: 5px; width: 60px;" ');
-		$date_m = form_dropdown('f_date_m', $date_all_m, $date_cur_m, ' style="margin-top: 5px; width: 60px;" ');
-		$date_d = form_dropdown('f_date_d', $date_all_d, $date_cur_d, ' style="margin-top: 5px; width: 60px;" ');
+		$date_y = form_dropdown('f_date_y', $date_all_y, $date_cur_y, ' style="width: 60px;" ');
+		$date_m = form_dropdown('f_date_m', $date_all_m, $date_cur_m, ' style="width: 60px;" ');
+		$date_d = form_dropdown('f_date_d', $date_all_d, $date_cur_d, ' style="width: 60px;" ');
 		
 		$time_all_h = array();
 		for ($i=0; $i<24; $i++) $time_all_h[$i] = $i;
@@ -262,13 +262,13 @@
 
 		$time_all_s = $time_all_m;
 		
-		$time_h = form_dropdown('f_time_h', $time_all_h, $tyme_cur_h, ' style="margin-top: 5px; width: 60px;" ');
-		$time_m = form_dropdown('f_time_m', $time_all_m, $tyme_cur_m, ' style="margin-top: 5px; width: 60px;" ');
-		$time_s = form_dropdown('f_time_s', $time_all_s, $tyme_cur_s, ' style="margin-top: 5px; width: 60px;" ');
+		$time_h = form_dropdown('f_time_h', $time_all_h, $tyme_cur_h, ' style="width: 60px;" ');
+		$time_m = form_dropdown('f_time_m', $time_all_m, $tyme_cur_m, ' style="width: 60px;" ');
+		$time_s = form_dropdown('f_time_s', $time_all_s, $tyme_cur_s, ' style="width: 60px;" ');
 		
 		
 		// получаем все страницы, для того чтобы отобразить их в паренте
-		$all_pages = NR . '<select name="f_page_parent"  style="margin-top: 5px; width: 99%;" >' . NR;
+		$all_pages = NR . '<select name="f_page_parent">' . NR;
 		$all_pages .= NR . '<option value="0">' . t('Нет') . '</option>';
 		
 		// если отмечена опция отрображать блок
@@ -305,7 +305,7 @@
 		$f_return = '';
 	
 		// быстрое сохранение только в режиме редактирования
-		$f_bsave = ' <button id="bsave" type="button">' . t('Сохранить в фоне') . '</button><div class="bsave_result"></div>';
+		$f_bsave = ' <button id="bsave" type="button" class="i bsave">' . t('Сохранить в фоне') . '</button><div class="bsave_result"></div>';
 		
 		# форма вынесена в отдельный файл, поскольку она одна и таже для new и edit
 		# из неё получается $do и $posle
@@ -328,7 +328,6 @@
 			
 	////////////////////////////////////////////////////////////////////////////////
 
-	
 	}
 	else
 	{

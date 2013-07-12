@@ -8,23 +8,22 @@
 
 function editor_markitup($args = array()) 
 {
-	$options = mso_get_option('editor_markitup', 'plugins', array() ); // получаем опции
+	$options = mso_get_option('editor_options', 'admin', array() ); // получаем опции
 	
-	if (!isset($options['preview'])) $options['preview'] = 'aftertext';
-	if (!isset($options['previewautorefresh'])) $options['previewautorefresh'] = 'no';
+	if (!isset($options['preview'])) $options['preview'] = 0;
+	if (!isset($options['previewautorefresh'])) $options['previewautorefresh'] = 0;
 	if (!isset($options['previewPosition'])) $options['previewPosition'] = 'after';
 	
-	if ($options['preview'] == 'aftertext') $editor_config['preview'] = 'previewInWindow: "",';
+	if ($options['preview']) $editor_config['preview'] = 'previewInWindow: "",';
 		else $editor_config['preview'] = 'previewInWindow: "width=960, height=800, resizable=yes, scrollbars=yes",';
 	
-	if ($options['previewautorefresh'] == 'no') $editor_config['previewautorefresh'] = 'previewAutoRefresh: false,';
-	else $editor_config['previewautorefresh'] = 'previewAutoRefresh: true,';
+	if ($options['previewautorefresh']) $editor_config['previewautorefresh'] = 'previewAutoRefresh: true,';
+	else $editor_config['previewautorefresh'] = 'previewAutoRefresh: false,';
 	
 	if ($options['previewPosition'] == 'before') 
 		$editor_config['previewPosition'] = 'previewPosition: "before",';
 	else 
 		$editor_config['previewPosition'] = 'previewPosition: "after",';
-	
 	
 	$editor_config['url'] = getinfo('admin_url') . 'plugins/editor_markitup/';
 	$editor_config['dir'] = getinfo('admin_dir') . 'plugins/editor_markitup/';
@@ -44,9 +43,20 @@ function editor_markitup($args = array())
 	if (isset($args['height'])) $editor_config['height'] = (int) $args['height'];
 	else 
 	{
-		$editor_config['height'] = (int) mso_get_option('editor_height', 'general', 400);
-		if ($editor_config['height'] < 100) $editor_config['height'] = 400;
+		$editor_options = mso_get_option('editor_options', 'admin', array());
+		
+		
+		if (isset($editor_options['editor_height']) and $editor_options['editor_height'] > 0)
+		{
+			$editor_config['height'] = (int) $editor_options['editor_height'];
+			if ($editor_config['height'] < 100) $editor_config['height'] = 400;
+		}
+		else
+		{
+			$editor_config['height'] = 400;
+		}
 	}
+	
 
 	# Приведение строк с <br> в первозданный вид
 	$editor_config['content'] = preg_replace('"&lt;br\s?/?&gt;"i', "\n", $editor_config['content']);
@@ -83,55 +93,6 @@ function editor_markitup($args = array())
 	}
 	
 	require($editor_config['dir'] . 'editor-bb.php');
-}
-
-# опции редактора
-function editor_markitup_mso_options() 
-{
-	mso_admin_plugin_options('editor_markitup', 'plugins', 
-		array(
-			'preview' => array(
-							'type' => 'radio', 
-							'name' => t('Режим предпросмотра текста'), 
-							'description' => '',
-							'values' => t('aftertext||На странице редактора # win||В отдельном окне'), 
-							'default' => 'aftertext',
-							'delimer' => '&nbsp;&nbsp;&nbsp;&nbsp;',
-						),
-						
-			'previewPosition' => array(
-							'type' => 'radio', 
-							'name' => t('Окно предпросмотра до или после текста'), 
-							'description' => t('Будет работать только если используется предпросмотр в окне редактора'),
-							'values' => t('after||Под текстовым редактором # before||Перед текстовым редактором'), 
-							'default' => 'after',
-							'delimer' => '&nbsp;&nbsp;&nbsp;&nbsp;',
-						),
-						
-			'previewautorefresh' => array(
-							'type' => 'radio', 
-							'name' => t('Обновление предпросмотра'), 
-							'values' => t('no||Обновлять предпросмотр вручную # yes||Использовать автообновление предпросмотра'), 
-							'default' => 'no',
-							'delimer' => '&nbsp;&nbsp;&nbsp;&nbsp;',
-							'description' => '',
-						),	
-			
-			),
-			t('Настройки текстового редактора markItUp'), // титул
-			t('Укажите необходимые опции.')   // инфо
-	);
-
-}
-
-// форма быстрой загрузки файлов
-function editor_markitup_q_files($out = '')
-{
-	$out = '';
-	
-	
-	
-	return $out;
 }
 
 # end file

@@ -46,8 +46,8 @@
 			# Высота визуального редактора
 			'editor_height' => array(
 							'type' => 'text', 
-							'name' => t('Высота визуального редактора'), 
-							'description' => t('Укажите высоту визуального редактора в пикселах. Значение по-умолчанияю 400'),
+							'name' => t('Высота текстового редактора'), 
+							'description' => t('Укажите высоту редактора в пикселах. Значение по-умолчанияю 400'),
 							'default' => '400'
 						),
 			
@@ -56,6 +56,21 @@
 							'type' => 'text', 
 							'name' => t('Высота блока рубрик'), 
 							'description' => t('Укажите максимальную высоту блока рубрик в пикселах. При превышении этого значения, появятся полосы скроллинга. Если указать 0, то высота не ограничивается. Значение по-умолчанияю - 0.'),
+							'default' => '0'
+						),			
+			
+
+			'preview' => array(
+							'type' => 'checkbox', 
+							'name' => t('Предварительный просмотр записи разместить под текстовым редактором'), 
+							'description' => 'Иначе просмотр будет выведен в новом окне браузера', 
+							'default' => '0'
+						),
+						
+			'previewautorefresh' => array(
+							'type' => 'checkbox', 
+							'name' => t('Автоматическое обновление предпросмотра записи'), 
+							'description' => t('Обновление произойдет при нажатии Enter'), 
 							'default' => '0'
 						),			
 						
@@ -67,7 +82,7 @@
 						
 			'page_status' => array(
 							'type' => 'checkbox', 
-							'name' => 'Отображать блок статуса страницы', 
+							'name' => t('Отображать блок статуса страницы'), 
 							'description' => '', 
 							'default' => '1'
 						),
@@ -77,74 +92,12 @@
 							'description' => '', 
 							'default' => '1'
 						),			
-			'page_meta' => array(
-							'type' => 'checkbox', 
-							'name' => 'Отображать блок мета', 
-							'description' => '', 
-							'default' => '1'
-						),	
-			'page_all_cat' => array(
-							'type' => 'checkbox', 
-							'name' => 'Отображать блок рубрик', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'page_tags' => array(
-							'type' => 'checkbox', 
-							'name' => 'Отображать блок меток', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'page_slug' => array(
-							'type' => 'checkbox', 
-							'name' => 'Отображать блок короткой ссылки', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'page_discus' => array(
-							'type' => 'checkbox', 
-							'name' => 'Отображать блок обсуждения', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'page_date' => array(
-							'type' => 'checkbox', 
-							'name' => 'Отображать блок выбора даты', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'page_post_type' => array(
-							'type' => 'checkbox', 
-							'name' => 'Отображать блок типа страницы', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'page_password' => array(
-							'type' => 'checkbox', 
-							'name' => 'Отображать блок пароля', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'page_menu_order' => array(
-							'type' => 'checkbox', 
-							'name' => 'Отображать блок порядка страницы', 
-							'description' => '', 
-							'default' => '1'
-						),
 			'page_all_parent' => array(
 							'type' => 'checkbox', 
 							'name' => 'Отображать блок родительской страницы', 
 							'description' => '', 
 							'default' => '1'
 						),
-			'page_all_users' => array(
-							'type' => 'checkbox', 
-							'name' => 'Отображать блок выбора автора', 
-							'description' => '', 
-							'default' => '1'
-						),
-
-
 	);
 	
 	
@@ -157,6 +110,7 @@
 		$_options,
 		t('Настройки редактора'), // титул
 		t('Выберите нужные опции редактора'), // инфо
+		false,
 		false
 	);
 

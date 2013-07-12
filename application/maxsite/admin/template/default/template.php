@@ -6,7 +6,7 @@
  */
 
 
-	# поскольку в хуках могут быть простой вывод данных через echo, следует 
+	# поскольку в хуках может быть вывод данных через echo, следует 
 	# включить буферизацию вывода на каждый хук
 	
 	// в теле контента можно определить хуки на остальные части 
@@ -32,7 +32,10 @@
 	
 	if (!$admin_header) $admin_header = t('Админ-панель');
 	
-	$admin_css = getinfo('admin_url') . 'template/' . mso_get_option('admin_template', 'general', 'default') . '/style.css';
+	// url каталог текущего шаблона
+	$admin_template_url = getinfo('admin_url') . 'template/' . mso_get_option('admin_template', 'general', 'default') . '/';
+	
+	$admin_css = $admin_template_url . 'style.css';
 	$admin_css = mso_hook('admin_css', $admin_css);
 	
 	$admin_css_profile = ''; // дополнительные css-файлы
@@ -43,12 +46,37 @@
 			
 			foreach ($admin_css_profile_s as $css)
 			{
-				$admin_css_profile .= '<link rel="stylesheet" href="' . getinfo('admin_url') . 'template/' . mso_get_option('admin_template', 'general', 'default') . '/profiles/' . $css . '">';
+				$admin_css_profile .= '<link rel="stylesheet" href="' . $admin_template_url . 'profiles/' . $css . '">';
 			}
 	}
 	
 	$admin_title = t('Админ-панель') . ' - ' . mso_hook('admin_title', mso_head_meta('title'));
-		
+	
+	global $admin_menu_bread;
+	
+	if ($admin_menu_bread) 
+	{
+		$admin_menu_bread = '<div class="admin-menu-bread">' . implode(' » ', $admin_menu_bread) . '</div>';
+	}
+	elseif (mso_segment(2) == 'plugin_options') // отдельно для опций плагинов
+	{
+		$admin_menu_bread = '<div class="admin-menu-bread">' . t('Опции плагинов') . '</div>';
+	}
+	else
+	{
+		$admin_menu_bread = '';
+	}
+	
+	$avatar_url = $MSO->data['session']['users_avatar_url'];
+	
+	if (!$avatar_url)
+	{
+		$avatar_url = $admin_template_url . 'images/avatar_user.png';
+	}
+	
+	// панель уведомлений — задел на будущее
+	$notification = '';
+	
 	
 ?><!DOCTYPE HTML>
 <html><head>
@@ -58,30 +86,58 @@
 <link rel="stylesheet" href="<?= $admin_css ?>">
 <?= $admin_css_profile ?>
 <?= mso_load_jquery() ?>
+<!-- <?= mso_load_jquery('jquery.scripts.js', $admin_template_url . 'js/') ?> -->
 <?php mso_hook('admin_head') ?>
 </head>
-<body>
-<div id="container">
-	<div class="admin-header"><div class="r">
-		<h1><a href="<?= getinfo('siteurl') ?>"><?= mso_get_option('name_site', 'general') ?></a></h1>
-		<?= $admin_header ?>
-	</div></div><!-- div class=admin-header -->
+<body class="admin-<?= mso_segment(2) ?>">
+<div class="all">
+	<div class="all-wrap">
 	
-	<div id="mc">
-		<div class="admin-menu"><div class="r">
-		<?= $admin_menu ?>
-		</div></div><!-- div class=admin-menu -->
+		<div class="header"><div class="header-wrap">
+			
+			<a href="http://max-3000.com/" class="logo-cms" title="MaxSite CMS"><a>
+			
+			<div class="name-site-descr">
+				<a href="<?= getinfo('siteurl') ?>"><?= mso_get_option('name_site', 'general') ?></a>
+				<span class="descr"><?= mso_get_option('description_site', 'general') ?></span>
+			</div>
+			
+			<div class="user"> 
+				<span class="avatar"><img src="<?= $avatar_url ?>"></span>
+				<span class="users-nik"><?= t('Привет,') ?> <?= getinfo('users_nik') ?>!</span>
+				<span class="users-action"><a href="<?= getinfo('siteurl') ?>admin/users_my_profile"><?= t('Профиль') ?></a> / <a href="<?= getinfo('siteurl') ?>logout"><?= t('Выход') ?></a></span>
+			</div>
+			
+			<div class="notification"><?= $notification ?></div>
+			
+			<div class="clearfix"></div>
+		</div></div>
 		
-		<div class="admin-content"><div class="r">
-		<?= $admin_content ?>
-		</div></div><!-- div class=admin-content -->
-	</div><!-- div id="#mc" -->
+		<div class="main"><div class="main-wrap">
+		
+			<div class="sidebar"><div class="sidebar-wrap">
+				<div class="mainmenu">
+					<?= $admin_menu ?>
+					<div class="clearfix"></div>
+					<!-- ?= $admin_menu_bread ? -->
+				</div>
+			</div></div>
+			
+			<div class="content"><div class="content-wrap">
+				<?= $admin_menu_bread ?>
+				<!-- <div class="info"><?= $admin_header ?></div> -->
+			
+				<?= $admin_content ?>
+			
+			</div></div><!-- div.content div.content-wrap -->
+		
+		</div></div>
+		
 
-	<div class="admin-footer"><div class="r">
-		<?= $admin_footer ?>
-	</div></div><!-- div class=admin-footer -->
+	</div>
+</div>
+<div class="footer"><div class="footer-wrap">
+	<?= $admin_footer ?>
+</div></div>
 
-</div><!-- div id="#container" -->
-
-</body>
-</html>
+</body></html>

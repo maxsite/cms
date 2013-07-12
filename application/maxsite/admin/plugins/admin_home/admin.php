@@ -11,8 +11,8 @@
 	<li><a href="http://book.max-3000.com/"><?= t('Книга по MaxSite CMS') ?></a></li>
 	<li><a href="http://forum.max-3000.com/"><?= t('Форум поддержки') ?></a></li>
 	<li><a href="http://max-3000.com/github"><?= t('MaxSite CMS на GitHub') ?></a></li>
-	<li><a href="http://forum.max-3000.com/viewforum.php?f=13"><?= t('Шаблоны для MaxSite CMS') ?></a></li>
-	<li><a href="http://alexanderschilling.net/plugins"><?= t('Каталог плагинов') ?></a></li>
+	<li><a href="http://forum.max-3000.com/viewforum.php?f=13"><?= t('Каталог шаблонов') ?></a></li>
+	<li><a href="http://forum.max-3000.com/viewforum.php?f=17"><?= t('Каталог плагинов') ?></a></li>
 </ul>
 
 <p><?= t('Ваша версия <strong>MaxSite CMS</strong>') ?>: <?= getinfo('version') ?></p>
@@ -76,10 +76,10 @@
 			echo '<form method="post">' . mso_form_session('f_session_id');
 
 			if ($show_check_version)
-				echo '<p><input type="submit" name="f_submit_check_version" value="' . t('Проверить последнюю версию MaxSite CMS') . '"></p>';
+				echo '<p><button type="submit" name="f_submit_check_version" class="i update-mini">' . t('Проверить последнюю версию MaxSite CMS') . '</button></p>';
 
 			if ($show_clear_cache)
-				echo '<p><input type="submit" name="f_submit_clear_cache" value="' . t('Сбросить кэш системы') . '"></p>';
+				echo '<p><button type="submit" name="f_submit_clear_cache" class="i eraser">' . t('Сбросить кэш системы') . '</button></p>';
 
 			echo '</form>';
 		}
@@ -95,14 +95,12 @@
 		if (!defined('MAGPIE_CACHE_AGE'))	define('MAGPIE_CACHE_AGE', 24*60*60); // время кэширования MAGPIE - 1 сутки
 		require_once(getinfo('common_dir') . 'magpierss/rss_fetch.inc');
 		$rss = @fetch_rss('http://max-3000.com/feed');
-		// $rss = fetch_rss('http://max-3000.com/feed-home-full');
 
 		if ($rss and isset($rss->items) and $rss->items)
 		{
 			$rss = $rss->items;
 			$rss = array_slice($rss, 0, 3); // последние три записи
 			
-			//pr($rss);
 			foreach ($rss as $item)
 			{
 				// title link category description date_timestamp pubdate
@@ -111,10 +109,10 @@
 				
 				if (!isset($item['category'])) $item['category'] = '-';
 				
-				echo '<h4 class="admin_home_maxrss"><a href="' . $item['link'] . '">' . $item['title'] 
-						. '</a> | ' . $item['category'] . ' | ' . date('Y-m-d , H:i:s', $item['date_timestamp']) . '</h4>';
+				echo '<h3><a href="' . $item['link'] . '">' . $item['title'] 
+						. '</a> | ' . $item['category'] . ' | ' . date('Y-m-d , H:i:s', $item['date_timestamp']) . '</h3>';
 				
-				echo '<div>' . $item['description'] . '</div>';
+				echo '<p>' . $item['description'] . '</p>';
 				echo '</div>';
 			}
 		}
@@ -123,4 +121,4 @@
 		
 	mso_hook('admin_home');
 	
-?>
+# end file

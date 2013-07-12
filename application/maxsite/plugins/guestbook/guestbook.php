@@ -1,23 +1,16 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 
+global $MSO;
+
 mso_head_meta('title', t('Гостевая книга') ); // meta title страницы
 
-// стили свои подключим
-mso_hook_add('head', 'guestbook_css');
-
-function guestbook_css($a = array())
-{
-	if (file_exists(getinfo('template_dir') . 'guestbook.css')) $css = getinfo('stylesheet_url') . 'guestbook.css';
-		else $css = getinfo('plugins_url') . 'guestbook/guestbook.css';
-		
-	echo '<link rel="stylesheet" href="' . $css . '">' . NR;
-	
-	return $a;
-}
 
 # начальная часть шаблона
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
+
+
 $CI = & get_instance();
+
 $options = mso_get_option('plugin_guestbook', 'plugins', array());
 
 if ( !isset($options['fields_arr']) ) 
@@ -27,17 +20,21 @@ if ( isset($options['text']) ) echo $options['text']; // из опций смо�
 if ( !isset($options['limit']) ) $options['limit'] = 10; // отзывов на страницу
 if ( !isset($options['email']) ) $options['email'] = false; // отправка на email
 if ( !isset($options['moderation']) ) $options['moderation'] = 1; // модерация
+
 // формат вывода
-if ( !isset($options['format']) ) $options['format'] = '<tr><td colspan="2" class="header"><a id="guestbook-[id]"></a>[date]</td></tr>
-<tr><td class="t1"><b>Имя:</b></td><td class="t2">[name]</td></tr>
-<tr><td class="t1"><b>Текст:</b></td><td class="t2">[text]</td></tr>
-<tr><td colspan="2" class="space">&nbsp;</td></tr>'; 
+if ( !isset($options['format']) or !$options['format']) $options['format'] = '<div class="fform guestbook">
+<p class="head"><span class="fheader">[name] | [date]</span></p>
+<div class="margin10">
+<p><span>[text]</span></p>
+</div>
+<p class="hr"></p>
+</div>';
 
 // текст до цикла
-if ( !isset($options['start']) ) $options['start'] = '<h2 class="guestbook">Отзывы</h2><table class="guestbook">';
+if ( !isset($options['start']) ) $options['start'] = '<h2>Отзывы</h2>';
  
 // текст после цикла
-if ( !isset($options['end']) ) $options['end'] = '</table>'; 
+if ( !isset($options['end']) ) $options['end'] = ''; 
 
 
 $session = getinfo('session'); // текущая сессия 
@@ -48,17 +45,19 @@ if ( $post = mso_check_post(array('f_session_id', 'f_submit_guestbook', 'f_field
 	mso_checkreferer();
 	
 	$captcha = $post['f_guestbook_captha']; // это введенное значение капчи
-	// которое должно быть вычисляем как и в img.php
-	$char = md5($session['session_id'] . mso_slug(mso_current_url()));
-	$char = str_replace(array('a', 'b', 'c', 'd', 'e', 'f'), array('0', '5', '8', '3', '4', '7'), $char);
-	$char = substr( $char, 1, 4);
-	if ($captcha != $char)
-	{ // не равны
-		echo '<div class="error">' . t('Привет роботам!') . '</div>';
+	
+	$char = mso_md5($MSO->data['session']['session_id'] . mso_current_url());
+	$char = str_replace(array('a', 'b', 'c', 'd', 'e', 'f'), array('1', '5', '8', '2', '7', '9'), $char);
+	$char = substr($char, 1, 4);
+	
+	if ($captcha != $char) // не равны
+	{ 
+		echo '<div class="error">' . t('Неверно введены нижние символы!') . '</div>';
 		mso_flush_cache();
 	}
 	else
-	{ // прошла капча, можно добавлять отзыв
+	{ 
+		// прошла капча, можно добавлять отзыв
 		
 		// pr($post);
 		
@@ -116,40 +115,39 @@ if ( $post = mso_check_post(array('f_session_id', 'f_submit_guestbook', 'f_field
 else
 {
 	// тут форма, если не было post
-	echo '<div class="guestbook_form"><form method="post">' . mso_form_session('f_session_id');
-	
-	echo '<table style="width: 100%;">';
+	echo '<form method="post" class="fform guestbook">' . mso_form_session('f_session_id');
 	
 	foreach( $options['fields_arr'] as $key => $val )
 	{
-		echo '<tr><td style="vertical-align: top; text-align: right;" class="td1"><strong>' . t($val) . '</strong> </td><td class="td2">';
+		echo '<p><span class="fheader ffirst1 ftitle ftop">' . t($val) . '</span>';
 		
 		if ($key != 'text')
 		{
-			echo '<input name="f_fields_guestbook[' . $key . ']" type="text" style="width: 99%;"></td></tr>';
+			echo '<span><input name="f_fields_guestbook[' . $key . ']" type="text"></span></p>';
 		}
 		else
 		{ 
-			echo '<textarea name="f_fields_guestbook[' . $key . ']" style="width: 99%; height: 100px;"></textarea></td></tr>';
+			echo '<span><textarea name="f_fields_guestbook[' . $key . ']" rows="10"></textarea></span></p>';
 		}
 	}
 
 	// капча из плагина капчи
 	
-	echo '<tr><td style="vertical-align: top; text-align: right;" class="td1"><strong>' . t('Введите нижние символы') . ' </td>
-			<td style="text-align: left;" class="td2"><input type="text" name="f_guestbook_captha" value="" maxlength="4"> <img src="' 
-			. getinfo('plugins_url') . 'captcha/img.php?image='
-			. $session['session_id']
-			. '&page='
-			. mso_slug(mso_current_url())
-			. '&code='
-			. time()
-			. '" title="' . t('Защита от спама: введите только нижние символы') . '" align="absmiddle"></td></tr>';
-
+	if (!function_exists('create_captha_img')) require_once(getinfo('plugins_dir') . 'captcha/index.php');
 	
-	echo '<tr><td class="td1">&nbsp;</td><td style="vertical-align: top; text-align: left;" class="td2"><input type="submit" class="submit" name="f_submit_guestbook" value="' . t('Отправить') . '"></td></tr>';
 	
-	echo '</table></form></div>';
+	
+	echo '<p><span class="fheader ffirst1 ftitle">' . t('Нижние символы:') . '</span>
+			<span style="width: 100px"><input type="text" name="f_guestbook_captha" value="" maxlength="4"></span>
+			<span class="fempty"></span>
+			<span><img src="' 
+			. create_captha_img(mso_md5($MSO->data['session']['session_id'] . mso_current_url()))
+			. '" title="' . t('Защита от спама: введите только нижние символы') . '" align="absmiddle"></span>
+			</p>';
+	
+	echo '<p><span class="fsubmit"><button type="submit" class="i submit" name="f_submit_guestbook">' . t('Отправить') . '</button></span></p>';
+	
+	echo '</form>';
 }
 
 
@@ -186,7 +184,7 @@ $CI->db->where('guestbook_approved', '1');
 $CI->db->order_by('guestbook_date', 'desc');
 if ($pag and $offset) $CI->db->limit($pag['limit'], $offset);
 	else $CI->db->limit($pag['limit']);
-			
+
 $query = $CI->db->get();
 
 if ($query->num_rows() > 0)	
@@ -220,7 +218,9 @@ if ($query->num_rows() > 0)
 				'[custom2]', 
 				'[custom3]', 
 				'[custom4]', 
-				'[custom5]'), 
+				'[custom5]',
+				'[url]'
+			), 
 			array(
 				$book['guestbook_id'],
 				$book['guestbook_ip'],
@@ -228,16 +228,17 @@ if ($query->num_rows() > 0)
 				mso_date_convert('Y-m-d H:i:s', $book['guestbook_date']),
 				htmlspecialchars($book['guestbook_name']),
 				str_replace("\n", "<br>", htmlspecialchars($book['guestbook_text']) . $tl),
-				htmlspecialchars($book['guestbook_title']),
-				htmlspecialchars($book['guestbook_email']),
-				htmlspecialchars($book['guestbook_icq']),
-				htmlspecialchars($book['guestbook_site']),
-				htmlspecialchars($book['guestbook_phone']),
-				htmlspecialchars($book['guestbook_custom1']),
-				htmlspecialchars($book['guestbook_custom2']),
-				htmlspecialchars($book['guestbook_custom3']),
-				htmlspecialchars($book['guestbook_custom4']),
-				htmlspecialchars($book['guestbook_custom5'])
+				htmlspecialchars($book['guestbook_title']) . '&nbsp;',
+				htmlspecialchars($book['guestbook_email']) . '&nbsp;',
+				htmlspecialchars($book['guestbook_icq']) . '&nbsp;',
+				htmlspecialchars($book['guestbook_site']) . '&nbsp;',
+				htmlspecialchars($book['guestbook_phone']) . '&nbsp;',
+				htmlspecialchars($book['guestbook_custom1']) . '&nbsp;',
+				htmlspecialchars($book['guestbook_custom2']) . '&nbsp;',
+				htmlspecialchars($book['guestbook_custom3']) . '&nbsp;',
+				htmlspecialchars($book['guestbook_custom4']) . '&nbsp;',
+				htmlspecialchars($book['guestbook_custom5']) . '&nbsp;',
+				getinfo('siteurl') . 'guestbook#guestbook-' . $book['guestbook_id'] // http://site/guestbook#guestbook-164
 			), $options['format']);
 	}
 	if ($out) echo $options['start'] . $out . $options['end'];

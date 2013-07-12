@@ -58,10 +58,12 @@ input, textarea, button {
 }
 
 
-form.fform {
+.fform {
 	p {
 	
-		@first: 90px; // размер первой ячейки или отступ (+5 на padding)
+		@first: 90px; // размер первой ячейки или отступ (+5 на padding) .ffirst 
+		@first1: 150px; // еще один размер первой ячейки или отступ (+5 на padding) .ffirst1
+		@first2: 250px; // еще один размер первой ячейки или отступ (+5 на padding) .ffirst2
 		@width_submit: 100px; // размер ячейки для кнопки submit (-5px для кнопки на отступ)
 		@width_button: 50px; // размер ячейки для остальных кнопок (кнопка этой же ширины)
 		
@@ -69,10 +71,10 @@ form.fform {
 		width: 100%;
 		padding: 3px 0;
 		margin: 0;
+		.box_sizing(border-box);
 		
 		span, label {
 			display: table-cell;
-			
 			vertical-align: middle;
 			
 			input[type="text"], 
@@ -84,11 +86,14 @@ form.fform {
 			textarea,
 			select
 			{
-				-moz-box-sizing: border-box; 
-				-webkit-box-sizing: border-box; 
-				box-sizing: border-box;
+				.box_sizing(border-box);
 				width: 100%;
-				*width: auto; // ie7
+			}
+			
+			input[type="radio"], 
+			input[type="checkbox"] 
+			{
+				margin-right: 5px;
 			}
 			
 			&.ftitle {
@@ -100,9 +105,24 @@ form.fform {
 				width: @first; // ширина первой ячейки
 			} 
 			
+			&.ffirst1 {
+				width: @first1; // ширина первой ячейки
+			}
+			
+			&.ffirst2 {
+				width: @first2; // ширина первой ячейки
+			} 
+			
 			&.ffirst.ftitle {
 				width: @first - 5px; // корректировка для двойного класса ffirst.ftitle
+			} 
 			
+			&.ffirst1.ftitle {
+				width: @first1 - 5px; // корректировка для двойного класса ffirst1.ftitle
+			} 
+			
+			&.ffirst2.ftitle {
+				width: @first2 - 5px; // корректировка для двойного класса ffirst2.ftitle
 			} 
 			
 			&.fbutton { // ячейка для кнопки
@@ -124,6 +144,7 @@ form.fform {
 			
 			&.ftop {
 				vertical-align: top;
+				padding-top: 3px; // чуть отступ сверху для красоты
 			}
 			
 			&.fcenter {
@@ -173,6 +194,28 @@ form.fform {
 		// визуальный отступ для строки - для отбивки ряда кнопок
 		&.hr {
 			margin-top: 10px;
-		} 
+		}
+		
+		// визуальное выделение фоном шапки
+		&.head {
+			.bg(#eee);
+			padding: 3px 7px;
+		}
+		
+		// Заголовок, например перед названием поля
+		&.header {
+			.bold;
+			margin: 15px 0 5px 0;
+		}
+		
+		&.fhint {
+			font-size: .9em; 
+			font-style: italic; 
+			color: #606060; 
+			padding-top: 0; 
+			padding-bottom: 5px;
+			margin-top: 0;
+		}
+			
 	}
 }

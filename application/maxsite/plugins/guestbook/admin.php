@@ -71,8 +71,8 @@
 	
 	// основной url этого плагина - жестко задается
 	$plugin_url = getinfo('site_admin_url') . 'guestbook';
-	$a  = mso_admin_link_segment_build($plugin_url, '', t('Настройки гостевой книги'), 'select') . ' | ';
-	$a .= mso_admin_link_segment_build($plugin_url, 'edit', t('Редактирование отзывов'), 'select');
+	$a  = mso_admin_link_segment_build($plugin_url, '', t('Настройки гостевой книги'), 'select', 'i book') . ' ';
+	$a .= mso_admin_link_segment_build($plugin_url, 'edit', t('Редактирование отзывов'), 'select', 'i edit');
 	echo $a;
 ?>
 </div>
@@ -86,57 +86,71 @@
 		if ( !isset($options['text']) ) $options['text'] = t("<h1>Гостевая книга</h1>\n<p>Оставьте свой отзыв</p>");
  
 		if ( !isset($options['slug']) ) $options['slug'] = 'guestbook'; 
-		if ( !isset($options['fields']) ) $options['fields'] = t("name | Ваше имя:\ntext | Ваш отзыв:"); 
+		if ( !isset($options['fields']) or !$options['fields'] ) $options['fields'] = t("name | Ваше имя:\ntext | Ваш отзыв:"); 
 		if ( !isset($options['limit']) ) $options['limit'] = 10; // отзывов на страницу 
 		if ( !isset($options['email']) ) $options['email'] = mso_get_option('admin_email', 'general', '');
 		if ( !isset($options['moderation']) ) $options['moderation'] = 1; // модерация
 
-		if ( !isset($options['format']) ) $options['format'] = '<tr><td colspan="2" class="header"><a id="guestbook-[id]"></a>[date]</td></tr>
-<tr><td class="t1"><b>Имя:</b></td><td class="t2">[name]</td></tr>
-<tr><td class="t1"><b>Текст:</b></td><td class="t2">[text]</td></tr>
-<tr><td colspan="2" class="space">&nbsp;</td></tr>'; 
+		if ( !isset($options['format']) or !$options['format']) $options['format'] = '<div class="fform guestbook">
+<p class="head"><span class="fheader">[name] | [date]</span></p>
+<div class="margin10">
+<p><span>[text]</span></p>
+</div>
+<p class="hr"></p>
+</div>';
 
-		if ( !isset($options['start']) ) $options['start'] = '<h2 class="guestbook">' . t('Отзывы') . '</h2><table class="guestbook">'; 
+		if ( !isset($options['start']) ) $options['start'] = '<h2>' . t('Отзывы') . '</h2>'; 
 
-		if ( !isset($options['end']) ) $options['end'] = '</table>'; 
+		if ( !isset($options['end']) ) $options['end'] = ''; 
 
 
-		$form = '';
-		
-		$form .= '<p><strong>' . t('Короткая ссылка:') . '</strong> ' . ' <input name="f_slug" type="text" value="' . $options['slug'] . '"> <a href="' . getinfo('siteurl') . $options['slug']  . '" target="_blank">' . t('Просмотр') . '</a></p>';
-		
-		$form .= '<p><strong>' . t('Отзывов на страницу:') . '</strong> ' . ' <input name="f_limit" type="text" value="' . $options['limit'] . '"></p>';
-		
-		$form .= '<p><strong>' . t('Уведомлять на email:') . '</strong> ' . ' <input name="f_email" type="text" value="' . $options['email'] . '"></p>';
+		$form = '
+				<p><span class="ftitle ffirst2 fheader">' . t('Короткая ссылка:') . '</span>
+				<span><input name="f_slug" type="text" value="' . $options['slug'] . '"></span>
+				<span>&nbsp;<a href="' . getinfo('siteurl') . $options['slug']  . '" target="_blank" class="i globe">' . t('Просмотр') . '</a></span>
+				</p>
+				
+				<p><span class="ftitle ffirst2 fheader">' . t('Отзывов на страницу:') . '</span>
+					<span><input name="f_limit" type="text" value="' . $options['limit'] . '"></span>
+				</p>
+			
+				<p><span class="ftitle ffirst2 fheader">' . t('Уведомлять на email:') . '</span>
+					<span><input name="f_email" type="text" value="' . $options['email'] . '"></span>
+				</p>';
 		
 		
 		if ($options['moderation']) $check = ' checked';
 			else $check = '';
 		
-		$form .= '<p><label><input name="f_moderation" type="checkbox"' . $check . '> <strong>' . t('Модерация каждого отзыва') . '</strong></label></p>';
+		$form .= '<p>
+			<span class="ffirst2"> </span>
+				<label><input name="f_moderation" type="checkbox"' . $check . '> ' . t('Модерация каждого отзыва') . '</label></p>';
 		
 		
-		$form .= '<br><p>' . t('Текст перед отзывами (можно использовать HTML):') . '</p><p>' . ' <textarea name="f_text" style="width: 99%; height: 200px;">' . $options['text'] . '</textarea></p>';
+		$form .= '<p class="header">' . t('Текст перед отзывами (можно использовать HTML):') . '</p><textarea name="f_text" rows="7">' . $options['text'] . '</textarea>';
 		
 		
-		$form .= '<br><p>' . t('Укажите названия полей, которые следует выводить в форме в формате: «поле | название», например: <strong>«name | Ваше имя:»</strong>. Поля буду выведены в том же порядке. Одно поле в одной строке.') . '</p>';
-		$form .= '<p>' . t('Все возможные варианты полей: <strong>name, text, title, email, icq, site, phone, custom1, custom2, custom3, custom4, custom5.</strong>') . '</p>';
+		$form .= '<p class="header">' . t('Укажите названия полей') . '</p>
+				<p>' . t('Их следует выводить в форме в формате: «поле | название», например: <b>«name | Ваше имя:»</b>. Поля буду выведены в том же порядке. Одно поле в одной строке.') . '</p>';
+		
+		$form .= '<p>' . t('Все возможные варианты: <b>id, name, text, title, email, icq, site, phone, custom1, custom2, custom3, custom4, custom5, url.</b>') . '</p>';
 
-		$form .= '<p><textarea name="f_fields" style="width: 99%; height: 200px;">' . $options['fields'] . '</textarea></p>';
+		$form .= '<textarea name="f_fields" rows="7">' . htmlspecialchars($options['fields']) . '</textarea>';
 		
 		
-		$form .= '<br><p>' . t('Укажите формат вывода отзывов. Можно использовать HTML.</p><p>Варианты: <strong>[name], [text], [title], [email], [icq], [site], [phone], [custom1], [custom2], [custom3], [custom4], [custom5], [id], [ip], [date], [browser].</strong>') . '</p>';
-		$form .= '<p><textarea name="f_format" style="width: 99%; height: 200px;">' . htmlspecialchars($options['format']) . '</textarea></p>';
+		$form .= '<p class="header">' . t('Укажите HTML-формат вывода отзывов') . '</p><p>' . t('Варианты полей: <b>[name], [text], [title], [email], [icq], [site], [phone], [custom1], [custom2], [custom3], [custom4], [custom5], [id], [ip], [date], [browser], [url].</b>') . '</p>';
 		
-		$form .= '<br><p>' . t('Текст перед циклом вывода отзывов. Можно использовать HTML.') .'</p>';
-		$form .= '<p><textarea name="f_start" style="width: 99%; height: 100px;">' . htmlspecialchars($options['start']) . '</textarea></p>';
+		$form .= '<textarea name="f_format" rows="10">' . htmlspecialchars($options['format']) . '</textarea>';
 		
-		$form .= '<br><p>' . t('Текст после цикла вывода отзывов. Можно использовать HTML.') .'</p>';
-		$form .= '<p><textarea name="f_end" style="width: 99%; height: 100px;">' . htmlspecialchars($options['end']) . '</textarea></p>';	
+		$form .= '<p class="header">' . t('Текст перед отзывами') .'</p>';
+		$form .= '<textarea name="f_start" rows="7">' . htmlspecialchars($options['start']) . '</textarea>';
+		
+		$form .= '<p class="header">' . t('Текст после всех отзывов') .'</p>';
+		$form .= '<textarea name="f_end" rows="7">' . htmlspecialchars($options['end']) . '</textarea>';	
 				
-		echo '<form method="post">' . mso_form_session('f_session_id');
+		echo '<form method="post" class="fform">' . mso_form_session('f_session_id');
 		echo $form;
-		echo '<button type="submit" name="f_submit" style="margin: 25px 0 5px 0;">' . t('Сохранить изменения') . '</button>';
+		echo '<button type="submit" name="f_submit" class="i save">' . t('Сохранить изменения') . '</button>';
 		echo '</form>';
 
-?>
+# end file

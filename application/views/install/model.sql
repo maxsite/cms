@@ -217,9 +217,9 @@ CREATE TABLE _PREFIX_page (
 	KEY page_id_autor (page_id_autor)
 ) _CHARSETCOLLATE_ ENGINE=MyISAM;
 ###
-INSERT INTO _PREFIX_page (page_title, page_content, page_slug, page_date_publish, page_last_modified) VALUES ('Привет, мир!', '<p>Это ваша первая запись. Вы можете её отредактировать или удалить через админ-панель.</p>', 'hello', NOW(), NOW());
+INSERT INTO _PREFIX_page (page_title, page_content, page_slug, page_date_publish, page_last_modified) VALUES ('Привет, мир!', 'Это ваша первая запись. Вы можете её отредактировать или удалить через админ-панель.', 'hello', NOW(), NOW());
 ###
-INSERT INTO _PREFIX_page (page_title, page_content, page_slug, page_date_publish, page_last_modified, page_type_id) VALUES ('О сайте', '<p>На этой странице вы можете написать о чем ваш сайт.</p>', 'about', NOW(), NOW(), 2);
+INSERT INTO _PREFIX_page (page_title, page_content, page_slug, page_date_publish, page_last_modified, page_type_id) VALUES ('О сайте', 'На этой странице вы можете написать о чем ваш сайт.', 'about', NOW(), NOW(), 2);
 ###
 
 DROP TABLE IF EXISTS _PREFIX_comusers;

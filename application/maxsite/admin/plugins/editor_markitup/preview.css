@@ -11,7 +11,7 @@ table {border-collapse: collapse; border-spacing: 0;}
 
 
 /* my base default */
-body {font-family: Verdana, sans-serif; font-size: 9pt;}
+body {font-family: Arial, sans-serif; font-size: 14px;}
 
 body, div, ul, ol, li, td, p, blockquote, code, pre, h1, h2, h3, h4, h5, h6 {line-height: 1.3em;}
 p, code, pre, blockquote, ul, ol, table, dl {margin: 4px 0 7px 0;}

@@ -319,7 +319,7 @@
 		<div class="new_cat_upload">
 		<form method="post">' . mso_form_session('f_session3_id') .
 		'<p><b>' . t('Новый каталог'). ':</b> <input type="text" name="f_cat_name" value="">
-		<input type="submit" name="f_newcat_submit" value="' . t('Создать') . '" onClick="if(confirm(\'' . t('Создать каталог в uploads?') . '\')) {return true;} else {return false;}" ></p>
+		<button type="submit" name="f_newcat_submit" class="i new-cat" onClick="if(confirm(\'' . t('Создать каталог в uploads?') . '\')) {return true;} else {return false;}" >' . t('Создать') . '</button></p>
 		</form></div>';
 
 	// размер
@@ -377,7 +377,7 @@
 	echo '
 		<div class="upload_file">
 		<h2>' . t('Загрузка файлов') . '</h2>
-		<p>' . t('Для загрузки файла нажмите кнопку «Обзор», выберите файл на своем компьютере. После этого нажмите кнопку «Загрузить». Размер файла не должен превышать') . ' ' . ini_get ('post_max_size') . '.</p>
+		<p>' . t('Для загрузки файла нажмите кнопку «Обзор», выберите файл на своем компьютере. После этого нажмите кнопку «Загрузить». Размер файла не должен превышать') . ' ' . ini_get('post_max_size') . '.</p>
 		<form method="post" enctype="multipart/form-data" class="admin_uploads_form">' . mso_form_session('f_session2_id') .
 		'<p>';
 	
@@ -388,7 +388,11 @@
 	}	
 	
 	
-	echo '&nbsp;<input type="submit" name="f_upload_submit" value="' . t('Загрузить') . '">&nbsp;<input type="reset" value="' . t('Сбросить') . '"></p>
+	echo '&nbsp;<button type="submit" name="f_upload_submit" class="i upload">' . t('Загрузить') . '</button>
+		&nbsp;
+		<button type="reset" class="i reset">' . t('Сбросить') . '</button>
+		</p>
+		
 		<p>' . t('Описание файла:') . ' <input type="text" name="f_userfile_title" class="description_file" value="" size="80"></p>
 
 		<p><label><input type="checkbox" name="f_userfile_resize" ' . $f_userfile_resize . 'value=""> ' . t('Для изображений изменить размер до') . '</label>
@@ -408,7 +412,7 @@
 		<option value="7"'.(($mini_type == 7)?(' selected="selected"'):('')).'>' . t('Уменьшения и обрезки (crop) в квадрат') . '</option>
 		</select>
 		
-		&nbsp;<input type="submit" name="f_update_mini_submit" value="' . t('Обновить миниатюры') . '" onClick="if(confirm(\'' . t('Обновить старые миниатюры (создать для тех файлов, у которых их нет) для всех изображений каталога?') . '\')) {return true;} else {return false;}" >
+		&nbsp;<button type="submit" class="i update-mini" name="f_update_mini_submit" onClick="if(confirm(\'' . t('Обновить старые миниатюры (создать для тех файлов, у которых их нет) для всех изображений каталога?') . '\')) {return true;} else {return false;}" >' . t('Обновить миниатюры') . '</button>
 		
 		</p>
 
@@ -426,7 +430,7 @@
 		<option value="5"'.(($watermark_type == 5)?(' selected="selected"'):('')).'>' . t('В правом нижнем углу') . '</option>
 		</select></p>
 		</form>
-		</div><hr>
+		</div>
 		';
 
 	// как выводим файлы
@@ -509,7 +513,7 @@
 		$sel = '<label title="' . htmlspecialchars($title) . '">'. form_checkbox('f_check_files[]', $file, false,
 			'class="f_check_files"')
 			. ' ' . $file . $title_f . '</label>'
-			. '<br><i class="date">' . date("Y-m-d H:i:s", $datefile) . '</i>';
+			. '<i class="date">' . date("Y-m-d H:i:s", $datefile) . '</i>';
 			
 
 		$cod1 = stripslashes(htmlspecialchars( $uploads_url . $file ) );
@@ -616,7 +620,7 @@
 		$cod .= '<br><a href="#" class="edit_descr_link" onClick="return false;">' . t('Изменить описание') . '</a>';
 		// конец добавления
 
-		$out_all .= '<div class="cornerz"><div class="wrap">' . $sel . $predpr . $cod . '</div></div>';
+		$out_all .= '<div class="image-block"><div class="wrap">' . $sel . $predpr . $cod . '</div></div>';
 
 		if ($admin_view_files == 'table') $CI->table->add_row($predpr, $sel . $cod);
 	}
@@ -629,13 +633,14 @@
 			echo $CI->table->generate(); // вывод подготовленной таблицы
 		else
 		{
-			echo '<div class="float-parent" style="width:100%">';
+			echo '<div class="all-images">';
 			echo $out_all;
-			echo '<div style="clear:both"></div></div>';
+			echo '</div>';
 		}
 
-		echo '<p class="br"><input type="submit" name="f_delete_submit" value="' . t('Удалить') . '" onClick="if(confirm(\'' . t('Выделенные файы будут безвозвратно удалены! Удалять?') . '\')) {return true;} else {return false;}" ></p>
-			<p class="br"><input type="button" id="check-all" value="' . t('Инвертировать выделение') . '"></p>
+		echo '<div class="sel-files"><button type="submit" name="f_delete_submit" class="i delete-file" onClick="if(confirm(\'' . t('Выделенные файы будут безвозвратно удалены! Удалять?') . '\')) {return true;} else {return false;}">' . t('Удалить') . '</button> 
+			<button type="button" id="check-all" class="i invert">' . t('Инвертировать выделение') . '</button></div>
+			
 			</form>';
 
 		$n = '\n';
@@ -721,13 +726,15 @@ $(function()
 	});
 });
 </script>
-<hr class="br">
+
 EOF;
-		echo '<h2 class="br">' . t('Создание галереи') . '</h2>
-		<p>' . t('Выделите нужные файлы. (У вас должен быть активирован плагин <strong>LightBox</strong>)') . '</p>
-		<p>' . t('Название:') . ' <input type="text" id="gallerycodename" value=""> ' . t('(если нужно)') . '<br><input class="br" type="button" id="gallerycodeclick" value="' . t('Генерировать код галереи') . '">
-		</p>
-		<p><textarea id="gallerycode" style="display: none"></textarea>
+		echo '<div class="create-gal">
+			<h2>' . t('Создание галереи') . '</h2>
+			<p>' . t('Выделите нужные файлы. (У вас должен быть активирован плагин <strong>LightBox</strong>)') . '</p>
+			<p>' . t('Название:') . ' <input type="text" id="gallerycodename" value=""> ' . t('(если нужно)') . '</p>
+			<button class="i gen" type="button" id="gallerycodeclick">' . t('Генерировать код галереи') . '</button>
+			<textarea id="gallerycode" style="display: none"></textarea>
+		</div>
 		';
 	}
 	else

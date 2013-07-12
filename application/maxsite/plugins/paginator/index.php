@@ -19,10 +19,12 @@ function paginator_head()
 	$url = getinfo('plugins_url').'paginator/';
 	
 	$options = mso_get_option('paginator', 'plugins', array() );
+	
 	if ( !isset($options['css']) ) $options['css'] = '1';
+	
 	if ( $options['css'] == '1' ) echo '<link rel="stylesheet" href="'.$url.'paginator.css">'.NR;
 	
-	echo '<script src="'.$url.'paginator.js"></script>'.NR;
+	echo '<script src="' . $url . 'paginator.js"></script>' . NR;
 }
 
 function paginator_mso_options()

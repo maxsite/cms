@@ -8,6 +8,7 @@ if ( $post = mso_check_post(array('data')) )
 	$output = trim($output);
 	$output = str_replace(chr(10), "<br>", $output);
 	$output = str_replace(chr(13), "", $output);
+	$output = str_replace('[cut]', '', $output);
 				
 	$output = mso_hook('content', $output);
 	$output = mso_hook('content_auto_tag', $output);

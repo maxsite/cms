@@ -5,47 +5,41 @@
  * (c) http://max-3000.com/
  */
 	
-	$CI = & get_instance();
+$CI = & get_instance();
+
+// проверяем входящие данные
+if ( $post = mso_check_post(array('f_session_id', 'f_submit', 'f_update_widgets')) )
+{
+	# защита рефера
+	mso_checkreferer();
 	
-	// проверяем входящие данные
-	if ( $post = mso_check_post(array('f_session_id', 'f_submit', 'f_update_widgets')) )
+	$widgets = $post['f_update_widgets'];
+	
+	# перебираем полученные виджеты
+	foreach ($widgets as $widget=>$val)
 	{
-		# защита рефера
-		mso_checkreferer();
 		
-		# защита сессии - если нужно убрать коммент
-		// if ($MSO->data['session']['session_id'] != $fo_session_id) mso_redirect('loginform');
-		
-		$widgets = $post['f_update_widgets'];
-		
-		# перебираем полученные виджеты
-		foreach ($widgets as $widget=>$val)
+		// разбиваем полученное значение на функцию и номер - они указываются через -
+		$arr_w = explode('--', $widget); // в массив
+
+		if ( sizeof($arr_w) > 1 ) // два или больше элементов
 		{
-			// [calendar_widget-1] => 
-			// [randomtext_widget-3] => 
-			
-			// разбиваем полученное значение на функцию и номер - они указываются через -
-			$arr_w = explode('--', $widget); // в массив
-
-			if ( sizeof($arr_w) > 1 ) // два или больше элементов
-			{
-				$widget = trim( $arr_w[0] ); // первый - функция
-				$num = mso_slug( trim( $arr_w[1] ) ); // второй - номер виджета
-				$num = str_replace('--', '-', $num); 
-			}
-			else 
-			{
-				$num = 0; // номер виджета не указан, значит 0
-			}
-			
-			$func = $widget . '_update'; // функция именуется по этому принципу
-			//$num = (int) $num;
-
-			if ( function_exists($func) ) $func($num);
+			$widget = trim( $arr_w[0] ); // первый - функция
+			$num = mso_slug( trim( $arr_w[1] ) ); // второй - номер виджета
+			$num = str_replace('--', '-', $num); 
+		}
+		else 
+		{
+			$num = 0; // номер виджета не указан, значит 0
 		}
 		
-		echo '<div class="update">' . t('Обновлено!') . '</div>';
+		$func = $widget . '_update'; // функция именуется по этому принципу
+
+		if ( function_exists($func) ) $func($num);
 	}
+	
+	echo '<div class="update">' . t('Обновлено!') . '</div>';
+}
 	
 ?>
 
@@ -82,7 +76,7 @@ $(function () {
 			
 			$form .= '<div class="admin-edit-widgets">';
 			
-			$form .= '<h2>' . $sidebar['title'] . ':</h2>';
+			$form .= '<h2>' . $sidebar['title'] . '</h2>';
 			
 			foreach ($widgets as $widget)
 			{
@@ -145,7 +139,7 @@ $(function () {
 		// добавляем форму, а также текущую сессию
 		echo '<form method="post" class="fform admin_widgets">' . mso_form_session('f_session_id');
 		echo $form;
-		echo '<p class="br"><input type="submit" name="f_submit" value="' . t('Сохранить изменения') . '"></p>';
+		echo '<button type="submit" name="f_submit" class="i save">' . t('Сохранить изменения') . '</button>';
 		echo '</form>';
 	}
 	else

@@ -82,9 +82,10 @@ function admin_plugin_options_admin($args = array())
 # функция проверяет входящий post
 # если все ок, то вносит новые значения в опции
 # если post нет, то выводит форму с текущими значениями опций
-function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $text_other = true)
+function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $text_other = '', $show_goto_plugins = true)
 {
-
+	if ($show_goto_plugins) echo '<p><a href="' . getinfo('site_admin_url') . 'plugins" class="i plugins">' . t('Плагины') . '</a></p>';
+	
 	if ($title)
 		echo '<h1><a href="">' . $title . '</a></h1>';
 	else
@@ -97,9 +98,7 @@ function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $te
 		echo '<p class="info">' . t('Укажите необходимые опции плагина.') . '</p>';
 		
 	
-	if ($text_other === true)
-		echo '<p><a href="' . getinfo('site_admin_url') . 'plugins">' . t('Вернуться на страницу плагинов') . '</a></p>';
-	elseif ($text_other) echo '<p>' . $text_other . '</p>';
+	if ($text_other) echo '<p>' . $text_other . '</p>';
 	
 	
 	# тут получаем текущие опции
@@ -338,7 +337,7 @@ function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $te
 		# выводим форму
 		echo NR . '<form method="post" class="fform">' . mso_form_session('f_session_id');
 		echo $form;
-		echo NR . '<p class="br"><input type="submit" name="f_submit" value="' . t('Сохранить') . '"></p>';
+		echo NR . '<button type="submit" name="f_submit" class="i save">' . t('Сохранить') . '</button>';
 		echo '</form>' . NR;
 	}
 	else

@@ -1,0 +1,114 @@
+// форма входа в адмн-панель
+
+@import url('../../../../shared/css-less/mixins/helpers.less'); // хелперы
+@import url('deafult/mso-reset.less'); // сброс стилей
+@import url('deafult/mso-default.less'); // начальные стили
+@import url('deafult/mso-forms.less'); // формы
+@import url('mixins/button.less'); // красивые кнопки
+
+body {
+	.bg(#606060);
+	color: #444;
+	.f > .sans("Open Sans");
+}
+
+div.all {
+	width: 330px;
+	margin: 0 auto;
+	.bg(#fff);
+}
+
+div.all-wrap {
+	margin: 180px 0 0 0;
+	padding-bottom: 40px;
+	
+}
+
+div.logo {
+	.bg(#222);
+	height: 60px;
+	
+	a.logo-cms {
+		display: block;
+		width: 50px;
+		height: 60px;
+		.left;
+		.bgu("images/maxsitelogo.png", no-repeat 15px 10px);
+	}
+	
+	div.name-site-descr {
+		.left;
+		line-height: 1em;
+		
+		span.site {
+			display: block;
+			margin: 16px 0 0 15px;
+			.f > .size(18px);
+			color: #ddd;
+		}
+		
+		span.descr {
+			display: block;
+			margin: 3px 0 0 15px;
+			.f > .size(13px);
+			.f > .small_caps;
+			.f > .verdana;
+			color: #999;
+		}
+	}
+}
+
+form.fform {
+	
+	margin: 35px 0 0 0;
+	padding: 0 25px;
+	
+	input.flogin_user,
+	input.flogin_password
+	{
+		.f > .size(14px);
+		padding: 5px;
+		margin: 0 0 15px 0;
+		.border(#ddd);
+		.transition(all 0.5s 0s ease);
+		
+		&:focus, 
+		&:hover
+		{
+		}
+	}
+	
+	input.flogin_user {
+	}
+	
+	input.flogin_password {
+	}
+	
+	button.flogin_submit {
+		
+		margin-top: 15px;
+		height: 30px;
+		
+		&:before {
+			content: url("images/16_unlock.png");
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 10px;
+		}
+	}
+}
+
+div.goto-site {
+	margin-top: -30px;
+	padding-right: 25px;
+	text-align: right;
+	
+	a {
+		color: #777;
+		.f > .underline(none);
+		
+		&:hover {
+			.f > .underline();
+		}
+	}
+}

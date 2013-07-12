@@ -32,7 +32,7 @@ function admin_page_admin_init($args = array())
 		# Третий - название ссылки	
 		# четвертый номер по порядку
 		
-		mso_admin_menu_add('page', $this_plugin_url, t('Список'), 2);
+		mso_admin_menu_add('page', $this_plugin_url, t('Все записи'), 2);
 
 		# прописываем для указаного admin_url_ + $this_plugin_url - (он будет в url) 
 		# связанную функцию именно она будет вызываться, когда 
@@ -48,7 +48,7 @@ function admin_page_admin_init($args = array())
 		
 		
 		$this_plugin_url = 'page_new'; // url и hook
-		mso_admin_menu_add('page', $this_plugin_url, t('Создать'), 1);
+		mso_admin_menu_add('page', $this_plugin_url, t('Создать запись'), 1);
 		mso_admin_url_hook ($this_plugin_url, 'admin_page_new');	
 	}
 	
@@ -66,8 +66,8 @@ function admin_page_admin($args = array())
 		return $args;
 	}
 	
-	mso_hook_add_dinamic( 'mso_admin_header', ' return $args . "' . t('Список страниц') . '"; ' );
-	mso_hook_add_dinamic( 'admin_title', ' return "' . t('Список страниц') . ' - " . $args; ' );
+	mso_hook_add_dinamic( 'mso_admin_header', ' return $args . "' . t('Список всех записей') . '"; ' );
+	mso_hook_add_dinamic( 'admin_title', ' return "' . t('Список всех записей') . ' - " . $args; ' );
 	
 	require($MSO->config['admin_plugins_dir'] . 'admin_page/admin.php');
 }
@@ -85,8 +85,8 @@ function admin_page_edit($args = array())
 		return $args;
 	}
 	
-	mso_hook_add_dinamic( 'mso_admin_header', ' return $args . "' . t('Редактирование страницы') . '"; ' );
-	mso_hook_add_dinamic( 'admin_title', ' return "' . t('Редактирование страницы') . ' - " . $args; ' );
+	mso_hook_add_dinamic( 'mso_admin_header', ' return $args . "' . t('Редактирование записи') . '"; ' );
+	mso_hook_add_dinamic( 'admin_title', ' return "' . t('Редактирование записи') . ' - " . $args; ' );
 	
 	require($MSO->config['admin_plugins_dir'] . 'admin_page/edit.php');
 }
@@ -104,8 +104,8 @@ function admin_page_new($args = array())
 		return $args;
 	}
 	
-	mso_hook_add_dinamic( 'mso_admin_header', ' return $args . "' . t('Создать страницу') . '"; ' );
-	mso_hook_add_dinamic( 'admin_title', ' return "' . t('Создать страницу') . ' - " . $args; ' );
+	mso_hook_add_dinamic( 'mso_admin_header', ' return $args . "' . t('Создать новую запись') . '"; ' );
+	mso_hook_add_dinamic( 'admin_title', ' return "' . t('Создать новую запись') . ' - " . $args; ' );
 	
 	require($MSO->config['admin_plugins_dir'] . 'admin_page/new.php');
 }
@@ -120,18 +120,9 @@ function admin_page_hide_blocks($arg = array())
 	if ( isset($options['page_status']) and !$options['page_status']) $css .= 'p.page_status {display: none !important;}' .NR ;
 	if ( isset($options['page_files']) and !$options['page_files']) $css .= 'a.page_files {display: none !important;}' .NR ;
 	
-	if ( isset($options['page_meta']) and !$options['page_meta']) $css .= 'div.page_meta {display: none !important;}' .NR ;
-	if ( isset($options['page_all_cat']) and !$options['page_all_cat']) $css .= 'div.page_all_cat {display: none !important;}' .NR ;
-	if ( isset($options['page_tags']) and !$options['page_tags']) $css .= 'div.page_tags {display: none !important;}' .NR ;
-	if ( isset($options['page_slug']) and !$options['page_slug']) $css .= 'div.page_slug {display: none !important;}' .NR ;
-	if ( isset($options['page_discus']) and !$options['page_discus']) $css .= 'div.page_discus {display: none !important;}' .NR ;
-	if ( isset($options['page_date']) and !$options['page_date']) $css .= 'div.page_date {display: none !important;}' .NR ;
-	if ( isset($options['page_post_type']) and !$options['page_post_type']) $css .= 'div.page_post_type {display: none !important;}' .NR ;
-	if ( isset($options['page_password']) and !$options['page_password']) $css .= 'div.page_password {display: none !important;}' .NR ;
-	if ( isset($options['page_menu_order']) and !$options['page_menu_order']) $css .= 'div.page_menu_order {display: none !important;}' .NR ;
-	if ( isset($options['page_all_parent']) and !$options['page_all_parent']) $css .= 'div.page_all_parent {display: none !important;}' .NR ;
-	if ( isset($options['page_all_users']) and !$options['page_all_users']) $css .= 'div.page_all_users {display: none !important;}' .NR ;
-	if ( isset($options['cat_height']) and $options['cat_height']) $css .= 'div.page_all_cat div.cat_page {max-height: ' . ((int) $options['cat_height']) . 'px!important; overflow: auto;}' .NR ;
+	if ( isset($options['page_all_parent']) and !$options['page_all_parent']) $css .= 'p.page_all_parent {display: none !important;}' .NR ;
+	
+	if ( isset($options['cat_height']) and $options['cat_height']) $css .= 'div.tabs-box.all-cat div.page_cat {max-height: ' . ((int) $options['cat_height']) . 'px!important; overflow: auto;}' .NR ;
 	
 	
 	if ($css)

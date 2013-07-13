@@ -177,11 +177,11 @@
 			$text = mso_xss_clean($row['comments_content']);
 			if ($text != $row['comments_content'])
 			{
-				echo '<div class="error">' . t('Внимание! Возможна XSS-атака! Полный текст комментария') . '</div><textarea>'
+				echo '<div class="error">' . t('Внимание! Возможна XSS-атака! Полный текст комментария') . '</div><textarea rows="10">'
 					. htmlspecialchars($row['comments_content']) . '</textarea><p>' . t('Исправленный текст комментария') . '</p>';
 			}
 
-			echo '<p><textarea name="f_comments_content" id="comments_content">' . htmlspecialchars($text) . '</textarea></p>';
+			echo '<textarea name="f_comments_content" id="comments_content" rows="10">' . htmlspecialchars($text) . '</textarea>';
 
 			echo '<h3>' . t('Дата') . '</h3>
 				<p><input name="f_comments_date" type="text" value="' . htmlspecialchars($row['comments_date']) .'"></p>';
@@ -229,7 +229,7 @@
 			
 			$out .= '</select></p>' . NR;
 			
-			echo t('<p>Выберите пользователя или комментатора, которого вы хотите назначить автором комментария, либо выберите «Аноним» и введите имя анонимного комментатора.</p>') . $out;
+			echo '<p>' . t('Выберите пользователя или комментатора, которого вы хотите назначить автором комментария, либо выберите «Аноним» и введите имя анонимного комментатора.') . '</p>' . $out;
 
 			$checked1 = $checked2 = '';
 
@@ -245,23 +245,12 @@
 			echo '<p><input type="hidden" name="f_comments_email_subscribe" value="0"><label><input type="checkbox" name="f_comments_email_subscribe" value="1" ' . $checked2 . '> '
 				. t('Сразу разослать подписчикам')
 				. '</label></p>';
-			echo '<p class="br"><input type="submit" name="f_submit" value="' . t('Готово') . '">' 
-				. ' <input type="submit" name="f_submit_delete" onClick="if(confirm(\'' . t('Уверены?') . '\')) {return true;} else {return false;}" value="' . t('Удалить комментарий') . '">'
+			echo '<p class="br"><button type="submit" name="f_submit" class="i save">' . t('Готово') . '</button>' 
+				. ' <button type="submit" name="f_submit_delete" onClick="if(confirm(\'' . t('Уверены?') . '\')) {return true;} else {return false;}" class="i delete">' . t('Удалить комментарий') . '</button>'
 				. '</p>';
 
 
 			echo '</form>';
-			
-			/*
-			echo '<p><a href="' . getinfo('siteurl') . 'page/' . $row['page_slug'] . '#comment-' . $id . '">'
-				. t('Комментарий на сайте') . '</a>'
-
-				. ' | <a href="' . getinfo('site_admin_url') . 'page_edit/' . $row['page_id'] . '">'
-				. t('Редактировать запись') . '</a>'
-
-				. '</p>';
-			*/
-			// pr($row);
 		}
 		else echo '<div class="error">' . t('Ошибочный комментарий') . '</div>';
 	}
@@ -271,4 +260,4 @@
 	}
 	
 	
-?>
+# end file

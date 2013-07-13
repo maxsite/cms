@@ -19,6 +19,9 @@ if (isset($page['page_password']) and $page['page_password']) // есть пар
 
 echo '<span><a id="comments"></a></span>';
 
+if ($f = mso_page_foreach('page_comments_start')) require($f);
+mso_hook('page_comments_start');
+
 // получаем список комментариев текущей страницы
 require_once( getinfo('common_dir') . 'comments.php' ); // функции комментариев
 

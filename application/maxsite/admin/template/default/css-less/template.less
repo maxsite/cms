@@ -43,14 +43,18 @@ div.header {
 		
 		height: 60px;
 		max-width: 50%;
-		overflow: hidden;
-	
+
 		a {
 			display: block;
-			margin: 16px 0 0 20px;
+			line-height: 1em;
+			margin: 6px 0 0 20px;
 			.f > .underline(none);
 			.f > .size(20px);
 			color: #ddd;
+
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
 			
 			&:hover {
 				.f > .underline;
@@ -60,7 +64,7 @@ div.header {
 		
 		span.descr {
 			display: block;
-			margin: 3px 0 0 20px;
+			margin: 1px 0 0 20px;
 			.f > .size(13px);
 			//.f > .i;
 			.f > .small_caps;
@@ -68,6 +72,7 @@ div.header {
 			color: #999;
 			white-space: nowrap;
 			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 	}
 	

@@ -19,7 +19,7 @@
 	<div class="all-wrap">
 
 		<div class="logo">
-			<a href="http://max-3000.com/" class="logo-cms" title="<?= t('Система управления сайтом MaxSite CMS') ?>"></a>
+			<a href="http://max-3000.com/" class="logo-cms" title="<?= t('MaxSite CMS — cистема управления сайтом') ?>"></a>
 			
 			<div class="name-site-descr">
 				<span class="site"><?= mso_get_option('name_site', 'general') ?></span>
@@ -46,8 +46,6 @@
 				),
 				$redirect_url);
 		}
-		
-		
 		?>
 		
 		<div class="goto-site"><a href="<?= getinfo('siteurl') ?>"><?= t('Вернуться к сайту') ?></a></div>

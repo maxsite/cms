@@ -1,10 +1,13 @@
 // форма входа в адмн-панель
 
 @import url('../../../../shared/css-less/mixins/helpers.less'); // хелперы
-@import url('deafult/mso-reset.less'); // сброс стилей
-@import url('deafult/mso-default.less'); // начальные стили
-@import url('deafult/mso-forms.less'); // формы
+@import url('../../../../shared/css-less/default/mso-reset.less'); // сброс стилей
+@import url('../../../../shared/css-less/default/mso-default.less'); // начальные стили
+@import url('../../../../shared/css-less/default/mso-forms.less'); // формы
 @import url('mixins/button.less'); // красивые кнопки
+
+// @import url('../../../../shared/css-less/default/mso-helpers.less'); // css-хелперы
+
 
 body {
 	.bg(#606060);
@@ -39,28 +42,40 @@ div.logo {
 	div.name-site-descr {
 		.left;
 		line-height: 1em;
+		height: 60px;
+		width: 250px;
+		
 		
 		span.site {
 			display: block;
-			margin: 16px 0 0 15px;
+			line-height: 1em;
+			margin: 13px 0 0 15px;
+			
 			.f > .size(18px);
 			color: #ddd;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			
 		}
 		
 		span.descr {
 			display: block;
-			margin: 3px 0 0 15px;
+			margin: 1px 0 0 15px;
 			.f > .size(13px);
 			.f > .small_caps;
 			.f > .verdana;
 			color: #999;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 	}
 }
 
-form.fform {
+.fform {
 	
-	margin: 35px 0 0 0;
+	margin: 30px 0 0 0;
 	padding: 0 25px;
 	
 	input.flogin_user,
@@ -85,7 +100,6 @@ form.fform {
 	}
 	
 	button.flogin_submit {
-		
 		margin-top: 15px;
 		height: 30px;
 		
@@ -104,7 +118,7 @@ div.goto-site {
 	text-align: right;
 	
 	a {
-		color: #777;
+		color: #333;
 		.f > .underline(none);
 		
 		&:hover {

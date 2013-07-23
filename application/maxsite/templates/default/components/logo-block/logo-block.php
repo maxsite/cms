@@ -4,8 +4,6 @@
 
 	Название: «Лого, блок»
 	
-	Для блока используется ушка logo-block.
-		
 	Расположение: header
 	
 	CSS-стили: 
@@ -31,6 +29,10 @@ $logo = '<img src="' . $logo . '" alt="' . getinfo('name_site') . '" title="' . 
 
 if (!is_type('home')) $logo = $pt->link(getinfo('siteurl'), $logo);
 
+
+$block = mso_get_option('logo_block', 'templates', '');
+
+
 // вывод
 $pt->div_start('logo-block', 'wrap');
 
@@ -39,7 +41,7 @@ $pt->div_start('logo-block', 'wrap');
 	$pt->div_end('r1');
 	
 	$pt->div_start('r2');
-		if (function_exists('ushka')) echo ushka('logo-block');
+		echo $block;
 	$pt->div_end('r2');
 	
 	$pt->clearfix();

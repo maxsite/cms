@@ -89,7 +89,7 @@
 <!-- <?= mso_load_jquery('jquery.scripts.js', $admin_template_url . 'js/') ?> -->
 <?php mso_hook('admin_head') ?>
 </head>
-<body class="admin-<?= mso_segment(2) ?>">
+<body class="admin-<?= mso_segment(2) ?>"><?php mso_hook('admin_body_start'); ?>
 <div class="all">
 	<div class="all-wrap">
 	

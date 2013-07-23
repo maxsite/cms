@@ -2090,7 +2090,9 @@ function mso_next_prev_page($r = array())
 		$cat = ''; // рубрика не учитывается
 	}
 	
-	
+	if (!isset($r['type'])) $r['type'] = 'blog'; // можно задать тип записей
+
+   
 	// next
 	if ( $pages = mso_get_pages(array(
 			'content' => false,
@@ -2103,6 +2105,7 @@ function mso_next_prev_page($r = array())
 			'get_page_categories' => false,
 			'get_page_meta_tags' => false,
 			'get_page_count_comments' => false,
+			'type' => $r['type'],
 			'exclude_page_id' => $r['page_id'] ), $temp) 
 		) 
 		$out['next'] = $pages[0];

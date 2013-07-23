@@ -788,7 +788,7 @@ function mso_get_cat_from_id($id = 0, $find_key = false)
 {
 	static $all_cats = false;
 	
-	if ($all_cats === false) $all_cats = mso_cat_array_single();
+	if ($all_cats === false) $all_cats = mso_cat_array_single('page', 'category_name', 'ASC', '', true, false);
 	
 	if (is_array($id) and count($id)>0) $id = $id[0];
 	

@@ -400,3 +400,47 @@
 </fieldset>
 </form>
 [/html]
+
+
+<h2>Примеры колонок</h2>
+
+<div class="onerow">
+    <div class="col w1-2 padding5" style="background: #eee">1-2</div>
+    <div class="col w1-2 padding5" style="background: #eee">1-2</div>
+</div>
+[br][br]
+<div class="onerow">
+    <div class="col w1-3 padding5" style="background: #eee">1-3</div>
+    <div class="col w2-3 padding5" style="background: #eee">2-3</div>
+</div>
+[br][br]
+<div class="onerow">
+    <div class="col w1-4 padding5" style="background: #eee">1-4</div>
+    <div class="col w1-4 padding5" style="background: #eee">1-4</div>
+    <div class="col w1-4 padding5" style="background: #eee">1-4</div>
+    <div class="col w1-4 padding5" style="background: #eee">1-4</div>
+</div>
+[br][br]
+<div class="onerow">
+    <div class="col w1-8 padding5" style="background: #eee">1-8</div>
+    <div class="col w2-8 padding5" style="background: #eee">2-8</div>
+    <div class="col w1-8 padding5" style="background: #eee">1-8</div>
+    <div class="col w3-8 padding5" style="background: #eee">3-8</div>
+    <div class="col w1-8 padding5" style="background: #eee">1-8</div>
+</div>
+
+[br][br]
+<div class="onerow">
+    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
+    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
+    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
+    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
+    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
+    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
+    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
+    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
+    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
+    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
+    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
+    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
+</div>

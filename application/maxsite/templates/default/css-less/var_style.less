@@ -2,30 +2,21 @@
 // Copyright http://max-3000.com/
 
 
-@import url('../../../shared/css-less/mixins/helpers.less'); // хелперы
+@import url('../../../shared/css-less/mixins/helpers.less'); // хелперы 
 
-@import url('constant.less');       // Константы
-@import url('variables.less');       // Общие переменные
+@import url('constant.less'); // Константы
+@import url('variables.less'); // Общие переменные
 
-@import url('base.less');  // базовое оформление
+@import url('typography/typography.less'); // типографика
+@import url('typography/button.less'); // кнопки
 
-@import url('layouts/layout.less'); // структура сайта
-@import url('menu.less'); // все меню сайта
+@import url('layouts/layout.less'); // модульная сетка
+@import url('menu/menu.less'); // меню
 
-@import url('mixins/message.less'); // сообщения .message
-@import url('mixins/label.less'); // сообщения .label
-@import url('mixins/tabs.less'); // табы
-@import url('mixins/pagination.less'); // пагинация
-@import url('mixins/dropdown-menu.less'); // выпадающее меню
-@import url('mixins/columns.less'); // колонки
-
-@import url('mixins/button.less'); // красивые кнопки
-
-@import url('mixins/social_grands.less'); // иконки на основе шрифта grangs
-
-// специальные MaxSite CMS команды-строки для автоматического подключения 
-// всех less-файлов из /blocks/, /components/, /plugins/, /type/, /elements/
-@MSO_IMPORT_ALL_BLOCKS;
+// @MSO_IMPORT_ALL_xxx — специальные MaxSite CMS команды-строки для автоматического подключения всех less-файлов из каталогов
+@MSO_IMPORT_ALL_FONTS;
+@MSO_IMPORT_ALL_MIXINS;
+@MSO_IMPORT_ALL_HELPERS;
 @MSO_IMPORT_ALL_COMPONENTS;
 @MSO_IMPORT_ALL_PLUGINS;
-@MSO_IMPORT_ALL_TYPE;
+@MSO_IMPORT_ALL_BLOCKS;

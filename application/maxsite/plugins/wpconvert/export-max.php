@@ -16,7 +16,6 @@ require_once ('admin-header.php');
 <p>Я рекомендую экспортировать записи частями. Дело в том, что когда вы будете делать конвертирование, то скорее всего столкнетесь с ситуацией, когда ваш сервер ограничит размер памяти и файла. Чтобы этого не произошло лучше сразу разбить файл экспорта на несколько частей, а потом их последовательно конвертировать в <a href="http://max-3000.com/">MaxSite CMS</a></p>
 <p>Следите за тем, чтобы размер выходного файла не превышал 300-500Кб. Количество можно подобрать экспериментально. У меня получилось примерно по 30 записей. После того, как вы экспортируете первый файл (с 1), то потом укажите начиная с 30, потом 60, потом 90 и т.д. Таким образом у вас получится несколько xml-файлов.</p>
 
-
 <form action="" method="get">
 
 <table>
@@ -43,7 +42,6 @@ $all_count = $wpdb->get_col("SELECT ID FROM $wpdb->posts WHERE post_status != 'i
 
 <p>Начиная с записи <input type="text" name="limit_start" value="1"> (всего <?= count($all_count) ?> записей)
 <br>Количество по <input type="text" name="limit_count" value="30"></p>
-
 
 <p class="submit"><input type="submit" name="submit" value="<?php _e('Download Export File'); ?> &raquo;">
 <input type="hidden" name="download" value="true">
@@ -81,7 +79,8 @@ header("Content-Disposition: attachment; filename=$filename");
 header('Content-Type: text/xml; charset=' . get_option('blog_charset'), true);
 
 $where = '';
-if ( isset( $_GET['author'] ) && $_GET['author'] != 'all' ) {
+if ( isset( $_GET['author'] ) && $_GET['author'] != 'all' ) 
+{
 	$author_id = (int) $_GET['author'];
 	$where = " WHERE post_author = '$author_id' and post_status != 'inherit'";
 }
@@ -94,9 +93,14 @@ else $where = " WHERE post_status != 'inherit'";
 $post_ids = $wpdb->get_col("SELECT ID FROM $wpdb->posts $where ORDER BY post_date_gmt ASC{$limit}");
 
 $categories = (array) get_categories('get=all');
-$tags = (array) get_tags('get=all');
 
-function wxr_missing_parents($categories) {
+// $tags = (array) get_tags('get=all');
+$tags = array();
+	
+
+	
+function wxr_missing_parents($categories) 
+{
 	if ( !is_array($categories) || empty($categories) )	return array();
 
 	foreach ( $categories as $category )
@@ -133,8 +137,6 @@ unset($categories);
 function wxr_cdata($str) {
 	if ( seems_utf8($str) == false ) $str = utf8_encode($str);
 
-	// $str = ent2ncr(wp_specialchars($str));
-
 	$str = "<![CDATA[$str" . ( ( substr($str, -1) == ']' ) ? ' ' : '') . "]]>";
 
 	return $str;
@@ -164,7 +166,8 @@ function wxr_tag_description($t) {
 	echo '<wp:tag_description>' . wxr_cdata($t->description) . '</wp:tag_description>';
 }
 
-function wxr_post_taxonomy() {
+function wxr_post_taxonomy() 
+{
 	$categories = get_the_category();
 	$tags = get_the_tags();
 	$cat_names = array();
@@ -172,15 +175,15 @@ function wxr_post_taxonomy() {
 	$the_list = array();
 	$filter = 'rss';
 
-	if ( !empty($categories) ) foreach ( (array) $categories as $category ) {
+	if ( !empty($categories) ) foreach ( (array) $categories as $category ) 
+	{
 		$cat_name = sanitize_term_field('name', $category->name, $category->term_id, 'category', $filter);
-		// $the_list .= "\n\t\t<category><![CDATA[$cat_name]]></category>\n";
 		$the_list['category'][$category->term_id] = $cat_name;
 	}
 
- 	if ( !empty($tags) ) foreach ( (array) $tags as $tag ) {
+ 	if ( !empty($tags) ) foreach ( (array) $tags as $tag ) 
+	{
 		$tag_name = sanitize_term_field('name', $tag->name, $tag->term_id, 'post_tag', $filter);
-		// $the_list .= "\n\t\t<category domain=\"tag\"><![CDATA[$tag_name]]></category>\n";
 		$the_list['tag'][$tag->term_id] = $tag->name;
 	}
 
@@ -210,10 +213,13 @@ echo '<?xml version="1.0" encoding="' . get_bloginfo('charset') . '"?' . ">\n";
 		global $wp_query;
 		$wp_query->in_the_loop = true;  // Fake being in the loop.
 		// fetch 20 posts at a time rather than loading the entire table into memory
-		while ( $next_posts = array_splice($post_ids, 0, 20) ) {
+		while ( $next_posts = array_splice($post_ids, 0, 20) ) 
+		
+		{
 			$where = "WHERE ID IN (".join(',', $next_posts).") and post_status != 'inherit'";
 			$posts = $wpdb->get_results("SELECT * FROM $wpdb->posts $where ORDER BY post_date_gmt ASC");
-				foreach ($posts as $post) {
+				foreach ($posts as $post) 
+				{
 			setup_postdata($post); ?>
 			
 <item>

@@ -5,3 +5,5 @@
 	и т.п.
 
 Все type-файлы см. в shared/type/.
+
+См. также «Вывод блоков записей в шаблоне» — http://maxsite.org/page/vyvod-blokov-zapisej-v-shablone

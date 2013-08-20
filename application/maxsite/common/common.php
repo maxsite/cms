@@ -4171,7 +4171,10 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 		
 		// в коде могут быть специальные команды 
 		// less-файлы в указанных каталогах
+		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_FONTS;', 'fonts');
+		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_MIXINS;', 'mixins');
 		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_BLOCKS;', 'blocks');
+		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_HELPERS;', 'helpers');
 		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_COMPONENTS;', 'components');
 		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_PLUGINS;', 'plugins');
 		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_TYPE;', 'type');

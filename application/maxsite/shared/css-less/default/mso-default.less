@@ -141,6 +141,7 @@ img {
 	clear: both;
 }
 
+/*
 .clearfix:after {
 	content: '.'; 
 	display: block; 
@@ -148,4 +149,11 @@ img {
 	visibility: hidden; 
 	height: 0; 
 	line-height: 0;
+}
+*/
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
 }

@@ -1,37 +1,33 @@
 // MaxSite CMS 
 // Copyright http://max-3000.com/
-// message.less
-// подключать - @import url('mixins/message.less');
-
-// использовать только копируя в каталог шаблона
 
 // переменные для цветов
 
 @MESSAGE_COLOR_DEFAULT: #E9E9E9;
 @MESSAGE_COLOR_TEXT_DEFAULT: #505050;
 
-@MESSAGE_COLOR_NOTE: #44AAC8;
+@MESSAGE_COLOR_NOTE: #E0EAEF;
 @MESSAGE_COLOR_TEXT_NOTE: #111;
 
-@MESSAGE_COLOR_ALERT: #F89406;
-@MESSAGE_COLOR_TEXT_ALERT: #fff;
+@MESSAGE_COLOR_ALERT: #FFD298;
+@MESSAGE_COLOR_TEXT_ALERT: #754E13;
 
-@MESSAGE_COLOR_IDEA: #FAF6AC;
+@MESSAGE_COLOR_IDEA: #FFFA9F;
 @MESSAGE_COLOR_TEXT_IDEA: #111;
 
-@MESSAGE_COLOR_ERROR: #D64B45;
-@MESSAGE_COLOR_TEXT_ERROR: #fff;
+@MESSAGE_COLOR_ERROR: #F5BEBB;
+@MESSAGE_COLOR_TEXT_ERROR: #5D322F;
 
-@MESSAGE_COLOR_OK: #58B158;
-@MESSAGE_COLOR_TEXT_OK: #fff;
+@MESSAGE_COLOR_OK: #A4E7A4;
+@MESSAGE_COLOR_TEXT_OK: #285728;
 
-@MESSAGE_COLOR_ABOUT: #EAEAEA;
+@MESSAGE_COLOR_ABOUT: #EDF5BB;
 @MESSAGE_COLOR_TEXT_ABOUT: #111;
 
-@MESSAGE_COLOR_MAIL: #EAEAEA;
+@MESSAGE_COLOR_MAIL: #CCDBE5;
 @MESSAGE_COLOR_TEXT_MAIL: #111;
 
-@MESSAGE_COLOR_HOME: #EAEAEA;
+@MESSAGE_COLOR_HOME: #EE96C0;
 @MESSAGE_COLOR_TEXT_HOME: #111;
 
 @MESSAGE_COLOR_QUESTION: #EAEAEA;
@@ -60,11 +56,11 @@
 	background: @MESSAGE_COLOR_DEFAULT; 
 	color: @MESSAGE_COLOR_TEXT_DEFAULT;
 	
-	.bold;
+	// .bold;
 	
 	&.ok {
 		.message_box('ok', @MESSAGE_COLOR_OK, @MESSAGE_COLOR_TEXT_OK);
-		.text_shadow(0, -1px, 0, rgba(0, 0, 0, 0.25));
+		// .text_shadow(0, -1px, 0, rgba(0, 0, 0, 0.25));
 	}
 
 	&.note {
@@ -81,7 +77,7 @@
 	
 	&.error {
 		.message_box('error', @MESSAGE_COLOR_ERROR, @MESSAGE_COLOR_TEXT_ERROR);
-		.text_shadow(0, -1px, 0, rgba(0, 0, 0, 0.25));
+		// .text_shadow(0, -1px, 0, rgba(0, 0, 0, 0.25));
 	}
 	
 	&.about {

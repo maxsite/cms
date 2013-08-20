@@ -6,7 +6,9 @@
 height: @menu_height;
 
 ul.menu {
-
+	
+	margin-left: 20px;
+	
 	li {
 		height: @menu_height;
 		line-height: @menu_height;
@@ -57,5 +59,40 @@ ul.menu {
 		.box_shadow(0px, 3px, 3px, rgba(0,0,0, 0.4));
 		.bg(#ddd);
 	}
+	
+	// отслеживаем верхний пункт, когда ховер на нижних
+	li.group:hover {
+		.bg(rgba(10,10,10, 0.2));
+	}
+	
+	// верхний пункт, где есть подпункты
+	li.group > a {
+	}
+	
+	// выделенный подпункт
+	li.group li.selected > a {
+		.bg(rgba(10,10,10, 0.2));
+		
+		&:hover {
+			.bg(rgba(10,10,10, 0.1));
+		}
+	}
+	
+}
 
+// адаптивное меню
+select.tinynav {
+	width: 100%;
+	height: @menu_height;
+}
+
+@media @MOBILE 
+{
+	@import url('menu/_tinynav.less');
+}
+
+// стили для сенсорных устройств
+html.detect-touch
+{
+	@import url('menu/_tinynav.less');
 }

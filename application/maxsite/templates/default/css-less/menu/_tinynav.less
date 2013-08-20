@@ -1,0 +1,23 @@
+// MaxSite CMS
+// Copyright http://max-3000.com/
+
+// стили для адаптивного меню
+// подключать через @import в стилях меню
+
+
+ul.menu_responsive {
+	display: none; // меню прячем, вместо него select.tinynav
+}
+
+div.MainMenu {
+	height: auto;
+	.bg(transparent);
+}
+
+// селект вместо меню
+select.tinynav {
+	display: block;
+	.bg(#eee);
+	.border(none);
+	.f > .size(18px);
+}

@@ -238,7 +238,7 @@
 			else
 				$checked2 = 'checked="checked"';
 
-			echo '<h3>'. t('Модерация') .'</h3><p><label><input type="radio" name="f_comments_approved" value="1" ' . $checked1 . '> ' . t('Одобрить')
+			echo '<p><b>'. t('Модерация') .':</b> <label class="padding10"><input type="radio" name="f_comments_approved" value="1" ' . $checked1 . '> ' . t('Одобрить')
 				. '</label> <label><input type="radio" name="f_comments_approved" value="0" ' . $checked2 . '> ' . t('Запретить')
 				. '</label></p>';
 

@@ -2,6 +2,9 @@
  * (c) http://maxsite.org/
  * Класс для вывода записи
  
+ См. http://maxsite.org/page/formatirovannyj-vyvod-zapisej-v-maxsite-cms
+ См. http://maxsite.org/page/shablonizator-ili-formatirovanyj-php-i-html-vyvod-v-maxsite-cms
+ 
 	# пример 1
 	
 	// подключение библиотеки автоматом или

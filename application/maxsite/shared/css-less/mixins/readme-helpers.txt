@@ -71,14 +71,17 @@
 .bg(@color, @file); // включая url-картинку background: @color url("../images/backgrounds/@{file}");
 .bgu(@file, @attr: no-repeat) // background: url(@file) @attr;
 
+// градиенты
+.gradient > .horizontal(@start-color: #555, @start-percent: 0%, @end-color: #333, @end-percent: 100%);
+.gradient > .vertical(@start-color: #555, @start-percent: 0%, @end-color: #333, @end-percent: 100%);
+.gradient > .directional(@start-color: #555, @end-color: #333, @deg: 45deg);
+.gradient > .horizontal_three_colors(@start-color: #00b3ee, @mid-color: #7a43b6, @color-stop: 50%, @end-color: #c3325f);
+.gradient > .vertical_three_colors(@start-color: #00b3ee, @mid-color: #7a43b6, @color-stop: 50%, @end-color: #c3325f);
+.gradient > .radial(@inner-color: #555, @outer-color: #333);
+.gradient > .striped(@color: #555, @angle: 45deg);
+
 .background_gradient(#555, #333); // линейный градиент вертикальный
-
 .radial_gradient(#555, #333, center, center); // радиальный градиент
-
-// linear-gradient работает через @переменную
-// @gr: 90deg, #CECECE, #DCDCDC, white, #EEEEEE, #f0f0f0;
-// .gradient(@gr);
-.gradient(@gradient);
 
 .opacity(100); // прозрачность
 .op(100); // прозрачность
@@ -92,3 +95,7 @@
 .box(); // аналог .box_sizing
 
 .transform(); // трансформация CSS3
+
+.placeholder(@color: #777); // цвет подсказки для input
+
+.text_overflow(); // обрезка текста, который не помещается в блок

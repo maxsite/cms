@@ -1064,7 +1064,7 @@ if (!function_exists('mso_get_first_image_url'))
 
 
 // класс для вывода блоков записей
-class block_pages
+class Block_pages
 {
 	protected $param; // массив входящих данных для получения записей
 	protected $pages; // полученные записи

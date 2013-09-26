@@ -25,7 +25,7 @@ else
 {
 	ob_start();
 	
-	$b = new block_pages( array (
+	$b = new Block_pages( array (
 			'limit' => 5,
 			'pagination' => false,
 		));

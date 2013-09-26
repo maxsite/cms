@@ -23,4 +23,5 @@ file = mini-title.php
 
 Каждый unit имеет свои специфичные настройки. Массив настроек доступен в переменной $UNIT.
 
-См. также «Вывод блоков записей в шаблоне» — http://maxsite.org/page/vyvod-blokov-zapisej-v-shablone
+См. «Вывод блоков записей в шаблоне» — http://maxsite.org/page/vyvod-blokov-zapisej-v-shablone
+См. «Произвольный вывод главной страницы сайта» — http://maxsite.org/page/proizvolnyj-vyvod-glavnoj-stranicy-sajta

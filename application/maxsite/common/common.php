@@ -1653,7 +1653,7 @@ function mso_auto_tag($pee, $pre_special_chars = false)
 	$pee = str_replace("<p>	<div", "<div", $pee); 
 	
 	# блочные тэги
-	$allblocks = '(?:table|thead|tfoot|caption|colgroup|center|tbody|tr|td|th|div|dl|dd|dt|ul|ol|li|pre|code|select|form|map|area|blockquote|address|math|style|input|embed|h1|h2|h3|h4|h5|h6|hr|p)';
+	$allblocks = '(?:table|thead|tfoot|caption|colgroup|center|tbody|tr|td|th|div|dl|dd|dt|ul|ol|li|pre|code|select|form|map|area|blockquote|address|math|style|input|embed|h1|h2|h3|h4|h5|h6|hr|p|hgroup|section|header|footer|article|aside|nav|main)';
 	
 	# здесь не нужно ставить <p> и </p>
 	$pee = preg_replace('!<p>(<' . $allblocks . '[^>]*>)</p>!', "\n$1", $pee); # <p><tag></p>
@@ -1774,7 +1774,10 @@ function mso_slug($slug)
 		
 		# беларусь
 		"Ў"=>"u", "ў"=>"u", "'"=>"",
-
+		
+		# румынский
+		"ă"=>'a', "î"=>'i', "ş"=>'sh', "ţ"=>'ts', "â"=>'a',
+		
 		"«"=>"", "»"=>"", "—"=>"-", "`"=>"", " "=>"-",
 		"["=>"", "]"=>"", "{"=>"", "}"=>"", "<"=>"", ">"=>"",
 
@@ -2769,6 +2772,7 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 
 	$menu = str_replace("\r", "", $menu); // если это windows
 	$menu = str_replace("_NR_", "\n", $menu);
+	$menu = str_replace(" ~ ", "\n", $menu);
 	$menu = str_replace("\n\n\n", "\n", $menu);
 	$menu = str_replace("\n\n", "\n", $menu);
 
@@ -4102,26 +4106,57 @@ function mso_widget_create_form($name = '', $input = '', $hint = '')
 
 # компилятор LESS в CSS
 # на выходе css-подключение, либо содержимое css-файла (переключается через $css_url)
+# если первый параметр — массив, то остальные игнорируются. В массиве ключи — опции
 # $less_file - входной less-файл (полный путь на сервере)
 # $css_file - выходной css-файл (полный путь на сервере)
 # $css_url - полный http-адрес css-файла. Если $css_url = '', то отдается содержимое css-файла
 # $use_cache - разрешить использование кэширования LESS-файла (определяется по времени файлов)
 # $use_mini - использовать сжатие css-кода
 # $use_mini_n - если включено сжатие, то удалять переносы строк
-# пример использования см. в /default/css/less/compiling-less.zip/var_style.php
 
 function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = false, $use_mini = true, $use_mini_n = false)
 {
 
+	if (is_array($less_file)) // все параметры в массиве
+	{
+		$options = $less_file; // для красоты кода и чтобы не путаться
+		
+		$less_file = isset($options['less_file']) ? $options['less_file'] : '';
+		$css_file = isset($options['css_file']) ? $options['css_file'] : '';
+		$css_url = isset($options['css_url']) ? $options['css_url'] : '';
+		$use_cache = isset($options['use_cache']) ? $options['use_cache'] : false;
+		$use_mini = isset($options['use_mini']) ? $options['use_mini'] : true;
+		$use_mini_n = isset($options['use_mini_n']) ? $options['use_mini_n'] : false;
+	}
+	
 	if (!$less_file or !$css_file) return; // не указаны файлы
 	
 	if ($use_cache) // проверка кэша
 	{
 		if (file_exists($less_file) and file_exists($css_file))
 		{
-			if (filemtime($less_file) < filemtime($css_file))
+			$flag_compiling = false; // флаг == true — требуется компиляция 
+			$t_css = filemtime($css_file); // время css-файла
+			
+			
+			// смотрим все файлы каталога
+			$CI = & get_instance(); // подключение CodeIgniter
+			$CI->load->helper('file_helper'); // хелпер для работы с файлами
+			$all_files_in_dirs = get_filenames(dirname($less_file), true);
+
+			foreach ($all_files_in_dirs as $file)
 			{
-				// отдаём из кэша
+				if (substr(strrchr($file, '.'), 1) !== 'less') continue; // проверка расширения файла
+				
+				if (filemtime($file) > $t_css) // файл старше css — нужна компиляция
+				{
+					$flag_compiling = true; // нужна компиляция
+					break;
+				}
+			}
+			
+			if (!$flag_compiling) // можно отдать из кеша
+			{
 				if ($css_url) 
 				{
 					// в виде имени файла
@@ -4135,7 +4170,6 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 			}
 		}
 	}
-	
 	
 	if (file_exists($less_file)) $fc_all = file_get_contents($less_file);
 		else return; // нет файла, выходим

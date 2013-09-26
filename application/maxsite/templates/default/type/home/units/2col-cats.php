@@ -55,7 +55,7 @@ else
 		// данные рубрики
 		$cat = mso_get_cat_from_id($cat1);
 		
-		$b = new block_pages( array (
+		$b = new Block_pages( array (
 				'limit' => $limit,
 				'pagination' => false,
 				'cat_id' => $cat1,
@@ -78,7 +78,7 @@ else
 		// вторая колонка
 		$cat = mso_get_cat_from_id($cat2);
 		
-		$b = new block_pages( array (
+		$b = new Block_pages( array (
 				'limit' => $limit,
 				'pagination' => false,
 				'cat_id' => $cat2,

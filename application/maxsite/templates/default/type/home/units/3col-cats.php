@@ -6,11 +6,11 @@
  */
 
  /*
-* две колонки/рубрики
+* три колонки/рубрики
 
 [unit]
-file = 2col-cats.php
-cats = 1,3
+file = 3col-cats.php
+cats = 1,2,3
 limit = 5
 [/unit]
 
@@ -30,25 +30,22 @@ else
 	// дефолтные рубрики (ID)
 	$cat1 = 1;
 	$cat2 = 2;
+	$cat3 = 3;
 	
 	if (isset($UNIT['cats']))
 	{
 		$cats = mso_explode($UNIT['cats']);
 		if(isset($cats[0])) $cat1 = $cats[0];
 		if(isset($cats[1])) $cat2 = $cats[1];
+		if(isset($cats[2])) $cat3 = $cats[2];
 	}
 	
 	// кол-во записей в одной колонке
-	$limit = 3;
-	
-	if (isset($UNIT['limit']))
-	{
-		$limit = $UNIT['limit'];
-	}
+	$limit = isset($UNIT['limit']) ? (int) $UNIT['limit'] : 3;
 	
 	
 	
-	echo '<div class="onerow">';
+	echo '<div class="onerow clearfix">';
 	
 		// первая колонка
 		
@@ -64,8 +61,8 @@ else
 		if ($b->go)	
 		{
 			$b->output(	array (
-				'block_start' => '<div class="col w1-2"><h2>' . $cat['category_name'] . '</h2>',
-				'block_end' => '<p class="all-cat"><a href="' . getinfo('siteurl') . 'category/' . $cat['category_slug'] . '">Посмотреть все записи</a></p></div>',
+				'block_start' => '<div class="col w1-3"><h2>' . $cat['category_name'] . '</h2>',
+				'block_end' => '<p class="all-cat"><a href="' . mso_page_url($cat['category_slug'], 'category') . '">Посмотреть все записи</a></p></div>',
 				'content_words' => 20,
 				'thumb_width' => 100,
 				'thumb_height' => 100,
@@ -87,10 +84,35 @@ else
 				'cat_id' => $cat2,
 			));
 		
-		if ($b->go)	
+		if ($b->go)
 		{
 			$b->output(	array (
-				'block_start' => '<div class="col w1-2"><h2>' . $cat['category_name'] . '</h2>',
+					'block_start' => '<div class="col w1-3"><h2>' . $cat['category_name'] . '</h2>',
+					'block_end' => '<p class="all-cat"><a href="' . getinfo('siteurl') . 'category/' . $cat['category_slug'] . '">Посмотреть все записи</a></p></div>',
+					'content_words' => 20,
+					'thumb_width' => 100,
+					'thumb_height' => 100,
+					'thumb_class' => 'left',
+					'line1' => '[title]',
+					'line2' => '[thumb]',
+					'line3' => '',
+					'title_start' => '<h4>',
+					'title_end' => '</h4>',
+				));
+		}
+		// вторая колонка
+		$cat = mso_get_cat_from_id($cat3);
+		
+		$b = new Block_pages( array (
+				'limit' => $limit,
+				'pagination' => false,
+				'cat_id' => $cat3,
+			));
+		
+		if ($b->go)	
+		{		
+			$b->output(	array (
+				'block_start' => '<div class="col w1-3"><h2>' . $cat['category_name'] . '</h2>',
 				'block_end' => '<p class="all-cat"><a href="' . getinfo('siteurl') . 'category/' . $cat['category_slug'] . '">Посмотреть все записи</a></p></div>',
 				'content_words' => 20,
 				'thumb_width' => 100,
@@ -103,12 +125,10 @@ else
 				'title_end' => '</h4>',
 			));
 		}
-		
+			
 	echo '</div>';
 	
 	
-	echo '<div class="clearfix"></div>';
-		
 	mso_add_cache($home_cache_key, ob_get_flush(), $home_cache_time * 60);
 
 }

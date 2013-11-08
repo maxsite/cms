@@ -180,7 +180,11 @@ function ushki_content_callback($matches)
 # [ushka=ads] - выведет ушку ads
 function ushki_content($content = '')
 {
-	if (!is_feed()) $content = preg_replace_callback('!\[ushka=(.*?)\]!is', 'ushki_content_callback', $content);
+	### зачем отключать ушки в rss ???????????????????
+	
+	// if (!is_feed()) $content = preg_replace_callback('!\[ushka=(.*?)\]!is', 'ushki_content_callback', $content);
+	
+	$content = preg_replace_callback('!\[ushka=(.*?)\]!is', 'ushki_content_callback', $content);
 	
 	return $content;
 }

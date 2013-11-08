@@ -94,10 +94,10 @@
 	// нужно вывести навигацию по каталогам в uploads
 	$all_dirs = directory_map(getinfo('uploads_dir'), 3); // карта каталога uploads — до 3 уровня
 	
-	ksort($all_dirs);
-	
 	$out = '';
-	
+
+	ksort($all_dirs, SORT_STRING);
+
 	// pr($all_dirs);
 	
 	echo '<p class="admin_files_nav"><b>' . t('Каталог:') . '</b> ';
@@ -106,9 +106,11 @@
 
 	$selected = ($segments) ? '' : ' selected';
 	echo '<option value="' . getinfo('site_admin_url') . 'files"' . $selected . '>uploads</option>';
-	
+
 	foreach ($all_dirs as $n=>$d)
 	{
+		ksort($d, SORT_STRING);
+
 		// нам нужны только каталоги
 		if (!is_array($d)) continue; // каталоги — это массив
 		if ($n == 'mini' or $n == '_mso_i' or $n == '_mso_float' or $n == 'smiles') continue; // эти нас не интересуют
@@ -122,6 +124,8 @@
 		// посмотрим, что там за подкаталоги 
 		foreach ($d as $n1=>$d1)
 		{
+			ksort($d1, SORT_STRING);
+
 			if (!is_array($d1)) continue; // каталоги — это массив
 			if ($n1 == 'mini' or $n1 == '_mso_i') continue; // эти нас не интересуют
 			

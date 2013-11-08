@@ -1,7 +1,7 @@
 Css-стили шаблона. См. http://max-3000.com/help
 
-Включить less-компиляцию можно одиним из способов:
-	- переименовать -var_style.php в var_style.php (там же выставляются параметры)
-	- с помощью плагина less_compiling (указывается less и css-файлы)
+Включить less-компиляцию можно с помощью плагина less_compiling.
 
-На рабочем сайте желательно отключить компиляцию less.
+*XXX | templates/XXX/css-less/var_style.less | templates/XXX/css/var_style.css | cache mini
+
+— где XXX — каталог шаблона.

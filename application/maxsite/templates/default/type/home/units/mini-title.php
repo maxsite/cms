@@ -29,8 +29,10 @@ else
 			'limit' => 5,
 			'pagination' => false,
 		));
-		
-	$b->output(	array (
+	
+	if ($b->go)	
+	{
+		$b->output(	array (
 			'block_start' => '<div class="home-mini-title">',
 			'block_end' => '</div>',
 			'columns' => 5,
@@ -45,8 +47,7 @@ else
 			'title_start' => '<p>',
 			'title_end' => '</p>',
 		));
-			
-	
+	}
 	
 	mso_add_cache($home_cache_key, ob_get_flush(), $home_cache_time * 60);
 }

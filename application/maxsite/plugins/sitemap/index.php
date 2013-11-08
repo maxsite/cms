@@ -212,10 +212,10 @@ function _sitemap_cat_elem($elem)
 				}
 				
 				if ($cat_vybr == $elem['category_id'] or $cat_vybr == 0)
-					$out .= '<li><a href="' . getinfo('siteurl') . 'page/' . $page['page_slug'] . '">' . htmlspecialchars($page['page_title']) . '</a> &rarr; ' . mso_page_date($page['page_date_publish'], array('format'=>'j F Y г. H:i'), '', '', false) . '</li>';
+					$out .= '<li><a href="' . getinfo('siteurl') . 'page/' . $page['page_slug'] . '">' . htmlspecialchars($page['page_title']) . '</a> <span>&rarr; ' . mso_page_date($page['page_date_publish'], array('format'=>'j F Y г. H:i'), '', '', false) . '</span></li>';
 			}
 			else
-				$out .= '<li><a href="' . getinfo('siteurl') . 'page/' . $page['page_slug'] . '">' . htmlspecialchars($page['page_title']) . '</a> &rarr; ' . mso_page_date($page['page_date_publish'], array('format'=>'j F Y г. H:i'), '', '', false) . '</li>';
+				$out .= '<li><a href="' . getinfo('siteurl') . 'page/' . $page['page_slug'] . '">' . htmlspecialchars($page['page_title']) . '</a> <span>&rarr; ' . mso_page_date($page['page_date_publish'], array('format'=>'j F Y г. H:i'), '', '', false) . '</span></li>';
 		}
 	}
 	

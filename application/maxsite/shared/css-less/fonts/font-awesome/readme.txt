@@ -2,11 +2,16 @@ Font Awesome (c) http://fortawesome.github.com/Font-Awesome/
 
 Список всех иконок: http://fortawesome.github.io/Font-Awesome/icons/
 
+Скопировать font-awesome.less в css-less каталог своего шаблона.
+css-less/fonts/font-awesome.less
 
 Подключение в своём less-файле. Главное указать верный путь.
+
+Файлы шрифта (ttf, уще и т.д.) копировать не нужно!
+
 -----------------------------------------------------------
 @FONTAWESOMEPATH: '../../../shared/css-less/fonts/font-awesome';
-@import url('../../../shared/css-less/fonts/font-awesome/font-awesome.less'); // подключение микса
+@import url('fonts/font-awesome.less'); // подключение микса
 
 
 Использование:

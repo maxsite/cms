@@ -1,8 +1,7 @@
 // MaxSite CMS
 // Copyright http://max-3000.com/
 
-
-@import url('../../../shared/css-less/mixins/helpers.less'); // хелперы 
+@import url('helpers.less'); // дефолтный less-хелпер из shared
 
 @import url('constant.less'); // Константы
 @import url('variables.less'); // Общие переменные
@@ -13,10 +12,10 @@
 @import url('layouts/layout.less'); // модульная сетка
 @import url('menu/menu.less'); // меню
 
-// @MSO_IMPORT_ALL_xxx — специальные MaxSite CMS команды-строки для автоматического подключения всех less-файлов из каталогов
-@MSO_IMPORT_ALL_FONTS;
-@MSO_IMPORT_ALL_MIXINS;
-@MSO_IMPORT_ALL_HELPERS;
-@MSO_IMPORT_ALL_COMPONENTS;
-@MSO_IMPORT_ALL_PLUGINS;
-@MSO_IMPORT_ALL_BLOCKS;
+// специальные MaxSite CMS команды-строки для автоматического подключения всех less-файлов из указанного каталога
+@MSO_IMPORT_ALL(mixins);
+@MSO_IMPORT_ALL(fonts);
+@MSO_IMPORT_ALL(helpers);
+@MSO_IMPORT_ALL(components);
+@MSO_IMPORT_ALL(plugins);
+@MSO_IMPORT_ALL(blocks);

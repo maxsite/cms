@@ -25,17 +25,17 @@ div.pagination2 {
 	font-size: .9em;
 	
 	a {
-		.f > .underline(none);
+		text-decoration: none;
 	}
 	
 	span.new {
 		display: inline-block;
-		.left;
+		float: left;
 	}
 	
 	span.old {
 		display: inline-block;
-		.right;
+		float: right;
 	}
 	
 }
@@ -198,16 +198,15 @@ ol.pre {
 
 form.plugin_forms {
 	p {
-		@first_width: 180px;
 	
 		span.ffirst, 
 		label.ffirst {
-			width: @first_width;
+			width: 180px;
 		}
 		
 		span.ffirst.ftitle, 
 		label.ffirst.ftitle {
-			width: @first_width - 5px;
+			width: 175px;
 		}
 		
 		span.ftitle, 
@@ -315,7 +314,7 @@ div.guestbook_form {
 div.theme-switch-panel {
 	width: 100%; 
 	overflow: auto; 
-	white-space: nowrap; 
+	white-space: nowrap;
 	background: #111;
 	padding: 5px 0;
 	
@@ -323,15 +322,15 @@ div.theme-switch-panel {
 		height: 100px;
 		width: auto;
 		margin: 0 10px 0 0;
-		.op(30);
+		.opacity(30);
 		
 		&:hover {
-			.op(100);
+			.opacity(100);
 		}
 	}
 	
 	a.current img {
 		border: 3px solid #fff;
-		.op(100);
+		.opacity(100);
 	}
 }

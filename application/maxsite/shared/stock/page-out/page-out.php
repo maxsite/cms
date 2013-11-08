@@ -428,6 +428,12 @@ class Page_out
 			}
 		}
 		
+		// [meta@price]
+		if (strpos($out, '[meta@') !== false)
+		{
+			$out = preg_replace_callback('!(\[meta@)(.*?)(\])!is', array('self', '_line_meta_set'), $out);
+			//pr($out);
+		}
 		
 		$out = str_replace('[title]', $title, $out);
 		$out = str_replace('[autor]', $autor, $out);
@@ -458,6 +464,15 @@ class Page_out
 		}
 	}
 	
+	// колбак для поиска [meta@мета]
+	protected function _line_meta_set($matches)
+	{
+		$m = $matches[2];
+		$m = $this->meta_val($m);
+		//pr($m);
+		return $m;
+	}
+			
 	// только получаем контент через mso_page_content()
 	function get_content()
 	{
@@ -1070,17 +1085,18 @@ class Block_pages
 	protected $pages; // полученные записи
 	protected $pagination; // если используется пагинация
 	
+	var $go = false; // признак, что можно делать вывод
 	
 	function __construct($r1 = array())
 	{
-		$this->get_pages($r1); // сразу получаем записи
+		if ($r1 !== false ) $this->get_pages($r1); // сразу получаем записи
 	}
 	
 	
 	// метод, где получаются записи
 	protected function get_pages($r)
 	{
-			// дефолтные значения для получения записей
+		// дефолтные значения для получения записей
 		$default = array(
 			'limit' => 1, // колво записей
 			'cut' => '»»»', // ссылка cut
@@ -1107,6 +1123,14 @@ class Block_pages
 				
 		), 
 		$this->pagination);
+		
+		$this->go = ($this->pages) ? true : false;
+	}
+	
+	public function set_pages($pages, $pagination)
+	{
+		$this->pages = $pages;
+		$this->pagination = $pagination;
 	}
 	
 	
@@ -1184,6 +1208,10 @@ class Block_pages
 			'columns_class_row' => 'onerow', // css-класс
 			'columns_class_cell' => 'col w1-2', // css-класс для ячейки (по-умолчанию 2 колонки)
 			
+			'clearfix' => true, // отбивать после вывода $p->clearfix();
+			'page_start' => '', // html в начале вывода записи 
+			'page_end' => '', // html в конце вывода записи
+			
 		);
 		
 		$r = array_merge($default, $r); // объединяем
@@ -1211,6 +1239,8 @@ class Block_pages
 		foreach ($this->pages as $page)
 		{
 			$p->load($page); // загружаем данные записи
+			
+			echo $r['page_start'];
 			
 			if ($r['columns']) $my_columns->out($r['columns_class_cell']);
 			
@@ -1242,7 +1272,7 @@ class Block_pages
 						$t_placehold
 					))
 				{
-					$p->thumb = $p->page_url(true) . '<img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '"></a>';
+					$p->thumb = '<a href="' . mso_page_url($p->val('page_slug')) . '" title="' . htmlspecialchars($p->val('page_title')). '"><img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '"></a>';
 				}
 			}
 			
@@ -1271,11 +1301,12 @@ class Block_pages
 			$p->line($r['line4'], $r['line4_start'], $r['line4_end']);
 			$p->line($r['line5'], $r['line5_start'], $r['line5_end']);
 			
-			$p->clearfix();
+			if ($r['clearfix']) $p->clearfix();
 			
 			
 			if ($r['columns']) $my_columns->next();
 			
+			echo $r['page_end'];
 			
 			// сохраняем id записей, чтобы их исключить из вывода
 			$exclude_page_id[] = $p->val('page_id'); 

@@ -4203,19 +4203,19 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 		$fc_all = ob_get_contents();
 		ob_end_clean();
 		
-		// в коде могут быть специальные команды 
-		// less-файлы в указанных каталогах
-		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_FONTS;', 'fonts');
-		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_MIXINS;', 'mixins');
-		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_BLOCKS;', 'blocks');
-		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_HELPERS;', 'helpers');
-		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_COMPONENTS;', 'components');
-		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_PLUGINS;', 'plugins');
-		$fc_all = _mso_less_import_all($fc_all, '@MSO_IMPORT_ALL_TYPE;', 'type');
+		// для совметимости со старым вариантом — удалить в январе 2014!!!
+		$fc_all = str_replace('@MSO_IMPORT_ALL_FONTS;', '@MSO_IMPORT_ALL(fonts);', $fc_all);
+		$fc_all = str_replace('@MSO_IMPORT_ALL_MIXINS;', '@MSO_IMPORT_ALL(mixins);', $fc_all);
+		$fc_all = str_replace('@MSO_IMPORT_ALL_BLOCKS;', '@MSO_IMPORT_ALL(blocks);', $fc_all);
+		$fc_all = str_replace('@MSO_IMPORT_ALL_HELPERS;', '@MSO_IMPORT_ALL(helpers);', $fc_all);
+		$fc_all = str_replace('@MSO_IMPORT_ALL_COMPONENTS;', '@MSO_IMPORT_ALL(components);', $fc_all);
+		$fc_all = str_replace('@MSO_IMPORT_ALL_PLUGINS;', '@MSO_IMPORT_ALL(plugins);', $fc_all);
+		$fc_all = str_replace('@MSO_IMPORT_ALL_TYPE;', '@MSO_IMPORT_ALL(type);', $fc_all);
 		
-		// less-файлы в подкаталогах
-		// главный style.less
-		$fc_all = _mso_less_import_all_dir($fc_all, '@MSO_IMPORT_ALL_ELEMENTS;', 'elements');
+		
+		// универсальная конструкция: @MSO_IMPORT_ALL(каталог);
+		
+		$fc_all = preg_replace_callback('!(@MSO_IMPORT_ALL\()(.*?)(\);)!is', '_mso_less_import_all_callback', $fc_all);
 		
 		try
 		{
@@ -4265,6 +4265,21 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 	}
 }
 
+
+# колбак функция для @MSO_IMPORT_ALL(каталог);
+function _mso_less_import_all_callback($matches)
+{
+	$dir = trim($matches[2]);
+
+	$files = mso_get_path_files(getinfo('template_dir') . 'css-less/' . $dir . '/', $dir . '/', true, array('less'));
+
+	$m = '';
+	foreach($files as $file) $m .= '@import url(\'' . $file . '\'); ';
+		
+	return $m;
+}
+
+/*
 # служебная функция для less 
 # возвращает строки с @import url(less-файл)
 # $in - входный less-текст
@@ -4316,6 +4331,7 @@ function _mso_less_import_all_dir($in, $find, $dir)
 	}
 }
 
+*/
 
 # формирует <style> из указанного адреса 
 function mso_load_style($url = '')

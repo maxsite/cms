@@ -81,13 +81,30 @@ else
 	$jcarousel_pagination = '';
 }
 
+if ($jcarousel_stop_on_hover = mso_get_option('jcarousel_stop_on_hover', 'templates', 0))
+{
+	$jcarousel_stop_on_hover = 'jcarouselBlock.hover(function () {
+		jcarouselBlock.jcarouselAutoscroll("stop");
+	},function () {
+		jcarouselBlock.jcarouselAutoscroll("start");
+	});';
+}
+else
+{
+	$jcarousel_stop_on_hover = '';
+}
+
+
+
 
 // http://sorgalla.com/jcarousel/docs/
 
 echo '
 <script>
 $(function() {
-    $(".jcarousel").jcarousel({
+	var jcarouselBlock = $(".jcarousel");
+
+	jcarouselBlock.jcarousel({
 		"list": ".jcarousel-list",
 		"animation": 
 			{
@@ -104,7 +121,8 @@ $(function() {
     $(".next").jcarouselControl({
         target: "+=1"
     });
-	
+
+	' . $jcarousel_stop_on_hover . '
 	' . $jcarousel_pagination . '
 });
 </script>

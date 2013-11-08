@@ -248,6 +248,8 @@ function forms_content_callback($matches)
 				
 				// pr($message);
 				
+				mso_hook('forms_send', $post);
+				
 				$form_hide = mso_mail($email, $subject, $message, $post['forms_email']);
 				
 				if ( $forms_subscribe and isset($post['forms_subscribe']) ) 

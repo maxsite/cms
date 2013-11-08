@@ -97,6 +97,9 @@ if ($pages) // есть страницы
 	echo '</header>' . NR2;
 	
 	
+	if ($f = mso_page_foreach('category-do-pages')) require($f); // подключаем кастомный вывод
+	if (function_exists('ushka')) echo ushka('category-do-pages');
+	
 	// цикл вывода в отдельных юнитах
 	
 	if ($full_posts) // полные записи
@@ -109,6 +112,7 @@ if ($pages) // есть страницы
 	}
 	
 	if ($f = mso_page_foreach('category-posle-pages')) require($f); // подключаем кастомный вывод
+	if (function_exists('ushka')) echo ushka('category-posle-pages');
 	
 	mso_hook('pagination', $pagination);
 

@@ -1,8 +1,9 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /*
-Слайдер
+	(c) MaxSite CMS, http://max-3000.com/
 
-Опции задаются в Slides JS
+	Слайдер (c) http://slidesjs.com/
+	Опции задаются в Slides JS
 
 [slide]
 header = заголовок
@@ -23,7 +24,6 @@ if (!in_array('all', $slidesjs_output)) // не отмечено выводит�
 	if (!in_array(getinfo('type'), $slidesjs_output)) return;
 		elseif (mso_current_paged() > 1) return; // на страницах пагинации не показывать (или показывать?..)
 }
-
 
 // опции слайдера
 $slides_def = '
@@ -93,8 +93,7 @@ if (mso_get_option('slidesjs_randomize', 'templates', ''))
 	$slidesjs_randomize = 'randomize: true,';
 }
 
-
-// http://slidesjs.com/
+// 
 echo mso_load_jquery('slides.min.jquery.js');
 echo mso_load_jquery('jquery.easing.js');
 

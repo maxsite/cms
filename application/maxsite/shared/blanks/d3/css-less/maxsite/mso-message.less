@@ -1,0 +1,83 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+
+// div.message
+// div.message.alert
+
+
+// вспомогательный хелпер
+._message_box(@icon; @bg: #E9E9E9; @text: #555)
+{
+	background: @bg url("../images/icons/@{icon}.png") no-repeat 15px center; 
+	color: @text;
+	
+	&.small {
+		background-image: url("../images/icons/small/@{icon}.png"); 
+	}
+
+}
+
+.message {
+	margin: 0 0 10px 0;
+	padding: 15px 10px 15px 70px;
+	min-height: 32px;
+
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	
+	background: #E9E9E9; 
+	color: #505050;
+	// .bold;
+	
+	&.ok {
+		._message_box('ok', #A4E7A4, #285728);
+	}
+
+	&.note {
+		._message_box('note', #E0EAEF, #111);
+	}
+	
+	&.alert {
+		._message_box('alert', #FFD298, #754E13);
+	}
+	
+	&.idea {
+		._message_box('idea', #FFFA9F, #111);
+	}
+	
+	&.error {
+		._message_box('error', #F5BEBB, #5D322F);
+	}
+	
+	&.about {
+		._message_box('about', #EDF5BB, #111);
+	}
+	
+	&.mail {
+		._message_box('mail', #CCDBE5, #111);
+	}
+	
+	&.home {
+		._message_box('home', #EE96C0, #111);
+	}
+	
+	&.question {
+		._message_box('question', #EAEAEA, #111);
+	}
+
+	&.noicon {
+		background-image: none; 
+		padding: 10px; 
+		min-height: 0;
+	}
+	
+	// мини версия сообщений 24px
+	&.small {
+		min-height: 20px; 
+		padding: 7px 10px 7px 50px; 
+		background-position: 10px center;
+		background-repeat: no-repeat;
+	}
+	
+}

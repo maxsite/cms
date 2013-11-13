@@ -4,7 +4,7 @@
 	вывод рубрик перед заголовком записи
 */
 
-$p->format('edit', 'Edit', '<div class="right bg-yellow padding5 d-inline-block">', '</div>');
+$p->format('edit', 'Edit', '<div class="right bg-yellow">', '</div>');
 $p->format('cat', ' / ', '<div>', '</div>');
 
 $p->html(NR . '<header>');

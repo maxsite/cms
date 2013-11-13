@@ -1,14 +1,10 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 /*
-	(c) http://max-3000.com/
+	(c) MaxSite CMS, http://max-3000.com/
 	
 	вывод соцсететй иконками
 	стили задаются в _social.less
 	Файл использовать в других компонентах
-	
-	if ($fn = mso_fe('components/_social/_social.php')) require($fn);
-	
 */
 
 $social = '[social]' . NR . mso_get_option('social', 'templates', '') . '[/social]';

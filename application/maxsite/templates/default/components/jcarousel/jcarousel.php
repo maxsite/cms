@@ -1,10 +1,9 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 /*
-Слайдер
-
-Опции задаются в JCarousel
-
+	(c) MaxSite CMS, http://max-3000.com/
+	Слайдер
+	(c) http://sorgalla.com/jcarousel/docs/
+	
 [slide]
 text = текст с html без переносов
 link = ссылка
@@ -24,7 +23,6 @@ if (!in_array('all', $jcarousel_output)) // не отмечено выводит
 		elseif (mso_current_paged() > 1) return; // на страницах пагинации не показывать (или показывать?..)
 }
 
-
 // опции слайдера
 $slides_def = '
 [slide]
@@ -39,7 +37,6 @@ link = http://max-3000.com/
 img = TEMPLATE_URL/images/placehold/220x300.png
 [/slide]
 ';
-
 
 $slides0 = mso_get_option('jcarousel', 'templates', $slides_def);
 
@@ -94,11 +91,6 @@ else
 	$jcarousel_stop_on_hover = '';
 }
 
-
-
-
-// http://sorgalla.com/jcarousel/docs/
-
 echo '
 <script>
 $(function() {
@@ -127,7 +119,6 @@ $(function() {
 });
 </script>
 ';
-
 
 // формируем html-код слайдера
 ?>

@@ -37,7 +37,19 @@ if ($fn = mso_find_ts_file('type/home/my_home.php')) // вывод в своём
 else
 {	
 	// свой вариант вывода главной на основе опций с [unit]
-	if ($home_units = mso_get_option('home_units', 'templates', ''))
+	$home_units = false;
+	
+	// если есть units.php, то получаем из него текст с [unit]
+	if ($fn = mso_find_ts_file('type/home/units.php')) 
+	{
+		$home_units = file_get_contents($fn);
+	}
+	else
+	{
+		$home_units = mso_get_option('home_units', 'templates', ''); // или из опции
+	}
+	
+	if ($home_units)
 	{
 		// ищем вхождение [unit] ... [/unit]
 		$units = mso_section_to_array($home_units, '!\[unit\](.*?)\[\/unit\]!is', array('file'=>''));

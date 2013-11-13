@@ -1,19 +1,10 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
-	Файл: menu-only.php
+	(c) MaxSite CMS, http://max-3000.com/
 
 	Название: меню
-	
 	Описание: Одиночное меню, только в виде отдельного блока
-	
-	CSS-стили: 
-		var_style.less:
-			>	@import url('components/menu-only.less');
-		
-	PHP-связи: 
-			>	if ($fn = mso_fe('components/menu-only/menu-only.php')) require($fn);
 */
-
 
 $pt = new Page_out; // подготавливаем объект для вывода
 

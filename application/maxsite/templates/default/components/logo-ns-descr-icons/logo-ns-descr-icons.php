@@ -1,20 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
-	Файл: logo-ns-descr-icons.php
+	(c) MaxSite CMS, http://max-3000.com/
 
 	Описание: Название и описание сайта слева. Справа иконки соцсетей.
-	
-	Расположение: header
-	
 	Схематичный вид: 
 		(лого) Название сайта				(иконки)
 		       Описание					
-		
-	CSS-стили: 
-			> @import url('components/logo-ns-descr-icons.less');
-		
-	PHP-связи: 
-			> if ($fn = mso_fe('components/logo-ns-descr-icons/logo-ns-descr-icons.php')) require($fn);
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода

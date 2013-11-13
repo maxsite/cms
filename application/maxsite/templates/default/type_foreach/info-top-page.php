@@ -24,19 +24,19 @@ if (is_type('page') and $p->val('page_type_name') == 'blog')
 	
 	if ($np['next'])
 	{
-		$np_out .= '<div class="d-inline-block left">← ' . $p->link( mso_page_url($np['next']['page_slug']), $np['next']['page_title'] ) . '</div>';
+		$np_out .= '<div class="left">← ' . $p->link( mso_page_url($np['next']['page_slug']), $np['next']['page_title'] ) . '</div>';
 	}
 
 	if ($np['prev'])
 	{
-		$np_out .= '<div class="d-inline-block right">' . $p->link( mso_page_url($np['prev']['page_slug']), $np['prev']['page_title'] ) . ' →</div>';
+		$np_out .= '<div class="right">' . $p->link( mso_page_url($np['prev']['page_slug']), $np['prev']['page_title'] ) . ' →</div>';
 	}
 	
 	$p->block($np_out, '<div class="next-prev-page">', '</div><div class="clearfix"></div>');
 }
 
 
-$p->format('edit', 'Edit', '<div class="right bg-yellow padding5 d-inline-block">', '</div>');
+$p->format('edit', 'Edit', '<div class="right bg-yellow">', '</div>');
 $p->format('cat', ' / ', '<div>', '</div>');
 $p->format('date', 'D, j F Y г.', '<time datetime="[page_date_publish_iso]">', '</time>');
 $p->format('view_count', ' / <span>' . tf('Просмотров') . ': ', '</span>');

@@ -1,0 +1,257 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+// mso-style.less
+
+// ссылки
+a.current_url, 
+a.curent-page-cat, 
+li.current_url a,
+li.current_url li a,
+li.current-page
+{
+}
+
+
+// рубрика если для главной вывод блоками рубрик
+div.type_home_cat_block {
+	
+	div.header_home_cat {
+		
+		a {
+
+		} 
+	} 
+	
+	// описание рубрики
+	div.description-cat {
+
+	}
+	
+	ul.list {
+
+	}
+}
+
+// описание записи на главной, если они списком
+div.type_home {
+	div.meta_description {
+	}
+}
+	
+// верхняя запись на главной
+div.home_top h1 {
+}
+
+// последняя запись на главной
+div.home_page_last h1 {
+}
+
+// описание рубрики на странице рубрики
+div.category_desc {
+}
+
+
+// виджеты
+div.widget {
+	// заголовок виджета
+	
+	h2.box,
+	div.widget_header {
+	}
+	
+	table th, 
+	table td {
+	} 
+}
+
+// списки в виджетах
+ul.is_link {
+	li li { // подподпункты
+	}
+}
+
+ul.category {
+
+}
+
+ul.links div {
+}
+
+
+
+// --- только для pages ---
+
+// отступы между записями на главной
+div.page_only {
+} 
+
+// отступ на некоторых не нужны
+div.type_page div.page_only, // одиночная
+div.type_contact div.page_only, // конакты
+div.home_top_page div.page_only // top-запись на главной
+{
+} 
+
+// верхняя запись на главной
+div.home_top {
+} 
+
+div.info {
+}
+
+
+// для текста
+
+// списки в тексте
+div.page_content ul, 
+div.page_content ol {
+} 
+
+// обсудить
+div.comments-link {
+} 
+
+// записи по теме
+div.page_other_pages {
+
+	ul {
+	}
+}
+
+
+// --- дефолтные pages MaxSite CMS ---
+
+// форма логина
+div.type_loginform {
+	div.loginform {
+	} 
+	
+	div.login-form-auth {
+	}
+	
+	p.header {
+	}
+	
+	div.form-end {
+	}
+}
+
+// плагин форма логина
+div.widget form.flogin {
+	
+	input.flogin_user, 
+	input.flogin_password {
+
+	}
+	
+	input.flogin_submit {
+	}
+}
+
+
+// форма поиска
+input {
+	&.s {
+	}
+	
+	&.submit {
+	}
+}
+
+// COMMENT FORM
+div.comment-form {
+	
+	textarea {
+	}
+	
+	div.comments-auth {
+	}
+}
+
+// СООБЩЕНИЯ О КОММЕНТАРИИ
+div.comment-ok {
+}
+
+div.comment-error {
+}
+
+
+// комментарии
+div.comments {
+
+	article {
+		// нечётный коммент
+		&.odd {
+			// background: #eee;
+		}
+		
+		// чётный
+		&.even {
+
+		}
+		
+		// юзер
+		&.users {
+
+		}
+		
+		// комюзер
+		&.comusers {
+
+		}
+		
+		// аноним
+		&.anonim {
+
+		}
+		
+	}
+	
+	div.comment-info {
+	}
+
+	img.gravatar {
+	}
+	
+	div.comments_content {
+	}
+	
+	span.num_comment{
+	}
+	
+	span.date{
+	}
+	
+	// подписка по rss
+	span.page_comments_rss {
+	}
+
+	blockquote {
+	}
+}
+
+// comusers
+form.comusers-form {
+	
+	h3 {
+	}
+	
+	p {
+	
+		span.ffirst, 
+		label.ffirst {
+		}
+		
+		span.ffirst.ftitle, 
+		label.ffirst.ftitle {
+		}
+		
+		span.ftitle, 
+		label.ftitle {
+		}
+		
+		span.submit {
+		}
+	}
+}
+

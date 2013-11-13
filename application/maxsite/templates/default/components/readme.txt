@@ -10,3 +10,8 @@
 	Опции - options.ini и options.php
 
 Если каталог компонента начинается с _ или -, то компонент игнорируется в админ-панели.
+
+Ручное подключение компонента (на примере _menu):
+	if ($fn = mso_fe('components/_menu/_menu.php')) require($fn);
+
+LESS-стили компонентов см. в css-less/components/

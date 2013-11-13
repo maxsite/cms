@@ -1,18 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /*
-	(c) http://max-3000.com/
-
-	Файл: footer-copy-stat.php
-
-	Расположение: footer
+	(c) MaxSite CMS, http://max-3000.com/
 	
-	CSS-стили: 
-		var_style.less:
-			> @import url('components/footer-copy-stat.less');
-		
-	PHP-связи: 
-		custom/header_components.php
-			> if ($fn = mso_fe('components/footer-copy-stat/footer-copy-stat.php')) require($fn);
+	Вывод в подвале копирайтов и статистики.
 */
 
 $pt = new Page_out;

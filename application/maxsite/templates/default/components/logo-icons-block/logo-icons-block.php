@@ -1,18 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
-	Файл: logo-icons-block.php
+	(c) MaxSite CMS, http://max-3000.com/
 
 	Название: «Лого, блок, социконки, блок»
-	
-	Расположение: header
-	
-	CSS-стили: 
-			>	@import url('components/logo-icons-block.less');
-		
-	PHP-связи: 
-			>	if ($fn = mso_fe('components/logo-icons-block/logo-icons-block.php')) require($fn);
-			
-			
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода
@@ -29,10 +19,8 @@ $logo = '<img src="' . $logo . '" alt="' . getinfo('name_site') . '" title="' . 
 
 if (!is_type('home')) $logo = $pt->link(getinfo('siteurl'), $logo);
 
-
 $block = mso_get_option('logo-icons-block', 'templates', '');
 $block0 = mso_get_option('logo-icons-block0', 'templates', '');
-
 
 // вывод
 $pt->div_start('logo-icons-block clearfix', 'wrap');

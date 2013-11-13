@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-	
 /*
+	(c) MaxSite CMS, http://max-3000.com/
 	вывод случайного изображения из заданного каталога
 */
 

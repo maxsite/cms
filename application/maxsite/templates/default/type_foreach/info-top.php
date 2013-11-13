@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 
-$p->format('edit', 'Edit', '<div class="right bg-yellow padding5 d-inline-block">', '</div>');
+$p->format('edit', 'Edit', '<div class="right bg-yellow">', '</div>');
 $p->format('cat', ' / ', '<div>', '</div>');
 $p->format('date', 'D, j F Y г.', '<div><time datetime="[page_date_publish_iso]">', '</time></div>');
 

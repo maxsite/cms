@@ -1,22 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
-	Файл: menu-search.php
+	(c) MaxSite CMS, http://max-3000.com/
 
 	Название: «Меню и поиск»
-	
 	Описание: Слева меню, справа форма поиска
-	
-	Расположение: header
-	
 	Схематичный вид: 
 		Меню | Меню      [Поиск]
-		
-	CSS-стили: 
-		var_style.less:
-			>	@import url('components/menu-search.less');
-		
-	PHP-связи: 
-			>	if ($fn = mso_fe('components/menu-search/menu-search.php')) require($fn);
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода

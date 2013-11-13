@@ -15,4 +15,3 @@ echo '<div class="footer-3-sidebars"><div class="wrap">';
 	echo '</div></div>' . NR;
 	
 echo '<div class="clearfix"></div></div></div><!-- /div.footer-3-sidebars -->';
-	

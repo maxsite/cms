@@ -1,14 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
-
-	Файл: _login.php
-
+	(c) MaxSite CMS, http://max-3000.com/
 	Описание: Форма логина. Подкомпонет.
 		Если есть залогиненность, то выводим приветствие.
-	
-	PHP-связи:
-		if ($fn = mso_fe('components/_login/_login.php')) require($fn);
-
 */
 
 echo mso_load_jquery('jquery.dropdown.js');

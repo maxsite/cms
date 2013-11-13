@@ -1,18 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
-	Файл: logo-block.php
+	(c) MaxSite CMS, http://max-3000.com/
 
 	Название: «Лого, блок»
-	
-	Расположение: header
-	
-	CSS-стили: 
-			>	@import url('components/logo-block.less');
-		
-	PHP-связи: 
-			>	if ($fn = mso_fe('components/logo-block/logo-block.php')) require($fn);
-			
-			
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода
@@ -29,9 +19,7 @@ $logo = '<img src="' . $logo . '" alt="' . getinfo('name_site') . '" title="' . 
 
 if (!is_type('home')) $logo = $pt->link(getinfo('siteurl'), $logo);
 
-
 $block = mso_get_option('logo_block', 'templates', '');
-
 
 // вывод
 $pt->div_start('logo-block', 'wrap');

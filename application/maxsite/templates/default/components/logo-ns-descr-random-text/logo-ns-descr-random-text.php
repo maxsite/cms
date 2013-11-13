@@ -1,17 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
-	Файл: logo-ns-descr-random-text.php
+	(c) MaxSite CMS, http://max-3000.com/
 
 	Описание: Название и описание сайта слева. Справа случайные цитаты.
-	
-	Расположение: header
-	
 	Схематичный вид: 
 		(лого) Название сайта				цитаты
 		       Описание					
-		
-	PHP-связи: 
-			> if ($fn = mso_fe('components/logo-ns-descr-random-text/logo-ns-descr-random-text.php')) require($fn);
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода

@@ -1,22 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
-	Файл: ns-menu-block.php
+	(c) MaxSite CMS, http://max-3000.com/
 
 	Название: «Название сайта, меню и блок»
-	
 	Описание: Слева название сайта, меню, справа произвольный блок
-	
-	Расположение: header
-	
 	Схематичный вид: 
 		Название  Меню | Меню      Блок
-		
-	CSS-стили: 
-		var_style.less:
-			>	@import url('components/ns-menu-block.less');
-		
-	PHP-связи: 
-			>	if ($fn = mso_fe('components/ns-menu-block/ns-menu-block.php')) require($fn);
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода

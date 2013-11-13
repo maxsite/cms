@@ -1,9 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /*
+	(c) MaxSite CMS, http://max-3000.com/
 	вывод заданного изображения из заданного каталога
-	
 */
-	
 
 // где выводить
 $component_output = mso_get_option('component_image_select_output', 'templates', array());

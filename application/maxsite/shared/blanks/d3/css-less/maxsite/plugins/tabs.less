@@ -1,0 +1,49 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+
+div.tabs {
+	width: 100%;
+
+	div.tabs-box.tabs-visible {
+		display: block;
+	}
+
+	ul.tabs-nav {
+		margin: 0; 
+		padding: 0; 
+		width: 100%; 
+		list-style: none;
+
+		li.elem {
+			float: left;
+			display: inline;
+			position: relative;
+			line-height: 1em;
+			margin: 0 2px 0 0;
+			padding: 7px 15px;
+			cursor: pointer;
+			font-size: .9em;
+			color: #777; 
+		}
+
+		li.elem:hover, 
+		li.tabs-current {
+			background: #f0f0f0; 
+			color: #222;
+		}
+	}
+
+	div.tabs-box {
+		display: none; 
+		background: #f0f0f0; 
+		padding: 10px;
+		clear: both;
+	}
+	
+}
+
+
+// коррекция отступа если табы в теле записи
+div.page_content div.tabs ul.tabs-nav {
+	margin-left: 0;
+}

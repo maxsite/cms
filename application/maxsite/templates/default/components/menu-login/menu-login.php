@@ -1,22 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
-	Файл: menu-block.php
+	(c) MaxSite CMS, http://max-3000.com/
 
 	Название: меню и логин
-	
 	Описание: Слева меню, справа логин-форма
-	
-	Расположение: header
-	
 	Схематичный вид: 
 		Меню | Меню      логин
-		
-	CSS-стили: 
-		var_style.less:
-			>	@import url('components/menu-login.less');
-		
-	PHP-связи: 
-			>	if ($fn = mso_fe('components/menu-login/menu-login.php')) require($fn);
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода

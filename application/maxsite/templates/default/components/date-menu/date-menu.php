@@ -1,18 +1,10 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
-
 /*
-	Файл: date-menu.php
+	(c) MaxSite CMS, http://max-3000.com/
 
 	Название: «Дата и меню»
-	
-	Расположение: header
-	
 	Схематичный вид: 
 		дата | Меню 
-		
-
-	PHP-связи: 
-			>	if ($fn = mso_fe('components/date-menu/date-menu.php')) require($fn);
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода

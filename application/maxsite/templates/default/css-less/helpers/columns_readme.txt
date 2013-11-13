@@ -43,7 +43,7 @@ div.my {
 
 3. Колонки на основе иммитации таблицы
 
-<div class="box">
+<div class="table-box">
 	<div class="row">
 		<div class="cell">Ячейка 1</div>
 		<div class="cell">Ячейка 2</div>

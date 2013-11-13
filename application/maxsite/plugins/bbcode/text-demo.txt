@@ -158,44 +158,6 @@
 </table>
 
 
-<h2>Таблица TABLE.zebra (чередующиеся строки)</h2>
-
-<table class="zebra">
-<tr>
-<th>Заголовок 1 TH</th>
-<th>Заголовок 2 TH</th>
-<th>Заголовок 3 TH</th>
-<th>Заголовок 4 TH</th>
-</tr>
-<tr>
-<td>Ячейка 1.1</td>
-<td>Ячейка 1.2</td>
-<td>Ячейка 1.3</td>
-<td>Ячейка 1.4</td>
-</tr>
-<tr>
-<td>Ячейка 2.1</td>
-<td>Ячейка 2.2</td>
-<td>Ячейка 2.3</td>
-<td>Ячейка 2.4</td>
-</tr>
-<tr>
-<td>Ячейка 3.1</td>
-<td>Ячейка 3.2</td>
-<td>Ячейка 3.3</td>
-<td>Ячейка 3.4</td>
-</tr>
-<tr>
-<td>Ячейка 4.1</td>
-<td>Ячейка 4.2</td>
-<td>Ячейка 4.3</td>
-<td>Ячейка 4.4</td>
-</tr>
-</table>
-
-
-
-
 <h2>Label</h2>
 
 <table class="zebra">
@@ -205,34 +167,34 @@
 <th>BB-код</th>
 </tr>
 <tr>
-<td class="padding5"><span class="label">default</span></td>
-<td class="padding5">&lt;span class="label"&gt;default&lt;/span&gt;</td>
-<td class="padding5">&#91;span(label)&#93;default&#91;/span&#93;</td>
+<td><span class="label">default</span></td>
+<td>&lt;span class="label"&gt;default&lt;/span&gt;</td>
+<td>&#91;span(label)&#93;default&#91;/span&#93;</td>
 </tr>
 <tr>
-<td class="padding5"><span class="label success">success</span></td>
-<td class="padding5">&lt;span class="label success"&gt;success&lt;/span&gt;</td>
-<td class="padding5">&#91;span(label success)&#93;success&#91;/span&#93;</td>
+<td><span class="label success">success</span></td>
+<td>&lt;span class="label success"&gt;success&lt;/span&gt;</td>
+<td>&#91;span(label success)&#93;success&#91;/span&#93;</td>
 </tr>
 <tr>
-<td class="padding5"><span class="label warning">warning</span></td>
-<td class="padding5">&lt;span class="label warning"&gt;warning&lt;/span&gt;</td>
-<td class="padding5">&#91;span(label warning)&#93;warning&#91;/span&#93;</td>
+<td><span class="label warning">warning</span></td>
+<td>&lt;span class="label warning"&gt;warning&lt;/span&gt;</td>
+<td>&#91;span(label warning)&#93;warning&#91;/span&#93;</td>
 </tr>
 <tr>
-<td class="padding5"><span class="label important">important</span></td>
-<td class="padding5">&lt;span class="label important"&gt;important&lt;/span&gt;</td>
-<td class="padding5">&#91;span(label important)&#93;important&#91;/span&#93;</td>
+<td><span class="label important">important</span></td>
+<td>&lt;span class="label important"&gt;important&lt;/span&gt;</td>
+<td>&#91;span(label important)&#93;important&#91;/span&#93;</td>
 </tr>
 <tr>
-<td class="padding5"><span class="label info">info</span></td>
-<td class="padding5">&lt;span class="label info"&gt;info&lt;/span&gt;</td>
-<td class="padding5">&#91;span(label info)&#93;info&#91;/span&#93;</td>
+<td><span class="label info">info</span></td>
+<td>&lt;span class="label info"&gt;info&lt;/span&gt;</td>
+<td>&#91;span(label info)&#93;info&#91;/span&#93;</td>
 </tr>
 <tr>
-<td class="padding5"><span class="label inverse">inverse</span></td>
-<td class="padding5">&lt;span class="label inverse"&gt;inverse&lt;/span&gt;</td>
-<td class="padding5">&#91;span(label inverse)&#93;inverse&#91;/span&#93;</td>
+<td><span class="label inverse">inverse</span></td>
+<td>&lt;span class="label inverse"&gt;inverse&lt;/span&gt;</td>
+<td>&#91;span(label inverse)&#93;inverse&#91;/span&#93;</td>
 </tr>
 </table>
 
@@ -405,42 +367,42 @@
 <h2>Примеры колонок</h2>
 
 <div class="onerow">
-    <div class="col w1-2 padding5" style="background: #eee">1-2</div>
-    <div class="col w1-2 padding5" style="background: #eee">1-2</div>
+    <div class="col w1-2" style="background: #eee">1-2</div>
+    <div class="col w1-2" style="background: #eee">1-2</div>
 </div>
 [br][br]
 <div class="onerow">
-    <div class="col w1-3 padding5" style="background: #eee">1-3</div>
-    <div class="col w2-3 padding5" style="background: #eee">2-3</div>
+    <div class="col w1-3" style="background: #eee">1-3</div>
+    <div class="col w2-3" style="background: #eee">2-3</div>
 </div>
 [br][br]
 <div class="onerow">
-    <div class="col w1-4 padding5" style="background: #eee">1-4</div>
-    <div class="col w1-4 padding5" style="background: #eee">1-4</div>
-    <div class="col w1-4 padding5" style="background: #eee">1-4</div>
-    <div class="col w1-4 padding5" style="background: #eee">1-4</div>
+    <div class="col w1-4" style="background: #eee">1-4</div>
+    <div class="col w1-4" style="background: #eee">1-4</div>
+    <div class="col w1-4" style="background: #eee">1-4</div>
+    <div class="col w1-4" style="background: #eee">1-4</div>
 </div>
 [br][br]
 <div class="onerow">
-    <div class="col w1-8 padding5" style="background: #eee">1-8</div>
-    <div class="col w2-8 padding5" style="background: #eee">2-8</div>
-    <div class="col w1-8 padding5" style="background: #eee">1-8</div>
-    <div class="col w3-8 padding5" style="background: #eee">3-8</div>
-    <div class="col w1-8 padding5" style="background: #eee">1-8</div>
+    <div class="col w1-8" style="background: #eee">1-8</div>
+    <div class="col w2-8" style="background: #eee">2-8</div>
+    <div class="col w1-8" style="background: #eee">1-8</div>
+    <div class="col w3-8" style="background: #eee">3-8</div>
+    <div class="col w1-8" style="background: #eee">1-8</div>
 </div>
 
 [br][br]
 <div class="onerow">
-    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
-    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
-    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
-    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
-    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
-    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
-    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
-    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
-    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
-    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
-    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
-    <div class="col w1-12 padding5" style="background: #eee">1-12</div>
+    <div class="col w1-12" style="background: #eee">1-12</div>
+    <div class="col w1-12" style="background: #eee">1-12</div>
+    <div class="col w1-12" style="background: #eee">1-12</div>
+    <div class="col w1-12" style="background: #eee">1-12</div>
+    <div class="col w1-12" style="background: #eee">1-12</div>
+    <div class="col w1-12" style="background: #eee">1-12</div>
+    <div class="col w1-12" style="background: #eee">1-12</div>
+    <div class="col w1-12" style="background: #eee">1-12</div>
+    <div class="col w1-12" style="background: #eee">1-12</div>
+    <div class="col w1-12" style="background: #eee">1-12</div>
+    <div class="col w1-12" style="background: #eee">1-12</div>
+    <div class="col w1-12" style="background: #eee">1-12</div>
 </div>

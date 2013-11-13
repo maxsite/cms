@@ -715,12 +715,12 @@ class Page_out
 	
 	# формирование таблиц из строк и ячеек аля-таблица
 	// если $rows1 = true, то сразу открываем row поскольку она одна
-	function box_start($class = '', $rows1 = true)
+	function box_start($class = 'table-box', $rows1 = true)
 	{
-		if ($class) $class = ' ' . $class;
+		if ($class) $class = ' class="' . $class . '"';
 		
-		if ($rows1) $text = NR . '<div class="box' . $class . '"><div class="row">';
-		else $text = NR . '<div class="box' . $class . '">';
+		if ($rows1) $text = NR . '<div' . $class . '"><div class="row">';
+		else $text = NR . '<div' . $class . '">';
 	
 		return $this->out($text);
 	}

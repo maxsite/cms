@@ -19,4 +19,3 @@ echo '<div class="footer-4-sidebars"><div class="wrap">';
 	echo '</div></div>' . NR;
 	
 echo '<div class="clearfix"></div></div></div><!-- /div.footer-4-sidebars -->';
-	

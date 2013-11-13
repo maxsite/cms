@@ -4,7 +4,7 @@
 	вывод только заголовка записи
 */
 
-$p->format('edit', 'Edit', '<div class="right bg-yellow padding5 d-inline-block">', '</div>');
+$p->format('edit', 'Edit', '<div class="right bg-yellow">', '</div>');
 
 $p->html(NR . '<header>');
 	$p->line('[edit][title]');

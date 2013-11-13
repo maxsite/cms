@@ -1,18 +1,10 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
-	Файл: ns-descr-block.php
+	(c) MaxSite CMS, http://max-3000.com/
 
 	Название: «Название сайта, описание, блок»
-	
 	Схематичный вид: 
 		Название  Блок
-		
-	CSS-стили: 
-		var_style.less:
-			>	@import url('components/ns-descr-block.less');
-		
-	PHP-связи: 
-			>	if ($fn = mso_fe('components/ns-descr-block/ns-descr-block.php')) require($fn);
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода

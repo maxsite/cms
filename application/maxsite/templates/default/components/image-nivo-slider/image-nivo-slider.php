@@ -1,6 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 /*
+	(c) MaxSite CMS, http://max-3000.com/
+	
 	вывод изображений слайдером/каруселью из заданного каталога
 */
 
@@ -47,5 +48,4 @@ echo '<div class="image-nivo-slider"><div class="nivoSlider">';
 	foreach ($imgs as $img) echo NR . '<img src="' . $img . '" alt="" title="">';
 echo '</div></div>';
 	
-
 # end file

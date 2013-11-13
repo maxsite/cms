@@ -1,0 +1,49 @@
+// MaxSite CMS 
+// Copyright http://max-3000.com/
+
+// span.label
+// span.label.success
+
+// вспомогательный микс
+._label(@bg; @color: #fff)
+{
+	background-color: @bg;
+	color: @color;
+}
+
+span.label {
+
+	._label(#999);
+	
+	display: inline-block;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	
+	&.default {
+		._label(#999);
+	}
+	
+	&.success {
+		._label(#468847);
+	}
+	
+	&.warning {
+		._label(#F89406);
+	}
+	
+	&.important {
+		._label(#B94A48);
+	}
+	
+	&.info {
+		._label(#3A87AD);
+	}
+	
+	&.inverse {
+		._label(#333);
+	}
+
+}

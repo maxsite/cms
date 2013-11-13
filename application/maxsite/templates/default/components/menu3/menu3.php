@@ -1,8 +1,10 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
-
-// Дополнительное меню. Может использоваться как подкомпонет
-
+/*
+	(c) MaxSite CMS, http://max-3000.com/
+	Дополнительное меню. Может использоваться как подкомпонет
+*/
 ?>
+
 <div class="MainMenu3"><div class="wrap">
 	<ul class="menu">
 		<?php

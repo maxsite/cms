@@ -24,7 +24,7 @@ foreach ($bl_pages as $bl_page)
 			getinfo('template_url') . 'images/placehold/100x100.png'
 		))
 	{
-		$pb->thumb = $pb->page_url(true) . $pb->img($image_for_page, 'margin5', $pb->val('page_title'), $pb->val('page_title')) . '</a> ';
+		$pb->thumb = $pb->page_url(true) . $pb->img($image_for_page, '', $pb->val('page_title'), $pb->val('page_title')) . '</a> ';
 	}
 	
 	$pb->line('[thumb]');

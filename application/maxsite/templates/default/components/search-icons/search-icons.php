@@ -1,18 +1,10 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
-	Файл: search-icons.php
+	(c) MaxSite CMS, http://max-3000.com/
 
 	Название: «Поиск и иконки»
-	
 	Схематичный вид: 
 		[Поиск] (иконки)
-		
-	CSS-стили: 
-		var_style.less:
-			>	@import url('components/search-icons.less');
-		
-	PHP-связи: 
-			>	if ($fn = mso_fe('components/search-icons/search-icons.php')) require($fn);
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода

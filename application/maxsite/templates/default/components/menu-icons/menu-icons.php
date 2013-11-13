@@ -1,23 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
-
 /*
-	Файл: menu-icons.php
+	(c) MaxSite CMS, http://max-3000.com/
 
 	Название: «Меню и иконки»
-	
 	Описание: Слева меню, справа социконки
-	
-	Расположение: header
-	
 	Схематичный вид: 
 		Меню | Меню      (иконки)
-		
-	CSS-стили: 
-		var_style.less:
-			>	@import url('components/menu-icons.less');
-		
-	PHP-связи: 
-			>	if ($fn = mso_fe('components/menu-icons/menu-icons.php')) require($fn);
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода

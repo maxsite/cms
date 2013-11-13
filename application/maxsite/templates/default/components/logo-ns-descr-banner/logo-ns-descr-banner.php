@@ -1,24 +1,12 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 /*
-	Файл: logo-ns-descr-banner.php
+	(c) MaxSite CMS, http://max-3000.com/
 
 	Название: «Лого, название, описание и баннер в шапке»
-	
 	Для баннера используется ушка logo-banner.
-		
-	Расположение: header
-	
 	Схематичный вид: 
 		(лого) Название сайта				(баннер)
-		       Описание		
-
-	CSS-стили: 
-			>	@import url('components/logo-ns-descr-banner.less');
-		
-	PHP-связи: 
-			>	if ($fn = mso_fe('components/logo-ns-descr-banner/logo-ns-descr-banner.php')) require($fn);
-			
-			
+		       Описание	
 */
 
 $pt = new Page_out; // подготавливаем объект для вывода

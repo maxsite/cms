@@ -1,16 +1,9 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
-
 /*
-	Файл: _random-text.php
-
-	Подкомпонент
+	(c) MaxSite CMS, http://max-3000.com/
 	
 	Описание: вывод случайной цитаты через плагин randomtext
 		если плагин не активирован, то он подключается автоматом.
-	
-	PHP-связи:
-		if ($fn = mso_fe('components/_random-text/_random-text.php')) require($fn);
-
 */
 
 if (!function_exists('randomtext_widget_custom'))
@@ -45,9 +38,6 @@ else // нет цитаты
 	$text = '<div class="text">Человек, по-настоящему мыслящий, черпает из своих ошибок не меньше познания, чем из своих успехов.</div><div class="author">Джон Дьюи</div>';
 }
 
-
-
 echo '<div class="random-text"><div class="wrap">' . $text . '</div></div>';
-
 
 # end file

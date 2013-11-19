@@ -13,8 +13,8 @@ file = cat-title-mini.php
 cat = 1
 cols = 4
 limit = 4
-width = 100
-height = 100
+thumb_width = 100
+thumb_height = 100
 [/unit]
 
 */
@@ -31,8 +31,8 @@ else
 	$cat_id = isset($UNIT['cat']) ? (int) $UNIT['cat'] : 1;
 	$cols = isset($UNIT['cols']) ? (int) $UNIT['cols'] : 4; // 4 колонки
 	$limit = isset($UNIT['limit']) ? (int) $UNIT['limit'] : 4; // всего записей
-	$width = isset($UNIT['width']) ? (int) $UNIT['width'] : 100; // ширина миниатюры
-	$height = isset($UNIT['height']) ? (int) $UNIT['height'] : 100; // высота миниатюры
+	$thumb_width = isset($UNIT['thumb_width']) ? (int) $UNIT['thumb_width'] : 100; // ширина миниатюры
+	$thumb_height = isset($UNIT['thumb_height']) ? (int) $UNIT['thumb_height'] : 100; // высота миниатюры
 	
 	// данные рубрики
 	$cat = mso_get_cat_from_id($cat_id);
@@ -51,8 +51,8 @@ else
 			'columns' => $cols,
 			'columns_class_cell' => 'col w1-' . $cols,
 			'content' => false,
-			'thumb_width' => $width,
-			'thumb_height' => $height,
+			'thumb_width' => $thumb_width,
+			'thumb_height' => $thumb_height,
 			'thumb_class' => '',
 			'placehold' => true,
 			
@@ -62,6 +62,7 @@ else
 			
 			'title_start' => '<p>',
 			'title_end' => '</p>',
+			'clearfix' => true,
 		));
 	}	
 	

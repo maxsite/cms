@@ -4197,12 +4197,6 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 		$compiler->addImportDir(dirname($less_file)); // новый 0.3.7 api
 		$compiler->indentChar = "\t";
 		
-		// в тексте исходного файла $fc_all может быть php-код
-		ob_start();
-		eval( '?>' . $fc_all . '<?php ');
-		$fc_all = ob_get_contents();
-		ob_end_clean();
-		
 		// для совметимости со старым вариантом — удалить в январе 2014!!!
 		$fc_all = str_replace('@MSO_IMPORT_ALL_FONTS;', '@MSO_IMPORT_ALL(fonts);', $fc_all);
 		$fc_all = str_replace('@MSO_IMPORT_ALL_MIXINS;', '@MSO_IMPORT_ALL(mixins);', $fc_all);
@@ -4217,13 +4211,20 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 		
 		$fc_all = preg_replace_callback('!(@MSO_IMPORT_ALL\()(.*?)(\);)!is', '_mso_less_import_all_callback', $fc_all);
 		
+		// в тексте исходного файла $fc_all может быть php-код
+		ob_start();
+		eval( '?>' . $fc_all . '<?php ');
+		$fc_all = ob_get_contents();
+		ob_end_clean();
+		
 		try
 		{
 			$out = $compiler->compile($fc_all); // новый 0.3.7 api
 		}
 		catch (Exception $ex) 
 		{
-			die("<pre>lessphp fatal error: " . $ex->getMessage() . '</pre>');
+			$out = _mso_less_exception($ex->getMessage(), $fc_all);
+			die($out); // рубим, ибо нефиг писать с ошибками
 		}
 		
 		// сжатие кода
@@ -4274,9 +4275,31 @@ function _mso_less_import_all_callback($matches)
 	$files = mso_get_path_files(getinfo('template_dir') . 'css-less/' . $dir . '/', $dir . '/', true, array('less'));
 
 	$m = '';
-	foreach($files as $file) $m .= '@import url(\'' . $file . '\'); ';
+	foreach($files as $file)
+	{
+		// $m .= '@import url(\'' . $file . '\'); '; // старый вариант
+		$m .= '/* ================== ' . $file . ' ================== */' . NR . NR;
+		$m .= file_get_contents(getinfo('template_dir') . 'css-less/' . $file) . NR;
+		
+	}
 		
 	return $m;
+}
+
+
+# функция, срабатывающая при ошибке компиляции LESS
+function _mso_less_exception($message, $text)
+{
+	// пробуем оформить более внятный вывод ошибки с исходным кодом
+	
+	$out = '<pre style="color: red;">lessphp fatal error: ' . $message . '</pre>';
+	
+	$text = NR . htmlspecialchars($text);
+	$text = str_replace("\n", "<li style='margin:0 0 0 30px'>", $text);
+	
+	$out .= '<ol style="height: 500px; overflow: scroll; background: #eee; font-family: monospace; ">' . $text . '</ol>';
+	
+	return $out;
 }
 
 /*

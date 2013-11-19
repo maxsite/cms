@@ -21,8 +21,6 @@ $pt->div_start('menu-search', 'wrap');
 		if ($fn = mso_fe('components/_search/_search.php')) require($fn);
 	$pt->div_end('r2');
 	
-	$pt->clearfix();
-
 $pt->div_end('menu-search', 'wrap');
 
 # end file

@@ -20,8 +20,6 @@ $pt->div_start('search-icons', 'wrap');
 		if ($fn = mso_fe('components/_social/_social.php')) require($fn);
 	$pt->div_end('r3');
 
-	$pt->clearfix();
-
 $pt->div_end('search-icons', 'wrap');
 
 # end file

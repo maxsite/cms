@@ -21,8 +21,6 @@ $pt->div_start('ns-descr-block', 'wrap');
 		
 	$pt->div($block, 'r2');	
 	
-	$pt->clearfix();
-
 $pt->div_end('ns-descr-block', 'wrap');
 
 # end file

@@ -12,5 +12,4 @@
 				echo mso_menu_build($menu, 'selected', false);
 		?>
 	</ul>
-	<div class="clearfix"></div>
 </div></div><!-- div class="MainMenu3" -->

@@ -12,6 +12,9 @@
 file = 3col-cats.php
 cats = 1,2,3
 limit = 5
+thumb_width = 100
+thumb_height = 100
+content_words = 20
 [/unit]
 
 */
@@ -42,7 +45,9 @@ else
 	
 	// кол-во записей в одной колонке
 	$limit = isset($UNIT['limit']) ? (int) $UNIT['limit'] : 3;
-	
+	$thumb_width = isset($UNIT['thumb_width']) ? (int) $UNIT['thumb_width'] : 100;
+	$thumb_height = isset($UNIT['thumb_height']) ? (int) $UNIT['thumb_height'] : 100;
+	$content_words = isset($UNIT['content_words']) ? (int) $UNIT['content_words'] : 20;
 	
 	
 	echo '<div class="onerow clearfix">';
@@ -63,9 +68,9 @@ else
 			$b->output(	array (
 				'block_start' => '<div class="col w1-3"><h2>' . $cat['category_name'] . '</h2>',
 				'block_end' => '<p class="all-cat"><a href="' . mso_page_url($cat['category_slug'], 'category') . '">Посмотреть все записи</a></p></div>',
-				'content_words' => 20,
-				'thumb_width' => 100,
-				'thumb_height' => 100,
+				'content_words' => $content_words,
+				'thumb_width' => $thumb_width,
+				'thumb_height' => $thumb_height,
 				'thumb_class' => 'left',
 				'line1' => '[title]',
 				'line2' => '[thumb]',
@@ -87,17 +92,17 @@ else
 		if ($b->go)
 		{
 			$b->output(	array (
-					'block_start' => '<div class="col w1-3"><h2>' . $cat['category_name'] . '</h2>',
-					'block_end' => '<p class="all-cat"><a href="' . getinfo('siteurl') . 'category/' . $cat['category_slug'] . '">Посмотреть все записи</a></p></div>',
-					'content_words' => 20,
-					'thumb_width' => 100,
-					'thumb_height' => 100,
-					'thumb_class' => 'left',
-					'line1' => '[title]',
-					'line2' => '[thumb]',
-					'line3' => '',
-					'title_start' => '<h4>',
-					'title_end' => '</h4>',
+				'block_start' => '<div class="col w1-3"><h2>' . $cat['category_name'] . '</h2>',
+				'block_end' => '<p class="all-cat"><a href="' . getinfo('siteurl') . 'category/' . $cat['category_slug'] . '">Посмотреть все записи</a></p></div>',
+				'content_words' => $content_words,
+				'thumb_width' => $thumb_width,
+				'thumb_height' => $thumb_height,
+				'thumb_class' => 'left',
+				'line1' => '[title]',
+				'line2' => '[thumb]',
+				'line3' => '',
+				'title_start' => '<h4>',
+				'title_end' => '</h4>',
 				));
 		}
 		// вторая колонка
@@ -114,9 +119,9 @@ else
 			$b->output(	array (
 				'block_start' => '<div class="col w1-3"><h2>' . $cat['category_name'] . '</h2>',
 				'block_end' => '<p class="all-cat"><a href="' . getinfo('siteurl') . 'category/' . $cat['category_slug'] . '">Посмотреть все записи</a></p></div>',
-				'content_words' => 20,
-				'thumb_width' => 100,
-				'thumb_height' => 100,
+				'content_words' => $content_words,
+				'thumb_width' => $thumb_width,
+				'thumb_height' => $thumb_height,
 				'thumb_class' => 'left',
 				'line1' => '[title]',
 				'line2' => '[thumb]',

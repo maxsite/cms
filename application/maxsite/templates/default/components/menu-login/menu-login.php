@@ -21,8 +21,6 @@ $pt->div_start('menu-login', 'wrap');
 		if ($fn = mso_fe('components/_login/_login.php')) require($fn);
 	$pt->div_end('r2');
 	
-	$pt->clearfix();
-
 $pt->div_end('menu-login', 'wrap');
 
 # end file

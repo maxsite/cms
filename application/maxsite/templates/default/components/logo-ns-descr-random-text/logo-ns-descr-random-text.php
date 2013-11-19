@@ -38,8 +38,6 @@ $pt->div_start('logo-ns-descr-random-text', 'wrap');
 		if ($fn = mso_fe('components/_random-text/_random-text.php')) require($fn);
 	$pt->div_end('r3');
 	
-	$pt->clearfix();
-
 $pt->div_end('logo-ns-descr-random-text', 'wrap');
 
 # end file

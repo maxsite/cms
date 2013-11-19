@@ -72,7 +72,6 @@ else
 				'line3' => '',
 				'title_start' => '',
 				'title_end' => '',
-				'clearfix' => false,
 			));
 		}
 		
@@ -99,7 +98,6 @@ else
 				'line3' => '',
 				'title_start' => '',
 				'title_end' => '',
-				'clearfix' => false,
 			));
 		}
 		
@@ -126,7 +124,6 @@ else
 				'line3' => '',
 				'title_start' => '',
 				'title_end' => '',
-				'clearfix' => false,
 			));
 		}
 		

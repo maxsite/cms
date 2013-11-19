@@ -62,5 +62,4 @@
 			if ($menu) echo mso_menu_build($menu, 'selected', false);
 		?>
 	</ul></nav>
-	<div class="clearfix"></div>
 </div></div><!-- div.wrap div.MainMenu -->

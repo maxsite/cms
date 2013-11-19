@@ -1,24 +1,13 @@
-// MaxSite CMS 
+// MaxSite CMS
 // Copyright http://max-3000.com/
 
-// @import url('resets/normalize.less'); // Сброс стилей браузера
-
-// CSS-фреймворк
-// @import url('uikit/_uikit.less');
-// @import url('bootstrap/_bootstrap.less');
-
-// Стили MaxSite CMS
-@import url('maxsite/mso-menu-vertical.less'); // меню
-@import url('maxsite/mso-forms.less'); // .fform
-@import url('maxsite/mso-columns.less'); // колонки
-@import url('maxsite/mso-css-helpers.less'); // css-хелперы
-@import url('maxsite/mso-message.less'); // сообщения 
-@import url('maxsite/mso-label.less'); // метки
-
-// Плагины
-@MSO_IMPORT_ALL(maxsite/plugins);
-
-// Стили шаблона
-// @import url('layouts/layout.less'); // модульная сетка
-
-// и т.д.
+@MSO_IMPORT_ALL(10-mixins);
+@MSO_IMPORT_ALL(20-core);
+@MSO_IMPORT_ALL(21-css-helpers);
+@MSO_IMPORT_ALL(22-typography);
+@MSO_IMPORT_ALL(23-layout);
+@MSO_IMPORT_ALL(30-maxsite);
+@MSO_IMPORT_ALL(40-plugins);
+@MSO_IMPORT_ALL(50-menu);
+@MSO_IMPORT_ALL(60-components);
+@MSO_IMPORT_ALL(70-other);

@@ -39,8 +39,6 @@ $pt->div_start('logo-ns-descr-banner', 'wrap');
 		if (function_exists('ushka')) echo ushka('logo-banner');
 	$pt->div_end('r3');
 	
-	$pt->clearfix();
-
 $pt->div_end('logo-ns-descr-banner', 'wrap');
 
 # end file

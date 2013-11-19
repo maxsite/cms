@@ -27,8 +27,6 @@ $pt->div_start('ns-menu-login', 'wrap');
 		if ($fn = mso_fe('components/_login/_login.php')) require($fn);
 	$pt->div_end('r3');
 	
-	$pt->clearfix();
-
 $pt->div_end('ns-menu-login', 'wrap');
 
 # end file

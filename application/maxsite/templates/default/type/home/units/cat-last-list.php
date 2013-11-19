@@ -12,6 +12,9 @@
 file = cat-last-list.php
 cat = 1
 limit = 5
+thumb_width = 100
+thumb_height = 100
+content_words = 65
 [/unit]
 
 */
@@ -29,6 +32,9 @@ else
 	
 	$cat_id = isset($UNIT['cat']) ? (int) $UNIT['cat'] : 1;
 	$limit = isset($UNIT['limit']) ? (int) $UNIT['limit'] : 3;
+	$thumb_width = isset($UNIT['thumb_width']) ? (int) $UNIT['thumb_width'] : 100;
+	$thumb_height = isset($UNIT['thumb_height']) ? (int) $UNIT['thumb_height'] : 100;
+	$content_words = isset($UNIT['content_words']) ? (int) $UNIT['content_words'] : 65;
 		
 	echo '<div class="onerow clearfix">';
 	
@@ -47,9 +53,9 @@ else
 			$b->output(	array (
 				'block_start' => '<h2>' . $cat['category_name'] . '</h2>',
 				'block_end' => '',
-				'content_words' => 65,
-				'thumb_width' => 100,
-				'thumb_height' => 100,
+				'content_words' => $content_words,
+				'thumb_width' => $thumb_width,
+				'thumb_height' => $thumb_height,
 				'thumb_class' => 'right',
 				'line1' => '[title]',
 				'line2' => '[thumb]',
@@ -80,7 +86,6 @@ else
 				'line3' => '',
 				'title_start' => '',
 				'title_end' => '',
-				'clearfix' => false,
 			));
 		}
 		

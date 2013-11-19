@@ -1208,7 +1208,7 @@ class Block_pages
 			'columns_class_row' => 'onerow', // css-класс
 			'columns_class_cell' => 'col w1-2', // css-класс для ячейки (по-умолчанию 2 колонки)
 			
-			'clearfix' => true, // отбивать после вывода $p->clearfix();
+			'clearfix' => false, // отбивать после вывода $p->clearfix();
 			'page_start' => '', // html в начале вывода записи 
 			'page_end' => '', // html в конце вывода записи
 			

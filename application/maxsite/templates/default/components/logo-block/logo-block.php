@@ -32,8 +32,6 @@ $pt->div_start('logo-block', 'wrap');
 		echo $block;
 	$pt->div_end('r2');
 	
-	$pt->clearfix();
-
 $pt->div_end('logo-block', 'wrap');
 
 # end file

@@ -20,8 +20,6 @@ $pt->div_start('date-menu', 'wrap');
 		if ($fn = mso_fe('components/_menu/_menu.php')) require($fn);
 	$pt->div_end('r2');
 	
-	$pt->clearfix();
-
 $pt->div_end('date-menu', 'wrap');
 
 # end file

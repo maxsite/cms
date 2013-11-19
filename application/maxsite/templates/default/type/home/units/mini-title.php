@@ -10,6 +10,9 @@
 
 [unit]
 file = mini-title.php
+limit = 5
+thumb_width = 100
+thumb_height = 100
 [/unit]
 
 */
@@ -25,8 +28,12 @@ else
 {
 	ob_start();
 	
+	$limit = isset($UNIT['limit']) ? (int) $UNIT['limit'] : 5;
+	$thumb_width = isset($UNIT['thumb_width']) ? (int) $UNIT['thumb_width'] : 100;
+	$thumb_height = isset($UNIT['thumb_height']) ? (int) $UNIT['thumb_height'] : 100;
+	
 	$b = new Block_pages( array (
-			'limit' => 5,
+			'limit' => $limit,
 			'pagination' => false,
 		));
 	
@@ -35,11 +42,11 @@ else
 		$b->output(	array (
 			'block_start' => '<div class="home-mini-title">',
 			'block_end' => '</div>',
-			'columns' => 5,
-			'columns_class_cell' => 'col w1-5',
+			'columns' => $limit,
+			'columns_class_cell' => 'col w1-' . $limit,
 			'content' => false,
-			'thumb_width' => 100,
-			'thumb_height' => 100,
+			'thumb_width' => $thumb_width,
+			'thumb_height' => $thumb_height,
 			'thumb_class' => '',
 			'placehold' => true,
 			'placehold_path' => getinfo('template_url') . 'images/placehold/', // путь к плейсхолдеру

@@ -23,7 +23,7 @@ $logo = '<img src="' . $logo . '" alt="' . getinfo('name_site') . '" title="' . 
 if (!is_type('home')) $logo = $pt->link(getinfo('siteurl'), $logo);
 
 // вывод
-$pt->div_start('logo-ns-descr-icons clearfix', 'wrap');
+$pt->div_start('logo-ns-descr-icons', 'wrap');
 
 	$pt->div_start('r1');
 		$pt->html($logo);
@@ -38,8 +38,6 @@ $pt->div_start('logo-ns-descr-icons clearfix', 'wrap');
 		if ($fn = mso_fe('components/_social/_social.php')) require($fn);
 	$pt->div_end('r3');
 	
-	// $pt->clearfix();
-
 $pt->div_end('logo-ns-descr-icons', 'wrap');
 
 # end file

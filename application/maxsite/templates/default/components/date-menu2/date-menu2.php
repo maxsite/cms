@@ -19,8 +19,6 @@ $pt->div_start('date-menu2', 'wrap');
 	$pt->div_start('r2');	
 		if ($fn = mso_fe('components/menu2/menu2.php')) require($fn);
 	$pt->div_end('r2');
-	
-	$pt->clearfix();
 
 $pt->div_end('date-menu2', 'wrap');
 

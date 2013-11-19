@@ -23,7 +23,7 @@ $block = mso_get_option('logo-icons-block', 'templates', '');
 $block0 = mso_get_option('logo-icons-block0', 'templates', '');
 
 // вывод
-$pt->div_start('logo-icons-block clearfix', 'wrap');
+$pt->div_start('logo-icons-block', 'wrap');
 
 	$pt->div_start('r1');
 		$pt->html($logo);

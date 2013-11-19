@@ -21,8 +21,6 @@ $pt->div_start('menu-icons', 'wrap');
 		if ($fn = mso_fe('components/_social/_social.php')) require($fn);
 	$pt->div_end('r2');
 	
-	$pt->clearfix();
-
 $pt->div_end('menu-icons', 'wrap');
 
 # end file

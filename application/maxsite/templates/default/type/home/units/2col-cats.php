@@ -12,6 +12,9 @@
 file = 2col-cats.php
 cats = 1,3
 limit = 5
+thumb_width = 100
+thumb_height = 100
+content_words = 20
 [/unit]
 
 */
@@ -39,16 +42,13 @@ else
 	}
 	
 	// кол-во записей в одной колонке
-	$limit = 3;
-	
-	if (isset($UNIT['limit']))
-	{
-		$limit = $UNIT['limit'];
-	}
+	$limit = isset($UNIT['limit']) ? (int) $UNIT['limit'] : 3;
+	$thumb_width = isset($UNIT['thumb_width']) ? (int) $UNIT['thumb_width'] : 100;
+	$thumb_height = isset($UNIT['thumb_height']) ? (int) $UNIT['thumb_height'] : 100;
+	$content_words = isset($UNIT['content_words']) ? (int) $UNIT['content_words'] : 20;
 	
 	
-	
-	echo '<div class="onerow">';
+	echo '<div class="onerow clearfix">';
 	
 		// первая колонка
 		
@@ -66,9 +66,9 @@ else
 			$b->output(	array (
 				'block_start' => '<div class="col w1-2"><h2>' . $cat['category_name'] . '</h2>',
 				'block_end' => '<p class="all-cat"><a href="' . getinfo('siteurl') . 'category/' . $cat['category_slug'] . '">Посмотреть все записи</a></p></div>',
-				'content_words' => 20,
-				'thumb_width' => 100,
-				'thumb_height' => 100,
+				'content_words' => $content_words,
+				'thumb_width' => $thumb_width,
+				'thumb_height' => $thumb_height,
 				'thumb_class' => 'left',
 				'line1' => '[title]',
 				'line2' => '[thumb]',
@@ -92,9 +92,9 @@ else
 			$b->output(	array (
 				'block_start' => '<div class="col w1-2"><h2>' . $cat['category_name'] . '</h2>',
 				'block_end' => '<p class="all-cat"><a href="' . getinfo('siteurl') . 'category/' . $cat['category_slug'] . '">Посмотреть все записи</a></p></div>',
-				'content_words' => 20,
-				'thumb_width' => 100,
-				'thumb_height' => 100,
+				'content_words' => $content_words,
+				'thumb_width' => $thumb_width,
+				'thumb_height' => $thumb_height,
 				'thumb_class' => 'left',
 				'line1' => '[title]',
 				'line2' => '[thumb]',
@@ -106,9 +106,6 @@ else
 		
 	echo '</div>';
 	
-	
-	echo '<div class="clearfix"></div>';
-		
 	mso_add_cache($home_cache_key, ob_get_flush(), $home_cache_time * 60);
 
 }

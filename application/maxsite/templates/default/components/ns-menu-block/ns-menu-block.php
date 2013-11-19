@@ -41,8 +41,6 @@ $pt->div_start('ns-menu-block', 'wrap');
 	
 	$pt->div($block, 'r3', 'div', $style_bl);	
 	
-	$pt->clearfix();
-
 $pt->div_end('ns-menu-block', 'wrap');
 
 # end file

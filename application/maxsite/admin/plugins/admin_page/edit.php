@@ -158,7 +158,7 @@
 		$all_post_types = '';
 		$query = $CI->db->get('page_type');
 		
-		//$page_type_js_obj = '{'; // для скрытия метаполей в зависимости от типа записи
+		$page_type_js_obj = '{'; // для скрытия метаполей в зависимости от типа записи
 		
 		foreach ($query->result_array() as $row)
 		{
@@ -170,12 +170,12 @@
 			$all_post_types .= '<label class="nocell"><input name="f_page_type[]" type="radio" ' . $che 
 								. ' value="' . $row['page_type_id'] . '"> ' 
 								. $row['page_type_name'] . $page_type_desc . '</label><br>';
-			//$page_type_js_obj .= $row['page_type_name'] . ':' . $row['page_type_id'] . ',';						
+			$page_type_js_obj .= $row['page_type_name'] . ':' . $row['page_type_id'] . ',';						
 									
 		}
 		
-		//$page_type_js_obj .= '}';
-		//$page_type_js_obj = str_replace(',}', '}', $page_type_js_obj);
+		$page_type_js_obj .= '}';
+		$page_type_js_obj = str_replace(',}', '}', $page_type_js_obj);
 
 	
 		

@@ -108,8 +108,7 @@
 		});		
 		
 	});
-	
-	
+
 	// фоновое сохранение
 	$(function(){	
 		$("#bsave").click(function()
@@ -130,7 +129,42 @@
 			);
 		});
 	});
-	
+
+	$(function(){
+		function select_page_type() {
+			var page_type_id = +$(".tabs-box.other input:radio:checked").val(),
+				page_type_obj = ' . $page_type_js_obj . ',
+				page_meta_block = $(".page_meta_block"),
+				checked_type;
+
+			for (var key in page_type_obj) {
+				if (page_type_obj[key] === page_type_id) {
+					checked_type = key;
+				}
+			}
+
+			page_meta_block.each(function() {
+				var number_classes = $(this).attr("class").split(" ").length;
+
+				if (number_classes == 1) {
+					return;
+				} else {
+					if ($(this).hasClass(checked_type)) {
+						$(this).show();
+					} else {
+						$(this).hide();
+					}
+				}
+			});
+		}
+
+		select_page_type();
+
+		$(".tabs-box.other input:radio").click(function() {
+			select_page_type();
+		});
+	});
+
 	</script>
 	
 	<div class="new_or_edit">

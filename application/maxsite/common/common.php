@@ -4194,6 +4194,10 @@ function mso_lessc($less_file = '', $css_file = '', $css_url = '', $use_cache = 
 		// пример http://leafo.net/lessphp/docs/#custom_functions
 		if (file_exists($less_file . '.php')) require_once($less_file . '.php');
 		
+		// это общие custom_functions
+		// их набор зависит от версии LESSPHP
+		if ($fn = mso_fe(getinfo('common_dir') . 'less/custom_functions.php')) require($fn);
+		
 		$compiler->addImportDir(dirname($less_file)); // новый 0.3.7 api
 		$compiler->indentChar = "\t";
 		

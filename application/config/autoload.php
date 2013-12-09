@@ -52,6 +52,12 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
+// проверка на наличие файла конфигурации базы
+if (!file_exists(FCPATH . APPPATH . 'config/database.php')) 
+{
+	die('File not found: <b>application/config/database.php</b>');
+}
+
 $autoload['libraries'] = array('database', 'session');
 
 

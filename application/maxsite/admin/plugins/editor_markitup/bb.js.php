@@ -161,6 +161,7 @@ myBbcodeSettings = {
 			{name:'<?= t('Обычный текст') ?>', openBlockWith:'[pre]', closeBlockWith:'[/pre]', className:"text" },
 			{name:'<?= t('PHP-код') ?>', openBlockWith:'[pre lang=php]', closeBlockWith:'[/pre]', className:"php" },
 			{name:'<?= t('HTML-код') ?>', openBlockWith:'[pre lang=html]', closeBlockWith:'[/pre]', className:"html-pre" },
+			{name:'<?= t('LESS/CSS-код') ?>', openBlockWith:'[pre lang=less]', closeBlockWith:'[/pre]', className:"css" },
 			{name:'<?= t('CSS-код') ?>', openBlockWith:'[pre lang=css]', closeBlockWith:'[/pre]', className:"css" },
 			{name:'<?= t('JavaScript-код') ?>', openBlockWith:'[pre lang=js]', closeBlockWith:'[/pre]', className:"js" },
 			{name:'<?= t('Delphi/Pascal-код') ?>', openBlockWith:'[pre lang=delphi]', closeBlockWith:'[/pre]', className:"delphi" },
@@ -179,54 +180,47 @@ myBbcodeSettings = {
 
 			{separator:'---------------' },
 
-			{name:'<?= t('Принудительный перенос') ?>', replaceWith:'[br]\n', className:"page-red"},
-			{name:'<?= t('Линия') ?>', openBlockWith:'\n[hr]\n', className:"hr"}, 
-
-			{separator:'---------------' },
-
+			{name:'<?= t('Задать HTML/JS-код') ?>', openBlockWith:'[html]', closeBlockWith:'[/html]', className:"html-code"}, 
+			
 			<?php if (function_exists('run_php_custom')) { ?>
-			{name:'<?= t('Выполнить PHP-код') ?>', openBlockWith:'[php]', closeBlockWith:'[/php]', className:"php"},
+			{name:'<?= t('Исполняемый PHP-код') ?>', openBlockWith:'[php]', closeBlockWith:'[/php]', className:"php"},
 			<?php } ?>
 
-			{name:'<?= t('Выполнить HTML/JS-код') ?>', openBlockWith:'[html]', closeBlockWith:'[/html]', className:"html-code"}, 
-
-			<?php if (function_exists('ushka')) { ?>
 			{separator:'---------------' },
+			
+			{name:'<?= t('Текст (demo)') ?>', openBlockWith:'[text-demo]', closeBlockWith:'', className:"add"}, 
+			{name:'<?= t('Текст (normalize)') ?>', openBlockWith:'[text-normalize]', closeBlockWith:'', className:"add"}, 
+			
+			{separator:'---------------' },
+			
+			<?php if (function_exists('ushka')) { ?>
 			{name:'<?= t('Ушка') ?>', openBlockWith:'[ushka=[![<?= t('Имя ушки') ?>]!]]', closeBlockWith:'', className:"add"}, 
 			<?php } ?>
 			
-			{separator:'---------------' },
 			{name:'<?= t('Показать/спрятать (show)') ?>', openBlockWith:'[show [![<?= t('Заголовок блока') ?>]!]]', closeBlockWith:'[/show]', className:"add"}, 
-
 			
 			<?php if (function_exists('down_count_content')) { ?>
-			{separator:'---------------' },
 			{name:'<?= t('Счетчик переходов') ?>', openBlockWith:'[dc]', closeBlockWith:'[/dc]', className:"add"}, 
 			<?php } ?>
 
 			<?php if (function_exists('audioplayer_content')) { ?>
-			{separator:'---------------' },
 			{name:'<?= t('Аудиоплеер MP3') ?>', replaceWith:'[audio=[![Адрес]!]]', className:"audio"}, 
 			<?php } ?>
 
 			<?php if (function_exists('faq_custom')) { ?>
-			{separator:'---------------' },
 			{name:'<?= t('FAQ (заготовка)') ?>', openBlockWith:'[faqs]\n[faq=<?= t('вопрос') ?>]<?= t('ответ') ?>[/faq]\n[faq=<?= t('вопрос2') ?>]<?= t('ответ2') ?>[/faq]\n[/faqs]', closeBlockWith:'', className:"add"}, 
 			<?php } ?>
 
 
 			<?php if (function_exists('spoiler_custom')) { ?>
-			{separator:'---------------' },
 			{name:'<?= t('Показать/спрятать (spoiler)') ?>', openBlockWith:'[spoiler=[![<?= t('Заголовок блока') ?>]!]]', closeBlockWith:'[/spoiler]', className:"add"}, 
 			<?php } ?>
 
 			<?php if (function_exists('auth_content_parse')) { ?>
-			{separator:'---------------' },
 			{name:'<?= t('Спрятать от незалогиненных') ?>', openBlockWith:'[auth]', closeBlockWith:'[/auth]', className:"add"}, 
 			<?php } ?>
 
 			<?php if (function_exists('forms_content')) { ?>
-			{separator:'---------------' },
 			{name:'<?= t('Форма (заготовка)') ?>', openBlockWith:'[form] \n[email=mylo@sait.com] \n[redirect=http://site.com/] \n[subject=<?= t('Моя форма') ?>] \n \n[field] \nrequire = 1   \ntype = select \ndescription = <?= t('Выберите специалиста') ?> \nvalues = <?= t('Иванов # Петров # Сидоров') ?>\ndefault = <?= t('Иванов') ?>\ntip = <?= t('Подсказка к полю') ?> \n[/field] \n \n[field] \nrequire = 0   \ntype = text \ndescription = <?= t('Ваш город') ?>\ntip = <?= t('Указывайте вместе со страной') ?>\n[/field] \n \n[field] \nrequire = 1 \ntype = textarea \ndescription = <?= t('Ваш вопрос') ?> \n[/field] \n \n[/form]', closeBlockWith:'', className:"add"}, 
 			<?php } ?>
 
@@ -237,8 +231,13 @@ myBbcodeSettings = {
 
 		{name:'<?= t('Отметить конец анонса') ?>', replaceWith:'\n[cut]\n', className:"separator", dropMenu: [
 			{name:'<?= t('Отрезать анонс') ?>', replaceWith:'\n[xcut]\n', className:"separator2"},
-		]}, 
 			
+			{name:'<?= t('Принудительный перенос') ?>', replaceWith:'[br]\n', className:"page-red"},
+			{name:'<?= t('Линия') ?>', openBlockWith:'\n[hr]\n', className:"hr"}, 
+
+		]}, 
+		
+		
 			
 			
 		{separator:'---------------' },

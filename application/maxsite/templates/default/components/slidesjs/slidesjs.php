@@ -72,7 +72,7 @@ if ($slidesjs_easing = mso_get_option('slidesjs_easing', 'templates', 'linear'))
 // время перехода
 if ($slidesjs_animation_time = mso_get_option('slidesjs_animation_time', 'templates', 1500))
 {
-	$slidesjs_animation_time = 'slideSpeed: ' . $slidesjs_animation_time . ', fadeSpeed: "' . $slidesjs_animation_time . '",';
+	$slidesjs_animation_time = 'slideSpeed: ' . $slidesjs_animation_time . ', fadeSpeed: ' . $slidesjs_animation_time . ',';
 }
 
 // эффект перехода: slide или fade

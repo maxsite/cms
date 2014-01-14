@@ -1550,7 +1550,6 @@ function mso_clean_html($matches)
 	return $matches[1];
 }
 
-
 # предподготовка html в тексте между [html] ... [/html]
 # конвертируем все символы в реальный html
 # после этого кодируем его в одну строчку base64
@@ -1560,21 +1559,22 @@ function mso_clean_html_do($matches)
 {
 	$arr1 = array('&amp;', '&lt;', '&gt;', '<br />', '<br>', '&nbsp;');
 	$arr2 = array('&',     '<',    '>',    "\n",     "\n",   ' ');
-	
 	$m = trim( str_replace($arr1, $arr2, $matches[1]) );
-
 	$m = '[html_base64]' . base64_encode($m) . '[/html_base64]';
-
 	return $m;
 }
 
+# аналогично mso_clean_html_do, только без замен — [html_r] ... [/html_r]
+function mso_clean_html_r_do($matches)
+{
+	return '[html_base64]' . base64_encode($matches[1]) . '[/html_base64]';
+}
 
-# декодирование из mso_balance_tags см. mso_clean_html_do
+# декодирование из mso_balance_tags см. mso_clean_html_do и mso_clean_html_r_do
 function mso_clean_html_posle($matches)
 {
 	return base64_decode($matches[1]);
 }
-
 
 # авторасстановка тэгов
 function mso_auto_tag($pee, $pre_special_chars = false)
@@ -1599,15 +1599,22 @@ function mso_auto_tag($pee, $pre_special_chars = false)
 	}
 	
 	//pr($pee, true); # контроль
+
+	# если html-код в [html_r] код [/html_r]
+	# в отличие от [html] — отдаёт полностью исходный html без обработок 
+	$pee = str_replace('<p>[html_r]</p>', '[html_r]', $pee);
+	$pee = str_replace('<p>[/html_r]</p>', '[/html_r]', $pee);
+	$pee = preg_replace_callback('!\[html_r\](.*?)\[\/html_r\]!is', 'mso_clean_html_r_do', $pee );
 	
+	// в исходном html убираем переносы
 	$pee = str_replace("\n", "", $pee);
 	$pee = $pee . "\n";
 
-	# если html в [html] код [/html]
+	# если html-код в [html] код [/html]
 	$pee = str_replace('<p>[html]</p>', '[html]', $pee);
 	$pee = str_replace('<p>[/html]</p>', '[/html]', $pee);
 	$pee = preg_replace_callback('!\[html\](.*?)\[\/html\]!is', 'mso_clean_html_do', $pee );
-
+	
 	
 	# исправляем стили браузера
 	$pee = str_replace('<hr style="width: 100%; height: 2px;">', "<hr>", $pee);

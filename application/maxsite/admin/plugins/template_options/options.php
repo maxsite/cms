@@ -62,7 +62,7 @@
 	// подключаем только те опции и ini компонентов, которые реально существуют
 	
 	// все компоненты
-	$all_component = get_path_files(getinfo('template_dir') . 'components/', getinfo('template_dir') . 'components/', true, array('php'));
+	$all_component = mso_get_path_files(getinfo('template_dir') . 'components/', getinfo('template_dir') . 'components/', true, array('php'));
 	
 	// проверяем опции
 	foreach($all_component as $file) 

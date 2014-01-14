@@ -75,7 +75,7 @@ function shjs_mso_options()
 			
 			'default_lang' => array(
 							'type' => 'select', 
-							'name' => t('Язык программирования по-умолчанию'), 
+							'name' => t('Язык подсветки по-умолчанию'), 
 							'description' => t('Выберите язык, который будет применяться к &lt;pre&gt; и [pre] без указанного class.'), 
 							'values' => $all_lang,
 							'default' => 'sh_php'
@@ -87,6 +87,7 @@ function shjs_mso_options()
 	Плагин делает код более привлекательным и наглядным. Для использования следует указать его в виде: </p>
 <pre>
 &lt;pre class="sh_php"&gt; тут PHP-код &lt;/pre&gt;
+&lt;pre class="sh_less"&gt; тут LESS-код &lt;/pre&gt;
 &lt;pre class="sh_css"&gt; тут CSS-код &lt;/pre&gt;
 &lt;pre class="sh_html"&gt; тут HTML-код &lt;/pre&gt;
 &lt;pre class="sh_javascript"&gt; тут JavaScript-код &lt;/pre&gt;
@@ -95,6 +96,7 @@ function shjs_mso_options()
 	<p class="info">Если у вас включён плагин <strong>BBCode</strong>, то можно использовать так:</p>
 <pre>
 [pre class="sh_php"] тут PHP-код [/pre]
+[pre class="sh_less"] тут LESS-код [/pre]
 [pre class="sh_css"] тут CSS-код [/pre]
 [pre class="sh_html"] тут HTML-код [/pre]
 [pre class="sh_javascript"] тут JavaScript-код [/pre]
@@ -160,6 +162,8 @@ function shjs_content($text = '')
 		$text = str_replace('[pre lang=html]', '[pre class="sh_html"]', $text);
 		$text = str_replace('<pre lang=html>', '<pre class="sh_html">', $text);
 		
+		$text = str_replace('[pre lang=less]', '[pre class="sh_less"]', $text);
+		$text = str_replace('<pre lang=less>', '<pre class="sh_less">', $text);
 		
 		$text = preg_replace_callback('~<pre(.*?)>(.*?)<\/pre>~si', 'shjs_pre_callback', $text);
 		

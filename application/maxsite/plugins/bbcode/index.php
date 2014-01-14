@@ -309,10 +309,17 @@ function bbcode_custom($text = '')
 	{
 		if (file_exists(getinfo('plugins_dir') . 'bbcode/text-demo.txt') )
 		{
-			$text_demo = file(getinfo('plugins_dir') . 'bbcode/text-demo.txt');
-			//$text_demo = implode("MSO_N", $text_demo);
-			$text_demo = implode("\n", $text_demo);
+			$text_demo = file_get_contents(getinfo('plugins_dir') . 'bbcode/text-demo.txt');
 			$text = str_replace('[text-demo]', $text_demo, $text);
+		}
+	}
+	
+	if (strpos($text, '[text-normalize]') !== false) // есть вхождение [text-normalize]
+	{
+		if (file_exists(getinfo('plugins_dir') . 'bbcode/text-normalize.txt') )
+		{
+			$text_normalize = file_get_contents(getinfo('plugins_dir') . 'bbcode/text-normalize.txt');
+			$text = str_replace('[text-normalize]', $text_normalize, $text);
 		}
 	}
 
@@ -333,6 +340,8 @@ function bbcode_custom($text = '')
 	
 	// по хуку bbcode можно выполнить свои замены
 	$text = mso_hook('bbcode', $text);
+	
+	// pr($text, 1);
 	
 	return $text;
 }

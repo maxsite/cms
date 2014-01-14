@@ -2,8 +2,8 @@
 
 $info = array(
 	'name' => t('Подсветка кода'),
-	'description' => t('Подсветка кодов (JS, PHP, CSS, HTML). Подробное описание см. в опциях плагина.'),
-	'version' => '1.4',
+	'description' => t('Подсветка кодов (JS, PHP, CSS, HTML, LESS). Подробное описание см. в опциях плагина.'),
+	'version' => '1.5',
 	'author' => 'Максим',
 	'plugin_url' => 'http://max-3000.com/',
 	'author_url' => 'http://shjs.sourceforge.net/',

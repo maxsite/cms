@@ -13,7 +13,7 @@ img = адрес картинки
 */
 
 // где выводить записи
-$jcarousel_output = mso_get_option('jcarousel_output', 'templates', array());
+$jcarousel_output = (array) mso_get_option('jcarousel_output', 'templates', array());
 
 if (!$jcarousel_output)  return; // ничего не отмечено - нигде не показывать
 
@@ -144,7 +144,7 @@ $(function() {
 					$slide['text'] = '<p>' . trim($slide['text']) . '</p>';
 				}
 				
-				echo '<li>' . $a1 . '<img src="' . $slide['img'] . '">' . $slide['text'] . $a1 . '</li>';
+				echo '<li>' . $a1 . '<img src="' . $slide['img'] . '">' . $slide['text'] . $a2 . '</li>';
 			}
 		?>
 		</ul>

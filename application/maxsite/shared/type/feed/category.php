@@ -41,7 +41,7 @@ $feed_url = getinfo('siteurl');
 $language = 'en-ru';
 $generator = 'MaxSite CMS (http://max-3000.com/)';
 
-$par = array( 'limit'=>$limit, 'cut'=>$cut, 'type'=>'blog', 'pagination'=>false, 'only_feed'=>true ); 
+$par = array( 'limit'=>$limit, 'cut'=>$cut, 'type'=>false, 'pagination'=>false, 'only_feed'=>true ); 
 
 $pages = mso_get_pages($par, $pagination); 
 

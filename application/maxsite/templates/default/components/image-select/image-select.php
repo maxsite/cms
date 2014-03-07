@@ -5,7 +5,7 @@
 */
 
 // где выводить
-$component_output = mso_get_option('component_image_select_output', 'templates', array());
+$component_output = (array) mso_get_option('component_image_select_output', 'templates', array());
 
 if (!in_array('all', $component_output)) // не отмечено выводить везде
 {

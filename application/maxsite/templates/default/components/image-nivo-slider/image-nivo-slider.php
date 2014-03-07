@@ -6,7 +6,7 @@
 */
 
 // где выводить записи
-$nivo_slider_output = mso_get_option('nivo_slider_output', 'templates', array());
+$nivo_slider_output = (array) mso_get_option('nivo_slider_output', 'templates', array());
 
 if (!$nivo_slider_output) return; // ничего не отмечено - нигде не показывать
 

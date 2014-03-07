@@ -91,7 +91,13 @@ class Page_out
 					'',
 					'',
 				),
-
+			
+			'author' => array // дубль autor
+				(
+					'',
+					'',
+				),
+				
 			'edit' => array
 				(
 					'Редактировать',
@@ -233,6 +239,7 @@ class Page_out
 		
 		$title = '';
 		$autor = '';
+		$author = ''; // синоним autor
 		$comments = '';
 		$comments_count = ''; // только колво комментариев числом
 		$cat = '';
@@ -270,6 +277,17 @@ class Page_out
 				$this->get_formats_args('autor', 2), // $posle = '',
 				false);
 		}
+		
+		if (strpos($out, '[author]') !== false)
+		{
+			$author = mso_page_author_link(
+				$this->val('users_nik'), // данные из $page
+				$this->val('page_id_autor'), // данные из $page
+				$this->get_formats_args('author', 1), // $do = '', 
+				$this->get_formats_args('author', 2), // $posle = '',
+				false);
+		}
+		
 		
 		// mso_page_comments_link($page_comment_allow = true, $page_slug = '', $title = 'Обсудить', $do = '', $posle = '', $echo = true, $type = 'page'
 		if (strpos($out, '[comments]') !== false)
@@ -437,6 +455,7 @@ class Page_out
 		
 		$out = str_replace('[title]', $title, $out);
 		$out = str_replace('[autor]', $autor, $out);
+		$out = str_replace('[author]', $author, $out);
 		$out = str_replace('[comments]', $comments, $out);
 		$out = str_replace('[comments_count]', $comments_count, $out);
 		$out = str_replace('[cat]', $cat, $out);
@@ -719,8 +738,8 @@ class Page_out
 	{
 		if ($class) $class = ' class="' . $class . '"';
 		
-		if ($rows1) $text = NR . '<div' . $class . '"><div class="row">';
-		else $text = NR . '<div' . $class . '">';
+		if ($rows1) $text = NR . '<div' . $class . '><div class="row">';
+		else $text = NR . '<div' . $class . '>';
 	
 		return $this->out($text);
 	}
@@ -823,12 +842,12 @@ class Page_out
 	
 	
 	// вывод записи
-	function box_grid_cell($class = '')
+	function box_grid_cell($class = '', $class_box = 'table-box')
 	{
 		// для первой ячейки нужно открыть блоки
 		if ($this->cur_cells == 1)
 		{
-			$this->box_start('', false);
+			$this->box_start($class_box, false);
 			$this->row_start();
 			$this->close_box_grid = false;
 		}
@@ -1104,6 +1123,9 @@ class Block_pages
 			'cat_id' => 0, // можно указать рубрики через запятую
 			'page_id' => 0, // можно указать записи через запятую
 			'type' => 'blog', // можно указать тип записей
+			'order' => 'page_date_publish', // поле сортировки страниц
+			'order_asc' => 'desc', // поле сортировки страниц
+			
 		);
 		
 		$this->param = array_merge($default, $r); // объединяем с дефолтом
@@ -1115,6 +1137,8 @@ class Block_pages
 			'cat_id' => $this->param['cat_id'],
 			'page_id' => $this->param['page_id'],
 			'type' => $this->param['type'],
+			'order' => $this->param['order'],
+			'order_asc' => $this->param['order_asc'],
 			
 			'custom_type' => 'home',
 			'exclude_page_id' => mso_get_val('exclude_page_id'), // исключаем получение уже выведенных записей
@@ -1131,6 +1155,7 @@ class Block_pages
 	{
 		$this->pages = $pages;
 		$this->pagination = $pagination;
+		$this->go = ($this->pages) ? true : false;
 	}
 	
 	
@@ -1171,6 +1196,8 @@ class Block_pages
 			'placehold' => false, // если нет картинки, выводим плейсхолд (true) или ничего (false)
 			'placehold_path' => 'http://placehold.it/', // путь к плейсхолдеру
 								// getinfo('template_url') . 'images/placehold/'
+			'placehold_pattern' => '[W]x[H].png', // шаблон плейсхолдера : width x height .png
+												// где [W] меняется на ширину, [H] — высоту, [RND] - число 1..10
 			'placehold_file' => false, // файл плейсхолдера, если false, то будет: width x height .png
 			
 			'block_start' => '', // html вначале
@@ -1212,6 +1239,13 @@ class Block_pages
 			'page_start' => '', // html в начале вывода записи 
 			'page_end' => '', // html в конце вывода записи
 			
+			// колонки в виде ячеек таблицы 1 2 / 3 4 / 5 6
+			// может конфликтовать с columns
+			'box_grid' => 0, // указывается количество ячеек в одной строке
+			'box_grid_class' => 'w50', // указывается css-класс ячейки
+			'box_grid_box_class' => 'table-box', // указывается css-класс строки-контейнера
+			
+			
 		);
 		
 		$r = array_merge($default, $r); // объединяем
@@ -1236,13 +1270,16 @@ class Block_pages
 			$my_columns = new Columns($r['columns'], count($this->pages), $r['columns_class_row']);
 		}
 		
+		if ($r['box_grid']) $p->box_grid($r['box_grid']);
+		
 		foreach ($this->pages as $page)
 		{
 			$p->load($page); // загружаем данные записи
 			
-			echo $r['page_start'];
-			
+			if ($r['box_grid']) $p->box_grid_cell($r['box_grid_class'], $r['box_grid_box_class']); 
 			if ($r['columns']) $my_columns->out($r['columns_class_cell']);
+			
+			echo $r['page_start'];
 			
 			if ($r['thumb']) // миниатюра
 			{
@@ -1251,7 +1288,11 @@ class Block_pages
 					// плейсхолд
 					if (!$r['placehold_file'])
 					{
-						$t_placehold = $r['placehold_path'] . $r['thumb_width'] . 'x' . $r['thumb_height'] . '.png';
+						$t_placehold_pattern = str_replace('[W]', $r['thumb_width'], $r['placehold_pattern']);
+						$t_placehold_pattern = str_replace('[H]', $r['thumb_height'], $t_placehold_pattern);
+						$t_placehold_pattern = str_replace('[RND]', rand(1, 10), $t_placehold_pattern);
+						
+						$t_placehold = $r['placehold_path'] . $t_placehold_pattern;
 					}
 					else
 					{
@@ -1303,16 +1344,19 @@ class Block_pages
 			
 			if ($r['clearfix']) $p->clearfix();
 			
+			echo $r['page_end'];
 			
 			if ($r['columns']) $my_columns->next();
-			
-			echo $r['page_end'];
+			if ($r['box_grid']) $p->box_grid_next();
 			
 			// сохраняем id записей, чтобы их исключить из вывода
 			$exclude_page_id[] = $p->val('page_id'); 
 		}
 		
+		
 		if ($r['columns']) $my_columns->close();
+		
+		if ($r['box_grid']) $p->box_grid_end();
 		
 		mso_set_val('exclude_page_id', $exclude_page_id);
 		

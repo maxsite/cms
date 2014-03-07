@@ -165,7 +165,7 @@ function page_views_widget_custom($options = array(), $num = 1)
 				$out1 = str_replace('[ALLCOUNT]', $page['page_view_count'], $out1);
 
 				$out1 = str_replace('[A]', $link . $page['page_slug']
-						. '" title="' . t('Просмотров в сутки: ') . $page['sutki'] . '">'
+						. '" title="' . tf('Просмотров в сутки: ') . $page['sutki'] . '">'
 						, $out1);
 
 				$out1 = str_replace('[/A]', '</a>', $out1);

@@ -15,7 +15,7 @@ img = адрес картинки
 */
 
 // где выводить записи
-$slidesjs_output = mso_get_option('slidesjs_output', 'templates', array());
+$slidesjs_output = (array) mso_get_option('slidesjs_output', 'templates', array());
 
 if (!$slidesjs_output)  return; // ничего не отмечено - нигде не показывать
 

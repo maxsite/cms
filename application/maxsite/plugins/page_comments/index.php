@@ -124,7 +124,7 @@ function page_comments_widget_custom($options = array(), $num = 1)
 				$out1 = str_replace('[COUNT]', $page['page_count_comments'], $out1);
 				
 				$out1 = str_replace('[A]', $link . $page['page_slug'] 
-						. '" title="Комментариев: ' . $page['page_count_comments'] . '">'
+						. '" title="' . tf('Комментариев: ') . $page['page_count_comments'] . '">'
 						, $out1);
 						
 				$out1 = str_replace('[/A]', '</a>', $out1);

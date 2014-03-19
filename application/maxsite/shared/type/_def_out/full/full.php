@@ -10,7 +10,7 @@ if (!$pages) return;
 $p = new Page_out();
 
 $p->format('title', mso_get_val('full_format_title_start', '<h2 class="page_title">'), mso_get_val('full_format_title_end', '</h2>'), true);
-$p->format('date', 'D, j F Y г.', '<span><time datetime="[page_date_publish_iso]">', '</time></span>');
+$p->format('date', 'D, j F Y '.tf('г.'), '<span><time datetime="[page_date_publish_iso]">', '</time></span>');
 $p->format('cat', ' -&gt; ', '<br><span>' . tf('Рубрика') . ': ', '</span>');
 $p->format('tag', ' | ', '<br><span>' . tf('Метки') . ': ', '</span>');
 $p->format('feed', tf('Комментарии по RSS'), ' | <span>', '</span>');

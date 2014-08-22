@@ -87,22 +87,26 @@ EOF;
 			}
 		);
 	
-		$("#all-files-update").click(function()
-		{
-			$("#all-files-result").html("' . t('Обновление...') . '");
-			
-			$.post(
-				"' . getinfo('ajax') . base64_encode('admin/plugins/admin_page/all-files-update-ajax.php') . '",
-				{
-					dir: "' . $current_dir . '"
-				},
-				function(data)
-				{
-					$("#all-files-result").html(data);
-					' . $lightbox . '
-				}
-			);
-			return false;
+		$(window).on("storage", function(e) {
+			var pageId = window.location.pathname.match(/\d+$/)[0],
+				event = e.originalEvent;
+
+			if (event.newValue === pageId) {
+				$("#all-files-result").html("' . t('Обновление...') . '");
+
+				$.post(
+					"' . getinfo('ajax') . base64_encode('admin/plugins/admin_page/all-files-update-ajax.php') . '",
+					{
+						dir: "' . $current_dir . '"
+					},
+					function(data)
+					{
+						$("#all-files-result").html(data);
+						' . $lightbox . '
+						localStorage.clear();
+					}
+				);
+			}
 		});
 	});
 	

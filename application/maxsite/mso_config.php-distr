@@ -5,7 +5,7 @@ global $mso_install;
 $mso_install = false; # после инсталяции блога можно установить true
 
 # секретная фраза - она будет использоваться при генерации ключей
-$MSO->config['secret_key'] = '';
+$MSO->config['secret_key'] = '%SECRET_KEY%';
 
 # можно указать свой ключ для удаленного постинга
 # $MSO->config['remote_key'] = '0';

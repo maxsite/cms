@@ -266,6 +266,10 @@ if (!class_exists('Maxsite'))
 				 ( $this->data_def['uri_segment'][count($this->data_def['uri_segment'])] == '3' )
 				)
 				$step = 3;
+			elseif ( ( count($this->data_def['uri_segment']) > 0 ) and 
+				 ( $this->data_def['uri_segment'][count($this->data_def['uri_segment'])] == '4' )
+				)
+				$step = 4;
 			else $step = 1;
 
 			$data = array('type'=>'install', 'url_css'=>$css, 'step'=>$step);

@@ -165,7 +165,9 @@ function last_comments_widget_custom($options = array(), $num = 1)
 				else 
 					$css_style_add = 'last_comment_anonim';
 				
-				$out .= '<li class="' . $css_style_add . '"><a href="' . getinfo('siteurl') . 'page/' . mso_slug($page_slug) . '#comment-' . $comments_id . '" id="comment-' . $comments_id . '"><strong>';
+				//$out .= '<li class="' . $css_style_add . '"><a href="' . getinfo('siteurl') . 'page/' . mso_slug($page_slug) . '#comment-' . $comments_id . '" id="comment-' . $comments_id . '"><strong>';
+				
+				$out .= '<li class="' . $css_style_add . '"><a href="' . getinfo('siteurl') . 'page/' . mso_slug($page_slug) . '#comment-' . $comments_id . '"><strong>';
 				
 				if ($comments_users_id) // это автор
 				{

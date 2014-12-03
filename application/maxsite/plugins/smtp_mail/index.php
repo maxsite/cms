@@ -125,6 +125,9 @@ function smtp_mail_custom($arg = array())
 	if (!isset($options['to_email'])) $options['to_email'] = 1;
 	$sent = '!not-sent-';
 	$res = false;
+	
+	$debug = '';
+	
 	if ($options['to_email'] == 1)
 	{
 		$CI->load->library('email');
@@ -163,7 +166,7 @@ function smtp_mail_custom($arg = array())
 		$CI->email->_safe_mode = true; # иначе CodeIgniter добавляет -f к mail - не будет работать в не safePHP
 
 		$res = $CI->email->send();
-		$debug = '';
+		
 		if (!$res)
 		{
 			$debug = '<div style="border: silver solid 1px; padding: 20px; margin: 20px;">' . $CI->email->print_debugger() . '<div>';
@@ -205,4 +208,4 @@ function smtp_mail_custom($arg = array())
 	return $res;
 }
 
-?>
+# end file

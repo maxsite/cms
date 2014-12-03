@@ -1045,7 +1045,7 @@ function mso_get_option($key, $type = 'general', $return_value = false)
 # аналог опций, хранящейся в отдельном файле/каталоге _mso_float
 function mso_add_float_option($key, $value, $type = 'general', $serialize = true, $ext = '', $md5_key = true, $dir = '')
 {
-	$CI = & get_instance();
+	// $CI = & get_instance();
 
 	if ($dir) $dir .= '/';
 
@@ -1080,7 +1080,7 @@ function mso_add_float_option($key, $value, $type = 'general', $serialize = true
 # получение данных из flat-опций
 function mso_get_float_option($key, $type = 'general', $return_value = false, $serialize = true, $ext = '', $md5_key = true, $dir = '')
 {
-	$CI = & get_instance();
+	// $CI = & get_instance();
 
 	if (!$key or !$type) return $return_value;
 
@@ -1114,7 +1114,7 @@ function mso_get_float_option($key, $type = 'general', $return_value = false, $s
 # удаление flat-опции если есть
 function mso_delete_float_option($key, $type = 'general', $dir = '')
 {
-	$CI = & get_instance();
+	// $CI = & get_instance();
 
 	if (!$key or !$type) return false;
 
@@ -2348,8 +2348,8 @@ function mso_get_permalink_cat_slug($slug = '', $prefix = 'category/')
 }
 
 
-#  разделить строку из чисел, разделенных запятыми в массив
-# если $integer = true, то дополнительно преобразуется в числа
+# преобразовать строку из чисел, разделенных запятыми, в массив
+# если $int = true, то дополнительно преобразуется в числа
 # если $probel = true, то разделителем может быть пробел
 # если $unique = true, то убираем дубли
 function mso_explode($s = '', $int = true, $probel = true, $unique = true )
@@ -2375,7 +2375,7 @@ function mso_explode($s = '', $int = true, $probel = true, $unique = true )
 	{
 		if ($int)
 		{
-			if (  (int) $val > 0 ) $out[] = $val; // id в массив
+			if ( (int) $val > 0 ) $out[] = $val; // id в массив
 		}
 		else
 		{
@@ -3962,7 +3962,6 @@ function mso_get_val($key = '', $default = '', $array = false)
 		return $default;
 	}
 	
-	
 	if ($array !== false and $default and isset($MSO->key_options[$key][$default]))
 	{
 		return $MSO->key_options[$key][$default]; 
@@ -3995,7 +3994,6 @@ function mso_set_val($key, $val, $val_val = null)
 	{
 		$MSO->key_options = array();
 	}
-	
 
 	if ($val_val !== null)
 	{
@@ -4005,7 +4003,6 @@ function mso_set_val($key, $val, $val_val = null)
 	{
 		$MSO->key_options[$key] = $val; // записали значение
 	}
-	
 }
 
 # Функция удаляет ключ $key 

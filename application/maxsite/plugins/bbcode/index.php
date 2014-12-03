@@ -134,6 +134,8 @@ function bbcode_custom($text = '')
 		'~\[p=(.*?)\](.*?)\[\/p\]~si'			=> '<p style="$1">$2</p>',
 		'~\[p (.*?)\](.*?)\[\/p\]~si'			=> '<p $1>$2</p>',
 		
+		'~\[p\((.*?)\)\](.*?)\[\/p\]~si' 	=> '<p class="$1">$2</p>', // [p(класс)] [/p] 
+		
 		'~\[pleft\](.*?)\[\/pleft\]~si'			=> '<p style="text-align: left;">$1</p>',
 		'~\[pright\](.*?)\[\/pright\]~si'		=> '<p style="text-align: right;">$1</p>',
 		'~\[pcenter\](.*?)\[\/pcenter\]~si'		=> '<p style="text-align: center;">$1</p>',

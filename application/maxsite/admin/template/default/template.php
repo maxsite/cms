@@ -95,7 +95,7 @@
 	
 		<div class="header"><div class="header-wrap">
 			
-			<a href="http://max-3000.com/" class="logo-cms" title="MaxSite CMS"><a>
+			<a href="http://max-3000.com/" class="logo-cms" title="MaxSite CMS"></a>
 			
 			<div class="name-site-descr">
 				<a href="<?= getinfo('siteurl') ?>"><?= mso_get_option('name_site', 'general') ?></a>

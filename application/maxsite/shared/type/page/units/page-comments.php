@@ -114,7 +114,7 @@ if ($page_text_ok and $comments) // есть страницы
 				. tf('Сайт комментатора') . '"></a>';
 		}
 		
-		$comment_date = '<span class="date"><a href="#comment-' 
+		$comment_date = ' <span class="date"><a href="#comment-' 
 			. $comments_id 
 			. '" id="comment-' . $comments_id . '">' . $comments_date . '</a></span>';
 		
@@ -141,7 +141,7 @@ if ($page_text_ok and $comments) // есть страницы
 					. ($comment_edit ? ' | ' . $comment_edit : '')
 					. ($comment_approved ? ' | ' . $comment_approved : '')
 					. $comment_num_comment 
-					. '<br>' . $comment_date
+					. $comment_date
 				. '</div>'
 				
 				. '<div class="comments_content">'

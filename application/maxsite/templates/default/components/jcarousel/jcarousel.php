@@ -144,7 +144,7 @@ $(function() {
 					$slide['text'] = '<p>' . trim($slide['text']) . '</p>';
 				}
 				
-				echo '<li>' . $a1 . '<img src="' . $slide['img'] . '">' . $slide['text'] . $a2 . '</li>';
+				echo '<li>' . $a1 . '<img src="' . $slide['img'] . '" alt="">' . $slide['text'] . $a2 . '</li>';
 			}
 		?>
 		</ul>

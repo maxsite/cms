@@ -6,12 +6,12 @@ application/maxsite/mso_config.php
 application/config/database.php
 
 /application/cache/*
-/application/cache/db/*
-!application/cache/db/.gitkeep/.gitkeep
-/application/cache/html/*
-!application/cache/html/.gitkeep/.gitkeep
-/application/cache/rss/*
-!application/cache/rss/.gitkeep/.gitkeep
+/application/cache/db/*.*
+!/application/cache/db/.gitkeep/.gitkeep
+/application/cache/html/*.*
+!/application/cache/html/.gitkeep/.gitkeep
+/application/cache/rss/*.*
+!/application/cache/rss/.gitkeep/.gitkeep
 
 /uploads/**
 !/uploads/.htaccess

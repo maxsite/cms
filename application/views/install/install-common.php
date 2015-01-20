@@ -72,4 +72,178 @@ function mso_install_newsite($arg = array())
 	return $res;
 }
 
+function mso_add_htaccess($arg = array())
+{
+    $htaccess_path = FCPATH . '/.htaccess';
+
+    if (!empty($arg['subdir'])) {
+        $subdir = '/' . $arg['subdir'] . '/';
+    } else {
+        $subdir = '/';
+    }
+
+    if ($arg['autoredirect']) {
+        $autoredirect = 'RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+RewriteRule ^(.*)$ http://%1%{REQUEST_URI} [R=301,L]';
+    } else {
+        $autoredirect = '';
+    }
+
+    $new = 'Options +FollowSymLinks
+Options -Indexes
+DirectoryIndex index.php index.html
+AddDefaultCharset UTF-8
+
+#php_flag register_globals off
+#php_value memory_limit 16M
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteBase ' . $subdir . '
+RewriteCond $1 !^(index\.php|uploads|robots\.txt|favicon\.ico)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ ' . $subdir . 'index.php/$1 [L,QSA]
+' . $autoredirect . '
+</IfModule>';
+
+    $handle = fopen($htaccess_path,'w+');
+    @chmod($htaccess_path,0644);
+    if(is_writable($htaccess_path)) {
+        if(fwrite($handle,$new)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+function mso_add_robots()
+{
+    $robots_path = FCPATH . '/robots.txt';
+
+    $new = 'User-agent: *
+Disallow: /system
+Disallow: /admin
+Disallow: /login
+Disallow: /logout
+Disallow: /registration
+Disallow: /search
+Disallow: /users/*/edit
+Disallow: /users/*/lost
+Disallow: /password-recovery
+Disallow: /ajax
+Disallow: /ajax/*
+Disallow: /require-maxsite
+Disallow: /require-maxsite/*
+Sitemap: http://'. $_SERVER['HTTP_HOST']. '/sitemap.xml
+
+Host: '. $_SERVER['HTTP_HOST'].'
+';
+
+    $handle = fopen($robots_path,'w+');
+    @chmod($robots_path,0777);
+    if(is_writable($robots_path)) {
+        if(fwrite($handle,$new)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+function mso_add_sitemap()
+{
+    $sitemap_path = FCPATH . '/sitemap.xml';
+
+    $new = '';
+
+    $handle = fopen($sitemap_path,'w+');
+    @chmod($sitemap_path,0777);
+    if(is_writable($sitemap_path)) {
+        if(fwrite($handle,$new)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+function mso_add_db_setting($arg = array())
+{
+    $db_config_path = FCPATH . '/' . APPPATH . 'config/database.php';
+
+    $database_file = file_get_contents($db_config_path);
+
+    $new  = str_replace("%HOSTNAME%",$arg['hostname'],$database_file);
+    $new  = str_replace("%USERNAME%",$arg['username'],$new);
+    $new  = str_replace("%PASSWORD%",$arg['password'],$new);
+    $new  = str_replace("%DATABASE%",$arg['database'],$new);
+
+    $handle = fopen($db_config_path,'w+');
+    @chmod($db_config_path,0644);
+    if(is_writable($db_config_path)) {
+        if(fwrite($handle,$new)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+function mso_add_secret_key($secret_name)
+{
+    $secret_config_path = FCPATH . '/' . APPPATH . 'maxsite/mso_config.php';
+    if (!file_exists($secret_config_path)) {
+        if (file_exists($secret_config_path . '-distr')) {
+            rename($secret_config_path . '-distr', $secret_config_path);
+        }
+        else exit;
+    }
+
+    $secret_file = file_get_contents($secret_config_path);
+
+    $new  = str_replace("%SECRET_KEY%",$secret_name,$secret_file);
+
+    $handle = fopen($secret_config_path,'w+');
+    @chmod($secret_config_path,0644);
+    if(is_writable($secret_config_path)) {
+        if(fwrite($handle,$new)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+function mso_install_success()
+{
+    $config_path = FCPATH . '/' . APPPATH . 'maxsite/mso_config.php';
+    $secret_file = file_get_contents($config_path);
+
+    $new  = str_replace('$mso_install = false;','$mso_install = true;',$secret_file);
+
+    $handle = fopen($config_path,'w+');
+    @chmod($config_path,0644);
+    if(is_writable($config_path)) {
+        if(fwrite($handle,$new)) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
 # end file

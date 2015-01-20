@@ -55,7 +55,11 @@ $autoload['packages'] = array();
 // проверка на наличие файла конфигурации базы
 if (!file_exists(FCPATH . APPPATH . 'config/database.php')) 
 {
-	die('File not found: <b>application/config/database.php</b>');
+    if (file_exists(FCPATH . APPPATH . 'config/database.php-distr'))
+    {
+        rename(FCPATH . APPPATH . 'config/database.php-distr', FCPATH . APPPATH . 'config/database.php');
+    }
+    else die('File not found: <b>application/config/database.php</b>');
 }
 
 $autoload['libraries'] = array('database', 'session');

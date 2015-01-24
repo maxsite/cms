@@ -746,4 +746,20 @@ EOF;
 		echo '<p>' . t('Нет загруженных файлов') . '</p>';
 	}
 
+	if ( mso_segment(1) == 'admin' and mso_segment(2) == 'files' and mso_segment(3) == '_pages' and preg_match("/\d+/", mso_segment(4)) )
+	{
+		echo <<<EOF
+	<script>
+		var regPattern = /_pages\/(\d+)$/,
+			pageId = window.location.pathname.match(regPattern),
+			updateMsg = $(".update");
+
+		if ( pageId && updateMsg.length ) {
+			pageId = pageId[1];
+			localStorage.setItem("uploads", pageId);
+		}
+	</script>
+EOF;
+	}
+
 # end file

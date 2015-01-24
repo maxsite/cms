@@ -2125,6 +2125,7 @@ function mso_next_prev_page($r = array())
 			'get_page_categories' => false,
 			'get_page_meta_tags' => false,
 			'get_page_count_comments' => false,
+			'type' => $r['type'],
 			'exclude_page_id' => $r['page_id'] ), $temp) 
 		) 
 		$out['prev'] = $pages[0];

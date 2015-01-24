@@ -28,7 +28,7 @@ $default = array(
 		'close_after_hour' => 0,
 		'admin_number_records' => 10,
 		'len_polls' => t('1 неделя'),
-		'secur_polls' => t('Защита по Coookie')
+		'secur_polls' => t('Защита по Cookie')
 );
 
 // Экспорт настроек из прошлых версий плагина.
@@ -119,7 +119,7 @@ mso_admin_plugin_options('plugin_samborsky_polls', 'plugins',
 			'name' => t('Защита от накрутки по-умолчанию'),
 			'type' => 'select',
 			'description' => t('Выберете защиту от накрутки по-умолчанию'),
-			'values' => t('Только для зарегистрированых (users)').' # '.t('Защита по Coookie').' # '.t('Без защиты, один пользователь может голосовать много раз'),
+			'values' => t('Только для зарегистрированых (users)').' # '.t('Защита по Cookie').' # '.t('Без защиты, один пользователь может голосовать много раз'),
 			'default' => $default['secur_polls']
 		)
 	),

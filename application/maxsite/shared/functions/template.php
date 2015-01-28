@@ -266,10 +266,6 @@ if (!function_exists('mso_default_head_section'))
 			
 		echo NT . mso_load_jquery();
 		
-		echo NT . '<!--[if lt IE 9]>
-	<script src="' . getinfo('shared_url') . 'js/html5shiv.js"></script>
-	<![endif]-->';
-		
 		echo NR . NT . '<!-- plugins -->' . NR;
 		mso_hook('head');
 		echo NT . '<!-- /plugins -->' . NR;

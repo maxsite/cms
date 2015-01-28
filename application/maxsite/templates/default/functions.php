@@ -15,10 +15,10 @@
 mso_register_sidebar('1', tf('Первый сайдбар'));
 
 # основные функции шаблона
-require_once(getinfo('shared_dir') . 'functions/template.php');
+if ($fn = mso_fe('custom/template.php')) require_once($fn);
 
 # набор из mso_set_val
-require_once(getinfo('shared_dir') . 'functions/set_val.php');
+if ($fn = mso_fe('custom/set_val.php')) require_once($fn);
 
 # библиотека для вывода записей в цикле и вывод колонок
 require_once(getinfo('shared_dir') . 'stock/page-out/page-out.php');

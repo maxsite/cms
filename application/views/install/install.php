@@ -80,7 +80,7 @@
 		echo '<h1>' . t('Добро пожаловать в программу установки <a href="http://max-3000.com/">MaxSite CMS</a>!', 'install') . '</h1>';
 			
 		echo '<div class="wrap">';
-		echo '<p class="error">' . t('Перед началом установки проверьте параметры доступа к MySQL в файле <span>application/config/database.php</span>', 'install') . '</p>';
+		echo '<p class="error">' . t('Проверьте параметры доступа к базе MySQL в файле <span>application/config/database.php</span>.', 'install') . '</p>';
 		echo '</div>';
 	
 	}

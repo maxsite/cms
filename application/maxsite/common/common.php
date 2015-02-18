@@ -4697,5 +4697,23 @@ function _mso_profiler_end($point = 'first', $echo = true)
 	else return $_points[$point];
 }
 
+# формирование <script> с внешним js-файлом или
+# формирование <link rel="stylesheet> с внешним css-файлом/less-файлом
+# имя файла указывается относительно каталога шаблона
+# если файла нет, то ничего не происходит
+function mso_add_file($fn)
+{
+	if (file_exists(getinfo('template_dir') . $fn)) 
+	{
+		$ext = substr(strrchr($fn, '.'), 1); // расширение файла
+		
+		if ($ext == 'js') 
+			echo NT . '<script src="' . getinfo('template_url') . $fn . '"></script>';
+		elseif ($ext == 'css') 
+			echo NT . '<link rel="stylesheet" href="' . getinfo('template_url') . $fn . '">';
+		elseif ($ext == 'less') 
+			echo NT . '<link rel="stylesheet/less" href="' . getinfo('template_url') . $fn . '" type="text/css">';
+	}
+}
 
 # end file

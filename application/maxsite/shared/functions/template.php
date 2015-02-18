@@ -5,9 +5,7 @@
  * http://max-3000.com/
  *
  * Функции для работы с шаблоном
- * Не копируйте этот файл в свой шаблон!
- *
- * Файл несовместим со старым default-шаблоном
+ * Не использовать для новых шаблонов MaxSite CMS > 0.87
  *
  */
 
@@ -350,26 +348,5 @@ if (!function_exists('mso_out_css_file'))
 		return $out;
 	}
 }
-
-
-# формирование <script> с внешним js-файлом или
-# формирование <link rel="stylesheet> с внешним css-файлом
-# имя файла указывается относительно каталога шаблона
-# если файла нет, то ничего не происходит
-if (!function_exists('mso_add_file'))
-{
-	function mso_add_file($fn)
-	{
-		if (file_exists(getinfo('template_dir') . $fn)) 
-		{
-			$ext = substr(strrchr($fn, '.'), 1);// расширение файла
-			if ($ext == 'js') echo NT . '<script src="' . getinfo('template_url') . $fn . '"></script>';
-			elseif ($ext == 'css') echo NT . '<link rel="stylesheet" href="' . getinfo('template_url') . $fn . '">';
-			elseif ($ext == 'less') echo NT . '<link rel="stylesheet/less" href="' . getinfo('template_url') . $fn . '" type="text/css">';
-			
-		}
-	}
-}
-
 
 # end file

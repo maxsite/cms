@@ -255,6 +255,8 @@
 										<br><em>' . $date_time . '</em>
 									</span>
 								</p>
+								
+								' . mso_hook('admin_page_form_add_block_2') . '
 							
 							</div><!-- /div.tabs-box.tabs-other -->
 							

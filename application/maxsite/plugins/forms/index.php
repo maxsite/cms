@@ -250,8 +250,9 @@ function forms_content_callback($matches)
 				
 				mso_hook('forms_send', $post);
 				
-				$form_hide = mso_mail($email, $subject, $message, $post['forms_email']);
+				$prefs = $post['forms_name'] != '' ? array( 'from_name' => $post['forms_name'] ) : array();
 				
+				$form_hide = mso_mail($email, $subject, $message, $post['forms_email'], $prefs);
 				if ( $forms_subscribe and isset($post['forms_subscribe']) ) 
 					mso_mail($post['forms_email'], tf('Вами отправлено сообщение:') . ' ' . $subject, $message);
 				

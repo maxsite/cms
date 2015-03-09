@@ -250,7 +250,9 @@ elseif(!isset($data['errors']))
 
 	$protect = get_protect_polls($options['secur_polls']);
 
-	$qu = new stdClass();
+	$qu = new stdClass(); 
+	$qu->data = new stdClass();
+	
 	$qu->data->q_id = '';
 	$qu->data->q_question = '';
 	$qu->data->q_timestamp = $date;
@@ -266,7 +268,9 @@ elseif(isset($data['errors']))
 	$act = $_POST['act'];
 	$no_expiry = isset( $_POST['noExpiry']) ? 'checked="checked"' : '' ;
 	
-	$qu = new stdClass();
+	$qu = new stdClass(); 
+	$qu->data = new stdClass();
+	
 	$qu->data->q_id = $_POST['id'];
 	$qu->data->q_question = $_POST['qu'];
 	$qu->data->q_timestamp = date_to_unix($_POST['beginDate']);

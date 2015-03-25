@@ -209,9 +209,8 @@ if (!$pages and !$categories and !$tags)
 				. '</p>';
 		
 		echo '<p>' . tf('Попробуйте повторить поиск.') . '</p>';
-
-		echo '
-		<p><form name="f_search" method="get" onsubmit="location.href=\'' . getinfo('siteurl') . 'search/\' + encodeURIComponent(this.s.value).replace(/%20/g, \'+\'); return false;"><input type="text" class="text" name="s" size="20" onfocus="if (this.value == \''. tf('что искать?'). '\') {this.value = \'\';}" onblur="if (this.value == \'\') {this.value = \''. tf('что искать?'). '\';}" value="'. tf('что искать?'). '">&nbsp;<input type="submit" class="submit" name="Submit" value="  '. tf('Поиск'). '  "></form></p>';
+		
+		if ($fn = mso_find_ts_file('type/search/units/form.php')) require($fn);
 		
 		echo mso_hook('page_404');
 		

@@ -328,7 +328,7 @@ function forms_content_callback($matches)
 				// формируем письмо и отправляем его
 					
 				# дополнительные параметры отправки письма
-				$prefs = array();
+				$prefs = $post['forms_name'] != '' ? array( 'from_name' => $post['forms_name'] ) : array();
 					
 				if (!mso_valid_email($email)) 
 					$email = mso_get_option('admin_email', 'general', 'admin@site.com'); // куда приходят письма

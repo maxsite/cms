@@ -4,6 +4,7 @@
  * MaxSite CMS
  * (c) http://max-3000.com/
  * Дополнения: Н. Громов (http://nicothin.ru/)
+ * Дополнения: Илья Земсков (http://vizr.ru/)
  */
 
 # функция автоподключения плагина
@@ -92,6 +93,51 @@ function forms_content_callback($matches)
 		$reset = false;
 	else
 		$reset = true;	
+	
+	// файлы к форме
+	$r = preg_match_all('!\[file_count=(.*?)\]!is', $text, $all);
+	if ($r)
+	{
+		$files = array();
+		$files['file_count'] = intval(trim($all[1][0]));
+		if ($files['file_count'] != '' && $files['file_count'] > 0)
+		{
+			// пытаемся определить остальные параметры загрузки файлов
+			// [file_type=jpg|jpeg|png]
+			$r = preg_match_all('!\[file_type=(.*?)\]!is', $text, $all);
+			if ($r)
+				$files['file_type'] = trim($all[1][0]);
+			else
+				$files['file_type'] = 'jpeg|jpg|png|gif';
+
+			// [file_max_size=200]
+			$r = preg_match_all('!\[file_max_size=(.*?)\]!is', $text, $all);
+			if ($r)
+				$files['file_max_size'] = intval(trim($all[1][0]));
+			else
+				$files['file_max_size'] = 200; // 200Кб
+			
+			// [file_description=Скриншоты]
+			$r = preg_match_all('!\[file_description=(.*?)\]!is', $text, $all);
+			if ($r)
+				$files['file_description'] = trim($all[1][0]);
+			else
+				$files['file_description'] = $files['file_count'] > 1 ? tf('Файлы') : tf('Файл');
+
+			// [file_tip=Выберите для загрузки фотографии в формате JPEG или PNG и максимальным объёмом - 200Кб]
+			$r = preg_match_all('!\[file_tip=(.*?)\]!is', $text, $all);
+			if ($r)
+				$files['file_tip'] = trim($all[1][0]);
+			else
+				$files['file_tip'] = tf('Выберите для загрузки файл(-ы) в формате JPEG или PNG');
+
+			#pr($files);
+		}
+		else
+			$files = false;
+	}
+	else
+		$files = false;
 	
 	
 	// поля формы
@@ -217,11 +263,73 @@ function forms_content_callback($matches)
 				}
 			}
 			
+			if ($ok && isset($files['file_count']) && $files['file_count'] > 0 && isset($_FILES) ) // обработаем файлы
+			{
+				require_once( getinfo('common_dir') . 'uploads.php' ); // функции загрузки 
+					
+				$_FILES = mso_prepare_files('forms_files'); // переформатируем массив присланных файлов
+					
+				# формирование папки для временных файлов вложений
+				$cache_folder = getinfo('cache_dir').'forms_attaches/';
+				if( !file_exists($cache_folder) )
+				{
+					mkdir($cache_folder, 0666);
+				}
+					
+				// параметры для mso_upload
+				// конфиг CI-библиотеки upload
+				$mso_upload_ar1 = array( 
+					'upload_path' => $cache_folder,
+					'allowed_types' => $files['file_type'],
+					'max_size' => $files['file_max_size'],
+					'overwrite' => true,
+				);
+
+				$mso_upload_ar2 = array( // массив прочих опций
+					'userfile_resize' => false, // нужно ли менять размер
+					'userfile_water' => false, // нужен ли водяной знак
+					'userfile_mini' => false, // делать миниатюру?
+					'prev_size' => false, // превьюху не делаем
+					'mini_make' => false, // не создаём папку mini
+					'prev_make' => false, // не создаём папку _mso_i
+					'message1' => '', // не выводить сообщение о загрузке каждого файла
+					//'message2' => '',
+				);
+					
+				$CI = & get_instance(); 
+				$file_attaches = array();
+					
+				foreach ($_FILES as $f_key => $f_info)
+				{
+					ob_start();
+					$res = mso_upload($mso_upload_ar1, $f_key, $mso_upload_ar2);
+					$msg = ob_get_contents();
+					ob_end_clean();
+						
+					if (!$msg && $res)
+					{
+						$up_data = $CI->upload->data();	#pr($up_data);
+							
+						# формируем список вложений к письму
+						$file_attaches[] = $up_data['full_path'];
+					}
+					else
+					{
+						$ok = false;
+						$out .= '<div class="message error small">' . strip_tags($msg) . '</div>';
+						break;
+					}
+				}
+			}
+				
 			// всё ок
 			if ($ok)
 			{
 				// формируем письмо и отправляем его
-				
+					
+				# дополнительные параметры отправки письма
+				$prefs = array();
+					
 				if (!mso_valid_email($email)) 
 					$email = mso_get_option('admin_email', 'general', 'admin@site.com'); // куда приходят письма
 					
@@ -238,35 +346,48 @@ function forms_content_callback($matches)
 					
 					$message .= $f[$key]['description'] . ': ' . $val . "\n\n";
 				}
-				
+					
+				# если есть вложенные файлы - сообщаем о них
+				if (isset($file_attaches) && $file_attaches)
+				{
+					$f_names = array_map('basename', $file_attaches);
+					$message .= $files['file_description'].': '.implode(', ', $f_names)."\n\n";
+					$prefs['attach'] = $file_attaches; # формируем вложения к письму
+				}
+					
 				if ($_SERVER['REMOTE_ADDR'] and $_SERVER['HTTP_REFERER'] and $_SERVER['HTTP_USER_AGENT']) 
 				{
 					$message .= "\n" . tf('IP-адрес: ') . $_SERVER['REMOTE_ADDR'] . "\n";
 					$message .= tf('Отправлено со страницы: ') . $_SERVER['HTTP_REFERER'] . "\n";
 					$message .= tf('Браузер: ') . $_SERVER['HTTP_USER_AGENT'] . "\n";
 				}
-				
+					
 				// pr($message);
-				
+					
 				mso_hook('forms_send', $post);
-				
-				$prefs = $post['forms_name'] != '' ? array( 'from_name' => $post['forms_name'] ) : array();
-				
+					
 				$form_hide = mso_mail($email, $subject, $message, $post['forms_email'], $prefs);
+				
 				if ( $forms_subscribe and isset($post['forms_subscribe']) ) 
-					mso_mail($post['forms_email'], tf('Вами отправлено сообщение:') . ' ' . $subject, $message);
+					mso_mail($post['forms_email'], tf('Вами отправлено сообщение:') . ' ' . $subject, $message, $prefs);
 				
 				
 				$out .= '<div class="message ok small">' . tf('Ваше сообщение отправлено!') . '</div><p>' 
 						. str_replace("\n", '<br>', htmlspecialchars($subject. "\n" . $message)) 
 						. '</p>';
 				
+				# удаляем временные файлы вложений
+				if (isset($file_attaches) and $file_attaches) mso_flush_cache(false, 'forms_attaches/');
+					
 				if ($redirect) mso_redirect($redirect, true);
 
 			}
 			else // какая-то ошибка, опять отображаем форму
 			{
-				$out .= forms_show_form($f, $ushka, $forms_subscribe, $reset, $subject, $name_title, $email_title);
+				# удаляем временные файлы вложений
+				if (isset($file_attaches) and $file_attaches) mso_flush_cache(false, 'forms_attaches/');
+					
+				$out .= forms_show_form($f, $ushka, $forms_subscribe, $reset, $subject, $name_title, $email_title, $files);
 			}
 			
 			
@@ -278,14 +399,14 @@ function forms_content_callback($matches)
 		}
 		else // нет post
 		{
-			$out .= forms_show_form($f, $ushka, $forms_subscribe, $reset, $subject, $name_title, $email_title);
+			$out .= forms_show_form($f, $ushka, $forms_subscribe, $reset, $subject, $name_title, $email_title, $files);
 		}
 	}
 
 	return $out;
 }
 
-function forms_show_form($f = array(), $ushka = '', $forms_subscribe = true, $reset = true, $subject = '', $name_title = '', $email_title = '')
+function forms_show_form($f = array(), $ushka = '', $forms_subscribe = true, $reset = true, $subject = '', $name_title = '', $email_title = '', $files = false)
 {
 	$out = '';
 
@@ -328,7 +449,7 @@ function forms_show_form($f = array(), $ushka = '', $forms_subscribe = true, $re
 		
 	}
 
-	$out .= NR . '<div class="forms"><form method="post" class="plugin_forms fform">' . mso_form_session('forms_session');
+	$out .= NR . '<div class="forms"><form method="post" enctype="multipart/form-data" class="plugin_forms fform">' . mso_form_session('forms_session');
 	
 	$out .= '<input type="hidden" name="forms_antispam1" value="' . $antispam1 * 984 . '">';
 	$out .= '<input type="hidden" name="forms_antispam2" value="' . $antispam2 * 765 . '">';
@@ -458,7 +579,22 @@ function forms_show_form($f = array(), $ushka = '', $forms_subscribe = true, $re
 		}
 		
 	}
-	
+		
+	// файлы
+	if ( $files )
+	{
+		# pr($files);
+		$out .= NR . '<p><label class="ffirst ftitle ftop" for="id-' . ++$id . '-1">' . $files['file_description'] . '</label>';
+		$out .= '<span>';
+		for( $it = 1; $it <= $files['file_count']; $it++ )
+		{
+			$out .= '<input name="forms_files[]" type="file" id="id-' . $id . '-'.$it.'"><br>';
+		}
+		$out .= '</span></p>';
+		$out .= $files['file_tip'] != '' ? NR . '<p class="nop"><span class="ffirst"></span><span class="fhint">'. $files['file_tip'] . '</span></p>' : '';
+		
+	}
+		
 	// обязательные поля антиспама и отправка и ресет
 	$out .= NR . '<p class="forms_antispam"><label class="ffirst ftitle" for="id-' . ++$id . '">' . $antispam1 . ' + ' . $antispam2 . ' =</label>';
 	$out .= '<span><input name="forms_antispam" type="number" required maxlength="3" value="" placeholder="' . tf('Укажите свой ответ') . '" id="id-' . $id . '"></span></p>';

@@ -85,6 +85,12 @@ function mso_upload($config_library = array(), $field_userfile = 'f_userfile', $
 	
 	// превьюхи всегда хранятся в подкаталоге _mso_i
 	if (!isset($r['prev_size'])) $r['prev_size'] = 100; // размер превьюхи
+	
+	// делать превью?
+	if (!isset($r['prev_make'])) $r['prev_make'] = true;
+	
+	// делать миниатюру?
+	if (!isset($r['mini_make'])) $r['mini_make'] = true;
 
 
 	if ($res)
@@ -218,12 +224,13 @@ function mso_upload($config_library = array(), $field_userfile = 'f_userfile', $
 			}
 	
 			# делаем миниатюру
-			mso_upload_mini($up_data, $r);			
+			if ($r['mini_make']) mso_upload_mini($up_data, $r);			
 			
 			# превьюшка
-			mso_upload_prev($up_data, $r);
+			if ($r['prev_make']) mso_upload_prev($up_data, $r);
 		
 		}
+		
 		return true;
 	}
 	else

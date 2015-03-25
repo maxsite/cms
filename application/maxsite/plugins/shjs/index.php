@@ -120,14 +120,13 @@ function shjs_head($arg = array())
 	if (!isset($options['css']) or !$options['css']) $options['css'] = 'sh_maxsite'; 
 
 	echo '
-	
-	<script src="' . getinfo('plugins_url') . 'shjs/sh_main.min.js"></script>
-	<link rel="stylesheet" href="' . getinfo('plugins_url') . 'shjs/css/' . $options['css'] . '.min.css">
-	<script>
-	$(document).ready(function() { 
-		sh_highlightDocument("' . getinfo('plugins_url') . 'shjs/lang/", ".min.js");
-    });
-    </script>
+<script src="' . getinfo('plugins_url') . 'shjs/sh_main.min.js"></script>
+<link rel="stylesheet" href="' . getinfo('plugins_url') . 'shjs/css/' . $options['css'] . '.min.css">
+<script>
+$(document).ready(function() {
+sh_highlightDocument("' . getinfo('plugins_url') . 'shjs/lang/", ".min.js");
+});
+</script>
 	';
 	
 	return $arg;

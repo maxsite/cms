@@ -1923,31 +1923,9 @@ function mso_login_form($conf = array(), $redirect = '', $echo = true)
 		$hook_login_form_auth = '<div class="login-form-auth">' . str_replace('     ', ', ', $hook_login_form_auth) . '</div>';
 	}
 	
-	$out = <<<EOF
-	<form method="post" action="{$action}" name="flogin" class="flogin fform">
-		<input type="hidden" value="{$redirect}" name="flogin_redirect">
-		<input type="hidden" value="{$session_id}" name="flogin_session_id">
-		
-		<p>
-			<label><span class="nocell ftitle">{$login}</span>
-			<input type="text" value="" name="flogin_user" class="flogin_user"{$login_add}>
-			</label>
-		</p>
-		
-		<p>
-			<label><span class="nocell ftitle">{$password}</span>
-			<input type="password" value="" name="flogin_password" class="flogin_password"{$password_add}>
-			</label>
-		</p>
-		
-		<p>
-			<span>{$submit}<button type="submit" name="flogin_submit" class="flogin_submit">{$submit_value}</button>{$submit_end}</span>
-		</p>
-		
-		{$hook_login_form_auth}
-		{$form_end}
-	</form>
-EOF;
+	// в loginform.php результат возвращается в $out
+	if ($fn = mso_find_ts_file('type/loginform/units/loginform.php')) require($fn);
+	
 	if ($echo) echo $out;
 		else return $out;
 }
@@ -2623,9 +2601,19 @@ function mso_mail($email = '', $subject = '', $message = '', $from = false, $pre
 	
 	$CI->email->clear(true);
 	
-	if (isset($preferences['attach']) and trim($preferences['attach']))
+	if (isset($preferences['attach'])) # письмо с вложением?
 	{
-		$CI->email->attach($preferences['attach']);
+		if (is_array($preferences['attach'])) # множественное вложение
+		{
+			foreach ($preferences['attach'] as $attach)
+			{
+				if (trim($attach)) $CI->email->attach($attach);
+			}
+		}
+		elseif (trim($preferences['attach']))
+		{
+			$CI->email->attach($preferences['attach']);
+		}
 	}
 		
 	if ($from) $admin_email = $from;

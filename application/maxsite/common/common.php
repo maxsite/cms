@@ -1924,7 +1924,7 @@ function mso_login_form($conf = array(), $redirect = '', $echo = true)
 	}
 	
 	// в loginform.php результат возвращается в $out
-	if ($fn = mso_find_ts_file('type/loginform/units/loginform.php')) require($fn);
+	if ($fn = mso_find_ts_file('type/loginform/units/form.php')) require($fn);
 	
 	if ($echo) echo $out;
 		else return $out;

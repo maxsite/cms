@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Почта чере SMTP mail'),
 	'description' => t('Плагин позволяет отправлять почту через SMTP сервер.'),
-	'version' => '0.8',
+	'version' => '0.9',
 	'author' => 'Wave',
 	'plugin_url' => 'http://wave.fantregata.com/page/work-for-maxsite',
 	'author_url' => 'http://wave.fantregata.com/',

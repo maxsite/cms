@@ -3,6 +3,7 @@
 /**
  * MaxSite CMS (c) http://max-3000.com/
  * Плагин, реализующий добавленный хук с почтой.
+ * Дополнения: Илья Земсков (http://vizr.ru/) - работа с множественным аттачем
  */
 
 
@@ -148,9 +149,27 @@ function smtp_mail_custom($arg = array())
 		$config['smtp_port'] = ( isset($options['smtp_port']) ) ? ( $options['smtp_port'] ) : ( '25' );
 		$config['mailpath']  = ( isset($options['mailpath']) )  ? ( $options['mailpath'] )  : ( '/usr/sbin/sendmail' );
 
-		if ( (isset($arg['preferences']['attach'])) and (trim($arg['preferences']['attach'])) != '' )
+		#if ( (isset($arg['preferences']['attach'])) and (trim($arg['preferences']['attach'])) != '' )
+		#{
+		#	$CI->email->attach($arg['preferences']['attach']);
+		#}
+			
+		if( isset($preferences['attach']) ) # письмо с вложением?
 		{
-			$CI->email->attach($arg['preferences']['attach']);
+			if( is_array($preferences['attach']) ) # множественное вложение
+			{
+				foreach( $preferences['attach'] as $attach )
+				{
+					if( trim($attach) != '' )
+					{
+						$CI->email->attach($attach);
+					}
+				}
+			}
+			elseif( trim($preferences['attach']) != '' )
+			{
+				$CI->email->attach($preferences['attach']);
+			}
 		}
 
 		if ( ($config['protocol'] == 'smtp') and ( strpos($config['smtp_host'], 'ssl') !== false ) ) $config['newline']="\r\n";

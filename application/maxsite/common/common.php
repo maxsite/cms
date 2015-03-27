@@ -4696,11 +4696,11 @@ function mso_add_file($fn)
 		$ext = substr(strrchr($fn, '.'), 1); // расширение файла
 		
 		if ($ext == 'js') 
-			echo NT . '<script src="' . getinfo('template_url') . $fn . '"></script>';
+			echo NR . '<script src="' . getinfo('template_url') . $fn . '"></script>';
 		elseif ($ext == 'css') 
-			echo NT . '<link rel="stylesheet" href="' . getinfo('template_url') . $fn . '">';
+			echo NR . '<link rel="stylesheet" href="' . getinfo('template_url') . $fn . '">';
 		elseif ($ext == 'less') 
-			echo NT . '<link rel="stylesheet/less" href="' . getinfo('template_url') . $fn . '" type="text/css">';
+			echo NR . '<link rel="stylesheet/less" href="' . getinfo('template_url') . $fn . '" type="text/css">';
 	}
 }
 

@@ -1,0 +1,49 @@
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+
+// http://the-echoplex.net/flexyboxes/ — построитель
+// http://html5.by/blog/flexbox/
+// http://frontender.info/a-guide-to-flexbox/
+// http://www.w3.org/TR/css3-flexbox/
+
+.flex {
+	.grid_flex > .container(space-between, stretch);
+	
+	&.flex-vcenter {
+		.grid_flex > .align_items(center);
+	}
+	
+	
+	&.flex-hcenter {
+		.grid_flex > .justify_content(center);
+	}
+}
+
+.flex-grow0 { .grid_flex > .grow(0); }
+.flex-grow1 { .grid_flex > .grow(1); }
+.flex-grow2 { .grid_flex > .grow(2); }
+.flex-grow3 { .grid_flex > .grow(3); }
+
+@media @SCREEN_TABLET {
+	.flex {
+		&.flex-wrap-tablet {
+			.grid_flex > .wrap(wrap);
+		}
+	}
+	
+	.flex-reverse-tablet {
+		.grid_flex > .direction(row-reverse);
+	}
+}
+
+@media @SCREEN_PHONE {
+	.flex {
+		&.flex-wrap-phone {
+			.grid_flex > .wrap(wrap);
+		}
+	}
+	
+	.flex-reverse-phone {
+		.grid_flex > .direction(row-reverse);
+	}
+}

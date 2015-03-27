@@ -1,0 +1,96 @@
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// бордюры
+
+// для элементов, где неважно какой border: по-умолчанию — серый
+.bordered { border: @gray 1px solid; }
+
+// задается классы: цвет (.bor-color1) стиль (.bor-solid) ширина (.bor1px)
+// h6(bor-color5 bor-solid-l bor3px) Пример левого border
+// по умолчанию ширина 1px для всех цветов. её можно не указывать
+// отображение линии происходит по border-style
+// h6(bor-gray300 bor-solid) Полная граница
+
+// для всех классов по умолчанию 1px
+[class*="bor-"] {
+	border-width: 1px;
+}
+
+// цвета основные, дополнительные и серые
+.bor-color1  { border-color: @color1; }
+.bor-color2  { border-color: @color2; }
+.bor-color3  { border-color: @color3; }
+.bor-color4  { border-color: @color4; }
+.bor-color5  { border-color: @color5; }
+
+.bor-colorA1 { border-color: @colorA1; }
+.bor-colorA2 { border-color: @colorA2; }
+.bor-colorA3 { border-color: @colorA3; }
+.bor-colorA4 { border-color: @colorA4; }
+.bor-colorA5 { border-color: @colorA5; }
+
+// все оттенки серого
+.bor-gray    { border-color: @gray;    }
+.bor-gray50  { border-color: @gray50;  }
+.bor-gray100 { border-color: @gray100; }
+.bor-gray200 { border-color: @gray200; }
+.bor-gray300 { border-color: @gray300; }
+.bor-gray400 { border-color: @gray400; }
+.bor-gray500 { border-color: @gray500; }
+.bor-gray600 { border-color: @gray600; }
+.bor-gray700 { border-color: @gray700; }
+.bor-gray800 { border-color: @gray800; }
+.bor-gray900 { border-color: @gray900; }
+
+// тип линий — этот класс и вызывает рисование линий
+.bor-solid    { border-style: solid; }
+.bor-solid-t  { border-top-style: solid; }
+.bor-solid-r  { border-right-style: solid; }
+.bor-solid-b  { border-bottom-style: solid; }
+.bor-solid-l  { border-left-style: solid; }
+.bor-solid-tb { border-top-style: solid; border-bottom-style: solid; }
+.bor-solid-rl { border-right-style: solid; border-left-style: solid; }
+
+.bor-dotted   { border-style: dotted; }
+.bor-dotted-t { border-top-style: dotted; }
+.bor-dotted-r { border-right-style: dotted; }
+.bor-dotted-b { border-bottom-style: dotted; }
+.bor-dotted-l { border-left-style: dotted; }
+.bor-dotted-tb { border-top-style: dotted; border-bottom-style: dotted; }
+.bor-dotted-rl { border-right-style: dotted; border-left-style: dotted; }
+
+.bor-dashed   { border-style: dashed; }
+.bor-dashed-t { border-top-style: dashed; }
+.bor-dashed-r { border-right-style: dashed; }
+.bor-dashed-b { border-bottom-style: dashed; }
+.bor-dashed-l { border-left-style: dashed; }
+.bor-dashed-tb { border-top-style: dashed; border-bottom-style: dashed; }
+.bor-dashed-rl { border-right-style: dashed; border-left-style: dashed; }
+
+.bor-double   { border-style: double; }
+.bor-double-t { border-top-style: double; }
+.bor-double-r { border-right-style: double; }
+.bor-double-b { border-bottom-style: double; }
+.bor-double-l { border-left-style: double; }
+.bor-double-tb { border-top-style: double; border-bottom-style: double; }
+.bor-double-rl { border-right-style: double; border-left-style: double; }
+
+// толщина линий
+.bor1px  { border-width: 1px; }
+.bor2px  { border-width: 2px; }
+.bor3px  { border-width: 3px; }
+.bor4px  { border-width: 4px; }
+.bor5px  { border-width: 5px; }
+.bor6px  { border-width: 6px; }
+.bor7px  { border-width: 7px; }
+.bor8px  { border-width: 8px; }
+.bor9px  { border-width: 9px; }
+.bor10px { border-width: 10px; }
+
+// спрятать ненужные линии
+// h4(bor-gray bor-dashed bor2px bor-none-r bor-none-l pad6-tb t-center) Пример
+.bor-none   { border-style: none !important; }
+.bor-none-t { border-top-style: none !important; }
+.bor-none-r { border-right-style: none !important; }
+.bor-none-b { border-bottom-style: none !important; }
+.bor-none-l { border-left-style: none !important; }

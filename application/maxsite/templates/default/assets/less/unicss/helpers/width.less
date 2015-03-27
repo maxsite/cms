@@ -1,0 +1,46 @@
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// максимальная ширина модульной сетки
+.w-max-layout {
+	width: 100%;
+	max-width: @layout_max_width;
+}
+
+// фиксированная max-width
+.w16px { max-width: 16px;}
+.w24px { max-width: 24px;}
+.w30px { max-width: 30px;}
+.w32px { max-width: 32px;}
+.w48px { max-width: 48px;}
+.w50px { max-width: 50px;}
+.w70px { max-width: 70px;}
+.w100px { max-width: 100px;}
+.w200px { max-width: 200px;}
+.w300px { max-width: 300px;}
+.w400px { max-width: 400px;}
+.w500px { max-width: 500px;}
+.w600px { max-width: 600px;}
+.w700px { max-width: 700px;}
+.w800px { max-width: 800px;}
+.w900px { max-width: 900px;}
+
+// под адаптивность
+.w320px { max-width: 320px;}
+.w480px { max-width: 480px;}
+.w768px { max-width: 768px;}
+.w992px { max-width: 992px;}
+
+// ВАЖНО! @media от больших экранов к маленьким!
+
+// устанавливаем ширины классов .wXX
+.set_width > .percent(w);
+
+// .wXX-tablet
+@media @SCREEN_TABLET {
+	.set_width > .percent(w, tablet);
+}
+
+// .wXX-phone
+@media @SCREEN_PHONE {
+	.set_width > .percent(w, phone);
+}

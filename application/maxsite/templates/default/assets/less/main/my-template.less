@@ -1,0 +1,55 @@
+// Стили сайта
+
+.my-all-container {
+	background: url("../images/backgrounds/diag.png") repeat scroll left top #DDDDDD;
+
+}
+
+
+div.widget button {
+	.button;
+}
+
+div.social a {
+	transition: color 0.2s ease 0s;
+}
+
+// поиск в меню
+.my-search {
+	
+	.bor-none;
+	.h48px;
+	.pad0-tb;
+	.w200px;
+	.b-hide;
+	.bg-gray600; 
+
+	&:focus {
+		background: @gray600 !important;
+		color: @gray300 !important;
+		.text > .placeholder(@gray400) !important;
+	}
+}
+
+
+// список в сайдбаре
+ul.is_link {
+	padding-left: 15px;
+}
+
+// заголовок сайдбара
+div.widget_header {
+	.t120;
+	color: @gray600;
+	border-bottom: 3px double @gray300;
+}
+
+// ссылки в виджетах
+div.widget a {
+	color: @gray600;
+}
+
+// виджеты
+div.widget {
+	.mar30-b;
+}

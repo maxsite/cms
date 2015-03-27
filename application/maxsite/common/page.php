@@ -217,7 +217,7 @@ function mso_get_pages($r = array(), &$pag)
 	// поскольку CodeIgniteryt не позволяет добавлять его явно, придется извращаться	
 	$query_sql = str_replace('SELECT ', 'SELECT SQL_BUFFER_RESULT ', $CI->db->_compile_select());
 	
-	// блядское экранирование CodeIgniter - используем свои костыли для запятых в запросе
+	// дурацкое экранирование CodeIgniter - используем свои костыли для запятых в запросе
 	$query_sql = str_replace('_MSO_ZAP_', ',', $query_sql);
 
 	$query = $CI->db->query($query_sql);
@@ -358,16 +358,14 @@ function mso_get_pages($r = array(), &$pag)
 			$mso_page_current = $page; // глобальная переменная, где хранится текущая обрабатываемая page
 			
 			$output = mso_hook('content_in', $output);
-			
 			$output = mso_hook('content', $output);
 			
+			/*
 			$output = mso_hook('content_auto_tag', $output);
 			$output = mso_hook('content_balance_tags', $output);
-			
 			$output = mso_hook('content_out', $output);
-			
 			$output = mso_hook('content_complete', $output);
-			
+			*/
 			
 			$pages[$key]['page_content'] = $output;
 
@@ -468,6 +466,15 @@ function mso_get_pages($r = array(), &$pag)
 			}
 			else $pages[$key]['page_count_comments'] = 0; // ставим, что нет комментариев
 			
+			// обработка контента хуками
+			$output = $pages[$key]['page_content'];
+			
+			$output = mso_hook('content_auto_tag', $output);
+			$output = mso_hook('content_balance_tags', $output);
+			$output = mso_hook('content_out', $output);
+			$output = mso_hook('content_complete', $output);
+			
+			$pages[$key]['page_content'] = $output;
 		}
 	}
 	else

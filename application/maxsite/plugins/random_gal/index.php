@@ -181,8 +181,9 @@ function random_gal_cmp_datefile_desc($a, $b)
 
 function random_gal_head($args = array())
 {
-	echo mso_load_jquery('jquery.nivo.slider.js') 
-		. mso_load_style(getinfo('plugins_url') . 'random_gal/random_gal.css');
+	echo mso_load_jquery('jquery.nivo.slider.js', getinfo('plugins_url') . 'random_gal/');
+	
+	echo mso_load_style(getinfo('plugins_url') . 'random_gal/random_gal.css');
 		
 	return $args;
 }

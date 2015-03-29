@@ -2814,14 +2814,22 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 			
 			// если адрес = ## то не выводим ссылку
 			$a_link = ($url != '##'); 
-				
+			
+			
 			// нет в адресе http:// - значит это текущий сайт
-			if (($url != '#') and strpos($url, 'http://') === false and strpos($url, 'https://') === false) 
+			// если начинается с # или  ? — ничего не делаем
+			if (
+				($url != '#') 
+				and strpos($url, '#') !== 0
+				and strpos($url, '?') !== 0
+				and strpos($url, 'http://') === false 
+				and strpos($url, 'https://') === false
+			) 
 			{
 				if ($url == '/') $url = getinfo('siteurl'); // это главная
 					else $url = getinfo('siteurl') . $url;
 			}
-
+			
 			# если текущий адрес совпал, значит мы на этой странице
 			if ($url == $current_url)
 			{

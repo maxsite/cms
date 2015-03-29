@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Less compiling'),
 	'description' => t('Автоматическая компиляция less в css-файл.'),
-	'version' => '1.0',
+	'version' => '2.0',
 	'author' => 'Максим',
 	'plugin_url' => 'http://max-3000.com/',
 	'author_url' => 'http://maxsite.org/',

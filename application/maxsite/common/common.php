@@ -2753,7 +2753,7 @@ function mso_load_jquery($plugin = '', $path = '')
 
 # формируем li-элементы для меню
 # элементы представляют собой текст, где каждая строчка один пункт
-# каждый пункт делается так:  http://ссылка | название | подсказка | class | class_для_span
+# каждый пункт делается так:  http://ссылка | название | подсказка | class | class_для_span | атрибуты ссылки
 # на выходе так:
 # <li class="selected"><a href="url"><span>ссылка</span></a></li>
 # если первый символ [ то это открывает группу ul 
@@ -2844,6 +2844,9 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 			// возможно указан class_для_span
 			if (isset($elem[4])) $class_span = ' class="' . trim($elem[4]) . '"';
 				else $class_span = '';
+				
+			// возможно указан атрибут_для_ссылки
+			$link_attr = (isset($elem[5])) ? ' ' . trim($elem[5]) : '';
 
 			# для первого элемента добавляем класс first
 			if ($i == 1) $class .= ' first';
@@ -2866,7 +2869,7 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 				
 				if ($a_link)
 				{
-					$out .= '<li class="group' . $class . '"><a href="' . $url . '"' . $title . '><span' .$class_span . '>' . $name . '</span></a>' 
+					$out .= '<li class="group' . $class . '"><a href="' . $url . '"' . $title . $link_attr . '><span' . $class_span . '>' . $name . '</span></a>' 
 							. NR . '<ul>' . NR;
 				}
 				else
@@ -2885,7 +2888,7 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 				
 				if ($a_link)
 				{
-					$out .= '<li class="' . trim($class) . '"><a href="' . $url . '"' . $title . '><span' .$class_span . '>' . $name . '</span></a></li>' . NR;
+					$out .= '<li class="' . trim($class) . '"><a href="' . $url . '"' . $title  . $link_attr . '><span' . $class_span . '>' . $name . '</span></a></li>' . NR;
 				}
 				else
 				{

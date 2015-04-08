@@ -10,6 +10,22 @@
 		
 		$f_content = $post['f_content'];
 		
+		
+		// возможно задан парсер
+		if ( isset($post['f_options']['parser_content']) and $post['f_options']['parser_content'] != 'none' )
+		{
+			$parser = $post['f_options']['parser_content']; // парсер
+			$parser_all = mso_hook('parser_register'); // все зарегистрированные парсеры
+			
+			$func = $parser_all[$parser]['content_post_edit']; // функцию, которую нужно выполнить
+			if ( function_exists($func) ) $f_content = $func($f_content);
+		}
+		
+		
+		/*
+		
+		// старый вариант отключаем он в parser_default_post_edit() стандартного парсера
+		
 		if ( mso_hook_present('content_replace_chr10_br') ) 
 		{
 			// если нужно задать свое начально форматирование, задайте хук content_replace_chr10_br
@@ -30,8 +46,10 @@
 		$f_content = str_replace('-moz-background-clip: -moz-initial;', '', $f_content);
 		$f_content = str_replace('-moz-background-origin: -moz-initial;', '', $f_content);
 		$f_content = str_replace('-moz-background-inline-policy: -moz-initial;', '', $f_content);
-			
-		$f_header = mso_text_to_html($post['f_header']);
+		*/
+		
+		
+		$f_header = $post['f_header'];
 		
 		if ( isset($post['f_tags']) and $post['f_tags'] ) $f_tags = $post['f_tags'] ;
 				else $f_tags = '';

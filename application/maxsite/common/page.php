@@ -155,6 +155,7 @@ function mso_get_pages($r = array(), &$pag)
 	// получать ли информацию о метках и мета страницы
 	// объединены, потому что это один sql-запрос
 	// если false, то возвращает пустые массивы page_tags и page_meta
+	// при этом перестанет работать парсер текста
 	if ( !isset($r['get_page_meta_tags']) )	$r['get_page_meta_tags'] = true;
 	
 	// нужно ли получать данные по количеству комментариев к страницам
@@ -327,7 +328,6 @@ function mso_get_pages($r = array(), &$pag)
 						$output .= '<a id="cut"></a>' .  $content[1];
 					}
 
-					// $output = mso_balance_tags($output);
 				}
 				
 				if ($r['xcut'])
@@ -438,6 +438,9 @@ function mso_get_pages($r = array(), &$pag)
 			}
 		}
 		
+		// получим данные о всех парсерах
+		$parser_all = mso_hook('parser_register', array()); // все зарегистрированные парсеры
+		
 		// добавим в массив pages полученную информацию по меткам и рубрикам
 		foreach ($pages as $key=>$val)
 		{
@@ -469,9 +472,42 @@ function mso_get_pages($r = array(), &$pag)
 			// обработка контента хуками
 			$output = $pages[$key]['page_content'];
 			
-			$output = mso_hook('content_auto_tag', $output);
-			$output = mso_hook('content_balance_tags', $output);
-			$output = mso_hook('content_out', $output);
+			// обработка парсером
+			if (isset($pages[$key]['page_meta']['parser_content']))
+			{
+				if ($pages[$key]['page_meta']['parser_content'][0] !== 'none')
+				{
+					$p = $pages[$key]['page_meta']['parser_content'][0];
+					
+					if (isset($parser_all[$p]['content']))
+					{
+						$func = $parser_all[$p]['content']; // функция, которую нужно выполнить
+						if ( function_exists($func) ) $output = $func($output);
+					}
+				}
+			}
+			else
+			{
+				// парсер не указан, используем дефолтный
+				// проверим его наличие по функции parser_default_content()
+				// иначе нужно включить плагин
+				if ( !function_exists('parser_default_content') )
+				{
+					require_once(getinfo('plugins_dir') . 'parser_default/index.php');
+				}
+				
+				$output = parser_default_content($output);
+			}
+			
+			
+			// pr($output, 1);
+			
+			// старые хуки, больше не используются
+			// $output = mso_hook('content_auto_tag', $output);
+			// $output = mso_hook('content_balance_tags', $output);
+			// $output = mso_hook('content_out', $output);
+			
+			
 			$output = mso_hook('content_complete', $output);
 			
 			$pages[$key]['page_content'] = $output;

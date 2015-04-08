@@ -1,11 +1,10 @@
-<?php  if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * Основные функции MaxSite CMS
  * (c) http://max-3000.com/
  * Функции для комментариев
  */
-
 
 
 # функция получения комментариев
@@ -17,9 +16,9 @@ function mso_get_comments($page_id = 0, $r = array())
 
 	if ( !isset($r['limit']) )	$r['limit'] = false;
 	if ( !isset($r['order']) )	$r['order'] = 'asc';
-	if ( !isset($r['tags']) )	$r['tags'] = '<p><img><strong><em><i><b><u><s><font><pre><code><blockquote>';
-	if ( !isset($r['tags_users']) )	$r['tags_users'] = '<a><p><img><strong><em><i><b><u><s><font><pre><code><blockquote>';
-	if ( !isset($r['tags_comusers']) )	$r['tags_comusers'] = '<a><p><img><strong><em><i><b><u><s><font><pre><code><blockquote>';
+	if ( !isset($r['tags']) )	$r['tags'] = '<p><img><strong><em><i><b><u><s><pre><code><blockquote>';
+	if ( !isset($r['tags_users']) )	$r['tags_users'] = '<a><p><img><strong><em><i><b><u><s><pre><code><blockquote>';
+	if ( !isset($r['tags_comusers']) )	$r['tags_comusers'] = '<a><p><img><strong><em><i><b><u><s><pre><code><blockquote>';
 	if ( !isset($r['anonim_comments']) )	$r['anonim_comments'] = array();
 	if ( !isset($r['anonim_title']) )	$r['anonim_title'] = '';// ' ('. t('анонимно'). ')'; // дописка к имени для анонимов
 	if ( !isset($r['anonim_no_name']) )	$r['anonim_no_name'] = tf('Аноним');// Если не указано имя анонима
@@ -156,38 +155,7 @@ function mso_get_comments($page_id = 0, $r = array())
 				}
 			}
 
-
 			$comments_content = $comment['comments_content'];
-			
-			// защитим pre
-			$t = $comments_content;
-			$t = str_replace('&lt;/pre>', '</pre>', $t); // проставим pre - исправление ошибки CodeIgniter
-			
-			$t = preg_replace_callback('!<pre>(.*?)</pre>!is', 'mso_clean_html_do', $t);
-
-			if ($commentator==1) $t = strip_tags($t, $r['tags_comusers']);
-			elseif ($commentator==2) $t = strip_tags($t, $r['tags_users']);
-			else $t = strip_tags($t, $r['tags']);
-			
-			$t = mso_xss_clean($t);
-
-			$t = str_replace('[html_base64]', '<pre>[html_base64]', $t); // проставим pre
-			$t = str_replace('[/html_base64]', '[/html_base64]</pre>', $t);
-			
-			// обратная замена
-			$t = preg_replace_callback('!\[html_base64\](.*?)\[\/html_base64\]!is', 'mso_clean_html_posle', $t);
-			
-			$comments_content = $t; // сохраним как текст комментария
-			
-			$comments_content = mso_hook('comments_content', $comments_content);
-			
-			$comments_content = str_replace("\n", "<br>", $comments_content);
-	
-			$comments_content = str_replace('<p>', '&lt;p&gt;', $comments_content);
-			$comments_content = str_replace('</p>', '&lt;/p&gt;', $comments_content);
-			$comments_content = str_replace('<P>', '&lt;P&gt;', $comments_content);
-			$comments_content = str_replace('</P>', '&lt;/P&gt;', $comments_content);
-			
 			
 			if (mso_hook_present('comments_content_custom'))
 			{
@@ -195,12 +163,9 @@ function mso_get_comments($page_id = 0, $r = array())
 			}
 			else
 			{
-				$comments_content = mso_auto_tag($comments_content, true);
-				$comments_content = mso_hook('content_balance_tags', $comments_content);
+				$comments_content = mso_comments_autotag($comments_content, $commentator, $r);
 			}
 			
-			$comments_content = mso_hook('comments_content_out', $comments_content);
-
 			$comments[$key]['comments_content'] = $comments_content;
 			$comments[$key]['comments_url'] = $comment['comments_url'];
 
@@ -212,6 +177,57 @@ function mso_get_comments($page_id = 0, $r = array())
 	return $comments;
 }
 
+# парсер текста для комментариев
+function mso_comments_autotag($text, $commentator, $r)
+{
+	// раньше использовался mso_auto_tag теперь свой вариант
+	
+	// защитим pre
+	$text = str_replace('&lt;/pre>', '</pre>', $text); // проставим pre - исправление ошибки CodeIgniter
+	
+	$text = preg_replace_callback('!<pre>(.*?)</pre>!is', '_comments_clean_html_do', $text);
+
+	if ($commentator==1) 
+		$text = strip_tags($text, $r['tags_comusers']);
+	elseif($commentator==2) 
+		$text = strip_tags($text, $r['tags_users']);
+	else 
+		$text = strip_tags($text, $r['tags']);
+	
+	$text = mso_xss_clean($text);
+
+	$text = str_replace('[html_base64]', '<pre>[html_base64]', $text); // проставим pre
+	$text = str_replace('[/html_base64]', '[/html_base64]</pre>', $text);
+	
+	// обратная замена
+	$text = preg_replace_callback('!\[html_base64\](.*?)\[\/html_base64\]!is', '_comments_clean_html_posle', $text);
+	
+	$text = mso_hook('comments_content', $text);
+	
+	$text = str_replace("\n", "<br>", $text);
+	$text = str_replace('<p>', '&lt;p&gt;', $text);
+	$text = str_replace('</p>', '&lt;/p&gt;', $text);
+	$text = str_replace('<P>', '&lt;P&gt;', $text);
+	$text = str_replace('</P>', '&lt;/P&gt;', $text);
+	
+	$text = mso_hook('comments_content_out', $text);
+			
+	return $text;
+}
+
+function _comments_clean_html_do($matches)
+{
+	$arr1 = array('&amp;', '&lt;', '&gt;', '<br />', '<br>', '&nbsp;');
+	$arr2 = array('&',     '<',    '>',    "\n",     "\n",   ' ');
+	$m = trim( str_replace($arr1, $arr2, $matches[1]) );
+	$m = '[html_base64]' . base64_encode($m) . '[/html_base64]';
+	return $m;
+}
+
+function _comments_clean_html_posle($matches)
+{
+	return base64_decode($matches[1]);
+}
 
 # функция отправляет админу уведомление о новом комментарии
 # первый парметр id, второй данные текст и т.д.

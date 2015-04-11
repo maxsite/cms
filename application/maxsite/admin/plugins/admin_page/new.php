@@ -235,8 +235,8 @@
 	echo '<h1 class="content">' . t('Новая запись') . '</h1>';
 	
 	
-	$f_header = mso_text_to_html($f_header);
-	$f_tags = mso_text_to_html($f_tags);
+	//$f_header = mso_text_to_html($f_header);
+	//$f_tags = mso_text_to_html($f_tags);
 	
 	$f_all_tags = ''; // все метки
 

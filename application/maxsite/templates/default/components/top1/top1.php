@@ -40,58 +40,24 @@ if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . 
 	
 	<div class="w100-tablet"><?php if ($fn = mso_fe('components/_menu/_menu.php')) require($fn); ?></div>
 	
-	<div class="fs">
-		<form class="f_search" name="f_search" method="get" onsubmit="location.href='<?= getinfo('siteurl') ?>search/' + encodeURIComponent(this.s.value).replace(/%20/g, '+'); return false;">
-			<input class="my-search" type="search" name="s" id="sss" placeholder="Поиск..."><label class="label-search i-search icon-square bg-gray700 t-gray300 cursor-pointer" for="sss"></label>
+	<div class="">
+		<form name="f_search" method="get" onsubmit="location.href='<?= getinfo('siteurl') ?>search/' + encodeURIComponent(this.s.value).replace(/%20/g, '+'); return false;">
+			<input class="my-search my-search--hidden" type="search" name="s" id="sss" placeholder="Поиск..."><label class="label-search i-search icon-square bg-gray700 t-gray300 cursor-pointer" for="sss"></label>
 		</form>
-		<style>
-			.f_search .my-search {
-				display: inline-block;
-				padding-left: 0;
-				padding-right: 0;
-				width: 0;
-			}
-
-			.slided-input .my-search {
-				padding-left: 6px;
-				padding-right: 6px;
-				width: 180px;
-			}
-
-			@media (max-width: 480px) {
-				.fs {
-					width: 100%
-				}
-
-				.f_search {
-					display: flex;
-					justify-content: flex-end;
-				}
-
-				.slided-input .my-search {
-					box-sizing: border-box;
-					width: calc(100% - 48px);
-				}
-			}
-		</style>
 		<script>
 			$(document).on("click", function(e) {
-				var searchForm = $(".f_search");
 				var searchInput = $(".my-search");
 
 				if ( $(e.target).hasClass("label-search") ) {
-					if ( !searchInput.hasClass("visible") ) {
-						searchForm.addClass("slided-input");
-						searchInput.addClass("visible");
+					if ( searchInput.hasClass("my-search--hidden") ) {
+						searchInput.removeClass("my-search--hidden");
 					}
 					else {
-						searchForm.removeClass("slided-input");
-						searchInput.removeClass("visible");
+						searchInput.addClass("my-search--hidden");
 					}
 				}
 				else if ( !$(e.target).hasClass("label-search") && !$(e.target).hasClass("my-search") ) {
-					searchForm.removeClass("slided-input");
-					searchInput.removeClass("visible");
+					searchInput.addClass("my-search--hidden");
 				}
 			});
 		</script>

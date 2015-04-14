@@ -49,12 +49,7 @@ if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . 
 				var searchInput = $(".my-search");
 
 				if ( $(e.target).hasClass("label-search") ) {
-					if ( searchInput.hasClass("my-search--hidden") ) {
-						searchInput.removeClass("my-search--hidden");
-					}
-					else {
-						searchInput.addClass("my-search--hidden");
-					}
+					searchInput.toggleClass("my-search--hidden");
 				}
 				else if ( !$(e.target).hasClass("label-search") && !$(e.target).hasClass("my-search") ) {
 					searchInput.addClass("my-search--hidden");

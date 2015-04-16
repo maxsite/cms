@@ -42,7 +42,19 @@ if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . 
 	
 	<div class="">
 		<form name="f_search" method="get" onsubmit="location.href='<?= getinfo('siteurl') ?>search/' + encodeURIComponent(this.s.value).replace(/%20/g, '+'); return false;">
-			<input class="my-search" type="search" name="s" id="sss" placeholder="Поиск..." onBlur="$('#sss').hide();"><i class="i-search icon-square bg-gray700 t-gray300 cursor-pointer" onClick="$('#sss').show().focus();"></i>
+			<input class="my-search my-search--hidden" type="search" name="s" id="sss" placeholder="Поиск..."><label class="label-search i-search icon-square bg-gray700 t-gray300 cursor-pointer" for="sss"></label>
 		</form>
+		<script>
+			$(document).on("click", function(e) {
+				var searchInput = $(".my-search");
+
+				if ( $(e.target).hasClass("label-search") ) {
+					searchInput.toggleClass("my-search--hidden");
+				}
+				else if ( !$(e.target).hasClass("label-search") && !$(e.target).hasClass("my-search") ) {
+					searchInput.addClass("my-search--hidden");
+				}
+			});
+		</script>
 	</div>
 </div>

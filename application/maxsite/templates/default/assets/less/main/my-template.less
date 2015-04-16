@@ -16,12 +16,10 @@ div.social a {
 
 // поиск в меню
 .my-search {
-	
 	.bor-none;
 	.h48px;
 	.pad0-tb;
 	.w200px;
-	.b-hide;
 	.bg-gray600; 
 
 	&:focus {
@@ -29,6 +27,11 @@ div.social a {
 		color: @gray300 !important;
 		.text > .placeholder(@gray400) !important;
 	}
+}
+
+.my-search--hidden {
+	.pad0-rl;
+	.w0;
 }
 
 

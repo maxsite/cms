@@ -5,9 +5,7 @@
  * (c) http://max-3000.com/
  */
 
-
 # коммментарии
-
 
 $page_text_ok = true; // разрешить вывод текста комментария в зависимости от пароля записи
 
@@ -15,7 +13,6 @@ if (isset($page['page_password']) and $page['page_password']) // есть пар
 {
 	$page_text_ok = (isset($page['page_password_ok'])); // нет отметки, что пароль пройден
 }
-
 
 echo '<span><a id="comments"></a></span>';
 
@@ -32,12 +29,9 @@ if ($out = mso_get_new_comment( array('page_title'=>$page['page_title']) ))
 	$out .= '<script>$(document).ready(function(){$.scrollTo("#comments", 500);})</script>';
 	echo $out;
 }
- 
-
 
 // получаем все разрешенные комментарии
 $comments = mso_get_comments($page['page_id']);
-
 
 // в сессии проверяем может быть только что отправленный комментарий
 if (isset($MSO->data['session']['comments']) and $MSO->data['session']['comments'] )
@@ -60,26 +54,21 @@ if ($f = mso_page_foreach('page-comments-do-list')) require($f);
 
 if ($page_text_ok and $comments) // есть страницы
 { 	
+	
+	echo '<div class="comments">';
 
-	if ($f = mso_page_foreach('page-comments-do')) require($f);
-	else 
-	{
-		echo '<div class="comments">';
-		
-		echo mso_get_val('page_comments_count_start', '<div class="page_comments_count">') 
-			. tf('Комментариев') . ': ' . count($comments) 
-			. ' <span class="page_comments_rss"><a href="' . mso_page_url($page['page_slug']). '/feed">'
-			. mso_get_val('page_comments_rss', 'RSS') . '</a></span>'
-			. mso_get_val('page_comments_count_end', '</div>');
-	}
+	eval(mso_tmpl_ts('type/page/units/page-comments-count-tmpl.php'));
 	
 	echo '<section>';
 	
-	static $num_comment = 0; // номер комментария по порядку - если нужно выводить в type_foreach-файле
+	static $comment_num = 0; // номер комментария по порядку - если нужно выводить в type_foreach-файле
 	
+	if ($fn = mso_find_ts_file('type/page/units/page-comments-article-tmpl.php')) 
+		$tmpl = mso_tmpl($fn);
+		
 	foreach ($comments as $comment)  // выводим в цикле
 	{
-		$num_comment++;
+		$comment_num++;
 		
 		if ($f = mso_page_foreach('page-comments')) 
 		{
@@ -89,70 +78,21 @@ if ($page_text_ok and $comments) // есть страницы
 		
 		extract($comment);
 		
-		// pr($comment);
+		if ($comment_num & 1) $a_class = 'comment-odd'; // нечетное
+			else $a_class = 'comment-even'; // четное
 		
-		if($num_comment & 1) $class = 'odd'; // нечетное
-			else $class = 'even'; // четное
+		if ($users_id) $a_class .= ' comment-users';
+		elseif ($comusers_id) $a_class .= ' comment-comusers';
+		else $a_class .= ' comment-anonim';
 		
-		if ($users_id) $class .= ' users';
-		elseif ($comusers_id) $class .= ' comusers';
-		else $class .= ' anonim';
+		$avatar = mso_avatar($comment, '', false,  false, true); // только адрес граватарки
+
+		// $comments_content = mso_comments_content($comments_content);
 		
-		$comments_date = mso_date_convert('Y-m-d в H:i:s', $comments_date);
-		
-		echo NR . '<article class="' . $class . '">';
-		
-		$comment_url = '<span class="url">' . $comments_url . '</span>';
-		
-		if ($comusers_url and mso_get_option('allow_comment_comuser_url', 'general', 0))
-		{
-			$comment_url .= ' <a href="' 
-				. $comusers_url 
-				. '" rel="nofollow" class="outlink"><img src="' 
-				. getinfo('template_url') 
-				. 'images/outlink.png" width="16" height="16" alt="link" title="' 
-				. tf('Сайт комментатора') . '"></a>';
-		}
-		
-		$comment_date = ' <span class="date"><a href="#comment-' 
-			. $comments_id 
-			. '" id="comment-' . $comments_id . '">' . $comments_date . '</a></span>';
-		
-		
-		if ($edit_link) $comment_edit = '<a href="' . $edit_link . $comments_id . '">edit</a>';
-			else $comment_edit = '';
-				
-		if (!$comments_approved) $comment_approved = '<span class="approved">' . tf('Ожидает модерации') . '</span>';
-			else $comment_approved = '';
-		
-		$comment_num_comment = '<span class="num_comment">' . $num_comment . '</span>'; 
-		
-		if ($f = mso_page_foreach('page-comments-out')) 
-		{
-			require($f);
-		}
-		else
-		{
-			echo 
-				mso_avatar($comment, 'class="gravatar"')
-				
-				. '<div class="comment-info">' 
-					. $comment_url 
-					. ($comment_edit ? ' | ' . $comment_edit : '')
-					. ($comment_approved ? ' | ' . $comment_approved : '')
-					. $comment_num_comment 
-					. $comment_date
-				. '</div>'
-				
-				. '<div class="comments_content">'
-					. mso_comments_content($comments_content) 
-				. '</div>';
-		}
-		
-		echo '<div class="clearfix"></div>';
-		
-		echo '</article>'; 
-		
+		if (!$comusers_url or !mso_get_option('allow_comment_comuser_url', 'general', 0))
+			$comusers_url = '';
+			
+		eval($tmpl); // выполнение через шаблонизатор
 	}
 	
 	echo '</section>';
@@ -167,25 +107,28 @@ if ($page['page_comment_allow'] and $page_text_ok)
 	if ( mso_get_option('allow_comment_anonim', 'general', '1') 
 		or mso_get_option('allow_comment_comusers', 'general', '1') )  
 	{
-		if ($f = mso_page_foreach('page-comment-form-do')) 
-		{
-			require($f);
-		}
-		else 
-		{
-			echo '<div class="clearfix"></div>' 
-				. mso_get_val('leave_a_comment_start', '<div class="leave_a_comment">') 
-				. mso_get_option('leave_a_comment', 'templates', tf('Оставьте комментарий!'))
-				. mso_get_val('leave_a_comment_end', '</div>');
-		}
 		
-		if ($f = mso_page_foreach('page-comment-form')) 
+		$to_login = tf('Вы можете <a href="#LOG#">войти</a> под своим логином или <a href="#REG#"> зарегистрироваться</a> на сайте.');
+		$to_login = str_replace('#LOG#', getinfo('site_url') . 'login', $to_login);
+		$to_login = str_replace('#REG#', getinfo('site_url') . 'registration', $to_login);
+		
+		
+		if (mso_get_option('new_comment_anonim_moderate', 'general', '1') )
+			$to_moderate = mso_get_option('form_comment_anonim_moderate', 'general', tf('Комментарий будет опубликован после проверки'));
+		else
+			$to_moderate = mso_get_option('form_comment_anonim', 'general', tf('Используйте нормальные имена'));
+		
+		// если запрещены комментарии от анонимов и при этом нет залогиненности, то форму при простой форме не выводим
+		if ( !mso_get_option('allow_comment_anonim', 'general', '1') and !is_login() and !is_login_comuser() and mso_get_option('form_comment_easy', 'general', '0')) 
 		{
-			require($f);
+			if (mso_get_option('allow_comment_comusers', 'general', '1')) 
+			{
+				eval(mso_tmpl_ts('type/page/units/page-comment-to-login-tmpl.php')); 
+			}
 		}
-		else 
+		else
 		{
-			if ($fn = mso_find_ts_file('type/page/units/page-comment-form.php')) require($fn);
+			eval(mso_tmpl_ts('type/page/units/page-comment-form-tmpl.php')); 
 		}
 	}
 }

@@ -1,14 +1,14 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 # авторасстановка тэгов
-function autotag_default($pee, $pre_special_chars = false)
+function autotag_default($pee)
 {
 	$pee = str_replace(array("\r\n", "\r"), "\n", $pee);
 	
-	if ( mso_hook_present('content_auto_tag_custom') ) 
-		return mso_hook('content_auto_tag_custom', $pee);
+	// if ( mso_hook_present('content_auto_tag_custom') ) 
+	//	return mso_hook('content_auto_tag_custom', $pee);
 	
-	$pee = mso_hook('content_auto_tag_do', $pee);
+	// $pee = mso_hook('content_auto_tag_do', $pee);
 
 	if ( // отдавать как есть - слово в начале текста
 		( strpos($pee, '[volkman]') !== false and strpos(trim($pee), '[volkman]') == 0 ) 
@@ -154,7 +154,7 @@ function autotag_default($pee, $pre_special_chars = false)
 	$pee = $pee . "\n";
 	
 	# кастомный автотэг
-	$pee = mso_hook('content_auto_tag_my', $pee);
+	// $pee = mso_hook('content_auto_tag_my', $pee);
 	
 	// _pr($pee, true); # контроль
 

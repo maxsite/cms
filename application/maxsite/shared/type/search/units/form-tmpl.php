@@ -1,0 +1,29 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+<div class="page_only"><div class="wrap">
+		
+	<h1>{{ tf('404. Ничего не найдено...') }} </h1>
+		
+	<div class="page_content">
+		{% if ($search_len) : %} 
+			<p>{{ tf('Поисковая фраза должна быть не менее 2 символов.') }}</p>
+		{% endif %}
+			
+		<p>{{ tf('Попробуйте повторить поиск.') }} </p>
+		
+		<form name="f_search" method="get" 
+			onsubmit="location.href='{{ getinfo('siteurl') }}search/' + encodeURIComponent(this.s.value).replace(/%20/g, '+'); return false;">
+			<input type="text" name="s" size="20" placeholder="{{ tf('что искать?') }}">
+			&nbsp;
+			<button type="submit">{{ tf('Поиск') }}</button>
+		</form>
+
+		{{ mso_hook('page_404') }}
+	</div>
+</div></div>
+
+
+
+
+
+

@@ -1527,11 +1527,18 @@ function mso_login_form($conf = array(), $redirect = '', $echo = true)
 		$hook_login_form_auth = '<div class="login-form-auth">' . str_replace('     ', ', ', $hook_login_form_auth) . '</div>';
 	}
 	
-	// в loginform.php результат возвращается в $out
-	if ($fn = mso_find_ts_file('type/loginform/units/form.php')) require($fn);
-	
-	if ($echo) echo $out;
-		else return $out;
+	if ($echo) 
+	{
+		eval(mso_tmpl_ts('type/loginform/units/loginform-common-tmpl.php'));
+	}
+	else 
+	{
+		ob_start();
+		eval(mso_tmpl_ts('type/loginform/units/loginform-common-tmpl.php'));
+		$out = ob_get_contents();
+		ob_end_clean();
+		return $out;
+	}
 }
 
 
@@ -4061,6 +4068,34 @@ function mso_add_file($fn)
 		elseif ($ext == 'less') 
 			echo NR . '<link rel="stylesheet/less" href="' . getinfo('template_url') . $fn . '" type="text/css">';
 	}
+}
+
+# HTML-шаблонизатор
+# получает текст файла, выполняет замены, отдает php-код
+# если $replace = true то в коде удаляются табуляторы и двойные \n
+# код выполнять через eval();
+# 	if (file_exists($fn)) eval(mso_tmpl($fn));
+function mso_tmpl($fn, $replace = true)
+{
+	$template = file_get_contents($fn);
+	
+	$template = '?>' . str_replace(array('{{', '}}', '{%', '%}'), array('<?=', '?>', '<?php', '?>'), $template);
+		
+	if ($replace)
+		$template = str_replace(array("\t", "\r", "\n\n"), array("", "", "\n"), $template);
+	
+	return $template;
+}
+
+# HTML-шаблонизатор
+# файл относительно шаблона/shared-каталога как в mso_find_ts_file()
+# 	eval(mso_tmpl_ts('article-tmpl.php'));
+function mso_tmpl_ts($fn, $replace = true)
+{
+	if ($fn = mso_find_ts_file($fn)) 
+		return mso_tmpl($fn, $replace);
+	else 
+		return '?>';
 }
 
 # end file

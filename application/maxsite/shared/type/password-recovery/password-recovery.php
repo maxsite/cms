@@ -32,7 +32,24 @@ if ($f = mso_page_foreach('password-recovery'))
 }
 else
 {
-	if ($fn = mso_find_ts_file('type/password-recovery/units/form.php')) require($fn);
+
+	if (is_login())
+	{
+		eval(mso_tmpl_ts('type/loginform/units/loginform-user-tmpl.php'));
+	}
+	elseif ($comuser = is_login_comuser())
+	{
+		if (mso_segment(2) == 'error') mso_redirect('loginform');
+		
+		if (!$comuser['comusers_nik']) $hello = t('Привет!');
+			else $hello = t('Привет,') . ' ' . $comuser['comusers_nik'] . '!';
+		
+		eval(mso_tmpl_ts('type/loginform/units/loginform-comuser-tmpl.php'));
+	}
+	else
+	{
+		eval(mso_tmpl_ts('type/password-recovery/units/password-recovery-tmpl.php'));
+	}
 }
 
 echo NR . '</div><!-- class="type type_password_recovery" -->' . NR;

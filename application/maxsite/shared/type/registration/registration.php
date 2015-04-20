@@ -10,7 +10,7 @@ if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 // проверяем запрет регистраций/комментирование комюзеров
 if (!mso_get_option('allow_comment_comusers', 'general', '1') )
 {
-	echo '<div class="message alert small ">' . tf('На сайте запрещена регистрация комюзеров.') . '</div>';
+	echo '<div class="message-alert">' . tf('На сайте запрещена регистрация комюзеров.') . '</div>';
 	if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	return;
 }
@@ -21,24 +21,16 @@ if (is_login())
 {
 	if (mso_segment(2) == 'error') mso_redirect('loginform');
 	
-	echo '<div class="loginform"><p class="ok user"><strong>'
-			. tf('Привет,') . ' ' . getinfo('users_nik') . '!</strong><br>'
-			. '<a href="' . getinfo('site_admin_url') . '">' . tf('Админ-панель') . '</a> | '
-			. '<a href="' . getinfo('siteurl') . 'logout' . '">' . tf('выйти') . '</a>'
-			. '</p></div>';
+	eval(mso_tmpl_ts('type/loginform/units/loginform-user-tmpl.php'));
 }
 elseif ($comuser = is_login_comuser())
 {
 	if (mso_segment(2) == 'error') mso_redirect('loginform');
 	
-	if (!$comuser['comusers_nik']) $cun = t('Привет!');
-		else $cun = t('Привет,') . ' ' . $comuser['comusers_nik'] . '!';
+	if (!$comuser['comusers_nik']) $hello = t('Привет!');
+		else $hello = t('Привет,') . ' ' . $comuser['comusers_nik'] . '!';
 	
-	echo '<div class="loginform"><p class="ok comuser"><strong>' . $cun . '</strong><br>'
-			. '<a href="' . getinfo('siteurl') . 'users/' . $comuser['comusers_id'] . '">' 
-			. t('своя страница') . '</a> | '
-			.'<a href="' . getinfo('siteurl') . 'logout' . '">' . t('выйти') . '</a>'
-			. '</p></div>';
+	eval(mso_tmpl_ts('type/loginform/units/loginform-comuser-tmpl.php'));
 }
 else
 {
@@ -77,12 +69,12 @@ else
 		
 		if (!$post['freg_rules_ok'])
 		{
-			$error .= '<div class="message error small">' . tf('Необходимо принять правила сайта') . '</div>';
+			$error .= '<div class="message-error">' . tf('Необходимо принять правила сайта') . '</div>';
 		}
 		
 		if (!$post['freg_email'])
 		{
-			$error .= '<div class="message error small">' . tf('Не указан email') . '</div>';
+			$error .= '<div class="message-error">' . tf('Не указан email') . '</div>';
 		}
 		else
 		{
@@ -91,13 +83,13 @@ else
 			
 			if (!$email)
 			{
-				$error .= '<div class="message error small">' . tf('Неверный email') . '</div>';
+				$error .= '<div class="message-error">' . tf('Неверный email') . '</div>';
 			}
 		}
 		
 		if (!$post['freg_password'])
 		{
-			$error .= '<div class="message error small">' . tf('Не указан пароль') . '</div>';
+			$error .= '<div class="message-error">' . tf('Не указан пароль') . '</div>';
 			
 			$vreg_password = '';
 			$vreg_password_repeat = '';
@@ -105,7 +97,7 @@ else
 		else
 		{
 			if ( strlen($post['freg_password']) < 6) 
-				$error .= '<div class="message error small">' . tf('Длина пароля должна быть более 6 символов') . '</div>';
+				$error .= '<div class="message-error">' . tf('Длина пароля должна быть более 6 символов') . '</div>';
 		}
 		
 		if ($post['freg_password'] != $post['freg_password_repeat'])
@@ -113,7 +105,7 @@ else
 			$vreg_password = '';
 			$vreg_password_repeat = '';
 			
-			$error .= '<div class="message error small">' . tf('Пароль и его повтор не совпадают') . '</div>';
+			$error .= '<div class="message-error">' . tf('Пароль и его повтор не совпадают') . '</div>';
 		}
 		
 		
@@ -149,37 +141,20 @@ else
 			$res = mso_comuser_auth($data);
 			
 			// если ошибка, то выводим сообщение
-			echo '<div class="message alert small">' . $res . '</div>';
+			echo '<div class="message-alert">' . $res . '</div>';
 		}
 	}
-
-	
-	echo '<div class="loginform"><p class="header">'. tf('Укажите данные для регистрации на сайте'). '</p>';
 
 	// форма регистрации
 	
 	$action = getinfo('siteurl') . 'registration';
-	$session_id = $MSO->data['session']['session_id'];
-	$email = tf('Email (используется как логин)');
-	$password = tf('Пароль (английские буквы и цифры, без пробелов, минимум 6 символов)');
-	$password_repeat = tf('Повторите пароль');
-	
-	$submit_value = tf('Зарегистрироваться');
-	$nik = tf('Имя');
-	$url = tf('Адрес сайта (если есть)');
-	
-	$rules_ok = tf('Обязуюсь соблюдать правила сайта');
-	
+
 	if ($rules = mso_get_option('rules_site', 'general', '')) 
-	{
 		$rules = ' (<a href="' . $rules . '" target="_blank">' . tf('Правила сайта') . '</a>)';
-	}
 	else
-	{
 		$rules = '';
-	}
 	
-	if ($fn = mso_find_ts_file('type/registration/units/form.php')) require($fn);
+	eval(mso_tmpl_ts('type/registration/units/registration-tmpl.php'));
 }
 
 echo NR . '</div><!-- class="type type_loginform" -->' . NR;

@@ -197,24 +197,7 @@ if (!$pages and !$categories and !$tags)
 	}
 	else // стандартный вывод
 	{
-		echo '<div class="page_only"><div class="wrap">';
-		
-		echo '<h1>' . tf('404. Ничего не найдено...') . '</h1>';
-		
-		echo '<div class="page_content">';
-		
-		if ($search_len) 
-			echo '<p>' 
-				. tf('Поисковая фраза должна быть не менее ' . $min_search_chars . ' символов.') 
-				. '</p>';
-		
-		echo '<p>' . tf('Попробуйте повторить поиск.') . '</p>';
-		
-		if ($fn = mso_find_ts_file('type/search/units/form.php')) require($fn);
-		
-		echo mso_hook('page_404');
-		
-		echo '</div></div></div>';
+		eval(mso_tmpl_ts('type/search/units/form-tmpl.php'));
 	}
 	
 } // endif $pages

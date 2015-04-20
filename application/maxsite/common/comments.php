@@ -178,15 +178,10 @@ function mso_get_comments($page_id = 0, $r = array())
 }
 
 # парсер текста для комментариев
-function mso_comments_autotag($text, $commentator, $r)
+function mso_comments_autotag($text, $commentator = 3, $r = array('tags' => '<p><img><strong><em><i><b><u><s><pre><code><blockquote>', 'tags_comusers' => '<p><img><strong><em><i><b><u><s><pre><code><blockquote>', 'tags_users' => '<p><img><strong><em><i><b><u><s><pre><code><blockquote>'))
 {
 	// раньше использовался mso_auto_tag теперь свой вариант
 	
-	// защитим pre
-	$text = str_replace('&lt;/pre>', '</pre>', $text); // проставим pre - исправление ошибки CodeIgniter
-	
-	$text = preg_replace_callback('!<pre>(.*?)</pre>!is', '_comments_clean_html_do', $text);
-
 	if ($commentator==1) 
 		$text = strip_tags($text, $r['tags_comusers']);
 	elseif($commentator==2) 
@@ -194,39 +189,32 @@ function mso_comments_autotag($text, $commentator, $r)
 	else 
 		$text = strip_tags($text, $r['tags']);
 	
-	$text = mso_xss_clean($text);
+	
+	$text = mso_comments_content($text);
+	
+	// pr($text,1);
 
-	$text = str_replace('[html_base64]', '<pre>[html_base64]', $text); // проставим pre
-	$text = str_replace('[/html_base64]', '[/html_base64]</pre>', $text);
-	
-	// обратная замена
-	$text = preg_replace_callback('!\[html_base64\](.*?)\[\/html_base64\]!is', '_comments_clean_html_posle', $text);
-	
 	$text = mso_hook('comments_content', $text);
 	
-	$text = str_replace("\n", "<br>", $text);
-	$text = str_replace('<p>', '&lt;p&gt;', $text);
-	$text = str_replace('</p>', '&lt;/p&gt;', $text);
-	$text = str_replace('<P>', '&lt;P&gt;', $text);
-	$text = str_replace('</P>', '&lt;/P&gt;', $text);
-	
-	$text = mso_hook('comments_content_out', $text);
+	//$text = mso_hook('comments_content_out', $text);
 			
 	return $text;
 }
 
-function _comments_clean_html_do($matches)
-{
-	$arr1 = array('&amp;', '&lt;', '&gt;', '<br />', '<br>', '&nbsp;');
-	$arr2 = array('&',     '<',    '>',    "\n",     "\n",   ' ');
-	$m = trim( str_replace($arr1, $arr2, $matches[1]) );
-	$m = '[html_base64]' . base64_encode($m) . '[/html_base64]';
-	return $m;
-}
 
-function _comments_clean_html_posle($matches)
+function mso_comments_content($text = '')
 {
-	return base64_decode($matches[1]);
+	// текст комментария прогоняется через стандартный парсер
+	if ( !function_exists('parser_default_content') )
+	{
+		require_once(getinfo('plugins_dir') . 'parser_default/index.php');
+	}
+	
+	$text = str_replace("\n", "<br>", $text); // обязательная замена
+	
+	$text = parser_default_content($text);
+	
+	return $text;
 }
 
 # функция отправляет админу уведомление о новом комментарии
@@ -288,7 +276,6 @@ function mso_email_message_new_comment($id = 0, $data = array(), $page_title = '
 	elseif (isset($data['comments_comusers_id']))
 	{
 		$text .= tf('Комюзер'). ': id=' . $data['comments_comusers_id'];
-
 		
 		$CI->db->select('comusers_nik, comusers_email');
 		$CI->db->from('comusers');
@@ -382,18 +369,17 @@ function mso_get_new_comment($args = array())
 		if ( !isset($args['xss_clean_die']) )		$args['xss_clean_die'] = false;
 		
 		// запрещенные слова как имя автора
-		if ( !isset($args['noword']) )		$args['noword'] = array('.com', '.ru', '.net', '.org', '.info', '.ua', 
-																	'.su', '.name', '/', 'www.', 'http', ':', '-', '"',
-																	'«', '»', '%', '<', '>', '&', '*', '+', '\'' );
+		if ( !isset($args['noword']) )
+			$args['noword'] = array('.com', '.ru', '.net', '.org', '.info', '.ua', 
+									'.su', '.name', '/', 'www.', 'http', ':', '-', '"',
+									'«', '»', '%', '<', '>', '&', '*', '+', '\'' );
 		
 		mso_hook('add_new_comment');
-
 
 		if (!mso_checksession($post['comments_session']) )
 			return '<div class="' . $args['css_error']. '">'. tf('Ошибка сессии! Обновите страницу'). '</div>';
 
 		if (!$post['comments_page_id']) return '<div class="' . $args['css_error']. '">'. tf('Ошибка!'). '</div>';
-
 
 		$comments_page_id = $post['comments_page_id'];
 		$id = (int) $comments_page_id;
@@ -419,19 +405,8 @@ function mso_get_new_comment($args = array())
 		// вычищаем от запрещенных тэгов
 		if ($args['tags']) 
 		{
-			// перед этим нужно все pre защитить
 			$t = $post['comments_content'];
-			
-			$t = preg_replace_callback('!<pre>(.*?)</pre>!is', 'mso_clean_html_do', $t);
-			
-			$t = strip_tags($t, $args['tags']); // теперь оставим только разрешенные тэги
-			
-			$t = str_replace('[html_base64]', '<pre>[html_base64]', $t); // проставим pre
-			$t = str_replace('[/html_base64]', '[/html_base64]</pre>', $t);
-			
-			// обратная замена
-			$t = preg_replace_callback('!\[html_base64\](.*?)\[\/html_base64\]!is', 'mso_clean_html_posle', $t);
-			
+			$t = strip_tags($t, $args['tags']); // оставим только разрешенные тэги
 			$post['comments_content'] = $t; // сохраним как текст комментария
 		}
 		
@@ -651,7 +626,6 @@ function mso_get_new_comment($args = array())
 
 						if ($res)
 						{
-							
 							// сохраним в сессии время отправления комментария - используется в mso_last_activity_comment
 							$CI->session->set_userdata('last_activity_comment', time());
 							
@@ -867,9 +841,7 @@ function mso_get_new_comment($args = array())
 			}
 		}
 	}
-	// else return '<div class="comment-new">Комментарий добавлен и возможно ожидает модерации.</div>';
 }
-
 
 # получаем данные комюзера.
 # если id = 0, то номер получаем из сессии или текущего сегмента (2)
@@ -947,47 +919,7 @@ function mso_get_comuser($id = 0, $args = array())
 
 			foreach ($comments as $key=>$comment)
 			{
-				$comments_content = $comment['comments_content'];
-				// защитим pre
-				$t = $comments_content;
-				$t = str_replace('&lt;/pre>', '</pre>', $t); // проставим pre - исправление ошибки CodeIgniter
-				
-				$t = preg_replace_callback('!<pre>(.*?)</pre>!is', 'mso_clean_html_do', $t);
-
-				$t = strip_tags($t, $args['tags']);
-				
-				$t = mso_xss_clean($t);
-
-				$t = str_replace('[html_base64]', '<pre>[html_base64]', $t); // проставим pre
-				$t = str_replace('[/html_base64]', '[/html_base64]</pre>', $t);
-				
-				// обратная замена
-				$t = preg_replace_callback('!\[html_base64\](.*?)\[\/html_base64\]!is', 'mso_clean_html_posle', $t);
-				
-				$comments_content = $t; // сохраним как текст комментария
-				
-				$comments_content = mso_hook('comments_content', $comments_content);
-				
-				$comments_content = str_replace("\n", "<br>", $comments_content);
-		
-				$comments_content = str_replace('<p>', '&lt;p&gt;', $comments_content);
-				$comments_content = str_replace('</p>', '&lt;/p&gt;', $comments_content);
-				$comments_content = str_replace('<P>', '&lt;P&gt;', $comments_content);
-				$comments_content = str_replace('</P>', '&lt;/P&gt;', $comments_content);
-				
-				if (mso_hook_present('comments_content_custom'))
-				{
-					$comments_content = mso_hook('comments_content_custom', $comments_content);
-				}
-				else
-				{
-					$comments_content = mso_auto_tag($comments_content, true);
-					$comments_content = mso_hook('content_balance_tags', $comments_content);
-				}
-				
-				$comments_content = mso_hook('comments_content_out', $comments_content);
-
-				$comments[$key]['comments_content'] = $comments_content;
+				$comments[$key]['comments_content'] = mso_comments_content($comment['comments_content']);
 			}
 
 			$comuser[0]['comments'] = $comments;
@@ -1497,13 +1429,9 @@ function mso_comuser_lost($args = array())
 	}
 }
 
-
-
-
 # список всех комюзеров
 function mso_get_comusers_all($args = array())
 {
-
 	$cache_key = mso_md5('mso_get_comusers_all');
 	$k = mso_get_cache($cache_key);
 	if ($k) return $k; // да есть в кэше
@@ -1569,8 +1497,6 @@ function mso_get_comusers_all($args = array())
 	
 	$all_comments = $r_array;
 	
-
-	
 	// добавляем в каждого комюзера элемент массива meta, comments и comments_pages_id
 	$r_array = array();
 	foreach ($comusers as $key=>$val)
@@ -1601,12 +1527,6 @@ function mso_get_comusers_all($args = array())
 	mso_add_cache($cache_key, $comusers);
 	
 	return $comusers;
-}
-
-
-function mso_comments_content($text = '')
-{
-	return $text;
 }
 
 # рассылаем по email уведомление о новом комментарии
@@ -1677,7 +1597,6 @@ function mso_email_message_new_comment_subscribe($data)
 			}
 		}
 	}
-
 }
 
 
@@ -1712,8 +1631,7 @@ function mso_comuser_auth($data)
 		if ($die) die(tf('Данный email уже используется на сайте админом или автором.'));
 			else return tf('Данный email уже используется на сайте админом или автором.');
 	}
-
-		
+	
 	// имя email и пароль нужно проверить, чтобы такие были в базе
 	// вначале нужно проверить наличие такого email
 	// если есть, то сверяем и пароль
@@ -1889,7 +1807,7 @@ function mso_last_activity_comment()
 
 # вывод аватарки комментатора
 # на входе массив комментария из page-comments.php
-function mso_avatar($comment, $img_add = 'style="float: left; margin: 5px 10px 10px 0;" class="gravatar"', $echo = false, $size = false)
+function mso_avatar($comment, $img_add = 'style="float: left; margin: 5px 10px 10px 0;" class="gravatar"', $echo = false, $size = false, $url_only = false)
 {
 	extract($comment);
 
@@ -1939,8 +1857,10 @@ function mso_avatar($comment, $img_add = 'style="float: left; margin: 5px 10px 1
 		}
 	}
 	
-	if ($avatar_url) 
-		$avatar_url =  '<img src="' . $avatar_url . '" width="' . $avatar_size . '" height="'. $avatar_size . '" alt="" title="" '. $img_add . '>';
+	if (!$url_only)
+	{
+		if ($avatar_url) $avatar_url =  '<img src="' . $avatar_url . '" width="' . $avatar_size . '" height="'. $avatar_size . '" alt="" title="" '. $img_add . '>';
+	}
 	
 	if ($echo) echo $avatar_url;	
 		else return $avatar_url;

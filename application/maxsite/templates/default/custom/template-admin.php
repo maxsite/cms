@@ -33,12 +33,10 @@ function default_profiles()
 {
 	$all = mso_get_path_files(getinfo('template_dir') . 'assets/css/profiles/', getinfo('template_url') . 'assets/css/profiles/', false, array('css'));
 	
-	/*
-	if ($all)	echo ' ||Нет #' . implode($all, '#');
-		else echo ' ||Нет';
-	*/
+	if ($all)	$all = ' ||Нет #' . implode($all, '#');
+		else $all = ' ||Нет';
 	
-	return implode($all, '#');
+	return $all;
 }
 
 # возвращает файлы для логотипа

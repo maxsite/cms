@@ -13,7 +13,6 @@
 		.grid_flex > .align_items(center);
 	}
 	
-	
 	&.flex-hcenter {
 		.grid_flex > .justify_content(center);
 	}
@@ -25,10 +24,16 @@
 .flex-grow3 { .grid_flex > .grow(3); }
 
 @media @SCREEN_TABLET {
-	.flex {
-		&.flex-wrap-tablet {
-			.grid_flex > .wrap(wrap);
-		}
+	.flex-wrap-tablet,
+	.flex-wrap-tablet-phone
+	{
+		.grid_flex > .wrap(wrap);
+	}
+	
+	.flex-tablet,
+	.flex-tablet-phone
+	{
+		.flex;
 	}
 	
 	.flex-reverse-tablet {
@@ -37,13 +42,20 @@
 }
 
 @media @SCREEN_PHONE {
-	.flex {
-		&.flex-wrap-phone {
-			.grid_flex > .wrap(wrap);
-		}
+	.flex-wrap-phone,
+	.flex-wrap-tablet-phone
+	{
+		.grid_flex > .wrap(wrap);
 	}
 	
+	.flex-phone,
+	.flex-tablet-phone
+	{
+	
+	.flex;
+	}
 	.flex-reverse-phone {
 		.grid_flex > .direction(row-reverse);
 	}
+	
 }

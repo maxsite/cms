@@ -8,17 +8,22 @@
   font-weight: 400;
 }
 
+// базовые стили для иконок для FA
+.icon-fa-normal {
+	font-family: FontAwesome;
+	display: inline-block;
+	font-size: inherit;
+	font-weight: normal;
+	font-style: normal;
+	line-height: 1;
+	margin-right: 7px;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
 [class*="i-"]:before {
-  font-family: FontAwesome;
-  display: inline-block;
-  font-size: inherit;
-  font-weight: normal;
-  font-style: normal;
-  line-height: 1;
-  margin-right: 7px;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	.icon-fa-normal;
 }
 
 @fa-css-prefix: i;

@@ -39,9 +39,9 @@
 	- копируем файл в каталог своего шаблона «custom»
 	- в my_template/functions.php в 18 строчке меняем код
 		
-		старый: require_once(getinfo('shared_dir') . 'functions/template.php');
+		было: require_once(getinfo('shared_dir') . 'functions/template.php');
 		
-		новый:  require_once(getinfo('template_dir') . 'custom/template.php');
+		стало:  require_once(getinfo('template_dir') . 'custom/template.php');
 	
 Аналогично проделываем такие же операции с другими недостающими файлам (которые высвечиваются как php-ошибки).
 

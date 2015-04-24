@@ -24,4 +24,5 @@
 	if (is_type('home')) mso_set_val('body_class', 'body-home');
 	else mso_set_val('body_class', 'body-all body-' . getinfo('type'));
 	
+	
 # end file

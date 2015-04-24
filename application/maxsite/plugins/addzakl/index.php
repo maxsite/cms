@@ -44,8 +44,8 @@ function addzakl_mso_options()
 							'type' => 'select', 
 							'name' => t('Размеры иконок'), 
 							'description' => t('Выберите размеры иконок'),
-							'values' => '16 # 24',  // правила для select как в ini-файлах
-							'default' => '16'
+							'values' => '16 # 24 # 32',  // правила для select как в ini-файлах
+							'default' => '24'
 						),
 			'text-do' => array(
 							'type' => 'text', 
@@ -217,7 +217,7 @@ function addzakl_mso_options()
 			
 			'gplusone' => array(
 							'type' => 'checkbox', 
-							'name' => ' <img width="38" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/gplusone.png"> Google +1', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/gplusone.png"> Google +1', 
 							'description' => '', 
 							'default' => '1'
 						),
@@ -238,7 +238,7 @@ function addzakl_content_end($args = array())
 	$options = mso_get_option('plugin_addzakl', 'plugins', array());
 	
 	$def_options = array(
-		'size' => 16, 
+		'size' => 24, 
 		'text-do' => '', 
 		'text-posle' => '', 
 		

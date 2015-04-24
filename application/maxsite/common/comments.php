@@ -1838,8 +1838,15 @@ function mso_avatar($comment, $img_add = 'style="float: left; margin: 5px 10px 1
 		
 		if ($gravatar_type = mso_get_option('gravatar_type', 'templates', ''))
 			$d = '&amp;d=' . urlencode($gravatar_type);
-		else 
-			$d = '';
+		else
+		{
+			$def = getinfo('uploads_dir') . 'gravatar-default.png';
+			
+			if (file_exists($def))
+				$d = '&amp;d=' . urlencode(getinfo('uploads_url') . 'gravatar-default.png');
+			else
+				$d = '';
+		}
 		
 		if (!empty($_SERVER['HTTPS'])) 
 		{

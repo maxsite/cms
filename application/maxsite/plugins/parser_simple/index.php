@@ -106,6 +106,11 @@ function autotag_simple($text)
 	
 	$text = preg_replace('! \@(.*?)\@!', " <code>$1</code>", $text);
 
+	// br для совместимости 
+	$text = str_replace('[br]', '<br style="clear:both">', $text);
+	$text = str_replace('[br none]', '<br>', $text);
+	$text = str_replace('[br left]', '<br style="clear:left">', $text);
+	$text = str_replace('[br right]', '<br style="clear:right">', $text);
 	
 	return trim($text);
 }

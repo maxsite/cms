@@ -49,7 +49,7 @@ $db['default']['database'] = '';
 
 $db['default']['dbprefix'] = 'mso_';
 
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['dbdriver'] = 'mysqli';
 $db['default']['pconnect'] = FALSE;
 $db['default']['db_debug'] = FALSE;
 $db['default']['cache_on'] = FALSE;

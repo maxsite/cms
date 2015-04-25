@@ -5297,6 +5297,10 @@ p.comments-count .comments-rss:before {
   padding-bottom: 20px !important;
   border-bottom: 1px dotted #757575;
 }
+.comment-leave {
+  margin: 20px 0;
+  font-weight: bold;
+}
 p.comment-info {
   font-size: .9rem;
   color: #616161;

@@ -2,9 +2,9 @@
 
 @import url('default/helpers.less'); // хелперы
 @import url('default/mso-reset.less'); // сброс стилей
-@import url('default/mso-default.less'); // начальные стили
-@import url('default/mso-forms.less'); // формы
-@import url('mixins/button.less'); // красивые кнопки
+// @import url('default/mso-default.less'); // начальные стили
+// @import url('default/mso-forms.less'); // формы
+// @import url('mixins/button.less'); // красивые кнопки
 
 
 body {
@@ -21,7 +21,7 @@ div.all {
 
 div.all-wrap {
 	margin: 180px 0 0 0;
-	padding-bottom: 40px;
+	padding-bottom: 20px;
 	
 }
 
@@ -71,20 +71,25 @@ div.logo {
 	}
 }
 
-.fform {
+form {
 	
-	margin: 30px 0 0 0;
-	padding: 0 25px;
+	width: 100%;
+	padding: 20px 20px 0 20px;
+	.box_sizing(border-box);
 	
-	input.flogin_user,
-	input.flogin_password
+	p {
+		margin: 0 0 20px 0;
+	}
+	
+	input
 	{
+		width: 100%;
 		.f > .size(14px);
 		padding: 5px;
-		margin: 0 0 15px 0;
+		// margin: 0 0 15px 0;
 		.border(#ddd);
 		.transition(all 0.5s 0s ease);
-		
+
 		&:focus, 
 		&:hover
 		{
@@ -111,10 +116,10 @@ div.logo {
 }
 
 div.goto-site {
-	margin-top: -30px;
+	// margin-top: -20px;
 	padding-right: 25px;
 	text-align: right;
-	
+	.f > .size(12px);
 	a {
 		color: #333;
 		.f > .underline(none);

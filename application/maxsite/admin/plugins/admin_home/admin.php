@@ -10,7 +10,7 @@
 	<li><a href="http://max-3000.com/page/faq"><?= t('ЧАВО по MaxSite CMS для новичков') ?></a></li>
 	<li><a href="http://book.max-3000.com/"><?= t('Книга по MaxSite CMS') ?></a></li>
 	<li><a href="http://forum.max-3000.com/"><?= t('Форум поддержки') ?></a></li>
-	<li><a href="http://max-3000.com/github"><?= t('MaxSite CMS на GitHub') ?></a>. <a href="https://github.com/maxsite/cms/wiki/Changelog"><?= t('История изменений') ?></a></li>
+	<li><a href="http://max-3000.com/github"><?= t('MaxSite CMS на GitHub') ?></a></li>
 	<li><a href="http://forum.max-3000.com/viewforum.php?f=13"><?= t('Каталог шаблонов') ?></a></li>
 	<li><a href="http://forum.max-3000.com/viewforum.php?f=17"><?= t('Каталог плагинов') ?></a></li>
 </ul>

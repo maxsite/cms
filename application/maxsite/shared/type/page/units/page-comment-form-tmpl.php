@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<p class="bold">{{ tf('Оставьте комментарий!') }}</p>
+<div class="comment-leave">{{ tf('Оставьте комментарий!') }}</div>
 
 <div class="comment-form">
 	<form method="post">

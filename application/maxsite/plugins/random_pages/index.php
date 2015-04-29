@@ -26,7 +26,7 @@ function random_pages_widget($num = 1)
 	
 	// заменим заголовок, чтобы был в  h2 class="box"
 	if ( isset($options['header']) and $options['header'] ) 
-		$options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+		$options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 	else $options['header'] = '';
 	
 	return random_pages_widget_custom($options, $num);
@@ -113,7 +113,7 @@ function random_pages_widget_custom($options = array(), $num = 1)
 		if (!$options['page_content'])
 		{
 			$link = '<a href="' . getinfo('siteurl') . 'page/';
-			$out .= '<ul class="is_link random_pages">' . NR;
+			$out .= '<ul class="mso-widget-list">' . NR;
 			foreach ($pages as $page) 
 			{
 				$out .= '<li>' . $link . $page['page_slug'] . '">' . $page['page_title'] . '</a>' . '</li>' . NR;
@@ -122,10 +122,11 @@ function random_pages_widget_custom($options = array(), $num = 1)
 		}
 		else
 		{
-			$out .= '<div class="random_pages">' . NR;
+			$out .= '<div class="mso-random_pages">' . NR;
+			
 			foreach ($pages as $page) 
 			{
-				$out .= '<div class="page_content">' . mso_hook('content', $page['page_content']) . '</div>' . NR;
+				$out .= '<div class="mso-random_pages-page">' . mso_hook('content', $page['page_content']) . '</div>' . NR;
 			}
 			$out .= '</div>' . NR;
 		}

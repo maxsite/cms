@@ -74,16 +74,16 @@ if (!$pages and !$categories and !$tags and mso_get_option('page_404_http_not_fo
 # начальная часть шаблона
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="type type_search">' . NR;
+echo NR . '<div class="mso-type-search">' . NR;
 
 if ($f = mso_page_foreach('search-do')) require($f); // подключаем кастомный вывод
 else 
 {	
 	if ($pages or $categories or $tags) // есть страницы рубрики или метки
 	{
-		echo '<div class="page_only"><div class="wrap">'
+		echo '<div class="mso-page-only">'
 			. '<h1>' . tf('Поиск') . '</h1>'
-			. '<div class="page_content">'
+			. '<div class="mso-page-content">'
 			. '<p>' . tf('Результаты поиска по запросу') 
 			. ' <strong>«' . $search . '»</strong></p>';
 	}
@@ -91,7 +91,7 @@ else
 
 if ($categories) // есть рубрики
 {
-	echo '<h2>' . tf('Рубрики:') . '</h2><ul class="search-res">';
+	echo '<h2>' . tf('Рубрики:') . '</h2><ul class="mso-search-res">';
 	
 	foreach ($categories as $key => $val)
 	{
@@ -102,7 +102,7 @@ if ($categories) // есть рубрики
 
 if ($tags) // есть метки
 {
-	echo '<h2>' . tf('Метки:') . '</h2><ul class="search-res">';
+	echo '<h2>' . tf('Метки:') . '</h2><ul class="mso-search-res">';
 	foreach ($tags as $tag)
 	{
 		echo '<li><a href="' . getinfo('siteurl') . 'tag/' . urlencode($tag) . '">' . $tag . '</a></li>';
@@ -119,7 +119,7 @@ if ($pages) // есть страницы
 	echo '<h2>' . tf('Записи:') . '</h2>';
 	
 	// вывод найденных страниц
-	echo '<ul class="search-res">';
+	echo '<ul class="mso-search-res">';
 
 	foreach ($pages as $page) // выводим в цикле
 	{
@@ -187,7 +187,7 @@ if ($pages) // есть страницы
 	mso_hook('pagination', $pagination);
 }
 
-if ($pages or $categories or $tags) echo '</div></div></div>';
+if ($pages or $categories or $tags) echo '</div></div>';
 
 if (!$pages and !$categories and !$tags)
 {
@@ -202,7 +202,7 @@ if (!$pages and !$categories and !$tags)
 	
 } // endif $pages
 
-echo NR . '</div><!-- class="type type_search" -->' . NR;
+echo NR . '</div><!-- class="mso-type-search" -->' . NR;
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

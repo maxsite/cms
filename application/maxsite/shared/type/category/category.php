@@ -42,7 +42,7 @@ if (!$pages and mso_get_option('page_404_http_not_found', 'templates', 1))
 # начальная часть шаблона
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="type type_category"><section>' . NR;
+echo NR . '<div class="mso-type-category"><section>' . NR;
 
 if ($f = mso_page_foreach('category-do')) require($f);
 
@@ -56,7 +56,7 @@ if ($pages) // есть страницы
 		}
 		else
 		{
-			echo '<h1 class="category">'
+			echo '<h1 class="mso-category">'
 				. htmlspecialchars(mso_get_cat_key('category_name')) 
 				. '</h1>';
 		}
@@ -71,7 +71,7 @@ if ($pages) // есть страницы
 			else
 			{
 				echo 
-					mso_get_val('show_rss_text_start', '<p class="show_rss_text">') 
+					mso_get_val('show_rss_text_start', '<p class="mso-show-rss-text">') 
 					. '<a href="' . getinfo('siteurl') . mso_segment(1) 
 					. '/' . mso_segment(2) 
 					. '/feed">'
@@ -88,7 +88,7 @@ if ($pages) // есть страницы
 		{
 			// описание рубрики
 			if ($category_desc = mso_get_cat_key('category_desc'))
-				echo '<div class="category_desc">' . $category_desc . '</div>';
+				echo '<div class="mso-category-desc">' . $category_desc . '</div>';
 			
 			if (function_exists('ushka')) echo ushka('category_' . mso_get_cat_key('category_slug'));
 			
@@ -133,7 +133,7 @@ else
 
 if ($f = mso_page_foreach('category-posle')) require($f); // подключаем кастомный вывод
 	
-echo NR . '</section></div><!-- /div.type type_category -->' . NR;
+echo NR . '</section></div><!-- /div.mso-type-category -->' . NR;
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

@@ -25,7 +25,7 @@ if (!$comuser_info and mso_get_option('page_404_http_not_found', 'templates', 1)
 
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="type type_users_form_lost">' . NR;
+echo NR . '<div class="mso-type-users-form-lost">' . NR;
 
 echo $res_post;
 	
@@ -91,7 +91,7 @@ else
 	}
 }
 
-echo NR . '</div><!-- class="type type_users_form_lost" -->' . NR;
+echo NR . '</div><!-- class="mso-type-users-form-lost" -->' . NR;
 
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	

@@ -12,12 +12,12 @@ mso_head_meta('title', $title_contact); //  meta title страницы
 
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="type type_contact"><div class="page_only"><div class="wrap">' . NR;
+echo NR . '<div class="mso-type-contact"><div class="mso-page-only">' . NR;
 
 
 echo '<h1>' . $title_contact . '</h1>';
 
-echo '<div class="page_content">';
+echo '<div class="mso-page-content">';
 
 echo mso_get_option('prew_contact', 'templates', '');
 
@@ -76,7 +76,7 @@ if ($f = mso_page_foreach('contact-posle')) require($f); // подключаем
 
 echo '</div>'; //  class="page_content"
 
-echo NR . '</div></div><!-- class="page_only" --></div><!-- class="type type_contact" -->' . NR;
+echo NR . '</div></div><!-- class="mso-type-contact" -->' . NR;
 
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 

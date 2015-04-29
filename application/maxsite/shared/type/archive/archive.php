@@ -38,12 +38,12 @@ if (!$pages and mso_get_option('page_404_http_not_found', 'templates', 1) )
 
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="type type_archive">' . NR;
+echo NR . '<div class="mso-type-archive">' . NR;
 
 if ($f = mso_page_foreach('archive-do')) 
 		require($f);
 	else 
-		echo '<h1 class="category archive">' . tf('Архивы') . '</h1>';
+		echo '<h1 class="mso-archive">' . tf('Архивы') . '</h1>';
 
 if ($pages) // есть страницы
 {
@@ -79,7 +79,7 @@ else
 if ($f = mso_page_foreach('archive-posle')) require($f);
 
 
-echo NR . '</div><!-- class="type type_archive" -->' . NR;
+echo NR . '</div><!-- class="mso-type-archive" -->' . NR;
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

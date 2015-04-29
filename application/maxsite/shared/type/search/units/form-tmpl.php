@@ -1,10 +1,10 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<div class="page_only"><div class="wrap">
+<div class="mso-page-only">
 		
 	<h1>{{ tf('404. Ничего не найдено...') }} </h1>
 		
-	<div class="page_content">
+	<div class="mso-page-content">
 		{% if ($search_len) : %} 
 			<p>{{ tf('Поисковая фраза должна быть не менее 2 символов.') }}</p>
 		{% endif %}
@@ -20,10 +20,4 @@
 
 		{{ mso_hook('page_404') }}
 	</div>
-</div></div>
-
-
-
-
-
-
+</div>

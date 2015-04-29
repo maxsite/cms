@@ -18,7 +18,7 @@ if ( function_exists('last_comments_widget_custom') )
 	
 	if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-	echo NR . '<div class="type type_comments page_only">' . NR;
+	echo NR . '<div class="mso-type-comments">' . NR;
 	
 	if ($f = mso_page_foreach('comments-do-last-comments-widget')) require($f); // подключаем кастомный вывод
 	else
@@ -47,7 +47,7 @@ else
 
 	if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 	
-	echo NR . '<div class="type type_comments">' . NR;
+	echo NR . '<div class="mso-type-comments">' . NR;
 
 	if ($f = mso_page_foreach('comments-do')) require($f); // подключаем кастомный вывод
 	else 
@@ -88,7 +88,7 @@ else
 	echo '</div>';
 }
 
-echo NR . '</div><!-- class="type type_comments" -->' . NR;
+echo NR . '</div><!-- class="mso-type-comments" -->' . NR;
 
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 

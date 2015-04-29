@@ -31,7 +31,7 @@ if (!$comuser_info and mso_get_option('page_404_http_not_found', 'templates', 1)
 // теперь сам вывод
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="type type_users_form">' . NR;
+echo NR . '<div class="mso-type-users-form">' . NR;
 
 echo $res_post;
 	
@@ -60,7 +60,7 @@ if ($comuser_info)
 		{
 			echo '<form method="post">' . mso_form_session('f_session_id');
 			echo '<p><span style="color: red; font-weight: bold;" class="users-form">'. tf('Введите ключ активации'). ':</span> 
-				 <input type="text" style="width: 200px;" class="users-form" name="f_comusers_activate_key"> ';
+				 <input type="text" style="width: 200px;" class="mso-users-form" name="f_comusers_activate_key"> ';
 			echo '<input type="submit" name="f_submit[' . $comusers_id . ']" value="' . tf('Готово') . '"></p></form>';
 			
 			echo '<p>' . tf('В случае проблем с активацией (не пришел ключ, указали ошибочный email), обращайтесь к администратору по email:') . ' <em>' . mso_get_option('admin_email', 'general', '-') . '</em></p>';
@@ -69,7 +69,7 @@ if ($comuser_info)
 		}
 		else // активация завершена - можно вывести поля для редактирования
 		{
-			echo '<form method="post" class="comusers-form fform">' . mso_form_session('f_session_id');
+			echo '<form method="post" class="mso-comusers-form">' . mso_form_session('f_session_id');
 			
 			if ($login_form) // нужно отобразить форму
 			{
@@ -187,7 +187,7 @@ else
 	}
 }
 
-echo NR . '</div><!-- class="type type_users_form" -->' . NR;
+echo NR . '</div><!-- class="mso-type-users-form" -->' . NR;
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

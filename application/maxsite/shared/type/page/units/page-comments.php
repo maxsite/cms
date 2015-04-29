@@ -48,14 +48,14 @@ if (isset($MSO->data['session']['comments']) and $MSO->data['session']['comments
 if (is_login()) $edit_link = getinfo('siteurl') . 'admin/comments/edit/';
 	else $edit_link = '';
 
-if ($comments or $page['page_comment_allow']) echo NR . '<div class="type type_page_comments">' . NR;
+if ($comments or $page['page_comment_allow']) echo NR . '<div class="mso-type-page-comments">' . NR;
 
 if ($f = mso_page_foreach('page-comments-do-list')) require($f);
 
 if ($page_text_ok and $comments) // есть страницы
 { 	
 	
-	echo '<div class="comments">';
+	echo '<div class="mso-comments">';
 
 	eval(mso_tmpl_ts('type/page/units/page-comments-count-tmpl.php'));
 	
@@ -78,12 +78,12 @@ if ($page_text_ok and $comments) // есть страницы
 		
 		extract($comment);
 		
-		if ($comment_num & 1) $a_class = 'comment-odd'; // нечетное
-			else $a_class = 'comment-even'; // четное
+		if ($comment_num & 1) $a_class = 'mso-comment-odd'; // нечетное
+			else $a_class = 'mso-comment-even'; // четное
 		
-		if ($users_id) $a_class .= ' comment-users';
-		elseif ($comusers_id) $a_class .= ' comment-comusers';
-		else $a_class .= ' comment-anonim';
+		if ($users_id) $a_class .= ' mso-comment-users';
+		elseif ($comusers_id) $a_class .= ' mso-comment-comusers';
+		else $a_class .= ' mso-comment-anonim';
 		
 		$avatar = mso_avatar($comment, '', false,  false, true); // только адрес граватарки
 
@@ -134,6 +134,6 @@ if ($page['page_comment_allow'] and $page_text_ok)
 }
 
 if ($comments or $page['page_comment_allow']) 
-	echo NR . '</div><!-- /div.type type_page_comments -->' . NR;
+	echo NR . '</div><!-- /div.mso-type-page-comments -->' . NR;
 
 # end file

@@ -22,7 +22,7 @@ else
 # начальная часть шаблона
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="type type_password_recovery">' . NR;
+echo NR . '<div class="mso-type-password-recovery">' . NR;
 
 echo $res_post;
 	
@@ -52,7 +52,7 @@ else
 	}
 }
 
-echo NR . '</div><!-- class="type type_password_recovery" -->' . NR;
+echo NR . '</div><!-- class="mso-type-password-recovery" -->' . NR;
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

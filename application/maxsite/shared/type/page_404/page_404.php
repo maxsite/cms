@@ -9,7 +9,7 @@ if ( mso_get_option('page_404_http_not_found', 'templates', 1) ) header('HTTP/1.
 
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="type type_page_404">' . NR;
+echo NR . '<div class="mso-type-page_404">' . NR;
 
 
 if ($f = mso_page_foreach('page_404')) 
@@ -18,18 +18,10 @@ if ($f = mso_page_foreach('page_404'))
 }
 else // стандартный вывод
 {
-	echo '<div class="page_only"><div class="wrap">';
-
-	echo '<h1>' . tf('404 - несуществующая страница') . '</h1>';
-	
-	echo '<div class="page_content">';
-	echo '<p>' . tf('Извините по вашему запросу ничего не найдено!') . '</p>';
-	echo mso_hook('page_404');
-	
-	echo '</div></div></div>';
+	if ($fn = mso_find_ts_file('type/page_404/units/page_404.php')) require($fn);
 }
 
-echo NR . '</div><!-- class="type type_page_404" -->' . NR;
+echo NR . '</div><!-- class="mso-type-page_404" -->' . NR;
 
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 

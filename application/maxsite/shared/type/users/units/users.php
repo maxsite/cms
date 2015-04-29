@@ -22,7 +22,7 @@ if (!$comuser_info and mso_get_option('page_404_http_not_found', 'templates', 1)
 # начальная часть шаблона
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="type type_users">' . NR;
+echo NR . '<div class="mso-type-users">' . NR;
 
 if ($comuser_info)
 {
@@ -33,13 +33,13 @@ if ($comuser_info)
 	{
 		$avatar_info = $comuser_info[0];
 		$avatar_info['users_avatar_url'] = $avatar_info['users_email'] = '';
-		$avatar = mso_avatar($avatar_info, 'style="float: right; margin: 5px 0 0 0;" class="gravatar"', false, 150); 
+		$avatar = mso_avatar($avatar_info, 'style="float: right; margin: 5px 0 0 0;" class="mso-gravatar"', false, 150); 
 		
 		if ($comusers_nik) echo '<h1>' . $avatar . $comusers_nik . '</h1>';
 			else echo '<h1>' . $avatar . tf('Комментатор'). ' ' . $comusers_id . '</h1>';
 		
 		if ($comusers_activate_string != $comusers_activate_key) // нет активации
-			echo '<p><span style="color: red;" class="comusers-no-activate">'. tf('Активация не завершена.'). '</span> <a href="' . getinfo('siteurl') . 'users/' . $comusers_id . '/edit">'. tf('Завершить'). '</a></p>';
+			echo '<p><span style="color: red;" class="mso-comusers-no-activate">'. tf('Активация не завершена.'). '</span> <a href="' . getinfo('siteurl') . 'users/' . $comusers_id . '/edit">'. tf('Завершить'). '</a></p>';
 		
 		// выводим все данные
 		if ($comusers_date_registr) echo '<p><strong>'. tf('Дата регистрации'). ':</strong> ' . $comusers_date_registr . '</p>';
@@ -117,7 +117,7 @@ else
 	}
 }
 
-echo NR . '</div><!-- class="type type_users" -->' . NR;
+echo NR . '</div><!-- class="mso-type-users" -->' . NR;
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

@@ -321,7 +321,7 @@ function mso_get_pages($r = array(), &$pag)
 						# отображать ссылку?
 						if ($r['show_cut'])
 							$output .= mso_page_title( $page['page_slug'] . $r['a_link_cut'], $cut, 
-								'<span class="cut">', '</span>', true, false, $r['link_page_type'] );
+								'<span class="mso-cut">', '</span>', true, false, $r['link_page_type'] );
 					}
 					else
 					{
@@ -340,7 +340,7 @@ function mso_get_pages($r = array(), &$pag)
 						{
 							if ($r['show_xcut'])
 								$cut = mso_page_title( $page['page_slug'] . $r['a_link_cut'], $cut, 
-									'<span class="cut">', '</span>', true, false, $r['link_page_type'] );
+									'<span class="mso-cut">', '</span>', true, false, $r['link_page_type'] );
 							else $cut = '';
 							
 							$output = $xcontent[0] . $cut;
@@ -2068,7 +2068,7 @@ function mso_page_other_pages($page_id = 0, $page_categories = array())
 			}
 			else
 			{
-				echo '<div class="page_other_pages">' . mso_get_val('page_other_pages_start', '<h3>') . $bl_title . mso_get_val('page_other_pages_end', '</h3>') . '<ul>';
+				echo '<div class="mso-page-other-pages">' . mso_get_val('page_other_pages_start', '<h4>') . $bl_title . mso_get_val('page_other_pages_end', '</h4>') . '<ul>';
 				
 				foreach ($bl_pages as $bl_page)
 				{

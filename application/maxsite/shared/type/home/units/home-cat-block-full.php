@@ -6,7 +6,7 @@
  */
 
 
-echo NR . '<div class="type type_home_cat_block">' . NR;
+echo NR . '<div class="mso-type-home-cat-block">' . NR;
 
 if ($f = mso_page_foreach('home-cat-block-text-do')) require($f); 
 
@@ -58,7 +58,7 @@ else
 				$cat_info = mso_get_cat_from_id($cat_id); // все данные рубрики
 				
 				// название рубрики и ссылка
-				echo '<div class="header_home_cat">'
+				echo '<div class="mso-header-home-cat">'
 					. '<a href="' . getinfo('site_url') . 'category/' 
 					. $cat_info['category_slug'] . '">' 
 					. htmlspecialchars($cat_info['category_name']) . '</a>' 
@@ -68,14 +68,14 @@ else
 				if (mso_get_option('default_description_home_cat', 'templates', '0') 
 					and $cat_info['category_desc'])
 				{
-					echo '<div class="description-cat">'
+					echo '<div class="mso-description-cat">'
 						. $cat_info['category_desc']
 						. '</div>';
 				}
 				
 				if ($f = mso_page_foreach('home-cat-block-out-pages-do')) require($f); 	
 				
-				mso_set_val('container_class', 'type_home type_home_cat_block type_home_cat_block_full');
+				mso_set_val('container_class', 'mso-type-home mso-type-home-cat-block mso-type-home-cat-block-full');
 				
 				if ($fn = mso_find_ts_file('type/_def_out/full/full.php')) require($fn);
 	
@@ -90,6 +90,6 @@ else
 
 if ($f = mso_page_foreach('home-cat-block-posle')) require($f);
 
-echo NR . '</div><!-- class="type type_home_cat_block" -->' . NR;
+echo NR . '</div><!-- class="mso-type-home-cat-block" -->' . NR;
 
 # end file

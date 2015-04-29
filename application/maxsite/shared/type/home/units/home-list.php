@@ -20,14 +20,14 @@ if ($f = mso_page_foreach('home-mso-get-pages')) require($f);
 
 $pages = mso_get_pages($par, $pagination);
 
-mso_set_val('container_class', 'type_home home_list');
+mso_set_val('container_class', 'mso-type-home mso-home-list');
 
 if (mso_get_option('default_description_home', 'templates', '0'))
 {
 	mso_set_val('list_line_format', '[title] - [date] [meta_description]');
 	
 	// заголовок перед списком
-	if ($_t = mso_get_val('home_list_header', '')) echo $_t;
+	if ($_t = mso_get_val('home_list_header', '<div class="mso-home-header">Последние записи</div>')) echo $_t;
 	
 }
 if ($fn = mso_find_ts_file('type/_def_out/list/list.php')) require($fn);

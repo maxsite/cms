@@ -22,14 +22,14 @@ if (!$comusers and mso_get_option('page_404_http_not_found', 'templates', 1) ) h
 # начальная часть шаблона
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="type type_users_all">' . NR;
+echo NR . '<div class="mso-type-users-all">' . NR;
 
 	
 if ($comusers)
 {
 	if ($f = mso_page_foreach('users-all-do')) require($f); // подключаем кастомный вывод
 	else 
-		echo '<h1>'. tf('Комментаторы'). '</h1><p>' . tf('Забыли кто вы?') . ' <a href="' . getinfo('siteurl') . 'password-recovery">'. tf('Можно восстановить пароль.'). '</a></p><ul class="users-all">';
+		echo '<h1>'. tf('Комментаторы'). '</h1><p>' . tf('Забыли кто вы?') . ' <a href="' . getinfo('siteurl') . 'password-recovery">'. tf('Можно восстановить пароль.'). '</a></p><ul class="mso-users-all">';
 	
 	// pr($comusers);
 	foreach ($comusers as $comuser)
@@ -61,7 +61,7 @@ else
 	}
 }
 
-echo NR . '</div><!-- class="type type_users_all" -->' . NR;
+echo NR . '</div><!-- class="mso-type-users-all" -->' . NR;
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

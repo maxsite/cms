@@ -20,7 +20,7 @@ if ($f = mso_page_foreach('home-top-mso-get-pages')) require($f);
 
 $pages = mso_get_pages($par, $temp);
 
-mso_set_val('container_class', 'home_top_page');
+mso_set_val('container_class', 'mso-home-top-page');
 mso_set_val('full_format_title_start', '<h1>');
 mso_set_val('full_format_title_end', '</h1>');
 

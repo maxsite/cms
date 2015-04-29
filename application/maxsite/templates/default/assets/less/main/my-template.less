@@ -36,6 +36,8 @@ div.social a {
 	.w0;
 }
 
+
+// виджеты
 // список в сайдбаре
 ul.is_link {
 	.pad15-l;
@@ -57,24 +59,25 @@ div.widget a {
 
 // виджеты
 div.widget {
-	.mar30-b;
+	margin-bottom: 30px;
 }
 
 // блок обсуждения
-div.comments-link {
+div.mso-comments-link {
 	.b-hide;
 }
 
 // читать далее
-span.cut {
+span.mso-cut {
 	.b-block;
 	.b-right;
 	.b-clear;
 }
 
 // блок Еще записи по теме
-div.page_other_pages {
-	.mar40-t;
+.mso-page-other-pages {
+
+	margin-top: 40px;
 	
 	a {
 		//.t-gray700;
@@ -85,24 +88,24 @@ div.page_other_pages {
 		.pad30-l;
 	}
 
-}
-
-// заголовок Еще записи по теме
-div.page_other_pages_header {
-	.t100;
-	.upper;
-	.t-gray700;
-	border-bottom: 3px double @gray300;
-	
-	&:before {
-		.icon-fa-normal;
-		content: @fa-var-stack-overflow;
+	h4 { 
+		.t100;
+		.upper;
+		.t-gray700;
+		margin: 30px 0 15px 0;;
+		
+		border-bottom: 3px double @gray300;
+		
+		&:before {
+			.icon-fa-normal;
+			content: @fa-var-stack-overflow;
+		}
 	}
 }
 
 // комментарии
-p.comments-count {
-	.mar40-t;
+.mso-comments-count {
+	margin-top: 40px;
 	.t100;
 	.upper;
 	.t-gray700;
@@ -113,7 +116,7 @@ p.comments-count {
 		content: @fa-var-comments-o;
 	}
 	
-	.comments-rss {
+	.mso-comments-rss {
 		.b-inline;
 		.b-right;
 		
@@ -124,23 +127,31 @@ p.comments-count {
 	}
 }
 
-.comment-article {
+.mso-comments-textarea {
+	textarea {width: 100%;}
+}
+
+.mso-comments-input-author {
+	width: 100%;
+}
+
+.mso-comment-article {
 	.mar20-t;
 	.pad20-b;
 	border-bottom: 1px dotted @gray600;
 }
 
 // оставьте комментарий
-.comment-leave {
+.mso-comment-leave {
 	margin: 20px 0;
 	.bold;
 }
 
-p.comment-info {
+.mso-comment-info {
 	.t90;
 	.t-gray700;
 	
-	.comment-num {
+	.mso-comment-num {
 		.bg-gray200;
 		.t-gray600;
 		.pad5-rl;
@@ -151,7 +162,7 @@ p.comment-info {
 		.t-gray700;
 	}
 	
-	.comment-author {
+	.mso-comment-author {
 		.mar10-l;
 		
 		&:before {
@@ -160,7 +171,7 @@ p.comment-info {
 		}
 	}
 	
-	.comuser-url {
+	.mso-comuser-url {
 		.mar10-l;
 		
 		&:before {
@@ -169,7 +180,7 @@ p.comment-info {
 		}
 	}
 	
-	.comment-date {
+	.mso-comment-date {
 		.mar10-l;
 		
 		&:before {
@@ -178,7 +189,7 @@ p.comment-info {
 		}
 	}
 	
-	.comment-edit {
+	.mso-comment-edit {
 		.mar10-l;
 		
 		&:before {
@@ -189,31 +200,41 @@ p.comment-info {
 }
 
 // аватарка
-img.gravatar {
+img.mso-gravatar {
 	.b-right;
 	.mar15-l;
 }
 
 // раскраска юзеров 
-.comment-users .comment-author,
-.comment-users .comment-author a 
+.mso-comment-users .mso-comment-author,
+.mso-comment-users .mso-comment-author a 
 {
 		color: @green;
 }
 		
-.comment-comusers .comment-author,
-.comment-comusers .comment-author a 
+.mso-comment-comusers .mso-comment-author,
+.mso-comment-comusers .mso-comment-author a 
 {
 	color: @green;
 }
 	
-.comment-anonim .comment-author {
+.mso-comment-anonim .mso-comment-author {
 	color: @gray700;
 }
 
 
-// плагин пагинации
 
+// системные сообщения
+.mso-message-error {
+	color: @red;
+}
+
+.mso-message-alert {
+	color: @red;
+}
+
+
+// плагин пагинации
 div.pagination {
 	
 	.mar40-t;
@@ -253,3 +274,4 @@ div.pagination {
 	.mar40-t;
 	.mar10-b;
 }
+

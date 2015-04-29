@@ -42,7 +42,7 @@ else
 	if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 }
 
-echo NR . '<div class="type type_page">' . NR;
+echo NR . '<div class="mso-type-page">' . NR;
 
 if ($f = mso_page_foreach('page-do')) require($f);
 
@@ -72,7 +72,7 @@ if ($pages)
 		
 		$p->load($page);
 		
-		$p->div_start('page_only', 'wrap', '<article>');
+		$p->div_start('mso-page-only', '<article>');
 		
 			// у page в записи может быть метаполе info-top-custom
 			// где указываетеся свой файл вывода
@@ -101,9 +101,9 @@ if ($pages)
 						$p->html(NR . '<header>');
 							$p->line('[title]');
 							
-							$p->div_start('info info-top');
+							$p->div_start('mso-info mso-info-top');
 								$p->line('[date][edit][cat][tag][view_count]');
-							$p->div_end('info info-top');
+							$p->div_end('mso-info mso-info-top');
 						$p->html('</header>');
 					}
 				}
@@ -121,7 +121,7 @@ if ($pages)
 				}
 				else
 				{
-					$p->div_start('page_content type_' . getinfo('type') . '_content');
+					$p->div_start('mso-page-content mso-type-' . getinfo('type') . '-content');
 						
 						if ($f = mso_page_foreach('content')) require($f);
 						else
@@ -147,7 +147,7 @@ if ($pages)
 						}
 						
 						// для page возможен свой info-bottom
-						if ($f = mso_page_foreach('info-bottom-page')) 
+						if ($f = mso_page_foreach('mso-info-bottom-page')) 
 						{
 							require($f);
 						}
@@ -172,11 +172,11 @@ if ($pages)
 								
 						$p->html('</aside>');
 						
-					$p->div_end('page_content type_' . getinfo('type') . '_content');
+					$p->div_end('mso-page-content mso-type-' . getinfo('type') . '-content');
 				}
 			}
 			
-		$p->div_end('page_only', 'wrap', '</article>');
+		$p->div_end('mso-page-only', '</article>');
 		
 		if ($f = mso_page_foreach('page-only-end')) require($f);
 		
@@ -202,7 +202,7 @@ else
 
 if ($f = mso_page_foreach('page-posle')) require($f);
 
-echo NR . '</div><!-- /div.type type_page -->' . NR;
+echo NR . '</div><!-- /div.mso-type-page -->' . NR;
 
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	

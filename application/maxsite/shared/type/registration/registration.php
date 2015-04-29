@@ -10,12 +10,12 @@ if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 // проверяем запрет регистраций/комментирование комюзеров
 if (!mso_get_option('allow_comment_comusers', 'general', '1') )
 {
-	echo '<div class="message-alert">' . tf('На сайте запрещена регистрация комюзеров.') . '</div>';
+	echo '<div class="mso-message-alert">' . tf('На сайте запрещена регистрация комюзеров.') . '</div>';
 	if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	return;
 }
 
-echo NR . '<div class="type type_loginform">' . NR;
+echo NR . '<div class="mso-type-loginform">' . NR;
 
 if (is_login())
 {
@@ -69,12 +69,12 @@ else
 		
 		if (!$post['freg_rules_ok'])
 		{
-			$error .= '<div class="message-error">' . tf('Необходимо принять правила сайта') . '</div>';
+			$error .= '<div class="mso-message-error">' . tf('Необходимо принять правила сайта') . '</div>';
 		}
 		
 		if (!$post['freg_email'])
 		{
-			$error .= '<div class="message-error">' . tf('Не указан email') . '</div>';
+			$error .= '<div class="mso-message-error">' . tf('Не указан email') . '</div>';
 		}
 		else
 		{
@@ -83,13 +83,13 @@ else
 			
 			if (!$email)
 			{
-				$error .= '<div class="message-error">' . tf('Неверный email') . '</div>';
+				$error .= '<div class="mso-message-error">' . tf('Неверный email') . '</div>';
 			}
 		}
 		
 		if (!$post['freg_password'])
 		{
-			$error .= '<div class="message-error">' . tf('Не указан пароль') . '</div>';
+			$error .= '<div class="mso-message-error">' . tf('Не указан пароль') . '</div>';
 			
 			$vreg_password = '';
 			$vreg_password_repeat = '';
@@ -97,7 +97,7 @@ else
 		else
 		{
 			if ( strlen($post['freg_password']) < 6) 
-				$error .= '<div class="message-error">' . tf('Длина пароля должна быть более 6 символов') . '</div>';
+				$error .= '<div class="mso-message-error">' . tf('Длина пароля должна быть более 6 символов') . '</div>';
 		}
 		
 		if ($post['freg_password'] != $post['freg_password_repeat'])
@@ -105,7 +105,7 @@ else
 			$vreg_password = '';
 			$vreg_password_repeat = '';
 			
-			$error .= '<div class="message-error">' . tf('Пароль и его повтор не совпадают') . '</div>';
+			$error .= '<div class="mso-message-error">' . tf('Пароль и его повтор не совпадают') . '</div>';
 		}
 		
 		
@@ -141,7 +141,7 @@ else
 			$res = mso_comuser_auth($data);
 			
 			// если ошибка, то выводим сообщение
-			echo '<div class="message-alert">' . $res . '</div>';
+			echo '<div class="mso-message-alert">' . $res . '</div>';
 		}
 	}
 
@@ -157,7 +157,7 @@ else
 	eval(mso_tmpl_ts('type/registration/units/registration-tmpl.php'));
 }
 
-echo NR . '</div><!-- class="type type_loginform" -->' . NR;
+echo NR . '</div><!-- class="mso-type-loginform" -->' . NR;
 
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 

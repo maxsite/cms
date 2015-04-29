@@ -19,7 +19,7 @@ $line_format = mso_get_val('list_line_format', '[title] - [date]');
 
 $p->div_start(mso_get_val('container_class'));
 
-$p->html(NR2 . '<ul class="list">');
+$p->html(NR2 . '<ul class="mso-pages-list">');
 
 foreach ($pages as $page) 
 {

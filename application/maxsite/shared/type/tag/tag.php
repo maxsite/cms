@@ -38,12 +38,12 @@ if (!$pages and mso_get_option('page_404_http_not_found', 'templates', 1) )
 
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="type type_tag"><section>' . NR;
+echo NR . '<div class="mso-type-tag"><section>' . NR;
 
 if ($f = mso_page_foreach('tag-do')) 
 		require($f);
 	else 
-		echo '<h1 class="category tag">' . htmlspecialchars(mso_segment(2)) . '</h1>';
+		echo '<h1 class="mso-tag">' . htmlspecialchars(mso_segment(2)) . '</h1>';
 
 if ($pages) // есть страницы
 {
@@ -56,7 +56,7 @@ if ($pages) // есть страницы
 		else 
 		{
 			echo 
-				mso_get_val('show_rss_text_start', '<p class="show_rss_text">') 
+				mso_get_val('show_rss_text_start', '<p class="mso-show-rss-text">') 
 				. '<a href="' . getinfo('siteurl') . mso_segment(1) . '/' 
 				. mso_segment(2) . '/feed">'
 				. tf('Подписаться на эту метку по RSS'). '</a>' 
@@ -98,7 +98,7 @@ else
 if ($f = mso_page_foreach('tag-posle')) require($f);
 
 
-echo NR . '</section></div><!-- class="type type_tag" -->' . NR;
+echo NR . '</section></div><!-- class="mso-type-tag" -->' . NR;
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

@@ -1807,7 +1807,7 @@ function mso_last_activity_comment()
 
 # вывод аватарки комментатора
 # на входе массив комментария из page-comments.php
-function mso_avatar($comment, $img_add = 'style="float: left; margin: 5px 10px 10px 0;" class="gravatar"', $echo = false, $size = false, $url_only = false)
+function mso_avatar($comment, $img_add = 'class="mso-gravatar"', $echo = false, $size = false, $url_only = false)
 {
 	extract($comment);
 

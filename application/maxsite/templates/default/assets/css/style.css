@@ -5217,32 +5217,33 @@ div.widget a {
   color: #616161;
 }
 div.widget {
-  margin-bottom: 30px !important;
+  margin-bottom: 30px;
 }
-div.comments-link {
+div.mso-comments-link {
   display: none;
 }
-span.cut {
+span.mso-cut {
   display: block;
   float: right;
   clear: both;
 }
-div.page_other_pages {
-  margin-top: 40px !important;
+.mso-page-other-pages {
+  margin-top: 40px;
 }
-div.page_other_pages a {
+.mso-page-other-pages a {
   font-size: .9rem;
 }
-div.page_other_pages ul {
+.mso-page-other-pages ul {
   padding-left: 30px !important;
 }
-div.page_other_pages_header {
+.mso-page-other-pages h4 {
   font-size: 1rem;
   text-transform: uppercase;
   color: #616161;
+  margin: 30px 0 15px 0;
   border-bottom: 3px double #e0e0e0;
 }
-div.page_other_pages_header:before {
+.mso-page-other-pages h4:before {
   font-family: FontAwesome;
   display: inline-block;
   font-size: inherit;
@@ -5255,14 +5256,14 @@ div.page_other_pages_header:before {
   -moz-osx-font-smoothing: grayscale;
   content: "\f16c";
 }
-p.comments-count {
-  margin-top: 40px !important;
+.mso-comments-count {
+  margin-top: 40px;
   font-size: 1rem;
   text-transform: uppercase;
   color: #616161;
   border-bottom: 3px double #e0e0e0;
 }
-p.comments-count:before {
+.mso-comments-count:before {
   font-family: FontAwesome;
   display: inline-block;
   font-size: inherit;
@@ -5275,11 +5276,11 @@ p.comments-count:before {
   -moz-osx-font-smoothing: grayscale;
   content: "\f0e6";
 }
-p.comments-count .comments-rss {
+.mso-comments-count .mso-comments-rss {
   display: inline-block;
   float: right;
 }
-p.comments-count .comments-rss:before {
+.mso-comments-count .mso-comments-rss:before {
   font-family: FontAwesome;
   display: inline-block;
   font-size: inherit;
@@ -5292,20 +5293,26 @@ p.comments-count .comments-rss:before {
   -moz-osx-font-smoothing: grayscale;
   content: "\f09e";
 }
-.comment-article {
+.mso-comments-textarea textarea {
+  width: 100%;
+}
+.mso-comments-input-author {
+  width: 100%;
+}
+.mso-comment-article {
   margin-top: 20px !important;
   padding-bottom: 20px !important;
   border-bottom: 1px dotted #757575;
 }
-.comment-leave {
+.mso-comment-leave {
   margin: 20px 0;
   font-weight: bold;
 }
-p.comment-info {
+.mso-comment-info {
   font-size: .9rem;
   color: #616161;
 }
-p.comment-info .comment-num {
+.mso-comment-info .mso-comment-num {
   background-color: #eeeeee;
   color: #757575;
   padding-right: 5px !important;
@@ -5314,13 +5321,13 @@ p.comment-info .comment-num {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-p.comment-info a {
+.mso-comment-info a {
   color: #616161;
 }
-p.comment-info .comment-author {
+.mso-comment-info .mso-comment-author {
   margin-left: 10px !important;
 }
-p.comment-info .comment-author:before {
+.mso-comment-info .mso-comment-author:before {
   font-family: FontAwesome;
   display: inline-block;
   font-size: inherit;
@@ -5333,10 +5340,10 @@ p.comment-info .comment-author:before {
   -moz-osx-font-smoothing: grayscale;
   content: "\f007";
 }
-p.comment-info .comuser-url {
+.mso-comment-info .mso-comuser-url {
   margin-left: 10px !important;
 }
-p.comment-info .comuser-url:before {
+.mso-comment-info .mso-comuser-url:before {
   font-family: FontAwesome;
   display: inline-block;
   font-size: inherit;
@@ -5349,10 +5356,10 @@ p.comment-info .comuser-url:before {
   -moz-osx-font-smoothing: grayscale;
   content: "\f0c1";
 }
-p.comment-info .comment-date {
+.mso-comment-info .mso-comment-date {
   margin-left: 10px !important;
 }
-p.comment-info .comment-date:before {
+.mso-comment-info .mso-comment-date:before {
   font-family: FontAwesome;
   display: inline-block;
   font-size: inherit;
@@ -5365,10 +5372,10 @@ p.comment-info .comment-date:before {
   -moz-osx-font-smoothing: grayscale;
   content: "\f073";
 }
-p.comment-info .comment-edit {
+.mso-comment-info .mso-comment-edit {
   margin-left: 10px !important;
 }
-p.comment-info .comment-edit:before {
+.mso-comment-info .mso-comment-edit:before {
   font-family: FontAwesome;
   display: inline-block;
   font-size: inherit;
@@ -5381,20 +5388,26 @@ p.comment-info .comment-edit:before {
   -moz-osx-font-smoothing: grayscale;
   content: "\f044";
 }
-img.gravatar {
+img.mso-gravatar {
   float: right;
   margin-left: 15px !important;
 }
-.comment-users .comment-author,
-.comment-users .comment-author a {
+.mso-comment-users .mso-comment-author,
+.mso-comment-users .mso-comment-author a {
   color: #4caf50;
 }
-.comment-comusers .comment-author,
-.comment-comusers .comment-author a {
+.mso-comment-comusers .mso-comment-author,
+.mso-comment-comusers .mso-comment-author a {
   color: #4caf50;
 }
-.comment-anonim .comment-author {
+.mso-comment-anonim .mso-comment-author {
   color: #616161;
+}
+.mso-message-error {
+  color: #f44336;
+}
+.mso-message-alert {
+  color: #f44336;
 }
 div.pagination {
   margin-top: 40px !important;

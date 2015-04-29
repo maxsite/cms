@@ -1,17 +1,17 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<div class="comment-leave">{{ tf('Оставьте комментарий!') }}</div>
+<div class="mso-comment-leave">{{ tf('Оставьте комментарий!') }}</div>
 
-<div class="comment-form">
+<div class="mso-comment-form">
 	<form method="post">
 		<input type="hidden" name="comments_page_id" value="{{ $page['page_id'] }}">
 		{{ mso_form_session('comments_session') }}
 
-		<div class="comments-textarea">
+		<div class="mso-comments-textarea">
 		
 			{%  if (is_login()) : %}
 				<input type="hidden" name="comments_user_id" value="{{ getinfo('users_id') }}">
-				<div class="comments-user">
+				<div class="mso-comments-user">
 					{{ tf('Привет') }}, {{ getinfo('users_nik') }}! <a href="{{ getinfo('siteurl') }}logout">{{ tf('Выйти') }}</a>
 				</div>
 			{% endif %}
@@ -22,7 +22,7 @@
 				<input type="hidden" name="comments_password_md" value="1">
 				<input type="hidden" name="comments_reg" value="reg">
 				
-				<div class="comments-user comments-comuser">
+				<div class="mso-comments-user mso-comments-comuser">
 				
 					{% if (!$comuser['comusers_nik']) : %} 
 						{{ tf('Привет!') }}
@@ -36,14 +36,14 @@
 		
 			{% mso_hook('comments_content_start') %}
 			
-			<textarea name="comments_content" id="comments_content" rows="10" class="w100"></textarea>
+			<textarea name="comments_content" id="comments_content" rows="10"></textarea>
 			
 			<!-- нет залогирования -->
 			{% if (!is_login() and (!$comuser = is_login_comuser())) : %}
 			
 				<!-- обычная форма -->
 				{%  if (!mso_get_option('form_comment_easy', 'general', '0')) : %}
-					<div class="comments-auth">
+					<div class="mso-comments-auth">
 						
 						{% if (mso_get_option('allow_comment_anonim', 'general', '1') ) : %}
 						
@@ -96,20 +96,20 @@
 						<p><i>{{ $form_comment_comuser }}</i></p>
 					{% endif %}
 						
-					</div> <!-- class="comments-auth"-->
+					</div> <!-- class="mso-comments-auth"-->
 					
 				{% endif %}	<!-- / обычная форма-->
 								
 
 				<!-- простая форма -->
 				{%  if (mso_get_option('form_comment_easy', 'general', '0')) : %}
-					<div class="comments-auth">
+					<div class="mso-comments-auth">
 
 						{% if (mso_get_option('allow_comment_anonim', 'general', '1') ) : %}
 						
 							<input type="hidden" name="comments_reg" id="comments_reg_1" value="noreg">
 							
-							<p><input type="text" name="comments_author" placeholder="{{ tf('Ваше имя') }}" class="w100"></p>
+							<p><input type="text" name="comments_author" placeholder="{{ tf('Ваше имя') }}" class="mso-comments-input-author"></p>
 								
 							<p><i>{{ $to_moderate }}</i></p>
 						
@@ -119,7 +119,7 @@
 							<p>{{ $to_login }}</p>
 						{% endif %}
 						
-					</div> <!-- class="comments-auth"-->
+					</div> <!-- class="mso-comments-auth"-->
 				{% endif %}	<!-- / простая форма-->
 			
 			
@@ -129,6 +129,6 @@
 			
 			<p><button name="comments_submit" type="submit">{{ tf('Отправить') }}</button></p>
 			
-		</div><!-- div class="comments-textarea" -->
+		</div><!-- div class="mso-comments-textarea" -->
 	</form>
-</div><!-- div class=comment-form -->
+</div><!-- div class=mso-comment-form -->

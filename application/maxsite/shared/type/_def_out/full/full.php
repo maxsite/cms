@@ -9,14 +9,14 @@ if (!$pages) return;
 
 $p = new Page_out();
 
-$p->format('title', mso_get_val('full_format_title_start', '<h2 class="page_title">'), mso_get_val('full_format_title_end', '</h2>'), true);
+$p->format('title', mso_get_val('full_format_title_start', '<h2 class="mso-page-title">'), mso_get_val('full_format_title_end', '</h2>'), true);
 $p->format('date', 'D, j F Y ' . tf('г.'), '<span><time datetime="[page_date_publish_iso]">', '</time></span>');
 $p->format('cat', ' -&gt; ', '<br><span>' . tf('Рубрика') . ': ', '</span>');
 $p->format('tag', ' | ', '<br><span>' . tf('Метки') . ': ', '</span>');
 $p->format('feed', tf('Комментарии по RSS'), ' | <span>', '</span>');
 $p->format('edit', 'Edit', ' | <span>', '</span>');
 $p->format('view_count', '<br><span>' . tf('Просмотров') . ': ', '</span>');
-$p->format('comments', tf('Обсудить'), tf('Читать комментарии'), '<div class="comments-link"><span>',  '</span></div>');
+$p->format('comments', tf('Обсудить'), tf('Читать комментарии'), '<div class="mso-comments-link"><span>',  '</span></div>');
 
 
 // исключенные записи
@@ -35,7 +35,7 @@ foreach ($pages as $page)
 
 	$p->load($page);
 
-	$p->div_start('page_only', 'wrap', '<article>');
+	$p->div_start('mso-page-only', '<article>');
 		
 		// для типа может быть свой info-top
 		if ($f = mso_page_foreach('info-top-' . getinfo('type'))) 
@@ -53,7 +53,7 @@ foreach ($pages as $page)
 				$p->html(NR . '<header>');
 					$p->line('[title]');
 					
-					$p->div_start('info info-top');
+					$p->div_start('mso-info mso-info-top');
 						$p->line('[date][edit][cat][tag][view_count]');
 					$p->div_end('info info-top');
 					
@@ -73,7 +73,7 @@ foreach ($pages as $page)
 			}
 			else
 			{
-				$p->div_start('page_content type_' . getinfo('type') . '_content');
+				$p->div_start('mso-page-content mso-type-' . getinfo('type') . '-content');
 					
 					if ($f = mso_page_foreach('content')) require($f);
 					else
@@ -123,11 +123,11 @@ foreach ($pages as $page)
 						
 					$p->html('</aside>');
 					
-				$p->div_end('page_content type_' . getinfo('type') . '_content');
+				$p->div_end('mso-page-content mso-type-' . getinfo('type') . '-content');
 			}
 		}
 		
-	$p->div_end('page_only', 'wrap', '</article>');
+	$p->div_end('mso-page-only', '</article>');
 	
 	if ($f = mso_page_foreach(getinfo('type') . '-page-only-end')) require($f);
 	

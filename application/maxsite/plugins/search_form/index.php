@@ -27,7 +27,7 @@ function search_form_widget($num = 1)
 	
 	// заменим заголовок, чтобы был в  h2 class="box"
 	if ( isset($options['header']) and $options['header'] ) 
-		$options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+		$options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 	else $options['header'] = '';
 	
 	return search_form_widget_custom($options, $num);
@@ -112,23 +112,16 @@ function search_form_widget_custom($options = array(), $num = 1)
 	
 	if ($options['style_text']) $options['style_text'] = ' style ="' . $options['style_text'] . '"';
 	
-	$out .= '
-	<form class="search_form_widget fform" name="f_search" method="get" onsubmit="location.href=\'' . getinfo('siteurl') . 'search/\' + encodeURIComponent(this.s.value).replace(/%20/g, \'+\'); return false;">
-	<p>
-	<span>
-	<input type="text" name="s"' . $options['style_text'] . ' class="search_text" onfocus="if (this.value == \'' . $options['text'] . '\') {this.value = \'\';}" onblur="if (this.value == \'\') {this.value = \'' . $options['text'] . '\';}" value="' . $options['text'] . '">
-	</span>
-	<span class="fempty"></span>
-	<span>
-	<button type="submit" name="Submit" style="' . $options['style_submit'] . '" class="search_submit">' . $options['submit'] . '</button>
-	</span>
-	</p>'
-	. $options['text_posle']
-	.'</form>';
 	
+	$out .= '
+<form name="f_search" method="get" onsubmit="location.href=\'' . getinfo('siteurl') . 'search/\' + encodeURIComponent(this.s.value).replace(/%20/g, \'+\'); return false;">
+<input type="search" name="s"' . $options['style_text'] . ' placeholder="' . htmlspecialchars($options['text']) . '"><button type="submit"' . $options['style_submit'] . '>' . $options['submit'] . '</button>' . $options['text_posle'] . '
+</form>
+';
+
 	if ($options['header']) $out = $options['header'] . $out;
 	
-	return $out;	
+	return $out;
 }
 
 # end file

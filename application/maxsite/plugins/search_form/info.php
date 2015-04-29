@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Форма поиска'),
 	'description' => t('Виджет «Форма поиска»'),
-	'version' => '1.5',
+	'version' => '1.6',
 	'author' => 'Максим',
 	'plugin_url' => 'http://max-3000.com/',
 	'author_url' => 'http://maxsite.org/',

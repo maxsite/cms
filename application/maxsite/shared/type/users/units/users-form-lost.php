@@ -36,43 +36,23 @@ if ($comuser_info)
 	if ($f = mso_page_foreach('users-form-lost')) require($f); // подключаем кастомный вывод
 	else
 	{
+		$session_id = mso_form_session('f_session_id');
+		
 		if ($comusers_nik) echo '<h1>' . $comusers_nik . '</h1>';
 			else echo '<h1>'. tf('Комментатор'). ' ' . $comusers_id . '</h1>';
 		
 		echo '<p><a href="' . getinfo('siteurl') . 'users/' . $comusers_id . '">'. tf('Персональная страница'). '</a></p>';
 		
-		// если актвация не завершена, то вначале требуем её завершить
+		// если активация не завершена, то вначале требуем её завершить
 		if ($comusers_activate_string != $comusers_activate_key) // нет активации
-		{
-			echo '<form method="post" class="fform">' . mso_form_session('f_session_id');
+		{	
+			$admin_email = mso_get_option('admin_email', 'general', '-');
 			
-			echo '
-				<p><span class="ftitle w30">' . tf('Ваш email'). '</span><span><input type="email" name="f_comusers_email"></span></p>
-				
-				<p><span class="ftitle w30">' . tf('Введите ключ активации'). '</span><span><input type="text" name="f_comusers_activate_key"></span></p>
-				
-				<p><span class="w30"></span><span><input type="submit" name="f_submit[' . $comusers_id . ']" value="' .  tf('Готово') . '"></span></p>
-				
-				</form>
-				';
-				 
-			
-			echo '<p>' . tf('В случае проблем с активацией (не пришел ключ, указали ошибочный email), обращайтесь к администратору по email:') . ' <em>' . mso_get_option('admin_email', 'general', '-') . '</em></p>';
-			
+			eval(mso_tmpl_ts('type/users/units/users-lost-no-activate-tmpl.php'));
 		}
-		else // активация завершена - можно вывести поля для редактирования
+		else // активация завершена - можно вывести поля для восстановления пароля
 		{
-			echo '<form method="post" class="comusers-form fform">' . mso_form_session('f_session_id');
-			echo '<p>'. tf('Если у вас сохранился код активации, то вы можете сразу заполнить все поля. Если код активации утерян, то вначале введите только email и нажмите кнопку «Готово». На указанный email вы получите код активации. После этого вы можете вернуться на эту страницу и заполнить все поля.'). '</p>';
-			
-			echo '<p><span class="ffirst ftitle">'. tf('Ваш email'). '</span><span><input type="text" name="f_comusers_email" value=""></span></p>';
-			
-			echo '<p><span class="ffirst ftitle">'. tf('Ваш код активации'). '</span><span><input type="text" name="f_comusers_activate_key" 
-			value=""></span></p>';
-			
-			echo '<p><span class="ffirst ftitle">'. tf('Новый пароль'). '</span><span><input type="text" name="f_comusers_password" value=""></span></p>';
-			
-			echo '<p><span class="ffirst"></span><span><input type="submit" name="f_submit[' . $comusers_id . ']" value="'. tf('Готово'). '"></span></p></form>';
+			eval(mso_tmpl_ts('type/users/units/users-replace-password-tmpl.php'));
 		}
 		
 	} // mso_page_foreach

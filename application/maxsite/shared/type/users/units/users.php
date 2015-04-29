@@ -33,50 +33,34 @@ if ($comuser_info)
 	{
 		$avatar_info = $comuser_info[0];
 		$avatar_info['users_avatar_url'] = $avatar_info['users_email'] = '';
-		$avatar = mso_avatar($avatar_info, 'style="float: right; margin: 5px 0 0 0;" class="mso-gravatar"', false, 150); 
+		$avatar = mso_avatar($avatar_info, '', false,  false, true); // только адрес граватарки
 		
-		if ($comusers_nik) echo '<h1>' . $avatar . $comusers_nik . '</h1>';
-			else echo '<h1>' . $avatar . tf('Комментатор'). ' ' . $comusers_id . '</h1>';
+		if (!$comusers_nik) $comusers_nik = tf('Комментатор'). ' ' . $comusers_id;
 		
-		if ($comusers_activate_string != $comusers_activate_key) // нет активации
-			echo '<p><span style="color: red;" class="mso-comusers-no-activate">'. tf('Активация не завершена.'). '</span> <a href="' . getinfo('siteurl') . 'users/' . $comusers_id . '/edit">'. tf('Завершить'). '</a></p>';
-		
-		// выводим все данные
-		if ($comusers_date_registr) echo '<p><strong>'. tf('Дата регистрации'). ':</strong> ' . $comusers_date_registr . '</p>';
-		
-		if ($comusers_nik) echo '<p><strong>'. tf('Ник'). ':</strong> ' . $comusers_nik . '</p>';
-		
-		if ($comusers_count_comments) echo '<p><strong>'. tf('Комментариев'). ':</strong> ' . $comusers_count_comments . '</p>';
-		
-		if ($comusers_url) echo '<p><strong>'. tf('Сайт'). ':</strong> <a rel="nofollow" href="' . $comusers_url . '">' . $comusers_url . '</a></p>';
-		
-		if ($comusers_icq) echo '<p><strong>'. tf('ICQ'). ':</strong> ' . $comusers_icq . '</p>';
-		
-		if ($comusers_msn) echo '<p><strong>'. tf('Twitter'). ':</strong> <a rel="nofollow" href="http://twitter.com/' . $comusers_msn . '">@' . $comusers_msn . '</a></p>';
-		
-		if ($comusers_jaber) echo '<p><strong>'. tf('Jabber'). ':</strong> ' . $comusers_jaber . '</p>';
-		
-		if ($comusers_skype) echo '<p><strong>'. tf('Skype'). ':</strong> ' . $comusers_skype . '</p>';
-		
-		if ($comusers_date_birth and $comusers_date_birth!='1970-01-01 00:00:00' and $comusers_date_birth!='0000-00-00 00:00:00'   ) 
-				echo '<p><strong>'. tf('Дата рождения'). ':</strong> ' . $comusers_date_birth . '</p>';
+		// нет активации
+		if ($comusers_activate_string != $comusers_activate_key)
+			$no_activation_link = getinfo('siteurl') . 'users/' . $comusers_id . '/edit';
+		else
+			$no_activation_link = '';
 		
 		if ($comusers_description) 
 		{
 			$comusers_description = strip_tags($comusers_description);
 			$comusers_description = str_replace("\n", '<br>', $comusers_description);
 			$comusers_description = str_replace('<br><br>', '<br>', $comusers_description);
-			
-			echo '<p><strong>'. tf('О себе'). ':</strong> ' . $comusers_description . '</p>';
 		}
 		
-		if ($comusers_admin_note) echo '<p><strong>'. tf('Примечание админа'). ':</strong> ' . $comusers_admin_note . '</p>';
-		
+		if (!$comusers_date_birth 
+			or $comusers_date_birth == '1970-01-01 00:00:00' 
+			or $comusers_date_birth == '0000-00-00 00:00:00') 
+			$comusers_date_birth = '';
 		
 		if (getinfo('comusers_id') == $comusers_id )
-		{
-			echo '<p><a href="' . getinfo('siteurl') . 'users/' . $comusers_id . '/edit">'. tf('Редактировать данные'). '</a></p>';
-		}
+			$edit_link = getinfo('siteurl') . 'users/' . $comusers_id . '/edit';
+		else
+			$edit_link = '';
+
+		eval(mso_tmpl_ts('type/users/units/users-tmpl.php'));
 		
 		// хук, по которому можно вывести дополнительные данные
 		mso_hook('users_add_out', $comuser_info[0]);
@@ -85,20 +69,8 @@ if ($comuser_info)
 		
 		if ($comments) // есть комментарии
 		{
-			echo '<br><h2>'. tf('Комментарии'). '</h2><ul>';
-			
-			foreach ($comments as $comment)
-			{
-				echo '<li><span><a href="' . getinfo('siteurl') . 'page/' . mso_slug($comment['page_slug']) . '#comment-' . $comment['comments_id'] . '" id="comment-' . $comment['comments_id'] . '">' . $comment['page_title'] . '</a>';
-				// echo ' | ' . $comments_url;
-				echo '</span><br>' . $comment['comments_date'];
-				echo '<br>' . $comment['comments_content'];
-				echo '</li>';
-			}
-			
-			echo '</ul>';
+			eval(mso_tmpl_ts('type/users/units/users-comments-tmpl.php'));
 		}
-		
 	} // mso_page_foreach
 	
 	if ($f = mso_page_foreach('users-posle')) require($f);

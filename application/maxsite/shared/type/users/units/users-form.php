@@ -50,7 +50,7 @@ if ($comuser_info)
 		
 		if (!$login_form)
 		{
-			echo ' | <a href="' . getinfo('siteurl') . 'password-recovery">' . tf('Сменить пароль') . '</a>';
+			// echo ' | <a href="' . getinfo('siteurl') . 'password-recovery">' . tf('Сменить пароль') . '</a>';
 			echo ' | <a href="' . getinfo('siteurl') . 'logout">' . tf('Выход') . '</a>';
 		}
 		echo '</p>';
@@ -58,119 +58,35 @@ if ($comuser_info)
 		// если активация не завершена, то вначале требуем её завершить
 		if ($comusers_activate_string != $comusers_activate_key) // нет активации
 		{
-			echo '<form method="post">' . mso_form_session('f_session_id');
-			echo '<p><span style="color: red; font-weight: bold;" class="users-form">'. tf('Введите ключ активации'). ':</span> 
-				 <input type="text" style="width: 200px;" class="mso-users-form" name="f_comusers_activate_key"> ';
-			echo '<input type="submit" name="f_submit[' . $comusers_id . ']" value="' . tf('Готово') . '"></p></form>';
+			$admin_email = mso_get_option('admin_email', 'general', '-');
 			
-			echo '<p>' . tf('В случае проблем с активацией (не пришел ключ, указали ошибочный email), обращайтесь к администратору по email:') . ' <em>' . mso_get_option('admin_email', 'general', '-') . '</em></p>';
-			
-			
+			eval(mso_tmpl_ts('type/users/units/users-lost-no-activate-tmpl.php'));
 		}
 		else // активация завершена - можно вывести поля для редактирования
 		{
-			echo '<form method="post" class="mso-comusers-form">' . mso_form_session('f_session_id');
-			
 			if ($login_form) // нужно отобразить форму
 			{
-				echo '<h3>'. tf('Для редактирования введите свой email и пароль'). '</h3>';
-			
-				echo '<input type="hidden" value="' . getinfo('siteurl') . 'users/' . $comusers_id . '/edit" name="flogin_redirect">';
-				echo mso_form_session('flogin_session_id');
-				
-				echo '<p><span class="ffirst ftitle">'. tf('Ваш email'). '</span><span><input type="text" name="flogin_user" class="flogin_user"></span></p>';
-				
-				echo '<p><span class="ffirst ftitle">'. tf('Ваш пароль'). '</span><span><input type="password" name="flogin_password" class="flogin_password"></span></p>';
-				
+				$login_redirect = getinfo('siteurl') . 'users/' . $comusers_id . '/edit';
+				$lost_link = getinfo('siteurl') . 'users/' . $comusers_id . '/lost';
+
+				eval(mso_tmpl_ts('type/users/units/users-loginform-tmpl.php'));
 			}
 			else
 			{
-				$CI = & get_instance();
-				$CI->load->helper('form');
+				$comusers_description = NR . htmlspecialchars(strip_tags($comusers_description));
 				
-				echo '<input type="hidden" value="' . $comusers_email . '" name="f_comusers_email">';
-				echo '<input type="hidden" value="' . $comusers_password . '" name="f_comusers_password">';
+				// чекбоксы
+				$check_subscribe_my_comments = (isset($comusers_meta['subscribe_my_comments']) and $comusers_meta['subscribe_my_comments']=='1') ? ' checked="checked"' : '';
 				
-				echo '<h3>'. tf('Укажите свои данные'). '</h3>';
+				$check_subscribe_other_comments = (isset($comusers_meta['subscribe_other_comments']) and $comusers_meta['subscribe_other_comments']=='1') ? ' checked="checked"' : '';
 				
-				echo '<p><span class="ffirst ftitle">'. tf('Отображаемый ник'). '</span><span><input type="text" name="f_comusers_nik" value="' . $comusers_nik . '"></span></p>';
+				$check_subscribe_new_pages = (isset($comusers_meta['subscribe_new_pages']) and $comusers_meta['subscribe_new_pages']=='1') ? ' checked="checked"' : '';
 				
-				if (mso_get_option('comusers_url', 'templates', 1))
-					echo '<p><span class="ffirst ftitle">'. tf('Сайт (с http://)'). '</span><span><input type="text" name="f_comusers_url" value="' . $comusers_url . '"></p>';
-				else
-					echo '<input type="hidden" name="f_comusers_url" value="' . $comusers_url . '">';
-					
+				$check_subscribe_admin = (isset($comusers_meta['subscribe_admin']) and $comusers_meta['subscribe_admin']=='1') ? ' checked="checked"' : '';
 				
-				if (mso_get_option('gravatar_only', 'templates', 0))
-					echo '<input type="hidden" name="f_comusers_avatar_url" value="' . $comusers_avatar_url . '">';
-				else
-					echo '<p><span class="ffirst ftitle">'. tf('Аватарка (с http://, 80x80px)'). '</span><span><input type="text" name="f_comusers_avatar_url" value="' . $comusers_avatar_url . '"></p>';
-				
-				echo '<p><span class="ffirst ftitle">'. tf('ICQ'). '</span><span><input type="text" name="f_comusers_icq" value="' . $comusers_icq . '"></p>';
-				
-				echo '<p><span class="ffirst ftitle">'. tf('Twitter'). '</span><span><input type="text" name="f_comusers_msn" value="' . $comusers_msn . '"></p>';
-				
-				echo '<p><span class="ffirst ftitle">'. tf('Jabber'). '</span><span><input type="text" name="f_comusers_jaber" value="' . $comusers_jaber . '"></p>';
-				
-				echo '<p><span class="ffirst ftitle">'. tf('Skype'). '</span><span><input type="text" name="f_comusers_skype" value="' . $comusers_skype . '"></p>';
-				
-				echo '<p><span class="ffirst ftitle">'. tf('Дата рождения'). '</span><span><input type="text" name="f_comusers_date_birth" value="' . $comusers_date_birth . '"></p>';
-				
-				echo '<p><span class="ffirst ftitle ftop">'. tf('О себе'). ' ('. tf('HTML удаляется'). ')</span><span><textarea name="f_comusers_description">'. NR 
-					. htmlspecialchars(strip_tags($comusers_description)) . '</textarea></span></p>';
-
-				
-				// поскольку чекбоксы не передаются, если они не отмечены, 
-				// то передаем скрытно их дефолтные значения
-
-				echo '<input type="hidden" value="0" name="f_comusers_meta[subscribe_my_comments]">';
-				
-				$check = (isset($comusers_meta['subscribe_my_comments']) and $comusers_meta['subscribe_my_comments']=='1') ? ' checked="checked"' : '';
-				
-				
-				echo '<p><span class="ffirst ftitle">'. tf('Уведомления'). '</span><label>' 
-					. '<input type="checkbox" name="f_comusers_meta[subscribe_my_comments]" value="1"' . $check . '>'
-					. ' '. tf('новые комментарии, где я участвую') . '</label></p>';
-
-				echo '<input type="hidden" value="0" name="f_comusers_meta[subscribe_other_comments]">';
-				
-				$check = (isset($comusers_meta['subscribe_other_comments']) and $comusers_meta['subscribe_other_comments']=='1') ? ' checked="checked"' : '';
-				
-				echo '<p class="nop"><span class="ffirst"></span><label>' 
-					. '<input type="checkbox" name="f_comusers_meta[subscribe_other_comments]" value="1"' . $check . '>'
-					. ' '. tf('новые комментарии, где я не участвую') . '</label>';
-				
-				echo '<input type="hidden" value="0" name="f_comusers_meta[subscribe_new_pages]">';
-				
-				$check = (isset($comusers_meta['subscribe_new_pages']) and $comusers_meta['subscribe_new_pages']=='1') ? ' checked="checked"' : '';
-				
-				echo '<p class="nop"><span class="ffirst"></span><label>' 
-					. '<input type="checkbox" name="f_comusers_meta[subscribe_new_pages]" value="1"' . $check . '>'
-					. ' '. tf('новые записи сайта') . '</label></p>';
-					
-				echo '<input type="hidden" value="0" name="f_comusers_meta[subscribe_admin]">';
-				
-				$check = (isset($comusers_meta['subscribe_admin']) and $comusers_meta['subscribe_admin']=='1') ? ' checked="checked"' : '';
-				
-				echo '<p class="nop"><span class="ffirst"></span><label>' 
-					. '<input type="checkbox" name="f_comusers_meta[subscribe_admin]" value="1"' . $check . '>'
-					. ' '. tf('рассылка администратора') . '</label></p>';
-					
-			}
-			
-			if ($login_form)
-			{
-				echo '<p><span class="ffirst"></span><span><input type="submit" name="flogin_submit" value="' .  tf('Отправить') . '">
-				<a href="' . getinfo('siteurl') . 'users/' . $comusers_id . '/lost">' . tf('Я забыл пароль') . '</a>
-				</span></p></form>';
-	
-			}
-			else
-			{
-				echo '<p><span class="ffirst"></span><span class="submit"><input type="submit" name="f_submit[' . $comusers_id . ']" value="' .  tf('Отправить') . '"></span></p></form>';
+				eval(mso_tmpl_ts('type/users/units/users-form-edit-tmpl.php'));
 			}
 		}
-		
 	} // mso_page_foreach
 }
 else

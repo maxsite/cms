@@ -4071,20 +4071,26 @@ function mso_add_file($fn)
 }
 
 # HTML-шаблонизатор
-# получает текст файла, выполняет замены, отдает php-код
+# вход - текст : выполняет замены, отдает php-код
 # если $replace = true то в коде удаляются табуляторы и двойные \n
-# код выполнять через eval();
-# 	if (file_exists($fn)) eval(mso_tmpl($fn));
-function mso_tmpl($fn, $replace = true)
+# полученный код выполнять через eval();
+function mso_tmpl_prepare($template, $replace = true)
 {
-	$template = file_get_contents($fn);
-	
 	$template = '?>' . str_replace(array('{{', '}}', '{%', '%}'), array('<?=', '?>', '<?php', '?>'), $template);
 		
 	if ($replace)
 		$template = str_replace(array("\t", "\r", "\n\n"), array("", "", "\n"), $template);
 	
 	return $template;
+}
+
+# HTML-шаблонизатор
+# 	if (file_exists($fn)) eval(mso_tmpl($fn));
+function mso_tmpl($fn, $replace = true)
+{
+	$template = file_get_contents($fn);
+	
+	return mso_tmpl_prepare($template, $replace);
 }
 
 # HTML-шаблонизатор

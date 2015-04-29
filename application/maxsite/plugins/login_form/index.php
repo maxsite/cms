@@ -51,7 +51,7 @@ function login_form_widget($num = 1)
 		
 		if (isset($options['registration']) and $options['registration'])
 		{
-			$registration = '</span><span class="text-right registration"><a href="' . getinfo('siteurl') . 'registration">' . tf('Регистрация') . '</a>';
+			$registration = '<span class="registration"><a href="' . getinfo('siteurl') . 'registration">' . tf('Регистрация') . '</a></span>';
 		}
 		else $registration = '';
 		
@@ -68,7 +68,7 @@ function login_form_widget($num = 1)
 	
 	if ($out)
 	{
-		if ( isset($options['header']) and $options['header'] ) $out = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>') . $out;
+		if ( isset($options['header']) and $options['header'] ) $out = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>') . $out;
 	}
 	
 	return $out;

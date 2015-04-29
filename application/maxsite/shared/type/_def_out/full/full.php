@@ -102,7 +102,7 @@ foreach ($pages as $page)
 						}
 						
 						$p->content('', '');
-						$p->clearfix();
+						// $p->clearfix();
 					}
 
 					// для page возможен свой info-bottom

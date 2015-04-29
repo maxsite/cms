@@ -9,8 +9,8 @@
  */
 
 	// заголовок виджета
-	mso_set_val('widget_header_start', '<div class="widget_header"><span>');
-	mso_set_val('widget_header_end', '</span></div>');
+	// mso_set_val('widget_header_start', '<div class="mso-widget-header">');
+	// mso_set_val('widget_header_end', '</div>');
 	
 	// mso_set_val('jquery_url', 'URL-адрес загрузки jQuery');
 	

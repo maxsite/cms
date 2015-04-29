@@ -5,7 +5,7 @@ body {
 }
 
 
-div.widget button {
+div.mso-widget button {
 	// .button;
 }
 
@@ -36,15 +36,39 @@ div.social a {
 	.w0;
 }
 
+div.mso-page-only {
+	.clearfix;
+}
+
+// вывод записей блоками на главной
+div.mso-header-home-cat {
+	.t100;
+		.upper;
+		.t-gray700;
+		margin: 30px 0 15px 0;
+		
+		border-bottom: 3px double @gray300;
+		
+		&:before {
+			.icon-fa-normal;
+			content: @fa-var-newspaper-o;
+		}
+}
 
 // виджеты
 // список в сайдбаре
-ul.is_link {
-	.pad15-l;
+div.mso-widget ul.is_link {
+//	padding-left: 15px;
+}
+
+// список в виджете
+ul.mso-widget-list
+{
+	padding-left: 15px;
 }
 
 // заголовок сайдбара
-div.widget_header {
+div.mso-widget-header {
 	.t100;
 	.upper;
 	.pad5-b;
@@ -53,14 +77,16 @@ div.widget_header {
 }
 
 // ссылки в виджетах
-div.widget a {
+div.mso-widget a {
 	.t-gray700;
 }
 
 // виджеты
-div.widget {
+div.mso-widget {
 	margin-bottom: 30px;
 }
+
+
 
 // блок обсуждения
 div.mso-comments-link {
@@ -92,7 +118,7 @@ span.mso-cut {
 		.t100;
 		.upper;
 		.t-gray700;
-		margin: 30px 0 15px 0;;
+		margin: 30px 0 15px 0;
 		
 		border-bottom: 3px double @gray300;
 		
@@ -274,4 +300,87 @@ div.pagination {
 	.mar40-t;
 	.mar10-b;
 }
+
+
+
+
+
+// настройка виджетов индивидуально
+
+
+// виджет рубрик
+.mso-category_widget .mso-widget-header {
+	&:before {
+		.icon-fa-normal;
+		content: @fa-var-bookmark;
+	}
+}
+
+// виджет ссылки
+.mso-links_widget {
+
+	.mso-widget-header:before {
+		.icon-fa-normal;
+		content: @fa-var-link;
+	}
+	
+	li div {
+		.t90;
+		color: @gray500;
+		margin-bottom: 5px;
+	}
+}
+
+
+.mso-login_form_widget {
+
+	.mso-widget-header:before {
+		.icon-fa-normal;
+		content: @fa-var-users;
+	}
+	
+	span.registration {
+		.b-inline;
+		.b-right;
+		.t90;
+	}
+}
+
+.mso-search_form_widget {
+
+	.mso-widget-header:before {
+		.icon-fa-normal;
+		content: @fa-var-search;
+	}
+	
+	form {
+		margin-top: 10px;
+	}
+	
+	input {
+		width: 65%;
+		margin-right: 1%;
+	}
+	
+	button {
+		width: 25%;
+	}
+	
+}
+
+.mso-random_pages_widget {
+	.mso-widget-header:before {
+		.icon-fa-normal;
+		content: @fa-var-chain-broken;
+	}
+}
+
+.mso-theme_switch_widget {
+	.mso-widget-header:before {
+		.icon-fa-normal;
+		content: @fa-var-stack-exchange;
+	}
+}
+
+
 

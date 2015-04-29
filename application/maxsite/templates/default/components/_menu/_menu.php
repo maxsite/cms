@@ -45,11 +45,11 @@
 				$menu .= NR . '[';
 				
 				if ($comuser['comusers_nik'])
-					$menu .= NR . '# | ' . $comuser['comusers_nik'];
+					$menu .= NR . '# | ' . $comuser['comusers_nik'] . ' | Своя страница | | i-user';
 				else
 					$menu .= NR . '# | Ваши ссылки';
 				
-				$menu .= NR . 'users/' . $comuser['comusers_id'] . ' | Своя страница | | i-user';
+				$menu .= NR . 'users/' . $comuser['comusers_id'] . ' | Своя страница';
 				
 				$menu .= mso_hook('main_menu_add_comuser');
 				

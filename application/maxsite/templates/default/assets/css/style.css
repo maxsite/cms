@@ -5203,20 +5203,48 @@ div.social a {
   padding-left: 0 !important;
   width: 0;
 }
-ul.is_link {
-  padding-left: 15px !important;
+div.mso-page-only:before,
+div.mso-page-only:after {
+  content: " ";
+  display: table;
 }
-div.widget_header {
+div.mso-page-only:after {
+  clear: both;
+}
+div.mso-header-home-cat {
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: #616161;
+  margin: 30px 0 15px 0;
+  border-bottom: 3px double #e0e0e0;
+}
+div.mso-header-home-cat:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  font-size: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  margin-right: 7px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f1ea";
+}
+ul.mso-widget-list {
+  padding-left: 15px;
+}
+div.mso-widget-header {
   font-size: 1rem;
   text-transform: uppercase;
   padding-bottom: 5px !important;
   color: #616161;
   border-bottom: 3px double #e0e0e0;
 }
-div.widget a {
+div.mso-widget a {
   color: #616161;
 }
-div.widget {
+div.mso-widget {
   margin-bottom: 30px;
 }
 div.mso-comments-link {
@@ -5447,6 +5475,104 @@ div.pagination span.pagination-last {
 .paginator {
   margin-top: 40px !important;
   margin-bottom: 10px !important;
+}
+.mso-category_widget .mso-widget-header:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  font-size: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  margin-right: 7px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f02e";
+}
+.mso-links_widget .mso-widget-header:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  font-size: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  margin-right: 7px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f0c1";
+}
+.mso-links_widget li div {
+  font-size: .9rem;
+  color: #9e9e9e;
+  margin-bottom: 5px;
+}
+.mso-login_form_widget .mso-widget-header:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  font-size: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  margin-right: 7px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f0c0";
+}
+.mso-login_form_widget span.registration {
+  display: inline-block;
+  float: right;
+  font-size: .9rem;
+}
+.mso-search_form_widget .mso-widget-header:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  font-size: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  margin-right: 7px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f002";
+}
+.mso-search_form_widget form {
+  margin-top: 10px;
+}
+.mso-search_form_widget input {
+  width: 65%;
+  margin-right: 1%;
+}
+.mso-search_form_widget button {
+  width: 25%;
+}
+.mso-random_pages_widget .mso-widget-header:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  font-size: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  margin-right: 7px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f127";
+}
+.mso-theme_switch_widget .mso-widget-header:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  font-size: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  margin-right: 7px;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f18d";
 }
 ul.menu {
   position: relative;

@@ -25,7 +25,7 @@ if ($fn = mso_fe('main/blocks/body-start.php')) require($fn) ?>
 		<?php if ($fn = mso_fe('main/blocks/main-start.php')) require($fn) ?>
 
 		<div class="sidebar w30 w100-tablet pad20 flex-tablet-phone flex-wrap-tablet-phone">
-			<?php mso_show_sidebar('1', '<div class="widget widget_[NUMW] widget_[SB]_[NUMW] [FN] [FN]_[NUMF]"><div class="wrap">', '</div></div>') ?>
+			<?php mso_show_sidebar('1') ?>
 		</div>
 		
 		<div class="content w70 w100-tablet pad20">

@@ -2086,7 +2086,7 @@ function mso_register_widget($widget = false, $title = 'Виджет')
 
 
 # вывод сайбрара
-function mso_show_sidebar($sidebar = '1', $block_start = '<div class="widget widget_[NUMW] widget_[SB]_[NUMW] [FN] [FN]_[NUMF]"><div class="w0"><div class="w1">', $block_end = '</div><div class="w2"></div></div></div>', $echo = true)
+function mso_show_sidebar($sidebar = '1', $block_start = '<div class="mso-widget mso-widget_[NUMW] mso-widget_[SB]_[NUMW] mso-[FN] mso-[FN]_[NUMF]">', $block_end = '</div>', $echo = true)
 {
 	global $MSO, $page; // чтобы был доступ к параметрам страниц в условиях виджетов
 

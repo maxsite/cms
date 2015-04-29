@@ -28,7 +28,7 @@ function category_widget($num = 1)
 	$options = mso_get_option($widget, 'plugins', array() ); // получаем опции
 	
 	// заменим заголовок, чтобы был в  h2 class="box"
-	if ( isset($options['header']) and $options['header'] ) $options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+	if ( isset($options['header']) and $options['header'] ) $options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 		else $options['header'] = '';
 	
 	if ( isset($options['include']) ) $options['include'] = mso_explode($options['include']);
@@ -215,7 +215,7 @@ function category_widget_custom($options = array(), $num = 1)
 			'childs'=>'childs', 
 			'format'=>$options['format'], 
 			'format_current'=>$options['format_current'], 
-			'class_ul'=>'is_link', 
+			'class_ul'=>'mso-widget-list', 
 			'title'=>'category_name', 
 			'link'=>'category_slug', 
 			'current_id'=>false, 

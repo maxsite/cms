@@ -21,7 +21,7 @@ function calendar_widget($num = 1)
 	$options = mso_get_option($widget, 'plugins', array() ); // получаем опции
 	
 	// заменим заголовок, чтобы был в  h2 class="box"
-	if ( isset($options['header']) and $options['header'] ) $options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+	if ( isset($options['header']) and $options['header'] ) $options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 		else $options['header'] = '';
 		
 	return calendar_widget_custom($options, $num);
@@ -82,7 +82,7 @@ function calendar_widget_custom($arg = array(), $num = 1)
 													t('Пт'), t('Сб'), t('Вс'));
 	
 	# оформление виджета
-	if ( !isset($arg['header']) ) $arg['header'] = '<h2 class="box"><span>' . t('Календарь') . '</span></h2>';
+	if ( !isset($arg['header']) ) $arg['header'] = '<div class="mso-widget-header"><span>' . t('Календарь') . '</span></div>';
 	if ( !isset($arg['block_start']) ) $arg['block_start'] = '<div class="calendar">';
 	if ( !isset($arg['block_end']) ) $arg['block_end'] = '</div>';
 	

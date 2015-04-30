@@ -27,7 +27,7 @@ function randomtext_widget($num = 1)
 	
 	// заменим заголовок, чтобы был в  h2 class="box"
 	if ( isset($options['header']) and $options['header'] ) 
-		$options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+		$options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 	else $options['header'] = '';
 	
 	return randomtext_widget_custom($options, $num);
@@ -78,7 +78,7 @@ function randomtext_widget_update($num = 1)
 # основная функция
 function randomtext_widget_custom($arg = array(), $num = 1)
 {
-	if ( !isset($arg['header'])) $arg['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . t('Цитата') . mso_get_val('widget_header_end', '</span></h2>') ;
+	if ( !isset($arg['header'])) $arg['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . t('Цитата') . mso_get_val('widget_header_end', '</span></div>') ;
 	if ( !isset($arg['block_start']) ) $arg['block_start'] = '<div class="random-text">';
 	if ( !isset($arg['block_end']) ) $arg['block_end'] = '</div>';
 	if ( !isset($arg['once_daily']) ) $arg['once_daily'] = 'random';

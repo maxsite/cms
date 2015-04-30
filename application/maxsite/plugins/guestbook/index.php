@@ -138,7 +138,7 @@ function guestbook_widget($num = 1)
 	
 	// заменим заголовок, чтобы был в  h2 class="box"
 	if ( isset($options['header']) and $options['header'] ) 
-		$options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+		$options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 	else $options['header'] = '';
 	
 	return guestbook_widget_custom($options, $num);
@@ -218,10 +218,13 @@ function guestbook_widget_custom($options = array(), $num = 1)
 {
 	// кэш 
 	$cache_key = 'guestbook_widget_custom' . serialize($options) . $num;
+	
 	$k = mso_get_cache($cache_key);
+	
 	if ($k) return $k; // да есть в кэше
 	
 	$out = '';
+	
 	if ( !isset($options['header']) ) $options['header'] = '';
 	if ( !isset($options['limit']) ) $options['limit'] = 10;
 	if ( !isset($options['max-word']) ) $options['max-word'] = 20;
@@ -235,7 +238,6 @@ function guestbook_widget_custom($options = array(), $num = 1)
 	
 	$options_guestbook = mso_get_option('plugin_guestbook', 'plugins', array());
 	if ( !isset($options_guestbook['slug']) ) $options_guestbook['slug'] = 'guestbook'; 
-	
 	
 	$CI = & get_instance();
 	
@@ -304,13 +306,12 @@ function guestbook_widget_custom($options = array(), $num = 1)
 		
 	}
 	
+	if ($out)
+		$out = $options['header'] . $options['text-do'] . $out . $options['text-posle'];
+	
 	mso_add_cache($cache_key, $out); // сразу в кэш добавим
 	
-	if ($out)
-	{
-		return $options['header'] . $options['text-do'] . $out . $options['text-posle'];
-	}
-	else return '';	
+	return $out;
 }
 
 

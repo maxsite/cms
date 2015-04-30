@@ -19,20 +19,20 @@ $(function() {
 			}
 			return cookies;
 		},
-		objCookies = getCookiesFilter(/tabs_widget_[0-9a-z]+/);
+		objCookies = getCookiesFilter(/mso-tabs_widget_[0-9a-z]+/);
 
 	$.each(objCookies, function(key, value)
 	{
-		$("." + key + " .elem").eq(value).addClass("tabs-current").siblings().removeClass("tabs-current")
-			.parents("div.tabs").find(".tabs-box").hide().eq(value).show();
+		$("." + key + " .mso-tabs-elem").eq(value).addClass("mso-tabs-current").siblings().removeClass("mso-tabs-current")
+			.parents("div.mso-tabs").find(".mso-tabs-box").hide().eq(value).show();
 	});
 	
-	$(".tabs-nav").on("click", ".elem:not(.tabs-current)", function() 
+	$(".mso-tabs-nav").on("click", ".mso-tabs-elem:not(.mso-tabs-current)", function() 
 	{
-		var cookieName = $(this).parents(".tabs_widget").attr("class").match(/tabs_widget_[0-9a-z]+/).join(),
+		var cookieName = $(this).parents(".mso-tabs_widget").attr("class").match(/mso-tabs_widget_[0-9a-z]+/).join(),
 			index = $(this).index();
-		$(this).addClass("tabs-current").siblings().removeClass("tabs-current")
-				.parents("div.tabs").find(".tabs-box").hide().eq(index).fadeIn(300);
+		$(this).addClass("mso-tabs-current").siblings().removeClass("mso-tabs-current")
+				.parents("div.mso-tabs").find(".mso-tabs-box").hide().eq(index).fadeIn(300);
 		$.cookie(cookieName, index, {expires: 1, path: "/"});
 	});
 });

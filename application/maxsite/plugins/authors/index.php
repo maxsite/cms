@@ -25,7 +25,7 @@ function authors_widget($num = 1)
 	$options = mso_get_option($widget, 'plugins', array() ); // получаем опции
 	
 	// заменим заголовок, чтобы был в  h2 class="box"
-	if ( isset($options['header']) and $options['header'] ) $options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+	if ( isset($options['header']) and $options['header'] ) $options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 		else $options['header'] = '';
 	
 	return authors_widget_custom($options, $num);
@@ -41,7 +41,7 @@ function authors_widget_form($num = 1)
 	// получаем опции 
 	$options = mso_get_option($widget, 'plugins', array());
 	
-	if ( !isset($options['header']) ) $options['header'] = '';
+	if ( !isset($options['header']) ) $options['header'] = t('Авторы');
 	
 	// вывод самой формы
 	$CI = & get_instance();
@@ -78,7 +78,7 @@ function authors_widget_custom($options = array(), $num = 1)
 	if ($k) return $k; // да есть в кэше
 	
 	$out = '';
-	if ( !isset($options['header']) ) $options['header'] = '';
+	if ( !isset($options['header']) ) $options['header'] = t('Авторы');
 	
 	// получаем всех авторов
 	
@@ -100,7 +100,7 @@ function authors_widget_custom($options = array(), $num = 1)
 						. '</a></li>';
 		}
 		
-		if ($out) $out = $options['header'] . '<ul class="is_link authors">' . $out . '</ul>' . NR;
+		if ($out) $out = $options['header'] . '<ul class="mso-widget-list">' . $out . '</ul>' . NR;
 	}
 	
 	mso_add_cache($cache_key, $out); // сразу в кэш добавим

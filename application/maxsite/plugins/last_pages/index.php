@@ -27,7 +27,7 @@ function last_pages_widget($num = 1)
 	$options = mso_get_option($widget, 'plugins', array() ); // получаем опции
 
 	// заменим заголовок, чтобы был в  h2 class="box"
-	if ( isset($options['header']) and $options['header'] ) $options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+	if ( isset($options['header']) and $options['header'] ) $options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 		else $options['header'] = '';
 
 	if ( isset($options['format']) ) $options['format'] = $options['format'];
@@ -142,7 +142,7 @@ function last_pages_widget_custom($arg = array(), $num = 1)
 	if (!isset($arg['max_words']) ) 	$arg['max_words'] = 20;
 	if (!isset($arg['text_posle']) ) 	$arg['text_posle'] = '';
 
-	if ( !isset($arg['header']) ) $arg['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . t('Последние записи') . mso_get_val('widget_header_end', '</span></h2>');
+	if ( !isset($arg['header']) ) $arg['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . t('Последние записи') . mso_get_val('widget_header_end', '</span></div>');
 
 	if ( !isset($arg['block_start']) ) $arg['block_start'] = '<div class="last-pages">';
 	if ( !isset($arg['block_end']) ) $arg['block_end'] = '</div>';

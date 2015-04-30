@@ -27,7 +27,7 @@ function page_comments_widget($num = 1)
 	
 	// заменим заголовок, чтобы был в  h2 class="box"
 	if ( isset($options['header']) and $options['header'] ) 
-		$options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+		$options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 	else $options['header'] = '';
 	
 	return page_comments_widget_custom($options, $num);
@@ -113,7 +113,7 @@ function page_comments_widget_custom($options = array(), $num = 1)
 		$pages = $query->result_array();
 		
 		$link = '<a href="' . getinfo('siteurl') . 'page/';
-		$out .= '<ul class="is_link page_comments">' . NR;
+		$out .= '<ul class="mso-widget-list">' . NR;
 		foreach ($pages as $page) 
 		{
 			if ($page['page_count_comments'] > 0)

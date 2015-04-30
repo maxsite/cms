@@ -30,7 +30,7 @@ function tabs_widget($num = 1)
 	
 	// заменим заголовок, чтобы был в  h2 class="box"
 	if ( isset($options['header']) and $options['header'] ) 
-		$options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+		$options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 	else $options['header'] = '';
 	
 	return tabs_widget_custom($options, $num);
@@ -125,18 +125,18 @@ function tabs_widget_custom($options = array(), $num = 1)
 	
 	if ($tabs) // есть закладки, можно выводить
 	{
-		$out .= NR . '<div class="tabs"><ul class="tabs-nav">' . NR;
+		$out .= NR . '<div class="mso-tabs"><ul class="mso-tabs-nav">' . NR;
 		
-		$current = ' tabs-current';
+		$current = ' mso-tabs-current';
 		
 		foreach($tabs as $key => $tab)
 		{
-			$out .= '<li class="elem' . $current . '"><span>' . $tab['title'] . '</span></li>' . NR;
+			$out .= '<li class="mso-tabs-elem' . $current . '"><span>' . $tab['title'] . '</span></li>' . NR;
 			$current = '';
 		}
-		$out .= '</ul><div class="clearfix"></div>' . NR;
+		$out .= '</ul>' . NR;
 		
-		$visible = ' tabs-visible';
+		$visible = ' mso-tabs-visible';
 		foreach($tabs as $key => $tab)
 		{
 			if ($options['type_func'] == 'widget') // выводим с помощью функции виджета ($tab['ushka'])
@@ -169,17 +169,17 @@ function tabs_widget_custom($options = array(), $num = 1)
 				else $func = '';
 			}
 
-			$out .= NR . '<div class="tabs-box' . $visible  . '">' . $func . '</div>' . NR;
+			$out .= NR . '<div class="mso-tabs-box' . $visible  . '">' . $func . '</div>' . NR;
 			$visible = '';
 		}
 			
-		$out .= '</div><!-- div class="tabs -->' . NR;
+		$out .= '</div><!-- div class="mso-tabs -->' . NR;
 	}
 	
 	if ($out and $options['header']) 
-		$out = $options['header'] . '<div class="widget-content">' . $out . '</div><!-- div class=widget-content -->';
+		$out = $options['header'] . '<div class="mso-tabs-widget-content">' . $out . '</div><!-- /div.mso-tabs-widget-content -->';
 	else
-		$out = '<div class="widget-content">' . $out . '</div><!-- div class=widget-content -->';
+		$out = '<div class="mso-tabs-widget-content">' . $out . '</div><!-- div.mso-tabs-widget-content -->';
 	
 	return $out;
 }
@@ -240,8 +240,8 @@ function tabs_content_callback($matches)
 		{
 			if ($key === 0) 
 			{
-				$current = ' tabs-current';
-				$visible = ' tabs-visible';
+				$current = ' mso-tabs-current';
+				$visible = ' mso-tabs-visible';
 			}
 			else 
 			{
@@ -249,18 +249,18 @@ function tabs_content_callback($matches)
 				$visible = '';
 			}
 			
-			$out_names .= '<li class="elem' . $current . '"><span>' . $val . '</span></li>';
+			$out_names .= '<li class="mso-tabs-elem' . $current . '"><span>' . $val . '</span></li>';
 			
-			$out_text .= '<div class="tabs-box' . $visible . '">' . $text[$key] . '</div>';
+			$out_text .= '<div class="mso-tabs-box' . $visible . '">' . $text[$key] . '</div>';
 		}
 		
 		if ($out_names and $out_text)
 		{
 			$page_id = (isset($mso_page_current['page_id'])) ? $mso_page_current['page_id'] : 0;
 			
-			$out = '[html]<div class="tabs_widget tabs_widget_' . $page_id . '"><div class="tabs"><ul class="tabs-nav">'
+			$out = '[html]<div class="mso-tabs_widget mso-tabs_widget_' . $page_id . '"><div class="mso-tabs"><ul class="mso-tabs-nav">'
 				. trim($out_names)
-				. '</ul><div class="clearfix"></div>'
+				. '</ul>'
 				. trim($out_text)
 				. '</div></div>[/html]';
 		}

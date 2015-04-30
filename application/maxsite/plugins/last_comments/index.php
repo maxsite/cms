@@ -46,7 +46,7 @@ function last_comments_widget($num = 1)
 	
 	// заменим заголовок, чтобы был в  h2 class="box"
 	if ( isset($options['header']) and $options['header'] ) 
-				$options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+				$options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 		else $options['header'] = '';
 	
 	return last_comments_widget_custom($options, $num);
@@ -139,6 +139,7 @@ function last_comments_widget_custom($options = array(), $num = 1)
 		// сгруппируем все комментарии по записям
 		$arr_com_page = array();
 		$arr_com_page_title = array();
+		
 		foreach ($comments as $comment)
 		{
 			$arr_com_page[ $comment['page_id'] ] [$comment['comments_id']] = $comment;
@@ -148,26 +149,24 @@ function last_comments_widget_custom($options = array(), $num = 1)
 		// выводим по странично
 		foreach ($arr_com_page as $key=>$comments)  // выводим в цикле
 		{
-			$out .= '<h2 class="last_comment">' . $arr_com_page_title[$key] . '</h2>' . NR;
+			$out .= '<h5>' . $arr_com_page_title[$key] . '</h5>';
 			
 			$comments = array_reverse($comments); // чтобы комментарии были в привычном порядке сверху вниз
 			
-			$out .= '<ul class="is_link last_comment">' . NR;
+			$out .= '<ul class="mso-widget-list">';
 			
 			foreach ($comments as $comment)  // выводим в цикле
 			{
 				extract($comment);
 				
 				if ($comment['comments_users_id']) 
-					$css_style_add = 'last_comment_users ' . ' last_comment_users_' . $comment['comments_users_id'];
+					$css_style_add = 'last_comment_users ' . ' mso-last-comment-users-' . $comment['comments_users_id'];
 				elseif ($comment['comments_comusers_id']) 
-					$css_style_add = 'last_comment_comusers ' . ' last_comment_comusers_' . $comment['comments_comusers_id'];
+					$css_style_add = 'last_comment_comusers ' . ' mso-last-comment-comusers-' . $comment['comments_comusers_id'];
 				else 
 					$css_style_add = 'last_comment_anonim';
 				
-				//$out .= '<li class="' . $css_style_add . '"><a href="' . getinfo('siteurl') . 'page/' . mso_slug($page_slug) . '#comment-' . $comments_id . '" id="comment-' . $comments_id . '"><strong>';
-				
-				$out .= '<li class="' . $css_style_add . '"><a href="' . getinfo('siteurl') . 'page/' . mso_slug($page_slug) . '#comment-' . $comments_id . '"><strong>';
+				$out .= '<li class="' . $css_style_add . '"><a href="' . getinfo('siteurl') . 'page/' . mso_slug($page_slug) . '#comment-' . $comments_id . '"><b>';
 				
 				if ($comments_users_id) // это автор
 				{
@@ -189,16 +188,17 @@ function last_comments_widget_custom($options = array(), $num = 1)
 				
 				// каждое слово нужно проверить на длину и если оно больше maxchars, то добавить пробел в wordwrap
 				$words = explode(' ', $comments_content);
+				
 				foreach($words as $key=>$word)
 					$words[$key] = mso_wordwrap($word, $options['maxchars'], ' ');
+				
 				$comments_content = implode(' ', $words);
 				
 				
-				$out .= ' »</strong>  ' . strip_tags($comments_content) . '</a>';
-				// $out .=  '<br><em>«' . $page_title . '»</em>';
+				$out .= ' »</b>  ' . strip_tags($comments_content) . '</a>';
 				$out .= '</li>' . NR; 
 			}
-			$out .= '</ul>' . NR;
+			$out .= '</ul>';
 		}
 		
 		if ($options['header']) $out = $options['header'] . $out;

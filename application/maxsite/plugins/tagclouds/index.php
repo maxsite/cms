@@ -27,7 +27,7 @@ function tagclouds_widget($num = 1)
 	
 	// заменим заголовок, чтобы был в  h2 class="box"
 	if ( isset($options['header']) and $options['header'] ) 
-		$options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+		$options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 	else $options['header'] = '';
 	
 	return tagclouds_widget_custom($options, $num);
@@ -45,7 +45,7 @@ function tagclouds_widget_form($num = 1)
 	
 	if ( !isset($options['header']) ) $options['header'] = '';
 	
-	if ( !isset($options['block_start']) ) $options['block_start'] = '<div class="tagclouds">';
+	if ( !isset($options['block_start']) ) $options['block_start'] = '<div class="mso-tagclouds">';
 	if ( !isset($options['block_end']) ) $options['block_end'] = '</div>';
 	
 	if ( !isset($options['min_size']) ) $options['min_size'] = 90;
@@ -61,7 +61,7 @@ function tagclouds_widget_form($num = 1)
 		else $options['min_count'] = (int) $options['min_count'];
 		
 	if ( !isset($options['format']) ) 
-		$options['format'] = '<span style="font-size: %SIZE%%"><a href="%URL%">%TAG%</a><sub style="font-size: 7pt;">%COUNT%</sub></span>';
+		$options['format'] = '<span style="font-size: [SIZE]%"><a href="[URL]">[TAG]</a><sub style="font-size: 12px;">[COUNT]</sub></span>';
 	
 	if ( !isset($options['sort']) ) $options['sort'] = 0;
 		else $options['sort'] = (int) $options['sort'];
@@ -73,7 +73,7 @@ function tagclouds_widget_form($num = 1)
 	
 	$form = mso_widget_create_form(t('Заголовок'), form_input( array( 'name'=>$widget . 'header', 'value'=>$options['header'] ) ), '');
 	
-	$form .= mso_widget_create_form(t('Формат'), form_textarea( array( 'name'=>$widget . 'format', 'value'=>$options['format'], 'rows' => 3) ), '%SIZE% %URL% %TAG% %COUNT%');
+	$form .= mso_widget_create_form(t('Формат'), form_textarea( array( 'name'=>$widget . 'format', 'value'=>$options['format'], 'rows' => 3) ), '[SIZE] [URL] [TAG] [COUNT]');
 
 	$form .= mso_widget_create_form(t('Мин. размер (%)'), form_input( array( 'name'=>$widget . 'min_size', 'value'=>$options['min_size'] ) ), '');
 
@@ -136,7 +136,7 @@ function tagclouds_widget_custom($options = array(), $num = 1)
 	// сортировка 
 	if ( !isset($options['header']) ) $options['header'] = '';
 	
-	if ( !isset($options['block_start']) ) $options['block_start'] = '<div class="tagclouds">';
+	if ( !isset($options['block_start']) ) $options['block_start'] = '<div class="mso-tagclouds">';
 	if ( !isset($options['block_end']) ) $options['block_end'] = '</div>';
 	
 	if ( !isset($options['min_size']) ) $min_size = 90;
@@ -152,7 +152,7 @@ function tagclouds_widget_custom($options = array(), $num = 1)
 		else $min_count = (int) $options['min_count'];
 		
 	if ( !isset($options['format']) ) 
-		$options['format'] = '<span style="font-size: %SIZE%%"><a href="%URL%">%TAG%</a><sub style="font-size: 7pt;">%COUNT%</sub></span>';
+		$options['format'] = '<span style="font-size: [SIZE]%"><a href="[URL]">[TAG]</a><sub style="font-size: 12px;">[COUNT]</sub></span>';
 	
 	if ( !isset($options['sort']) ) $sort = 0;
 		else $sort = (int) $options['sort'];
@@ -183,12 +183,8 @@ function tagclouds_widget_custom($options = array(), $num = 1)
 
 		$font_size = round( (($count - $min)/($max - $min)) * ($max_size - $min_size) + $min_size );
 			
-		$af = str_replace(array('%SIZE%', '%URL%', '%TAG%', '%COUNT%'), 
-							array($font_size, $url . urlencode($tag), $tag, $count), $options['format']);
-		
-		// альтернативный синтаксис с []
 		$af = str_replace(array('[SIZE]', '[URL]', '[TAG]', '[COUNT]'), 
-							array($font_size, $url . urlencode($tag), $tag, $count), $af);
+							array($font_size, $url . urlencode($tag), $tag, $count), $options['format']);
 
 		$out .= $af . ' ';
 		$i++;

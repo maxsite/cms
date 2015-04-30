@@ -25,7 +25,7 @@ function rss_get_widget($num = 1)
 	$options = mso_get_option($widget, 'plugins', array() ); // получаем опции
 	
 	if ( isset($options['header']) and $options['header'] ) 
-		$options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+		$options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 		else $options['header'] = '';
 
 	return rss_get_widget_custom($options, $num);
@@ -40,7 +40,7 @@ function rss_get_widget_form($num = 1)
 	$options = mso_get_option($widget, 'plugins', array());
 	
 	if ( !isset($options['header']) ) $options['header'] = t('RSS', 'plugins');
-	if ( !isset($options['url']) ) $options['url'] = 'http://www.google.ru/search?q="Работает%20на%20MaxSite%20CMS"&hl=ru&client=news&tbm=blg&output=rss';
+	if ( !isset($options['url']) ) $options['url'] = 'http://www.google.com/search?q="MaxSite%20CMS"&hl=ru&client=news&tbm=blg&output=rss';
 	if ( !isset($options['count']) ) $options['count'] = 5;
 	if ( !isset($options['time_cache']) ) $options['time_cache'] = 180;
 	if ( !isset($options['max_word_description']) ) $options['max_word_description'] = '40';
@@ -55,7 +55,7 @@ function rss_get_widget_form($num = 1)
 	
 	if ( !isset($options['fields_items']) ) $options['fields_items'] = 'items';
 	
-	if ( !isset($options['charset']) ) $options['charset'] = '';
+	if ( !isset($options['charset']) ) $options['charset'] = 'UTF-8';
 	
 	
 	// вывод самой формы
@@ -64,7 +64,7 @@ function rss_get_widget_form($num = 1)
 	
 	$form = mso_widget_create_form(t('Заголовок'), form_input( array( 'name'=>$widget . 'header', 'value'=>$options['header'] ) ), '');
 	
-	$form .= mso_widget_create_form(t('Адрес'), form_input( array( 'name'=>$widget . 'url', 'value'=>htmlspecialchars($options['url']) ) ), '');
+	$form .= mso_widget_create_form(t('Адрес'), form_input( array( 'name'=>$widget . 'url', 'value'=>$options['url'])  ), '');
 	
 	$form .= mso_widget_create_form(t('Количество записей'), form_input( array( 'name'=>$widget . 'count', 'value'=>$options['count'] ) ), '');
 	
@@ -72,13 +72,13 @@ function rss_get_widget_form($num = 1)
 	
 	$form .= mso_widget_create_form(t('Поле с записями'), form_input( array( 'name'=>$widget . 'fields_items', 'value'=>$options['fields_items'] ) ), 'Обычно items');
 
-	$form .= mso_widget_create_form(t('Формат вывода'), form_textarea( array( 'name'=>$widget . 'format', 'value'=>htmlspecialchars($options['format']) ) ), '');
+	$form .= mso_widget_create_form(t('Формат вывода'), form_textarea( array( 'name'=>$widget . 'format', 'value'=>$options['format'])  ), '');
 	
 	$form .= mso_widget_create_form(t('Формат даты'), form_input( array( 'name'=>$widget . 'format_date', 'value'=>$options['format_date'] ) ), '');
 	
 	$form .= mso_widget_create_form(t('Количество слов'), form_input( array( 'name'=>$widget . 'max_word_description', 'value'=>$options['max_word_description'] ) ), '');
 	
-	$form .= mso_widget_create_form(t('Текст в конце блока'), form_textarea( array( 'name'=>$widget . 'footer', 'value'=>htmlspecialchars($options['footer']) ) ), '');
+	$form .= mso_widget_create_form(t('Текст в конце блока'), form_textarea( array( 'name'=>$widget . 'footer', 'value'=>$options['footer']) ), '');
 
 	$form .= mso_widget_create_form(t('Время кэша (минуты)'), form_input( array( 'name'=>$widget . 'time_cache', 'value'=>$options['time_cache'] ) ), '');
 	
@@ -122,7 +122,7 @@ function rss_get_widget_update($num = 1)
 function rss_get_widget_custom($arg, $num)
 {
 	# параметры ленты
-	if ( !isset($arg['url']) ) $arg['url'] = false;
+	if ( !isset($arg['url']) ) $arg['url'] = 'http://www.google.com/search?q="MaxSite%20CMS"&hl=ru&client=news&tbm=blg&output=rss';
 	if ( !isset($arg['count']) ) $arg['count'] = 5;
 	if ( !isset($arg['format']) ) $arg['format'] = '<p><a rel="nofollow" target="_blank" href="[link]">[link-host]</a><br><em>[title]</em><br>[dc:date]</p>';
 	if ( !isset($arg['format_date']) ) $arg['format_date'] = 'd/m/Y H:i';
@@ -140,7 +140,7 @@ function rss_get_widget_custom($arg, $num)
 	if ( !isset($arg['fields']) ) $arg['fields'] = 'title link description summary dc:date dc:publisher dc:creator';
 	
 	if ( !isset($arg['field_items']) ) $arg['fields_items'] = 'items';
-	if ( !isset($arg['charset']) ) $arg['charset'] = '';
+	if ( !isset($arg['charset']) ) $arg['charset'] = 'UTF-8';
 	
 	$rss = rss_get_go(array(
 		'url' => $arg['url'], 
@@ -181,6 +181,7 @@ function rss_get_go($arg)
 		require_once(getinfo('plugins_dir') . 'rss_get/lastrss.php');
 		
 		$rss_pars = new lastRSS();
+		
 		
 		$rss_pars->convert_cp = $arg['charset'];
 		

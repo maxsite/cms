@@ -25,8 +25,8 @@ function catclouds_widget($num = 1)
 	$widget = 'catclouds_widget_' . $num; // имя для опций = виджет + номер
 	$options = mso_get_option($widget, 'plugins', array() ); // получаем опции
 	
-	// заменим заголовок, чтобы был в  h2 class="box"
-	if ( isset($options['header']) and $options['header'] ) $options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+	// заменим заголовок
+	if ( isset($options['header']) and $options['header'] ) $options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 		else $options['header'] = '';
 	
 	return catclouds_widget_custom($options, $num);
@@ -44,7 +44,7 @@ function catclouds_widget_form($num = 1)
 	
 	if ( !isset($options['header']) ) $options['header'] = '';
 	
-	if ( !isset($options['block_start']) ) $options['block_start'] = '<div class="catclouds">';
+	if ( !isset($options['block_start']) ) $options['block_start'] = '<div class="mso-catclouds">';
 	if ( !isset($options['block_end']) ) $options['block_end'] = '</div>';
 	
 	if ( !isset($options['min_size']) ) $options['min_size'] = 90;
@@ -57,7 +57,7 @@ function catclouds_widget_form($num = 1)
 		else $options['cat_id'] = (int) $options['cat_id'];		
 		
 	if ( !isset($options['format']) ) 
-		$options['format'] = '<span style="font-size: %SIZE%%"><a href="%URL%">%CAT%</a><sub style="font-size: 7pt;">%COUNT%</sub></span>';
+		$options['format'] = '<span style="font-size: [SIZE]%"><a href="[URL]">[CAT]</a><sub style="font-size: 12px;">[COUNT]</sub></span>';
 	
 	if ( !isset($options['sort']) ) $options['sort'] = 0;
 		else $options['sort'] = (int) $options['sort'];
@@ -69,7 +69,7 @@ function catclouds_widget_form($num = 1)
 	
 	$form = mso_widget_create_form(t('Заголовок'), form_input( array( 'name'=>$widget . 'header', 'value'=>$options['header'] ) ), '');
 	
-	$form .= mso_widget_create_form(t('Формат'), form_input( array( 'name'=>$widget . 'format', 'value'=>$options['format'] ) ), '%SIZE% %URL% %CAT% %COUNT%');
+	$form .= mso_widget_create_form(t('Формат'), form_textarea( array( 'name'=>$widget . 'format', 'value'=>$options['format'] ) ), '[SIZE] [URL] [CAT] [COUNT]');
 	
 	$form .= mso_widget_create_form(t('Мин. размер (%)'), form_input( array( 'name'=>$widget . 'min_size', 'value'=>$options['min_size'] ) ), '');
 	
@@ -125,7 +125,7 @@ function catclouds_widget_custom($options = array(), $num = 1)
 	
 	if ($k) return $k; // да есть в кэше
 	
-	// формат вывода  %SIZE% %URL% %TAG% %COUNT% 
+	// формат вывода  [SIZE] [URL] %TAG% [COUNT] 
 	// параметры $min_size $max_size $block_start $block_end
 	// сортировка 
 	
@@ -133,7 +133,7 @@ function catclouds_widget_custom($options = array(), $num = 1)
 	
 	if ( !isset($options['header']) ) $options['header'] = '';
 	
-	if ( !isset($options['block_start']) ) $options['block_start'] = '<div class="catclouds">';
+	if ( !isset($options['block_start']) ) $options['block_start'] = '<div class="mso-catclouds">';
 	if ( !isset($options['block_end']) ) $options['block_end'] = '</div>';
 	
 	if ( !isset($options['min_size']) ) $min_size = 90;
@@ -146,7 +146,7 @@ function catclouds_widget_custom($options = array(), $num = 1)
 		else $cat_id = (int) $options['cat_id'];		
 		
 	if ( !isset($options['format']) ) 
-		$options['format'] = '<span style="font-size: %SIZE%%"><a href="%URL%">%CAT%</a><sub style="font-size: 7pt;">%COUNT%</sub></span>';
+		$options['format'] = '<span style="font-size: [SIZE]%"><a href="[URL]">[CAT]</a><sub style="font-size: 12px;">[COUNT]</sub></span>';
 	
 	if ( !isset($options['sort']) ) $sort = 0;
 		else $sort = (int) $options['sort'];
@@ -197,7 +197,7 @@ function catclouds_widget_custom($options = array(), $num = 1)
 	
         $font_size = round( (($count - $min)/($max - $min)) * ($max_size - $min_size) + $min_size );
         
-        $af = str_replace(array('%SIZE%', '%URL%', '%CAT%', '%COUNT%'), 
+        $af = str_replace(array('[SIZE]', '[URL]', '[CAT]', '[COUNT]'), 
 						  array($font_size, $url . $slug, $cat, $count), $options['format']);
 
 		$out .= $af . ' '; 	

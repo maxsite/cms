@@ -73,9 +73,9 @@ function rater_widget($num = 1)
 	$widget = 'rater_widget_' . $num; // имя для опций = виджет + номер
 	$options = mso_get_option($widget, 'plugins', array() ); // получаем опции
 	
-	// заменим заголовок, чтобы был в  h2 class="box"
+	// заменим заголовок
 	if ( isset($options['header']) and $options['header'] ) 
-		$options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
+		$options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 	else $options['header'] = '';
 	
 	return rater_widget_custom($options, $num);
@@ -99,18 +99,16 @@ function rater_widget_form($num = 1)
 	$CI = & get_instance();
 	$CI->load->helper('form');
 	
-	$form = '<p><div class="t150">' . t('Заголовок:') . '</div> '. form_input( array( 'name'=>$widget . 'header', 'value'=>$options['header'] ) ) ;
 	
-	$form .= '<p><div class="t150">' . t('Количество:') . '</div> '. form_input( array( 'name'=>$widget . 'count', 'value'=>$options['count'] ) ) ;
 	
-	$form .= '<p><div class="t150">' . t('Формат:') . '</div> '. form_input( array( 'name'=>$widget . 'format', 'value'=>$options['format'] ) ) ;
 	
-	$form .= '<p><div class="t150">&nbsp;</div><strong>[TITLE]</strong> - ' . t('название записи');
-	$form .= '<br><div class="t150">&nbsp;</div><strong>[COUNT]</strong> - ' . t('всего голосов');
-	$form .= '<br><div class="t150">&nbsp;</div><strong>[BALL]</strong> -  ' . t('общий бал (деление общего рейтинга на кол-во голосов) - округлен до целого');
-	$form .= '<br><div class="t150">&nbsp;</div><strong>[REALBALL]</strong> -  ' . t('общий бал (дробный)');
-	$form .= '<br><div class="t150">&nbsp;</div><strong>[A]</strong>' . t('ссылка') . '<strong>[/A]</strong>';
-
+	$form = mso_widget_create_form(t('Заголовок'), form_input( array( 'name'=>$widget . 'header', 'value'=>$options['header'] ) ), '');
+	
+	
+	$form .= mso_widget_create_form(t('Количество'), form_input( array( 'name'=>$widget . 'count', 'value'=>$options['count'] ) ), '');
+	
+	$form .= mso_widget_create_form(t('Формат'), form_textarea( array( 'name'=>$widget . 'format', 'value'=>$options['format'] ) ), '<em title="' . t('Название записи') . '">[TITLE]</em> <em title="' . t('Всего голосов') . '">[COUNT]</em> <em title="' . t('Общий бал (деление общего рейтинга на кол-во голосов) - округлен до целого') . '">[BALL]</em> <em title="' . t('Общий бал (дробный)') . '">[REALBALL]</em> <em title="' . t('Ссылка') . '">[A]</em>');
+	
 	return $form;
 }
 
@@ -165,7 +163,7 @@ function rater_widget_custom($options = array(), $num = 1)
 		
 		$link = '<a href="' . getinfo('siteurl') . 'page/';
 		
-		$out .= '<ul class="is_link rater">' . NR;
+		$out .= '<ul class="mso-widget-list">' . NR;
 
 		foreach ($pages as $page)
 		{

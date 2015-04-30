@@ -382,5 +382,88 @@ div.pagination {
 	}
 }
 
+.mso-randomtext_widget {
+	.mso-widget-header:before {
+		.icon-fa-normal;
+		content: @fa-var-book;
+	}
+}
 
+.mso-page_views_widget {
+	.mso-widget-header:before {
+		.icon-fa-normal;
+		content: @fa-var-area-chart;
+	}
+}
+
+.mso-page_comments_widget {
+	.mso-widget-header:before {
+		.icon-fa-normal;
+		content: @fa-var-bar-chart;
+	}
+}
+
+.mso-last_comments_widget {
+	.mso-widget-header:before {
+		.icon-fa-normal;
+		content: @fa-var-comments;
+	}
+}
+
+.mso-tagclouds_widget {
+	.mso-widget-header:before {
+		.icon-fa-normal;
+		content: @fa-var-tags;
+	}
+}
+
+
+
+// plugin tabs
+
+div.mso-tabs-box.mso-tabs-visible { 
+	display: block; 
+}
+
+ul.mso-tabs-nav { 
+	margin: 0; 
+	padding: 0; 
+	height: 30px; 
+	width: 100%; 
+	list-style: none;
+}
+
+ul.mso-tabs-nav li.mso-tabs-elem {
+	float: left; 
+	display: inline; 
+	position: relative; 
+	line-height: 30px; 
+	height: 30px; 
+	margin: 0 1px 0 0; 
+	padding: 0 10px; 
+	cursor: pointer; 
+	color: @gray100; 
+	background: @gray400; 
+	font-size: .9em;
+	// border-radius: 8px 8px 0 0; 
+	
+	&:hover{
+		color: white; 
+		background: @gray500;
+	}
+}
+
+
+ul.mso-tabs-nav li.mso-tabs-current {
+	color: white; 
+	background: @gray800;
+}
+
+div.mso-tabs-box {
+	display: none; 
+	border: 1px solid @gray200; 
+	background: @gray100; 
+	padding: 10px; 
+	// border-radius: 0 8px 0 0;
+}
 

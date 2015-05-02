@@ -76,8 +76,13 @@ function forms_content_callback($matches)
 
 	$files = mso_section_to_array($text, 'files', $def, true);
 	
-	if ($files) $files = $files[0]; // только одна секция
-	if ((int) $files['file_count'] < 1) $files = array(); // если полей меньше 1, то обнуляем массив
+	if ($files) 
+	{
+		$files = $files[0]; // только одна секция
+		
+		// если полей меньше 1, то обнуляем массив
+		if ((int) $files['file_count'] < 1) $files = array(); 
+	}
 	
 	// поля формы [field]
 	$def = array(

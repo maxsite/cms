@@ -81,8 +81,6 @@ if (!class_exists('Maxsite'))
 			elseif ($method == 'ajax') $this->_view_i('ajax', 'ajax');
 			elseif ($method == 'require-maxsite') $this->_view_i('require-maxsite', 'require-maxsite');
 			elseif ($method == 'admin') $this->_view_i('admin', 'admin');
-			elseif ($method == 'xmlrpc') $this->_view_i('xmlrpc', 'xmlrpc/xmlrpc');
-			elseif ($method == 'xmlrpc_server') $this->_view_i('xmlrpc_server', 'xmlrpc/xmlrpc_server');
 			elseif ($method == 'login') $this->_view_i('login', 'login');
 			elseif ($method == 'logout') $this->_view_i('logout', 'logout');
 			else $this->page_404();

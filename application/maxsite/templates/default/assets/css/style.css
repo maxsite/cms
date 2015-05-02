@@ -5676,6 +5676,24 @@ div.mso-tabs-box {
   background: #f5f5f5;
   padding: 10px;
 }
+div.mso-forms label > span {
+  font-weight: bold;
+}
+div.mso-forms span.mso-forms-tip {
+  font-style: italic;
+  color: #9e9e9e;
+}
+div.mso-forms input,
+div.mso-forms textarea,
+div.mso-forms select {
+  width: 100%;
+}
+div.mso-forms input[type="checkbox"] {
+  width: auto;
+}
+div.mso-forms p.mso-forms-buttons {
+  margin-top: 30px;
+}
 ul.menu {
   position: relative;
   list-style: none;

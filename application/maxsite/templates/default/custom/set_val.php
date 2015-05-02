@@ -8,15 +8,12 @@
  *
  */
 
-	// заголовок виджета
-	// mso_set_val('widget_header_start', '<div class="mso-widget-header">');
-	// mso_set_val('widget_header_end', '</div>');
-	
-	// mso_set_val('jquery_url', 'URL-адрес загрузки jQuery');
-	
-	// можно указать css-класс для BODY
-	if (is_type('home')) mso_set_val('body_class', 'mso-body-home');
-	else mso_set_val('body_class', 'mso-body-all mso-body-' . getinfo('type'));
-	
-	
+// mso_set_val('jquery_url', 'URL-адрес загрузки jQuery');
+
+// можно указать css-класс для BODY
+if (is_type('home')) 
+	mso_set_val('body_class', 'mso-body-home');
+else 
+	mso_set_val('body_class', 'mso-body-all mso-body-' . getinfo('type'));
+
 # end file

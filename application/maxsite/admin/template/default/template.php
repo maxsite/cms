@@ -82,7 +82,7 @@
 <html><head>
 <meta charset="UTF-8">
 <title><?= $admin_title ?></title>
-<link rel="shortcut icon" href="<?= getinfo('template_url') . 'images/favicons/' . mso_get_option('default_favicon', 'templates', 'favicon1.png') ?>" type="image/x-icon">
+<link rel="shortcut icon" href="<?= $admin_template_url . 'images/favicon1.png' ?>" type="image/x-icon">
 <link rel="stylesheet" href="<?= $admin_css ?>">
 <?= $admin_css_profile ?>
 <?= mso_load_jquery() ?>

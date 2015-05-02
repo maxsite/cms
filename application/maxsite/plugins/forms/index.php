@@ -3,8 +3,6 @@
 /**
  * MaxSite CMS
  * (c) http://max-3000.com/
- * Дополнения: Н. Громов (http://nicothin.ru/)
- * Дополнения: Илья Земсков (http://vizr.ru/)
  */
 
 # функция автоподключения плагина
@@ -13,13 +11,22 @@ function forms_autoload($args = array())
 	mso_hook_add( 'content', 'forms_content'); # хук на вывод контента
 }
 
-# 
-function forms_content_callback($matches) 
+# функции плагина
+function forms_content($text = '')
+{
+	if (strpos($text, '[form]') !== false) 
+		$text = preg_replace_callback('!\[form\](.*?)\[/form\]!is', 'forms_content_callback', $text );
+	
+	return $text;
+}
+
+# callback-функция
+# вся логика формы
+function forms_content_callback($matches)
 {
 	$text = $matches[1];
 	
 	$text = str_replace("\r", "", $text);
-	
 	$text = str_replace('&nbsp;', ' ', $text);
 	$text = str_replace("\t", ' ', $text);
 	$text = str_replace('<br />', "<br>", $text);
@@ -33,593 +40,497 @@ function forms_content_callback($matches)
 	$text = str_replace("\n\n", "\n", $text);
 	$text = trim($text);
 	
-	$out = ''; // убиваем исходный текст формы
+	// число антиспама привязано и к сессии
+	$ses = getinfo('session');
+	$ses = preg_replace("/\D/", '', $ses['session_id']);
+	$ses = substr($ses, 0, 4);
 	
-	// на какой email отправляем
-	$r = preg_match_all('!\[email=(.*?)\]!is', $text, $all);
-	if ($r)
-		$email = trim(implode(' ', $all[1]));
-	else
-		$email = mso_get_option('admin_email', 'general', 'admin@site.com');
+	$antispam_num = date('jw') + date('t') * date('G') + $ses;
 	
-	// тема письма
-	$r = preg_match_all('!\[subject=(.*?)\]!is', $text, $all);
-	if ($r)
-		$subject = trim(implode(' ', $all[1]));
-	else
-		$subject = tf('Обратная связь');
+	// служебная секция [options]
+	$def = array(
+		'email' => mso_get_option('admin_email', 'general', 'admin@site.com') , // на какой email отправляем
+		'subject' => '', // subject email если пусто, то используется из [field]
+		'from' => '', // from email если пусто, то используется из [field]
+		'redirect' => '', // куда редиректить после отправки
+		'redirect_pause' => '2', // пауза перед редиректом секунд
+		'ushka' => '', // ушка к форме
+		'reset' => 1, // показать кнопку Сброс формы
+		'require_title' => '*', // текст для обязательного поля
+		'antispam' => tf('Наберите число'), // вопросы антиспама
+		'antispam_ok' => $antispam_num, // правильный ответ на антиспам — задается автоматом
+	);
 	
-	// имя, как оно будет показано в форме
-	$r = preg_match_all('!\[name_title=(.*?)\]!is', $text, $all);
-	if ($r)
-		$name_title = trim(implode(' ', $all[1]));
-	else
-		$name_title = tf('Ваше имя');
+	$options = mso_section_to_array($text, 'options', $def, true);
 	
+	if ($options) $options = $options[0];
 	
-	// email, как он будет показан в форме
-	$r = preg_match_all('!\[email_title=(.*?)\]!is', $text, $all);
-	if ($r)
-		$email_title = trim(implode(' ', $all[1]));
-	else
-		$email_title = tf('Ваш email');
+	// служебная секция [files] 
+	$def = array(
+		'file_count' => 0, // количество полей - если 0, то полей нет
+		'file_type' => 'jpg|jpeg|png|svg', // загружаемые типы файлов
+		'file_max_size' => 200, // максимальный размер файла в КБ
+		'file_description' => 'Скриншоты', // название поля
+		'file_tip' => tf('Выберите для загрузки файлы (jpg, jpeg, png, svg) размером до 200 Кб'), // подсказка
+	);
+
+	$files = mso_section_to_array($text, 'files', $def, true);
 	
+	if ($files) $files = $files[0]; // только одна секция
+	if ((int) $files['file_count'] < 1) $files = array(); // если полей меньше 1, то обнуляем массив
 	
-	// куда редиректить после отправки
-	$r = preg_match_all('!\[redirect=(.*?)\]!is', $text, $all);
-	if ($r)
-		$redirect = trim(implode(' ', $all[1]));
-	else
-		$redirect = '';
+	// поля формы [field]
+	$def = array(
+		'require' => 0, // обязательное поле 
+		'type' => 'text', // тип поля по-умолчанию
+		'description' => '', // название поля
+		'placeholder' => '', // подсказка в поле
+		'tip' => '', // подсказка после поля
+		'value' => '', // значение по-умолчанию
+		'attr' => '', // прочие атрибуты поля
+		'clean' => 'base', // фильтрация поля
+		'values' => '', // значение для select через #
+		'default' => '', // дефолтное значение для select
+		'subject' => 0, // поле испольуется как subject письма 
+		'from' => 0, // поле испольуется как from (от кого) письма 
+	);
 	
+	$fields = mso_section_to_array($text, 'field', $def, true);
 	
-	// ушка к форме
-	$r = preg_match_all('!\[ushka=(.*?)\]!is', $text, $all);
-	if ($r)
-		$ushka = trim(implode(' ', $all[1]));
-	else
-		$ushka = '';
+	$options = array_map('trim', $options);
 	
-	// отправить копию на ваш email
-	$r = preg_match_all('!\[nocopy\]!is', $text, $all);
-	if ($r)
-		$forms_subscribe = false;
-	else
-		$forms_subscribe = true;
+	// pr($options);
+	// pr($files);
+	// pr($fields);
+	// pr($text);
 	
-	// кнопка Сброс формы
-	$r = preg_match_all('!\[noreset\]!is', $text, $all);
-	if ($r)
-		$reset = false;
-	else
-		$reset = true;	
+	// html-формат вывода 
+
+	$format['container_class'] = 'mso-forms'; // css-класс для div-контейнера формы
 	
-	// файлы к форме
-	$r = preg_match_all('!\[file_count=(.*?)\]!is', $text, $all);
-	if ($r)
+	$format['textarea'] = '<p><label><span>[description][require_title]</span><textarea [field_param]>[value]</textarea></label>[tip]</p>';
+	
+	$format['checkbox'] = '<p><label><span></span><input [field_param] value="1" type="checkbox"> [description]</label>[tip]</p>';
+	
+	$format['select'] = '<p><label><span>[description][require_title]</span><select [field_param]>[option]</select></label>[tip]</p>';
+	
+	$format['input'] = '<p><label><span>[description][require_title]</span><input [field_param]></label>[tip]</p>';
+
+	$format['tip'] = '<span class="mso-forms-tip">[tip]</span>';
+	
+	$format['file_description'] = '<p><label><span>[file_description]</span></label></p>';
+	$format['file_field'] = '<p>[file_field]</p>';
+	$format['file_tip'] = '<p><span class="mso-forms-tip">[file_tip]</span></p>';
+	
+	$format['message_ok'] = '<p class="mso-forms-ok">' . tf('Ваше сообщение отправлено') . '</p>';
+	$format['message_error'] = '<p class="mso-forms-error">[error]</p>';
+	
+	$format['antispam'] = '<p><label><span>[antispam] [antispam_ok][require_title]</span>[input]</label></p>';
+	
+	$format['buttons'] = '<p class="mso-forms-buttons">[submit] [reset]</p>';
+	
+	$format['mail_field'] = '[description]: [post_value] [NR]';
+
+	
+	// подключаем файл формата из текущего шаблона
+	if ($fn = mso_fe('custom/plugins/forms/format.php')) require($fn);
+	
+	$out = ''; // затираем исходный текст формы
+	
+	if ($_POST)
 	{
-		$files = array();
-		$files['file_count'] = intval(trim($all[1][0]));
-		if ($files['file_count'] != '' && $files['file_count'] > 0)
+		// если это отправка
+		$result_post = forms_content_post($options, $files, $fields, $format);
+		
+		// в $result_post результат отправки
+		
+		if ($result_post['show_ok']) // всё ок
 		{
-			// пытаемся определить остальные параметры загрузки файлов
-			// [file_type=jpg|jpeg|png]
-			$r = preg_match_all('!\[file_type=(.*?)\]!is', $text, $all);
-			if ($r)
-				$files['file_type'] = trim($all[1][0]);
-			else
-				$files['file_type'] = 'jpeg|jpg|png|gif';
-
-			// [file_max_size=200]
-			$r = preg_match_all('!\[file_max_size=(.*?)\]!is', $text, $all);
-			if ($r)
-				$files['file_max_size'] = intval(trim($all[1][0]));
-			else
-				$files['file_max_size'] = 200; // 200Кб
+			$out .= $format['message_ok'];
 			
-			// [file_description=Скриншоты]
-			$r = preg_match_all('!\[file_description=(.*?)\]!is', $text, $all);
-			if ($r)
-				$files['file_description'] = trim($all[1][0]);
-			else
-				$files['file_description'] = $files['file_count'] > 1 ? tf('Файлы') : tf('Файл');
-
-			// [file_tip=Выберите для загрузки фотографии в формате JPEG или PNG и максимальным объёмом - 200Кб]
-			$r = preg_match_all('!\[file_tip=(.*?)\]!is', $text, $all);
-			if ($r)
-				$files['file_tip'] = trim($all[1][0]);
-			else
-				$files['file_tip'] = tf('Выберите для загрузки файл(-ы) в формате JPEG или PNG');
-
-			#pr($files);
+			if ($options['redirect'])
+			{
+				// редирект через N секунд
+				header('Refresh: ' . $options['redirect_pause'] . '; url=' . $options['redirect']);
+			}
 		}
-		else
-			$files = false;
+		elseif ($result_post['show_error']) // есть ошибки
+		{
+			// вывод сообщений об ошибках
+
+			foreach($result_post['show_error'] as $error)
+			{
+				$out .= str_replace('[message_error]', tf($error), $format['message_error']);
+			}
+			
+			if ($result_post['show_form']) // нужно показать форму
+			{
+				$out .= forms_show_form($options, $files, $result_post['fields'], $format);
+			}
+		}
 	}
 	else
-		$files = false;
-	
-	
-	// поля формы
-	$r = preg_match_all('!\[field\](.*?)\[\/field\]!is', $text, $all);
-	
-	$f = array(); // массив для полей
-	if ($r)
 	{
-		$fields = $all[1];
-
-		
-		if ($subject)
-		{
-			// поле тема письма делаем в виде обязательнного поля select.
-			
-			// формируем массив для формы
-			$subject_f['require'] = 1;
-			
-			$subject_f['type'] = (mb_strpos($subject, '#') === false ) ? 'text' : 'select';
-			
-			// если это одиночное поле, но при этом текст сабжа начинается
-			// с _ то ставим тип hidden
-			if ($subject_f['type'] == 'text' and mb_strpos($subject, '_') === 0 ) 
-			{
-				$subject = mb_substr($subject . ' ', 1, -1, 'UTF-8');
-				$subject_f['type'] = 'hidden'; 
-			}
-			
-			$subject_f['description'] = tf('Тема письма');
-			//$subject_f['tip'] = t('Выберите тему письма');
-			$subject_f['values'] = $subject;
-			$subject_f['value'] = $subject;
-			$subject_f['default'] = '';
-
-			// преобразования, чтобы сделать ключ для поля 
-			$f1['subject'] = $subject_f; // у поля тема будет ключ subject
-			foreach($f as $key=>$val) $f1[$key] = $val; 
-			$f = $f1;
-		}
-		
-		$i = 0;
-
-		foreach ($fields as $val)
-		{
-			$val = trim($val);
-			
-			if (!$val) continue;
-			
-			$val = str_replace(' = ', '=', $val);
-			$val = str_replace('= ', '=', $val);
-			$val = str_replace(' =', '=', $val);
-			$val = explode("\n", $val); // разделим на строки
-			$ar_val = array();
-			foreach ($val as $pole)
-			{
-				$pole = preg_replace('!=!', '_VAL_', $pole, 1);
-				
-				$ar_val = explode('_VAL_', $pole); // строки разделены = type = select
-				if ( isset($ar_val[0]) and isset($ar_val[1]))
-					$f[$i][$ar_val[0]] = $ar_val[1];
-			}
-			
-			
-			$i++;
-		}
-		
-		if (!$f) return ''; // нет полей - выходим
-		
-		// теперь по-идее у нас есть вся необходимая информация по полям и по форме
-		// смотрим есть ли POST. Если есть, то проверяем введенные поля и если они корректные, 
-		// то выполняем отправку почты, выводим сообщение и редиректимся
-		
-		// если POST нет, то выводим обычную форму
-		
-		if ($_POST) $_POST = mso_clean_post(array(
-			'forms_antispam1' => 'integer',
-			'forms_antispam2' => 'integer',
-			'forms_antispam' => 'integer',
-			'forms_name' => 'base',
-			'forms_email' => 'email',
-			'forms_session' => 'base',
-			));
-		
-		if ( $post = mso_check_post(array('forms_session', 'forms_antispam1', 'forms_antispam2', 'forms_antispam',
-					'forms_name', 'forms_email',  'forms_submit' )) )
-		{
-			mso_checkreferer();
-			
-			$out .= '<div class="forms-post">';
-			// верный email?
-			if (!$ok = mso_valid_email($post['forms_email']))
-			{
-				$out .= '<div class="message error small">' . tf('Неверный email!') . '</div>';
-			}
-			
-			// антиспам 
-			if ($ok)
-			{
-				$antispam1s = (int) $post['forms_antispam1'];
-				$antispam2s = (int) $post['forms_antispam2'];
-				$antispam3s = (int) $post['forms_antispam'];
-				
-				if ( ($antispam1s/984 + $antispam2s/765) != $antispam3s )
-				{ // неверный код
-					$ok = false;
-					$out .= '<div class="message error small">' . tf('Неверная сумма антиспама') . '</div>';
-				}
-			}
-			
-			if ($ok) // проверим обязательные поля
-			{
-				foreach ($f as $key=>$val)
-				{
-					if ( $ok and isset($val['require']) and $val['require'] == 1 ) // поле отмечено как обязательное
-					{
-						if (!isset($post['forms_fields'][$key]) or !$post['forms_fields'][$key]) 
-						{
-							$ok = false;
-							$out .= '<div class="message error small">' . tf('Заполните все необходимые поля!') . '</div>';
-						}
-					}
-					if (!$ok) break;
-				}
-			}
-			
-			if ($ok && isset($files['file_count']) && $files['file_count'] > 0 && isset($_FILES) ) // обработаем файлы
-			{
-				require_once( getinfo('common_dir') . 'uploads.php' ); // функции загрузки 
-					
-				$_FILES = mso_prepare_files('forms_files'); // переформатируем массив присланных файлов
-					
-				# формирование папки для временных файлов вложений
-				$cache_folder = getinfo('cache_dir').'forms_attaches/';
-				if( !file_exists($cache_folder) )
-				{
-					mkdir($cache_folder, 0666);
-				}
-					
-				// параметры для mso_upload
-				// конфиг CI-библиотеки upload
-				$mso_upload_ar1 = array( 
-					'upload_path' => $cache_folder,
-					'allowed_types' => $files['file_type'],
-					'max_size' => $files['file_max_size'],
-					'overwrite' => true,
-				);
-
-				$mso_upload_ar2 = array( // массив прочих опций
-					'userfile_resize' => false, // нужно ли менять размер
-					'userfile_water' => false, // нужен ли водяной знак
-					'userfile_mini' => false, // делать миниатюру?
-					'prev_size' => false, // превьюху не делаем
-					'mini_make' => false, // не создаём папку mini
-					'prev_make' => false, // не создаём папку _mso_i
-					'message1' => '', // не выводить сообщение о загрузке каждого файла
-					//'message2' => '',
-				);
-					
-				$CI = & get_instance(); 
-				$file_attaches = array();
-					
-				foreach ($_FILES as $f_key => $f_info)
-				{
-					ob_start();
-					$res = mso_upload($mso_upload_ar1, $f_key, $mso_upload_ar2);
-					$msg = ob_get_contents();
-					ob_end_clean();
-						
-					if (!$msg && $res)
-					{
-						$up_data = $CI->upload->data();	#pr($up_data);
-							
-						# формируем список вложений к письму
-						$file_attaches[] = $up_data['full_path'];
-					}
-					else
-					{
-						$ok = false;
-						$out .= '<div class="message error small">' . strip_tags($msg) . '</div>';
-						break;
-					}
-				}
-			}
-				
-			// всё ок
-			if ($ok)
-			{
-				// формируем письмо и отправляем его
-					
-				# дополнительные параметры отправки письма
-				$prefs = $post['forms_name'] != '' ? array( 'from_name' => $post['forms_name'] ) : array();
-					
-				if (!mso_valid_email($email)) 
-					$email = mso_get_option('admin_email', 'general', 'admin@site.com'); // куда приходят письма
-					
-				$message = t('Имя: ') . $post['forms_name'] . "\n";
-				$message .= t('Email: ') . $post['forms_email'] . "\n";
-				
-				foreach ($post['forms_fields'] as $key=>$val)
-				{
-					if ($key === 'subject' and $val)
-					{
-						$subject = $val;
-						continue;
-					}
-					
-					$message .= $f[$key]['description'] . ': ' . $val . "\n\n";
-				}
-					
-				# если есть вложенные файлы - сообщаем о них
-				if (isset($file_attaches) && $file_attaches)
-				{
-					$f_names = array_map('basename', $file_attaches);
-					$message .= $files['file_description'].': '.implode(', ', $f_names)."\n\n";
-					$prefs['attach'] = $file_attaches; # формируем вложения к письму
-				}
-					
-				if ($_SERVER['REMOTE_ADDR'] and $_SERVER['HTTP_REFERER'] and $_SERVER['HTTP_USER_AGENT']) 
-				{
-					$message .= "\n" . tf('IP-адрес: ') . $_SERVER['REMOTE_ADDR'] . "\n";
-					$message .= tf('Отправлено со страницы: ') . $_SERVER['HTTP_REFERER'] . "\n";
-					$message .= tf('Браузер: ') . $_SERVER['HTTP_USER_AGENT'] . "\n";
-				}
-					
-				// pr($message);
-					
-				mso_hook('forms_send', $post);
-					
-				$form_hide = mso_mail($email, $subject, $message, $post['forms_email'], $prefs);
-				
-				if ( $forms_subscribe and isset($post['forms_subscribe']) ) 
-					mso_mail($post['forms_email'], tf('Вами отправлено сообщение:') . ' ' . $subject, $message, $prefs);
-				
-				
-				$out .= '<div class="message ok small">' . tf('Ваше сообщение отправлено!') . '</div><p>' 
-						. str_replace("\n", '<br>', htmlspecialchars($subject. "\n" . $message)) 
-						. '</p>';
-				
-				# удаляем временные файлы вложений
-				if (isset($file_attaches) and $file_attaches) mso_flush_cache(false, 'forms_attaches/');
-					
-				if ($redirect) mso_redirect($redirect, true);
-
-			}
-			else // какая-то ошибка, опять отображаем форму
-			{
-				# удаляем временные файлы вложений
-				if (isset($file_attaches) and $file_attaches) mso_flush_cache(false, 'forms_attaches/');
-					
-				$out .= forms_show_form($f, $ushka, $forms_subscribe, $reset, $subject, $name_title, $email_title, $files);
-			}
-			
-			
-			$out .= '</div>';
-			
-			$out .= mso_load_jquery('jquery.scrollto.js');
-			$out .= '<script>$(document).ready(function(){$.scrollTo("div.forms-post", 500, {offset:-45});})</script>';
-
-		}
-		else // нет post
-		{
-			$out .= forms_show_form($f, $ushka, $forms_subscribe, $reset, $subject, $name_title, $email_title, $files);
-		}
+		// выводим форму
+		$out .= forms_show_form($options, $files, $fields, $format);
 	}
-
+	
 	return $out;
 }
 
-function forms_show_form($f = array(), $ushka = '', $forms_subscribe = true, $reset = true, $subject = '', $name_title = '', $email_title = '', $files = false)
+
+# выводим форму
+function forms_show_form($options, $files, $fields, $format)
 {
 	$out = '';
 
-	$antispam1 = rand(1, 10);
-	$antispam2 = rand(1, 10);
+	if (!$fields) return ''; // нет полей — выходим
 	
-	$id = 1; // счетчик для id label
+	// удаляем временные файлы вложений перед отображением формы
+	if($files) mso_flush_cache(false, 'forms_attaches/');
+		
+	// pr($fields);
 	
-	if ($subject)
-	{
-		// поле тема письма делаем в виде обязательнного поля select.
-		
-		// формируем массив для формы
-		$subject_f['require'] = 1;
-		
-		// если в  subject есть #, то это несколько значений - select
-		// если нет, значит обычное текстовое поле
-		
-		$subject_f['type'] = (mb_strpos($subject, '#') === false ) ? 'text' : 'select';
-		
-		// если это одиночное поле, но при этом текст сабжа начинается
-		// с _ то ставим тип hidden
-		if ($subject_f['type'] == 'text' and mb_strpos($subject, '_') === 0 ) 
-		{
-			$subject = mb_substr($subject . ' ', 1, -1, 'UTF-8');
-			$subject_f['type'] = 'hidden'; 
-		}
-		
-		$subject_f['description'] = tf('Тема письма');
-		//$subject_f['tip'] = t('Выберите тему письма');
-		$subject_f['values'] = $subject;
-		$subject_f['value'] = $subject;
-		$subject_f['default'] = '';
-		
-		// преобразования, чтобы сделать ключ для поля 
-		$f1['subject'] = $subject_f; // у поля тема будет ключ subject
-		
-		foreach($f as $key=>$val) $f1[$key] = $val; 
-		$f = $f1;
-		
-	}
+	// начальная часть всегда однакова ???
+	$out .= '<div class="' . $format['container_class'] . '"><form method="post" enctype="multipart/form-data">' . mso_form_session('forms_session');
 
-	$out .= NR . '<div class="forms"><form method="post" enctype="multipart/form-data" class="plugin_forms fform">' . mso_form_session('forms_session');
-	
-	$out .= '<input type="hidden" name="forms_antispam1" value="' . $antispam1 * 984 . '">';
-	$out .= '<input type="hidden" name="forms_antispam2" value="' . $antispam2 * 765 . '">';
-	
-	// для сохранения отправленных полей смотрим POST
-	if (!isset($_POST['forms_name']) or !$pvalue = mso_clean_str($_POST['forms_name'])) $pvalue = '';
-	
-	// обязательные поля
-	if ($name_title)
+	foreach($fields as $key => $field)
 	{
-		$out .= '<p><label class="ffirst ftitle" title="' . tf('Обязательное поле') . '" for="id-' . ++$id . '">' . $name_title . '*</label><span><input name="forms_name" type="text" value="' . $pvalue . '" placeholder="' . $name_title . '" required id="id-' . $id . '"></span></p>';
-	}
-	else 
-	{
-		$out .= '<p><label class="ffirst ftitle" title="' . tf('Обязательное поле') . '" for="id-' . ++$id . '">' . tf('Ваше имя*') . '</label><span><input name="forms_name" type="text" value="' . $pvalue . '" placeholder="' . tf('Ваше имя') . '" required id="id-' . $id . '"></span></p>';
-	}
-
-	
-	if (!isset($_POST['forms_email']) or !$pvalue = mso_clean_str($_POST['forms_email'], 'base|email')) $pvalue = '';
-	
-	if ($email_title)
-	{
+		$field = array_map('trim', $field);
 		
-		$out .= '<p><label class="ffirst ftitle" title="' . tf('Обязательное поле') . '" for="id-' . ++$id . '">' . $email_title . '*</label><span><input name="forms_email" type="email" value="' . $pvalue . '" placeholder="' . $email_title . '" required id="id-' . $id . '"></span></p>';
-	}
-	else 
-	{
-		$out .= '<p><label class="ffirst ftitle" title="' . tf('Обязательное поле') . '" for="id-' . ++$id . '">' . tf('Ваш email*') . '</label><span><input name="forms_email" type="email" value="' . $pvalue . '" placeholder="' . tf('Ваш email') . '" required id="id-' . $id . '"></span></p>';
-	}
-	
-	
-	// тут указанные поля в $f
-	foreach ($f as $key=>$val)
-	{
-		if (!isset($val['type'])) continue;
-		if (!isset($val['description'])) $val['description'] = '';
+		// pr($field);
 		
-		$val['type'] = trim($val['type']);
-		$val['description'] = trim($val['description']);
+		// ключ для каждого отправляемого поля
+		$field_name = 'forms_fields[' . $key . ']';
 		
-		if (isset($val['require']) and  trim($val['require']) == 1) 
+		$description = $field['description']; // название поля
+		
+		// подсказка в поле
+		$placeholder = ($field['placeholder']) ? ' placeholder="' . htmlspecialchars($field['placeholder']) . '"' : '';
+		
+		// обязательные поля
+		if ($field['require'])
 		{
-			$require = '*';
-			$require_title = ' title="' . tf('Обязательное поле') . '"';
+			// подсказка что это обязательное поле
+			$require_title = ' ' . $options['require_title'];
+		
+			// если поле обязательное ставим ему required
 			$required = ' required';
-		}		
-		else 
+		}
+		else
 		{
-			$require = '';
 			$require_title = '';
 			$required = '';
 		}
 		
-		if (isset($val['attr']) and  trim($val['attr'])) $attr = ' ' . trim($val['attr']);
-			else $attr = '';
+		// подсказка после поля
+		$tip = $field['tip'] ? str_replace('[tip]', $field['tip'], $format['tip']) : ''; 
 		
-		if (isset($val['value']) and  trim($val['value'])) $pole_value = htmlspecialchars(tf(trim($val['value'])));
-			else $pole_value = '';
+		$attr = ($field['attr']) ? ' ' . $field['attr'] : ''; // атрибуты поля
 		
+		$value = htmlspecialchars($field['value']); // значение value по-умолчанию
 		
-		// изменим $pole_value значение, если оно было в _POST
-		// для полей можно задать правила фильрации функции mso_clean_str
-		if (isset($val['clean']) and trim($val['clean'])) $clean = trim($val['clean']);
-			else $clean = 'base';
-		
-		if (isset($_POST['forms_fields'][$key]) and $pvalue = mso_clean_str($_POST['forms_fields'][$key], $clean)) 
-			$pole_value = $pvalue;
+		// если был POST, то ставим его (он уже обработан)
+		if (isset($field['post_value'])) $value = $field['post_value'];
 		
 		
-		if (isset($val['placeholder']) and  trim($val['placeholder'])) $placeholder = ' placeholder="' . htmlspecialchars(tf(trim($val['placeholder']))) . '"';
-			else $placeholder = '';	
-			
-		$description = t(trim($val['description']));
-		
-		if (isset($val['tip']) and trim($val['tip']) ) $tip = NR . '<p class="nop"><span class="ffirst"></span><span class="fhint">'. trim($val['tip']) . '</span></p>';
-			else $tip = '';
-			
-		if ($val['type'] == 'text') #####
+		if ($field['type'] == 'textarea')
 		{
-			//type_text - type для input HTML5
-			if (isset($val['type_text']) and  trim($val['type_text'])) $type_text = htmlspecialchars(trim($val['type_text']));
-				else $type_text = 'text';
+			// комбинируем name + placeholder + $required + $attr
+			$field_param = 'name="' . $field_name . '" ' . $placeholder . $required . $attr;
 			
-			$out .= NR . '<p><label class="ffirst ftitle" for="id-' . ++$id . '"' . $require_title . '>' . $description . $require . '</label><span><input name="forms_fields[' . $key . ']" type="' . $type_text . '" value="' . $pole_value . '" id="id-' . $id . '"' . $placeholder . $required . $attr . '></span></p>' . $tip;
-
+			$out .= str_replace(array('[description]', '[require_title]', '[field_param]', '[value]', '[tip]'), array($description, $require_title, $field_param, $value, $tip), $format['textarea']);
 		}
-		elseif ($val['type'] == 'select') #####
+		elseif ($field['type'] == 'checkbox')
 		{
-			if (!isset($val['default'])) continue;
-			if (!isset($val['values'])) continue;
+			// дефолтное значение 0 или 1
+			$checked = $field['default'] ? ' checked="checked"' : '';
 			
-			$out .= NR . '<p><label class="ffirst ftitle" for="id-' . ++$id . '"' . $require_title . '>' . $description . $require . '</label><span><select name="forms_fields[' . $key . ']" id="id-' . $id . '"' . $attr . '>';
+			$field_param = 'name="' . $field_name . '" ' . $attr . $checked;
 			
-			$default = trim($val['default']);
-			$values = explode('#', $val['values']);
+			// cкрытый input для того, чтобы передать неотмеченный чекбокс будет - value="0"
+			$out .= '<input name="' . $field_name . '" value="0" type="hidden">';
 			
-			foreach ($values as $value)
+			$out .= str_replace(array('[description]', '[field_param]', '[tip]'), array($description, $field_param, $tip), $format['checkbox']);
+		}
+		elseif ($field['type'] == 'select')
+		{
+			if (! $values = $field['values']) continue; // не указаны значение
+			
+			$default = $field['default']; // дефолтное значение
+			
+			$values = explode('#', $values);
+			
+			$option = '';
+			
+			foreach ($values as $o)
 			{
-				$value = trim($value);
+				$selected = ($o == $default) ? ' selected="selected"' : '';
 				
-				if (!$value) continue; // пустые опции не выводим
-				
-				if ($pole_value and $value == $pole_value)
-				{
-					$checked = ' selected="selected"';
-				}
-				elseif ($value == $default and !$pole_value) 
-				{
-					$checked = ' selected="selected"';
-				}
-				else $checked = '';
-				
-				$out .= '<option' . $checked . '>' . htmlspecialchars(tf($value)) . '</option>';
+				$option .= '<option' . $selected . '>' . htmlspecialchars(tf($o)) . '</option>';
 			}
 			
-			$out .= '</select></span></p>' . $tip;
-
+			$field_param = 'name="' . $field_name . '" ' . $attr;
+			
+			$out .= str_replace(array('[description]', '[require_title]', '[field_param]', '[option]', '[tip]'), array($description, $require_title, $field_param, $option, $tip), $format['select']);
 		}
-		elseif ($val['type'] == 'textarea') #####
+		else // обычный input с любым type
 		{
-			$out .= NR . '<p><label class="ffirst ftitle ftop" for="id-' . ++$id . '"' . $require_title . '>' . $description . $require . '</label><span><textarea name="forms_fields[' . $key . ']" id="id-' . $id . '"' . $placeholder . $required. $attr . '>' . $pole_value . '</textarea></span></p>' . $tip;
-		
+			// комбинируем name + placeholder + $required + $attr
+			$field_param = 'name="' . $field_name . '" value="' . $value . '" type="' . $field['type'] . '"'. $placeholder . $required . $attr;
+			
+			$out .= str_replace(array('[description]', '[require_title]', '[field_param]', '[tip]'), array($description, $require_title, $field_param, $tip), $format['input']);
 		}
-		elseif ($val['type'] == 'hidden') #####
-		{
-			$out .= NR . '<input name="forms_fields[' . $key . ']" type="hidden" value="' . $pole_value . '" id="id-' . $id . '"' . $attr . '>';
-		}
-		
 	}
-		
-	// файлы
-	if ( $files )
+	
+	// поля для $files вывести 
+	if ($files)
 	{
-		# pr($files);
-		$out .= NR . '<p><label class="ffirst ftitle ftop" for="id-' . ++$id . '-1">' . $files['file_description'] . '</label>';
-		$out .= '<span>';
-		for( $it = 1; $it <= $files['file_count']; $it++ )
-		{
-			$out .= '<input name="forms_files[]" type="file" id="id-' . $id . '-'.$it.'"><br>';
-		}
-		$out .= '</span></p>';
-		$out .= $files['file_tip'] != '' ? NR . '<p class="nop"><span class="ffirst"></span><span class="fhint">'. $files['file_tip'] . '</span></p>' : '';
-		
+		$out .= forms_files_fields($files, $format);
 	}
+	
+	// антиспам
+	if ($options['antispam'])
+	{
+		$antispam = $options['antispam'];
+		$antispam_ok = $options['antispam_ok'];
+		$require_title = ' ' . $options['require_title'];
+		$input = '<input type="text" name="forms_fields[antispam]" required>';
 		
-	// обязательные поля антиспама и отправка и ресет
-	$out .= NR . '<p class="forms_antispam"><label class="ffirst ftitle" for="id-' . ++$id . '">' . $antispam1 . ' + ' . $antispam2 . ' =</label>';
-	$out .= '<span><input name="forms_antispam" type="number" required maxlength="3" value="" placeholder="' . tf('Укажите свой ответ') . '" id="id-' . $id . '"></span></p>';
+		$out .= str_replace(array('[antispam]', '[antispam_ok]', '[input]', '[require_title]'), array($antispam, $antispam_ok, $input, $require_title), $format['antispam']);
+	}
 	
-	if ($forms_subscribe)
-		$out .= NR . '<p><span class="ffirst"></span><label><input name="forms_subscribe" value="" type="checkbox"  class="forms_checkbox"> ' . tf('Отправить копию письма на ваш e-mail') . '</label></p>';
+	$submit = '<button type="submit">' . tf('Отправить') . '</button>';
 	
-	$out .= NR . '<p><span class="ffirst"></span><span class="submit"><button name="forms_submit" type="submit" class="forms_submit">' . tf('Отправить') . '</button>';
+	if (!$options['reset']) 
+		$reset = '';
+	else
+		$reset = '<button type="reset">' . tf('Очистить форму') . '</button>';
 	
-	if ($reset) $out .= ' <button name="forms_clear" type="reset" class="forms_reset">' . tf('Очистить форму') . '</button>';
+	$out .= str_replace(array('[submit]', '[reset]'), array($submit, $reset), $format['buttons']);
 	
-	$out .= '</span></p>';
+	if (function_exists('ushka') and $options['ushka']) $out .= ushka($options['ushka']);
 	
-	if (function_exists('ushka')) $out .= ushka($ushka);
-	
-	$out .= '</form></div>' . NR;
+	// конец формы
+	$out .= '</form></div>';
+
 	
 	return $out;
 }
 
-# функции плагина
-function forms_content($text = '')
+// поля для загрузки файлов в форме
+function forms_files_fields($files, $format)
 {
-	if (strpos($text, '[form]') !== false) $text = preg_replace_callback('!\[form\](.*?)\[/form\]!is', 'forms_content_callback', $text );
-	return $text;
+	$out = '';
+	
+	$out .= $files['file_description'] ? str_replace('[file_description]', $files['file_description'], $format['file_description']) : '';
+	
+	for( $it = 1; $it <= $files['file_count']; $it++ )
+	{
+		$out .= str_replace('[file_field]', '<input name="forms_files[]" type="file">', $format['file_field']);
+	}
+	
+	$out .= ($files['file_tip']) ? str_replace('[file_tip]', $files['file_tip'], $format['file_tip']) : '';
+		
+	return $out;
 }
 
-# end file
+
+# обработка POST
+function forms_content_post($options, $files, $fields, $format)
+{
+	$result['show_error'] = array(); // каждый элемент сообщение об ошибке 
+	$result['show_form'] = false;
+	$result['show_ok'] = false;
+	$result['fields'] = array(); // массив полей в случае ошибок
+	
+	$out = '';
+	
+	// принимаем post
+	if ( $post = mso_check_post(array('forms_session', 'forms_fields')) )
+	{
+		mso_checkreferer();
+		
+		$subject_key = false; // если у поля отмечен subject, то ставим номер поля
+		$from_key = false; // если у поля отмечен from, то ставим номер поля
+		
+		// добавляем в массив $field полученные значения и сразу их чистим через mso_clean_str()
+		foreach($fields as $key => $field)
+		{
+			if (isset($fields[$key]['post_value'])) unset($fields[$key]['post_value']);
+			
+			$field = array_map('trim', $field);
+			
+			if (isset($post['forms_fields'][$key]))
+			{
+				$p_v = mso_clean_str($post['forms_fields'][$key], $field['clean']);
+				
+				$fields[$key]['post_value'] = $p_v;
+				
+				// обязательное поле и не получены данные (браузер должен был это сам отсеить)
+				if ($field['require'] and !$p_v)
+				{
+					$result['show_error'][] = tf('Неверно заполнено поле: ') . $field['description'];
+				}
+			}
+			
+			if ($field['subject']) $subject_key = $key;
+			if ($field['from']) $from_key = $key;
+		}
+		
+		// если есть ошибки то выходим
+		if ($result['show_error'])
+		{
+			$result['show_form'] = true;
+			$result['fields'] = $fields;
+			
+			return $result;
+		}
+		
+		// если были ошибки, то уже вышли из функции
+		
+		$prefs = ''; // дополнительные опции для mso_mail
+		
+		// если есть вложения
+		if ($file_attaches = forms_files_post($files))
+		{
+			// формируем вложения к письму
+			$prefs['attach'] = $file_attaches; 
+		}
+		
+		// формируем само письмо
+		
+		// куда приходят письма
+		$email = $options['email']; 
+		
+		if (!mso_valid_email($email))
+			$email = mso_get_option('admin_email', 'general', 'admin@site.com'); 
+		
+		// тема письма может быть в опциях
+		$subject = $options['subject'];
+		
+		if (!$subject) // нет, значит ищем в полях
+			$subject = $fields[$subject_key]['post_value'];
+			
+		// тема письма может быть в опциях
+		$from = $options['from'];
+		
+		if (!$from) // нет, значит ищем в полях
+			$from = $fields[$from_key]['post_value'];		
+		
+		// pr($fields);
+		
+		$message = '';
+		
+		foreach($fields as $field)
+		{
+			$description = $field['description'];
+			$post_value = $field['post_value'];
+			
+			$m = $format['mail_field'];
+			
+			$m = str_replace('[description]', $description, $m); 
+			$m = str_replace('[post_value]', $post_value, $m); 
+			$m = str_replace('[NR]', NR, $m); 
+			
+			$message .= $m;
+		}
+		
+		// добавляем служебную информацию
+		$message .= tf('IP: ') . $_SERVER['REMOTE_ADDR'] . NR;
+		$message .= tf('Браузер: ') . $_SERVER['HTTP_USER_AGENT'] . NR;
+		
+		mso_hook('forms_send', $post);
+		
+		// pr($email);
+		// pr($subject);
+		// pr($from);
+		// pr($message);
+		// pr($prefs);
+		
+		// тут отправка почты
+		mso_mail($email, $subject, $message, $from, $prefs);
+		
+		// удаляем временные файлы вложений
+		if($files) mso_flush_cache(false, 'forms_attaches/');
+		
+		$result['show_ok'] = true;
+	}
+	else
+	{
+		$result['show_error'][] = tf('Ошибка сессии');
+	}
+	
+	return $result;
+}
+
+
+// загрузка файлов по POST
+function forms_files_post($files)
+{
+	// возвращать нужно данные для $prefs
+
+	if (!$files) return false; // файлы не нужны
+	
+	if (!isset($_FILES)) return false; // не были отправлены файлы
+	
+	require_once( getinfo('common_dir') . 'uploads.php' ); // функции загрузки 
+					
+	$_FILES = mso_prepare_files('forms_files'); // переформатируем массив присланных файлов
+		
+	// формирование папки для временных файлов вложений
+	$cache_folder = getinfo('cache_dir').'forms_attaches/';
+	
+	if( !file_exists($cache_folder) ) mkdir($cache_folder, 0666);
+		
+	// параметры для mso_upload
+	// конфиг CI-библиотеки upload
+	$mso_upload_ar1 = array( 
+		'upload_path' => $cache_folder,
+		'allowed_types' => $files['file_type'],
+		'max_size' => $files['file_max_size'],
+		'overwrite' => true,
+	);
+
+	$mso_upload_ar2 = array( // массив прочих опций
+		'userfile_resize' => false, // нужно ли менять размер
+		'userfile_water' => false, // нужен ли водяной знак
+		'userfile_mini' => false, // делать миниатюру?
+		'prev_size' => false, // превьюху не делаем
+		'mini_make' => false, // не создаём папку mini
+		'prev_make' => false, // не создаём папку _mso_i
+		'message1' => '', // не выводить сообщение о загрузке каждого файла
+		//'message2' => '',
+	);
+		
+	$CI = & get_instance();
+	
+	$file_attaches = array();
+		
+	foreach ($_FILES as $f_key => $f_info)
+	{
+		ob_start();
+		$res = mso_upload($mso_upload_ar1, $f_key, $mso_upload_ar2);
+		$msg = ob_get_contents(); // сообщения, если были ошибки
+		ob_end_clean();
+			
+		if (!$msg && $res)
+		{
+			$up_data = $CI->upload->data();	
+				
+			// формируем список вложений к письму
+			$file_attaches[] = $up_data['full_path'];
+		}
+		else
+		{
+			// ошибки не выводим
+			// $out .= '<div class="message error small">' . strip_tags($msg) . '</div>';
+			break;
+		}
+	}
+				
+	return $file_attaches;
+}
+
+
+# end of file

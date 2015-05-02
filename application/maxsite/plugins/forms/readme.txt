@@ -1,36 +1,47 @@
-Пример формы:
-
+Пример формы
 
 [form]
-[email=mylo@sait.com]
-[redirect=http://site.com/]
-[subject=Пожелания по сайту # Нашел ошибку на сайте # Подскажите, пожалуйста]
-[ushka=ушка, которая выведется после формы]
-[nocopy]
-[noreset]   
-[name_title=Кликуха]
-[email_title=Твоё мыло, братан]
 
-[file_count=2]
-[file_type=jpg|jpeg|png]
-[file_max_size=200]
-[file_description=Скриншоты]
-[file_tip=Выберите для загрузки фотографии в формате JPEG или PNG и максимальным объёмом - 200Кб]
+[options]
+email = admin@site.com
+[/options]
 
+[files]
+file_count = 1
+file_type = jpg|jpeg|png|svg
+file_max_size = 200
+file_description = Скриншоты
+file_tip = Выберите для загрузки файлы (jpg, jpeg, png, svg) размером до 200 Кб
+[/files]
+
+[field] 
+require = 1
+type = select
+description = Тема письма
+values = Пожелания по сайту # Нашел ошибку на сайте # Подскажите, пожалуйста
+default = Пожелания по сайту 
+subject = 1
+[/field]
 
 [field]
-require = 0   
+require = 1   
 type = text
-description = Ваш город
-tip = Указывайте вместе со страной
-value = значение по-умолчанию
-attr = class="gorod" (атрибуты поля)
+description = Ваше имя
+placeholder = Ваше имя
+[/field]
+
+[field]
+require = 1   
+type = text
+clean = email
+description = Ваш email
+placeholder = Ваш email
+from = 1
 [/field]
 
 [field] 
 require = 0   
-type = text
-type_text = url
+type = url
 description = Сайт
 tip = Вы можете указать адрес своего сайта (если есть)
 placeholder = Адрес сайта
@@ -44,7 +55,6 @@ tip = Телефон лучше указывать с кодом города/с
 placeholder = Введите свой телефонный номер
 [/field] 
 
-
 [field] 
 require = 1 
 type = textarea 
@@ -55,34 +65,73 @@ placeholder = О чем вы хотите написать?
 [/form]
 
 
+Форма состоит из секций
+
+[form]
+
+	[options]
+		опции
+	[/options]
+
+	[files]
+		опции, если нужно загружать файлы
+	[/files]
+
+	[field] 
+		поле 1
+	[/field]
+
+	[field] 
+		поле 2 и т.д.
+	[/field]
+
+[/form]
+
+
+ПАРАМЕТРЫ options
+-----------------
+email = mylo@sait.com - куда отправляем письмо
+redirect = http://site.com/ - куда редиректим после отправки
+redirect_pause = 2 —  пауза перед редиректом секунд
+ushka = ушка - ушка, которая выведется после формы
+reset = 1 - вывод кнопки «Сбросить форму»
+require_title = * - текст для обязательного поля
+subject = Обратная связь - тема email-письма
+antispam = Наберите число — текст антиспама
+subject = Тема письма — тема письма. Если пусто, то используется из [field]
+from = bill@gates.us — from (от кого) Если пусто, то используется из [field]
+
+
+ПАРАМЕТРЫ files
+-----------------
+file_count = 1 - сколько файлов можно приложить
+file_type = jpg|jpeg|png|svg - разрешённые типы файлов
+file_max_size = 200  - максимально допустимый размер файла в килобайтах (Кб)
+file_description = Скриншоты - заголовок полей для выбора файла(-ов)
+file_tip = Выберите для загрузки файлы (jpg, jpeg, png, svg) размером до 200 Кб - текст подсказки
+	
+	
 ПАРАМЕТРЫ ПОЛЕЙ field
 ---------------------
-
 type - тип поля
-	text
 	textarea
 	select
-	hidden
-
-
-type_text - тип для text (input)
-	type_text = url
-	type_text = email
-	type_text = password
-	type_text = search
-	type_text = search
-	type_text = number
+	checkbox
+	text url email password search number hidden... (из HTML5) (формируется как input)
 
 placeholder = Подсказка для поля
-
-tip = Подсказка к полю
-
+tip = Подсказка к полю внизу
 value = значение по-умолчанию
+attr = class="gorod" — html-атрибуты элемента
 
-attr = class="gorod"
-	html-атрибуты элемента
+values - для select'а значения через #: Первый # Второй # Третий
+default - для select'а дефолтное значение:  Второй
+default - для checkbox'а дефолтное значение: 0 или 1
 
-clean = base
+subject = 1 — значит значение поля используется для subject email-письма
+from = 1 - это поле подставляется как from (от кого)
+
+clean = base — фильтрация поля
 clean = xss|htmlspecialchars
 	способ валидации поля, согласно функции mso_clean_str() 
 	Правила указываются через | (без пробелов)
@@ -96,39 +145,4 @@ clean = xss|htmlspecialchars
 		valid_email или email - если это неверный адрес, вернет пустую строчку
 		not_url - удалить все признаки url
 	
-	если правило равно base, то это cработают правила: trim|xss|strip_tags|htmlspecialchars
-
-
-ПАРАМЕТРЫ ФОРМЫ
----------------
-[email=mylo@sait.com] - куда отправляем письмо
-[redirect=http://site.com/] - куда редиректим после отправки
-[subject=Пожелания по сайту # Нашел ошибку на сайте # Подскажите, пожалуйста] - темы письма черз #
-[ushka=ушка] - ушка, которая выведется после формы
-[nocopy] - отключить вывод «Отправить копию на ваш email»
-[noreset] - отключить вывод кнопки «Сбросить форму»
-[name_title=Кликуха] - заголовок поля ИМЯ 
-[email_title=Твоё мыло, братан] - заголовок поля Email
-
-
-[file_count=3] - сколько файлов можно приложить
-[file_type=jpg|jpeg|png] - разрешённые типы файлов
-[file_max_size=200] - максимально допустимый размер файла в килобайтах (Кб)
-[file_description=Скриншоты] - заголовок полей для выбора файла(-ов)
-[file_tip=Выберите для загрузки фотографии в формате JPEG или PNG и максимальным объёмом - 200Кб] - текст подсказки
-
-ПРОЧЕЕ
-------
-[subject] если указывается через #, то формируется выпадающий select. Если нет #, то это
-обычный редактируемый input. Если тема письма начинается с _ то это скрытый input.
-
-	Выпадающий select
-	[subject=Пожелания по сайту # Нашел ошибку на сайте # Подскажите, пожалуйста]
-
-	Редактируемое поле
-	[subject=Пожелания по сайту]
-
-	Скрытое поле
-	[subject=_Обратная связь]
-	
- 
+	если правило равно base, то cработают правила: trim|xss|strip_tags|htmlspecialchars

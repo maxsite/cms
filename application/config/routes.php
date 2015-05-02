@@ -41,6 +41,8 @@
 $route['default_controller'] = "maxsite";
 $route['404_override'] = '';
 
+$route['codeigniter_welcome'] = "codeigniter_welcome";
+
 $route['(\S+)'] = "maxsite/$1";
 $route['(\S+)/(.+)'] = "maxsite/$1/$2";
 $route['(\S+)/(.+)/(.+)'] = "maxsite/$1/$2/$3";

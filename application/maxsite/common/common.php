@@ -3972,7 +3972,8 @@ function mso_section_to_array($text, $pattern, $array_default = array(), $simple
 			
 			foreach ($val as $pole)
 			{
-				$ar_val = explode('=', $pole); // строки разделены = type = select
+				$ar_val = explode('=', $pole, 2); // строки разделены = type = select
+				
 				if ( isset($ar_val[0]) and isset($ar_val[1]))
 				{
 					$f[$i][$ar_val[0]] = preg_replace_callback('!\[base64\](.*?)\[\/base64\]!is', '_mso_section_to_array_replace_end', $ar_val[1]);

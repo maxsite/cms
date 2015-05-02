@@ -151,7 +151,7 @@ function maxsite_auth_custom($args = array())
 		
 		$redirect_url = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : getinfo('siteurl');
 		
-		echo '<html><head>
+		echo '<!DOCTYPE html><html><head>
 <meta charset="UTF-8">
 <title>Авторизация</title>
 </head><body>
@@ -194,7 +194,7 @@ function maxsite_auth_custom($args = array())
 		
 		if (!is_login()) // нет логина - нужно вывести форму логина
 		{
-			echo '<html><head>
+			echo '<!DOCTYPE html><html><head>
 <meta charset="UTF-8">
 <title>Авторизация</title>
 </head><body>
@@ -295,7 +295,7 @@ function maxsite_auth_custom($args = array())
 			// pr($data);
 			// pr($CI->encrypt->decode($my_email_pass, $data_key . $my_key));
 			
-			echo '<html><head>
+			echo '<!DOCTYPE html><html><head>
 <meta charset="UTF-8">
 <title>Авторизация</title>
 </head><body>

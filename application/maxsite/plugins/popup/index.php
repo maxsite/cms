@@ -49,8 +49,9 @@ function popup_head($args = array())
 	elseif ($options['popup-position'] == 'tl') $style_pos = 'top:15px; left:15px; width:22%;'; // tl||Сверху слева
 	elseif ($options['popup-position'] == 'wt') $style_pos = 'top:15px; left:15px; right:15px;'; // wt||Во всю ширину окна сверху
 	elseif ($options['popup-position'] == 'wb') $style_pos = 'bottom:15px; left:15px; right:15px;'; // wb||Во всю ширину окна снизу
+	elseif ($options['popup-position'] == 'cnb') $style_pos = 'bottom:15px; left:35%; right:35%;'; // cnb||по середине снизу
+	elseif ($options['popup-position'] == 'cncn') $style_pos = 'bottom:50%; left:35%; right:35%;'; // cncn||по середине
 	else $style_pos = 'bottom:15px; right:15px; width:22%;'; // br||Снизу справа
-
 
 	if (!isset($options['popup-btn-close-color'])) $options['popup-btn-close-color'] = 'gray';
 	
@@ -74,65 +75,66 @@ function popup_head($args = array())
 		$if_xy_top = 'false';
 	}
 	
-	if (!isset($options['popup-btn-close']) or $options['popup-btn-close']) $popup_btn_close = 'false';
-		else $popup_btn_close = 'true';
+	if (!isset($options['popup-btn-close']) or $options['popup-btn-close']) 
+		$popup_btn_close = 'false';
+	else 
+		$popup_btn_close = 'true';
 		
 	
 	if (!isset($options['popup-allways-view'])) $options['popup-allways-view'] = false;
+	
 	$popup_allways_view =  $options['popup-allways-view'] ? 'false' : 'true';
 	
 	echo mso_load_jquery() . mso_load_jquery('jquery.cookie.js') . '
-	<script>
-	if (document.querySelector)
-	{ 
-		$(function() 
+<script>
+if (document.querySelector)
+{ 
+	$(function() 
+	{
+		if (' . $popup_btn_close . ' || !$.cookie("mso-hidePopup")) 
 		{
-			if (' . $popup_btn_close . ' || !$.cookie("hidePopup")) 
+			var popupBlock = $("div.mso-popup-block"),
+				close = $("span.mso-popup-close");
+			
+			if ('. $if_xy_top . ') {popupBlock.show();}
+			
+			if (' . $popup_allways_view  . ')
 			{
-				var popupBlock = $("div.popup-block"),
-					close = $("span.popup-close");
-				
-				if ('. $if_xy_top . ') {popupBlock.show();}
-				
-				if (' . $popup_allways_view  . ')
+				$(window).scroll(function()
 				{
-					$(window).scroll(function()
+					if (popupBlock.data("hide")) 
 					{
-						if (popupBlock.data("hide")) 
-						{
-							popupBlock.hide();
-						}
-						else if (' . $if_xy . ') 
-						{
-							popupBlock.fadeIn(' . $options['popup-fade'] . ');
-						}
-						else if (!popupBlock.is(":animated")) 
-						{
-							popupBlock.fadeOut(' . $options['popup-fade'] . ');
-						}
-					});
-				}
-				else
-				{
-					popupBlock.show();
-				}
-				
-				close.click(function() 
-				{
-					popupBlock.hide().data("hide", 1);
-					$.cookie("hidePopup", "true", {expires: ' . $options['popup-cookie'] . ', path: "/"});
+						popupBlock.hide();
+					}
+					else if (' . $if_xy . ') 
+					{
+						popupBlock.fadeIn(' . $options['popup-fade'] . ');
+					}
+					else if (!popupBlock.is(":animated")) 
+					{
+						popupBlock.fadeOut(' . $options['popup-fade'] . ');
+					}
 				});
 			}
-		});
-	}
-	</script>
+			else
+			{
+				popupBlock.show();
+			}
+			
+			close.click(function() 
+			{
+				popupBlock.hide().data("hide", 1);
+				$.cookie("hidePopup", "true", {expires: ' . $options['popup-cookie'] . ', path: "/"});
+			});
+		}
+	});
+}
+</script>
 
-	<style>
-		div.popup-block {position:fixed; display:none; z-index: 999; padding:8px; border:1px solid #ccc; background:#fff; border-radius:5px; box-shadow:1px 2px 5px #999; ' . $style_pos . $options['popup-my-style-block'] . '}
-		h3.popup-header {margin:0 0 8px; padding:0 40px 8px 0; border-bottom:1px solid #ccc; font:17px Verdana, sans-serif; ' . $options['popup-my-style-header'] . '}
-		span.popup-close {float:right; width:23px; height:23px; margin-bottom:8px; ' . $close_color . ' cursor:pointer;}
-		div.popup-content {clear:both; font-size:13px;' . $options['popup-my-style-content'] . '}
-	</style>
+<style>
+div.mso-popup-block {position:fixed; display:none; padding: 10px; border: 1px solid #ccc; background: #F8F8F8; z-index: 9999;' . $style_pos . $options['popup-my-style-block'] . '}
+span.mso-popup-close {float:right; width:23px; height:23px; margin-bottom:8px; ' . $close_color . ' cursor:pointer;}
+</style>
 ';
 		
 	return $args;
@@ -142,20 +144,19 @@ function popup_body_end($args = array())
 {	
 	$options = mso_get_option('plugin_popup', 'plugins', array());
 	if (!isset($options['popup-content']) or !$options['popup-content']) return $args;
-	if (!isset($options['popup-header'])) $options['popup-header'] = t('Интересные записи');
-	if ($options['popup-header']) $options['popup-header'] = '<h3 class="popup-header">' . $options['popup-header'] . '</h3>';
 	
 	
 	if (!isset($options['popup-btn-close'])) $options['popup-btn-close'] = 1;
 
-	$popup_btn_close = $options['popup-btn-close'] ? '<span class="popup-close" title="Закрыть"></span>' : '';
+	$popup_btn_close = $options['popup-btn-close'] ? '<span class="mso-popup-close" title="Закрыть"></span>' : '';
 
-	echo '
-	<div class="popup-block">
-			' . $popup_btn_close . $options['popup-header'] . '
-		<div class="popup-content">' . $options['popup-content'] . '<div>
-	</div>
-	';
+	// если нужног перекрыть всё остальное
+	// <div style="background: red; width: 100%; height: 100%; position: fixed; top: 0; left:0; z-index: 999;"></div>
+	
+	//		' . $popup_btn_close . $options['popup-header'] . '
+	// <div class="popup-content">' . $options['popup-content'] . '<div>
+	
+	echo '<div class="mso-popup-block">' . $popup_btn_close . $options['popup-content'] . '</div>';
 
 	return $args;
 }
@@ -173,17 +174,11 @@ function popup_mso_options()
 	# ключ, тип, ключи массива
 	mso_admin_plugin_options('plugin_popup', 'plugins', 
 		array(
-			'popup-header' => array(
-							'type' => 'text', 
-							'name' => t('Заголовок блока'), 
-							'description' => t('Укажите заголовок блока'), 
-							'default' => t('Интересные записи'),
-						),
-						
+				
 			'popup-content' => array(
 							'type' => 'textarea', 
 							'name' => t('Текст блока'), 
-							'description' => t('Укажите текст блока'), 
+							'description' => t('Укажите текст блока. Можно использовать HTML'), 
 							'default' => '',
 						),			
 			
@@ -191,7 +186,7 @@ function popup_mso_options()
 							'type' => 'select', 
 							'name' => t('Положение блока'), 
 							'description' => t('Выберите расположение блока на сайте'), 
-							'values' => 'br||Снизу справа # bl||Снизу слева # tp||Сверху справа # tl||Сверху слева # wt||Во всю ширину окна сверху # wb||Во всю ширину окна снизу',
+							'values' => 'br||Снизу справа # bl||Снизу слева # tp||Сверху справа # tl||Сверху слева # wt||Во всю ширину окна сверху # wb||Во всю ширину окна снизу # cnb||По центру окна снизу # cncn||По центру окна',
 							'default' => 'br',
 						),
 						
@@ -221,7 +216,7 @@ function popup_mso_options()
 							'type' => 'text', 
 							'name' => t('При закрытии блока не показывать его в течение'), 
 							'description' => t('Укажите срок в днях'), 
-							'default' => 30,
+							'default' => 7,
 						),
 						
 			'popup-allways-view' => array(
@@ -247,25 +242,11 @@ function popup_mso_options()
 						),
 			
 			'popup-my-style-block' => array(
-							'type' => 'text', 
+							'type' => 'textarea', 
 							'name' => t('Свои css-стили блока'), 
 							'description' => t('Укажите свой вариант оформления'), 
 							'default' => '',
 						),
-						
-			'popup-my-style-header' => array(
-							'type' => 'text', 
-							'name' => t('Свои css-стили заголовка блока'), 
-							'description' => t('Укажите свой вариант'), 
-							'default' => '',
-						),	
-							
-			'popup-my-style-content' => array(
-							'type' => 'text', 
-							'name' => t('Свои css-стили текста блока'), 
-							'description' => t('Укажите свой вариант'), 
-							'default' => '',
-						),			
 			),
 		t('Настройки плагина PopUp'), // титул
 		t('Плагин выводит всплывающее popup-окно на страницах сайта.')   // инфо

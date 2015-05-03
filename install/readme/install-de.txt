@@ -1,0 +1,257 @@
+-------------------------------------------------------------------------
+                            (с) MaxSite CMS
+-------------------------------------------------------------------------
+
+
+Information auf Russisch:
+
+Offizielle Website: http://max-3000.com/
+Hilfe: http://max-3000.com/help
+Forum: http://forum.max-3000.com/
+Entwickler-Blog: http://maxsite.org/
+Support: http://max-3000.com/page/support
+MaxSite CMS FAQ für Anfänger: http://max-3000.com/page/faq
+
+(Lösung der häufigsten Probleme, finden Sie am Ende dieser Datei)
+
+==================
+SYSTEMANFORDERUNGEN
+==================
+1. Fähigkeit zur Arbeit mit .htaccess und aktiven mod_rewrite.
+2. MySQL > 4.1. Arbeit mit UTF8. Datenbank Typ MyISAM.
+3. Aktive Bibliothek mbstring.
+4. PHP > 5.2.4.
+
+
+=========
+INSTALLATION
+=========
+
+Die Installation des Systems erfolgt sehr schnell. Bevor Sie beginnen, müssen
+die Parameter in den Konfigurationsdateien von der MySQL Datenbank eingeben. Das System
+wird dann die Installation selbst durchzuführen.
+
+Folgen Sie einfach dieser Anleitung und es wird alles klappen! :-)
+
+Falls Sie Probleme haben oder Hilfe brauchen, kommen Sie bei Deutsche Support Seite vorbei:
+http://de.maxsitecms.com
+
+	| Da alle Dateien in UTF8 codiert sind, ändern Sie am besten die Dateien
+	| nicht mit Notepad, der Probleme hat mit diesem Modus, sondern mit Hilfe einer guten
+	| Software, z.B. Notepad2: http://www.flos-freeware.ch/
+
+________________________________________________________________________________
+
+1. Öffnen Sie die Datei «application/config/database.php-distr» in Notepad2. In dieser 
+    Datei, müssen Sie die Parameter der Datenbank angeben. Danach laden Sie die
+    Datei auf dem Server mit dem Namen database.php hoch.
+________________________________________________________________________________
+
+2. Öffnen Sie die Datei «application/maxsite/mso_config.php-distr». 
+	
+    Geben Sie in dieser Datei Ihre Geheim Wort ein. Sie wird bei
+    der Verschlüsselung verwendet. Bitte beachten Sie, dass eine Änderung der 
+    Geheim Wort nach der Installation Ihr Passwort ungültig macht.
+    Wenn Sie nichts eingeben, dann wird als Geheim Wort die URL der Webseite verwendet.
+    Wenn Sie später einen Umzug auf andere URL planen, dann sollen Sie
+    ein Geheim Wort am besten gleich eingeben.
+    
+    Wählen Sie Deutsch als Standard Sprache aus.
+    $MSO->language = 'de';
+
+    Danach laden Sie die Datei auf dem Server mit dem Namen mso_config.php hoch.
+________________________________________________________________________________
+
+3. Benennen Sie die Datei «.htaccess-distr» in «.htaccess» um.
+
+    Wenn Ihre Webseite nicht in Rootverzeichnes liegt, sondern in einen unter Ordner
+    z.B. http://www.your-site.com/blog/, dann Öffnen Sie die Datei
+    .htaccess-subdir und ersetzen Sie in diese Datei alle #subdir# mit dem Name
+    ihren unter Ordner (in unseren Bsp. "blog" - ohne Anführungszeichen!).
+
+    Danach laden Sie die Datei auf dem Server mit dem Namen .htaccess hoch.
+    (Beachten Sie das ein Punkt "." vor den Beginn der Dateiname stehen muss)
+	
+	Schauen Sie genau so «Wenn PHP als FastCGI».
+________________________________________________________________________________
+
+4. Setzten Sie die Rechte für den Ordner /application/cache/ auf 777, sowie
+    auf unter Ordner "html" und "rss", die für Cache verwendet werden.
+________________________________________________________________________________
+
+5. Setzten Sie die Rechte für die Datei sitemap.xml auf 666. Die Datei wird
+    bei dem Plugin "XML Sitemap (google-sitemap)" und dient für bessere
+    Indizierung durch Suchmaschinen.
+________________________________________________________________________________
+
+6. Setzten Sie die Rechte für den Ordner /uploads/ auf 777, sowie auf unter Ordner
+   "_mso_float", "_mso_i" и "mini".
+________________________________________________________________________________
+
+7. Starten Sie in einem Browser «http://ihre_webseite/» und folgen Sie den Anweisungen.
+________________________________________________________________________________
+
+8. Nach der Installation, Öffnen Sie die Datei «application/maxsite/mso_config.php»
+	und ändern Sie den Wert auf
+	
+		$mso_install = true; 
+
+    Dies teilt das System mit, das eine Installation erfolgreich durchgeführt wurde,
+    und das eine auf eine weitere Überprüfung verzichtet wird.
+________________________________________________________________________________
+
+9. In der Datei «robots.txt-distr» bei dem Parameter Host geben Sie die Url der Haupt Domain an:
+	
+		Host: site.com 
+
+    Speichern Sie die Datei als "robots.txt" ab. Diese Datei wird verwendet
+    bei der Indexierung Ihrer Website durch die Suchmaschinen. Beachten Sie,
+    dass eine URL mit www und ohne www für die Suchmaschine zwei verschiedene
+    Seiten sind. Ich empfehle des weiteren in der Datei .htaccess, einen
+    automatischen redirect aktivieren (mehr dazu siehe unten).
+________________________________________________________________________________
+
+
+=============
+BEGINN
+=============
+
+1. Nach dem Einloggen in das Admin-Panel, gehen Sie auf Optionen, damit die gespeichert werden.
+2. Die Template besteht auf Widgets, deswegen empfehle ich die benötigte Plugins zu aktivieren.
+3. Danach soll man die Sidebar und Widgets Einstellen.
+usw.
+
+
+==============================
+Upgrades von früheren Versionen
+==============================
+
+In der Regel, muss man den neue Zip-Arhiv mit dem Aktuellen MaxSite CMS herunterladen,
+auf dem Server/Hosting hoch-laden und entpacken, alle bestehende Dateien muss man überschreiben.
+Danach muss man in Admin-Panel reingehen und den Cache der System zurücksetzen.
+Wenn keine besondere Updates sind, dann Funktioniert es immer.
+
+Wenn Ihre Version älter ist als 0.5, dann machen Sie so:
+
+    - Logen Sie sich auf dem FTP-Server an.
+    - Ändern Sie den Name des Ordners "system" in "system-old" um.
+    - Laden Sie alle Datein der MaxSite CMS auf dem Server hoch.
+    - Setzten die Rechte 777 auf "application/cache", sowie alle unter Ordner.
+    - In der Admin-Panel müssen den System Cache zurücksetzten.
+    - Wenn Sie alles Überprüft haben, und die Seite Funktioniert perfekt,
+    dann können Sie den Ordner "system-old" entfernen.
+
+
+	
+Wenn Sie MaxSite CMS automatisch aktualisieren möchten, dann lesen Sie diese
+Anleitung durch (nur auf Russisch): http://max-3000.com/page/update-maxsite-cms
+
+
+==========
+ERGÄNZUNG
+==========
+
+Automatische Weiterleitung von www.site.com zu site.com
+--------------------------------------------------
+
+Fügen Sie in .htaccess nach «RewriteEngine on»:
+
+RewriteCond %{HTTP_HOST} ^www.site.com
+RewriteRule ^(.*)$ http://site.com/$1 [R=permanent,L]
+
+ein.
+
+Wenn PHP als FastCGI
+--------------------
+In diesem Fall müssen Sie die passende Konfiguration Einstellungen für .htaccess
+ finden
+In meinen Bsp. hat es mit folgenden Einstellungen Funktioniert, 
+die ich in .htaccess-fastcgi eingefügt habe.
+
+Bei manche Server statt der Zeile:
+
+	RewriteRule . /index.php [L]
+
+kann man versuchen:
+
+	RewriteRule ^(.*)$ /index.php?/$1 [L,QSA]
+
+Des weiteren muss man in config.php den richtigen Wert für "uri_protocol" eintragen.
+Bei mir hat es so Funktioniert:
+
+	$config['uri_protocol']	= "REQUEST_URI";
+
+Bei Bsp. mit Nginx mit Apache hat es so Funktioniert:
+-----------------------------------------------
+RewriteRule ^(.*)$ /index.php?$1 [L,QSA]
+
+
+================
+MÖGLICHE FEHLER
+================
+
+    * In Browser kommt die Fehler "Cannot modify header information - headers..."
+
+      Kann man sagen, das die Umwandlung in UTF-8 nicht richig Funktioniert.
+      Antwort gibt es hier (nur Russisch): http://forum.maxsite.org/viewtopic.php?id=1075
+
+
+    * Bei der Installation, wenn man auf den zweiten Schritt kommt, wird wieder der
+      erste Schritt angezeigt.
+
+      Das heißt, das der "CPU" nicht richtig Funktioniert. Prüfen Sie die Einstellungen
+      bei der Datei .htaccess.
+
+
+    * Bei der Installation, wenn bei auf den Zweiten Schritt kommt, wird ein Fehler angezeigt
+      das der Ordner nicht existiert.
+
+      Das heißt, das der "CPU" nicht richtig Funktioniert. Prüfen Sie die Einstellungen
+      bei der Datei .htaccess.
+	
+	* Auf der Seite «wird die Ganze Formatierung zerschossen» und in Title steht dann <?= . 
+
+      Das heißt, das auf Ihren Server die kurz PHP Tags (short open tag) nicht erlaubt sind.
+      Geben Sie in php.ini:
+			
+			short_open_tag = On
+
+      oder Sprechen Sie das Support Team ihrer Hosters an.
+	
+	* Wenn das Fehler Call-time pass-by-reference has been deprecated kommt, 
+	  siehe .htaccess weiter unten.
+	  
+===================
+Richtlinien für .htaccess
+===================
+Wenn der Server eine 500-Fehlermeldung ausgibt, bedeutet es dass Sie keine
+Richtlinien ausführen können .htaccess.
+
+# 
+Options +FollowSymLinks
+
+# verbietet die Anzeige der Liste der Dateien in einem Verzeichnis
+Options -Indexes
+
+# schaltet die register globals aus - SIE MÜSSEN IMMER AUS SEIN register globals
+# Wenn die Richtlinie aus ist, überprüfen Sie durch phpinfo() ihren Wert.
+# Wenn register_globals on steht, dann Sprechen Sie ihren Hoster an.
+php_flag register_globals off
+
+# Anzeige der index Files
+DirectoryIndex index.php index.html
+
+# Größe des Speichers für php-Skripte
+php_value memory_limit 16M
+
+# Wenn die Fehler Call-time pass-by-reference has been deprecated kommt
+php_flag allow_call_time_pass_reference on
+
+# UTF-8 wird als Standart verwendet.
+AddDefaultCharset UTF-8
+
+# Weitere Richtlinien...
+CharsetDisable On
+CharsetDefault UTF-8
+CharsetSourceEnc UTF-8
+CharsetRecodeMultipartForms off

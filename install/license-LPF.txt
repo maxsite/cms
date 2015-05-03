@@ -1,0 +1,11 @@
+Landing Page Framework (LPF)
+(c) MAX — http://lpf.maxsite.com.ua/
+Made in Ukraine
+
+License:  Putin huilo! | Путин хуйло!
+          Crimea this Ukraine! | Крым — это Украина!
+
+Требования по использованию LPF
+
+1. Запрещается удалять этот файл лицензии.
+2. Запрещается менять файл engine/engine.php.

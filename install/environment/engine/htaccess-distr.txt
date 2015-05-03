@@ -1,0 +1,31 @@
+Options +FollowSymLinks
+Options -Indexes
+DirectoryIndex index.php
+AddDefaultCharset UTF-8
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteBase /
+RewriteCond $1 !^(index\.php|robots\.txt|favicon\.ico)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.php?page=$1 [QSA] 
+</IfModule>
+
+<IfModule deflate_module>
+AddOutputFilterByType \
+DEFLATE \
+application/javascript \
+text/css \
+text/html \
+text/javascript \
+text/plain \
+text/xml
+</IfModule>
+
+<ifmodule mod_expires.c>
+<filesmatch ".(jpg|jpeg|gif|png|svg|ico|css|js|woff)$">
+ExpiresActive on
+ExpiresDefault "access plus 1 month"
+</filesmatch>
+</ifmodule>

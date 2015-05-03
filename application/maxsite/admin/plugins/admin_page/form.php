@@ -132,7 +132,7 @@
 
 	$(function(){
 		function select_page_type() {
-			var page_type_id = +$(".tabs-box.other input:radio:checked").val(),
+			var page_type_id = +$(".mso-tabs-box.other input:radio:checked").val(),
 				page_type_obj = ' . $page_type_js_obj . ',
 				page_meta_block = $(".page_meta_block"),
 				checked_type;
@@ -160,7 +160,7 @@
 
 		select_page_type();
 
-		$(".tabs-box.other input:radio").click(function() {
+		$(".mso-tabs-box.other input:radio").click(function() {
 			select_page_type();
 		});
 	});
@@ -195,17 +195,17 @@
 
 				. mso_hook('admin_page_form_pre_all_meta')
 				
-				. '<div class="tabs_widget tabs_widget_000">
+				. '<div class="mso-tabs_widget mso-tabs_widget_000">
 				
-						<div class="tabs">
-							<ul class="tabs-nav">
-								<li class="elem tabs-current i i-cat"><span>' . t('Рубрики и метки') . '</span></li>
-								<li class="elem i i-meta"><span>' . t('Дополнительные поля') . '</span></li>
-								<li class="elem i i-other"><span>' . t('Прочее') . '</span></li>
-								<li class="elem i i-files"><span>' . t('Файлы') . '</span></li>
+						<div class="mso-tabs">
+							<ul class="mso-tabs-nav">
+								<li class="mso-tabs-elem mso-tabs-current i i-cat"><span>' . t('Рубрики и метки') . '</span></li>
+								<li class="mso-tabs-elem i i-meta"><span>' . t('Дополнительные поля') . '</span></li>
+								<li class="mso-tabs-elem i i-other"><span>' . t('Прочее') . '</span></li>
+								<li class="mso-tabs-elem i i-files"><span>' . t('Файлы') . '</span></li>
 							</ul>
 							<div class="clearfix"></div>
-							<div class="tabs-box tabs-visible all-cat">' 
+							<div class="mso-tabs-box mso-tabs-visible all-cat">' 
 								. '<div class="page_cat">'
 									. $all_cat 
 								. '</div>'
@@ -219,9 +219,9 @@
 							. '</div>
 							
 							
-							<div class="tabs-box all-meta">' . $all_meta . mso_hook('admin_page_form_add_all_meta') . '</div>
+							<div class="mso-tabs-box all-meta">' . $all_meta . mso_hook('admin_page_form_add_all_meta') . '</div>
 							
-							<div class="tabs-box other fform">
+							<div class="mso-tabs-box other fform">
 								' . mso_hook('admin_page_form_add_block_1') . '
 								
 								<p><label class="fwrap"><span class="ffirst ftitle">Короткая ссылка:</span><span><input type="text" value="' . $f_slug . '" name="f_slug" class="f_slug" title="' . t('Короткая ссылка') . '"></span></label></p>
@@ -258,9 +258,9 @@
 								
 								' . mso_hook('admin_page_form_add_block_2') . '
 							
-							</div><!-- /div.tabs-box.tabs-other -->
+							</div><!-- /div.mso-tabs-box.tabs-other -->
 							
-							<div class="tabs-box all-files">' . $all_files . '</div>
+							<div class="mso-tabs-box all-files">' . $all_files . '</div>
 							
 						</div>
 					

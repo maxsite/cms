@@ -137,7 +137,7 @@
 				'sort' => isset($editor_options['tags_sort']) ? $editor_options['tags_sort'] : 0, 
 				'block_start' => '<p id="f_all_tags_max_num">',
 				'block_end' => ' <a title="' . t('Показать все метки') . '" href="#" onClick="shtags(1); return false;">&gt;&gt;&gt;</a></p>',
-				'format' => '<span style="font-size: %SIZE%%"><a href="#" onClick="addTag(\'%TAG%\'); return false;">%TAG%</a><sub style="font-size: 7pt;">%COUNT%</sub></span>'
+				'format' => '<span style="font-size: [SIZE]%"><a href="#" onClick="addTag(\'[TAG]\'); return false;">[TAG]</a><sub style="font-size: 7pt;">[COUNT]</sub></span>'
 			));
 			
 			// все метки

@@ -674,7 +674,7 @@ div.admin-h-menu {
 
 // табы
 
-div.tabs {
+div.mso-tabs {
 	margin: 20px 0;
 	
 	// какая-то хрень с clearfix в табах — отключаем
@@ -684,13 +684,13 @@ div.tabs {
 	}
 }
 
-ul.tabs-nav {
+ul.mso-tabs-nav {
 	margin: 0; 
 	padding: 0; 
 	width: 100%;
 	list-style: none;
 
-	li.elem {
+	li.mso-tabs-elem {
 		display: inline-block;
 		line-height: 1em;
 		padding: 7px 15px;
@@ -706,14 +706,14 @@ ul.tabs-nav {
 		}
 	}
 
-	li.tabs-current
+	li.mso-tabs-current
 	{
 		color: #fff;
 		cursor: default;
 	}
 	
 	
-	li.tabs-current.i-cat {
+	li.mso-tabs-current.i-cat {
 		.bg(#35AA47);
 		
 		&:hover {
@@ -721,7 +721,7 @@ ul.tabs-nav {
 		}
 	}
 	
-	li.tabs-current.i-meta {
+	li.mso-tabs-current.i-meta {
 		.bg(#2382B4);
 		
 		&:hover {
@@ -729,7 +729,7 @@ ul.tabs-nav {
 		}
 	}
 	
-	li.tabs-current.i-other {
+	li.mso-tabs-current.i-other {
 		.bg(#D8AE1C);
 		
 		&:hover {
@@ -737,7 +737,7 @@ ul.tabs-nav {
 		}
 	}
 	
-	li.tabs-current.i-files {
+	li.mso-tabs-current.i-files {
 		.bg(#B148CF);
 		
 		&:hover {
@@ -746,7 +746,7 @@ ul.tabs-nav {
 	}
 }
 
-div.tabs-box {
+div.mso-tabs-box {
 	display: none; 
 	margin-top: -1px;
 	.bg(#eee); 
@@ -754,7 +754,7 @@ div.tabs-box {
 	.border(#e0e0e0);
 }
 
-div.tabs-box.tabs-visible {
+div.mso-tabs-box.mso-tabs-visible {
 	display: block;
 }
 
@@ -770,7 +770,7 @@ div.page-header {
 
 
 // поля формы в табах
-div.tabs-box.fform {
+div.mso-tabs-box.fform {
 	p span.ffirst {
 		width: 200px;
 	}
@@ -815,7 +815,7 @@ p.page_status {
 }
 
 // блок таба с метаполями
-div.tabs-box.all-meta {
+div.mso-tabs-box.all-meta {
 	
 	h3 {
 		.bold;
@@ -846,7 +846,7 @@ div.tabs-box.all-meta {
 }
 
 // блок таба с рубриками и метками
-div.tabs-box.all-cat {
+div.mso-tabs-box.all-cat {
 	
 	div.page_cat {
 		width: 30%;
@@ -880,7 +880,7 @@ div.tabs-box.all-cat {
 }
 
 // таб файлы записи
-div.tabs-box.all-files {
+div.mso-tabs-box.all-files {
 	min-height: 300px; // чтобы высота не прыгала
 	
 	div.all-files-nav {

@@ -1,6 +1,8 @@
 .htaccess
 sitemap.xml
 robots.txt
+!/install/distr/sitemap.xml
+!/install/distr/robots.txt
 
 application/maxsite/mso_config.php
 application/config/database.php

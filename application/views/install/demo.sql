@@ -43,5 +43,5 @@ INSERT INTO _PREFIX_page (page_id_autor, page_title, page_content, page_slug, pa
 
 ###
 
-INSERT INTO mso_cat2obj (page_id, category_id) VALUES (3, 3), (4, 4), (5, 5), (6, 1);
+INSERT INTO _PREFIX_cat2obj (page_id, category_id) VALUES (3, 3), (4, 4), (5, 5), (6, 1);
 

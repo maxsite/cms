@@ -2,7 +2,7 @@
 /*
 	Landing Page Framework (LPF)
 	(c) MAX — http://lpf.maxsite.com.ua/
-	ver. 26.1 21/04/2015
+	ver. 26.2 3/05/2015
 	
 	Made in Ukraine | Зроблено в Україні
 	
@@ -56,6 +56,7 @@ $VAR['end_file_text'] = false;
 $VAR['before_file'] = false;
 $VAR['after_file'] = false;
 $VAR['event'] = false;
+$VAR['tmpl'] = false;
 
 $VAR['nd_css'] = 'css'; // каталог css
 $VAR['nd_images'] = 'images'; // каталог images
@@ -618,7 +619,17 @@ function mso_output_text()
 		if ($VAR['start_file_text'] and $fd = mso_fe($VAR['start_file_text'])) require($fd);
 		
 		// файл page.php
-		require($fn);
+		if ($VAR['tmpl']) 
+		{
+			// используется шаблонизатор
+			$templ = mso_tmpl_prepare(file_get_contents($fn));
+			eval($templ);
+		}
+		else
+		{
+			// простое подключение
+			require($fn);
+		}
 		
 		// файл после page.php
 		if ($VAR['end_file_text'] and $fd = mso_fe($VAR['end_file_text'])) require($fd);
@@ -1893,5 +1904,18 @@ function mso_create_htaccess()
 	file_put_contents(BASEPATH . '.htaccess', $htaccess);
 }
 
+# HTML-шаблонизатор
+# вход - текст : выполняет замены, отдает php-код
+# если $replace = true то в коде удаляются табуляторы и двойные \n
+# полученный код выполнять через eval();
+function mso_tmpl_prepare($template, $replace = false)
+{
+	$template = '?>' . str_replace(array('{{', '}}', '{%', '%}'), array('<?=', '?>', '<?php', '?>'), $template);
+		
+	if ($replace)
+		$template = str_replace(array("\t", "\r", "\n\n"), array("", "", "\n"), $template);
+	
+	return $template;
+}
 
 #end of file

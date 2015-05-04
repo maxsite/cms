@@ -14,4 +14,6 @@ $VAR['nd_css'] = 'environment/css';
 $VAR['nd_js'] = 'environment/js';
 $VAR['nd_images'] = 'environment/images';
 
+$VAR['tmpl'] = true;
+
 # end of file

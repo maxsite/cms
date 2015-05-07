@@ -47,14 +47,7 @@ if (!class_exists('Maxsite'))
 			if ( isset($this->data_def['uri_segment'][1]) ) $method = $this->data_def['uri_segment'][1];
 			else
 			{
-				global $mso_install;
-			
-				if ($mso_install == false)
-				{
-					$CI = & get_instance();	
-					if ( !$CI->db->table_exists('options')) return $this->install();
-				}
-				else $method = 'home'; // нет сегмента, значит это главная
+				$method = 'home'; // нет сегмента, значит это главная
 			}
 			### 
 			
@@ -76,7 +69,6 @@ if (!class_exists('Maxsite'))
 			}
 			elseif ($method == 'index') $this->index();
 			elseif ($method == 'feed') $this->index('home');
-			elseif ($method == 'install') $this->install();
 			elseif ($method == 'remote') $this->_view_i('remote', 'remote');
 			elseif ($method == 'ajax') $this->_view_i('ajax', 'ajax');
 			elseif ($method == 'require-maxsite') $this->_view_i('require-maxsite', 'require-maxsite');
@@ -133,8 +125,6 @@ if (!class_exists('Maxsite'))
 					
 				exit;
 			}
-			
-			
 			
 			if (function_exists('mso_autoload_plugins')) mso_autoload_plugins();
 			
@@ -221,53 +211,8 @@ if (!class_exists('Maxsite'))
 		
 		function index()
 		{
-			global $mso_install;
-			
-			if ($mso_install == false)
-			{
-				$CI = & get_instance();	
-				if ( !$CI->db->table_exists('options')) return $this->install();
-			}
-			
 			$this->_view_i('home');
 		}
-		
-
-		function install()
-		{
-			global $MSO, $mso_install;
-			
-			
-			if ($mso_install == true) 
-			{
-				$this->_view_i('home');
-				return;
-			}
-			
-			$CI = & get_instance();
-			if ($CI->db->table_exists('options')) // echo 'уже есть';
-			{
-				$this->_view_i('home');
-				return;
-			}
-			
-			$css = $CI->config->config['base_url'] . APPPATH . 'views/install/install.css';
-			
-			if ( ( count($this->data_def['uri_segment']) > 0 ) and 
-				 ( $this->data_def['uri_segment'][count($this->data_def['uri_segment'])] == '2' )
-				)
-				$step = 2;
-			elseif ( ( count($this->data_def['uri_segment']) > 0 ) and 
-				 ( $this->data_def['uri_segment'][count($this->data_def['uri_segment'])] == '3' )
-				)
-				$step = 3;
-			else $step = 1;
-
-			$data = array('type'=>'install', 'url_css'=>$css, 'step'=>$step);
-			$MSO->data = array_merge($this->data_def, $data);
-			$this->load->view('install/install', $MSO->data);
-		}
-		
 	}
 
 } // if (!class_exists('Maxsite'))

@@ -9,8 +9,7 @@
 # подключаем библиотеку mbstring
 # какие функции отсутствуют определяется в этом файле
 
-global $mso_install;
-if ($mso_install and !function_exists('mb_strlen') ) require('mbstring.php');
+if (!function_exists('mb_strlen') ) require('mbstring.php');
 
 
 define("NR", "\n"); // перенос строки
@@ -373,7 +372,7 @@ function mso_strip($s = '', $logical = false, $arr_strip = array('\\', '|', '/',
 # функция инициализации
 function mso_initalizing()
 {
-	global $MSO, $mso_install;
+	global $MSO;
 	$CI = & get_instance();
 	
 	
@@ -400,13 +399,6 @@ function mso_initalizing()
 	else // файла нет > _mso_cache_last.txt < создадим - наверное совсем старый кэш
 	{
 		mso_flush_cache();
-	}
-
-	# стоит ли флаг, что уже произведена инсталяция?
-
-	if (!isset($mso_install) or $mso_install == false)
-	{
-		if ( !$CI->db->table_exists('options')) return false; # еще не установлен сайт
 	}
 
 	# подключаем опции - они могут быть в кэше

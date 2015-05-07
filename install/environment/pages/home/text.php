@@ -188,11 +188,10 @@ if ($_POST)
 			}
 			else
 			{
-				
 				v_new_database($PV);
 				
 				// таблиц нет, можно создавать
-				$sqls = v_load_sql('application/views/install/model.sql');
+				$sqls = v_load_sql('install/distr/sql/model.sql');
 				$sqls = explode('###', $sqls);
 				
 				$charset_collate = ' DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci';
@@ -243,7 +242,7 @@ if ($_POST)
 				// демо-данные
 				if ($PV['demo'])
 				{
-					$sqls = v_load_sql('application/views/install/demo.sql');
+					$sqls = v_load_sql('install/distr/sql/demo.sql');
 					$sqls = explode('###', $sqls);
 					
 					foreach($sqls as $sql)

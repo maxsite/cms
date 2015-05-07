@@ -55,7 +55,7 @@ $autoload['packages'] = array();
 // проверка на наличие файла конфигурации базы
 if (!file_exists(FCPATH . APPPATH . 'config/database.php')) 
 {
-	die('File not found: <b>application/config/database.php</b>');
+	die('File not found: <b>application/config/database.php</b>. Please run <a href="install">install MaxSite CMS</a>.');
 }
 
 $autoload['libraries'] = array('database', 'session');

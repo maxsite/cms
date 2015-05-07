@@ -1,9 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-global $mso_install;
-
-$mso_install = false; # после инсталяции блога можно установить true
-
 # секретная фраза - она будет использоваться при генерации ключей
 $MSO->config['secret_key'] = '';
 

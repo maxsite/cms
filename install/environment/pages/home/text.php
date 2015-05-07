@@ -228,16 +228,13 @@ if ($_POST)
 				$value = $mysqli->real_escape_string($PV['site_name']);
 				$sql = "INSERT INTO {$table} (options_key, options_type, options_value) VALUES ('name_site', 'general', '{$value}')";
 				
-				
 				$mysqli->query($sql);
 				
-			
-				/*
-					эти опции нужны???
-					mso_add_option('template', 'default', 'general');
-					mso_add_option('description', t('Очередной сайт на Maxsite CMS', 'install'), 'general');
-					mso_add_option('keywords', '', 'general');
-				*/
+				
+				$value = $mysqli->real_escape_string($PV['site_name']);
+				$sql = "INSERT INTO {$table} (options_key, options_type, options_value) VALUES ('title', 'general', '{$value}')";
+				
+				$mysqli->query($sql);
 				
 				// демо-данные
 				if ($PV['demo'])

@@ -106,7 +106,7 @@ function favorites_widget_custom($options = array(), $num = 1)
 				{
 					$title = trim($ar[1]); // название
 					
-					if ($href == $current_url) $class = ' class="current-page" '; // мы на этой странице
+					if ($href == $current_url) $class = ' class="mso-current-page" '; // мы на этой странице
 							else $class = '';
 					
 					$out .= NR . '<li' . $class . '><a href="' . $siteurl . $href . '" title="' . $title . '">' 
@@ -116,7 +116,7 @@ function favorites_widget_custom($options = array(), $num = 1)
 		}
 	}
 	
-	if ($out) $out = $options['header'] . NR . '<ul class="is_link favorites">' . $out . NR . '</ul>' .NR ;
+	if ($out) $out = $options['header'] . NR . '<ul class="mso-widget-list">' . $out . NR . '</ul>' .NR ;
 	
 	return $out;
 }

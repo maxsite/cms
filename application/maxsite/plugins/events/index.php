@@ -150,7 +150,7 @@ function events_widget_custom($options = array(), $num = 1)
 		}
 	}
 	
-	if ($out) $out = $options['header'] . '<ul class="is_link events">' . NR . $out . '</ul>' . NR;
+	if ($out) $out = $options['header'] . '<ul class="mso-widget-list">' . NR . $out . '</ul>' . NR;
 	
 	mso_add_cache($cache_key, $out); // сразу в кэш добавим
 	

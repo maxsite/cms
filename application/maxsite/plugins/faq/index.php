@@ -20,8 +20,8 @@ function faq_custom_headers_callback($matches)
 # callback-функция вычленения текстов
 function faq_custom_text_callback($matches)
 {
-	return '<a id="' . mso_slug($matches[1]) . '"></a><h3>' . trim($matches[1]) . '</h3>'
-			. '<div class="faq-text">' . trim($matches[2]) . '<a href="#faq-top" class="to-faq-top">' . t('К списку') . '</a></div>';
+	return '<a id="' . mso_slug($matches[1]) . '"></a><h3 class="mso-faq">' . trim($matches[1]) . '</h3>'
+			. '<div class="mso-faq-text">' . trim($matches[2]) . '<a href="#faq-top" class="mso-to-faq-top">' . t('К списку') . '</a></div>';
 }
 
 function faq_custom_faqs_callback($matches)
@@ -33,9 +33,9 @@ function faq_custom_faqs_callback($matches)
 	
 	$text2 = preg_replace_callback($pattern, 'faq_custom_text_callback', $text);
 	
-	$text = '<div class="faq-list">' . $text1 . '</div><div class="faq-out">' . $text2 . '</div>';
+	$text = '<div class="mso-faq-list">' . $text1 . '</div><div class="mso-faq-out">' . $text2 . '</div>';
 	
-	return '<div class="faq"><a id="faq-top"></a>' . $text . '</div><!--div class="faq"-->';
+	return '<div class="mso-faq"><a id="faq-top"></a>' . $text . '</div><!--div class="mso-faq"-->';
 }
 
 # функции плагина

@@ -22,12 +22,10 @@ if ( !isset($options['email']) ) $options['email'] = false; // отправка 
 if ( !isset($options['moderation']) ) $options['moderation'] = 1; // модерация
 
 // формат вывода
-if ( !isset($options['format']) or !$options['format']) $options['format'] = '<div class="fform guestbook">
-<p class="head"><span class="fheader">[name] | [date]</span></p>
-<div class="margin10">
-<p><span>[text]</span></p>
-</div>
-<p class="hr"></p>
+if ( !isset($options['format']) or !$options['format']) $options['format'] = '<div class="mso-guestbook">
+<h5><b>[name]</b> - [date]</h5>
+<p>[text]</p>
+<hr>
 </div>';
 
 // текст до цикла
@@ -52,7 +50,7 @@ if ( $post = mso_check_post(array('f_session_id', 'f_submit_guestbook', 'f_field
 	
 	if ($captcha != $char) // не равны
 	{ 
-		echo '<div class="error">' . t('Неверно введены нижние символы!') . '</div>';
+		echo '<div class="mso-message-error">' . t('Неверно введены нижние символы! Вернитесь назад и повторите попытку.') . '</div>';
 		mso_flush_cache();
 	}
 	else
@@ -90,7 +88,7 @@ if ( $post = mso_check_post(array('f_session_id', 'f_submit_guestbook', 'f_field
 		
 		if ($res)
 		{
-			echo '<div class="update">' . t('Ваш отзыв добавлен!');
+			echo '<div class="mso-message-ok">' . t('Ваш отзыв добавлен!');
 			if ( $options['moderation'] ) echo ' ' . t('Он будет опубликован после одобрения модератором.');
 			echo '</div>';
 			
@@ -104,7 +102,7 @@ if ( $post = mso_check_post(array('f_session_id', 'f_submit_guestbook', 'f_field
 			}
 			
 		}
-		else echo '<div class="error">' . t('Ошибка добавления в базу данных...') . '</div>';
+		else echo '<div class="mso-message-error">' . t('Ошибка добавления в базу данных...') . '</div>';
 		
 		mso_flush_cache();
 		
@@ -115,19 +113,19 @@ if ( $post = mso_check_post(array('f_session_id', 'f_submit_guestbook', 'f_field
 else
 {
 	// тут форма, если не было post
-	echo '<form method="post" class="fform guestbook">' . mso_form_session('f_session_id');
+	echo '<div class="mso-guestbook"><form method="post">' . mso_form_session('f_session_id');
 	
 	foreach( $options['fields_arr'] as $key => $val )
 	{
-		echo '<p><span class="fheader ffirst1 ftitle ftop">' . t($val) . '</span>';
+		echo '<p><label><span>' . t($val) . '</span>';
 		
 		if ($key != 'text')
 		{
-			echo '<span><input name="f_fields_guestbook[' . $key . ']" type="text"></span></p>';
+			echo '<input name="f_fields_guestbook[' . $key . ']" type="text"></label></p>';
 		}
 		else
 		{ 
-			echo '<span><textarea name="f_fields_guestbook[' . $key . ']" rows="10"></textarea></span></p>';
+			echo '<textarea name="f_fields_guestbook[' . $key . ']" rows="10"></textarea></label></p>';
 		}
 	}
 
@@ -135,19 +133,16 @@ else
 	
 	if (!function_exists('create_captha_img')) require_once(getinfo('plugins_dir') . 'captcha/index.php');
 	
-	
-	
-	echo '<p><span class="fheader ffirst1 ftitle">' . t('Нижние символы:') . '</span>
-			<span style="width: 100px"><input type="text" name="f_guestbook_captha" value="" maxlength="4"></span>
-			<span class="fempty"></span>
-			<span><img src="' 
+	$captcha = '<img src="' 
 			. create_captha_img(mso_md5($MSO->data['session']['session_id'] . mso_current_url()))
-			. '" title="' . t('Защита от спама: введите только нижние символы') . '" align="absmiddle"></span>
-			</p>';
+			. '" title="' . t('Защита от спама: введите только нижние символы') . '">';
+			
+	echo '<p><label><span>' . t('Нижние символы:') . $captcha . '</span>
+		<input type="text" name="f_guestbook_captha" value="" maxlength="4" required></label></p>';
 	
-	echo '<p><span class="fsubmit"><button type="submit" class="i submit" name="f_submit_guestbook">' . t('Отправить') . '</button></span></p>';
+	echo '<p><button type="submit" class="i submit" name="f_submit_guestbook">' . t('Отправить') . '</button></p>';
 	
-	echo '</form>';
+	echo '</form></div>';
 }
 
 
@@ -195,12 +190,20 @@ if ($query->num_rows() > 0)
 	foreach ($books as $book) 
 	{
 		if (is_login()) 
-			$tl = '<br><a href="' . getinfo('siteurl') . 'admin/guestbook/editone/' . $book['guestbook_id'] . '">'
-				. t('Редактировать') . '</a>';
+			$tl = '<p><a href="' . getinfo('siteurl') . 'admin/guestbook/editone/' . $book['guestbook_id'] . '">'
+				. t('Редактировать') . '</a></p>';
 		else $tl = '';
 
 		// pr($book);
 		$out .= '<a id="guestbook-' . $book['guestbook_id'] . '"></a>';
+		
+		$guestbook_text = htmlspecialchars($book['guestbook_text']) . "\n";
+		$guestbook_text = str_replace(array("\r\n", "\r"), "\n", $guestbook_text);
+		$guestbook_text = preg_replace('!(.*)\n!', "<p>$1</p>", $guestbook_text);
+		$guestbook_text = str_replace('<p></p>', "", $guestbook_text);
+		
+		// pr($guestbook_text, 1);
+		
 		$out .= str_replace( 
 			array(
 				'[id]', 
@@ -227,7 +230,7 @@ if ($query->num_rows() > 0)
 				$book['guestbook_browser'],
 				mso_date_convert('Y-m-d H:i:s', $book['guestbook_date']),
 				htmlspecialchars($book['guestbook_name']),
-				str_replace("\n", "<br>", htmlspecialchars($book['guestbook_text']) . $tl),
+				$guestbook_text,
 				htmlspecialchars($book['guestbook_title']) . '&nbsp;',
 				htmlspecialchars($book['guestbook_email']) . '&nbsp;',
 				htmlspecialchars($book['guestbook_icq']) . '&nbsp;',

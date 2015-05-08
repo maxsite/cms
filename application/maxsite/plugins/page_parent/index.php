@@ -89,8 +89,8 @@ function page_parent_widget_custom($options = array(), $num = 1)
 	
 	// создание ul-списка со своими опциями
 	$out = mso_create_list($r, array('format_current'=>'[LINK][TITLE][/LINK]',
-									'class_ul'=>'is_link page_parent', 
-									'class_child'=>'is_link page_parent_child', 'current_id'=>false ) ); 
+									'class_ul'=>'mso-widget-list mso-page-parent', 
+									'class_child'=>'mso-widget-list mso-page-parent-child', 'current_id'=>false ) ); 
 	
 	if ($out and $options['header']) $out = $options['header'] . $out;
 	

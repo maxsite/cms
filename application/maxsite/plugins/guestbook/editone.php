@@ -195,8 +195,8 @@ if ($query->num_rows() > 0)
 
 	echo '<form action="" method="post">' . mso_form_session('f_session_id');
 	echo $CI->table->generate(); // вывод подготовленной таблицы
-	echo ' <button type="submit" name="f_submit_guestbook_delete" class="i delete" onClick="if(confirm(\'' . t('Удалить отзыв?') . '\')) {return true;} else {return false;}">' . t('Удалить отзыв') . '</button>';
 	echo '<button type="submit" name="f_submit_guestbook" class="i save" style="margin: 10px 0;">' . t('Сохранить') . '</button>';
+	echo ' <button type="submit" name="f_submit_guestbook_delete" class="i delete" onClick="if(confirm(\'' . t('Удалить отзыв?') . '\')) {return true;} else {return false;}">' . t('Удалить отзыв') . '</button>';
 	echo '</form>';
 
 }

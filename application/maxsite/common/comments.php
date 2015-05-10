@@ -225,7 +225,7 @@ function mso_email_message_new_comment($id = 0, $data = array(), $page_title = '
 	$data['id'] = $id; // номер комментария
 	$data['comments_content'] =	mso_xss_clean($data['comments_content']);
 	
-	# хук на который можно повестить подписку на новые комментарии
+	# хук на который можно повесить подписку на новые комментарии
 	mso_hook('mso_email_message_new_comment', $data);
 	
 	# рассылаем комментарий всем, кто на него подписан
@@ -237,45 +237,90 @@ function mso_email_message_new_comment($id = 0, $data = array(), $page_title = '
 	switch ($level)
 	{
 		case 6 : $return = true; break;                                    // Ни от кого.
-		case 5 : if ( $data['comments_approved'] ) $return = true; break;  // Требующий модераци
+		case 5 : if ( $data['comments_approved'] ) $return = true; break;  // Требующий модерации
 		case 4 : if ( (array_key_exists('comments_users_id', $data) or array_key_exists('comments_comusers_id', $data)) ) $return = true; break;
 		case 3 : if ( !array_key_exists('comments_comusers_id', $data) ) $return = true; break; // От комментаторов
 		case 2 : if ( array_key_exists('comments_users_id', $data) ) $return = true; break;     // От всех кроме юзеров
 		case 1 : break;                                                                         // От всех
 	}
-
+		
 	if ($return) return false;
-
-
+		
 	$email = mso_get_option('comments_email', 'general', false); // email куда приходят уведомления
 	if (!$email) $email = mso_get_option('admin_email', 'general', false); // если не задан, отдельный email, то берём email администратора.
-
+		
 	if (!$email) return false;
-
+		
 	$CI = & get_instance();
-
-	if ($data['comments_approved'] == 0) // нужно промодерировать
+		
+	if (!$data['comments_approved']) // нужно промодерировать
 		$subject = '[' . getinfo('name_site') . '] ' . '(-) '. tf('Новый комментарий'). ' (' . $id . ') "' . $page_title . '"';
 	else
 		$subject = '[' . getinfo('name_site') . '] ' . tf('Новый комментарий'). ' (' . $id . ') "' . $page_title . '"';
 
-	$text = tf('Новый комментарий на'). ' "' . $page_title . '"'. NR ;
-	$text .= mso_get_permalink_page($data['comments_page_id'])  . '#comment-' . $id . NR . NR;
+	if( !mso_get_option('subscribe_message_my_comment', 'general', true) && isset($data['comments_users_id']) && $data['comments_users_id'] == getingo('users_id') ) return false; // не посылаем уведомление о своём комментарии если нет специальной опции
+	
+	// шаблон уведомления
+$def_option = 'Новый комментарий на "{{ $page_title }}"
+{{ $comment_url }}
 
-	if ($data['comments_approved'] == 0) // нужно промодерировать
+{% if (!$comments_approved) : %}
+
+Комментарий требует модерации: {{ $edit_link }}
+
+{% endif %}
+
+Автор IP: {{ $comment_ip }}
+
+Referer: {{ $comment_referer }}
+
+Дата: {{ $comment_date }}
+
+{% if ($user) : %}
+Пользователь: {{ $user_id }}
+{% endif %}
+{% if ($comuser) : %}
+Комюзер: id={{ $comuser_id }}, ник: {{ $comuser_nik }}, email: {{ $comuser_email }}
+
+Профиль: {{ $comuser_url }}
+{% endif %}
+{% if ($anonim) : %}
+Аноним: {{ $anonim }}
+{% endif %}
+
+
+Текст:
+{{ $comment_content }}
+
+
+Администрировать комментарий вы можете по ссылке:
+{{ $edit_link }}
+';
+	
+	$template = mso_get_option('template_email_message_new_comment', 'general', $def_option);
+		
+	$comment_url = mso_get_permalink_page($data['comments_page_id'])  . '#comment-' . $id;
+		
+	$comments_approved = $data['comments_approved'];
+		
+	$comment_ip = $data['comments_author_ip'];	
+		
+	$comment_referer = $_SERVER['HTTP_REFERER'];
+		
+	$comment_date = $data['comments_date'];
+		
+	$user = $comuser = $anonim = false;
+		
+	if (isset($data['comments_users_id']))
 	{
-		$text .= tf('Комментарий требует модерации'). ': ' . NR
-			. getinfo('site_admin_url') . 'comments/edit/' . $id . NR . NR;
+		$user = true;
+		$user_id = $data['comments_users_id'];
 	}
 
-	$text .= tf('Автор IP: ') . $data['comments_author_ip'] . NR;
-	$text .= tf('Referer: ') . $_SERVER['HTTP_REFERER'] . NR;
-	$text .= tf('Дата: ') . $data['comments_date'] . NR;
-
-	if (isset($data['comments_users_id'])) $text .= tf('Пользователь'). ': ' . $data['comments_users_id'] . NR;
-	elseif (isset($data['comments_comusers_id']))
+	if (isset($data['comments_comusers_id']))
 	{
-		$text .= tf('Комюзер'). ': id=' . $data['comments_comusers_id'];
+		$comuser = true;
+		$comuser_id = $data['comments_comusers_id'];
 		
 		$CI->db->select('comusers_nik, comusers_email');
 		$CI->db->from('comusers');
@@ -286,19 +331,30 @@ function mso_email_message_new_comment($id = 0, $data = array(), $page_title = '
 		if ($query->num_rows() > 0)
 		{
 			$comusers = $query->row();
-			$text .= ', ник: ' . $comusers->comusers_nik . ', email: ' . $comusers->comusers_email . NR;
-			$text .= tf('Профиль: ') . getinfo('siteurl') . 'users/' . $data['comments_comusers_id'] . NR;
+			
+			$comuser_nik = $comusers->comusers_nik;
+			$comuser_email = $comusers->comusers_email;
+			$comuser_url = getinfo('siteurl') . 'users/' . $data['comments_comusers_id'];
 		}
 	}
-	elseif (isset($data['comments_author_name'])) $text .= tf('Аноним'). ': ' . $data['comments_author_name'] . NR;
 
-	$text .= NR . tf('Текст: ') . NR . $data['comments_content'] . NR;
-
-	$text .= NR . tf('Администрировать комментарий вы можете по ссылке'). ': ' . NR
-			. getinfo('site_admin_url') . 'comments/edit/' . $id . NR;
-
-	$data = array_merge($data, array('comment' => true));      //Чтобы плагин smtp_mail точно знал, что ему подсунули коммент, а не вычислял это по subject
-	return mso_mail($email, $subject, $text, $false, $data);   //А зная о комментарии, он сможет сотворить некоторые бонусы.
+	if (isset($data['comments_author_name']))
+	{
+		$anonim = $data['comments_author_name'];
+	}
+		
+	$comment_content = $data['comments_content'];
+		
+	$edit_link = getinfo('site_admin_url') . 'comments/edit/' . $id;
+		
+	$template = mso_tmpl_prepare($template, false);
+		
+	ob_start();
+	eval( $template );
+	$text = ob_get_contents(); ob_end_clean();
+		
+	$data = array_merge($data, array('comment' => true));      // Чтобы плагин smtp_mail точно знал, что ему подсунули коммент, а не вычислял это по subject
+	return mso_mail($email, $subject, $text, $false, $data);   // А зная о комментарии, он сможет сотворить некоторые бонусы.
 }
 
 

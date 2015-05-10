@@ -14,18 +14,28 @@
 # можно использовать в header.php
 function my_default_head_section()
 {
+	global $page;
+	
 	echo 
 '<!DOCTYPE HTML>
-<html' . mso_get_val('head_section_html_add') . '><head>' . mso_hook('head-start') . '
+<html' . mso_get_val('head_section_html_add') . '><head>' . mso_hook('head_start') . '
 <meta charset="UTF-8">
 <title>' . mso_head_meta('title') . '</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="MaxSite CMS">
 <meta name="description" content="' . mso_head_meta('description') . '">
 <meta name="keywords" content="' . mso_head_meta('keywords') . '">
+<meta property="og:title" content="' . mso_head_meta('title') . '">
+<meta property="og:description" content="' . mso_head_meta('description') . '">
+<meta property="og:url" content="' . mso_link_rel('canonical', '', true) . '">
 <link rel="shortcut icon" href="' . getinfo('template_url') . 'assets/images/favicons/' . mso_get_option('default_favicon', 'templates', 'favicon1.png') . '" type="image/x-icon">
 ';
 
+	if (is_type('page') and isset($page['page_meta']['image_for_page'][0]))
+	{
+		echo '<meta property="og:image" content="' . $page['page_meta']['image_for_page'][0] . '">';
+	}
+	
 	if (mso_get_option('default_canonical', 'templates', 0)) echo mso_link_rel('canonical');
 
 	echo mso_rss();
@@ -40,9 +50,9 @@ function my_default_head_section()
 			echo '<link rel="stylesheet" href="' . $fn_css . '">' . NR;
 		}
 	}
-
+	
 	my_out_component_css();
-	mso_hook('head-css');
+	mso_hook('head_css');
 	my_default_out_profiles();
 	
 	// своя версия jQuery, если нужно
@@ -79,7 +89,7 @@ function my_default_head_section()
 	if ($my_style = mso_get_option('my_style', 'templates', '')) 
 		echo NR . '<!-- custom css-my_style -->' . NR . '<style>' . NR . $my_style . '</style>';
 	
-	mso_hook('head-end');
+	mso_hook('head_end');
 
 	if (function_exists('ushka')) echo ushka('google_analytics_top');
 	

@@ -3525,20 +3525,20 @@ function mso_rss()
 		. tf('Все новые записи') . '" href="' 
 		. getinfo('rss_url') . '">' . NR;
 
-	$out .= '	<link rel="alternate" type="application/rss+xml" title="' 
+	$out .= '<link rel="alternate" type="application/rss+xml" title="' 
 		. tf('Все новые комментарии') . '" href="' 
 		. getinfo('rss_comments_url') . '">' . NR;
 
 	if (is_type('page') and mso_segment(2) and (isset($MSO->data['pages_is']) and $MSO->data['pages_is']))
 	{
 		
-		$out .= '	<link rel="alternate" type="application/rss+xml" title="' 
+		$out .= '<link rel="alternate" type="application/rss+xml" title="' 
 				. tf('Комментарии этой записи') . '" href="' 
 				. getinfo('site_url') . mso_segment(1) . '/' . mso_segment(2) . '/feed">' . NR;
 	}
 	elseif (is_type('category') and mso_segment(2) and (isset($MSO->data['pages_is']) and $MSO->data['pages_is']))
 	{
-		$out .= '	<link rel="alternate" type="application/rss+xml" title="' 
+		$out .= '<link rel="alternate" type="application/rss+xml" title="' 
 					. tf('Записи этой рубрики') . '" href="' 
 					. getinfo('site_url') . mso_segment(1) . '/' . mso_segment(2) . '/feed">' . NR;
 	}
@@ -3622,14 +3622,15 @@ function mso_unset_val($key)
 # $rel - тип rel. Если он равен canonical, то формируется канонизация
 # http://www.google.com/support/webmasters/bin/answer.py?answer=139066&hl=ru
 # <link rel="canonical" href="http://www.example.com/page/about">
-function mso_link_rel($rel = 'canonical', $add = '')
+function mso_link_rel($rel = 'canonical', $add = '', $url_only = false)
 {
 	if (!$rel) return; // пустой тип
+	
 	if ($rel == 'canonical')
 	{
 		if ($add)
 		{
-			echo '<link rel="canonical" ' . $add . '>';
+			return '<link rel="canonical" ' . $add . '>';
 		}
 		else
 		{
@@ -3677,17 +3678,19 @@ function mso_link_rel($rel = 'canonical', $add = '')
 			}
 
 			if ($url) 
-			{			
-				echo '<link rel="canonical" href="' . $url . '">' . NR;
+			{	
+				if ($url_only)
+					return $url;
+				else
+					return '<link rel="canonical" href="' . $url . '">';
 			}
 		}
-		
 	}
 	else
 	{
 		if ($add)
 		{
-			echo '<link rel="' . $rel . '" ' . $add . '>';
+			return '<link rel="' . $rel . '" ' . $add . '>';
 		}
 	}
 	

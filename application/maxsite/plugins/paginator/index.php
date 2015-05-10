@@ -3,6 +3,7 @@
 function paginator_autoload($a = array())
 {
 	mso_hook_add('head', 'paginator_head');
+	mso_hook_add('head_css', 'paginator_head_css');
 	mso_hook_add('admin_head', 'paginator_head');
 	mso_hook_add('pagination', 'paginator_go', 10);
 	return $a;
@@ -16,15 +17,19 @@ function paginator_activate($args = array())
 
 function paginator_head() 
 {
+	echo '<script src="' . getinfo('plugins_url').'paginator/paginator.js"></script>' . NR;
+}
+
+function paginator_head_css() 
+{
 	$url = getinfo('plugins_url').'paginator/';
 	
 	$options = mso_get_option('paginator', 'plugins', array() );
 	
 	if ( !isset($options['css']) ) $options['css'] = '1';
 	
-	if ( $options['css'] == '1' ) echo '<link rel="stylesheet" href="'.$url.'paginator.css">'.NR;
-	
-	echo '<script src="' . $url . 'paginator.js"></script>' . NR;
+	if ( $options['css'] == '1' ) 
+		echo '<link rel="stylesheet" href="' . $url . 'paginator.css">' . NR;
 }
 
 function paginator_mso_options()

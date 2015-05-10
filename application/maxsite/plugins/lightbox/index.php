@@ -10,8 +10,9 @@
 function lightbox_autoload($args = array())
 {
 	mso_hook_add( 'head', 'lightbox_head');
+	mso_hook_add( 'head_css', 'lightbox_head_css');
 	mso_hook_add( 'admin_head', 'lightbox_head');
-	mso_hook_add( 'content_out', 'lightbox_content'); # хук на вывод контента после обработки всех тэгов
+	mso_hook_add( 'content', 'lightbox_content'); # хук на вывод контента после обработки всех тэгов
 }
 
 function lightbox_head($args = array()) 
@@ -25,7 +26,6 @@ function lightbox_head($args = array())
 	
 	// http://leandrovieira.com/projects/jquery/lightbox/
 	echo <<<EOF
-
 <script src="{$url}js/jquery.lightbox.js"></script>
 <script>
 $(function(){
@@ -51,10 +51,14 @@ txtOf: '{$t_iz}',
 });
 });
 </script>
-<link rel="stylesheet" href="{$url}css/jquery.lightbox-0.5.css">
-
 EOF;
+}
 
+function lightbox_head_css($args = array()) 
+{
+	echo '<link rel="stylesheet" href="' . getinfo('plugins_url') . 'lightbox/css/jquery.lightbox-0.5.css">';
+	
+	return $args;
 }
 
 function lightbox_content($text = '')

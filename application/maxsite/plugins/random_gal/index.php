@@ -11,6 +11,7 @@ function random_gal_autoload($args = array())
 	mso_register_widget('random_gal_widget', t('Галерея')); # регистрируем виджет
 	mso_hook_add('custom_page_404', 'random_gal_custom_page_404'); # хук для подключения к шаблону
 	mso_hook_add('head', 'random_gal_head');
+	mso_hook_add('head_css', 'random_gal_head_css');
 }
 
 # функция выполняется при деинсталяции плагина
@@ -182,7 +183,12 @@ function random_gal_cmp_datefile_desc($a, $b)
 function random_gal_head($args = array())
 {
 	echo mso_load_jquery('jquery.nivo.slider.js', getinfo('plugins_url') . 'random_gal/');
-	
+		
+	return $args;
+}
+
+function random_gal_head_css($args = array())
+{
 	echo mso_load_style(getinfo('plugins_url') . 'random_gal/random_gal.css');
 		
 	return $args;

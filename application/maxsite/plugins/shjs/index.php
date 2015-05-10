@@ -10,6 +10,7 @@
 function shjs_autoload()
 {
 	mso_hook_add( 'head', 'shjs_head');
+	mso_hook_add( 'head_css', 'shjs_head_css');
 	$options = mso_get_option('plugin_shjs', 'plugins', array());
 	if (isset($options['default_lang']) and $options['default_lang']) mso_hook_add('content', 'shjs_content');
 }
@@ -116,18 +117,24 @@ function shjs_mso_options()
 # подключение плагина в head
 function shjs_head($arg = array())
 {
-	$options = mso_get_option('plugin_shjs', 'plugins', array());
-	if (!isset($options['css']) or !$options['css']) $options['css'] = 'sh_maxsite'; 
-
-	echo '
-<script src="' . getinfo('plugins_url') . 'shjs/sh_main.min.js"></script>
-<link rel="stylesheet" href="' . getinfo('plugins_url') . 'shjs/css/' . $options['css'] . '.min.css">
+	echo '<script src="' . getinfo('plugins_url') . 'shjs/sh_main.min.js"></script>
 <script>
 $(document).ready(function() {
 sh_highlightDocument("' . getinfo('plugins_url') . 'shjs/lang/", ".min.js");
 });
-</script>
-	';
+</script>';
+	
+	return $arg;
+}
+
+
+function shjs_head_css($arg = array())
+{
+	$options = mso_get_option('plugin_shjs', 'plugins', array());
+	
+	if (!isset($options['css']) or !$options['css']) $options['css'] = 'sh_maxsite'; 
+
+	echo '<link rel="stylesheet" href="' . getinfo('plugins_url') . 'shjs/css/' . $options['css'] . '.min.css">';
 	
 	return $arg;
 }

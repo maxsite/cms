@@ -141,7 +141,7 @@ function top_commentators_widget_custom($options = array(), $num = 1)
                 . '</a></li>';
       }
 
-      if ($out) $out = $options['header'] . '<ul class="is_link top_commentators">' . $out . '</ul>' . NR;
+      if ($out) $out = $options['header'] . '<ul class="mso-widget-list">' . $out . '</ul>' . NR;
     }
 
     mso_add_cache($cache_key, $out); // сразу в кэш добавим

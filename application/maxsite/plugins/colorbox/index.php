@@ -4,8 +4,9 @@ function colorbox_autoload($args = array())
 {
 	mso_hook_add( 'admin_init', 'colorbox_admin_init');
 	mso_hook_add( 'head', 'colorbox_head');
+	mso_hook_add( 'head_css', 'colorbox_head_css');
 	mso_hook_add( 'admin_head', 'colorbox_head');
-	mso_hook_add( 'content_out', 'colorbox_content');
+	mso_hook_add( 'content', 'colorbox_content');
 }
 
 # функция выполняется при активации (вкл) плагина
@@ -52,27 +53,35 @@ function colorbox_head($args = array())
 	$url = getinfo('plugins_url') . 'colorbox/';
 	$options = mso_get_option('plugin_colorbox', 'plugins', array());
 
-	if ( !isset($options['style']) ) $options['style'] = '1';
 	if ( !isset($options['effect']) ) $options['effect'] = 'elastic';
 	if ( !isset($options['size']) ) $options['size'] = '0';
 	if ( !isset($options['width']) ) $options['width'] = '75%';
 	if ( !isset($options['height']) ) $options['height'] = '75%';
 	if ( !isset($options['slideshowspeed']) ) $options['slideshowspeed'] = '2500';
 	
-	echo '<link rel="stylesheet" href="'.$url.'style/'.$options['style'].'/colorbox.css" media="screen">';
-	
 	$size = '';
 	if ($options['size'] == '1') $size = ',width:"'.$options['width'].'",height:"'.$options['height'].'"';
 	echo '<script src="'.$url.'js/jquery.colorbox-min.js"></script>
 <script>
 $(document).ready(function(){
-	$(".gallery,.slideshow").find("a[href$=\'.jpg\'],a[href$=\'.jpeg\'],a[href$=\'.png\'],a[href$=\'.gif\'],a[href$=\'.bmp\']").attr("rel","cb");
-	$("div.gallery a[rel=cb]").colorbox({rel:"true",transition:"'.$options['effect'].'"'.$size.',photo:"true"});
-	$("a.lightbox").colorbox({transition:"'.$options['effect'].'"'.$size.'});
-	$("div.slideshow a[rel=cb]").colorbox({rel:"true",transition:"'.$options['effect'].'"'.$size.',slideshow:"true",slideshowSpeed:"'.$options['slideshowspeed'].'",photo:"true"});
+$(".gallery,.slideshow").find("a[href$=\'.jpg\'],a[href$=\'.jpeg\'],a[href$=\'.png\'],a[href$=\'.gif\'],a[href$=\'.bmp\']").attr("rel","cb");
+$("div.gallery a[rel=cb]").colorbox({rel:"true",transition:"'.$options['effect'].'"'.$size.',photo:"true"});
+$("a.lightbox").colorbox({transition:"'.$options['effect'].'"'.$size.'});
+$("div.slideshow a[rel=cb]").colorbox({rel:"true",transition:"'.$options['effect'].'"'.$size.',slideshow:"true",slideshowSpeed:"'.$options['slideshowspeed'].'",photo:"true"});
 });
 </script>';
 
+}
+
+function colorbox_head_css($args = array()) 
+{
+	$url = getinfo('plugins_url') . 'colorbox/';
+	
+	$options = mso_get_option('plugin_colorbox', 'plugins', array());
+
+	if ( !isset($options['style']) ) $options['style'] = '1';
+	
+	echo '<link rel="stylesheet" href="' . $url . 'style/' . $options['style'] . '/colorbox.css">';
 }
 
 function colorbox_content($text = '')

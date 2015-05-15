@@ -117,7 +117,7 @@ function my_default_out_profiles($path = 'assets/css/profiles/')
 				mso_add_file($fn); // подключаем внешими стилями
 			else
 				// получение и обработка CSS из файла
-				$css_out .= mso_out_css_file($fn, false, false); 
+				$css_out .= my_out_css_file($fn, false, false); 
 		}
 		
 		if ($css_out) 

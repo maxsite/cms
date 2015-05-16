@@ -389,7 +389,7 @@ function mso_view_ini($all = false)
 				$CI->table->add_row(
 					
 					array('class'=>'section', 'colspan' => 2, 
-						'data' => '<a id="a-' . mso_slug($row['section']) . '"></a><h2 class="section">' . t($row['section']) . '</h2><p>' . t($row['section_description']) . '</p')
+						'data' => '<a id="a-' . mso_slug($row['section']) . '"></a><h2 class="section">' . t($row['section']) . '</h2><p>' . t($row['section_description']) . '</p>')
 					);
 			}
 			else

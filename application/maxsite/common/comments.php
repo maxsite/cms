@@ -261,38 +261,31 @@ function mso_email_message_new_comment($id = 0, $data = array(), $page_title = '
 	if( !mso_get_option('subscribe_message_my_comment', 'general', true) && isset($data['comments_users_id']) && $data['comments_users_id'] == getingo('users_id') ) return false; // не посылаем уведомление о своём комментарии если нет специальной опции
 	
 	// шаблон уведомления
-$def_option = 'Новый комментарий на "{{ $page_title }}"
-{{ $comment_url }}
-
+	$def_option = 'Новый комментарий на "{{ $page_title }}"
+{{ $comment_url }} 
+ 
 {% if (!$comments_approved) : %}
-
-Комментарий требует модерации: {{ $edit_link }}
-
+Комментарий требует модерации: {{ $edit_link }} 
+ 
 {% endif %}
-
-Автор IP: {{ $comment_ip }}
-
-Referer: {{ $comment_referer }}
-
-Дата: {{ $comment_date }}
-
+Автор IP: {{ $comment_ip }} 
+Referer: {{ $comment_referer }} 
+Дата: {{ $comment_date }} 
+ 
 {% if ($user) : %}
-Пользователь: {{ $user_id }}
+Пользователь: {{ $user_id }} 
 {% endif %}
 {% if ($comuser) : %}
-Комюзер: id={{ $comuser_id }}, ник: {{ $comuser_nik }}, email: {{ $comuser_email }}
-
-Профиль: {{ $comuser_url }}
+Комюзер: id={{ $comuser_id }}, ник: {{ $comuser_nik }}, email: {{ $comuser_email }} 
+Профиль: {{ $comuser_url }} 
 {% endif %}
 {% if ($anonim) : %}
-Аноним: {{ $anonim }}
+Аноним: {{ $anonim }} 
 {% endif %}
-
-
+ 
 Текст:
-{{ $comment_content }}
-
-
+{{ $comment_content }} 
+ 
 Администрировать комментарий вы можете по ссылке:
 {{ $edit_link }}
 ';
@@ -359,7 +352,7 @@ Referer: {{ $comment_referer }}
 
 
 # функция отправляет новому комюзеру уведомление о новой регистрации
-# первый парметр id, второй данные
+# первый параметр id, второй данные
 # третий - если это автоматическая активация и подтверждение не требуется
 function mso_email_message_new_comuser($comusers_id = 0, $ins_data = array(), $comusers_activate_auto = false)
 {
@@ -370,27 +363,47 @@ function mso_email_message_new_comuser($comusers_id = 0, $ins_data = array(), $c
 	// comusers_activate_key
 
 	$subject = tf('Регистрация на ') . getinfo('title');
-	if (!$comusers_activate_auto)
-	{
-		// текст нужна активация
-		$text = tf('Вы или кто-то еще зарегистрировал ваш адрес на сайте') . ' "' . getinfo('name_site') . '" — ' . getinfo('siteurl') . NR ;
-		$text .= tf('Если это действительно сделали вы, то вам нужно подтвердить эту регистрацию. Для этого следует пройти по ссылке: ') . NR;
-		$text .= getinfo('siteurl') . 'users/' . $comusers_id . NR . NR;
-		$text .= tf('И ввести следующий код для активации: '). NR;
-		$text .= $ins_data['comusers_activate_key'] . NR. NR;
-		$text .= tf('(Сохраните это письмо, поскольку код активации может понадобиться для смены пароля.)') . NR . NR;
-		$text .= tf('Если же регистрацию выполнили не вы, то просто удалите это письмо.') . NR;
-	}
-	else
-	{
-		// автоактивация
-		$text = tf('Спасибо за регистрацию на сайте') . ' "' . getinfo('name_site') . '" — ' . getinfo('siteurl') . NR ;
-		$text .= tf('Ваша страница: ') . NR;
-		$text .= getinfo('siteurl') . 'users/' . $comusers_id . NR . NR;
-		$text .= tf('Ваш код активации: '). NR;
-		$text .= $ins_data['comusers_activate_key'] . NR. NR;
-		$text .= tf('Сохраните это письмо, поскольку код активации может понадобиться для смены пароля.') . NR . NR;
-	}
+
+	// шаблон уведомления
+	$def_option = '{% if ($activate_auto) : %}
+Спасибо за регистрацию на сайте "{{ $name_site }}" — {{ $site_url }} 
+ 
+Ваша страница:
+{{ $comuser_url }} 
+ 
+Ваш код активации:
+{{ $activate_key }} 
+ 
+Сохраните это письмо, поскольку код активации может понадобиться для смены пароля.
+{% else: %}
+Вы или кто-то еще зарегистрировал ваш адрес на сайте "{{ $name_site }}" — {{ $site_url }} 
+ 
+Если это действительно сделали вы, то вам нужно подтвердить эту регистрацию. Для этого следует пройти по ссылке:
+{{ $comuser_url }} 
+ 
+И ввести следующий код для активации:
+{{ $activate_key }} 
+ 
+(Сохраните это письмо, поскольку код активации может понадобиться для смены пароля.)
+ 
+Если же регистрацию выполнили не вы, то просто удалите это письмо.
+{% endif %}
+';
+	
+	$template = mso_get_option('template_email_message_new_comuser', 'general', $def_option);
+	
+	$activate_auto = $comusers_activate_auto;
+	$name_site = getinfo('name_site');
+	$site_url = getinfo('siteurl');
+	$comuser_url = getinfo('siteurl') . 'users/' . $comusers_id;
+	$activate_key = $ins_data['comusers_activate_key'];
+	
+	$template = mso_tmpl_prepare($template, false);
+	
+	ob_start();
+	eval( $template );
+	$text = ob_get_contents(); 
+	ob_end_clean();
 	
 	return mso_mail($email, $subject, $text, $email); // поскольку это регистрация, то отправитель - тот же email
 }

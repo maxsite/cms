@@ -12,6 +12,7 @@ function lightbox_autoload($args = array())
 	mso_hook_add( 'head', 'lightbox_head');
 	mso_hook_add( 'head_css', 'lightbox_head_css');
 	mso_hook_add( 'admin_head', 'lightbox_head');
+	mso_hook_add( 'admin_head_css', 'lightbox_head_css');
 	mso_hook_add( 'content', 'lightbox_content'); # хук на вывод контента после обработки всех тэгов
 }
 

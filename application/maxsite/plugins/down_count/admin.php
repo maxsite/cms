@@ -87,16 +87,6 @@
 									);
 			}
 			echo $CI->table->generate();
-			
-			
-			echo mso_load_jquery('jquery.tablesorter.js') . '
-			<script>
-			$(function() {
-				$("table.tablesorter").tablesorter();
-			});
-			</script>';				
-			
-			
 		}
 
-?>
+# end of file

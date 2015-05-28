@@ -6,6 +6,7 @@ function colorbox_autoload($args = array())
 	mso_hook_add( 'head', 'colorbox_head');
 	mso_hook_add( 'head_css', 'colorbox_head_css');
 	mso_hook_add( 'admin_head', 'colorbox_head');
+	mso_hook_add( 'admin_head_css', 'colorbox_head_css');
 	mso_hook_add( 'content', 'colorbox_content');
 }
 

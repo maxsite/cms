@@ -602,12 +602,15 @@ function mso_cat_ul(
 		$out = str_replace( '<a href="' . $current_url . '">', '<a href="' . $current_url . '" class="current_url">', $k);
 		$pattern = '|<li class="(.*?)">(.*?)(<a href="' . $current_url . '")|ui';
 		$out = preg_replace($pattern, '<li class="$1 current_url">$2$3', $out);
+		
 		return $out; 
 	}
 	
 	# получим все рубрики в виде одномерного массива
-	if ($custom_array) $all = $custom_array; // какой-то свой массив
-		else $all = mso_cat_array_single('page', $order, $asc, $type_page);
+	if ($custom_array) 
+		$all = $custom_array; // какой-то свой массив
+	else 
+		$all = mso_cat_array_single('page', $order, $asc, $type_page);
 	
 	$top = array();
 
@@ -620,7 +623,8 @@ function mso_cat_ul(
 		{
 			if( !isset($all[ $parentId]['children'])) 
 				$all[ $parentId]['children'] = array($id);
-			else $all[ $parentId]['children'][] = $id;
+			else 
+				$all[ $parentId]['children'][] = $id;
 		} 
 		else 
 		{
@@ -683,10 +687,12 @@ function _mso_cat_ul_glue($in, &$all, $li_format, $checked_id, $selected_id, $sh
 		$add = $li_format;
 		$add = str_replace('%NAME%', $all[$id]['category_name'], $add);
 		$add = str_replace('%ID%', $all[$id]['category_id'], $add);
+		
 		if ($all[$id]['category_desc'])
 			$add = str_replace('%DESC%', '<div class="category_desc">' . $all[$id]['category_desc'] . '</div>', $add);
 		else 
 			$add = str_replace('%DESC%', '', $add);
+			
 		$add = str_replace('%LEVEL%', $level, $add);
 		$add = str_replace('%COUNT_PAGES%', $count_pages, $add);
 		
@@ -705,20 +711,28 @@ function _mso_cat_ul_glue($in, &$all, $li_format, $checked_id, $selected_id, $sh
 		{
 			if (in_array($all[$id]['category_id'], $checked_id )) 
 				$add = str_replace('%CHECKED%', ' checked="checked" ', $add);
-			else $add = str_replace('%CHECKED%', '', $add);
+			else 
+				$add = str_replace('%CHECKED%', '', $add);
 		
 		}
-		else $add = str_replace('%CHECKED%', '', $add);
+		else 
+			$add = str_replace('%CHECKED%', '', $add);
+		
+		// отмечаем родителя, у которого есть children
+		if( isset( $all[$id]['children'])) $css_level .= ' parent parent' . $level;
 		
 		if ($selected_id) 
 		{
 			if (in_array($all[$id]['category_id'], $selected_id )) 
 				$li = str_repeat("\t", $level+1) . '<li class="selected ' . $css_count . ' ' . $css_level . '">';
-			else $li = str_repeat("\t", $level+1) . '<li class="' . $css_count . ' ' . $css_level . '">';
+			else 
+				$li = str_repeat("\t", $level+1) . '<li class="' . $css_count . ' ' . $css_level . '">';
 		}
-		else $li = '<li class="' . $css_count . ' ' . $css_level . '">';
+		else 
+			$li = '<li class="' . $css_count . ' ' . $css_level . '">';
 		
-		if ($show_empty) $out[] = $li . $add; // если показывать все, то в любом случае выводим
+		if ($show_empty) 
+			$out[] = $li . $add; // если показывать все, то в любом случае выводим
 		else 
 		{ // иначе проверяем кол-во
 			if ($count_pages) $out[] = $li . $add;
@@ -731,9 +745,11 @@ function _mso_cat_ul_glue($in, &$all, $li_format, $checked_id, $selected_id, $sh
 			$out[] = _mso_cat_ul_glue($all[$id]['children'], $all, $li_format, $checked_id, $selected_id, $show_empty, $include, $exclude);
 			$out[] = str_repeat("\t", $level+2) . '</ul>';
 		}
-			$out[] = str_repeat("\t", $level+1) . '</li>';
-			# $out[] = '{*}</li>';
-		}
+		
+		$out[] = str_repeat("\t", $level+1) . '</li>';
+		# $out[] = '{*}</li>';
+	}
+	
 	return implode("\n", $out);
 }
 

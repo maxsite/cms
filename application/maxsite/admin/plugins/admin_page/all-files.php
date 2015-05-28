@@ -58,72 +58,70 @@ if ($n = mso_segment(3)) // указан N номер записи
 		$t_iz = t('из');
 		
 		$lightbox = <<<EOF
-				var lburl = "{$url}images/";
-				$("a.lightbox").lightBox({
-					imageLoading: lburl+"lightbox-ico-loading.gif",
-					imageBtnClose: lburl+"lightbox-btn-close.gif",
-					imageBtnPrev: lburl+"lightbox-btn-prev.gif",
-					imageBtnNext: lburl+"lightbox-btn-next.gif",
-					imageBlank: lburl+"lightbox-blank.gif",
-					txtImage: "{$t_izob}",
-					txtOf: "{$t_iz}",
-				});
+var lburl = "{$url}images/";
+$("a.lightbox").lightBox({
+	imageLoading: lburl+"lightbox-ico-loading.gif",
+	imageBtnClose: lburl+"lightbox-btn-close.gif",
+	imageBtnPrev: lburl+"lightbox-btn-prev.gif",
+	imageBtnNext: lburl+"lightbox-btn-next.gif",
+	imageBlank: lburl+"lightbox-blank.gif",
+	txtImage: "{$t_izob}",
+	txtOf: "{$t_iz}",
+});
 EOF;
 	}
 	
 	
-	$all_files .= '
-<script>
-	$(function(){
-		$.post(
-			"' . getinfo('ajax') . base64_encode('admin/plugins/admin_page/all-files-update-ajax.php') . '",
-			{
-				dir: "' . $current_dir . '"
-			},
-			function(data)
-			{
-				$("#all-files-result").html(data);
-				' . $lightbox . '
-			}
-		);
-	
-		$(window).on("storage", function(e) {
-			var pageId = window.location.pathname.match(/\d+$/)[0],
-				event = e.originalEvent;
-
-			if (event.newValue === pageId) {
-				$("#all-files-result").html("' . t('Обновление...') . '");
-
-				$.post(
-					"' . getinfo('ajax') . base64_encode('admin/plugins/admin_page/all-files-update-ajax.php') . '",
-					{
-						dir: "' . $current_dir . '"
-					},
-					function(data)
-					{
-						$("#all-files-result").html(data);
-						' . $lightbox . '
-						localStorage.clear();
-					}
-				);
-			}
-		});
-	});
-	
-	function addImgPage(img, t) {
-		var e = $("input[name=\'f_options[image_for_page]\']");
-		if ( e.length > 0 ) 
+	$all_files .= '<script>
+$(function(){
+	$.post(
+		"' . getinfo('ajax') . base64_encode('admin/plugins/admin_page/all-files-update-ajax.php') . '",
 		{
-			e.val(img);
-			alert("' . t('Установлено:') . ' " + img);
+			dir: "' . $current_dir . '"
+		},
+		function(data)
+		{
+			$("#all-files-result").html(data);
+			' . $lightbox . '
 		}
+	);
+
+	$(window).on("storage", function(e) {
+		var pageId = window.location.pathname.match(/\d+$/)[0],
+			event = e.originalEvent;
+
+		if (event.newValue === pageId) {
+			$("#all-files-result").html("' . t('Обновление...') . '");
+
+			$.post(
+				"' . getinfo('ajax') . base64_encode('admin/plugins/admin_page/all-files-update-ajax.php') . '",
+				{
+					dir: "' . $current_dir . '"
+				},
+				function(data)
+				{
+					$("#all-files-result").html(data);
+					' . $lightbox . '
+					localStorage.clear();
+				}
+			);
+		}
+	});
+});
+
+function addImgPage(img, t) {
+	var e = $("input[name=\'f_options[image_for_page]\']");
+	if ( e.length > 0 ) 
+	{
+		e.val(img);
+		alert("' . t('Установлено:') . ' " + img);
 	}
-	
+}
 </script>
 
 <script src="'. getinfo('plugins_url') . 'comment_smiles/comment_smiles.js"></script>
 
-<div id="all-files-result">' . t('Загрузка...') . '</div>
+<div id="all-files-result" class="all-files-result">' . t('Загрузка...') . '</div>
 
 ';
 }

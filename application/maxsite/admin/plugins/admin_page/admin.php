@@ -61,9 +61,9 @@
 	$CI->load->helper('form');
 	
 	$tmpl = array (
-				'table_open'		  => '<table class="page tablesorter">',
+				'table_open'		  => '<table class="page page-responsive page-all-pages tablesorter">',
 				'row_alt_start'		  => '<tr class="alt">',
-				'cell_alt_start'	  => '<td class="alt">',
+				// 'cell_alt_start'	  => '<td class="alt">',
 		  );
 		  
 	$CI->table->set_template($tmpl); // шаблон таблицы
@@ -250,9 +250,9 @@
 			
 			$qhint = strip_tags($page['page_content']);
 			
-			if (mb_strlen($qhint) > 250)
+			if (mb_strlen($qhint) > 150)
 			{
-				$qhint = mb_substr($qhint, 0, 250, 'UTF-8') . '...';
+				$qhint = mb_substr($qhint, 0, 150, 'UTF-8') . '...';
 			}
 			
 			$qhint = htmlspecialchars(str_replace("\n", " ", $qhint));
@@ -286,8 +286,8 @@
 			
 			
 			
-			if ($cats) $title .= '<br>' . t('Рубрика:') . ' ' . $cats;
-			if ($tags) $title .= '<br>' . t('Метки:') . ' ' . $tags;
+			if ($cats) $title .= '<p class="admin_page_cat">' . t('Рубрика:') . ' ' . $cats . '</p>';
+			if ($tags) $title .= '<p class="admin_page_tag">' . t('Метки:') . ' ' . $tags . '</p>';
 			
 			$title .= '<p class="admin_page_qhint">' . $qhint . '</p>';
 			
@@ -295,8 +295,32 @@
 			
 			$date_p = '<span title="' . t('Дата отображения на блоге с учетом временной поправки') . '">' . mso_date_convert('Y-m-d H:i:s', $page['page_date_publish']) . '</span>';
 			
-			$CI->table->add_row($page['page_id'], $title, $date_p, 
-					$page['page_type_name'], $page['page_status'], $page['users_nik']);
+			$CI->table->add_row(
+				array( 
+					'data' => $page['page_id'], 
+					'class' => 'p_page_id', 
+					),
+				array( 
+					'data' => $title, 
+					'class' => 'p_title', 
+					),
+				array( 
+					'data' => $date_p, 
+					'class' => 'p_date_p', 
+					),
+				array( 
+					'data' => $page['page_type_name'], 
+					'class' => 'p_page_type_name', 
+					),
+				array( 
+					'data' => $page['page_status'], 
+					'class' => 'p_page_status', 
+					),
+				array( 
+					'data' => $page['users_nik'], 
+					'class' => 'p_users_nik', 
+					)
+			);
 		}
 	
 
@@ -304,15 +328,6 @@
 		$pagination['range'] = 10;
 		mso_hook('pagination', $pagination);
 	
-	
-		echo mso_load_jquery('jquery.tablesorter.js') . '
-			<script>
-			$(function() {
-				$("table.tablesorter").tablesorter();
-			});
-			</script>';
-	
-
 		echo $CI->table->generate(); // вывод подготовленной таблицы
 	
 

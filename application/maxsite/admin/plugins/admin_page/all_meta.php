@@ -180,7 +180,7 @@
 		}
 		
 		if ($description) $f .= '<p>' .  t($description) . '</p>';
-		$key = '<h3>' . t($key) . '</h3>';
+		$key = '<h4>' . t($key) . '</h4>';
 		
 		// $all_meta .= '<div>' . $key . NR . $f . '</div>';
 		

@@ -19,9 +19,13 @@
 				$("input.f_header").attr("sh", 1);
 				$("input.f_header").attr("title", "' . t('Для перехода в полноэкранный режим нажмите F2') . '");
 				
+				$("div.my-nav-panel").show();
+				
+				/*
 				$("div.header").show();
 				$("div.sidebar").show();
 				$("div.footer").show();
+				*/
 				
 				$("div.update").show();
 				$("div.error").show();
@@ -43,10 +47,12 @@
 				
 				$("input.f_header").attr("title", "' . t('Для возврата в обычный режим нажмите F2') . '");
 				
+				$("div.my-nav-panel").hide();
+				/*
 				$("div.header").hide();
 				$("div.footer").hide();
 				$("div.sidebar").hide();
-				
+				*/
 				$("div.update").hide();
 				$("div.error").hide();
 				$("h1").hide();
@@ -190,7 +196,6 @@
 			</div>
 			
 			<div class="page_meta_container">' 
-				. mso_load_jquery('jquery.cookie.js')
 				. mso_load_script(getinfo('plugins_url'). 'tabs/tabs.js')
 
 				. mso_hook('admin_page_form_pre_all_meta')
@@ -204,17 +209,16 @@
 								<li class="mso-tabs-elem i i-other"><span>' . t('Прочее') . '</span></li>
 								<li class="mso-tabs-elem i i-files"><span>' . t('Файлы') . '</span></li>
 							</ul>
-							<div class="clearfix"></div>
+
 							<div class="mso-tabs-box mso-tabs-visible all-cat">' 
 								. '<div class="page_cat">'
 									. $all_cat 
 								. '</div>'
 								. '<div class="page_tags">
-										<h3>' . t('Метки (через запятую)') . '</h3>
+										<h4>' . t('Метки (через запятую)') . '</h4>
 										<textarea name="f_tags" id="f_tags">' . $f_tags . '</textarea>
 										' . $f_all_tags . '
 									</div>
-									<div class="break"></div>
 									'
 							. '</div>
 							
@@ -224,38 +228,50 @@
 							<div class="mso-tabs-box other fform">
 								' . mso_hook('admin_page_form_add_block_1') . '
 								
-								<p><label class="fwrap"><span class="ffirst ftitle">Короткая ссылка:</span><span><input type="text" value="' . $f_slug . '" name="f_slug" class="f_slug" title="' . t('Короткая ссылка') . '"></span></label></p>
 								
-								<p><span class="ffirst ftitle ftop">' . t('Тип страницы:') . '</span><span>' . $all_post_types . '</span></p>
-								
-								<p><span class="ffirst ftitle">Обсуждение:</span>
-									<label><input name="f_comment_allow" type="checkbox" ' . $f_comment_allow . '> ' . t('Разрешить комментирование') . '</label>
-
-									<label><input name="f_feed_allow" type="checkbox" ' . $f_feed_allow . '> ' . t('Публикация в RSS') . '</label>
-								</p>
-
-								<p><label class="fwrap"><span class="ffirst ftitle">' . t('Пароль для чтения:') . '</span><span><input type="text" value="' . $f_password . '" name="f_password"></span></label></p>
-								
-								
-								<p><label class="fwrap"><span class="ffirst ftitle">' . t('Порядок:') . '</span><span><input type="number" value="' . $page_menu_order . '" name="f_menu_order"></span></label></p>
-									
-								<p><label class="fwrap"><span class="ffirst ftitle">' . t('Автор:') . '</span><span>' . $all_users . '</span></label></p>
-								
-								<p class="page_all_parent"><label class="fwrap"><span class="ffirst ftitle">' . t('Родительская страница:') . '</span><span>' . $all_pages . '</span></label></p>
-								
-								<p class="ends">
-									<span class="ffirst ftitle ftop">' . t('Дата публикации:') . '</span>
-								
-									<span><input name="f_date_change" id="f_date_change" type="checkbox" ' . $f_date_change . '> ' . t('Изменить дату') . '
+								<table class="page page-responsive">
+								<colgroup style="width: 25%;"><tbody>
+								<tr>
+									<td><strong>' . t('Короткая ссылка') . '</strong></td>
+									<td><input type="text" value="' . $f_slug . '" name="f_slug" class="f_slug" title="' . t('Короткая ссылка') . '"></td>
+								</tr>
+								<tr>
+									<td><strong>' . t('Тип страницы') . '</strong></td>
+									<td>' . $all_post_types . '</td>
+								</tr>
+								<tr>
+									<td><strong>' . t('Обсуждение') . '</strong></td>
+									<td><label><input name="f_comment_allow" type="checkbox" ' . $f_comment_allow . '> ' . t('Разрешить комментирование') . '</label> &nbsp;&nbsp;<label><input name="f_feed_allow" type="checkbox" ' . $f_feed_allow . '> ' . t('Публикация в RSS') . '</label>
+									</td>
+								</tr>
+								<tr>
+									<td><strong>' . t('Пароль для чтения') . '</strong></td>
+									<td><input type="text" value="' . $f_password . '" name="f_password"></td>
+								</tr>
+								<tr>
+									<td><strong>' . t('Порядок') . '</strong></td>
+									<td><input type="number" value="' . $page_menu_order . '" name="f_menu_order"></td>
+								</tr>
+								<tr>
+									<td><strong>' . t('Автор') . '</strong></td>
+									<td>' . $all_users . '</td>
+								</tr>
+								<tr>
+									<td><strong>' . t('Родительская страница') . '</strong></td>
+									<td>' . $all_pages . '</td>
+								</tr>
+								<tr>
+									<td><strong>' . t('Дата публикации') . '</strong></td>
+									<td><input name="f_date_change" id="f_date_change" type="checkbox" ' . $f_date_change . '> ' . t('Изменить дату') . '
 									
 									<a href="#" style="font-size: 1.5em; text-decoration: none;" id="set_current_time" title="' . t('Установить текущее время компьютера') . '">&#9685;</a>
 									
 									<br>' . $date_y . ' ' . $date_m . ' ' . $date_d . '
 										&nbsp;&nbsp; — &nbsp;&nbsp;' . $time_h . ' : ' . $time_m . ' : ' . $time_s . '
-										<br><em>' . $date_time . '</em>
-									</span>
-								</p>
-								
+										<br><em>' . $date_time . '</em></td>
+								</tr>
+								</tbody>
+								</table>
 								' . mso_hook('admin_page_form_add_block_2') . '
 							
 							</div><!-- /div.mso-tabs-box.tabs-other -->

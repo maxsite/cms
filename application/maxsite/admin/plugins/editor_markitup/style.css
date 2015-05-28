@@ -3,7 +3,8 @@
 // By Jay Salvat - http://markitup.jaysalvat.com/
 // ------------------------------------------------------------------*/
 .markItUp * {
-	margin:0px; padding:0px;
+	margin:0; 
+	padding:0;
 	outline:none;
 }
 .markItUp a:link,
@@ -18,18 +19,24 @@
 	border:1px solid #3C769D;	
 	background:#FFF;
 	padding:5px 10px 2px 5px;
-	font:11px Verdana, Arial, Helvetica, sans-serif;
 }
+
 .markItUpEditor {
-	font:13px 'Courier New', Courier, monospace;
+	font-size: 16px;
+	line-height: 1.5;
+	font-family: PT Mono, Monaco, Menlo, Consolas, Courier New, monospace;
 	padding:0;
 	border:none;
 	border-top:1px solid #3C769D;	
 	width:100%;
-	/* clear:both; */ 
 	display:block;
-	line-height:20px;
 	overflow:auto;
+	background: white;
+	color: black;
+}
+.markItUpEditor:focus {
+	border:none;
+	border-top:1px solid #3C769D;
 }
 .markItUpPreviewFrame	{
 	overflow:auto;
@@ -45,7 +52,8 @@
 }
 .markItUpResizeHandle {
 	overflow:hidden;
-	width:22px; height:5px;
+	width:22px; 
+	height:5px;
 	margin-left:auto;
 	margin-right:auto;
 	background-image:url(images/handle.png);
@@ -71,7 +79,7 @@
 	position: relative;
 }
 .markItUpHeader ul .markItUpDropMenu li {
-	margin-right:0px;
+	margin-right:0;
 }
 .markItUpHeader ul .markItUpSeparator {
 	margin:0 10px 0 0;
@@ -82,13 +90,14 @@
 }
 .markItUpHeader ul ul .markItUpSeparator {
 	width:auto; height:1px;
-	margin:0px;
+	margin:0;
 }
 /* next rows of buttons */
 .markItUpHeader ul ul {
 	display:none;
 	position:absolute;
-	top:18px; left:0px;	
+	top:18px; 
+	left:0;	
 	background:#F5F5F5;
 	border:1px solid #3C769D;
 	height:inherit;
@@ -103,25 +112,29 @@
 /* next rows of buttons */
 .markItUpHeader ul ul ul {
 	position:absolute;
-	top:-1px; left:150px;
+	top:-1px; 
+	left:150px;
 }
 .markItUpHeader ul ul ul li {
 	float:none;
 }
 .markItUpHeader ul a {
 	display:block;
-	width:16px; height:16px;
+	width:24px; 
+	height:24px;
 	text-indent:-10000px;
 	background-repeat:no-repeat;
-	padding:3px;
-	margin:0px;
+	padding: 3px;
+	margin:0;
 }
 .markItUpHeader ul ul a {
-	display:block;
-	padding-left:0px;
+	font-size: 14px;
+	display: block;
 	text-indent:0;
-	width:180px; 
-	padding:5px 5px 5px 25px;
+	width:280px;
+	height: 32px;
+	line-height: 32px;
+	padding-left: 25px;
 	background-position:2px 50%;
 }
 .markItUpHeader ul ul a:hover  {

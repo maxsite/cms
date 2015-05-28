@@ -57,8 +57,12 @@ if ( $post = mso_check_post(array('dir')) )
 		
 		if (isset($mso_descritions[$file]))
 		{
-			$title = $mso_descritions[$file];
+			$title = $mso_descritions[$file] . ' / ' . htmlspecialchars($file);
 			// if ($title) $title_f = '<em>' . htmlspecialchars($title) . '</em><br>';
+		}
+		else
+		{
+			$title = htmlspecialchars($file);
 		}
 		
 		if ($this_img and file_exists($uploads_dir . '/mini/' . $file)) 
@@ -71,7 +75,7 @@ if ( $post = mso_check_post(array('dir')) )
 		}
 		else 
 		{
-			$mini = '<img src="' . getinfo('admin_url') . 'plugins/admin_files/document_plain.png">';
+			$mini = '<img src="' . getinfo('admin_url') . 'plugins/admin_files/document_plain.png" title="' . $title . '">';
 		}
 		
 		if ($this_img)
@@ -91,28 +95,27 @@ if ( $post = mso_check_post(array('dir')) )
 		}
 		
 		$all_files_res .= '<div class="all-files-image">' 
-					. $mini 
-					. '<span title="' . t('Адрес файла') . '" onclick="jAlert(\'<textarea cols=70 rows=3>' . $uploads_url . '/' . $file . '</textarea>\', \'' . t('Адрес файла') . '\'); return false;">Адрес</span>';
+					. '<div class="all-files-image-mini">' . $mini . '</div>' 
+					. '<div class="all-files-image-actions"><span title="' . t('Получить URL-адрес файла') . '" onclick="jAlert(\'<textarea cols=70 rows=3>' . $uploads_url . '/' . $file . '</textarea>\', \'' . t('Адрес файла') . '\'); return false;">URL</span>';
 					
 		if ($this_img)			
 		{
 			$all_files_res .= '
-					<span title="' . t('Изображение') . '" onclick="addSmile(\'' . $img . '\', \'f_content\');">[img]</span>
-					<span title="' . t('Миниатюра') . '" onclick="addSmile(\'' . $image . '\', \'f_content\');">[image]</span>
-					
-					<span title="' . t('Использовать как изображение записи') . '" onclick="addImgPage(\'' . $uploads_url . '/' . $file . '\');">+</span>
+					<span title="' . t('Вставить в текст код изображения') . '" onclick="addSmile(\'' . $img . '\', \'f_content\');">[img]</span>
+					<span title="' . t('Вставить в текст код миниатюры') . '" onclick="addSmile(\'' . $image . '\', \'f_content\');">[image]</span>
+					<span title="' . t('Использовать как изображение записи') . '" onclick="addImgPage(\'' . $uploads_url . '/' . $file . '\');">page</span>
 					';
 					
 					
 		}
 		
 		
-		$all_files_res .= '</div>'; 
+		$all_files_res .= '</div></div>'; 
 		
 	}
 	
 	
-	echo $all_files_res . '<div class="break"></div>';
+	echo $all_files_res . '<div class="clearfix"></div>';
 }
 
 # end file

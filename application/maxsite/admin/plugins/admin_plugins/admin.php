@@ -191,7 +191,7 @@
 		return $flag_present_plugins;
 	}
 	
-	$CI->table->set_caption('<h2>'.t('Активные плагины') . '</h2>');
+	// $CI->table->set_caption('<h2>'.t('Активные плагины') . '</h2>');
 	
 	$flag_present_plugins = _create_table(true, $opt_url);
 	
@@ -218,7 +218,7 @@
 			  
 	$CI->table->clear();
 	$CI->table->set_template($tmpl); // шаблон таблицы
-	$CI->table->set_caption('<h2>' . t('Неактивные плагины') . '</h2>');
+	// $CI->table->set_caption('<h2>' . t('Неактивные плагины') . '</h2>');
 	
 	// заголовки
 	$CI->table->set_heading(' ', t('Каталог'), ' ', t('Название'), t('Версия'), t('Автор'), t('Описание'));
@@ -243,13 +243,26 @@
 		
 	// быстрые настройки плагинов
 
-	echo '<p class="nav"><strong>' . t('Настройки') . '</strong> '
-		. str_replace('  ', '<span class="sep"> </span>', trim(implode(' ', $opt_url)))
-		.'</p>';
+	// echo '<p class="nav"><strong>' . t('Настройки') . '</strong> '
+	// 	. str_replace('  ', '<span class="sep"> </span>', trim(implode(' ', $opt_url)))
+	// 	.'</p>';
 
-	// добавляем форму, а также текущую сессию
-	echo '<form method="post">' . mso_form_session('f_session_id');
-	echo $table1 . $table2; // вывод таблиц
-	echo '</form>';
+	// echo '<p class="nav">' . trim(implode(' ', $opt_url)) .'</p>';
 	
+	echo mso_load_jquery('jquery.cookie.js');
+	echo mso_load_script(getinfo('plugins_url'). 'tabs/tabs.js');
+	
+	echo '
+<form method="post">' . mso_form_session('f_session_id') . '
+<div class="mso-tabs_widget mso-tabs_widget_000"><div class="mso-tabs">
+<ul class="mso-tabs-nav">
+<li class="mso-tabs-elem mso-tabs-current active-plugins"><span>' . t('Активные плагины') . '</span></li>
+<li class="mso-tabs-elem inactive-plugins"><span>' . t('Неактивные плагины') . '</span></li>
+<li class="mso-tabs-elem options-plugins"><span>' . t('Опции плагинов') . '</span></li>
+</ul>
+<div class="mso-tabs-box mso-tabs-visible">' . $table1 . '</div>
+<div class="mso-tabs-box">' . $table2 . '</div>	
+<div class="mso-tabs-box tab-options-plugins"><p class="nav">' . trim(implode(' ', $opt_url)) .'</p></div>	
+</div></div></form>';
+
 # end file

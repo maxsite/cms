@@ -139,7 +139,7 @@
 
 	echo '
 		<p class="br">' . t('C отмеченными:') . '
-		<input type="submit" name="f_delete_submit" onClick="if(confirm(\'' . t('Уверены?') . '\')) {return true;} else {return false;}" value="' . t('Удалить') . '"></p></form>';
+		<button type="submit" name="f_delete_submit" onClick="if(confirm(\'' . t('Уверены?') . '\')) {return true;} else {return false;}">' . t('Удалить') . '</button></p></form>';
 	
 	mso_hook('pagination', $pag);
 

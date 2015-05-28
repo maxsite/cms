@@ -118,14 +118,14 @@
 		<span class="fempty"></span>
 		<span class="fempty"></span>
 		
-		<label><input style="width: 250px;" title="' . t('Название') . '" name="f_category_name[[ID]]" value="[TITLE_HTML]"></label>
+		<label><input style="width: 250px;" type="text" title="' . t('Название') . '" name="f_category_name[[ID]]" value="[TITLE_HTML]"></label>
 		
 		<label>' . t('Ссылка:') . ' <input style="width: 150px;" title="' . t('Короткая ссылка') . '" name="f_category_slug[[ID]]" value="[SLUG_HTML]" type="text"></label>
 		
 		
-		<label>' . t('Родитель:') . ' <input style="width: 45px;" title="' . t('Номер родителя') . '" name="f_category_id_parent[[ID]]" value="[ID_PARENT]" type="number"></label>
+		<label>' . t('Родитель:') . ' <input style="width: 60px;" title="' . t('Номер родителя') . '" name="f_category_id_parent[[ID]]" value="[ID_PARENT]" type="number"></label>
 		
-		<label>' . t('Порядок:') . ' <input style="width: 45px;" title="' . t('Порядок') . '" name="f_category_menu_order[[ID]]" value="[MENU_ORDER]" type="number"></label>
+		<label>' . t('Порядок:') . ' <input style="width: 60px;" title="' . t('Порядок') . '" name="f_category_menu_order[[ID]]" value="[MENU_ORDER]" type="number"></label>
 		
 		<span><a href="' . getinfo('site_admin_url') . 'page/category/[ID]" title="' . t('Список записей') . '" target="_blank">' . t('Записей:') . ' [COUNT]</a></span>
 		
@@ -151,9 +151,9 @@
 			'format_current'=>$format, 
 			'class_ul'=>'', 
 			
-			'class_ul_style'=>'list-style-type: none; margin: 0 0 0 -30px;', 
-			'class_child_style'=>'list-style-type: none;', 
-			'class_li_style'=>'margin: 0 0 10px 30px;',
+			'class_ul_style'=>'', 
+			'class_child_style'=>'', 
+			'class_li_style'=>'',
 			
 			'title'=>'category_name', 
 			'link'=>'category_slug', 
@@ -167,27 +167,20 @@
 			) );
 	
 	// добавляем форму, а также текущую сессию
-	echo '<form method="post" class="fform">' . mso_form_session('f_session_id');
+	echo '<form method="post" class="mso-cats">' . mso_form_session('f_session_id');
 	echo $out;
 	
 	# строчка для добавления новой рубрики
 	echo '
 		<div>
 			<h3>' . t('Добавить новую рубрику') . '</h3>
-			
-			<p><label class="ffirst ftitle fheader" for="f_new_name">' . t('Название') . '</label><span><input type="text" name="f_new_name" id="f_new_name"></span></p>
-			
-			<p><label class="ffirst ftitle ftop fheader" for="f_new_desc">' . t('Описание') . ' </label><span><textarea name="f_new_desc" id="f_new_desc"></textarea></span></p>
-			
-			<p><label class="ffirst ftitle fheader" for="f_new_slug">' . t('Ссылка') . ' </label><span><input type="text" name="f_new_slug" id="f_new_slug"></span></p>
-			
-			<p><label class="ffirst ftitle fheader" for="f_new_parent">' . t('Родитель') . ' </label><span><input type="text" name="f_new_parent" value="" id="f_new_parent"></span></p>
-			
-			<p><label class="ffirst ftitle fheader" for="f_new_order">' . t('Порядок') . ' </label><span><input type="text" name="f_new_order" id="f_new_order"></span></p>
-			
-			<p><span class="ffirst"></span><span><button type="submit" name="f_new_submit" class="i add-new">' . t('Добавить новую рубрику') . '</button></span></p>
+			<p><label><span>' . t('Название') . '<span><input type="text" name="f_new_name"></label></p>
+			<p><label><span>' . t('Описание') . '<span><textarea name="f_new_desc"></textarea></label></p>
+			<p><label><span>' . t('Ссылка') . '<span><input type="text" name="f_new_slug"></label></p>
+			<p><label><span>' . t('Родитель') . '<span><input type="text" name="f_new_parent" value=""></label></p>
+			<p><label><span>' . t('Порядок') . '<span><input type="text" name="f_new_order"></label></p>
+			<p><button type="submit" name="f_new_submit" class="i add-new">' . t('Добавить новую рубрику') . '</button></p>
 		</div>
-	
 	</form>';
 	
 # end file

@@ -42,9 +42,9 @@ if ( $post = mso_check_post(array('f_session_id', 'f_submit', 'f_sidebars')) )
 ?>
 
 <h1><?= t('Настройки сайдбаров') ?></h1>
-<p class="info"><?= t('Добавьте в сайдбары необходимые виджеты. Каждый виджет в одной строчке. Виджеты будут отображаться в указанном вами порядке. Если указанные виджеты не существуют, то они будут проигнорированы при выводе в сайдбаре.') ?></p>
-<p class="info"><?= t('Если вы указываете несколько одинаковых виджетов, то через пробел указывайте их номера (имена) (<a href="http://wbloger.com/page/widgets" target="_blank">см. примеры</a>).') ?></p>
-<p class="info"><?= t('Для виджета можно указать <a href="http://max-3000.com/page/uslovija-otobrazhenija-vidzheta" target="_blank">условия отображения</a>.') ?></p>
+<p><?= t('Добавьте в сайдбары необходимые виджеты. Каждый виджет в одной строчке. Виджеты будут отображаться в указанном вами порядке. Если указанные виджеты не существуют, то они будут проигнорированы при выводе в сайдбаре.') ?></p>
+<p><?= t('Если вы указываете несколько одинаковых виджетов, то через пробел указывайте их номера (имена) (<a href="http://wbloger.com/page/widgets" target="_blank">см. примеры</a>).') ?></p>
+<p><?= t('Для виджета можно указать <a href="http://max-3000.com/page/uslovija-otobrazhenija-vidzheta" target="_blank">условия отображения</a>.') ?></p>
 
 <?php
 
@@ -62,22 +62,22 @@ if ( $post = mso_check_post(array('f_session_id', 'f_submit', 'f_sidebars')) )
 	{
 		$form .= '
 <script>
-	$(function(){
-		function addText(t, tarea){
-			var elem = document.getElementById(tarea);
-			elem.value = elem.value + "\n" + t;
-			L = $(elem).val();
-			$(elem).attr("rows", L.split("\n").length + 1);
+$(function(){
+	function addText(t, tarea){
+		var elem = document.getElementById(tarea);
+		elem.value = elem.value + "\n" + t;
+		L = $(elem).val();
+		$(elem).attr("rows", L.split("\n").length + 1);
+	}
+	$("select.all_widgets").change(function(){
+		f = $(this).val();
+		if (f)
+		{
+			s = $(this).attr("data-id-sb");
+			addText(f, "f_sidebars[" + s + "]");
 		}
-		$("select.all_widgets").change(function(){
-			f = $(this).val();
-			if (f)
-			{
-				s = $(this).attr("data-id-sb");
-				addText(f, "f_sidebars[" + s + "]");
-			}
-		});
 	});
+});
 </script>';
 
 		// формируем select со списком виджетов
@@ -105,9 +105,8 @@ if ( $post = mso_check_post(array('f_session_id', 'f_submit', 'f_sidebars')) )
 			if ($count_rows < 2) $count_rows = 2;
 			$options = implode("\n", $options); // разделим по строкам 
 
-			$form .= '<h2>' . $sidebar['title'] 
-					. '<span class="add-widget">Добавить: <select class="all_widgets" data-id-sb="' . $name . '"><option value="">' . t('—') . '</option>' . $select . '</select></span>'
-					. '</h2>';
+			$form .= '<h2>' . $sidebar['title'] . '</h2>'
+					. '<p class="add-widget">Добавить виджет <select class="all_widgets" data-id-sb="' . $name . '"><option value="">' . t('—') . '</option>' . $select . '</select></p>';
 			
 			$form .= '<textarea id="f_sidebars[' . $name  . ']" name="f_sidebars[' . $name . ']" rows="' . $count_rows . '">';
 			$form .= htmlspecialchars($options);

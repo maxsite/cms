@@ -231,7 +231,7 @@
 		
 		$date_time = t('Сохранено:') . ' ' . $page_date_publish;
 		
-		$date_time .= '<br>' . t('На блоге как:') . ' ' . mso_date_convert('Y-m-d H:i:s', $page_date_publish);
+		$date_time .= '<br>' . t('На сайте как:') . ' ' . mso_date_convert('Y-m-d H:i:s', $page_date_publish);
 		$date_time .= '<br>' . t('Текущее время:') . ' ' . date('Y-m-d H:i:s');
 		
 		$date_cur_y = date('Y', $date_cur);
@@ -250,7 +250,7 @@
 		$date_all_d = array();
 		for ($i=1; $i<32; $i++) $date_all_d[$i] = $i;
 		
-		$date_y = form_dropdown('f_date_y', $date_all_y, $date_cur_y, ' style="width: 60px;" ');
+		$date_y = form_dropdown('f_date_y', $date_all_y, $date_cur_y, ' style="width: 100px;" ');
 		$date_m = form_dropdown('f_date_m', $date_all_m, $date_cur_m, ' style="width: 60px;" ');
 		$date_d = form_dropdown('f_date_d', $date_all_d, $date_cur_d, ' style="width: 60px;" ');
 		

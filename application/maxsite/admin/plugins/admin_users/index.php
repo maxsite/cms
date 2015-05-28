@@ -32,7 +32,7 @@ function admin_users_admin_init($args = array())
 	}
 
 	$this_plugin_url = 'users_my_profile'; // url и hook
-	mso_admin_menu_add('users', $this_plugin_url, t('Мой профиль'), 5);
+	// mso_admin_menu_add('users', $this_plugin_url, t('Мой профиль'), 5);
 	mso_admin_url_hook ($this_plugin_url, 'admin_users_my_profile');	
 	
 	

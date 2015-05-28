@@ -49,6 +49,8 @@ myBbcodeSettings = {
 			{name:'<?= t('Адрес') ?>', openBlockWith:'[address]', closeBlockWith:'[/address]', className:"address"}, 
 			{name:'<?= t('Новый термин') ?>', openBlockWith:'[dfn]', closeBlockWith:'[/dfn]', className:"dfn"}, 
 			{name:'<?= t('Код (строка)') ?>', openBlockWith:'[code]', closeBlockWith:'[/code]', className:"code1"}, 
+			{name:'<?= t('Принудительный перенос') ?>', replaceWith:'[br]\n', className:"page-red"},
+			{name:'<?= t('Линия') ?>', openBlockWith:'\n[hr]\n', className:"hr"}, 
 			
 		]},
 	
@@ -117,6 +119,7 @@ myBbcodeSettings = {
 			{name:'&lt;span <?= t('свойства') ?>&gt;', openBlockWith:'[span [![<?= t('Свойства') ?>]!]]', closeBlockWith:'[/span]', className:"add"}, 
 		]},
 
+		/*
 		{name:'<?= t('Сообщения') ?>', openWith:'[div(message [![Css message]!])]', closeWith:'[/div]', className:"page-red", dropMenu :[  
 			{name:'Note', openBlockWith:'[div(message note)]', closeBlockWith:'[/div]', className:"add"}, 
 			{name:'Alert', openBlockWith:'[div(message alert)]', closeBlockWith:'[/div]', className:"add"}, 
@@ -128,7 +131,7 @@ myBbcodeSettings = {
 			{name:'Home', openBlockWith:'[div(message home)]', closeBlockWith:'[/div]', className:"add"}, 
 			{name:'Question', openBlockWith:'[div(message question)]', closeBlockWith:'[/div]', className:"add"}, 
 		]},
-
+		*/
 		
 		{name: '<?= t('Список') ?>', className:"list-bullet", openBlockWith:'[list]\n', openWith:'[*]', closeWith:'', closeBlockWith:'\n[/list]', multiline:true, dropMenu: [ 
 			{name:'<?= t('Номера') ?>', className:'list-numeric', openBlockWith:'[ol]\n', openWith:'[*]', closeWith:'', closeBlockWith:'\n[/ol]', multiline:true}, 
@@ -219,10 +222,12 @@ myBbcodeSettings = {
 			<?php if (function_exists('auth_content_parse')) { ?>
 			{name:'<?= t('Спрятать от незалогиненных') ?>', openBlockWith:'[auth]', closeBlockWith:'[/auth]', className:"add"}, 
 			<?php } ?>
-
+			
+			/*
 			<?php if (function_exists('forms_content')) { ?>
 			{name:'<?= t('Форма (заготовка)') ?>', openBlockWith:'[form] \n[email=mylo@sait.com] \n[redirect=http://site.com/] \n[subject=<?= t('Моя форма') ?>] \n \n[field] \nrequire = 1   \ntype = select \ndescription = <?= t('Выберите специалиста') ?> \nvalues = <?= t('Иванов # Петров # Сидоров') ?>\ndefault = <?= t('Иванов') ?>\ntip = <?= t('Подсказка к полю') ?> \n[/field] \n \n[field] \nrequire = 0   \ntype = text \ndescription = <?= t('Ваш город') ?>\ntip = <?= t('Указывайте вместе со страной') ?>\n[/field] \n \n[field] \nrequire = 1 \ntype = textarea \ndescription = <?= t('Ваш вопрос') ?> \n[/field] \n \n[/form]', closeBlockWith:'', className:"add"}, 
 			<?php } ?>
+			*/
 
 
 		]},
@@ -231,10 +236,6 @@ myBbcodeSettings = {
 
 		{name:'<?= t('Отметить конец анонса') ?>', replaceWith:'\n[cut]\n', className:"separator", dropMenu: [
 			{name:'<?= t('Отрезать анонс') ?>', replaceWith:'\n[xcut]\n', className:"separator2"},
-			
-			{name:'<?= t('Принудительный перенос') ?>', replaceWith:'[br]\n', className:"page-red"},
-			{name:'<?= t('Линия') ?>', openBlockWith:'\n[hr]\n', className:"hr"}, 
-
 		]}, 
 		
 		

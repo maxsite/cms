@@ -16,7 +16,7 @@ function admin_menu_autoload($args = array())
 # выводит меню в админке
 function admin_menu_menu($args = array()) 
 {
-	global $admin_menu, $admin_menu_bread, $MSO;
+	global $admin_menu, $admin_menu_bread, $MSO, $admin_menu_select_option;
 	
 	$admin_url = getinfo('site_admin_url');
 	
@@ -24,6 +24,8 @@ function admin_menu_menu($args = array())
 	
 	$nr = "\n";
 	$out = '';
+	
+	$admin_menu_select_option = ''; // <option> для <select>
 	
 	if ( count($MSO->data['uri_segment']) > 1 )
 	{
@@ -58,6 +60,7 @@ function admin_menu_menu($args = array())
 		
 		$out1 = $nr . '<li class="admin-menu-top"><a href="#" class="admin-menu-section admin-menu-section-' . ($key ? $key : 'beginning') . '">' . _mso_del_menu_pod($value['']) . '</a>';
 		
+		$admin_menu_select_option .= '<optgroup label="' . htmlspecialchars(_mso_del_menu_pod($value[''])) . '">'. NR;
 		
 		if (count($value)>1 )
 		{
@@ -68,10 +71,13 @@ function admin_menu_menu($args = array())
 			{
 				if ( $value[''] == $name ) continue;
 
+				$opt_selected = '';
 				
 				if ($url == $cur_url or $url == $cur_url2) 
 				{
 					$selected = ' class="admin-menu-selected admin-menu-' . mso_slug($url) . '"';
+					
+					$opt_selected = ' selected';
 					
 					$out_block_css_class .= ' admin-menu-top-selected';
 					
@@ -92,6 +98,8 @@ function admin_menu_menu($args = array())
 				}
 				
 				$out1 .= $nr . '      <li' . $selected . ' title="' . _mso_del_menu_pod($name) . '"><a href="' . $admin_url . $url . '">' . _mso_del_menu_pod($name) . '</a></li>';
+				
+				$admin_menu_select_option .= '<option value="' . $admin_url . $url . '"' . $opt_selected . '>' ._mso_del_menu_pod($name) . '</option>'. NR;
 			}
 			$out1 .= $nr . '    </ul>';
 		}

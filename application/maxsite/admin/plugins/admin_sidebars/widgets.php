@@ -48,17 +48,15 @@ if ( $post = mso_check_post(array('f_session_id', 'f_submit', 'f_update_widgets'
 
 <?php
 
-	echo mso_load_jquery('jquery.cookie.js');
-	echo mso_load_jquery('jquery.showhide.js');
+	// echo mso_load_jquery('jquery.cookie.js');
+	// echo mso_load_jquery('jquery.showhide.js');
 	
-	echo '
-<script>
+	echo '<script>
 $(function () {
 	$.cookie.json = true; 
-	$(".admin-edit-widgets-form").showHide({time: 400, useID: false, clickElem: ".link", foldElem: ".admin_widgets", visible: false});
+	$(".admin-edit-widgets-form").showHide({time: 200, useID: false, clickElem: ".link", foldElem: ".admin_widgets", visible: false});
 });
-</script>
-';
+</script>';
 	
 
 
@@ -137,7 +135,7 @@ $(function () {
 	if (!$error)
 	{
 		// добавляем форму, а также текущую сессию
-		echo '<form method="post" class="fform admin_widgets">' . mso_form_session('f_session_id');
+		echo '<form method="post" class="admin_widgets">' . mso_form_session('f_session_id');
 		echo $form;
 		echo '<button type="submit" name="f_submit" class="i save">' . t('Сохранить изменения') . '</button>';
 		echo '</form>';
@@ -147,4 +145,4 @@ $(function () {
 		echo $error;
 	}
 
-?>
+# end of file

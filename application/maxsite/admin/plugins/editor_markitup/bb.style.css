@@ -31,7 +31,7 @@
 	
 .bbcode .smiles a {background-image:url(images/grin.gif); }
 	.bbcode .smiles ul {width:420px; padding:1px;}
-	.bbcode .smiles  li {border: none; width:21px;height:21px;overflow:hidden;padding:0; margin:0; float:left;}
+	.bbcode .smiles  li {border: none; width:21px; height:29px;overflow:hidden;padding:0; margin:0; float:left;}
 	.bbcode .smiles ul a {width:21px; height:21px;}
 	.bbcode .smiles ul a:hover {background-color:none;}
 	.bbcode .smiles .col1-0 a {background:white; color: black; padding: 1px;}

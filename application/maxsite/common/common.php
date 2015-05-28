@@ -375,6 +375,8 @@ function mso_initalizing()
 	global $MSO;
 	$CI = & get_instance();
 	
+	// нет соединения с Базой данных - всё рубим, а-а-а-а-а!
+	if (!$CI->db->conn_id) die('Database not connected');
 	
 	# считываем файл конфигурации
 	$fn = $MSO->config['config_file'];
@@ -3701,14 +3703,10 @@ function mso_link_rel($rel = 'canonical', $add = '', $url_only = false)
 # $form = mso_widget_create_form('Название', поле формы, 'Подсказка');
 function mso_widget_create_form($name = '', $input = '', $hint = '')
 {
-	$out = '<p><span class="ffirst ftitle ftop">' . $name . '</span><label>'
-			. $input . '</label></p>';
-
 	if ($hint)
-	{
-		$out .= '<p class="nop"><span class="ffirst"></span><span class="fhint">'
-				. $hint . '</span></p>';
-	}
+		$out = '<p><label><span class="name_widget">' . $name . '</span>' . $input . '</label><span class="hint_widget">' . $hint . '</span></p>';
+	else
+		$out = '<p><label><span class="name_widget">' . $name . '</span>' . $input . '</label></p>';
 	
 	return $out;
 }

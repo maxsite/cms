@@ -2,7 +2,7 @@
 /*
 	Landing Page Framework (LPF)
 	(c) MAX — http://lpf.maxsite.com.ua/
-	ver. 26.2 3/05/2015
+	ver. 26.4 9/05/2015
 	
 	Made in Ukraine | Зроблено в Україні
 	
@@ -174,8 +174,12 @@ function init()
 	
 	define('CURRENT_PAGE_DIR', PAGES_DIR . CURRENT_PAGE . '/'); // путь на сервере к текущей page
 	define('CURRENT_PAGE_URL', PAGES_URL . CURRENT_PAGE . '/'); // http-адрес к текущей page
-	define('CURRENT_URL', BASE_URL . CURRENT_PAGE); // текущий http-адрес
 	
+	if (CURRENT_PAGE != HOME_PAGE)
+		define('CURRENT_URL', BASE_URL . CURRENT_PAGE); // текущий http-адрес
+	else
+		define('CURRENT_URL', BASE_URL); // текущий http-адрес главной страницы
+		
 	if ($VAR['head_file'] === true) $VAR['head_file'] = CURRENT_PAGE_DIR . 'head.php';
 	if ($VAR['start_file'] === true) $VAR['start_file'] = CURRENT_PAGE_DIR . 'header.php';
 	if ($VAR['end_file'] === true) $VAR['end_file'] = CURRENT_PAGE_DIR . 'footer.php';
@@ -551,7 +555,21 @@ function mso_meta()
 	
 	foreach($META as $name => $content)
 	{
-		$out .= NR . '<meta name="' . $name . '" content="' . $content . '">';
+		if (is_array($content))
+		{
+			$a = '';
+			
+			foreach($content as $key => $val)
+			{
+				$a .= $key . '="' . htmlspecialchars($val) . '" ';
+			}
+			
+			$out .= NR . '<meta ' . trim($a) . '>';
+		}
+		else
+		{
+			$out .= NR . '<meta name="' . $name . '" content="' . htmlspecialchars($content) . '">';
+		}
 	}
 	
 	if ($META_LINK)

@@ -40,25 +40,14 @@ function mso_admin_content_default($args = '')
 
 function mso_admin_footer_default($args = '')
 {
-	global $MSO;
+	$CI = & get_instance();
 	
-	$CI = & get_instance(); 
 	$query_count = $CI->db->query_count;
-	$ver = $MSO->version;
-	$out = '<p>' 
-	. t('Работает на <a href="http://max-3000.com/">MaxSite CMS</a> ')
-	. ' ' 
-	. $ver 
-	// . '. <a class="footer-logout" href="' . $MSO->config['site_url'] . 'logout'.'">' . t('Выход') . '</a>'
-	. '. <span class="footer-stat">'
-	. t('Статистика: {elapsed_time} сек., {memory_usage}, MySQL:') 
-	. ' '
-	. $query_count 
-	//. '. '
-	. '</span></p>';
-	
-	return $out;
+
+	return '{elapsed_time}s | {memory_usage} | MySQL: ' . $query_count;
 }
+
+
 
 function mso_admin_plugins_default($args = array())
 {

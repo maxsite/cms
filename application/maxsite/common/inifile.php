@@ -124,7 +124,7 @@ function mso_view_ini($all = false)
 	$CI->load->library('table');
 
 	$tmpl = array (
-                    'table_open'          => '<table class="page"><colgroup style="width: 25%;">',
+                    'table_open'          => '<table class="page "><colgroup style="width: 25%;">',
                     'row_alt_start'		  => '<tr class="alt">',
 					'cell_alt_start'	  => '<td class="alt">',
               );
@@ -363,7 +363,7 @@ function mso_view_ini($all = false)
 		if ($options_key != 'none')
 		{
 			if (!$options_present) 
-				$key = '<span title="' . $options_key . ' (' . $row['options_type'] . ')" class="red">* ' . t($key) . ' '. t('(нет в базе)') .'</span>';
+				$key = '<span title="' . $options_key . ' (' . $row['options_type'] . ')" class="mso-alert">* ' . t($key) . ' '. t('(нет в базе)') .'</span>';
 			else
 				$key = '<strong title="' . $options_key . ' (' . $row['options_type'] . ')">' . t($key) . '</strong>';
 		}
@@ -379,7 +379,7 @@ function mso_view_ini($all = false)
 			
 			$CI->table->clear(); // очистим, если были старые данные
 			
-			$tmpl['table_open'] = NR . '<table class="page section_' . mso_slug($row['section']) . '"><colgroup style="width: 25%;">';
+			$tmpl['table_open'] = NR . '<table class="page page-responsive section_' . mso_slug($row['section']) . '"><colgroup style="width: 25%;">';
                     
 			$CI->table->set_template($tmpl); // шаблон таблицы
 		

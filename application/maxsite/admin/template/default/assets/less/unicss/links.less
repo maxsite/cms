@@ -1,0 +1,38 @@
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// ссылки
+
+a {
+	// сбрасываем цвет :hover
+	&.hover-no-color {
+		&:hover {
+			color: inherit;
+		}
+	}
+	
+	// сбрасываем подчеркивание :hover
+	&.hover-no-underline {
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
+// для дочерних тэгов
+.hover-no-color {
+	a:hover {
+		color: inherit;
+	}
+}
+
+.hover-no-underline {
+	a:hover {
+		text-decoration: none;
+	}
+}
+
+.links-no-color {
+	a {
+		color: inherit;
+	}
+}

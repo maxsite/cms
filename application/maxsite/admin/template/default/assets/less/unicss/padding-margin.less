@@ -1,0 +1,43 @@
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// отступы
+
+// padding
+.box > .set_padding(0, pad0) !important;
+.box > .set_padding(@padding, pad) !important;
+.box > .set_padding(5px, pad5) !important;
+.box > .set_padding(6px, pad6) !important;
+.box > .set_padding(7px, pad7) !important;
+.box > .set_padding(10px, pad10) !important;
+.box > .set_padding(15px, pad15) !important;
+.box > .set_padding(20px, pad20) !important;
+.box > .set_padding(25px, pad25) !important;
+.box > .set_padding(30px, pad30) !important;
+.box > .set_padding(40px, pad40) !important;
+.box > .set_padding(50px, pad50) !important;
+
+// margin
+.box > .set_margin(0, mar0) !important;
+.box > .set_margin(@margin, mar) !important;
+.box > .set_margin(5px, mar5) !important;
+.box > .set_margin(6px, mar6) !important;
+.box > .set_margin(7px, mar7) !important;
+.box > .set_margin(10px, mar10) !important;
+.box > .set_margin(15px, mar15) !important;
+.box > .set_margin(20px, mar20) !important;
+.box > .set_margin(25px, mar25) !important;
+.box > .set_margin(30px, mar30) !important;
+.box > .set_margin(40px, mar40) !important;
+.box > .set_margin(50px, mar50) !important;
+
+
+// для адаптивного дизайна сбросы
+@media @SCREEN_TABLET {
+	.box > .set_padding(0, pad0, tablet) !important;
+	.box > .set_margin(0, mar0, tablet) !important;
+}
+
+@media @SCREEN_PHONE {
+	.box > .set_padding(0, pad0, phone) !important;
+	.box > .set_margin(0, mar0, phone) !important;
+}

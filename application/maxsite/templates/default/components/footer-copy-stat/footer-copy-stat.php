@@ -12,7 +12,7 @@ $pt = new Page_out;
 
 $pt->div('&copy; ' . getinfo('name_site') . ', ' . date('Y'), 'copyright');
 
-$pt->div_start('links-no-color');
+$pt->div_start('links-no-color hover-no-color');
 	
 	$CI = & get_instance();	
 	

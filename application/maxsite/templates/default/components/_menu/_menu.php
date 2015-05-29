@@ -15,18 +15,22 @@
 			{
 				$menu .= NR . '[';
 				$menu .= NR . 'admin | ' . getinfo('users_nik') . ' | Админ-панель | | i-user';
-				$menu .= NR . 'admin/page_new | Создать запись';
-				$menu .= NR . 'admin/page | Список записей';
-				$menu .= NR . 'admin/cat | Рубрики';
-				$menu .= NR . 'admin/plugins | Плагины';
-				$menu .= NR . 'admin/files | Загрузки';
-				$menu .= NR . 'admin/sidebars | Сайдбары';
-				$menu .= NR . 'admin/options | Основные настройки';
-				$menu .= NR . 'admin/template_options | Настройка шаблона';
+				$menu .= NR . 'admin/page_new | Создать запись | | | i-edit';
 				$menu .= NR . '---';
-				$menu .= NR . 'http://max-3000.com/page/faq | ЧАВО для новичков';
-				$menu .= NR . 'http://max-3000.com/help | Центр помощи';
-				$menu .= NR . 'http://forum.max-3000.com/ | Форум поддержки';
+				$menu .= NR . 'admin/page | Список записей | | | i-newspaper-o';
+				$menu .= NR . 'admin/files | Загрузки | | | i-download';
+				$menu .= NR . '---';
+				$menu .= NR . 'admin/cat | Рубрики | | | i-list-ul';
+				$menu .= NR . 'admin/sidebars | Сайдбары | | | i-trello';
+				$menu .= NR . 'admin/sidebars/widgets | Виджеты | | | i-paperclip';
+				$menu .= NR . 'admin/plugins | Плагины | | | i-puzzle-piece';
+				$menu .= NR . '---';
+				$menu .= NR . 'admin/options | Опции сайта | | | i-wrench';
+				$menu .= NR . 'admin/template_options | Настройки шаблона | | | i-gears';
+				// $menu .= NR . '---';
+				// $menu .= NR . 'http://max-3000.com/page/faq | ЧАВО для новичков';
+				// $menu .= NR . 'http://max-3000.com/help | Центр помощи';
+				// $menu .= NR . 'http://forum.max-3000.com/ | Форум поддержки';
 				
 				if (function_exists('ushka')) 
 				{
@@ -34,7 +38,7 @@
 				}
 				
 				$menu .= NR . '---';
-				$menu .= NR . 'logout | Выход | | icon logout';
+				$menu .= NR . 'logout | Выход | | | i-unlock';
 				
 				$menu .= NR . ']';
 			}

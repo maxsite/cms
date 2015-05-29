@@ -215,7 +215,7 @@
 	}
 	
 	// разделитель
-	.divider(@bg: #ccc; @margin: 0) {
+	.divider(@border: #ccc 1px solid; @margin: 0) {
 	
 		li.divider {
 			display: block !important;
@@ -226,7 +226,7 @@
 				display: block;
 				padding: 0;
 				height: 1px;
-				border: @bg, 1px, dotted;
+				border: @border;
 				margin: @margin;
 			}
 		}

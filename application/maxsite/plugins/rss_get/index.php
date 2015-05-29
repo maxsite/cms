@@ -182,7 +182,6 @@ function rss_get_go($arg)
 		
 		$rss_pars = new lastRSS();
 		
-		
 		$rss_pars->convert_cp = $arg['charset'];
 		
 		$rss_pars->itemtags = mso_explode($arg['fields'], false);
@@ -229,6 +228,8 @@ function rss_get_go($arg)
 			$value = str_replace('&lt;', '<', $value);
 			$value = str_replace('&gt;', '>', $value);
 			$value = str_replace('&amp;', '&', $value);
+			$value = str_replace('<![CDATA[', '', $value);
+			$value = str_replace(']]>', '', $value);
 			
 			// если стоит максимальное колво слов, то обрежем лишнее
 			if ($arg['max_word_description'] and $field != 'link')

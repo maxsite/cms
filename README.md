@@ -1,4 +1,4 @@
-MaxSite CMS
+MaxSite CMS 0.86x
 
 Сайт системы: http://max-3000.com/
 

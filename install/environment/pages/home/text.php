@@ -298,7 +298,7 @@ h4 Укажите данные для установки
 	
 	<p><label>Пользователь <input type="text" class="w100" name="db_username" value="{{ $PV['db_username'] }}" placeholder="пользователь базы..." required></label></p>
 	
-	<p><label>Пароль <input type="text" class="w100" name="db_password" value="{{ $PV['db_password'] }}" placeholder="пароль пользователя..." required></label></p>
+	<p><label>Пароль <input type="text" class="w100" name="db_password" value="{{ $PV['db_password'] }}" placeholder="пароль пользователя..."></label></p>
 	
 	<p><label>Имя базы данных <input type="text" class="w100"  name="db_database" value="{{ $PV['db_database'] }}" placeholder="имя базы данных..." required></label></p>
 	

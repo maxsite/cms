@@ -23,6 +23,14 @@ function v_file_exists($fn)
 	return file_exists($path . $fn);
 }
 
+# адрес сайта
+function v_get_host()
+{
+	$base_url = $_SERVER['HTTP_HOST'] . str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+
+	return str_replace('/install/', '', $base_url);
+}
+
 # robots.txt
 function v_new_robots()
 {
@@ -206,6 +214,19 @@ function v_load_sql($file)
 		return file_get_contents($path . $file);
 	else
 		return '';
+}
+
+function v_email($to, $subject, $message)
+{
+	$from = 'no-reply@' . $_SERVER['SERVER_NAME']; // якобы адрес отправителя с сервера
+	$headers = 'From: '. $from . "\r\n"; // от кого
+	
+	// кодируем заголовок в UTF-8
+	$subject = preg_replace("/(\r\n)|(\r)|(\n)/", "", $subject);
+	$subject = preg_replace("/(\t)/", " ", $subject);
+	$subject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+
+	@mail($to, $subject, $message, $headers);
 }
 
 

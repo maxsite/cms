@@ -236,6 +236,11 @@ if ($_POST)
 				
 				$mysqli->query($sql);
 				
+				$value = $mysqli->real_escape_string($PV['email']);
+				$sql = "INSERT INTO {$table} (options_key, options_type, options_value) VALUES ('admin_email', 'general', '{$value}')";
+				
+				$mysqli->query($sql);
+				
 				// демо-данные
 				if ($PV['demo'])
 				{
@@ -257,6 +262,17 @@ if ($_POST)
 				
 				
 				echo '<p class="t-green i-check-square-o">' . t('Все требуемые sql-запросы выполнены') . '</p>';
+				
+				
+				// отпраляем уведомление на email
+				$message = t('Ваш новый сайт создан: ') . $PV['site_name'] . "\r\n"
+						. 'http://' . v_get_host() . " \r\n"
+						. t('Для входа воспользуйтесь данными:') . "\r\n"
+						. t('Логин: ') . $PV['username'] . "\r\n"
+						. t('Пароль: ') . $PV['password'] . "\r\n" . "\r\n" . "\r\n"
+						. t('Сайт поддержки: http://max-3000.com/');
+						
+				v_email($PV['email'], t('Новый сайт на MaxSite CMS'), $message, $headers);
 			}
 
 			$mysqli->close();

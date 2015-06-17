@@ -9,7 +9,7 @@
 	
 		<?php
 
-			$menu = mso_get_option('top_menu', 'templates', tf('/ | Главная ~ about | О сайте ~ comments | Комментарии ~ contact | Контакты ~ sitemap | Архив ~ feed | RSS'));
+			$menu = mso_get_option('top_menu', 'templates', tf('/ | Главная ~ page/about | О сайте ~ comments | Комментарии ~ contact | Контакты ~ sitemap | Архив ~ feed | RSS'));
 			
 			if (is_login())
 			{

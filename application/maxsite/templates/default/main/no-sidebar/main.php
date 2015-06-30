@@ -20,7 +20,7 @@ if ($fn = mso_fe('main/blocks/body-start.php')) require($fn) ?>
 
 	<?php if ($fn = mso_fe('main/blocks/header-out.php')) require($fn) ?>
 
-	<div class="main flex flex-wrap-tablet">
+	<div class="main">
 
 		<?php if ($fn = mso_fe('main/blocks/main-start.php')) require($fn) ?>
 

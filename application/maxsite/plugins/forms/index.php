@@ -63,6 +63,9 @@ function forms_content_callback($matches)
 	
 	$options = mso_section_to_array($text, 'options', $def, true);
 	
+	// если секции [options] нет, то ставим дефолт
+	if (!$options) $options[0] = $def;
+	
 	if ($options) $options = $options[0];
 	
 	// служебная секция [files] 

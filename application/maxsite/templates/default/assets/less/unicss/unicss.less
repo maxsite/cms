@@ -1,3 +1,511 @@
+/*  .UniCSS v4.06.2015 */
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+*,
+*:before,
+*:after {
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+}
+
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// normalize.css v3.0.2 | MIT License | git.io/normalize
+
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+[hidden],
+template {
+  display: none;
+}
+
+a {
+  background-color: transparent;
+}
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+dfn {
+  font-style: italic;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+img {
+  border: 0;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+figure {
+  margin: 1em 40px;
+}
+
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+pre {
+  overflow: auto;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit; 
+  margin: 0;
+}
+
+button {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer; 
+}
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+input {
+  line-height: normal;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box; 
+  padding: 0; 
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box; 
+  box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+legend {
+  border: 0; 
+  padding: 0;
+}
+
+textarea {
+  overflow: auto;
+}
+
+optgroup {
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// БЛОКИ
+
+.clearfix { 
+        &:before,
+        &:after {
+                content: " "; 
+                display: table; 
+        }
+        
+        &:after {
+                clear: both;
+        }
+}  
+
+.b-right  { float: right; }
+.b-left   { float: left; }
+
+.b-center { 
+        margin-left: auto;
+        margin-right: auto; 
+}
+
+.b-hide { display: none; } 
+
+.b-inline { display: inline-block; }
+.b-block  { display: block; }
+
+.b-clear { clear: both; }
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// бордюры
+
+// для элементов, где неважно какой border: по-умолчанию — серый
+.bordered { border: @gray 1px solid; }
+
+// задается классы: цвет (.bor-color1) стиль (.bor-solid) ширина (.bor1px)
+// h6(bor-color5 bor-solid-l bor3px) Пример левого border
+// по умолчанию ширина 1px для всех цветов. её можно не указывать
+// отображение линии происходит по border-style
+// h6(bor-gray300 bor-solid) Полная граница
+
+// для всех классов по умолчанию 1px
+[class*="bor-"] {
+        border-width: 1px;
+}
+
+// цвета основные, дополнительные и серые
+.bor-color1  { border-color: @color1; }
+.bor-color2  { border-color: @color2; }
+.bor-color3  { border-color: @color3; }
+.bor-color4  { border-color: @color4; }
+.bor-color5  { border-color: @color5; }
+
+.bor-colorA1 { border-color: @colorA1; }
+.bor-colorA2 { border-color: @colorA2; }
+.bor-colorA3 { border-color: @colorA3; }
+.bor-colorA4 { border-color: @colorA4; }
+.bor-colorA5 { border-color: @colorA5; }
+
+// все оттенки серого
+.bor-gray    { border-color: @gray;    }
+.bor-gray50  { border-color: @gray50;  }
+.bor-gray100 { border-color: @gray100; }
+.bor-gray200 { border-color: @gray200; }
+.bor-gray300 { border-color: @gray300; }
+.bor-gray400 { border-color: @gray400; }
+.bor-gray500 { border-color: @gray500; }
+.bor-gray600 { border-color: @gray600; }
+.bor-gray700 { border-color: @gray700; }
+.bor-gray800 { border-color: @gray800; }
+.bor-gray900 { border-color: @gray900; }
+
+// тип линий — этот класс и вызывает рисование линий
+.bor-solid    { border-style: solid; }
+.bor-solid-t  { border-top-style: solid; }
+.bor-solid-r  { border-right-style: solid; }
+.bor-solid-b  { border-bottom-style: solid; }
+.bor-solid-l  { border-left-style: solid; }
+.bor-solid-tb { border-top-style: solid; border-bottom-style: solid; }
+.bor-solid-rl { border-right-style: solid; border-left-style: solid; }
+
+.bor-dotted   { border-style: dotted; }
+.bor-dotted-t { border-top-style: dotted; }
+.bor-dotted-r { border-right-style: dotted; }
+.bor-dotted-b { border-bottom-style: dotted; }
+.bor-dotted-l { border-left-style: dotted; }
+.bor-dotted-tb { border-top-style: dotted; border-bottom-style: dotted; }
+.bor-dotted-rl { border-right-style: dotted; border-left-style: dotted; }
+
+.bor-dashed   { border-style: dashed; }
+.bor-dashed-t { border-top-style: dashed; }
+.bor-dashed-r { border-right-style: dashed; }
+.bor-dashed-b { border-bottom-style: dashed; }
+.bor-dashed-l { border-left-style: dashed; }
+.bor-dashed-tb { border-top-style: dashed; border-bottom-style: dashed; }
+.bor-dashed-rl { border-right-style: dashed; border-left-style: dashed; }
+
+.bor-double   { border-style: double; }
+.bor-double-t { border-top-style: double; }
+.bor-double-r { border-right-style: double; }
+.bor-double-b { border-bottom-style: double; }
+.bor-double-l { border-left-style: double; }
+.bor-double-tb { border-top-style: double; border-bottom-style: double; }
+.bor-double-rl { border-right-style: double; border-left-style: double; }
+
+// толщина линий
+.bor1px  { border-width: 1px; }
+.bor2px  { border-width: 2px; }
+.bor3px  { border-width: 3px; }
+.bor4px  { border-width: 4px; }
+.bor5px  { border-width: 5px; }
+.bor6px  { border-width: 6px; }
+.bor7px  { border-width: 7px; }
+.bor8px  { border-width: 8px; }
+.bor9px  { border-width: 9px; }
+.bor10px { border-width: 10px; }
+
+// спрятать ненужные линии
+// h4(bor-gray bor-dashed bor2px bor-none-r bor-none-l pad6-tb t-center) Пример
+.bor-none   { border-style: none !important; }
+.bor-none-t { border-top-style: none !important; }
+.bor-none-r { border-right-style: none !important; }
+.bor-none-b { border-bottom-style: none !important; }
+.bor-none-l { border-left-style: none !important; }
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// кнопки
+
+// типовой вариант
+.button {
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        white-space: nowrap;
+        border: none; // для <button> 
+        
+        background: @button_bg_color;
+        color: @button_text_color;
+        padding: @button_padding;
+        
+        &:hover {
+                text-decoration: none;
+                background: @button_hover_bg_color;
+                color: @button_hover_text_color;
+        }
+        
+        &:active, 
+        &:focus 
+        {
+                background: @button_active_bg_color;
+                color: @button_active_text_color;
+        }
+        
+        &.disabled,
+        &:disabled
+        {
+                background: @button_disabled_bg_color;
+                color: @button_disabled_text_color;
+                cursor: not-allowed;
+        }
+
+}
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// цвета
+
+// основные
+.colors_state(color1, @color1);
+.colors_state(color2, @color2);
+.colors_state(color3, @color3);
+.colors_state(color4, @color4);
+.colors_state(color5, @color5);
+
+// дополнительные
+.colors_state(colorA1, @colorA1);
+.colors_state(colorA2, @colorA2);
+.colors_state(colorA3, @colorA3);
+.colors_state(colorA4, @colorA4);
+.colors_state(colorA5, @colorA5);
+
+// предопределенные
+.colors_state(white, @white);
+.colors_state(black, @black);
+.colors_state(gray, @gray);
+.colors_state(red, @red);
+.colors_state(green, @green);
+.colors_state(blue, @blue);
+.colors_state(yellow, @yellow);
+
+// оттенки серого
+.colors_state(gray50, @gray50);
+.colors_state(gray100, @gray100);
+.colors_state(gray200, @gray200);
+.colors_state(gray300, @gray300);
+.colors_state(gray400, @gray400);
+.colors_state(gray500, @gray500);
+.colors_state(gray600, @gray600);
+.colors_state(gray700, @gray700);
+.colors_state(gray800, @gray800);
+.colors_state(gray900, @gray900);
+
+// прозрачность
+.bg-op10 { background-color: rgba(0,0,0,0.1); }
+.bg-op20 { background-color: rgba(0,0,0,0.2); }
+.bg-op30 { background-color: rgba(0,0,0,0.3); }
+.bg-op40 { background-color: rgba(0,0,0,0.4); }
+.bg-op50 { background-color: rgba(0,0,0,0.5); }
+.bg-op60 { background-color: rgba(0,0,0,0.6); }
+.bg-op70 { background-color: rgba(0,0,0,0.7); }
+.bg-op80 { background-color: rgba(0,0,0,0.8); }
+.bg-op90 { background-color: rgba(0,0,0,0.9); }
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+
+// http://the-echoplex.net/flexyboxes/ — построитель
+// http://html5.by/blog/flexbox/
+// http://frontender.info/a-guide-to-flexbox/
+// http://www.w3.org/TR/css3-flexbox/
+
+.flex {
+        .grid_flex > .container(space-between, stretch);
+        
+        &.flex-vcenter {
+                .grid_flex > .align_items(center);
+        }
+        
+        &.flex-hcenter {
+                .grid_flex > .justify_content(center);
+        }
+}
+
+.flex-grow0 { .grid_flex > .grow(0); }
+.flex-grow1 { .grid_flex > .grow(1); }
+.flex-grow2 { .grid_flex > .grow(2); }
+.flex-grow3 { .grid_flex > .grow(3); }
+
+@media @SCREEN_TABLET {
+        .flex-wrap-tablet,
+        .flex-wrap-tablet-phone
+        {
+                .grid_flex > .wrap(wrap);
+        }
+        
+        .flex-tablet,
+        .flex-tablet-phone
+        {
+                .flex;
+        }
+        
+        .flex-reverse-tablet {
+                .grid_flex > .direction(row-reverse);
+        }
+}
+
+@media @SCREEN_PHONE {
+        .flex-wrap-phone,
+        .flex-wrap-tablet-phone
+        {
+                .grid_flex > .wrap(wrap);
+        }
+        
+        .flex-phone,
+        .flex-tablet-phone
+        {
+        
+        .flex;
+        }
+        .flex-reverse-phone {
+                .grid_flex > .direction(row-reverse);
+        }
+        
+}
 // http://fortawesome.github.io/Font-Awesome/cheatsheet/
 // font-awesome-4.3.0
 
@@ -10,20 +518,20 @@
 
 // базовые стили для иконок для FA
 .icon-fa-normal {
-	font-family: FontAwesome;
-	display: inline-block;
-	font-size: inherit;
-	font-weight: normal;
-	font-style: normal;
-	line-height: 1;
-	margin-right: 7px;
-	text-rendering: auto;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+        font-family: FontAwesome;
+        display: inline-block;
+        font-size: inherit;
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1;
+        margin-right: 7px;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
 }
 
 [class*="i-"]:before {
-	.icon-fa-normal;
+        .icon-fa-normal;
 }
 
 @fa-css-prefix: i;
@@ -1217,3 +1725,445 @@
 .@{fa-css-prefix}-train:before { content: @fa-var-train; }
 .@{fa-css-prefix}-subway:before { content: @fa-var-subway; }
 .@{fa-css-prefix}-medium:before { content: @fa-var-medium; }
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// градиенты
+
+// серый
+.gr-gray400-100 {
+  background-color: #f5f5f5;
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#bdbdbd), to(#f5f5f5));
+  background-image: -webkit-linear-gradient(top, #bdbdbd, 0%, #f5f5f5, 100%);
+  background-image: -moz-linear-gradient(top, #bdbdbd 0%, #f5f5f5 100%);
+  background-image: linear-gradient(to bottom, #bdbdbd 0%, #f5f5f5 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffbdbdbd', endColorstr='#fff5f5f5', GradientType=0);
+}
+
+.gr-gray100-400 {
+  background-color: #bdbdbd;
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#f5f5f5), to(#bdbdbd));
+  background-image: -webkit-linear-gradient(top, #f5f5f5, 0%, #bdbdbd, 100%);
+  background-image: -moz-linear-gradient(top, #f5f5f5 0%, #bdbdbd 100%);
+  background-image: linear-gradient(to bottom, #f5f5f5 0%, #bdbdbd 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffbdbdbd', endColorstr='#fff5f5f5', GradientType=0);
+}
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// высота
+
+.h16px  {min-height: 16px !important;}
+.h24px  {min-height: 24px !important;}
+.h32px  {min-height: 32px !important;}
+.h48px  {min-height: 48px !important;}
+.h100px {min-height: 100px !important;}
+.h200px {min-height: 200px !important;}
+.h300px {min-height: 300px !important;}
+.h400px {min-height: 400px !important;}
+.h500px {min-height: 500px !important;}
+
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// Иконки
+
+// классы для размеров иконок
+.t-icon        { font-size: @icon_size; }
+.t-icon-small  { font-size: @icon_size_small; }
+.t-icon-medium { font-size: @icon_size_medium; }
+.t-icon-large  { font-size: @icon_size_large; }
+
+// круглая иконка с базовым размером
+// <a href="#" class="i-car icon-circle"></a>
+.icon-circle { 
+        width: @icon_circle_size; 
+        height: @icon_circle_size; 
+        line-height: @icon_circle_size; 
+        display: inline-block;
+        text-align: center;
+        
+        .border_radius(50%);
+        
+        // сброс отступа для иконки
+        &:before {
+                margin: 0;
+        }
+}
+
+// квадратная иконка
+.icon-square { 
+        width: @icon_square_size; 
+        height: @icon_square_size; 
+        line-height: @icon_square_size; 
+        display: inline-block;
+        text-align: center;
+
+        // сброс отступа для иконки
+        &:before {
+                margin: 0;
+        }
+}
+
+
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// МОДУЛЬНАЯ СЕТКА
+
+.layout-center {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        max-width: @layout_max_width;
+}
+
+// если есть внутренний wrap заданной ширины
+.layout-center-wrap {
+        width: 100%;
+        
+        > .wrap {
+                width: 100%;
+                margin-right: auto;
+                margin-left: auto;
+                max-width: @layout_max_width;
+        }
+}
+
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// ссылки
+
+a {
+        // сбрасываем цвет :hover
+        &.hover-no-color {
+                &:hover {
+                        color: inherit;
+                }
+        }
+        
+        // сбрасываем подчеркивание :hover
+        &.hover-no-underline {
+                &:hover {
+                        text-decoration: none;
+                }
+        }
+}
+
+// для дочерних тэгов
+.hover-no-color {
+        a:hover {
+                color: inherit;
+        }
+}
+
+.hover-no-underline {
+        a:hover {
+                text-decoration: none;
+        }
+}
+
+.links-no-color {
+        a {
+                color: inherit;
+        }
+}
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// разное без четкой тематики
+
+
+// скругление
+.rounded, .rounded10 { .border_radius(10px); }
+.rounded5 { .border_radius(5px); }
+
+// круг
+.b-circle { .border_radius(50%); }
+
+// курсор
+.cursor-pointer { cursor: pointer; }
+
+// буквица для абзца
+.drop-cap { 
+        &:first-letter {
+                float: left;
+                font-size: 3em;
+                font-weight: bold;
+                margin-right: 0.75rem;
+                text-transform: uppercase;
+                line-height: 1;
+        }
+}
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// отступы
+
+// padding
+.box > .set_padding(0, pad0) !important;
+.box > .set_padding(@padding, pad) !important;
+.box > .set_padding(5px, pad5) !important;
+.box > .set_padding(6px, pad6) !important;
+.box > .set_padding(7px, pad7) !important;
+.box > .set_padding(10px, pad10) !important;
+.box > .set_padding(15px, pad15) !important;
+.box > .set_padding(20px, pad20) !important;
+.box > .set_padding(25px, pad25) !important;
+.box > .set_padding(30px, pad30) !important;
+.box > .set_padding(40px, pad40) !important;
+.box > .set_padding(50px, pad50) !important;
+
+// margin
+.box > .set_margin(0, mar0) !important;
+.box > .set_margin(@margin, mar) !important;
+.box > .set_margin(5px, mar5) !important;
+.box > .set_margin(6px, mar6) !important;
+.box > .set_margin(7px, mar7) !important;
+.box > .set_margin(10px, mar10) !important;
+.box > .set_margin(15px, mar15) !important;
+.box > .set_margin(20px, mar20) !important;
+.box > .set_margin(25px, mar25) !important;
+.box > .set_margin(30px, mar30) !important;
+.box > .set_margin(40px, mar40) !important;
+.box > .set_margin(50px, mar50) !important;
+
+
+// для адаптивного дизайна сбросы
+@media @SCREEN_TABLET {
+        .box > .set_padding(0, pad0, tablet) !important;
+        .box > .set_margin(0, mar0, tablet) !important;
+}
+
+@media @SCREEN_PHONE {
+        .box > .set_padding(0, pad0, phone) !important;
+        .box > .set_margin(0, mar0, phone) !important;
+}
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// position
+
+.pos-fixed    { position: fixed; }
+.pos-absolute { position: absolute; }
+.pos-relative { position: relative; }
+
+.pos-top    { top: 0; }
+.pos-right  { right: 0; }
+.pos-bottom { bottom: 0; }
+.pos-left   { left: 0; }
+
+.pos-top10px    { top: 10px; }
+.pos-right10px  { right: 10px; }
+.pos-bottom10px { bottom: 10px; }
+.pos-left10px   { left: 10px; }
+
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// тени
+
+.shadow {
+        -webkit-box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// текст
+
+// сброс текста и отступов
+.normal
+{
+        font-weight: normal;
+        font-style: normal;
+        text-decoration: none;
+        margin: 0;
+        padding: 0;
+        line-height: 1em;
+}
+
+// форматирование текста
+.bold       { font-weight: bold; }
+.italic     { font-style: italic; }
+.underline  { text-decoration: underline; }
+.strike     { text-decoration: line-through; }
+.small-caps { font-variant: small_caps; }
+.capitalize { text-transform: capitalize; }
+.upper      { text-transform: uppercase; }
+.lower      { text-transform: lowercase; }
+
+// выравнивание текста
+.t-right   { text-align: right; }
+.t-left    { text-align: left; }
+.t-center  { text-align: center; }
+.t-justify { text-align: justify; }
+
+@media @SCREEN_TABLET {
+        .t-right-tablet   { text-align: right; }
+        .t-left-tablet    { text-align: left; }
+        .t-center-tablet  { text-align: center; }
+        .t-justify-tablet { text-align: justify; }
+}
+
+@media @SCREEN_PHONE {
+        .t-right-phone   { text-align: right; }
+        .t-left-phone    { text-align: left; }
+        .t-center-phone  { text-align: center; }
+        .t-justify-phone { text-align: justify; }       
+}
+
+
+// запрет переноса
+.t-nowrap { white-space: nowrap; }
+.t-wrap   { white-space: normal; }
+
+// гарнитура
+.t-georgia { font-family: Georgia, Times New Roman, serif; }
+.t-times   { font-family: Times New Roman, serif; }
+.t-arial   { font-family: Arial, Helvetica, Verdana, sans-serif; }
+.t-verdana { font-family: Verdana, Arial, Helvetica, sans-serif; }
+.t-mono    { font-family: PT Mono, Monaco, Menlo, Consolas, Courier New, monospace; }
+
+// размеры относительные
+.t80  {font-size: .8rem; }
+.t90  {font-size: .9rem; }
+.t100 {font-size: 1rem; }
+.t110 {font-size: 1.1rem; }
+.t120 {font-size: 1.2rem; }
+.t130 {font-size: 1.3rem; }
+.t140 {font-size: 1.4rem; }
+.t150 {font-size: 1.5rem; }
+.t160 {font-size: 1.6rem; }
+.t170 {font-size: 1.7rem; }
+.t180 {font-size: 1.8rem; }
+.t190 {font-size: 1.9rem; }
+.t200 {font-size: 2rem; }
+.t210 {font-size: 2.1rem; }
+.t220 {font-size: 2.2rem; }
+.t230 {font-size: 2.3rem; }
+.t240 {font-size: 2.4rem; }
+.t250 {font-size: 2.5rem; }
+.t260 {font-size: 2.6rem; }
+.t270 {font-size: 2.7rem; }
+.t280 {font-size: 2.8rem; }
+.t290 {font-size: 2.9rem; }
+.t300 {font-size: 3rem; }
+.t310 {font-size: 3.1rem; }
+.t320 {font-size: 3.2rem; }
+.t330 {font-size: 3.3rem; }
+.t340 {font-size: 3.4rem; }
+.t350 {font-size: 3.5rem; }
+.t360 {font-size: 3.6rem; }
+.t370 {font-size: 3.7rem; }
+.t380 {font-size: 3.8rem; }
+.t390 {font-size: 3.9rem; }
+.t400 {font-size: 4rem; }
+.t450 {font-size: 4.5rem; }
+.t500 {font-size: 5rem; }
+
+// фиксированные px
+.t8px  {font-size: 8px; }
+.t9px  {font-size: 9px; }
+.t10px {font-size: 10px; }
+.t11px {font-size: 11px; }
+.t12px {font-size: 12px; }
+.t14px {font-size: 14px; }
+.t15px {font-size: 15px; }
+.t16px {font-size: 16px; }
+.t17px {font-size: 17px; }
+.t18px {font-size: 18px; }
+.t19px {font-size: 19px; }
+.t20px {font-size: 20px; }
+.t24px {font-size: 24px; }
+.t26px {font-size: 26px; }
+.t28px {font-size: 28px; }
+.t30px {font-size: 30px; }
+.t32px {font-size: 32px; }
+.t48px {font-size: 48px; }
+.t64px {font-size: 64px; }
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// видимоcть блоков ТОЛЬКО для desktop, tablet или phone
+
+// дефолт для desktop
+.visible-desktop { display: block; }
+.visible-desktop-tablet { display: block; }
+.visible-tablet { display: none; }
+.visible-phone { display: none; }
+.visible-tablet-phone { display: none; }
+
+.hide-desktop { display: none; }
+.hide-desktop-tablet { display: none; }
+
+@media @SCREEN_TABLET {
+        .visible-tablet  { display: block; }
+        .visible-tablet-phone  { display: block; }
+        .visible-desktop-tablet  { display: block; }
+        .visible-desktop { display: none; }
+        .visible-phone   { display: none; }
+        
+        .hide-tablet { display: none; }
+        .hide-tablet-phone { display: none; }
+}
+
+@media @SCREEN_PHONE {
+        .visible-phone   { display: block; }
+        .visible-tablet-phone   { display: block; }
+        .visible-desktop { display: none; }
+        .visible-desktop-tablet  { display: none; }
+        .visible-tablet  { display: none; }
+        
+        .hide-phone { display: none; }
+        .hide-tablet-phone { display: none; }
+}
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// максимальная ширина модульной сетки
+.w-max-layout {
+        width: 100%;
+        max-width: @layout_max_width;
+}
+
+// фиксированная max-width
+.w16px { max-width: 16px;}
+.w24px { max-width: 24px;}
+.w30px { max-width: 30px;}
+.w32px { max-width: 32px;}
+.w48px { max-width: 48px;}
+.w50px { max-width: 50px;}
+.w70px { max-width: 70px;}
+.w100px { max-width: 100px;}
+.w200px { max-width: 200px;}
+.w250px { max-width: 250px;}
+.w300px { max-width: 300px;}
+.w400px { max-width: 400px;}
+.w500px { max-width: 500px;}
+.w600px { max-width: 600px;}
+.w700px { max-width: 700px;}
+.w800px { max-width: 800px;}
+.w900px { max-width: 900px;}
+
+// под адаптивность
+.w320px { max-width: 320px;}
+.w480px { max-width: 480px;}
+.w768px { max-width: 768px;}
+.w992px { max-width: 992px;}
+
+// ВАЖНО! @media от больших экранов к маленьким!
+
+// устанавливаем ширины классов .wXX
+.set_width > .percent(w);
+
+// .wXX-tablet
+@media @SCREEN_TABLET {
+        .set_width > .percent(w, tablet);
+}
+
+// .wXX-phone
+@media @SCREEN_PHONE {
+        .set_width > .percent(w, phone);
+}
+/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+
+// z-index
+
+.z-index1    { z-index: 1; }
+.z-index9    { z-index: 9; }
+.z-index99   { z-index: 99; }
+.z-index999  { z-index: 999; }
+.z-index9999 { z-index: 9999; }

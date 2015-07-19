@@ -61,6 +61,20 @@ function less_compiling_mso_options()
 							'description' => '',
 							'default' => 0
 						),
+			
+			'syslessc' => array(
+							'type' => 'checkbox', 
+							'name' => t('Использовать системный less-компилятор'), 
+							'description' => t('Он должен быть уже устновлен в системе, например через Node.js'),
+							'default' => 0
+						),	
+						
+			'syslessc_path' => array(
+							'type' => 'text', 
+							'name' => t('Полный путь к системному less-компилятору'), 
+							'description' => '',
+							'default' => 'c:\Users\admin\AppData\Roaming\npm\lessc.cmd'
+						),
 						
 			'files' => array(
 							'type' => 'textarea', 
@@ -89,6 +103,9 @@ function less_compiling_init($args = array())
 	
 	// Выполнять компиляцию при работе в админ-панели
 	if (!isset($options['admin_enabled'])) $options['admin_enabled'] = false;
+	
+	if (!isset($options['syslessc'])) $options['syslessc'] = false;
+	if (!isset($options['syslessc_path'])) $options['syslessc_path'] = 'c:\Users\admin\AppData\Roaming\npm\lessc.cmd';
 	
 	// не компилировать в админке
 	if (!$options['admin_enabled'] and mso_segment(1) == 'admin') return $args; 
@@ -140,9 +157,14 @@ function less_compiling_init($args = array())
 				
 				$use_cache = !in_array('nocache', $opt); // если есть nocache, то не кэшируем
 				$use_mini = in_array('mini', $opt);
-
-				// $use_cache = false, $use_mini = true, $use_mini_n = false 
-				mso_lessc($less_file, $css_file, 'qwerty', $use_cache, $use_mini, $use_mini);
+				
+				// компиляция через системный lessc
+				if ($options['syslessc'])
+					mso_syslessc($less_file, $css_file, 'qwerty', $use_cache, $use_mini, $use_mini, $options['syslessc_path']);
+				else
+					// компиляция через lessphp
+					// $use_cache = false, $use_mini = true, $use_mini_n = false 
+					mso_lessc($less_file, $css_file, 'qwerty', $use_cache, $use_mini, $use_mini);
 				
 			}
 		}
@@ -354,6 +376,72 @@ function _mso_less_exception($message, $text)
 	$out .= '<ol style="height: 500px; overflow: scroll; background: #eee; font-family: monospace; ">' . $text . '</ol>';
 	
 	return $out;
+}
+
+
+function mso_syslessc($less_file = '', $css_file = '', $css_url = '', $use_cache = false, $use_mini = true, $use_mini_n = false, $syslessc_path)
+{
+	if (!$less_file or !$css_file) return; // не указаны файлы
+	
+	if ($use_cache) // проверка кэша
+	{
+		if (file_exists($less_file) and file_exists($css_file))
+		{
+			$flag_compiling = false; // флаг == true — требуется компиляция 
+			$t_css = filemtime($css_file); // время css-файла
+			
+			
+			// смотрим все файлы каталога
+			$CI = & get_instance(); // подключение CodeIgniter
+			$CI->load->helper('file_helper'); // хелпер для работы с файлами
+			$all_files_in_dirs = get_filenames(dirname($less_file), true);
+
+			foreach ($all_files_in_dirs as $file)
+			{
+				if (substr(strrchr($file, '.'), 1) !== 'less') continue; // проверка расширения файла
+				
+				if (filemtime($file) > $t_css) // файл старше css — нужна компиляция
+				{
+					$flag_compiling = true; // нужна компиляция
+					break;
+				}
+			}
+			
+			if (!$flag_compiling) // можно отдать из кеша
+			{
+				if ($css_url) 
+				{
+					// в виде имени файла
+					return NT . '<link rel="stylesheet" href="' . $css_url . '">';
+				}
+				else
+				{
+					// в виде содержимого
+					return file_get_contents($css_file);
+				}
+			}
+		}
+	}
+	
+	// замены слэшей в путях
+	$less_file = str_replace('/', DIRECTORY_SEPARATOR , $less_file);
+	$css_file = str_replace('/', DIRECTORY_SEPARATOR, $css_file);
+	
+	// возможен такой вариант
+	// $less_file = str_replace(DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, $less_file);
+	// $css_file = str_replace(DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, $css_file);
+	
+	if ($use_mini)
+		$com = $syslessc_path . ' --compress "' . $less_file . '" > "'. $css_file . '"';
+	else
+		$com = $syslessc_path . ' "' . $less_file . '" > "'. $css_file . '"';
+	
+	$com = escapeshellcmd($com);
+	
+	// pr($com);
+	
+	// lessc --compress style.less > style.css
+	exec($com);
 }
 
 # end file

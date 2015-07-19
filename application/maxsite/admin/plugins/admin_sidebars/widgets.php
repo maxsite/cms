@@ -78,9 +78,15 @@ $(function () {
 			
 			foreach ($widgets as $widget)
 			{
+				
+				// удаляем указанные @классы@
+				$widget = trim(preg_replace('!\@(.*?)\@!is', "", $widget));
+				$widget = str_replace('  ', ' ', $widget);
+				
 				// имя виджета может содержать номер через пробел
 				// проверим это
 				$arr_w = explode(' ', $widget); // в массив
+				
 				if ( sizeof($arr_w) > 1 ) // два или больше элементов
 				{
 					$widget = trim( $arr_w[0] ); // первый - функция

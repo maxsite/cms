@@ -2080,7 +2080,7 @@ function mso_register_widget($widget = false, $title = 'Виджет')
 
 
 # вывод сайбрара
-function mso_show_sidebar($sidebar = '1', $block_start = '<div class="mso-widget mso-widget_[NUMW] mso-widget_[SB]_[NUMW] mso-[FN] mso-[FN]_[NUMF]">', $block_end = '</div>', $echo = true)
+function mso_show_sidebar($sidebar = '1', $block_start = '<div class="[CLASS]mso-widget mso-widget_[NUMW] mso-widget_[SB]_[NUMW] mso-[FN] mso-[FN]_[NUMF]">', $block_end = '</div>', $echo = true)
 {
 	global $MSO, $page; // чтобы был доступ к параметрам страниц в условиях виджетов
 
@@ -2095,9 +2095,20 @@ function mso_show_sidebar($sidebar = '1', $block_start = '<div class="mso-widget
 		foreach ($widgets as $widget)
 		{
 			$usl_res = 1; // предполагаем, что нет условий, то есть всегда true
-
+			$class = ''; // дополнительный класс виджета
+			
+			// возможно указаны css-классы виджета между @класс1 класс2@
+			if (preg_match('!\@(.*?)\@!is', $widget, $matches)) $class = trim($matches[1]) . ' ';
+			
+			// удаляем указанные классы
+			$widget = trim(preg_replace('!\@(.*?)\@!is', "", $widget));
+			
+			// удалим возможные двойные пробелы
+			$widget = str_replace('  ', ' ', $widget);
+			
 			// имя виджета может содержать номер через пробел
 			$arr_w = explode(' ', $widget); // в массив
+			
 			if ( sizeof($arr_w) > 1 ) // два или больше элементов
 			{
 				$widget = trim( $arr_w[0] ); // первый - функция
@@ -2146,26 +2157,12 @@ function mso_show_sidebar($sidebar = '1', $block_start = '<div class="mso-widget
 					$st = str_replace('[NUMF]', $num, $st); // номер функции
 					$st = str_replace('[NUMW]', $numw, $st);	//
 					$st = str_replace('[SB]', $sidebar, $st); // номер сайдбара
+					$st = str_replace('[CLASS]', $class, $st);
 
 					$en = str_replace('[FN]', $widget, $block_end);
 					$en = str_replace('[NUMF]', $num, $en);
 					$en = str_replace('[NUMW]', $numw, $en);
 					$en = str_replace('[SB]', $sidebar, $en);
-					
-					
-					// обрамим содержимое виджета в div.widget-content
-					/*
-					if (stripos($temp, mso_get_val('widget_header_end', '</span></h2>')) !== false)
-					{
-						// есть вхождение заголовка виджета <h2>
-						$temp = str_replace(mso_get_val('widget_header_end', '</span></h2>'), mso_get_val('widget_header_end', '</span></h2>') . '<div class="widget-content">', $temp);
-						$en = '</div>' . $en;
-					}
-					else
-					{
-						$temp = '<div class="widget-content">' . $temp . '</div>';
-					}
-					*/
 					
 					$out .= $st . $temp . $en;
 				}

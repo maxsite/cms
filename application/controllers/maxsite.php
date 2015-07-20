@@ -147,8 +147,8 @@ if (!class_exists('Maxsite'))
 				require($fn);
 			elseif ($fn !== false) 
 			{
-				// если в конфиге стоит mso_permalink_no_slug == "no", то ничего не делаем - отдаем 404-страницу
-				if ($this->config->item('mso_permalink_no_slug') !== "no")
+				// если в конфиге стоит mso_permalink_no_slug == "yes", то ищем синонимы
+				if ($this->config->item('mso_permalink_no_slug') === "yes")
 				{
 					# проверим короткую ссылку - может быть это slug из page или category 
 					# если это так, то выставить тип вручную

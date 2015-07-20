@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Пагинация'),
 	'description' => t('Пагинация страниц (&lt;&lt; &lt; 1 2 ... 5 6 7 &gt; &gt;&gt;)'),
-	'version' => '1.6',
+	'version' => '2.0',
 	'author' => 'Максим',
 	'plugin_url' => 'http://max-3000.com/',
 	'author_url' => 'http://maxsite.org/',

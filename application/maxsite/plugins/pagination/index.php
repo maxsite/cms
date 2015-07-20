@@ -35,7 +35,6 @@ function pagination_go($r = array())
 	
 	if ( !isset($r['sep2']) ) 
 		$r['sep2'] = isset($options['sep2']) ? $options['sep2'] : ' ';
-		
 	
 	
 	if ( !isset($r['format']) )
@@ -54,40 +53,28 @@ function pagination_go($r = array())
 	
 	if ($current_paged > $r['maxcount']) $current_paged = $r['maxcount'];
 	
-	if ($r['type'] !== false) $type = $r['type'];
-		else $type = $MSO->data['type'];
+	if ($r['type'] !== false) 
+		$type = $r['type'];
+	else 
+		$type = $MSO->data['type'];
 	
-	// текущий урл сделаем
-	$a_cur_url = $MSO->data['uri_segment'];
+	// текущий адрес
+	$cur_url = mso_current_url(true);
 	
-	// $cur_url = getinfo('site_url') . $type;
-	if ($type != 'page_404') $cur_url = getinfo('site_url') . $type;
-		else $cur_url = getinfo('site_url');
-	
-	// pr($cur_url);
-	
-	foreach ($a_cur_url as $val)
+	// в текущем адресе нужно исключить пагинацию next
+	if (preg_match("!/" . $r['next_url'] . "/!is", $cur_url, $matches, PREG_OFFSET_CAPTURE)) 
 	{
-		#if ($val == 'next') break; // next - дальше не нужно
-		
-		if ($val == $r['next_url']) break; // next - дальше не нужно
-		else
-		{
-			if ($val != $type) $cur_url .= '/@@' . $val;
-		}
+		$cur_url = substr($cur_url, 0, $matches[0][1]);
 	}
 	
-	$cur_url = str_replace('//@@', '/', $cur_url);
-	$cur_url = str_replace('@@', '', $cur_url);
-	// pr($cur_url);
+	if ($type == 'home') $cur_url = $cur_url . 'home';
 	
+	// pr($cur_url);
 	
 	if ($type == 'home') 
 		$home_url = getinfo('site_url');
 	else
 		$home_url = $cur_url;
-	
-	//pr($home_url);
 	
 	$out = _pagination( $r['maxcount'], 
 						$current_paged, 
@@ -107,7 +94,7 @@ function pagination_go($r = array())
 				$r['format'],
 				$out);
 		
-		echo NR . '<div class="pagination"><nav>' . $out . '</nav></div>' . NR;
+		echo '<div class="pagination"><nav>' . $out . '</nav></div>';
 	}
 	
 	return $r_orig;

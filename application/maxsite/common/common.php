@@ -1463,20 +1463,28 @@ function mso_redirect($url = '', $absolute = false, $header = false)
 # получение текущего url относительно сайта
 # ведущий и конечные слэши удаляем
 # если $absolute = true, то возвращается текущий урл как есть
-function mso_current_url($absolute = false)
+function mso_current_url($absolute = false, $explode = false, $delete_request = false)
 {
 	global $MSO;
 
 	$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https://" : "http://";
 	$url .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	
+	if ($delete_request) // отделим по «?»
+	{
+		$url = explode('?', $url);
+		$url = $url[0];
+	}
+	
 	if ($absolute) return $url;
 	
 	$url = str_replace($MSO->config['site_url'], "", $url);
-
 	$url = trim( str_replace('/', ' ', $url) );
 	$url = str_replace(' ', '/', $url);
-
+	$url = urldecode($url);
+	
+	if ($explode) $url = explode('/', $url);
+	
 	return $url;
 }
 
@@ -2001,8 +2009,12 @@ function mso_current_paged($next = 'next')
 {
 	global $MSO;
 
-	$uri = $MSO->data['uri_segment'];
-
+	$uri = mso_current_url(false, true);
+	
+	// это чтобы нумерация совпадала с $MSO->data['uri_segment'] с 1
+	array_unshift($uri, '');
+	unset($uri[0]);
+	
 	if ($n = mso_array_get_key_value($uri, $next))
 	{
 		if (isset($uri[$n+1])) $n = (int) $uri[$n+1];
@@ -3638,29 +3650,36 @@ function mso_link_rel($rel = 'canonical', $add = '', $url_only = false)
 			
 			$url = '';
 			
-			if (is_type('page') 
-				or is_type('category') 
-				or is_type('tag') 
-				or is_type('author')
-				or is_type('users')
-				or (mso_segment(1) == 'sitemap')
-				or (mso_segment(1) == 'contact')
-				)
-			{
-				if (mso_segment(2))
-				{
-					$url = getinfo('site_url') . mso_segment(1) . '/' . mso_segment(2);
-				}
-				else
-				{
-					$url = getinfo('site_url') . mso_segment(1);
-				}
-			}
-			elseif (is_type('home'))
-			{
-				$url = getinfo('site_url');
-			}
+			// если есть хук canonical, то выполняем его
+			// если хук вернул какое-то значение, то это $url
+			// если нет, то выполняем типовое определение канонического адреса
+			if (mso_hook_present('canonical')) $url = mso_hook('canonical'); 
 			
+			if (!$url)
+			{
+				if (is_type('page') 
+					or is_type('category') 
+					or is_type('tag') 
+					or is_type('author')
+					or is_type('users')
+					or (mso_segment(1) == 'sitemap')
+					or (mso_segment(1) == 'contact')
+					)
+				{
+					if (mso_segment(2))
+					{
+						$url = getinfo('site_url') . mso_segment(1) . '/' . mso_segment(2);
+					}
+					else
+					{
+						$url = getinfo('site_url') . mso_segment(1);
+					}
+				}
+				elseif (is_type('home'))
+				{
+					$url = getinfo('site_url');
+				}
+			}
 			// echo $url;
 			
 			// пагинация

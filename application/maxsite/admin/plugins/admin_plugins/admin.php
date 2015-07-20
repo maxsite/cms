@@ -234,8 +234,9 @@
 	else $table2 = '';
 		
 	
-	echo mso_load_jquery('jquery.tablesorter.js') . '
-		<script>
+	echo 
+	// mso_load_jquery('jquery.tablesorter.js') . '
+		'<script>
 		$(function() {
 			$("table.tablesorter").tablesorter( {headers: { 0: {sorter: false}, 2: {sorter: false} }});
 		});

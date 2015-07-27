@@ -44,11 +44,11 @@
 		$form .= '<h2>' . t('Настройки') . '</h2>';
 		
 		$form .= '<p><strong>' . t('Файл для хранения количества скачиваний:') . '</strong><br>' . 
-			getinfo('uploads_dir') . ' <input name="f_file" type="text" value="' . $options['file'] . '"></p>';
+			getinfo('uploads_dir') . ' <input name="f_file" type="text" class="w200px value="' . $options['file'] . '"></p>';
 			
-		$form .= '<p><strong>' . t('Префикс URL:') . '</strong> ' . getinfo('siteurl') . ' <input name="f_prefix" type="text" value="' . $options['prefix'] . '">/' . t('ссылка') . '</p>';
+		$form .= '<p><strong>' . t('Префикс URL:') . '</strong> ' . getinfo('siteurl') . ' <input name="f_prefix" type="text" class="w100px" value="' . $options['prefix'] . '">/' . t('ссылка') . '</p>';
 		
-		$form .= '<p><strong>Формат количества переходов:</strong> <input name="f_format" style="width: 400px;" type="text" value="' . htmlspecialchars($options['format']) . '"></p>';
+		$form .= '<p><strong>Формат количества переходов:</strong><br><input name="f_format" type="text" value="' . htmlspecialchars($options['format']) . '"></p>';
 		
 		
 		$chk = $options['referer'] ? ' checked="checked"  ' : '';

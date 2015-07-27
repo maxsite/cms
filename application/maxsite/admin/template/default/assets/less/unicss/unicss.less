@@ -1,5 +1,5 @@
-/*  .UniCSS v4.06.2015 */
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS v.21-07-2015 
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 *,
 *:before,
@@ -7,8 +7,7 @@
         -moz-box-sizing: border-box;
         box-sizing: border-box;
 }
-
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // normalize.css v3.0.2 | MIT License | git.io/normalize
 
@@ -231,7 +230,7 @@ td,
 th {
   padding: 0;
 }
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // БЛОКИ
 
@@ -261,7 +260,7 @@ th {
 .b-block  { display: block; }
 
 .b-clear { clear: both; }
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // бордюры
 
@@ -280,6 +279,20 @@ th {
 }
 
 // цвета основные, дополнительные и серые
+.bor-white  { border-color: @white; }
+.bor-black  { border-color: @black; }
+.bor-red        { border-color: @red; }
+.bor-green  { border-color: @green; }
+.bor-blue       { border-color: @blue; }
+.bor-yellow { border-color: @yellow; }
+.bor-orange { border-color: @orange; }
+.bor-olive  { border-color: @olive; }
+.bor-teal       { border-color: @teal; }
+.bor-violet { border-color: @violet; }
+.bor-purple { border-color: @purple; }
+.bor-pink       { border-color: @pink; }
+.bor-brown  { border-color: @brown; }
+
 .bor-color1  { border-color: @color1; }
 .bor-color2  { border-color: @color2; }
 .bor-color3  { border-color: @color3; }
@@ -339,16 +352,18 @@ th {
 .bor-double-rl { border-right-style: double; border-left-style: double; }
 
 // толщина линий
-.bor1px  { border-width: 1px; }
-.bor2px  { border-width: 2px; }
-.bor3px  { border-width: 3px; }
-.bor4px  { border-width: 4px; }
-.bor5px  { border-width: 5px; }
-.bor6px  { border-width: 6px; }
-.bor7px  { border-width: 7px; }
-.bor8px  { border-width: 8px; }
-.bor9px  { border-width: 9px; }
-.bor10px { border-width: 10px; }
+// цикл border-width на основе @border_list из variables.less
+.border_loop(@counter) when (@counter > 0) {
+        .border_loop((@counter - 1));
+        
+        @val: extract(@border_list, @counter);
+        
+        .bor@{val}px {
+                border-width: ~"@{val}px";
+        }
+}
+
+.border_loop(length(@border_list));
 
 // спрятать ненужные линии
 // h4(bor-gray bor-dashed bor2px bor-none-r bor-none-l pad6-tb t-center) Пример
@@ -357,7 +372,7 @@ th {
 .bor-none-r { border-right-style: none !important; }
 .bor-none-b { border-bottom-style: none !important; }
 .bor-none-l { border-left-style: none !important; }
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // кнопки
 
@@ -396,7 +411,7 @@ th {
         }
 
 }
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // цвета
 
@@ -423,6 +438,14 @@ th {
 .colors_state(blue, @blue);
 .colors_state(yellow, @yellow);
 
+.colors_state(orange, @orange);
+.colors_state(olive, @olive);
+.colors_state(teal, @teal);
+.colors_state(violet, @violet);
+.colors_state(purple, @purple);
+.colors_state(pink, @pink);
+.colors_state(brown, @brown);
+
 // оттенки серого
 .colors_state(gray50, @gray50);
 .colors_state(gray100, @gray100);
@@ -445,7 +468,7 @@ th {
 .bg-op70 { background-color: rgba(0,0,0,0.7); }
 .bg-op80 { background-color: rgba(0,0,0,0.8); }
 .bg-op90 { background-color: rgba(0,0,0,0.9); }
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 
 // http://the-echoplex.net/flexyboxes/ — построитель
@@ -1725,7 +1748,7 @@ th {
 .@{fa-css-prefix}-train:before { content: @fa-var-train; }
 .@{fa-css-prefix}-subway:before { content: @fa-var-subway; }
 .@{fa-css-prefix}-medium:before { content: @fa-var-medium; }
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // градиенты
 
@@ -1749,21 +1772,31 @@ th {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffbdbdbd', endColorstr='#fff5f5f5', GradientType=0);
 }
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // высота
 
-.h16px  {min-height: 16px !important;}
-.h24px  {min-height: 24px !important;}
-.h32px  {min-height: 32px !important;}
-.h48px  {min-height: 48px !important;}
-.h100px {min-height: 100px !important;}
-.h200px {min-height: 200px !important;}
-.h300px {min-height: 300px !important;}
-.h400px {min-height: 400px !important;}
-.h500px {min-height: 500px !important;}
+// цикл height и min-height на основе @height_list из variables.less
+.height_loop(@counter) when (@counter > 0) {
+        .height_loop((@counter - 1));
+        
+        @val: extract(@height_list, @counter);
+        
+        .h@{val}px {
+                height: ~"@{val}px";
+        }
+        
+        .h@{val}px-min {
+                min-height: ~"@{val}px" !important;
+        }
+        
+        .h@{val}px-max {
+                max-height: ~"@{val}px" !important;
+        }
+ }
 
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+.height_loop(length(@height_list));
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // Иконки
 
@@ -1775,10 +1808,11 @@ th {
 
 // круглая иконка с базовым размером
 // <a href="#" class="i-car icon-circle"></a>
-.icon-circle { 
-        width: @icon_circle_size; 
-        height: @icon_circle_size; 
-        line-height: @icon_circle_size; 
+.icon-circle,
+.icon-circle-small,
+.icon-circle-medium,
+.icon-circle-large
+{ 
         display: inline-block;
         text-align: center;
         
@@ -1790,11 +1824,37 @@ th {
         }
 }
 
+.icon-circle
+{ 
+        width: @icon_circle_size; 
+        height: @icon_circle_size; 
+        line-height: @icon_circle_size; 
+}
+
+.icon-circle-small { 
+        width: @icon_size_small; 
+        height: @icon_size_small; 
+        line-height: @icon_size_small; 
+}
+
+.icon-circle-medium { 
+        width: @icon_size_medium; 
+        height: @icon_size_medium; 
+        line-height: @icon_size_medium; 
+}
+
+.icon-circle-large { 
+        width: @icon_size_large; 
+        height: @icon_size_large; 
+        line-height: @icon_size_large; 
+}
+
 // квадратная иконка
-.icon-square { 
-        width: @icon_square_size; 
-        height: @icon_square_size; 
-        line-height: @icon_square_size; 
+.icon-square, 
+.icon-square-small, 
+.icon-square-medium, 
+.icon-square-large
+{ 
         display: inline-block;
         text-align: center;
 
@@ -1804,8 +1864,30 @@ th {
         }
 }
 
+.icon-square { 
+        width: @icon_square_size; 
+        height: @icon_square_size; 
+        line-height: @icon_square_size; 
+}
 
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+.icon-square-small { 
+        width: @icon_size_small; 
+        height: @icon_size_small; 
+        line-height: @icon_size_small; 
+}
+
+.icon-square-medium { 
+        width: @icon_size_medium; 
+        height: @icon_size_medium; 
+        line-height: @icon_size_medium; 
+}
+
+.icon-square-large { 
+        width: @icon_size_large; 
+        height: @icon_size_large; 
+        line-height: @icon_size_large; 
+}
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // МОДУЛЬНАЯ СЕТКА
 
@@ -1827,8 +1909,7 @@ th {
                 max-width: @layout_max_width;
         }
 }
-
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // ссылки
 
@@ -1863,10 +1944,10 @@ a {
 
 .links-no-color {
         a {
-                color: inherit;
+                color: inherit !important;
         }
 }
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // разное без четкой тематики
 
@@ -1892,38 +1973,36 @@ a {
                 line-height: 1;
         }
 }
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // отступы
 
-// padding
-.box > .set_padding(0, pad0) !important;
 .box > .set_padding(@padding, pad) !important;
-.box > .set_padding(5px, pad5) !important;
-.box > .set_padding(6px, pad6) !important;
-.box > .set_padding(7px, pad7) !important;
-.box > .set_padding(10px, pad10) !important;
-.box > .set_padding(15px, pad15) !important;
-.box > .set_padding(20px, pad20) !important;
-.box > .set_padding(25px, pad25) !important;
-.box > .set_padding(30px, pad30) !important;
-.box > .set_padding(40px, pad40) !important;
-.box > .set_padding(50px, pad50) !important;
-
-// margin
-.box > .set_margin(0, mar0) !important;
 .box > .set_margin(@margin, mar) !important;
-.box > .set_margin(5px, mar5) !important;
-.box > .set_margin(6px, mar6) !important;
-.box > .set_margin(7px, mar7) !important;
-.box > .set_margin(10px, mar10) !important;
-.box > .set_margin(15px, mar15) !important;
-.box > .set_margin(20px, mar20) !important;
-.box > .set_margin(25px, mar25) !important;
-.box > .set_margin(30px, mar30) !important;
-.box > .set_margin(40px, mar40) !important;
-.box > .set_margin(50px, mar50) !important;
 
+
+// цикл padding на основе @padding_list из variables.less
+.padding_loop(@counter) when (@counter > 0) {
+        .padding_loop((@counter - 1));
+        
+        @val: extract(@padding_list, @counter);
+        
+        .box > .set_padding(~"@{val}px", ~"pad@{val}") !important;
+}
+
+.padding_loop(length(@padding_list));
+
+// аналогично margin
+// цикл margin на основе @margin_list из variables.less
+.margin_loop(@counter) when (@counter > 0) {
+        .margin_loop((@counter - 1));
+        
+        @val: extract(@margin_list, @counter);
+        
+        .box > .set_margin(~"@{val}px", ~"mar@{val}") !important;
+}
+
+.margin_loop(length(@margin_list));
 
 // для адаптивного дизайна сбросы
 @media @SCREEN_TABLET {
@@ -1935,7 +2014,7 @@ a {
         .box > .set_padding(0, pad0, phone) !important;
         .box > .set_margin(0, mar0, phone) !important;
 }
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // position
 
@@ -1948,12 +2027,35 @@ a {
 .pos-bottom { bottom: 0; }
 .pos-left   { left: 0; }
 
-.pos-top10px    { top: 10px; }
-.pos-right10px  { right: 10px; }
-.pos-bottom10px { bottom: 10px; }
-.pos-left10px   { left: 10px; }
+// цикл top right bottom left на основе @position_list из variables.less
+.position_loop(@counter) when (@counter > 0) {
+        .position_loop((@counter - 1));
+        
+        @val: extract(@position_list, @counter);
 
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+        .pos-top@{val}px        { top: ~"@{val}px"; }
+        .pos-right@{val}px      { right: ~"@{val}px"; }
+        .pos-bottom@{val}px     { bottom: ~"@{val}px"; }
+        .pos-left@{val}px       { left: ~"@{val}px"; }
+}
+
+.position_loop(length(@position_list));
+
+// z-index
+
+// цикл z-index на основе @zindex_list из variables.less
+.zindex_loop(@counter) when (@counter > 0) {
+        .zindex_loop((@counter - 1));
+        
+        @val: extract(@zindex_list, @counter);
+        
+        .z-index@{val} {
+                z-index: @val;
+        }
+ }
+
+.zindex_loop(length(@zindex_list));
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // тени
 
@@ -1961,8 +2063,7 @@ a {
         -webkit-box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
 }
-
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // текст
 
@@ -2019,99 +2120,98 @@ a {
 .t-verdana { font-family: Verdana, Arial, Helvetica, sans-serif; }
 .t-mono    { font-family: PT Mono, Monaco, Menlo, Consolas, Courier New, monospace; }
 
-// размеры относительные
-.t80  {font-size: .8rem; }
-.t90  {font-size: .9rem; }
-.t100 {font-size: 1rem; }
-.t110 {font-size: 1.1rem; }
-.t120 {font-size: 1.2rem; }
-.t130 {font-size: 1.3rem; }
-.t140 {font-size: 1.4rem; }
-.t150 {font-size: 1.5rem; }
-.t160 {font-size: 1.6rem; }
-.t170 {font-size: 1.7rem; }
-.t180 {font-size: 1.8rem; }
-.t190 {font-size: 1.9rem; }
-.t200 {font-size: 2rem; }
-.t210 {font-size: 2.1rem; }
-.t220 {font-size: 2.2rem; }
-.t230 {font-size: 2.3rem; }
-.t240 {font-size: 2.4rem; }
-.t250 {font-size: 2.5rem; }
-.t260 {font-size: 2.6rem; }
-.t270 {font-size: 2.7rem; }
-.t280 {font-size: 2.8rem; }
-.t290 {font-size: 2.9rem; }
-.t300 {font-size: 3rem; }
-.t310 {font-size: 3.1rem; }
-.t320 {font-size: 3.2rem; }
-.t330 {font-size: 3.3rem; }
-.t340 {font-size: 3.4rem; }
-.t350 {font-size: 3.5rem; }
-.t360 {font-size: 3.6rem; }
-.t370 {font-size: 3.7rem; }
-.t380 {font-size: 3.8rem; }
-.t390 {font-size: 3.9rem; }
-.t400 {font-size: 4rem; }
-.t450 {font-size: 4.5rem; }
-.t500 {font-size: 5rem; }
+// размеры REM
+// цикл font-size REM на основе @text_rem из variables.less
+.text_rem_loop(@counter) when (@counter > 0) {
+        .text_rem_loop((@counter - 1));
+        
+        @val: extract(@text_rem, @counter);
+        @val1: @val * 100;
+        
+        .t@{val1} {
+                font-size: ~"@{val}rem";
+        }
+}
 
-// фиксированные px
-.t8px  {font-size: 8px; }
-.t9px  {font-size: 9px; }
-.t10px {font-size: 10px; }
-.t11px {font-size: 11px; }
-.t12px {font-size: 12px; }
-.t14px {font-size: 14px; }
-.t15px {font-size: 15px; }
-.t16px {font-size: 16px; }
-.t17px {font-size: 17px; }
-.t18px {font-size: 18px; }
-.t19px {font-size: 19px; }
-.t20px {font-size: 20px; }
-.t24px {font-size: 24px; }
-.t26px {font-size: 26px; }
-.t28px {font-size: 28px; }
-.t30px {font-size: 30px; }
-.t32px {font-size: 32px; }
-.t48px {font-size: 48px; }
-.t64px {font-size: 64px; }
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+.text_rem_loop(length(@text_rem));
+
+
+// размеры EM
+// цикл font-size EM на основе @text_em из variables.less
+.text_em_loop(@counter) when (@counter > 0) {
+        .text_em_loop((@counter - 1));
+        
+        @val: extract(@text_em, @counter);
+        @val1: @val * 100;
+        
+        .t@{val1}em {
+                font-size: ~"@{val}em";
+        }
+}
+
+.text_em_loop(length(@text_em));
+
+// размеры PX
+// цикл font-size PX на основе @text_px из variables.less
+.text_px_loop(@counter) when (@counter > 0) {
+        .text_px_loop((@counter - 1));
+        
+        @val: extract(@text_px, @counter);
+        
+        .t@{val}px {
+                font-size: ~"@{val}px";
+        }
+}
+
+.text_px_loop(length(@text_px));
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // видимоcть блоков ТОЛЬКО для desktop, tablet или phone
 
 // дефолт для desktop
-.visible-desktop { display: block; }
-.visible-desktop-tablet { display: block; }
-.visible-tablet { display: none; }
-.visible-phone { display: none; }
-.visible-tablet-phone { display: none; }
+.visible-desktop, 
+.visible-desktop-tablet { 
+        display: block !important; 
+}
 
-.hide-desktop { display: none; }
-.hide-desktop-tablet { display: none; }
+.visible-tablet,
+.visible-phone,
+.visible-tablet-phone, 
+.hide-desktop,
+.hide-desktop-tablet { 
+        display: none !important; 
+}
 
 @media @SCREEN_TABLET {
-        .visible-tablet  { display: block; }
-        .visible-tablet-phone  { display: block; }
-        .visible-desktop-tablet  { display: block; }
-        .visible-desktop { display: none; }
-        .visible-phone   { display: none; }
+        .visible-tablet,
+        .visible-tablet-phone,
+        .visible-desktop-tablet  { 
+                display: block !important; 
+        }
         
-        .hide-tablet { display: none; }
-        .hide-tablet-phone { display: none; }
+        .visible-desktop,
+        .visible-phone,
+        .hide-tablet,
+        .hide-tablet-phone { 
+                display: none !important; 
+        }
 }
 
 @media @SCREEN_PHONE {
-        .visible-phone   { display: block; }
-        .visible-tablet-phone   { display: block; }
-        .visible-desktop { display: none; }
-        .visible-desktop-tablet  { display: none; }
-        .visible-tablet  { display: none; }
+        .visible-phone,
+        .visible-tablet-phone { 
+                display: block !important; 
+        }
         
-        .hide-phone { display: none; }
-        .hide-tablet-phone { display: none; }
+        .visible-desktop,
+        .visible-desktop-tablet,
+        .visible-tablet,
+        .hide-phone,
+        .hide-tablet-phone {
+                display: none !important; 
+        }
 }
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
+// .UniCSS -> http://unicss.maxsite.com.ua/
 
 // максимальная ширина модульной сетки
 .w-max-layout {
@@ -2119,30 +2219,27 @@ a {
         max-width: @layout_max_width;
 }
 
-// фиксированная max-width
-.w16px { max-width: 16px;}
-.w24px { max-width: 24px;}
-.w30px { max-width: 30px;}
-.w32px { max-width: 32px;}
-.w48px { max-width: 48px;}
-.w50px { max-width: 50px;}
-.w70px { max-width: 70px;}
-.w100px { max-width: 100px;}
-.w200px { max-width: 200px;}
-.w250px { max-width: 250px;}
-.w300px { max-width: 300px;}
-.w400px { max-width: 400px;}
-.w500px { max-width: 500px;}
-.w600px { max-width: 600px;}
-.w700px { max-width: 700px;}
-.w800px { max-width: 800px;}
-.w900px { max-width: 900px;}
+// цикл width и max-width на основе @width_list из variables.less
+.width_loop(@counter) when (@counter > 0) {
+        .width_loop((@counter - 1));
+        
+        @val: extract(@width_list, @counter);
+        
+        .w@{val}px {
+                width: ~"@{val}px";
+        }
+        
+        .w@{val}px-min {
+                min-width: ~"@{val}px";
+        }
+        
+        .w@{val}px-max {
+                max-width: ~"@{val}px";
+        }
+ }
 
-// под адаптивность
-.w320px { max-width: 320px;}
-.w480px { max-width: 480px;}
-.w768px { max-width: 768px;}
-.w992px { max-width: 992px;}
+.width_loop(length(@width_list));
+
 
 // ВАЖНО! @media от больших экранов к маленьким!
 
@@ -2158,12 +2255,3 @@ a {
 @media @SCREEN_PHONE {
         .set_width > .percent(w, phone);
 }
-/*  .UniCSS -> http://unicss.maxsite.com.ua/  */
-
-// z-index
-
-.z-index1    { z-index: 1; }
-.z-index9    { z-index: 9; }
-.z-index99   { z-index: 99; }
-.z-index999  { z-index: 999; }
-.z-index9999 { z-index: 9999; }

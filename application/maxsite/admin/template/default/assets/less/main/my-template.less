@@ -513,6 +513,7 @@ div.admin-edit-widgets {
 			color: @g_gray700;
 			.t90;
 			margin: 0;
+			display: block;
 		}
 
 		textarea,
@@ -838,9 +839,16 @@ div.plugin-ushki {
 		width: 400px;
 	}
 	
+
+	
 	select {
 		width: 120px;
 	}
+}
+
+// поле новая ушка
+input[name="f_ushka_new"] {
+	max-width: 300px;
 }
 
 // настройка рубрик
@@ -991,3 +999,11 @@ div.all-images {
 	*/
 }
 
+// Загрузки 
+div.new_cat_upload {
+
+	input[name="f_cat_name"] {
+		width: 200px;
+	}
+
+}

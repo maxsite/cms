@@ -55,6 +55,8 @@ if ($comuser_info)
 		}
 		echo '</p>';
 		
+		$session_id = mso_form_session('f_session_id');
+		
 		// если активация не завершена, то вначале требуем её завершить
 		if ($comusers_activate_string != $comusers_activate_key) // нет активации
 		{

@@ -5,7 +5,7 @@
 <img src="{{ $avatar }}" alt="" class="mso-gravatar">
 
 {% if ($no_activation_link) : %}
-	<p><span style="color: red;">{{ tf('Активация не завершена.') }}</span> <a href="$no_activation_link">{{ tf('Завершить') }}</a></p>
+	<p><span style="color: red;">{{ tf('Активация не завершена.') }}</span> <a href="{{ $no_activation_link }}">{{ tf('Завершить') }}</a></p>
 {% endif %}
 
 

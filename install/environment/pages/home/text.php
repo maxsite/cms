@@ -272,7 +272,7 @@ if ($_POST)
 						. t('Пароль: ') . $PV['password'] . "\r\n" . "\r\n" . "\r\n"
 						. t('Сайт поддержки: http://max-3000.com/');
 						
-				v_email($PV['email'], t('Новый сайт на MaxSite CMS'), $message, $headers);
+				v_email($PV['email'], t('Новый сайт на MaxSite CMS'), $message);
 			}
 
 			$mysqli->close();

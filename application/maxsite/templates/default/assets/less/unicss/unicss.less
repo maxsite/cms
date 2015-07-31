@@ -1,4 +1,4 @@
-// .UniCSS v.21-07-2015 
+// .UniCSS v.29-07-2015 
 // .UniCSS -> http://unicss.maxsite.com.ua/
 
 *,
@@ -493,42 +493,81 @@ th {
 .flex-grow2 { .grid_flex > .grow(2); }
 .flex-grow3 { .grid_flex > .grow(3); }
 
-@media @SCREEN_TABLET {
-        .flex-wrap-tablet,
-        .flex-wrap-tablet-phone
-        {
-                .grid_flex > .wrap(wrap);
-        }
-        
-        .flex-tablet,
-        .flex-tablet-phone
-        {
-                .flex;
-        }
-        
-        .flex-reverse-tablet {
-                .grid_flex > .direction(row-reverse);
-        }
+.flex-order0 { .grid_flex > .order(0); }
+.flex-order1 { .grid_flex > .order(1); }
+.flex-order2 { .grid_flex > .order(2); }
+.flex-order3 { .grid_flex > .order(3); }
+.flex-order4 { .grid_flex > .order(4); }
+.flex-order5 { .grid_flex > .order(5); }
+
+.flex-wrap {
+        .grid_flex > .wrap(wrap);
 }
 
-@media @SCREEN_PHONE {
-        .flex-wrap-phone,
-        .flex-wrap-tablet-phone
-        {
-                .grid_flex > .wrap(wrap);
-        }
-        
-        .flex-phone,
-        .flex-tablet-phone
-        {
-        
-        .flex;
-        }
-        .flex-reverse-phone {
-                .grid_flex > .direction(row-reverse);
+// миксы формрующие произвольные классы с @media
+.flex_media(@m; @postfix; @a_postfix)
+{
+        @media @m {
+                .flex-wrap-@{postfix},
+                .flex-wrap-@{a_postfix}
+                {
+                        .grid_flex > .wrap(wrap);
+                }
+                
+                .flex-@{postfix},
+                .flex-@{a_postfix}
+                {
+                        .flex;
+                }
+                
+                .flex-reverse-@{postfix} {
+                        .grid_flex > .direction(row-reverse);
+                }
+                
+                .flex-order0-@{postfix} { .grid_flex > .order(0); }
+                .flex-order1-@{postfix} { .grid_flex > .order(1); }
+                .flex-order2-@{postfix} { .grid_flex > .order(2); }
+                .flex-order3-@{postfix} { .grid_flex > .order(3); }
+                .flex-order4-@{postfix} { .grid_flex > .order(4); }
+                .flex-order5-@{postfix} { .grid_flex > .order(5); }
         }
         
 }
+
+// тот же микс, только с двумя параметрами
+.flex_media(@m; @postfix)
+{
+        @media @m {
+                .flex-wrap-@{postfix}
+                {
+                        .grid_flex > .wrap(wrap);
+                }
+                
+                .flex-@{postfix}
+                {
+                        .flex;
+                }
+                
+                .flex-reverse-@{postfix} {
+                        .grid_flex > .direction(row-reverse);
+                }
+                
+                .flex-order0-@{postfix} { .grid_flex > .order(0); }
+                .flex-order1-@{postfix} { .grid_flex > .order(1); }
+                .flex-order2-@{postfix} { .grid_flex > .order(2); }
+                .flex-order3-@{postfix} { .grid_flex > .order(3); }
+                .flex-order4-@{postfix} { .grid_flex > .order(4); }
+                .flex-order5-@{postfix} { .grid_flex > .order(5); }
+        }
+        
+}
+
+// выполняем
+.flex_media(@SCREEN_TABLET, tablet, tablet-phone);
+.flex_media(@SCREEN_PHONE, phone, tablet-phone);
+.flex_media(@SCREEN_SMALL, small);
+.flex_media(@SCREEN_MEDIUM, medium);
+.flex_media(@SCREEN_LARGE, large);
 // http://fortawesome.github.io/Font-Awesome/cheatsheet/
 // font-awesome-4.3.0
 
@@ -2014,6 +2053,21 @@ a {
         .box > .set_padding(0, pad0, phone) !important;
         .box > .set_margin(0, mar0, phone) !important;
 }
+
+@media @SCREEN_SMALL {
+        .box > .set_padding(0, pad0, small) !important;
+        .box > .set_margin(0, mar0, small) !important;
+}
+
+@media @SCREEN_MEDIUM {
+        .box > .set_padding(0, pad0, medium) !important;
+        .box > .set_margin(0, mar0, medium) !important;
+}
+
+@media @SCREEN_LARGE {
+        .box > .set_padding(0, pad0, large) !important;
+        .box > .set_margin(0, mar0, large) !important;
+}
 // .UniCSS -> http://unicss.maxsite.com.ua/
 
 // position
@@ -2094,20 +2148,22 @@ a {
 .t-center  { text-align: center; }
 .t-justify { text-align: justify; }
 
-@media @SCREEN_TABLET {
-        .t-right-tablet   { text-align: right; }
-        .t-left-tablet    { text-align: left; }
-        .t-center-tablet  { text-align: center; }
-        .t-justify-tablet { text-align: justify; }
+// микс для @media
+.text_media(@m; @postfix)
+{
+        @media @m {
+                .t-right-@{postfix}   { text-align: right; }
+                .t-left-@{postfix}    { text-align: left; }
+                .t-center-@{postfix}  { text-align: center; }
+                .t-justify-@{postfix} { text-align: justify; }  
+        }
 }
 
-@media @SCREEN_PHONE {
-        .t-right-phone   { text-align: right; }
-        .t-left-phone    { text-align: left; }
-        .t-center-phone  { text-align: center; }
-        .t-justify-phone { text-align: justify; }       
-}
-
+.text_media(@SCREEN_TABLET, tablet);
+.text_media(@SCREEN_PHONE, phone);
+.text_media(@SCREEN_SMALL, small);
+.text_media(@SCREEN_MEDIUM, medium);
+.text_media(@SCREEN_LARGE, large);
 
 // запрет переноса
 .t-nowrap { white-space: nowrap; }
@@ -2166,7 +2222,8 @@ a {
 .text_px_loop(length(@text_px));
 // .UniCSS -> http://unicss.maxsite.com.ua/
 
-// видимоcть блоков ТОЛЬКО для desktop, tablet или phone
+// видимоcть блоков для разных @media
+// .visible-X только для display: block
 
 // дефолт для desktop
 .visible-desktop, 
@@ -2211,6 +2268,34 @@ a {
                 display: none !important; 
         }
 }
+
+// для small medium large только одиночные классы
+.visible-small, 
+.visible-medium,
+.visible-large { 
+        display: block !important; 
+}
+
+.hide-small,
+.hide-medium,
+.hide-large { 
+        display: none !important; 
+}
+
+@media @SCREEN_SMALL {
+        .visible-small { display: block !important; }
+        .hide-small { display: none !important; }
+}
+
+@media @SCREEN_MEDIUM {
+        .visible-medium { display: block !important; }
+        .hide-medium { display: none !important; }
+}
+
+@media @SCREEN_LARGE {
+        .visible-large { display: block !important; }
+        .hide-large { display: none !important; }
+}
 // .UniCSS -> http://unicss.maxsite.com.ua/
 
 // максимальная ширина модульной сетки
@@ -2254,4 +2339,19 @@ a {
 // .wXX-phone
 @media @SCREEN_PHONE {
         .set_width > .percent(w, phone);
+}
+
+// .wXX-small
+@media @SCREEN_SMALL {
+        .set_width > .percent(w, small);
+}
+
+// .wXX-medium
+@media @SCREEN_MEDIUM {
+        .set_width > .percent(w, medium);
+}
+
+// .wXX-large
+@media @SCREEN_LARGE {
+        .set_width > .percent(w, large);
 }

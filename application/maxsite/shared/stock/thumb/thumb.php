@@ -357,4 +357,88 @@ function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 
 	return $img;
 }
 
+/**
+*  функция преобразования #-цвета в массив RGB
+*  
+*  @param $color цвет в виде #RRGGBB
+*  
+*  @return array
+*/
+function mso_hex2rgb($color)
+{
+	$color = str_replace('#', '', $color);
+	
+	if ($color == 'rand')
+	{
+		$arr = array(
+			"red" => rand(1, 255),
+			"green" => rand(1, 255),
+			"blue" => rand(1, 255)
+			);
+	}
+	else
+	{
+		$int = hexdec($color);
+	
+		$arr = array(
+			"red" => 0xFF & ($int >> 0x10),
+			"green" => 0xFF & ($int >> 0x8),
+			"blue" => 0xFF & $int
+			);
+	}
+	
+	return $arr;
+}
+
+/**
+*  создание заглушки holder для <IMG>
+*  цвет задавать как в HTML в полном формате #RRGGBB
+*  если цвет = rand то он формируется случайным образом
+*  текст только английский (кодировка latin2)
+*  если $text = true, то выводится размер изображения ШШхВВ
+*  
+*  @param $width ширина
+*  @param $height высота
+*  @param $text текст
+*  @param $background_color цвет фона
+*  @param $text_color цвет текста
+*  @param $font_size размер шрифта от 1 до 5
+*  
+*  @return string
+*  
+*  <img src="<?= mso_holder() ? >" -> в формате data:image/png;base64, 
+*  mso_holder(250, 80)
+*  mso_holder(300, 50, 'My text', '#660000', '#FFFFFF')
+*  mso_holder(600, 400, 'Slide', 'rand', 'rand')
+*/
+function mso_holder($width = 100, $height = 100, $text = true, $background_color = '#CCCCCC', $text_color = '#777777', $font_size = 5)
+{
+	$im = @imagecreate($width, $height) or die("Cannot initialize new GD image stream");
+	
+	$color = mso_hex2rgb($background_color);
+	$bg = imagecolorallocate($im, $color['red'], $color['green'], $color['blue']);
+	
+	$color = mso_hex2rgb($text_color);
+	$tc = imagecolorallocate($im, $color['red'], $color['green'], $color['blue']);
+	
+	if ($text)
+	{
+		if ($text === true) $text = $width . 'x' . $height;
+		
+		$center_x = ceil( ( imagesx($im) - ( ImageFontWidth($font_size) * mb_strlen($text) ) ) / 2 );
+		$center_y = ceil( ( ( imagesy($im) - ( ImageFontHeight($font_size) ) ) / 2));
+		
+		imagestring($im, $font_size, $center_x, $center_y,  $text, $tc);
+	}
+	
+	ob_start();
+	imagepng($im);
+	$src = 'data:image/png;base64,' . base64_encode(ob_get_contents());
+	ob_end_clean();
+	
+	imagedestroy($im);
+	
+	return $src;
+}
+
 # end file

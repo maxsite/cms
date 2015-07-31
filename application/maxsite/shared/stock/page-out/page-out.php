@@ -1198,7 +1198,9 @@ class Block_pages
 								// getinfo('template_url') . 'images/placehold/'
 			'placehold_pattern' => '[W]x[H].png', // шаблон плейсхолдера : width x height .png
 												// где [W] меняется на ширину, [H] — высоту, [RND] - число 1..10
-			'placehold_file' => false, // файл плейсхолдера, если false, то будет: width x height .png
+			'placehold_file' => false,  // файл плейсхолдера, если false, то будет: width x height .png
+										// если равно data, то свой плейсхолдер
+			'placehold_data_bg' => '#CCCCCC', // цвет фона, если data
 			
 			'block_start' => '', // html вначале
 			'block_end' => '', // html в конце
@@ -1250,6 +1252,7 @@ class Block_pages
 		
 		$r = array_merge($default, $r); // объединяем
 		
+		$r = array_map('trim', $r);
 		
 		$p = new Page_out; // шаблонизатор
 		
@@ -1283,10 +1286,24 @@ class Block_pages
 			
 			if ($r['thumb']) // миниатюра
 			{
+				// плейсхолд
 				if ($r['placehold'])
 				{
-					// плейсхолд
-					if (!$r['placehold_file'])
+					if ($r['placehold_file'])
+					{
+						if ($r['placehold_file'] == 'data')
+						{
+							
+							// сами генерируем плейсхолд
+						  // mso_holder($width = 100, $height = 100, $text = true, $background_color = '#CCCCCC', $text_color = '#777777', $font_size = 5)
+							$t_placehold = mso_holder($r['thumb_width'], $r['thumb_height'], false, $r['placehold_data_bg']);
+						}
+						else
+						{
+							$t_placehold = $r['placehold_path'] . $r['placehold_file'];
+						}
+					}
+					else
 					{
 						$t_placehold_pattern = str_replace('[W]', $r['thumb_width'], $r['placehold_pattern']);
 						$t_placehold_pattern = str_replace('[H]', $r['thumb_height'], $t_placehold_pattern);
@@ -1294,17 +1311,13 @@ class Block_pages
 						
 						$t_placehold = $r['placehold_path'] . $t_placehold_pattern;
 					}
-					else
-					{
-						$t_placehold = $r['placehold_path'] . $r['placehold_file'];
-					}
-					
 				}
 				else 
 				{
 					$t_placehold = false;
 				}
 				
+	
 				if (
 					$thumb = thumb_generate(
 						$p->meta_val('image_for_page'), // адрес

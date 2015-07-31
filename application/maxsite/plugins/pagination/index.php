@@ -67,7 +67,7 @@ function pagination_go($r = array())
 		$cur_url = substr($cur_url, 0, $matches[0][1]);
 	}
 	
-	if ($type == 'home') $cur_url = $cur_url . 'home';
+	if ($type == 'home' and $current_paged == 1) $cur_url = $cur_url . 'home';
 	
 	// pr($cur_url);
 	

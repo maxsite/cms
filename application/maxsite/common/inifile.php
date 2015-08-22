@@ -269,6 +269,8 @@ function mso_view_ini($all = false)
 					$mr = preg_replace( '|_serialize_|A', '', $mr, 1);
 					$mr = @unserialize($mr);
 				}
+				
+				if (!is_array($mr)) $mr = array($mr);
 			}
 			else
 			{
@@ -284,13 +286,14 @@ function mso_view_ini($all = false)
 				foreach($values as $val) 
 				{
 					$ar = explode('||', $val);
+					
 					if (isset($ar[0])) $mr1 = trim($ar[0]); // ключ чекбокса
 					if (isset($ar[1])) $mr2 = trim($ar[1]); // если есть название
 						else $mr2 = $mr1;
-
+					
 					if (in_array($mr1, $mr)) $checked = 'checked="checked"';
 						else $checked = '';
-						
+					
 					//для каждого чекбокса свой ключ!
 					$mkey = $options_key . '_' . mso_slug($mr1) . '_m_s_o_' . $options_type;
 					$name_f1 = 'f_options[' . $mkey . ']';
@@ -363,7 +366,7 @@ function mso_view_ini($all = false)
 		if ($options_key != 'none')
 		{
 			if (!$options_present) 
-				$key = '<span title="' . $options_key . ' (' . $row['options_type'] . ')" class="mso-alert">* ' . t($key) . ' '. t('(нет в базе)') .'</span>';
+				$key = '<span title="' . $options_key . ' (' . $row['options_type'] . ')" class="mso-alert">* ' . t($key) . '</span>';
 			else
 				$key = '<strong title="' . $options_key . ' (' . $row['options_type'] . ')">' . t($key) . '</strong>';
 		}

@@ -1610,6 +1610,38 @@ function mso_array_get_key_value($ar, $value = false, $no = false)
 }
 
 
+# объединение входящего массива $a с $def по ключам
+# в $def задаются все дефолтные значения
+# происходит пребразование значения trim, а также приведение типов bool и int
+# если во входящем массиве нет ключа, он берется из $def
+# &NBSP; заменяется на обычный пробел
+function mso_merge_array($a, $def)
+{
+	$out = array();
+	
+	foreach ($def as $d_key => $d_val)
+	{
+		if (isset($a[$d_key]))
+		{
+			$a_val = trim($a[$d_key]);
+			
+			if (is_bool($d_val)) $a_val = (bool) $a_val;
+			elseif (is_int($d_val)) $a_val = (int) $a_val;
+			
+			$a_val = str_replace('&NBSP;', ' ', $a_val);
+			
+			$out[$d_key] = $a_val;
+		}
+		else
+		{
+			$out[$d_key] = str_replace('&NBSP;', ' ', $d_val);
+		}
+	}
+	
+	return $out;
+}
+
+
 # проверка комбинации логина-пароля
 # если указан act - то сразу смотрим разрешение на действие
 function mso_check_user_password($login = false, $password = false, $act = false)

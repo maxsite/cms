@@ -58,7 +58,7 @@ function last_pages_widget_form($num = 1)
 	if ( !isset($options['comments_format']) )	$options['comments_format'] = ' | ' . t('Комментариев: ') . '[COUNT]';
 	if ( !isset($options['page_type']) )		$options['page_type'] = 'blog';
 	if ( !isset($options['img_prev_def']) )		$options['img_prev_def'] = '';
-	if ( !isset($options['img_prev_attr']) )	$options['img_prev_attr'] = 'class="left w100"';
+	if ( !isset($options['img_prev_attr']) )	$options['img_prev_attr'] = 'class="b-left w100"';
 	if ( !isset($options['max_words']) )		$options['max_words'] = 20;
 	if ( !isset($options['text_posle']) ) 		$options['text_posle'] = '';
 
@@ -138,7 +138,7 @@ function last_pages_widget_custom($arg = array(), $num = 1)
 	if (!isset($arg['comments_format'])) $arg['comments_format'] = ' | ' . t('Комментариев: ') . '[COUNT]';
 	if (!isset($arg['include_cat'])) 	$arg['include_cat'] = '';
 	if (!isset($arg['img_prev_def'])) 	$arg['img_prev_def'] = '';
-	if (!isset($arg['img_prev_attr'])) 	$arg['img_prev_attr'] = 'class="left"';
+	if (!isset($arg['img_prev_attr'])) 	$arg['img_prev_attr'] = 'class="b-left w100"';
 	if (!isset($arg['max_words']) ) 	$arg['max_words'] = 20;
 	if (!isset($arg['text_posle']) ) 	$arg['text_posle'] = '';
 
@@ -164,7 +164,9 @@ function last_pages_widget_custom($arg = array(), $num = 1)
 		'order' => $arg['sort'],
 		'order_asc' => $arg['sort_order'],
 		'type' => $arg['page_type'],
+		'custom_type' => 'home',
 	);
+	
 	
 	$pages = mso_get_pages($par, $temp);
 	

@@ -258,7 +258,7 @@ function mso_email_message_new_comment($id = 0, $data = array(), $page_title = '
 	else
 		$subject = '[' . getinfo('name_site') . '] ' . tf('Новый комментарий'). ' (' . $id . ') "' . $page_title . '"';
 
-	if( !mso_get_option('subscribe_message_my_comment', 'general', true) && isset($data['comments_users_id']) && $data['comments_users_id'] == getingo('users_id') ) return false; // не посылаем уведомление о своём комментарии если нет специальной опции
+	if( !mso_get_option('subscribe_message_my_comment', 'general', true) && isset($data['comments_users_id']) && $data['comments_users_id'] == getinfo('users_id') ) return false; // не посылаем уведомление о своём комментарии если нет специальной опции
 	
 	// шаблон уведомления
 	$def_option = 'Новый комментарий на "{{ $page_title }}"

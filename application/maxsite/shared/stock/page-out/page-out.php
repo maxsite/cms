@@ -252,7 +252,7 @@ class Page_out
 		$view_count = '';
 		$meta_description = '';
 		$meta_title = '';
-		
+		$page_url = '';
 		
 		// title
 		if (strpos($out, '[title]') !== false)
@@ -266,6 +266,11 @@ class Page_out
 				false);
 		}
 		
+		// адрес страницы
+		if (strpos($out, '[page_url]') !== false)
+		{
+			$page_url = $this->page_url(false);
+		}
 		
 		// mso_page_author_link($users_nik = '', $page_id_autor = '', $do = '', $posle = '', $echo = true, $type = 'author', $link = true
 		if (strpos($out, '[autor]') !== false)
@@ -454,6 +459,7 @@ class Page_out
 		}
 		
 		$out = str_replace('[title]', $title, $out);
+		$out = str_replace('[page_url]', $page_url, $out);
 		$out = str_replace('[autor]', $autor, $out);
 		$out = str_replace('[author]', $author, $out);
 		$out = str_replace('[comments]', $comments, $out);
@@ -1122,10 +1128,12 @@ class Block_pages
 			'pagination' => false, // выводить пагинацию
 			'cat_id' => 0, // можно указать рубрики через запятую
 			'page_id' => 0, // можно указать записи через запятую
+			'page_id_autor' => false, // записи автора
 			'type' => 'blog', // можно указать тип записей
 			'order' => 'page_date_publish', // поле сортировки страниц
 			'order_asc' => 'desc', // поле сортировки страниц
-			
+			'show_cut' => true, // показывать ссылку cut
+			'date_now' => true, // учитывать время публикации
 		);
 		
 		$this->param = array_merge($default, $r); // объединяем с дефолтом
@@ -1136,9 +1144,15 @@ class Block_pages
 			'pagination' => $this->param['pagination'],
 			'cat_id' => $this->param['cat_id'],
 			'page_id' => $this->param['page_id'],
+			'page_id_autor' => $this->param['page_id_autor'],
 			'type' => $this->param['type'],
 			'order' => $this->param['order'],
 			'order_asc' => $this->param['order_asc'],
+			
+			'show_cut' => $this->param['show_cut'],
+			'show_xcut' => $this->param['show_cut'],
+			
+			'date_now' => $this->param['date_now'],
 			
 			'custom_type' => 'home',
 			'exclude_page_id' => mso_get_val('exclude_page_id'), // исключаем получение уже выведенных записей
@@ -1231,6 +1245,8 @@ class Block_pages
 			'content_chars' => 0, // колво символов 
 			'content_words' => 0, // колво слов 
 			'content_cut' => ' ...', // завершение в контенте 
+			'content_start' => '<div class="mso-page-content">', // обрамляющий блок до
+			'content_end' => '</div>', // обрамляющий блок после
 			
 			// колонки
 			'columns' => 0, // можно указать кол-во колонок
@@ -1238,8 +1254,12 @@ class Block_pages
 			'columns_class_cell' => 'col w1-2', // css-класс для ячейки (по-умолчанию 2 колонки)
 			
 			'clearfix' => false, // отбивать после вывода $p->clearfix();
+			
 			'page_start' => '', // html в начале вывода записи 
 			'page_end' => '', // html в конце вывода записи
+			
+			'pagination_start' => '', // html в начале пагинации 
+			'pagination_end' => '', // html в конце пагинации
 			
 			// колонки в виде ячеек таблицы 1 2 / 3 4 / 5 6
 			// может конфликтовать с columns
@@ -1252,7 +1272,7 @@ class Block_pages
 		
 		$r = array_merge($default, $r); // объединяем
 		
-		$r = array_map('trim', $r);
+		// $r = array_map('trim', $r);
 		
 		$p = new Page_out; // шаблонизатор
 		
@@ -1339,18 +1359,17 @@ class Block_pages
 			{
 				if ($r['content_chars'])
 				{
-					$p->content_chars($r['content_chars'], $r['content_cut']);  // текст обрезанный
+					$p->content_chars($r['content_chars'], $r['content_cut'], $r['content_start'], $r['content_end']);  // текст обрезанный
 				}
 				elseif ($r['content_words'])
 				{
-					$p->content_words($r['content_words'], $r['content_cut']);  // текст обрезанный
+					$p->content_words($r['content_words'], $r['content_cut'], $r['content_start'], $r['content_end']);  // текст обрезанный
 				}
 				else
 				{
-					$p->content();
+					$p->content($r['content_start'], $r['content_end']);
 				}
 			}
-			
 			
 			$p->line($r['line4'], $r['line4_start'], $r['line4_end']);
 			$p->line($r['line5'], $r['line5_start'], $r['line5_end']);
@@ -1375,7 +1394,15 @@ class Block_pages
 		
 		echo $r['block_end'];
 		
-		if ($this->param['pagination']) mso_hook('pagination', $this->pagination);
+		if ($this->param['pagination']) 
+		{
+			if (mso_hook_present('pagination'))
+			{
+				echo $r['pagination_start'];
+				mso_hook('pagination', $this->pagination);
+				echo $r['pagination_end'];
+			}
+		}
 		
 	}
 } // end block_pages

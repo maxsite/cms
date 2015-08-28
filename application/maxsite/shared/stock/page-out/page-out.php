@@ -454,6 +454,7 @@ class Page_out
 		// [meta@price]
 		if (strpos($out, '[meta@') !== false)
 		{
+			//pr($out);
 			$out = preg_replace_callback('!(\[meta@)(.*?)(\])!is', array('self', '_line_meta_set'), $out);
 			//pr($out);
 		}
@@ -494,7 +495,7 @@ class Page_out
 	{
 		$m = $matches[2];
 		$m = $this->meta_val($m);
-		//pr($m);
+		// pr($m);
 		return $m;
 	}
 			
@@ -1392,7 +1393,6 @@ class Block_pages
 		
 		mso_set_val('exclude_page_id', $exclude_page_id);
 		
-		echo $r['block_end'];
 		
 		if ($this->param['pagination']) 
 		{
@@ -1404,6 +1404,7 @@ class Block_pages
 			}
 		}
 		
+		echo $r['block_end'];
 	}
 } // end block_pages
 

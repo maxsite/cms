@@ -1706,7 +1706,11 @@ function mso_page_meta_value($meta = '', $page_meta = array(), $default = '', $r
 		}
 		
 		$out = trim($out);
-		if (!$out) return $default;
+		
+		if (!$out) 
+		{
+			if ($out != 0) return $default;
+		}
 
 		return str_replace('     ', $razd, $out);
 	}

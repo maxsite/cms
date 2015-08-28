@@ -57,22 +57,57 @@ else
 		// pr($units);
 		
 		// подключаем каждый указанный unit 
-		// обязательный параметр file где указывается файл юнита в каталоге type/home/units/ 
+		// _rules — php-условие, при котором юнит выводится
+		// параметр file где указывается файл юнита в каталоге type/home/units/
+		// если file нет, то проверяются другие параметры если есть:
+		// html — выводится как есть текстом
+		// require — подключается файл в шаблоне (пусть относительно каталога шаблона)
+		// ushka — ушка
+		// component — компонент шаблона
+		// option_key и option_type и option_default — опция
 		if ($units) 
 		{
 			foreach ($units as $UNIT)
 			{
+				
+				if (isset($UNIT['_rules']) and trim($UNIT['_rules']))
+				{
+					$rules = 'return ( ' . trim($UNIT['_rules']) . ' ) ? 1 : 0;';
+					$rules_result = eval($rules); // выполяем
+					if ($rules_result === false) $rules_result = 1; // возможно произошла ошибка
+					if ($rules_result !== 1) continue;
+				}
+				
 				if (trim($UNIT['file']))
 				{
 					// в подключаемом файле доступна переменная $UNIT — массив параметров
 					if ($fn = mso_find_ts_file('type/home/units/' . trim($UNIT['file']))) require($fn);
+				}
+				elseif (isset($UNIT['html']) and trim($UNIT['html']))
+				{
+					echo trim($UNIT['html']);
+				}
+				elseif (isset($UNIT['require']) and trim($UNIT['require']))
+				{
+					if ($fn = mso_fe(trim($UNIT['require']))) require($fn);
+				}
+				elseif (isset($UNIT['ushka']) and trim($UNIT['ushka']) and function_exists('ushka'))
+				{
+					echo ushka(trim($UNIT['ushka']));
+				}
+				elseif (isset($UNIT['component']) and trim($UNIT['component']))
+				{
+					if ($_fn = mso_fe( 'components/' . trim($UNIT['component']) . '/' . trim($UNIT['component']) . '.php' )) require($_fn);
+				}
+				elseif (isset($UNIT['option_key'], $UNIT['option_type'], $UNIT['option_default']) and trim($UNIT['option_key']) and trim($UNIT['option_type']) and trim($UNIT['option_default']))
+				{
+					echo mso_get_option(trim($UNIT['option_key']), trim($UNIT['option_type']), trim($UNIT['option_default']));
 				}
 			}
 		}
 	}
 	else // типовой вывод главной
 	{
-		
 		// блоки рубрик на главной
 		if (mso_get_option('home_cat_block', 'templates', '0'))
 		{

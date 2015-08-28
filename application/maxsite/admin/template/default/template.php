@@ -75,7 +75,7 @@
 </div>
 	
 <div class="flex">
-	<div class="flex-grow1 w30 wmax200px my-nav-panel hide-tablet">
+	<div class="flex-grow1 w30 w200px-max my-nav-panel hide-tablet">
 		<div class="mar10-rl mar10-t mar15-b">
 			
 			<div class="flex flex-vcenter mar10-b">

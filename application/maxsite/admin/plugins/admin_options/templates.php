@@ -69,7 +69,7 @@
 	$dirs = directory_map($templates_dir, true);
 	
 	echo '<form method="post">' . mso_form_session('f_session_id');
-	echo '<div class="options-templates">';
+	echo '<div class="options-templates flex flex-wrap">';
 	
 	foreach ($dirs as $dir)
 	{
@@ -108,7 +108,7 @@
 				$out .= '</p>';
 			}
 			
-			$out .= '<button type="submit" name="f_submit[' . $dir . ']" class="i set-template">' . t('Выбрать этот шаблон') . '</button>';
+			$out .= '<button type="submit" name="f_submit[' . $dir . ']" class="button">' . t('Выбрать этот шаблон') . '</button>';
 			
 			$out .= '</div>';
 

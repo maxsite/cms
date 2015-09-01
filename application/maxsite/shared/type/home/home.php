@@ -67,8 +67,11 @@ else
 		// option_key и option_type и option_default — опция
 		if ($units) 
 		{
+			$UNIT_NUM = 0; // порядковый номер юнита (можно использовать для кэширования)
+			
 			foreach ($units as $UNIT)
 			{
+				$UNIT_NUM++;
 				
 				if (isset($UNIT['_rules']) and trim($UNIT['_rules']))
 				{

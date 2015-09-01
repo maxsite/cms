@@ -39,6 +39,11 @@
 @SCREEN_TABLET: ~"(max-width: 768px)"; // средние экраны — планшеты
 @SCREEN_PHONE: ~"(max-width: 480px)"; // мелкие экраны — телефоны
 
+// дополнительные условия для @media .flex-small .flex-medium .flex-large
+@SCREEN_SMALL: ~"(min-width: 769px) and (max-width: 992px)";
+@SCREEN_MEDIUM: ~"(min-width: 993px) and (max-width: 1200px)";
+@SCREEN_LARGE: ~"(min-width: 1201px)";
+
 // отступы базовые значения
 @padding: 20px;
 @margin: 20px;

@@ -20,7 +20,7 @@ limit = 3
 
 # используем кэширование
 $home_cache_time = (int) mso_get_option('home_cache_time', 'templates', 0);
-$home_cache_key = getinfo('template') . '-' .  __FILE__ . '-' . mso_current_paged();
+$home_cache_key = getinfo('template') . '-' .  __FILE__ . '-' . mso_current_paged() . '-' . $UNIT_NUM;
 
 if ($home_cache_time > 0 and $k = mso_get_cache($home_cache_key) ) echo $k; // да есть в кэше
 else
@@ -43,6 +43,7 @@ else
 		'thumb_height' => 100,
 		'class_thumb' => 'b-left mar15-r rounded',
 		
+		'content' => true,
 		'content_words' => 0,
 		'content_chars' => 0,
 		'content_cut' => ' ...',
@@ -116,6 +117,7 @@ else
 				'block_start' 			=> $UNIT['block_start'],
 				'block_end' 			=> $UNIT['block_end'],
 
+				'content' 				=> $UNIT['content'],
 				'content_words' 		=> $UNIT['content_words'],
 				'content_chars' 		=> $UNIT['content_chars'],
 				'content_cut' 			=> $UNIT['content_cut'],

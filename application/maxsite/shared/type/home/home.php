@@ -106,6 +106,10 @@ else
 				{
 					echo mso_get_option(trim($UNIT['option_key']), trim($UNIT['option_type']), trim($UNIT['option_default']));
 				}
+				elseif (isset($UNIT['sidebar']) and trim($UNIT['sidebar']))
+				{
+					mso_show_sidebar($UNIT['sidebar']);
+				}
 			}
 		}
 	}

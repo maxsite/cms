@@ -199,7 +199,12 @@ if ($pages)
 			if ($f = mso_page_foreach('page-only-end')) require($f);
 			
 			// здесь комментарии
-			if ($fn = mso_find_ts_file('type/page/units/page-comments.php')) require($fn);
+			
+			if (mso_get_option('comment_other_system', 'general', false))
+			{
+				if ($fn = mso_find_ts_file('type/page/units/page-comments-other-system.php')) require($fn);
+			}
+			elseif ($fn = mso_find_ts_file('type/page/units/page-comments.php')) require($fn);
 				
 		} // end foreach
 	} // else page_content_only

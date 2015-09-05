@@ -1,4 +1,4 @@
-/* LESS framework (lite-version) (c) MAX http://maxsite.com.ua/ */
+// LESS framework (lite-version) (c) MAX http://maxsite.com.ua/
 
 .box() {
 	.clearfix() {
@@ -738,24 +738,31 @@
 
 .colors_state(@class, @color) {
 	
-	.t-@{class}, 
+	.t-@{class}
+	{
+		color: @color; 
+	}
+	
 	.hover-t-@{class}:hover, 
 	.links-hover-t-@{class} a:hover, // вложенные ссылки 
 	.active-t-@{class}:active, 
 	.active-t-@{class}:focus 
 	{
-		color: @color; 
-	}	
+		color: @color !important; 
+	}
 	
-	.bg-@{class}, 
+	.bg-@{class}
+	{
+		background-color: @color; 
+	}
+	
 	.hover-bg-@{class}:hover, 
 	.links-hover-bg-@{class} a:hover, // вложенные ссылки 
 	.active-bg-@{class}:active, 
 	.active-bg-@{class}:focus 
 	{
-		background-color: @color; 
+		background-color: @color !important; 
 	}
-	
 }
 
 // end of file

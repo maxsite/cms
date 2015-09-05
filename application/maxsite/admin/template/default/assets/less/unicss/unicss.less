@@ -1,4 +1,4 @@
-// .UniCSS v.28-08-2015 
+// .UniCSS v.4-09-2015 
 // .UniCSS -> http://unicss.maxsite.com.ua/
 
 *,
@@ -254,7 +254,7 @@ th {
         margin-right: auto; 
 }
 
-.b-hide { display: none; } 
+.b-hide { display: none !important; } 
 
 .b-inline { display: inline-block; }
 .b-block  { display: block; }
@@ -1099,6 +1099,9 @@ a {
         max-width: @layout_max_width;
 }
 
+.w-hide { display: none; }
+.w-auto { width: auto; }
+
 // цикл width и max-width на основе @width_list из variables.less
 .width_loop(@counter) when (@counter > 0) {
         .width_loop((@counter - 1));
@@ -1123,30 +1126,62 @@ a {
 
 // ВАЖНО! @media от больших экранов к маленьким!
 
-// устанавливаем ширины классов .wXX
-.set_width > .percent(w);
+
+// цикл width на основе @width_list_percent из variables.less
+.width_loop_percent(@counter) when (@counter > 0) {
+        .width_loop_percent((@counter - 1));
+        
+        @val: extract(@width_list_percent, @counter);
+        
+        .w@{val} {
+                width: ~"@{val}%";
+        }
+ }
+
+.width_loop_percent(length(@width_list_percent));
+
+
+.width_loop_percent_postfix(@counter; @postfix) when (@counter > 0) {
+        .width_loop_percent_postfix((@counter - 1), @postfix);
+        
+        @val: extract(@width_list_percent, @counter);
+        
+        .w@{val}@{postfix} {
+                width: ~"@{val}%";
+        }
+ }
 
 // .wXX-tablet
 @media @SCREEN_TABLET {
-        .set_width > .percent(w, tablet);
+        .w-hide-tablet { display: none; }
+        .w-auto-tablet { width: auto; }
+        .width_loop_percent_postfix(length(@width_list_percent), ~"-tablet");
 }
 
 // .wXX-phone
 @media @SCREEN_PHONE {
-        .set_width > .percent(w, phone);
+        .w-hide-phone { display: none; }
+        .w-auto-phone { width: auto; }
+        .width_loop_percent_postfix(length(@width_list_percent), ~"-phone");
 }
 
 // .wXX-small
 @media @SCREEN_SMALL {
-        .set_width > .percent(w, small);
+        .w-hide-small { display: none; }
+        .w-auto-small { width: auto; }
+        .width_loop_percent_postfix(length(@width_list_percent), ~"-small");
 }
 
 // .wXX-medium
 @media @SCREEN_MEDIUM {
-        .set_width > .percent(w, medium);
+        .w-hide-medium { display: none; }
+        .w-auto-medium { width: auto; }
+        .width_loop_percent_postfix(length(@width_list_percent), ~"-medium");
 }
 
 // .wXX-large
 @media @SCREEN_LARGE {
-        .set_width > .percent(w, large);
+        .w-hide-large { display: none; }
+        .w-auto-large { width: auto; }
+        .width_loop_percent_postfix(length(@width_list_percent), ~"-large");
 }

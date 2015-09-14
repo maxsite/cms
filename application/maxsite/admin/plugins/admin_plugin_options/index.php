@@ -82,7 +82,7 @@ function admin_plugin_options_admin($args = array())
 # функция проверяет входящий post
 # если все ок, то вносит новые значения в опции
 # если post нет, то выводит форму с текущими значениями опций
-function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $text_other = '', $show_goto_plugins = true)
+function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $text_other = '', $show_goto_plugins = false)
 {
 	if ($show_goto_plugins) echo '<p><a href="' . getinfo('site_admin_url') . 'plugins" class="i plugins">' . t('Плагины') . '</a></p>';
 	

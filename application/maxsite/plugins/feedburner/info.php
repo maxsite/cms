@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('RSS для FeedBurner.com'),
 	'description' => t('Подключение RSS блога для FeedBurner.com'),
-	'version' => '1.0',
+	'version' => '1.1',
 	'author' => 'Максим',
 	'plugin_url' => 'http://max-3000.com/',
 	'author_url' => 'http://maxsite.org/',

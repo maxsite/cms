@@ -419,7 +419,7 @@ function mso_view_ini($all = false)
 	
 	$out .= $table; // вывод подготовленной таблицы
 	
-	$out .= NR . '<a id="abottom"></a><button type="submit" name="f_submit" class="i save">' . t('Сохранить') . '</button>';
+	$out .= NR . '<a id="abottom"></a><button type="submit" name="f_submit" class="mso-save-ini">' . t('Сохранить') . '</button>';
 	$out .= '</form>';
 	
 	$out .= mso_load_jquery('jquery.cookie.js') . "

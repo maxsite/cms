@@ -1,4 +1,4 @@
-// .UniCSS v.17-08-2015 
+// .UniCSS v.14-09-2015 
 // .UniCSS -> http://unicss.maxsite.com.ua/
 
 *,
@@ -254,7 +254,7 @@ th {
         margin-right: auto; 
 }
 
-.b-hide { display: none; } 
+.b-hide { display: none !important; } 
 
 .b-inline { display: inline-block; }
 .b-block  { display: block; }
@@ -358,7 +358,7 @@ th {
         
         @val: extract(@border_list, @counter);
         
-        .bor@{val}px {
+        .bor@{val} {
                 border-width: ~"@{val}px";
         }
 }
@@ -398,8 +398,8 @@ th {
         &:active, 
         &:focus 
         {
-        //      background: @button_active_bg_color;
-        //      color: @button_active_text_color;
+                background: @button_active_bg_color;
+                color: @button_active_text_color;
         }
         
         &.disabled,
@@ -416,47 +416,167 @@ th {
 // цвета
 
 // основные
-.colors_state(color1, @color1);
-.colors_state(color2, @color2);
-.colors_state(color3, @color3);
-.colors_state(color4, @color4);
-.colors_state(color5, @color5);
+.colors_state(~"color1", @color1);
+.colors_state(~"color2", @color2);
+.colors_state(~"color3", @color3);
+.colors_state(~"color4", @color4);
+.colors_state(~"color5", @color5);
 
 // дополнительные
-.colors_state(colorA1, @colorA1);
-.colors_state(colorA2, @colorA2);
-.colors_state(colorA3, @colorA3);
-.colors_state(colorA4, @colorA4);
-.colors_state(colorA5, @colorA5);
+.colors_state(~"colorA1", @colorA1);
+.colors_state(~"colorA2", @colorA2);
+.colors_state(~"colorA3", @colorA3);
+.colors_state(~"colorA4", @colorA4);
+.colors_state(~"colorA5", @colorA5);
 
 // предопределенные
-.colors_state(white, @white);
-.colors_state(black, @black);
-.colors_state(gray, @gray);
-.colors_state(red, @red);
-.colors_state(green, @green);
-.colors_state(blue, @blue);
-.colors_state(yellow, @yellow);
+.colors_state(~"white", @white);
+.colors_state(~"black", @black);
 
-.colors_state(orange, @orange);
-.colors_state(olive, @olive);
-.colors_state(teal, @teal);
-.colors_state(violet, @violet);
-.colors_state(purple, @purple);
-.colors_state(pink, @pink);
-.colors_state(brown, @brown);
+.colors_state(~"red", @red);
+.colors_state(~"red900",  darken(@red, 40%));
+.colors_state(~"red800",  darken(@red, 30%));
+.colors_state(~"red700",  darken(@red, 20%));
+.colors_state(~"red600",  darken(@red, 10%));
+.colors_state(~"red500",         @red);
+.colors_state(~"red400", lighten(@red, 10%));
+.colors_state(~"red300", lighten(@red, 20%));
+.colors_state(~"red200", lighten(@red, 30%));
+.colors_state(~"red100", lighten(@red, 40%));
+.colors_state(~"red50",  lighten(@red, 45%));
 
-// оттенки серого
-.colors_state(gray50, @gray50);
-.colors_state(gray100, @gray100);
-.colors_state(gray200, @gray200);
-.colors_state(gray300, @gray300);
-.colors_state(gray400, @gray400);
-.colors_state(gray500, @gray500);
-.colors_state(gray600, @gray600);
-.colors_state(gray700, @gray700);
-.colors_state(gray800, @gray800);
-.colors_state(gray900, @gray900);
+.colors_state(~"green", @green);
+.colors_state(~"green900",  darken(@green, 40%));
+.colors_state(~"green800",  darken(@green, 30%));
+.colors_state(~"green700",  darken(@green, 20%));
+.colors_state(~"green600",  darken(@green, 10%));
+.colors_state(~"green500",         @green);
+.colors_state(~"green400", lighten(@green, 10%));
+.colors_state(~"green300", lighten(@green, 20%));
+.colors_state(~"green200", lighten(@green, 30%));
+.colors_state(~"green100", lighten(@green, 40%));
+.colors_state(~"green50",  lighten(@green, 45%));
+
+.colors_state(~"blue", @blue);
+.colors_state(~"blue900",  darken(@blue, 40%));
+.colors_state(~"blue800",  darken(@blue, 30%));
+.colors_state(~"blue700",  darken(@blue, 20%));
+.colors_state(~"blue600",  darken(@blue, 10%));
+.colors_state(~"blue500",         @blue);
+.colors_state(~"blue400", lighten(@blue, 10%));
+.colors_state(~"blue300", lighten(@blue, 20%));
+.colors_state(~"blue200", lighten(@blue, 30%));
+.colors_state(~"blue100", lighten(@blue, 40%));
+.colors_state(~"blue50",  lighten(@blue, 45%));
+
+.colors_state(~"yellow", @yellow);
+.colors_state(~"yellow900",  darken(@yellow, 40%));
+.colors_state(~"yellow800",  darken(@yellow, 30%));
+.colors_state(~"yellow700",  darken(@yellow, 20%));
+.colors_state(~"yellow600",  darken(@yellow, 10%));
+.colors_state(~"yellow500",         @yellow);
+.colors_state(~"yellow400", lighten(@yellow, 10%));
+.colors_state(~"yellow300", lighten(@yellow, 20%));
+.colors_state(~"yellow200", lighten(@yellow, 30%));
+.colors_state(~"yellow100", lighten(@yellow, 40%));
+.colors_state(~"yellow50",  lighten(@yellow, 45%));
+
+.colors_state(~"orange", @orange);
+.colors_state(~"orange900",  darken(@orange, 40%));
+.colors_state(~"orange800",  darken(@orange, 30%));
+.colors_state(~"orange700",  darken(@orange, 20%));
+.colors_state(~"orange600",  darken(@orange, 10%));
+.colors_state(~"orange500",         @orange);
+.colors_state(~"orange400", lighten(@orange, 10%));
+.colors_state(~"orange300", lighten(@orange, 20%));
+.colors_state(~"orange200", lighten(@orange, 30%));
+.colors_state(~"orange100", lighten(@orange, 40%));
+.colors_state(~"orange50",  lighten(@orange, 45%));
+
+.colors_state(~"olive", @olive);
+.colors_state(~"olive900",  darken(@olive, 40%));
+.colors_state(~"olive800",  darken(@olive, 30%));
+.colors_state(~"olive700",  darken(@olive, 20%));
+.colors_state(~"olive600",  darken(@olive, 10%));
+.colors_state(~"olive500",         @olive);
+.colors_state(~"olive400", lighten(@olive, 10%));
+.colors_state(~"olive300", lighten(@olive, 20%));
+.colors_state(~"olive200", lighten(@olive, 30%));
+.colors_state(~"olive100", lighten(@olive, 40%));
+.colors_state(~"olive50",  lighten(@olive, 45%));
+
+.colors_state(~"teal", @teal);
+.colors_state(~"teal900",  darken(@teal, 40%));
+.colors_state(~"teal800",  darken(@teal, 30%));
+.colors_state(~"teal700",  darken(@teal, 20%));
+.colors_state(~"teal600",  darken(@teal, 10%));
+.colors_state(~"teal500",         @teal);
+.colors_state(~"teal400", lighten(@teal, 10%));
+.colors_state(~"teal300", lighten(@teal, 20%));
+.colors_state(~"teal200", lighten(@teal, 30%));
+.colors_state(~"teal100", lighten(@teal, 40%));
+.colors_state(~"teal50",  lighten(@teal, 45%));
+
+.colors_state(~"violet", @violet);
+.colors_state(~"violet900",  darken(@violet, 40%));
+.colors_state(~"violet800",  darken(@violet, 30%));
+.colors_state(~"violet700",  darken(@violet, 20%));
+.colors_state(~"violet600",  darken(@violet, 10%));
+.colors_state(~"violet500",         @violet);
+.colors_state(~"violet400", lighten(@violet, 10%));
+.colors_state(~"violet300", lighten(@violet, 20%));
+.colors_state(~"violet200", lighten(@violet, 30%));
+.colors_state(~"violet100", lighten(@violet, 40%));
+.colors_state(~"violet50",  lighten(@violet, 45%));
+
+.colors_state(~"purple", @purple);
+.colors_state(~"purple900",  darken(@purple, 40%));
+.colors_state(~"purple800",  darken(@purple, 30%));
+.colors_state(~"purple700",  darken(@purple, 20%));
+.colors_state(~"purple600",  darken(@purple, 10%));
+.colors_state(~"purple500",         @purple);
+.colors_state(~"purple400", lighten(@purple, 10%));
+.colors_state(~"purple300", lighten(@purple, 20%));
+.colors_state(~"purple200", lighten(@purple, 30%));
+.colors_state(~"purple100", lighten(@purple, 40%));
+.colors_state(~"purple50",  lighten(@purple, 45%));
+
+.colors_state(~"pink", @pink);
+.colors_state(~"pink900",  darken(@pink, 40%));
+.colors_state(~"pink800",  darken(@pink, 30%));
+.colors_state(~"pink700",  darken(@pink, 20%));
+.colors_state(~"pink600",  darken(@pink, 10%));
+.colors_state(~"pink500",         @pink);
+.colors_state(~"pink400", lighten(@pink, 10%));
+.colors_state(~"pink300", lighten(@pink, 20%));
+.colors_state(~"pink200", lighten(@pink, 30%));
+.colors_state(~"pink100", lighten(@pink, 40%));
+.colors_state(~"pink50",  lighten(@pink, 45%));
+
+.colors_state(~"brown", @brown);
+.colors_state(~"brown900",  darken(@brown, 40%));
+.colors_state(~"brown800",  darken(@brown, 30%));
+.colors_state(~"brown700",  darken(@brown, 20%));
+.colors_state(~"brown600",  darken(@brown, 10%));
+.colors_state(~"brown500",         @brown);
+.colors_state(~"brown400", lighten(@brown, 10%));
+.colors_state(~"brown300", lighten(@brown, 20%));
+.colors_state(~"brown200", lighten(@brown, 30%));
+.colors_state(~"brown100", lighten(@brown, 40%));
+.colors_state(~"brown50",  lighten(@brown, 45%));
+
+// оттенки серого заданы отдельными переменными
+.colors_state(~"gray",    @gray);
+.colors_state(~"gray50",  @gray50);
+.colors_state(~"gray100", @gray100);
+.colors_state(~"gray200", @gray200);
+.colors_state(~"gray300", @gray300);
+.colors_state(~"gray400", @gray400);
+.colors_state(~"gray500", @gray500);
+.colors_state(~"gray600", @gray600);
+.colors_state(~"gray700", @gray700);
+.colors_state(~"gray800", @gray800);
+.colors_state(~"gray900", @gray900);
 
 // прозрачность
 .bg-op10, .hover-bg-op10:hover { background-color: rgba(0,0,0,0.1); }
@@ -641,6 +761,11 @@ th {
 .t-icon-medium { font-size: @icon_size_medium; }
 .t-icon-large  { font-size: @icon_size_large; }
 
+// класс где убирается правый отступ иконок
+.icon0:before {
+        margin-right: 0 !important;
+}
+
 // круглая иконка с базовым размером
 // <a href="#" class="i-car icon-circle"></a>
 .icon-circle,
@@ -737,12 +862,21 @@ th {
 .layout-center-wrap {
         width: 100%;
         
+        // будет удалён
         > .wrap {
                 width: 100%;
                 margin-right: auto;
                 margin-left: auto;
                 max-width: @layout_max_width;
         }
+        
+        > .layout-wrap {
+                width: 100%;
+                margin-right: auto;
+                margin-left: auto;
+                max-width: @layout_max_width;
+        }
+        
 }
 // .UniCSS -> http://unicss.maxsite.com.ua/
 
@@ -780,6 +914,14 @@ a {
 .links-no-color {
         a {
                 color: inherit !important;
+        }
+}
+
+// экспериментальный вариант возможно будет изменен
+// тоже самое, только без !important
+.links-no-color2 {
+        a {
+                color: inherit;
         }
 }
 // .UniCSS -> http://unicss.maxsite.com.ua/
@@ -872,21 +1014,16 @@ a {
 .pos-absolute { position: absolute; }
 .pos-relative { position: relative; }
 
-.pos-top    { top: 0; }
-.pos-right  { right: 0; }
-.pos-bottom { bottom: 0; }
-.pos-left   { left: 0; }
-
 // цикл top right bottom left на основе @position_list из variables.less
 .position_loop(@counter) when (@counter > 0) {
         .position_loop((@counter - 1));
         
         @val: extract(@position_list, @counter);
 
-        .pos-top@{val}px        { top: ~"@{val}px"; }
-        .pos-right@{val}px      { right: ~"@{val}px"; }
-        .pos-bottom@{val}px     { bottom: ~"@{val}px"; }
-        .pos-left@{val}px       { left: ~"@{val}px"; }
+        .pos@{val}-t    { top: ~"@{val}px"; }
+        .pos@{val}-r    { right: ~"@{val}px"; }
+        .pos@{val}-b    { bottom: ~"@{val}px"; }
+        .pos@{val}-l    { left: ~"@{val}px"; }
 }
 
 .position_loop(length(@position_list));
@@ -964,6 +1101,9 @@ a {
 // запрет переноса
 .t-nowrap { white-space: nowrap; }
 .t-wrap   { white-space: normal; }
+.t-pre-wrap  { white-space: pre-wrap; }
+.t-break-word  { word-wrap: break-word; }
+
 
 // гарнитура
 .t-georgia { font-family: Georgia, Times New Roman, serif; }
@@ -1100,6 +1240,9 @@ a {
         max-width: @layout_max_width;
 }
 
+.w-hide { display: none; }
+.w-auto { width: auto; }
+
 // цикл width и max-width на основе @width_list из variables.less
 .width_loop(@counter) when (@counter > 0) {
         .width_loop((@counter - 1));
@@ -1124,30 +1267,62 @@ a {
 
 // ВАЖНО! @media от больших экранов к маленьким!
 
-// устанавливаем ширины классов .wXX
-.set_width > .percent(w);
+
+// цикл width на основе @width_list_percent из variables.less
+.width_loop_percent(@counter) when (@counter > 0) {
+        .width_loop_percent((@counter - 1));
+        
+        @val: extract(@width_list_percent, @counter);
+        
+        .w@{val} {
+                width: ~"@{val}%";
+        }
+ }
+
+.width_loop_percent(length(@width_list_percent));
+
+
+.width_loop_percent_postfix(@counter; @postfix) when (@counter > 0) {
+        .width_loop_percent_postfix((@counter - 1), @postfix);
+        
+        @val: extract(@width_list_percent, @counter);
+        
+        .w@{val}@{postfix} {
+                width: ~"@{val}%";
+        }
+ }
 
 // .wXX-tablet
 @media @SCREEN_TABLET {
-        .set_width > .percent(w, tablet);
+        .w-hide-tablet { display: none; }
+        .w-auto-tablet { width: auto; }
+        .width_loop_percent_postfix(length(@width_list_percent), ~"-tablet");
 }
 
 // .wXX-phone
 @media @SCREEN_PHONE {
-        .set_width > .percent(w, phone);
+        .w-hide-phone { display: none; }
+        .w-auto-phone { width: auto; }
+        .width_loop_percent_postfix(length(@width_list_percent), ~"-phone");
 }
 
 // .wXX-small
 @media @SCREEN_SMALL {
-        .set_width > .percent(w, small);
+        .w-hide-small { display: none; }
+        .w-auto-small { width: auto; }
+        .width_loop_percent_postfix(length(@width_list_percent), ~"-small");
 }
 
 // .wXX-medium
 @media @SCREEN_MEDIUM {
-        .set_width > .percent(w, medium);
+        .w-hide-medium { display: none; }
+        .w-auto-medium { width: auto; }
+        .width_loop_percent_postfix(length(@width_list_percent), ~"-medium");
 }
 
 // .wXX-large
 @media @SCREEN_LARGE {
-        .set_width > .percent(w, large);
+        .w-hide-large { display: none; }
+        .w-auto-large { width: auto; }
+        .width_loop_percent_postfix(length(@width_list_percent), ~"-large");
 }

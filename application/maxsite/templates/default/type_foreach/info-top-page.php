@@ -37,7 +37,7 @@ $p->format('title', '<h1 class="t-gray700 bor-double-b bor3px bor-gray300 pad5-b
 
 $p->format('date', 'j F Y г.', '<time datetime="[page_date_publish_iso]" class="i-calendar">', '</time>');
 
-$p->format('view_count', '<span class="i-coffee mar15-l">' . tf('Просмотров') . ': ', '</span>');
+$p->format('view_count', '<span class="i-eye mar15-l">' . tf('Просмотров') . ': ', '</span>');
 
 $p->format('comments_count', '<span class="i-comment mar15-l">Комментарии: ', '</span>');
 

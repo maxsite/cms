@@ -6,16 +6,6 @@
 file = home-last-page.php
 [/unit]
 
-[unit]
-file = 2col-cats.php
-cats = 1,3
-limit = 5
-[/unit]
-
-[unit]
-file = mini-title.php
-[/unit]
-
 Где каждый блок вывода это [unit] ... [/unit].
 
 Обязательный параметр file, в котором имя файла в каталоге type/home/units/ 

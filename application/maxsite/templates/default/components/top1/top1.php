@@ -33,7 +33,7 @@ if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . 
 
 <div class="logo-block flex flex-vcenter pad20">
 	<div class=""><?= $logo ?></div>
-	<div class=""><?= mso_get_option('top1_block', 'templates', '') ?></div>
+	<div class=""><?= mso_get_option('top1_block', 'default', '') ?></div>
 </div>
 
 <div class="menu-search flex flex-vcenter mar20-rl bg-gray800 flex-wrap-tablet">
@@ -42,7 +42,7 @@ if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . 
 	
 	<div class="">
 		<form name="f_search" class="f_search" method="get">
-			<input class="my-search my-search--hidden" type="search" name="s" id="sss" placeholder="Поиск..."><label class="label-search i-search icon-square bg-gray700 t-gray300 cursor-pointer" for="sss"></label>
+			<input class="my-search my-search--hidden" type="search" name="s" id="sss" placeholder="Поиск..."><label class="label-search i-search icon-square bg-gray500 t-gray200 cursor-pointer" for="sss"></label>
 		</form>
 		<script>
 			var searchForm = $(".f_search");

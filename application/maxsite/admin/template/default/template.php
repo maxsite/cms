@@ -109,5 +109,6 @@
 <?= mso_load_jquery('jquery.cookie.js') ?>
 <?= mso_load_jquery('jquery.showhide.js') ?>
 <script src="<?= $admin_template_url ?>assets/js/jquery.tablesorter.js"></script>
+<script src="<?= $admin_template_url ?>assets/js/jquery.fullscreen.js"></script>
 <script src="<?= $admin_template_url ?>assets/js/my.js"></script>
 </body></html>

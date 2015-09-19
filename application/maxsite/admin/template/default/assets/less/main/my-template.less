@@ -1018,3 +1018,97 @@ div.new_cat_upload {
 	}
 
 }
+
+button.mso-save-ini {
+	.button;
+}
+
+// jquery.fullscreen.js
+.fScreen {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+}
+
+.fScreen.fScreen__active textarea {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+}
+
+.fScreen a {
+	position: absolute;
+	display: block;
+	right: 21px;
+	top: 5px;
+	padding-left: 7px;
+	text-decoration: none;
+	color:  #BBBBBB;
+	background: rgba(0,0,0,0.05);
+	cursor: pointer;
+}
+
+.fScreen a:hover {
+	background: rgba(0,0,0,.5);
+	color: #fff;
+}
+
+.fScreen__active {
+	position: fixed;
+	display: block;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	border: 15px solid rgba(0,0,0,.6);
+	z-index: 9999;
+}
+
+.fScreen__active textarea {
+	resize: none;
+}
+
+html.my-html-no-scroll {
+	overflow:  hidden;
+}
+
+// плагин пагинации
+div.pagination {
+	
+	.mar40-t;
+	.mar10-b;
+	
+	a, span, strong {
+		.b-inline;
+		.pad5;
+		background: @gray500;
+		color: @white;
+		
+		min-width: 28px;
+		.t-center;
+	}
+	
+	a:hover {
+		text-decoration: none;
+		background: @blue;
+	}
+	
+	strong {
+		background: @button_bg_color;
+		color: @button_text_color;
+		font-weight: normal;
+	}
+	
+	span.pagination-first { .b-hide; }	
+	span.pagination-prev { .b-hide; }
+	.pagination-start {}
+	span.pagination-next { .b-hide; }
+	span.pagination-last { .b-hide; }
+}
+
+// плагин paginator
+.paginator {
+	.mar40-t;
+	.mar10-b;
+}

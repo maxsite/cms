@@ -381,8 +381,10 @@
 	
 	// форма загрузки
 	echo '
-		<div class="upload_file">
-		<h2>' . t('Загрузка файлов') . '</h2>
+		<div class="upload_file mar20-tb pad20-rl pad5-tb bg-gray100">
+		<h4><a class="upload_file_link" href="#">' . t('Загрузка файлов') . '</a></h4>
+		<div class="upload_file_show">
+		
 		<p>' . t('Для загрузки файла нажмите кнопку «Обзор», выберите файл на своем компьютере. После этого нажмите кнопку «Загрузить». Размер файла не должен превышать') . ' ' . ini_get('post_max_size') . '.</p>
 		<form method="post" enctype="multipart/form-data" class="admin_uploads_form">' . mso_form_session('f_session2_id') .
 		'<p>';
@@ -394,9 +396,9 @@
 	}	
 	
 	
-	echo '&nbsp;<button type="submit" name="f_upload_submit" class="i upload">' . t('Загрузить') . '</button>
+	echo '&nbsp;<button type="submit" name="f_upload_submit" class="mso-upload">' . t('Загрузить') . '</button>
 		&nbsp;
-		<button type="reset" class="i reset">' . t('Сбросить') . '</button>
+		<button type="reset" class="mso-reset">' . t('Сбросить') . '</button>
 		</p>
 		
 		<p>' . t('Описание файла:') . ' <input type="text" name="f_userfile_title" class="description_file" value="" size="80"></p>
@@ -418,7 +420,7 @@
 		<option value="7"'.(($mini_type == 7)?(' selected="selected"'):('')).'>' . t('Уменьшения и обрезки (crop) в квадрат') . '</option>
 		</select>
 		
-		&nbsp;<button type="submit" class="i update-mini" name="f_update_mini_submit" onClick="if(confirm(\'' . t('Обновить старые миниатюры (создать для тех файлов, у которых их нет) для всех изображений каталога?') . '\')) {return true;} else {return false;}" >' . t('Обновить миниатюры') . '</button>
+		&nbsp;<button type="submit" class="mso-update-mini" name="f_update_mini_submit" onClick="if(confirm(\'' . t('Обновить старые миниатюры (создать для тех файлов, у которых их нет) для всех изображений каталога?') . '\')) {return true;} else {return false;}" >' . t('Обновить миниатюры') . '</button>
 		
 		</p>
 
@@ -436,8 +438,16 @@
 		<option value="5"'.(($watermark_type == 5)?(' selected="selected"'):('')).'>' . t('В правом нижнем углу') . '</option>
 		</select></p>
 		</form>
-		</div>
+		</div></div>
+<script>
+$(function () {
+$.cookie.json = true; $("div.upload_file").showHide({time: 200, useID: false, clickElem: "a.upload_file_link", foldElem: "div.upload_file_show", visible: false});
+});
+</script>	
+		
 		';
+	
+		
 
 	// как выводим файлы
 	$admin_view_files = mso_get_option('admin_view_files', 'general', 'mini');
@@ -647,7 +657,7 @@
 		}
 
 		echo '<div class="sel-files"><button type="submit" name="f_delete_submit" class="i delete-file" onClick="if(confirm(\'' . t('Выделенные файы будут безвозвратно удалены! Удалять?') . '\')) {return true;} else {return false;}">' . t('Удалить') . '</button> 
-			<button type="button" id="check-all" class="i invert">' . t('Инвертировать выделение') . '</button></div>
+			<button type="button" id="check-all" class="mso-invert">' . t('Инвертировать выделение') . '</button></div>
 			
 			</form>';
 

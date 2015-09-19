@@ -1,23 +1,21 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 
 <h1><?= t('Добро пожаловать в MaxSite CMS!') ?></h1>
+<div class="flex flex-wrap-tablet">
 
-<ul>
-	<li><a href="http://max-3000.com/"><?= t('Официальный сайт MaxSite CMS') ?></a> / <a href="http://max-3000.com/page/donation"><?= t('Помочь проекту') ?></a></li>
-	
-	<li><a href="https://github.com/maxsite/cms"><?= t('Исходный код на GitHub') ?></a> / <a href="https://github.com/maxsite/cms/tree/dev"><?= t('Версия для разработчиков') ?></a></li>
-	
-	<li><a href="https://github.com/maxsite/cms/issues"><?= t('Сообщить о проблеме') ?></a></li>
-	
-	<li><a href="http://book.max-3000.com/"><?= t('Обучающая книга по MaxSite CMS') ?></a></li>
-	
-	<li><a href="http://max-3000.com/help"><?= t('Центр помощи') ?></a> / <a href="http://max-3000.com/page/faq"><?= t('ЧАВО для новичков') ?></a></li>
-	
-	<li><a href="http://forum.max-3000.com/"><?= t('Форум поддержки') ?></a> / <a href="http://forum.max-3000.com/viewforum.php?f=13"><?= t('Шаблоны') ?></a> / <a href="http://forum.max-3000.com/viewforum.php?f=17"><?= t('Плагины') ?></a></li>
-	
-	<li><a href="http://maxhub.ru/"><?= t('MaxHub - сообщество MaxSite CMS') ?></a></li>
-	
+<ul class="flex-grow3">
+	<li><a href="//max-3000.com/"><?= t('Официальный сайт MaxSite CMS') ?></a> &bull; <a href="//max-3000.com/page/donation"><?= t('Помочь проекту') ?></a></li>
+	<li><a href="//github.com/maxsite/cms"><?= t('GitHub') ?></a> &bull; <a href="//github.com/maxsite/cms/tree/dev"><?= t('Dev-версия') ?></a> &bull; <a href="//github.com/maxsite/cms/commits/dev"><?= t('История изменений') ?></a></li>
+	<li><a href="//github.com/maxsite/cms/issues"><?= t('Сообщить о проблеме') ?></a></li>
+	<li><a href="//book.max-3000.com/"><?= t('Обучающая книга по MaxSite CMS') ?></a></li>
+	<li><a href="//max-3000.com/help"><?= t('Центр помощи') ?></a> &bull; <a href="//max-3000.com/page/faq"><?= t('ЧАВО для новичков') ?></a></li>
+	<li><a href="//forum.max-3000.com/"><?= t('Форум поддержки') ?></a> &bull; <a href="//forum.max-3000.com/viewforum.php?f=13"><?= t('Шаблоны') ?></a> &bull; <a href="//forum.max-3000.com/viewforum.php?f=17"><?= t('Плагины') ?></a></li>
+	<li><a href="//maxhub.ru/"><?= t('MaxHub - сообщество MaxSite CMS') ?></a></li>
 </ul>
+<div class="flex-grow1 pad20 t-center t-gray100 links-no-color" style="background: #006187; align-self: flex-start;">
+	<a href="//unicss.maxsite.com.ua/" target="_blank" title="Less/Css-фреймворк UniCSS"><b>.UniCSS</b> { Less/Css: Framework }</a>
+</div>
+</div>
 
 <iframe src="http://max-3000.com/check-latest?<?= getinfo('version') ?>" scrolling="auto" frameborder="no" style="width: 100%; min-height: 100px; margin-top: 20px;"></iframe>
 

@@ -81,4 +81,5 @@ function admin_options_admin_template()
 
 	return $out;
 }
-?>
+
+# end of file

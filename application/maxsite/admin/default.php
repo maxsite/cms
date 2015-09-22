@@ -69,7 +69,20 @@ function mso_admin_plugins_default($args = array())
 	return $args;
 }
 
+// язык админ-панели
+function mso_admin_lang($args = array())
+{
+	global $MSO;
+	
+	$MSO->language = mso_get_option('admin_lang', 'general', ''); 
+	
+	return $args;
+}
+
+
 # дефолтные хуки
+mso_hook_add('admin_init', 'mso_admin_lang');
+
 mso_hook_add('admin_header_default', 'mso_admin_header_default');
 mso_hook_add('admin_menu_default', 'mso_admin_menu_default');
 mso_hook_add('admin_content_default', 'mso_admin_content_default');

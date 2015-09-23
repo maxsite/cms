@@ -8,7 +8,7 @@
 ?>
 
 <h1><?= t('Основные настройки') ?></h1>
-<p class="info"><?= t('Здесь вы можете указать основные настройки. Если указанная настройка отмечена «нет в базе», значит нужно ввести её значение и нажать кнопку «Сохранить».') ?></p>
+<p class="info"><?= t('Здесь вы можете указать основные настройки сайта.') ?></p>
 
 <?php
 
@@ -21,7 +21,7 @@
 
 
 
-	$CI = & get_instance();
+	// $CI = & get_instance();
 	require_once( getinfo('common_dir') . 'inifile.php' ); // функции для работы с ini-файлом
 	
 	// проверяем входящие данные
@@ -33,4 +33,4 @@
 	$all = mso_get_ini_file( $MSO->config['admin_plugins_dir'] . 'admin_options/general.ini');
 	echo mso_view_ini($all); // вывод таблицы ini 
 
-?>
+# end of file

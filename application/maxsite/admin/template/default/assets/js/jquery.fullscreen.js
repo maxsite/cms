@@ -38,5 +38,5 @@
 /*---------------------------*/
 
 $(function () {
-	$("textarea").fullScreen();
+	$("textarea:not(#f_content)").fullScreen();
 });

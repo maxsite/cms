@@ -13,6 +13,8 @@ $par = array(
 		'cat_order' => 'category_id_parent', 
 		'cat_order_asc' => 'asc',
 		'exclude_page_id' => mso_get_val('exclude_page_id'),
+		'order' => mso_get_option('home_order', 'templates', 'page_date_publish'),
+		'order_asc' => mso_get_option('home_order_asc', 'templates', 'desc'),
 	);
 		
 // подключаем кастомный вывод, где можно изменить массив параметров $par для своих задач
@@ -20,7 +22,7 @@ if ($f = mso_page_foreach('home-mso-get-pages')) require($f);
 
 $pages = mso_get_pages($par, $pagination);
 
-mso_set_val('container_class', 'type_home home_full');
+mso_set_val('container_class', 'mso-type_home home_full');
 mso_set_val('full_format_title_start', '<h1>');
 mso_set_val('full_format_title_end', '</h1>');
 
@@ -30,4 +32,4 @@ if ($f = mso_page_foreach('home-do-pagination')) require($f);
 
 mso_hook('pagination', $pagination);
 	
-# end file
+# end of file

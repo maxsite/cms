@@ -126,7 +126,7 @@
 	mso_hook('pagination', $pag);
 	//echo '<br>'; // вывод навигации
 
-	echo mso_load_jquery('jquery.tablesorter.js') . '
+	echo '
 		<script>
 		$(function() {
 			$("table.tablesorter").tablesorter( {headers: { 1: {sorter: false}, 3: {sorter: false} }});

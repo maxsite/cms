@@ -21,7 +21,7 @@ application/config/database.php
 /uploads/**
 !/uploads/.htaccess
 !/uploads/smiles/*.gif
-!/uploads/favicons/*.*
+!/uploads/favicons/favicon1.png
 !/uploads/mini/index.html
 !/uploads/_mso_i/index.html
 !/uploads/_mso_float/index.html

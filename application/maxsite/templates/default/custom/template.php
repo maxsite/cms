@@ -28,7 +28,7 @@ function my_default_head_section()
 <meta property="og:title" content="' . mso_head_meta('title') . '">
 <meta property="og:description" content="' . mso_head_meta('description') . '">
 <meta property="og:url" content="' . mso_link_rel('canonical', '', true) . '">
-<link rel="shortcut icon" href="' . getinfo('template_url') . 'assets/images/favicons/' . mso_get_option('default_favicon', 'templates', 'favicon1.png') . '" type="image/x-icon">
+<link rel="shortcut icon" href="' . getinfo('uploads_url') . 'favicons/' . mso_get_option('default_favicon', 'templates', 'favicon1.png') . '" type="image/x-icon">
 ';
 
 	if (is_type('page') and isset($page['page_meta']['image_for_page'][0]))
@@ -86,7 +86,7 @@ function my_default_head_section()
 	if (mso_fe('assets/js/my.js')) 
 		echo mso_add_file('assets/js/my.js');
 	
-	if ($my_style = mso_get_option('my_style', 'templates', '')) 
+	if ($my_style = mso_get_option('my_style', getinfo('template'), '')) 
 		echo NR . '<!-- custom css-my_style -->' . NR . '<style>' . NR . $my_style . '</style>';
 	
 	mso_hook('head_end');
@@ -102,7 +102,7 @@ function my_default_out_profiles($path = 'assets/css/profiles/')
 {
 	global $page;
 	
-	if ($default_profiles = mso_get_option('default_profiles', 'templates', array())) // есть какие-то профили оформления
+	if ($default_profiles = mso_get_option('default_profiles', getinfo('template'), array())) // есть какие-то профили оформления
 	{
 		$css_out = '';
 		
@@ -157,7 +157,7 @@ function my_default_out_profiles($path = 'assets/css/profiles/')
 # if ($fn = my_get_component_fn('header_component2', 'menu')) require($fn);
 function my_get_component_fn($option = '', $def_component = '')
 {
-	if ($dir = mso_get_option($option, 'templates', $def_component)) // получение опции
+	if ($dir = mso_get_option($option, getinfo('template'), $def_component)) // получение опции
 	{
 		$fn = getinfo('template_dir') . 'components/' . $dir . '/' . $dir . '.php';
 		
@@ -179,7 +179,7 @@ function my_out_component_css($component_options = array('header_component1', 'h
 	foreach($component_options as $option)
 	{
 		// и если они определены
-		if ($dir = mso_get_option($option, 'templates', false))
+		if ($dir = mso_get_option($option, getinfo('template'), false))
 		{
 			$fn = 'components/' . $dir . '/style.css';
 			mso_add_file($fn); // подключаем внешими стилями

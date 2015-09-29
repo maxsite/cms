@@ -82,4 +82,13 @@ function admin_options_admin_template()
 	return $out;
 }
 
+# возвращает файлы для favicon
+function admin_options_favicon()
+{
+	$all = mso_get_path_files(getinfo('uploads_dir') . 'favicons/', getinfo('template_url') . 'uploads/favicons/', false);
+	
+	return implode($all, '#');
+}
+
+
 # end of file

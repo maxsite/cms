@@ -46,7 +46,7 @@ else
 	}
 	else
 	{
-		$home_units = mso_get_option('home_units', 'templates', ''); // или из опции
+		$home_units = mso_get_option('home_units', getinfo('template'), ''); // или из опции
 	}
 	
 	if ($home_units)

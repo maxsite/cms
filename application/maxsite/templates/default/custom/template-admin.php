@@ -8,14 +8,6 @@
  *
  */
 
-# возвращает файлы для favicon
-function default_favicon()
-{
-	$all = mso_get_path_files(getinfo('template_dir') . 'assets/images/favicons/', getinfo('template_url') . 'assets/images/favicons/', false);
-	
-	return implode($all, '#');
-}
-
 # возвращает файлы для компонент
 function default_components()
 {
@@ -39,6 +31,7 @@ function default_profiles()
 	return $all;
 }
 
+/*
 # возвращает файлы для логотипа
 function default_header_logo()
 {
@@ -46,8 +39,8 @@ function default_header_logo()
 	
 	return implode($all, '#');
 }
-
-
+*/
+/*
 # возвращает каталоги в uploads, где могут храниться файлы для шапки 
 function default_header_image()
 {
@@ -55,6 +48,6 @@ function default_header_image()
 	
 	return '-template-||' . tf('Каталог шаблона') . '#' . implode($dirs, '#');
 }
+*/
 
-
-# end file
+# end of file

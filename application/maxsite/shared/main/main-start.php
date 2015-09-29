@@ -34,7 +34,7 @@ else
 		}
 		else
 		{	
-			if($page_template = mso_get_option('main_template_page', 'templates', '')) // опция
+			if($page_template = mso_get_option('main_template_page', getinfo('template'), '')) // опция
 			{
 				if ($fn = mso_fe('main/' . $page_template . '/main.php')) 
 				{	
@@ -42,7 +42,6 @@ else
 				}
 			}
 		}
-		
 	}
 	else
 	{
@@ -57,7 +56,7 @@ else
 			// возможно указана опця
 			// main_template_TYPE 
 			// опции заданы в ini-файлах
-			if ($page_template = mso_get_option('main_template_' . getinfo('type'), 'templates', ''))
+			if ($page_template = mso_get_option('main_template_' . getinfo('type'), getinfo('template'), ''))
 			{
 				if ($fn = mso_fe('main/' . $page_template . '/main.php')) 
 				{	
@@ -81,7 +80,7 @@ else
 		else $fn_main = getinfo('template_dir') . 'main.php';
 	
 	// может быть задан main-файл по-умолчанию в опции main_template_default
-	if ($page_template = mso_get_option('main_template_default', 'templates', ''))
+	if ($page_template = mso_get_option('main_template_default', getinfo('template'), ''))
 	{
 		if ($fn = mso_fe('main/' . $page_template . '/main.php')) 
 		{	

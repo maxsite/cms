@@ -3,12 +3,9 @@
 	(c) MaxSite CMS, http://max-3000.com/
 */
 
-// если в опции явно указан адрес лого, то берем его
-$logo = trim(mso_get_option('default_header_logo_custom', 'templates', false));
+$logo = trim(mso_get_option('top1_header_logo', getinfo('template'), getinfo('template_url') . 'assets/images/logos/logo01.png'));
 
-if (!$logo) $logo = getinfo('stylesheet_url') . 'assets/images/logos/' . mso_get_option('default_header_logo', 'templates', 'logo01.png');
-
-$logo = '<img src="' . $logo . '" alt="' . getinfo('name_site') . '" title="' . getinfo('name_site') . '">';
+if ($logo) $logo = '<img src="' . $logo . '" alt="' . getinfo('name_site') . '" title="' . getinfo('name_site') . '">';
 
 if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . '</a>';
 

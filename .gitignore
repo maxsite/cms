@@ -18,10 +18,10 @@ application/config/database.php
 /application/cache/rss/*.*
 !/application/cache/rss/.gitkeep/.gitkeep
 
-/uploads/**
+/uploads/*
 !/uploads/.htaccess
-!/uploads/smiles/*.gif
 !/uploads/favicons/favicon1.png
+!/uploads/smiles/*.gif
 !/uploads/mini/index.html
 !/uploads/_mso_i/index.html
 !/uploads/_mso_float/index.html

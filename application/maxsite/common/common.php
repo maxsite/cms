@@ -1106,16 +1106,19 @@ function mso_get_float_option($key, $type = 'general', $return_value = false, $s
 
 
 # удаление flat-опции если есть
-function mso_delete_float_option($key, $type = 'general', $dir = '')
+function mso_delete_float_option($key, $type = 'general', $dir = '', $ext = '', $md5_key = true)
 {
-	// $CI = & get_instance();
-
 	if (!$key or !$type) return false;
 
 	if ($dir) $dir .= '/';
 
-	$path = getinfo('uploads_dir') . '_mso_float/' . $dir . mso_md5($key . $type);
+	// $path = getinfo('uploads_dir') . '_mso_float/' . $dir . mso_md5($key . $type);
 
+	if ($md5_key) 
+		$path = getinfo('uploads_dir') . '_mso_float/' . $dir . mso_md5($key . $type) . $ext;
+	else 
+		$path = getinfo('uploads_dir') . '_mso_float/' . $dir . $key . $type . $ext;
+		
 	if ( file_exists($path))
 	{
 		@unlink($path);

@@ -59,7 +59,8 @@ function mso_get_pages($r = array(), &$pag)
 	// если 0, значит все страницы - только для главной
 	// можно указать номера страниц через запятую
 	if ( !isset($r['page_id']) )		$r['page_id'] = 0;
-	 
+	
+	
 	// можно указать номера рубрик через запятую
 	if ( !isset($r['cat_id']) )			$r['cat_id'] = 0; // если 0, значит все рубрики - только для главной
 
@@ -71,8 +72,13 @@ function mso_get_pages($r = array(), &$pag)
 
 	// если нужно вывести все данные, невзирая на limit, то no_limit=true - пагинация при этом отключается
 	if ( !isset($r['no_limit']) )		$r['no_limit'] = false;
+	
+	// если указаны номера записей, то limit отключаем
+	if ($r['page_id']) $r['no_limit'] = true; 
+	
 	if ($r['no_limit']) $r['pagination'] = false;
-
+	
+	
 	// custom_type - аналог is_type - анализ явного указания типа данных
 	if ( !isset($r['custom_type']) )	$r['custom_type'] = false;
 

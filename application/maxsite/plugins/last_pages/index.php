@@ -60,6 +60,7 @@ function last_pages_widget_form($num = 1)
 	if ( !isset($options['img_prev_def']) )		$options['img_prev_def'] = '';
 	if ( !isset($options['img_prev_attr']) )	$options['img_prev_attr'] = 'class="b-left w100"';
 	if ( !isset($options['max_words']) )		$options['max_words'] = 20;
+	if ( !isset($options['text_do']) ) 			$options['text_do'] = '';
 	if ( !isset($options['text_posle']) ) 		$options['text_posle'] = '';
 
 	// вывод самой формы
@@ -81,7 +82,7 @@ function last_pages_widget_form($num = 1)
 	
 	$form .= mso_widget_create_form(t('Включить рубрики'), form_input( array( 'name'=>$widget . 'include_cat', 'value'=>$options['include_cat'] ) ), '');
 	
-	$form .= mso_widget_create_form(t('Сортировка'), form_dropdown( $widget . 'sort', array( 'page_date_publish'=>t('По дате'), 'page_title'=>t('По алфавиту') ), $options['sort']), '');
+	$form .= mso_widget_create_form(t('Сортировка'), form_dropdown( $widget . 'sort', array( 'page_date_publish'=>t('По дате'), 'page_title'=>t('По алфавиту'), 'page_id'=>t('По ID записи'), 'page_menu_order'=>t('По menu_order'), 'page_slug'=>t('По коротким ссылкам'), 'page_last_modified'=>t('По дате последнего редактированию') ), $options['sort']), '');
 
 	$form .= mso_widget_create_form(t('Порядок сортировки'), form_dropdown( $widget . 'sort_order', array( 'asc'=>t('Прямой'), 'desc'=>t('Обратный'), 'random'=>t('Случайно')), $options['sort_order']), '');
 	
@@ -91,7 +92,10 @@ function last_pages_widget_form($num = 1)
 
 	$form .= mso_widget_create_form(t('Количество слов'), form_input( array( 'name'=>$widget . 'max_words', 'value'=>$options['max_words'] ) ));
 	
+	$form .= mso_widget_create_form(t('Текст вверху'), form_textarea( array( 'name'=>$widget . 'text_do', 'value'=>$options['text_do'], 'rows' => '3')));
+	
 	$form .= mso_widget_create_form(t('Текст внизу'), form_textarea( array( 'name'=>$widget . 'text_posle', 'value'=>$options['text_posle'], 'rows' => '3')));
+	
 	
 	return $form;
 }
@@ -120,6 +124,7 @@ function last_pages_widget_update($num = 1)
 	$newoptions['img_prev_def'] = mso_widget_get_post($widget . 'img_prev_def');
 	$newoptions['img_prev_attr'] = mso_widget_get_post($widget . 'img_prev_attr');
 	$newoptions['max_words'] = mso_widget_get_post($widget . 'max_words');
+	$newoptions['text_do'] = mso_widget_get_post($widget . 'text_do');
 	$newoptions['text_posle'] = mso_widget_get_post($widget . 'text_posle');
 
 	if ( $options != $newoptions )
@@ -140,12 +145,13 @@ function last_pages_widget_custom($arg = array(), $num = 1)
 	if (!isset($arg['img_prev_def'])) 	$arg['img_prev_def'] = '';
 	if (!isset($arg['img_prev_attr'])) 	$arg['img_prev_attr'] = 'class="b-left w100"';
 	if (!isset($arg['max_words']) ) 	$arg['max_words'] = 20;
+	if (!isset($arg['text_do']) ) 	$arg['text_do'] = '';
 	if (!isset($arg['text_posle']) ) 	$arg['text_posle'] = '';
 
 	if ( !isset($arg['header']) ) $arg['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . t('Последние записи') . mso_get_val('widget_header_end', '</span></div>');
 
-	if ( !isset($arg['block_start']) ) $arg['block_start'] = '<div class="last-pages">';
-	if ( !isset($arg['block_end']) ) $arg['block_end'] = '</div>';
+	if ( !isset($arg['block_start']) ) $arg['block_start'] = '';
+	if ( !isset($arg['block_end']) ) $arg['block_end'] = '';
 
 	
 	if ($arg['sort_order'] != 'random')
@@ -216,8 +222,7 @@ function last_pages_widget_custom($arg = array(), $num = 1)
 			$out .= $out_page;
 		}
 		
-		$out = $arg['header'] . $arg['block_start'] . $out . $arg['block_end'];
-		$out .= $arg['text_posle'];
+		$out = $arg['header'] . $arg['block_start'] . $arg['text_do'] . $out . $arg['text_posle'] . $arg['block_end'];
 	}
 	
 	if ($arg['sort_order'] != 'random') mso_add_cache($cache_key, $out); // в кэш

@@ -21,23 +21,7 @@ function _getFiles($rdi, $depth=0, $dir)
 			{
 				if ($depth == 0) 
 				{
-					// $out[] = $cur . '--0';
-					
 					$out[] = '<optgroup class="bg-gray100" label="' . $cur . '"></optgroup>';
-					
-					// echo ' &bull; ';
-					// $cur = str_replace('/', '', strrchr($cur, '/'));
-					// $out[] = '--' . str_replace('/', '', strrchr($cur, '/'));
-				}
-				
-				if ($depth == 1) 
-				{
-					// $out[] = $cur . '--1';
-					// $out[] = '<optgroup class="bg-gray" label="-"></optgroup>';
-					
-					// echo ' &bull; ';
-					// $cur = str_replace('/', '', strrchr($cur, '/'));
-					// $out[] = '--' . str_replace('/', '', strrchr($cur, '/'));
 				}
 			}
 			
@@ -45,9 +29,8 @@ function _getFiles($rdi, $depth=0, $dir)
 			{
 				$file_ext = strtolower(str_replace('.', '', strrchr($cur, '.')));
 				
-				if (in_array($file_ext, array('php', 'txt', 'css', 'less', 'js', 'html', 'htm', 'ini'))) 
+				if (in_array($file_ext, array('php', 'txt', 'css', 'less', 'js', 'html', 'htm', 'ini', 'sass', 'scss'))) 
 				{
-					
 					if (is_writable($rdi->getPathname())) $out[] = $cur;
 				}
 			}
@@ -63,13 +46,32 @@ function _getFiles($rdi, $depth=0, $dir)
 	return $out;
 }
 
-
 $directory = getinfo('template_dir');
 $directory = str_replace('\\', '/', $directory);
 
 $r = new RecursiveDirectoryIterator($directory);
 
 $files = _getFiles($r, 0, $directory);
+
+// в третьем сегменте можно указать адрес файла в base64
+$content_file = '';
+$file_path = '';
+
+if (mso_segment(3)) 
+{
+	$f = base64_decode(mso_segment(3));
+	$f = str_replace('~', '-', $f);
+	$f = str_replace('\\', '-', $f);
+	$f = getinfo('template_dir') . $f;
+	
+	// есть такой файл
+	if (file_exists($f)) 
+	{
+		$content_file = file_get_contents($f);
+		$file_path = mso_segment(3);
+	}
+}
+
 
 // pr(getinfo('template'));
 // pr($directory);
@@ -80,10 +82,13 @@ $select = '<option value="" selected>-</option>';
 foreach ($files as $file)
 {
 	if (strpos($file, 'optgroup') === false)
-		$select .= '<option value="' . base64_encode($file) . '">' . $file . '</option>';
+	{
+		$opt_selected = (mso_segment(3) and base64_encode($file) === mso_segment(3)) ? ' selected' : '';
+		
+		$select .= '<option value="' . base64_encode($file) . '"' . $opt_selected . '>' . $file . '</option>';
+	}
 	else
 		$select .= $file;
-		
 }
 
 ?>
@@ -95,7 +100,7 @@ foreach ($files as $file)
 
 <?php
 
-echo '<form method="post" id="edit_form" action=""><textarea name="content" id="content" class="w100 h500px bg-gray50"></textarea><input type="hidden" id="file_path" name="file_path" value=""><p><button id="b-save" class="button i-save" type="submit">Сохранить</button></p></form>';
+echo '<form method="post" id="edit_form" action=""><textarea name="content" id="content" class="w100 h500px bg-gray50">' . $content_file . '</textarea><input type="hidden" id="file_path" name="file_path" value="' . $file_path . '"><p><button id="b-save" class="button i-save" type="submit">Сохранить</button></p></form>';
 		
 $AJAX1 = getinfo('ajax') . base64_encode('admin/plugins/editor_files/load-file-ajax.php');
 $AJAX2 = getinfo('ajax') . base64_encode('admin/plugins/editor_files/save-file-ajax.php');
@@ -112,7 +117,6 @@ jQuery(function($) {
 		
 		if (f)
 		{
-			// alert(f);
 			$.post("{$AJAX1}", {file:f},  function(response) {
 				$('#file_path').val(f);
 				
@@ -130,8 +134,6 @@ jQuery(function($) {
 	})
 	
 	$('#edit_form').submit(function(){
-	
-		// alert(123);
 		$.post("{$AJAX2}", $("#edit_form").serialize(),  function(response) {
 			$('#success').html(response);
 			$('#success').show();
@@ -151,6 +153,5 @@ jQuery(function($) {
 </script>
 
 EOF;
-		
-		
+
 # end of file

@@ -14,6 +14,7 @@ function mso_admin_menu_default($args = array())
 	# вначале нужно добавить все главные меню в той последовательности, которая нужна
 
 	mso_admin_menu_add('', '', t('Начало') );
+	mso_admin_menu_add('favorites', '', t('Избранное') );
 	mso_admin_menu_add('page', '', t('Содержимое'));
 	mso_admin_menu_add('options', '', t('Настройки'));
 	mso_admin_menu_add('users', '', t('Пользователи'));

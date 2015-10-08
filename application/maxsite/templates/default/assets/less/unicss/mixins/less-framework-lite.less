@@ -531,25 +531,19 @@
 		color: @color; 
 	}
 	
-	.hover-t-@{class}:hover, 
-	.links-hover-t-@{class} a:hover, // вложенные ссылки 
-	.t-@{class}-imp // !important
-	//.active-t-@{class}:active, 
-	//.active-t-@{class}:focus 
-	{
-		color: @color !important; 
-	}
-	
 	.bg-@{class}
 	{
 		background-color: @color; 
 	}
 	
+	.hover-t-@{class}:hover, 
+	.links-hover-t-@{class} a:not([class^="hover-t-"]):not([class*=" hover-t-"]):hover
+	{
+		color: @color !important; 
+	}
+	
 	.hover-bg-@{class}:hover, 
-	.links-hover-bg-@{class} a:hover, // вложенные ссылки 
-	.bg-@{class}-imp // !important
-	//.active-bg-@{class}:active, 
-	//.active-bg-@{class}:focus 
+	.links-hover-bg-@{class} a:not([class^="hover-bg-"]):not([class*=" hover-bg-"]):hover
 	{
 		background-color: @color !important; 
 	}

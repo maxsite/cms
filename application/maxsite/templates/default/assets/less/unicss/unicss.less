@@ -912,17 +912,18 @@ a {
         }
 }
 
-.links-no-color-imp {
-        a {
-                color: inherit !important;
+.links-no-color {
+        
+        a:not([class^="t-"]):not([class*=" t-"])
+        {
+                color: inherit;
         }
 }
 
-// экспериментальный вариант возможно будет изменен
-// тоже самое, только без !important
-.links-no-color {
+// жесткий !important — экспериметральный вариант!
+.links-no-color-imp {
         a {
-                color: inherit;
+                color: inherit !important;
         }
 }
 // .UniCSS -> http://unicss.maxsite.com.ua/

@@ -1,4 +1,4 @@
-// .UniCSS v.14-09-2015 
+// .UniCSS v.8-10-2015 
 // .UniCSS -> http://unicss.maxsite.com.ua/
 
 *,
@@ -254,7 +254,8 @@ th {
         margin-right: auto; 
 }
 
-.b-hide { display: none !important; } 
+.b-hide { display: none; } 
+.b-hide-imp { display: none !important; } 
 
 .b-inline { display: inline-block; }
 .b-block  { display: block; }
@@ -398,8 +399,8 @@ th {
         &:active, 
         &:focus 
         {
-                background: @button_active_bg_color;
-                color: @button_active_text_color;
+                // background: @button_active_bg_color;
+                // color: @button_active_text_color;
         }
         
         &.disabled,
@@ -911,7 +912,7 @@ a {
         }
 }
 
-.links-no-color {
+.links-no-color-imp {
         a {
                 color: inherit !important;
         }
@@ -919,7 +920,7 @@ a {
 
 // экспериментальный вариант возможно будет изменен
 // тоже самое, только без !important
-.links-no-color2 {
+.links-no-color {
         a {
                 color: inherit;
         }

@@ -39,7 +39,7 @@ if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . 
 
 <div class="logo-block flex flex-vcenter pad20">
 	<div class=""><?= $logo ?></div>
-	<div class=""><?= mso_get_option('top1_block', getinfo('template'), '') ?></div>
+	<div class=""><?php eval(mso_tmpl_prepare(mso_get_option('top1_block', getinfo('template'), ''))); ?></div>
 </div>
 
 <div class="menu-search flex flex-vcenter mar20-rl bg-gray800 flex-wrap-tablet">

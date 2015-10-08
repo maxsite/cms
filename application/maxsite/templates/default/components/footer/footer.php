@@ -22,14 +22,18 @@ if (is_login())
 else
 	$login = '<a href="' . getinfo('siteurl') . 'login">' . tf('Вход') . '</a>';
 	
-?>
 
-<?= mso_get_option('footer_block1', getinfo('template'), '<div class="flex flex-wrap">
+$footer_block1 = mso_get_option('footer_block1', getinfo('template'), '<div class="flex flex-wrap">
 <div class="w30">Блок 1</div>
 <div class="w30">Блок 2</div>
 <div class="w30">Блок 3</div>
-</div>') ?>
+</div>'); 
 
+$footer_block2 = mso_get_option('footer_block2', getinfo('template'), 'Блок 4');
+
+eval(mso_tmpl_prepare($footer_block1)); 
+
+?>
 <div class="flex flex-wrap">
 	<div class="t-white t90 hover-no-color links-no-color pad20-t">
 		<div class="">&copy; <?php echo getinfo('name_site') . ', ' . date('Y'); ?></div>
@@ -37,6 +41,6 @@ else
 	</div>
 	
 	<div class="pad10-t">
-		<?= mso_get_option('footer_block2', getinfo('template'), 'Блок 4') ?>
+		<?php eval(mso_tmpl_prepare($footer_block2)) ?>
 	</div>
 </div>

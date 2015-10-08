@@ -3840,7 +3840,7 @@ function mso_find_ts_file($fn, $default = false)
 # функция возвращает массив $path_url-файлов по указанному $path - каталог на сервере
 # $full_path - нужно ли возвращать полный адрес (true) или только имя файла (false)
 # $exts - массив требуемых расширений. По-умолчанию - картинки
-function mso_get_path_files($path = '', $path_url = '', $full_path = true, $exts = array('jpg', 'jpeg', 'png', 'gif', 'ico'))
+function mso_get_path_files($path = '', $path_url = '', $full_path = true, $exts = array('jpg', 'jpeg', 'png', 'gif', 'ico', 'svg'))
 {
 	// если не указаны пути, то отдаём пустой массив
 	if (!$path) return array();

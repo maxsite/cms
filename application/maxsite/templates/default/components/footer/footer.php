@@ -5,7 +5,7 @@
 
 // условие вывода компонента
 // php-условие как в виджетах
-if ($rules = trim(mso_get_option('top1_rules_output', getinfo('template'), '')))
+if ($rules = trim(mso_get_option('footer_rules_output', getinfo('template'), '')))
 {
 	$rules_result = eval('return ( ' . $rules . ' ) ? 1 : 0;');
 	if ($rules_result === false) $rules_result = 1; 

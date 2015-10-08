@@ -2,9 +2,18 @@
 /*
 	(c) MaxSite CMS, http://max-3000.com/
 	
-	вывод соцсететй иконками
-	стили задаются в _social.less
+	вывод иконок
 	Файл использовать в других компонентах
+	используется глобальная опция social.templates
+	
+	Иконки произвольные из http://fortawesome.github.io/Font-Awesome/icons/
+
+	иконка = адрес
+	иконка = адрес | подсказка
+	иконка = адрес | подсказка | дополнительный css-класс
+	
+	facebook = //facebook.com/my | Фейсбук
+	
 */
 
 $social = '[social]' . NR . mso_get_option('social', 'templates', '') . '[/social]';
@@ -12,75 +21,19 @@ $social = mso_section_to_array($social, 'social', array(), true);
 
 if ($social and isset($social[0]))
 {
-	echo '<div class="social">';
-	
 	$socials = $social[0];
 	
-	// подсказки в title
-	$title = array(
-		'behance' => 'Behance',
-		'dropbox' => 'Dropbox',
-		'facebook' => 'Facebook',
-		'gplus' => 'Google+',
-		'github' => 'Github',
-		'last_fm' => 'Last FM',
-		'linked_in' => 'Linked In',
-		'email' => 'Контакты',
-		'odnoklassniki' => 'Одноклассники',
-		'rss' => 'RSS',
-		'skype' => 'Skype',
-		'twitter' => 'Twitter',
-		'vimeo' => 'Vimeo',
-		'vkontakte' => 'В Контакте',
-		'yahoo' => 'Yahoo',
-		'youtube' => 'Youtube'
-		// 'blogger' => 'Blogger',
-		// 'evernote' => 'Evernote',
-		// 'mail' => 'Mail.ru',
-	);
-	
-	// классы для каждой иконки
-	$class = array(
-		'behance' => 'i-behance',
-		'dropbox' => 'i-dropbox ',
-		'facebook' => 'i-facebook',
-		'gplus' => 'i-google-plus',
-		'github' => 'i-github',
-		'last_fm' => 'i-lastfm',
-		'linked_in' => 'i-linkedin',
-		'email' => 'i-envelope',
-		'odnoklassniki' => 'i-male',
-		'rss' => 'i-rss',
-		'skype' => 'i-skype',
-		'twitter' => 'i-twitter',
-		'vimeo' => 'i-vimeo-square',
-		'vkontakte' => 'i-vk',
-		'yahoo' => 'i-yahoo',
-		'youtube' => 'i-youtube'
-		// 'blogger' => 'Blogger',
-		// 'mail' => 'Mail.ru',
-		// 'evernote' => 'Evernote',
-	);	
-	
-	foreach ($socials as $s => $url)
+	foreach ($socials as $icon => $data)
 	{
-		if (isset($title[$s])) $t = tf($title[$s]);
-			else $t = $s;
+		$data = explode('|', $data);
+		$data = array_map('trim', $data);
+
+		$url = (isset($data[0])) ? $data[0] : '';
+		$title = (isset($data[1])) ? htmlspecialchars($data[1]) : '';
+		$add_class = (isset($data[2])) ? ' ' . $data[2] : '';
 		
-		if (isset($class[$s])) $cls = $class[$s];
-			else $cls = $s;
-		
-		if ($s == 'rss') // rss автоматом формируем адрес
-		{
-			echo '<a class="' . $cls . '" title="RSS" href="' . getinfo('rss_url') . '"></a> ';
-		}
-		else
-		{
-			echo '<a class="' . $cls . '" rel="nofollow" title="' . $t . '" href="' . trim($url) .'"></a> ';
-		}
+		echo '<a class="my-social i-' . strtolower($icon) . $add_class . '" rel="nofollow" title="' . $title . '" href="' . $url .'"></a>';
 	}
-	
-	echo '</div>';
 }
 
-# end file
+# end of file

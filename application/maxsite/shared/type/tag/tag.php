@@ -17,7 +17,6 @@ $par = array(
 		'content' => $full_posts
 	); 
 
-
 // подключаем кастомный вывод, где можно изменить массив параметров $par для своих задач
 if ($f = mso_page_foreach('tag-mso-get-pages')) require($f); 
 		
@@ -47,23 +46,10 @@ if ($f = mso_page_foreach('tag-do'))
 
 if ($pages) // есть страницы
 {
-	if ( mso_get_option('category_show_rss_text', 'templates', 1) )
-	{
-		if ($f = mso_page_foreach('tag-show-rss-text'))
-		{
-			require($f);
-		}
-		else 
-		{
-			echo 
-				mso_get_val('show_rss_text_start', '<p class="mso-show-rss-text">') 
-				. '<a href="' . getinfo('siteurl') . mso_segment(1) . '/' 
-				. mso_segment(2) . '/feed">'
-				. tf('Подписаться на эту метку по RSS'). '</a>' 
-				.  mso_get_val('show_rss_text_end', '</p>');
-		}
-	}
+	if ($fn = mso_find_ts_file('type/tag/units/tag-header.php')) require($fn);
 	
+	if ($f = mso_page_foreach('tag-do-pages')) require($f); // подключаем кастомный вывод
+	if (function_exists('ushka')) echo ushka('tag-do-pages');
 	
 	// цикл вывода в отдельных юнитах
 	
@@ -76,10 +62,10 @@ if ($pages) // есть страницы
 		if ($fn = mso_find_ts_file('type/tag/units/tag-list.php')) require($fn);
 	}
 	
-	if ($f = mso_page_foreach('tag-posle-pages')) require($f);
+	if ($f = mso_page_foreach('tag-posle-pages')) require($f); // подключаем кастомный вывод
+	if (function_exists('ushka')) echo ushka('tag-posle-pages');
 	
 	mso_hook('pagination', $pagination);
-		
 }
 else 
 {
@@ -103,4 +89,4 @@ echo NR . '</section></div><!-- class="mso-type-tag" -->' . NR;
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	
-# end file
+# end of file

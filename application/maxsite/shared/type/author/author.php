@@ -50,8 +50,11 @@ if ($f = mso_page_foreach('author-do'))
 
 if ($pages) // есть страницы
 {
+	if ($fn = mso_find_ts_file('type/author/units/author-do-pages.php')) require($fn);
+	
+	if (function_exists('ushka')) echo ushka('author-do-pages');
+	
 	// цикл вывода в отдельных юнитах
-
 	if ($full_posts) // полные записи
 	{
 		if ($fn = mso_find_ts_file('type/author/units/author-full.php')) require($fn);
@@ -87,4 +90,4 @@ echo NR . '</div><!-- class="mso-type-author" -->' . NR;
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	
-# end file
+# end of file

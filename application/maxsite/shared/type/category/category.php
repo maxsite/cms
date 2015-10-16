@@ -53,6 +53,8 @@ if ($pages) // есть страницы
 	if ($f = mso_page_foreach('category-do-pages')) require($f); // подключаем кастомный вывод
 	if (function_exists('ushka')) echo ushka('category-do-pages');
 	
+	if ($fn = mso_find_ts_file('type/category/units/category-do-pages.php')) require($fn);
+	
 	// цикл вывода в отдельных юнитах
 	
 	if ($full_posts) // полные записи

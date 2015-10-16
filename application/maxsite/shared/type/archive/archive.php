@@ -47,8 +47,11 @@ if ($f = mso_page_foreach('archive-do'))
 
 if ($pages) // есть страницы
 {
+	if ($fn = mso_find_ts_file('type/archive/units/archive-do-pages.php')) require($fn);
+	
+	if (function_exists('ushka')) echo ushka('archive-do-pages');
+	
 	// цикл вывода в отдельных юнитах
-
 	if ($full_posts) // полные записи
 	{
 		if ($fn = mso_find_ts_file('type/archive/units/archive-full.php')) require($fn);

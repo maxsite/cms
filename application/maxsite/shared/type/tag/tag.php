@@ -46,9 +46,8 @@ if ($f = mso_page_foreach('tag-do'))
 
 if ($pages) // есть страницы
 {
-	if ($fn = mso_find_ts_file('type/tag/units/tag-header.php')) require($fn);
+	if ($fn = mso_find_ts_file('type/tag/units/tag-do-pages.php')) require($fn);
 	
-	if ($f = mso_page_foreach('tag-do-pages')) require($f); // подключаем кастомный вывод
 	if (function_exists('ushka')) echo ushka('tag-do-pages');
 	
 	// цикл вывода в отдельных юнитах

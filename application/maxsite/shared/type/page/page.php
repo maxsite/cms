@@ -144,19 +144,23 @@ if ($pages)
 							if ($f = mso_page_foreach('content')) require($f);
 							else
 							{
-								// если show_thumb_type_ТИП вернул false, то картинку не ставим
-								// show_thumb - если нужно отключить для всех типов
-								if ( mso_get_val('show_thumb', true)
-									and mso_get_val('show_thumb_type_' . getinfo('type'), true) )
+								// есть отметка не выводить миниатюру
+								if ($p->meta_val('image_for_page_out') !== 'no-page')
 								{
-									// вывод миниатюры перед записью
-									if ($image_for_page = thumb_generate(
-											$p->meta_val('image_for_page'), 
-											mso_get_option('image_for_page_width', 'templates', 280),
-											mso_get_option('image_for_page_height', 'templates', 210)
-										))
+									// если show_thumb_type_ТИП вернул false, то картинку не ставим
+									// show_thumb - если нужно отключить для всех типов
+									if ( mso_get_val('show_thumb', true)
+										and mso_get_val('show_thumb_type_' . getinfo('type'), true) )
 									{
-										echo $p->img($image_for_page, mso_get_option('image_for_page_css_class', 'templates', 'image_for_page'), '', $p->val('page_title'));
+										// вывод миниатюры перед записью
+										if ($image_for_page = thumb_generate(
+												$p->meta_val('image_for_page'), 
+												mso_get_option('image_for_page_width', getinfo('template'), 280),
+												mso_get_option('image_for_page_height', getinfo('template'), 210)
+											))
+										{
+											echo $p->img($image_for_page, mso_get_option('image_for_page_css_class', getinfo('template'), 'image_for_page'), '', $p->val('page_title'));
+										}
 									}
 								}
 								

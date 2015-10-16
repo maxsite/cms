@@ -48,7 +48,7 @@ if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . 
 	
 	<div class="">
 		<form name="f_search" class="f_search" method="get">
-			<input class="my-search my-search--hidden" type="search" name="s" id="sss" placeholder="Поиск..."><label class="label-search i-search icon-square bg-gray500 t-gray200 cursor-pointer" for="sss"></label>
+			<input class="my-search my-search--hidden" type="search" name="s" id="sss" placeholder="Поиск..."><label class="label-search i-search icon-square bg-gray700 t-gray200 cursor-pointer" for="sss"></label>
 		</form>
 		<script>
 			var searchForm = $(".f_search");

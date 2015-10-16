@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 
 $p->format('edit', '<i class="i-edit t-gray600 hover-t-black" title="Edit page"></i>', '<div class="b-right mar10-t">', '</div>');
-$p->format('title', '<h1 class="t-gray700 bor-double-b bor3px bor-gray300 pad5-b">', '</h1>', true);
+$p->format('title', '<h1 class="t-gray700 bor-double-b bor3px bor-gray300 pad5-b">', '</h1>', !is_type('page'));
 
 $p->format('date', 'j F Y г.', '<time datetime="[page_date_publish_iso]" class="i-calendar">', '</time>');
 

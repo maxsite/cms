@@ -1135,10 +1135,14 @@ class Block_pages
 			'order_asc' => 'desc', // поле сортировки страниц
 			'show_cut' => true, // показывать ссылку cut
 			'date_now' => true, // учитывать время публикации
+			'exclude_page_allow' => true, // учитывать исключенные ранее страницы
+			// 'exclude_page_add' => true, // разрешить добавлять полученные страницы в исключенные
 		);
 		
 		$this->param = array_merge($default, $r); // объединяем с дефолтом
-	
+		
+		$exclude_page_id = ($this->param['exclude_page_allow']) ? mso_get_val('exclude_page_id') : array();
+		
 		$this->pages = mso_get_pages( array ( 
 			'limit' => $this->param['limit'], 
 			'cut' => $this->param['cut'],
@@ -1156,7 +1160,8 @@ class Block_pages
 			'date_now' => $this->param['date_now'],
 			
 			'custom_type' => 'home',
-			'exclude_page_id' => mso_get_val('exclude_page_id'), // исключаем получение уже выведенных записей
+			'exclude_page_id' => $exclude_page_id, // исключаем получение уже выведенных записей
+			
 			// 'get_page_categories' => false,
 			// 'get_page_count_comments' => false,
 				
@@ -1268,7 +1273,8 @@ class Block_pages
 			'box_grid_class' => 'w50', // указывается css-класс ячейки
 			'box_grid_box_class' => 'table-box', // указывается css-класс строки-контейнера
 			
-			
+			'exclude_page_add' => true, // разрешить добавлять полученные страницы в исключенные
+
 		);
 		
 		$r = array_merge($default, $r); // объединяем
@@ -1287,7 +1293,7 @@ class Block_pages
 		$p->format('read', $r['read_start'], $r['read_end']);
 		$p->format('comments_count', $r['comments_count_start'], $r['comments_count_end']);
 		
-		$exclude_page_id = mso_get_val('exclude_page_id');
+		if ($r['exclude_page_add']) $exclude_page_id = mso_get_val('exclude_page_id');
 		
 		if ($r['columns'])
 		{
@@ -1383,7 +1389,7 @@ class Block_pages
 			if ($r['box_grid']) $p->box_grid_next();
 			
 			// сохраняем id записей, чтобы их исключить из вывода
-			$exclude_page_id[] = $p->val('page_id'); 
+			if ($r['exclude_page_add']) $exclude_page_id[] = $p->val('page_id'); 
 		}
 		
 		
@@ -1391,7 +1397,7 @@ class Block_pages
 		
 		if ($r['box_grid']) $p->box_grid_end();
 		
-		mso_set_val('exclude_page_id', $exclude_page_id);
+		if ($r['exclude_page_add']) mso_set_val('exclude_page_id', $exclude_page_id);
 		
 		
 		if ($this->param['pagination']) 

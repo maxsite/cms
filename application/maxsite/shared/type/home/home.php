@@ -60,7 +60,7 @@ else
 		// _rules — php-условие, при котором юнит выводится
 		// параметр file где указывается файл юнита в каталоге type/home/units/
 		// если file нет, то проверяются другие параметры если есть:
-		// html — выводится как есть текстом
+		// html — выводится как есть текстом/ Можно использовать php-шаблонизатор {{ }} и {% %}
 		// require — подключается файл в шаблоне (пусть относительно каталога шаблона)
 		// ushka — ушка
 		// component — компонент шаблона
@@ -88,7 +88,7 @@ else
 				}
 				elseif (isset($UNIT['html']) and trim($UNIT['html']))
 				{
-					echo trim($UNIT['html']);
+					eval(mso_tmpl_prepare(trim($UNIT['html']), false));
 				}
 				elseif (isset($UNIT['require']) and trim($UNIT['require']))
 				{

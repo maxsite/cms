@@ -8,7 +8,7 @@
 	<li><a href="//github.com/maxsite/cms"><?= t('GitHub') ?></a> &bull; <a href="//github.com/maxsite/cms/tree/dev"><?= t('Dev-версия') ?></a> &bull; <a href="//github.com/maxsite/cms/commits/dev"><?= t('История изменений') ?></a></li>
 	<li><a href="//github.com/maxsite/cms/issues"><?= t('Сообщить о проблеме') ?></a></li>
 	<li><a href="//book.max-3000.com/"><?= t('Обучающая книга по MaxSite CMS') ?></a></li>
-	<li><a href="//max-3000.com/help"><?= t('Центр помощи') ?></a> &bull; <a href="//max-3000.com/page/faq"><?= t('ЧАВО для новичков') ?></a></li>
+	<li><a href="//max-3000.com/page/help"><?= t('Центр помощи') ?></a> &bull; <a href="//max-3000.com/page/faq"><?= t('ЧАВО для новичков') ?></a></li>
 	<li><a href="//forum.max-3000.com/"><?= t('Форум поддержки') ?></a> &bull; <a href="//forum.max-3000.com/viewforum.php?f=13"><?= t('Шаблоны') ?></a> &bull; <a href="//forum.max-3000.com/viewforum.php?f=17"><?= t('Плагины') ?></a></li>
 	<li><a href="//maxhub.ru/"><?= t('MaxHub - сообщество MaxSite CMS') ?></a></li>
 </ul>

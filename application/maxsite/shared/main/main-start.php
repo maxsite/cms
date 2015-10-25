@@ -45,22 +45,30 @@ else
 	}
 	else
 	{
-		// возможно есть main-файл по type
-		// в main/type/home/main.php
-		if ($fn = mso_fe('main/type/' . getinfo('type') . '/main.php')) 
-		{	
-			mso_set_val('main_file', $fn); // выставляем путь к файлу
-		}
-		else
+		// если есть type/ТИП/main_set_val.php, то подключаем его
+		// где и выставляется нужный файл через mso_set_val('main_file', 'ФАЙЛ');
+		if ($fn = mso_fe('type/' . getinfo('type') . '/main_set_val.php')) require($fn);
+	
+		// если main-файл не выставлен, то проверяем другие варианты 
+		if (!mso_get_val('main_file'))
 		{
-			// возможно указана опця
-			// main_template_TYPE 
-			// опции заданы в ini-файлах
-			if ($page_template = mso_get_option('main_template_' . getinfo('type'), getinfo('template'), ''))
+			// возможно есть main-файл по type
+			// в main/type/home/main.php
+			if ($fn = mso_fe('main/type/' . getinfo('type') . '/main.php')) 
+			{	
+				mso_set_val('main_file', $fn); // выставляем путь к файлу
+			}
+			else
 			{
-				if ($fn = mso_fe('main/' . $page_template . '/main.php')) 
-				{	
-					mso_set_val('main_file', $fn); // выставляем путь к файлу
+				// возможно указана опця
+				// main_template_TYPE 
+				// опции заданы в ini-файлах
+				if ($page_template = mso_get_option('main_template_' . getinfo('type'), getinfo('template'), ''))
+				{
+					if ($fn = mso_fe('main/' . $page_template . '/main.php')) 
+					{	
+						mso_set_val('main_file', $fn); // выставляем путь к файлу
+					}
 				}
 			}
 		}
@@ -112,4 +120,4 @@ require_once(getinfo('shared_dir') . 'stock/thumb/thumb.php');
 
 ob_start();
 
-# end file
+# end of file

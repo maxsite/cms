@@ -91,6 +91,8 @@ else
 
 		'pagination_start' => '',
 		'pagination_end' => '',
+		'exclude_page_allow' => true,
+		'exclude_page_add' => true,
 	);
 	
 	$UNIT = mso_merge_array($UNIT, $def);
@@ -109,6 +111,7 @@ else
 				'show_cut' 		=> $UNIT['show_cut'],
 				'date_now' 		=> $UNIT['date_now'],
 				'page_id_autor'	=> $UNIT['page_id_autor'],
+				'exclude_page_allow'	=> $UNIT['exclude_page_allow'],
 			));
 		
 		if ($b->go)
@@ -167,7 +170,8 @@ else
 					
 				'pagination_start' 		=> $UNIT['pagination_start'],
 				'pagination_end' 		=> $UNIT['pagination_end'], 
-
+				
+				'exclude_page_add'		=> $UNIT['exclude_page_add'],
 			));
 		}
 

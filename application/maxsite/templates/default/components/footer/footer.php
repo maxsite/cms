@@ -23,7 +23,7 @@ else
 	$login = '<a href="' . getinfo('siteurl') . 'login">' . tf('Вход') . '</a>';
 	
 
-$footer_block1 = mso_get_option('footer_block1', getinfo('template'), '<div class="flex flex-wrap">
+$footer_block1 = mso_get_option('footer_block1', getinfo('template'), '<div class="hide-print flex flex-wrap">
 <div class="w30">Блок 1</div>
 <div class="w30">Блок 2</div>
 <div class="w30">Блок 3</div>
@@ -34,7 +34,7 @@ $footer_block2 = mso_get_option('footer_block2', getinfo('template'), 'Блок 
 eval(mso_tmpl_prepare($footer_block1)); 
 
 ?>
-<div class="flex flex-wrap">
+<div class="hide-print flex flex-wrap">
 	<div class="t-white t90 hover-no-color links-no-color pad20-t">
 		<div class="">&copy; <?php echo getinfo('name_site') . ', ' . date('Y'); ?></div>
 		<div class=""><?= $copy_maxsite ?> <?= $login ?></div>

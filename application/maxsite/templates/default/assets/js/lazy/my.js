@@ -28,7 +28,7 @@ $(function(){
 	
 	
 	// скролл вверх
-	$("body").append("<div id='to_top' title='Вверх' class='pos-fixed pos10-r pos10-b bg-gray600 t-gray100 cursor-pointer i-arrow-up icon-circle bg-op40'></div>");
+	$("body").append("<div id='to_top' title='Вверх' class='hide-print pos-fixed pos10-r pos10-b bg-gray600 t-gray100 cursor-pointer i-arrow-up icon-circle bg-op40'></div>");
 	$("#to_top").hide();
 	$(window).scroll(function () {if ($(this).scrollTop() > 100) { $("#to_top").fadeIn();} else {$("#to_top").fadeOut(); } });
 	$("#to_top").click(function() {$("body,html").animate({scrollTop: 0}, 800); return false; }); 

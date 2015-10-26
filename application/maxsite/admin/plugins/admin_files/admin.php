@@ -721,16 +721,12 @@ $(function()
 
 		if ( codegal )
 		{
-			n = $('#gallerycodename').val();
-			if (n) { n = '[galname]' + n + '[/galname]';}
-			else { n = ''; }
+			n = '';
 
 			codegal = '[gallery]' + n + '{$n}'+ codegal + '[/gallery]';
 			$('#gallerycode').html(codegal);
 			$('#gallerycode').css({ background: '#F0F0F0', width: '100%', height: '150px',
-									border: '1px solid gray', margin: '20px 0',
-									'font-family': 'Courier New',
-									'font-size': '9pt'});
+									border: '1px solid gray', margin: '20px 0'});
 			$('#gallerycode').fadeIn('slow');
 			$('#gallerycode').select();
 		}
@@ -747,8 +743,7 @@ EOF;
 		echo '<div class="create-gal">
 			<h2>' . t('Создание галереи') . '</h2>
 			<p>' . t('Выделите нужные файлы. (У вас должен быть активирован плагин <strong>LightBox</strong>)') . '</p>
-			<p>' . t('Название:') . ' <input type="text" id="gallerycodename" value=""> ' . t('(если нужно)') . '</p>
-			<button class="i gen" type="button" id="gallerycodeclick">' . t('Генерировать код галереи') . '</button>
+			 <button class="i-gen" type="button" id="gallerycodeclick">' . t('Генерировать код галереи') . '</button>
 			<textarea id="gallerycode" style="display: none"></textarea>
 		</div>
 		';

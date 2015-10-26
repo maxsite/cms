@@ -28,30 +28,9 @@ function lightbox_head($args = array())
 	// http://leandrovieira.com/projects/jquery/lightbox/
 	echo <<<EOF
 <script src="{$url}js/jquery.lightbox.js"></script>
-<script>
-$(function(){
-lburl = '{$url}images/';
-$('div.gallery a').lightBox({
-imageLoading: lburl+'lightbox-ico-loading.gif',
-imageBtnClose: lburl+'lightbox-btn-close.gif',
-imageBtnPrev: lburl+'lightbox-btn-prev.gif',
-imageBtnNext: lburl+'lightbox-btn-next.gif',
-imageBlank: lburl+'lightbox-blank.gif',
-txtImage: '{$t_izob}',
-txtOf: '{$t_iz}',
-});
-
-$('a.lightbox').lightBox({
-imageLoading: lburl+'lightbox-ico-loading.gif',
-imageBtnClose: lburl+'lightbox-btn-close.gif',
-imageBtnPrev: lburl+'lightbox-btn-prev.gif',
-imageBtnNext: lburl+'lightbox-btn-next.gif',
-imageBlank: lburl+'lightbox-blank.gif',
-txtImage: '{$t_izob}',
-txtOf: '{$t_iz}',
-});
-});
-</script>
+<script>$(function(){lburl = '{$url}images/';$('div.gallery a').lightBox({imageLoading: lburl+'lightbox-ico-loading.gif',imageBtnClose: lburl+'lightbox-btn-close.gif',imageBtnPrev: lburl+'lightbox-btn-prev.gif',imageBtnNext: lburl+'lightbox-btn-next.gif',imageBlank: lburl+'lightbox-blank.gif',txtImage: '{$t_izob}',txtOf: '{$t_iz}',});
+$('a.lightbox').lightBox({imageLoading: lburl+'lightbox-ico-loading.gif',imageBtnClose: lburl+'lightbox-btn-close.gif',imageBtnPrev: lburl+'lightbox-btn-prev.gif',imageBtnNext: lburl+'lightbox-btn-next.gif',imageBlank: lburl+'lightbox-blank.gif',txtImage: '{$t_izob}',txtOf: '{$t_iz}',});
+});</script>
 EOF;
 }
 
@@ -67,7 +46,7 @@ function lightbox_content($text = '')
 	$url = getinfo('plugins_url') . 'lightbox/images/';
 	
 	$preg = array(
-	
+	/*
 		// удалим раставленные абзацы
 		'~<p>\[gal=(.*?)\[\/gal\]</p>~si' => '[gal=$1[/gal]',
 		'~<p>\[gallery(.*?)\](\s)*</p>~si' => '[gallery$1]',
@@ -76,28 +55,30 @@ function lightbox_content($text = '')
 		'~<p>\[gallery(.*?)\](\s)*~si' => '[gallery$1]',
 		'~\[\/gallery\](\s)*</p>~si' => '[/gallery]',
 		
-		'~\[gallery=(.*?)\](.*?)\[\/gallery\]~si' => '<div class="gallery$1">$2</div><script>\$(function() { lburl = \'' . $url . '\'; \$(\'div.gallery$1 a\').lightBox({imageLoading: lburl+\'lightbox-ico-loading.gif\', imageBtnClose: lburl+\'lightbox-btn-close.gif\', imageBtnPrev: lburl+\'lightbox-btn-prev.gif\', imageBtnNext: lburl+\'lightbox-btn-next.gif\'});});</script>
-		',
+		*/
 		
-		'~\[gallery\](.*?)\[\/gallery\]~si' => '<div class="gallery">$1</div>',
+		'~\[gallery=(.*?)\](.*?)\[\/gallery\]~si' => '<div class="gallery" id="$1">$2</div><script>\$(function() { lburl = \'' . $url . '\'; \$(\'#$1 a\').lightBox({imageLoading: lburl+\'lightbox-ico-loading.gif\', imageBtnClose: lburl+\'lightbox-btn-close.gif\', imageBtnPrev: lburl+\'lightbox-btn-prev.gif\', imageBtnNext: lburl+\'lightbox-btn-next.gif\'});});</script>',
+		
+		'~\[gallery\](.*?)\[\/gallery\]~si' => '<div class="gallery">$1 </div>',
+		
+		
+		'~\[gal=(.[^\s]*?)\](.*?)\[\/gal\]~si' => '<a href="$2"><img src="$1" alt=""></a>',
 		
 		'~\[gal=(.[^\s]*?) (.*?)\](.*?)\[\/gal\]~si' => '<a href="$3" title="$2"><img src="$1" alt="$2"></a>',
 		
-		'~\[gal=(.*?)\](.*?)\[\/gal\]~si' => '<a href="$2"><img src="$1" alt=""></a>',
-		
 		'~\[image\](.*?)\[\/image\]~si' => '<a href="$1" class="lightbox"><img src="$1" alt=""></a>',
 	
-		'~\[image=(.[^\s]*?) (.*?)\](.*?)\[\/image\]~si' => '<a href="$3" class="lightbox" title="$2"><img src="$1" alt="$2"></a>',
-		
 		'~\[image=(.[^ ]*?)\](.*?)\[\/image\]~si' => '<a href="$2" class="lightbox"><img src="$1" alt=""></a>',
 		
-		# [image(left)=http://localhost/uploads/mini/2008-07-11-19-50-56.jpg Картинка]http://localhost/uploads/2008-07-11-19-50-56.jpg[/image]
+		'~\[image=(.[^\s]*?) (.*?)\](.*?)\[\/image\]~is' => '<a href="$3" class="lightbox" title="$2"><img src="$1" alt="$2"></a>',
+		
+		# [image(left)=http://localhost/uploads/mini/2008-07.jpg Картинка]http://localhost/uploads/2008-07.jpg[/image]
 		'~\[image\((.[^\s]*?)\)=(.[^\s]*?) (.*?)\](.*?)\[\/image\]~si' => '<a href="$4" class="lightbox" title="$3"><img src="$2" alt="$3" class="$1"></a>',
 		
-		# [image(left)=http://localhost/uploads/mini/2008-07-11-19-50-56.jpg]http://localhost/uploads/2008-07-11-19-50-56.jpg[/image]
+		# [image(left)=http://localhost/uploads/mini/2008-07.jpg]http://localhost/uploads/2008-07.jpg[/image]
 		'~\[image\((.[^ ]*?)\)=(.[^ ]*?)\](.*?)\[\/image\]~si' => '<a href="$3" class="lightbox"><img src="$2" alt="" class="$1"></a>',
 		
-		# [image(right)]http://localhost/uploads/2008-07-11-19-50-56.jpg[/image]
+		# [image(right)]http://localhost/uploads/2008-07.jpg[/image]
 		'~\[image\((.[^ ]*?)\)\](.*?)\[\/image\]~si' => '<a href="$2" class="lightbox"><img src="$2" alt="" class="$1"></a>',
 
 		

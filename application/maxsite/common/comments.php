@@ -166,6 +166,8 @@ function mso_get_comments($page_id = 0, $r = array())
 				$comments_content = mso_comments_autotag($comments_content, $commentator, $r);
 			}
 			
+			$comments_content = mso_hook('comments_content_out', $comments_content);
+			
 			$comments[$key]['comments_content'] = $comments_content;
 			$comments[$key]['comments_url'] = $comment['comments_url'];
 
@@ -196,7 +198,7 @@ function mso_comments_autotag($text, $commentator = 3, $r = array('tags' => '<p>
 
 	$text = mso_hook('comments_content', $text);
 	
-	//$text = mso_hook('comments_content_out', $text);
+	// $text = mso_hook('comments_content_out', $text);
 			
 	return $text;
 }
@@ -213,6 +215,8 @@ function mso_comments_content($text = '')
 	$text = str_replace("\n", "<br>", $text); // обязательная замена
 	
 	$text = parser_default_content($text);
+	
+	$text = mso_hook('comments_content_out', $text);
 	
 	return $text;
 }

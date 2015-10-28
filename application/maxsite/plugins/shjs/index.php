@@ -9,7 +9,7 @@
 # функция автоподключения плагина
 function shjs_autoload()
 {
-	mso_hook_add( 'head', 'shjs_head');
+	mso_hook_add( 'body_end', 'shjs_head');
 	mso_hook_add( 'head_css', 'shjs_head_css');
 	$options = mso_get_option('plugin_shjs', 'plugins', array());
 	if (isset($options['default_lang']) and $options['default_lang']) mso_hook_add('content', 'shjs_content');

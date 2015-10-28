@@ -8,7 +8,7 @@
 # функция автоподключения плагина
 function comment_button_autoload($args = array())
 {
-	mso_hook_add( 'head', 'comment_button_head'); # хук на head шаблона - для JS
+	mso_hook_add( 'body_end', 'comment_button_head'); # хук на head шаблона - для JS
 	mso_hook_add( 'admin_comment_edit', 'comment_button_head_admin_comment_edit'); # для JS админки
 	mso_hook_add( 'comments_content_start', 'comment_button_custom'); # хук на форму
 }

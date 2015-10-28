@@ -12,6 +12,7 @@ function rater_autoload($args = array())
 	if ( is_type('page') )
 	{
 		mso_hook_add( 'head', 'rater_head');
+		mso_hook_add( 'body_end', 'rater_body_end');
 		mso_hook_add( 'content_end', 'rater_content_end');
 	}
 	
@@ -20,11 +21,14 @@ function rater_autoload($args = array())
 
 function rater_head($args = array())
 {
+	echo '<link rel="stylesheet" href="' . getinfo('plugins_url') . 'rater/' . 'rater.css">';
+}
+
+function rater_body_end($args = array())
+{
 	mso_load_jquery();
 	
-	$path = getinfo('plugins_url') . 'rater/';
-	echo '<script src="' . $path . 'jquery.rater.js"></script>' . NR;
-	echo '	<link rel="stylesheet" href="' . $path . 'rater.css">' . NR;
+	echo '<script src="' . getinfo('plugins_url') . 'rater/' . 'jquery.rater.js"></script>' . NR;
 }
 
 function rater_content_end($arg = array())

@@ -8,7 +8,7 @@
 # функция автоподключения плагина
 function tabs_autoload($args = array())
 {
-	mso_hook_add('head', 'tabs_head');
+	mso_hook_add('body_end', 'tabs_head');
 	mso_hook_add('content', 'tabs_content');
 	
 	mso_register_widget('tabs_widget', t('Табы (закладки)')); # регистрируем виджет

@@ -10,7 +10,7 @@ function random_gal_autoload($args = array())
 {
 	mso_register_widget('random_gal_widget', t('Галерея')); # регистрируем виджет
 	mso_hook_add('custom_page_404', 'random_gal_custom_page_404'); # хук для подключения к шаблону
-	mso_hook_add('head', 'random_gal_head');
+	mso_hook_add('body_end', 'random_gal_head');
 	mso_hook_add('head_css', 'random_gal_head_css');
 }
 

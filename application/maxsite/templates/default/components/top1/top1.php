@@ -50,31 +50,6 @@ if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . 
 		<form name="f_search" class="f_search" method="get">
 			<input class="my-search my-search--hidden" type="search" name="s" id="sss" placeholder="Поиск..."><label class="label-search i-search icon-square bg-gray700 t-gray200 cursor-pointer" for="sss"></label>
 		</form>
-		<script>
-			var searchForm = $(".f_search");
-			var searchInput = $(".my-search");
-			var searchLabel = $(".label-search");
-
-			searchForm.submit(function (e) {
-				e.preventDefault();
-				window.location.href = "<?= getinfo('siteurl') ?>search/" + encodeURIComponent(searchInput.val()).replace(/%20/g, '+');
-			});
-
-			searchLabel.click(function (e) {
-				if (searchInput.val() === "") {
-					searchInput.toggleClass("my-search--hidden");
-				}
-				else {
-					e.preventDefault();
-					searchForm.submit();
-				}
-			});
-
-			$(document).click(function(e) {
-				if ( !$(e.target).hasClass("label-search") && !$(e.target).hasClass("my-search") && (searchInput.val() === "") ) {
-					searchInput.addClass("my-search--hidden");
-				}
-			});
-		</script>
+		<script> var searchForm = $(".f_search"); var searchInput = $(".my-search"); var searchLabel = $(".label-search"); searchForm.submit(function (e) { e.preventDefault(); window.location.href = "<?= getinfo('siteurl') ?>search/" + encodeURIComponent(searchInput.val()).replace(/%20/g, '+'); }); searchLabel.click(function (e) { if (searchInput.val() === "") { searchInput.toggleClass("my-search--hidden"); } else { e.preventDefault(); searchForm.submit(); } }); $(document).click(function(e) { if ( !$(e.target).hasClass("label-search") && !$(e.target).hasClass("my-search") && (searchInput.val() === "") ) { searchInput.addClass("my-search--hidden"); } }); </script>
 	</div>
 </div>

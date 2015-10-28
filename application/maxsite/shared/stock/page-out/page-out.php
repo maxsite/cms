@@ -1283,7 +1283,8 @@ class Block_pages
 		
 		$p = new Page_out; // шаблонизатор
 		
-		echo $r['block_start'];
+		// echo $r['block_start'];
+		eval(mso_tmpl_prepare($r['block_start'], false));
 		
 		// формат записи
 		$p->format('title', $r['title_start'], $r['title_end']);
@@ -1309,7 +1310,8 @@ class Block_pages
 			if ($r['box_grid']) $p->box_grid_cell($r['box_grid_class'], $r['box_grid_box_class']); 
 			if ($r['columns']) $my_columns->out($r['columns_class_cell']);
 			
-			echo $r['page_start'];
+			// echo $r['page_start'];
+			eval(mso_tmpl_prepare($r['page_start'], false));
 			
 			if ($r['thumb']) // миниатюра
 			{
@@ -1383,7 +1385,9 @@ class Block_pages
 			
 			if ($r['clearfix']) $p->clearfix();
 			
-			echo $r['page_end'];
+			// echo $r['page_end'];
+			eval(mso_tmpl_prepare($r['page_end'], false));
+			
 			
 			if ($r['columns']) $my_columns->next();
 			if ($r['box_grid']) $p->box_grid_next();
@@ -1404,13 +1408,18 @@ class Block_pages
 		{
 			if (mso_hook_present('pagination'))
 			{
-				echo $r['pagination_start'];
+				// echo $r['pagination_start'];
+				eval(mso_tmpl_prepare($r['pagination_start'], false));
+				
 				mso_hook('pagination', $this->pagination);
-				echo $r['pagination_end'];
+				
+				// echo $r['pagination_end'];
+				eval(mso_tmpl_prepare($r['pagination_end'], false));
 			}
 		}
 		
-		echo $r['block_end'];
+		// echo $r['block_end'];
+		eval(mso_tmpl_prepare($r['block_end'], false));
 	}
 } // end block_pages
 

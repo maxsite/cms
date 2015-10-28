@@ -9,15 +9,15 @@
 	<li><a href="//github.com/maxsite/cms/issues"><?= t('Сообщить о проблеме') ?></a></li>
 	<li><a href="//book.max-3000.com/"><?= t('Обучающая книга по MaxSite CMS') ?></a></li>
 	<li><a href="//max-3000.com/page/help"><?= t('Центр помощи') ?></a> &bull; <a href="//max-3000.com/page/faq"><?= t('ЧАВО для новичков') ?></a></li>
-	<li><a href="//forum.max-3000.com/"><?= t('Форум поддержки') ?></a> &bull; <a href="//forum.max-3000.com/viewforum.php?f=13"><?= t('Шаблоны') ?></a> &bull; <a href="//forum.max-3000.com/viewforum.php?f=17"><?= t('Плагины') ?></a></li>
 	<li><a href="//maxhub.ru/"><?= t('MaxHub - сообщество MaxSite CMS') ?></a></li>
+	<li><a href="//forum.max-3000.com/"><?= t('Форум поддержки') ?></a> &bull; <a href="//maxhub.ru/category/templates"><?= t('Шаблоны') ?></a> &bull; <a href="//maxhub.ru/category/plugins"><?= t('Плагины') ?></a></li>
 </ul>
 <div class="flex-grow1 pad20 t-center t-gray100 links-no-color" style="background: #006187; align-self: flex-start;">
 	<a href="//unicss.maxsite.com.ua/" target="_blank" title="Less/Css-фреймворк UniCSS"><b>.UniCSS</b> { Less/Css: Framework }</a>
 </div>
 </div>
 
-<iframe src="http://max-3000.com/check-latest?<?= getinfo('version') ?>" scrolling="auto" frameborder="no" style="width: 100%; min-height: 100px; margin-top: 20px;"></iframe>
+<iframe src="//max-3000.com/check-latest?<?= getinfo('version') ?>" scrolling="auto" frameborder="no" style="width: 100%; min-height: 100px; margin-top: 20px;"></iframe>
 
 <?php
 
@@ -78,4 +78,4 @@
 		
 	mso_hook('admin_home');
 	
-# end file
+# end of file

@@ -7,7 +7,7 @@ $p->format('date', 'j F Y г.', '<time datetime="[page_date_publish_iso]" class=
 
 $p->format('view_count', '<span class="i-eye mar15-l">' . tf('Просмотров') . ': ', '</span>');
 
-$p->format('comments_count', '<span class="i-comment mar15-l">Комментарии: ', '</span>');
+$p->format('comments_count', '<span class="i-comment mar15-l">' . tf('Комментарии') . ': ', '</span>');
 
 $p->format('cat', '<i class="i-bookmark-o mar10-l"></i>', '<br><span class="i-bookmark" title="' . tf('Рубрика записи') . '">', '</span>');
 

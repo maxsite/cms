@@ -99,10 +99,14 @@ class Thumb
 			return;
 		}
 		
+		// проверим существование mini-каталога нового файла
+		// если его нет, попробуем создать
+		$new_dir = dirname(getinfo('uploads_dir') . $this->new_file);
+		
+		if (!is_dir($new_dir)) @mkdir($new_dir, 0777);
+	
 		// сразу сформируем новый адрес
 		$this->new_img = getinfo('uploads_url') . $this->new_file;
-		
-		// pr($this->new_img);
 	}
 	
 	

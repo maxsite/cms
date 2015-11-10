@@ -73,11 +73,13 @@
 		<div class="flex-grow2 pad5-b"><select id="my-nav-panel" class="w100"><?= $admin_menu_select_option ?></select></div>
 	</div>
 </div>
-	
+
+
+<div id="sh-my-nav-panel" class="h32px bg-color1 t-white t18px i-ellipsis-v hover-bg-blue600 cursor-pointer pos-absolute hide-tablet" style="width: 12px; border-radius: 0 5px 5px 0; line-height: 32px; padding-left: 3px; left: 200px;"></div>
+
 <div class="flex">
 	<div class="flex-grow1 w30 w200px-max my-nav-panel hide-tablet">
 		<div class="mar10-rl mar10-t mar15-b">
-			
 			<div class="flex flex-vcenter mar10-b">
 				<div class="flex-grow0">
 					<a href="http://max-3000.com/" class="my-q-maxsite"><img src="<?= $admin_template_url . 'assets/images/maxsitelogo.fw.png' ?>" alt="" title="MaxSite CMS"></a>

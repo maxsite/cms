@@ -3,9 +3,9 @@
 /**
  * MaxSite CMS
  * (c) http://max-3000.com/
+ * 9-11-2015
  */
-
- /*
+/*
 
 Универсальный юнит для вывода записей по множеству критериев
 
@@ -46,7 +46,7 @@ else
 		'content' => true,
 		'content_words' => 0,
 		'content_chars' => 0,
-		'content_cut' => ' ...',
+		'content_cut' => '...',
 		'content_start' => '<div class="mso-page-content clearfix">',
 		'content_end' => '</div>',
 		
@@ -77,8 +77,9 @@ else
 		'tag_end' => '</p>',
 		'tag_sep' => ',&NBSP;',
 		
-		'read_start' => '',
-		'read_end' => '',
+		'read' => '»»»',
+		'read_start' => '<p>',
+		'read_end' => '</p>',
 		
 		'comments_count_start' => '',
 		'comments_count_end' => '',
@@ -156,6 +157,7 @@ else
 				'tag_end' 				=> $UNIT['tag_end'],
 				'tag_sep' 				=> $UNIT['tag_sep'],
 
+				'read' 					=> $UNIT['read'],
 				'read_start' 			=> $UNIT['read_start'],
 				'read_end' 				=> $UNIT['read_end'],
 

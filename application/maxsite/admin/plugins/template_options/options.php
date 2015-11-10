@@ -8,7 +8,6 @@
 ?>
 
 <h1><?= t('Настройка шаблона', 'templates') . ' «'. getinfo('template_name') . '»' ?></h1>
-<p class="info"><?= t('Выберите необходимые опции', 'templates') ?></p>
 
 <?php
 

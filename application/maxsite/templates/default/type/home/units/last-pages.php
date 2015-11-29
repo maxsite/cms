@@ -3,7 +3,7 @@
 /**
  * MaxSite CMS
  * (c) http://max-3000.com/
- * 9-11-2015
+ * 25-11-2015
  */
 /*
 
@@ -77,6 +77,9 @@ else
 		'tag_end' => '</p>',
 		'tag_sep' => ',&NBSP;',
 		
+		'author_start' => '',
+		'author_end' => '',
+
 		'read' => '»»»',
 		'read_start' => '<p>',
 		'read_end' => '</p>',
@@ -156,6 +159,9 @@ else
 				'tag_start' 			=> $UNIT['tag_start'],
 				'tag_end' 				=> $UNIT['tag_end'],
 				'tag_sep' 				=> $UNIT['tag_sep'],
+				
+				'author_start' 			=> $UNIT['author_start'],
+				'author_end' 			=> $UNIT['author_end'],
 
 				'read' 					=> $UNIT['read'],
 				'read_start' 			=> $UNIT['read_start'],

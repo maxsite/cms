@@ -461,6 +461,12 @@ class Page_out
 			//pr($out);
 		}
 		
+		// [val@price] — произвольный val из page
+		if (strpos($out, '[val@') !== false)
+		{
+			$out = preg_replace_callback('!(\[val@)(.*?)(\])!is', array('self', '_line_val_set'), $out);
+		}
+		
 		$out = str_replace('[title]', $title, $out);
 		$out = str_replace('[page_url]', $page_url, $out);
 		$out = str_replace('[autor]', $autor, $out);
@@ -500,6 +506,15 @@ class Page_out
 		// pr($m);
 		return $m;
 	}
+	
+	// колбак для поиска [val@поле]
+	protected function _line_val_set($matches)
+	{
+		$m = $matches[2];
+		$m = $this->val($m);
+		// pr($m);
+		return $m;
+	}	
 			
 	// только получаем контент через mso_page_content()
 	function get_content()
@@ -1207,6 +1222,9 @@ class Block_pages
 			'tag_end' => '</span>', 
 			'tag_sep' => ', ',
 			
+			'author_start' => '',
+			'author_end' => '',
+			
 			'read' => '»»»',
 			'read_start' => '',
 			'read_end' => '',
@@ -1296,6 +1314,7 @@ class Block_pages
 		// формат записи
 		$p->format('title', $r['title_start'], $r['title_end']);
 		$p->format('date', $r['date'], $r['date_start'], $r['date_end']);
+		$p->format('author', $r['author_start'], $r['author_end']);
 		$p->format('cat', $r['cat_sep'], $r['cat_start'], $r['cat_end']);
 		$p->format('tag', $r['tag_sep'], $r['tag_start'], $r['tag_end']);
 		$p->format('read', $r['read'], $r['read_start'], $r['read_end']);

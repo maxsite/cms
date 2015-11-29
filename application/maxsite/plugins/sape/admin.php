@@ -121,7 +121,7 @@
 		
 		$form .= '<p><label><input name="f_start" type="checkbox"' . $checked_start . '> Включить плагин</label></p>';
 		$form .= '<p><label><input name="f_context" type="checkbox"' . $checked_context . '> Использовать контекстные ссылки</label></p>';
-		$form .= '<p><label><input name="f_multi_site" type="checkbox"' . $checked_multi_site . '> Включите если код Сапы использыется <a href="http://help.sape.ru/sape/faq/1031" target="_blank">для нескольких сайтов</a></label></p>';
+		$form .= '<p><label><input name="f_multi_site" type="checkbox"' . $checked_multi_site . '> Включите если код Сапы используется <a href="http://help.sape.ru/sape/faq/1031" target="_blank">для нескольких сайтов</a></label></p>';
 		$form .= '<p><label><input name="f_context_comment" type="checkbox"' . $checked_context_comment . '> Использовать контекстные ссылки в комментариях</label></p>';
 		$form .= '<p><label><input name="f_test" type="checkbox"' . $checked_test . '> Режим проверки установленного кода</label></p>';
 		$form .= '<p><label><input name="f_anticheck" type="checkbox"' . $checked_anticheck . '> Включить антиобнаружитель продажных ссылок</label></p>';

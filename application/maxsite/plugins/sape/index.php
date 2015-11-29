@@ -162,7 +162,7 @@ function sape_widget($num = 1)
 	$options = mso_get_option($widget, 'plugins', array() ); // получаем опции
 	
 	// заменим заголовок, чтобы был в  h2 class="box"
-	if ( isset($options['header']) and $options['header'] ) $options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
+	if ( isset($options['header']) and $options['header'] ) $options['header'] = mso_get_val('widget_header_start', '<h2 class="box"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></h2>');
 		else $options['header'] = '';
 	
 	return sape_widget_custom($options, $num);
@@ -297,7 +297,7 @@ function sape_content($text = '')
 	
 	if ($SAPE_CONTENT)
 	{
-		# $text = 'TEXT-DO ' . $SAPE_CONTENT->replace_in_text_segment($text) . ' TEXT-POSLE'; // контроль
+		// $text = 'TEXT-DO ' . $SAPE_CONTENT->replace_in_text_segment($text) . ' TEXT-POSLE'; // контроль
 		$text = $SAPE_CONTENT->replace_in_text_segment($text);
 	}
 	
@@ -316,7 +316,8 @@ function sape_articles_custom_page_404($args = false)
 {
 	global $SAPE_ARTICLE;
 	
-	$SAPE_ARTICLE->process_request();
+	// добавил echo
+	echo $SAPE_ARTICLE->process_request();
 	
 	return true; // выходим с true
 }

@@ -26,8 +26,6 @@ function rater_head($args = array())
 
 function rater_body_end($args = array())
 {
-	mso_load_jquery();
-	
 	echo '<script src="' . getinfo('plugins_url') . 'rater/' . 'jquery.rater.js"></script>' . NR;
 }
 
@@ -51,15 +49,9 @@ function rater_content_end($arg = array())
 	
 	$path = getinfo('ajax') . base64_encode('plugins/rater/ratings-post-ajax.php');
 	
-	
-	echo '
-	<div id="rater" title="' . t('Текущая оценка:') . ' ' . $curvalue . '. ' 
+	echo '<div id="rater" title="' . t('Текущая оценка:') . ' ' . $curvalue . '. ' 
 		. t('Голосов:') . ' ' . $page['page_rating_count'] 
-		. '"><script>
-		$(\'#rater\').rater(\'' . $path 
-		. '\', {maxvalue:10, style:\'basic\', curvalue:' . $curvalue . ', slug:\''. $page_id . '\'});
-	</script></div>
-	';
+		. '"><script>$(document).ready(function(){ $(\'#rater\').rater(\'' . $path .  '\', {maxvalue:10, style:\'basic\', curvalue:' . $curvalue . ', slug:\''. $page_id . '\'});}) </script></div>';
 
 	return $arg;
 }

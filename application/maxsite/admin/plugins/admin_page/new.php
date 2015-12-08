@@ -159,9 +159,9 @@
 		
 		require_once( getinfo('common_dir') . 'functions-edit.php' ); // функции редактирования
 		$result = mso_new_page($data);
-			
-		// pr($result);
-		
+
+		require_once('all-files-new.php');
+
 		if (isset($result['result']) and $result['result'])
 		{
 			if (isset($result['result'][0])) 

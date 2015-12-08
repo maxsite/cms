@@ -68,6 +68,7 @@
 			
 			// номер записи хратится как ключ массива f_submit - переделываем
 			$post['f_submit'] = array($id => '');
+			$post['is_bsave'] = true; // признак, что это быстрое сохранение
 			
 			require(getinfo('admin_plugins_dir') . 'admin_page/post-edit.php');
 		}

@@ -392,15 +392,17 @@ class Page_out
 		}
 		
 		// read
-		// mso_page_title($page_slug = '', $page_title = 'no title', $do = '<h1>', $posle = '</h1>', $link = true, $echo = true, $type = 'page'
 		if (strpos($out, '[read]') !== false)
 		{
 			$read = 
 				  $this->get_formats_args('read', 2) // $do
 				. $this->page_url(true)
 				. $this->get_formats_args('read', 1) // 'читать далее'
-				. $this->get_formats_args('read', 3) // $posle
-				. '</a>';
+				. '</a>'
+				. $this->get_formats_args('read', 3); // $posle
+				
+				//pr($this->formats);
+				// pr($read,1);
 		}							
 		
 		// feed
@@ -459,6 +461,12 @@ class Page_out
 			//pr($out);
 		}
 		
+		// [val@price] — произвольный val из page
+		if (strpos($out, '[val@') !== false)
+		{
+			$out = preg_replace_callback('!(\[val@)(.*?)(\])!is', array('self', '_line_val_set'), $out);
+		}
+		
 		$out = str_replace('[title]', $title, $out);
 		$out = str_replace('[page_url]', $page_url, $out);
 		$out = str_replace('[autor]', $autor, $out);
@@ -498,6 +506,15 @@ class Page_out
 		// pr($m);
 		return $m;
 	}
+	
+	// колбак для поиска [val@поле]
+	protected function _line_val_set($matches)
+	{
+		$m = $matches[2];
+		$m = $this->val($m);
+		// pr($m);
+		return $m;
+	}	
 			
 	// только получаем контент через mso_page_content()
 	function get_content()
@@ -519,12 +536,16 @@ class Page_out
 	// обрезка контента по кол-ву слов
 	function content_words($max_words = 15, $cut = '', $do = '<div class="mso-page-content">', $posle = '</div>')
 	{
+		if ($cut) $cut = ' ' . $this->page_url(true) . $cut . '</a>';
+		
 		return $this->out(NR . $do . mso_str_word(strip_tags($this->get_content()), $max_words) . $cut . $posle);
 	}
 	
 	// обрезка контента по кол-ву символов
 	function content_chars($max_chars = 100, $cut = '', $do = '<div class="mso-page-content">', $posle = '</div>')
 	{
+		if ($cut) $cut = ' ' . $this->page_url(true) . $cut . '</a>';
+		
 		return $this->out(NR . $do . mb_substr(strip_tags($this->get_content()), 0, $max_chars, 'UTF-8') . $cut . $posle);
 	}
 	
@@ -1201,8 +1222,12 @@ class Block_pages
 			'tag_end' => '</span>', 
 			'tag_sep' => ', ',
 			
-			'read_start' => '»»»',
-			'read_end' => ' ',
+			'author_start' => '',
+			'author_end' => '',
+			
+			'read' => '»»»',
+			'read_start' => '',
+			'read_end' => '',
 			
 			'comments_count_start' => '',
 			'comments_count_end' => '',
@@ -1289,9 +1314,10 @@ class Block_pages
 		// формат записи
 		$p->format('title', $r['title_start'], $r['title_end']);
 		$p->format('date', $r['date'], $r['date_start'], $r['date_end']);
+		$p->format('author', $r['author_start'], $r['author_end']);
 		$p->format('cat', $r['cat_sep'], $r['cat_start'], $r['cat_end']);
 		$p->format('tag', $r['tag_sep'], $r['tag_start'], $r['tag_end']);
-		$p->format('read', $r['read_start'], $r['read_end']);
+		$p->format('read', $r['read'], $r['read_start'], $r['read_end']);
 		$p->format('comments_count', $r['comments_count_start'], $r['comments_count_end']);
 		
 		if ($r['exclude_page_add']) $exclude_page_id = mso_get_val('exclude_page_id');

@@ -204,11 +204,25 @@ if ($pages)
 			
 			// здесь комментарии
 			
-			if (mso_get_option('comment_other_system', 'general', false))
+			if ($f = mso_page_foreach('page-comments-start')) require($f);
+			
+			
+			if (mso_get_option('comment_other_system', 'general', false)) 
 			{
+				// внешнее комментирование 
 				if ($fn = mso_find_ts_file('type/page/units/page-comments-other-system.php')) require($fn);
+				
+				// + стандартное комментирование
+				if (mso_get_option('comment_other_system_standart', 'general', false))
+				{
+					if ($fn = mso_find_ts_file('type/page/units/page-comments.php')) require($fn);
+				}
 			}
+			elseif (mso_hook_present('page-comment-unit-file') and $fn = mso_fe(mso_hook('page-comment-unit-file'), '')) require($fn);
 			elseif ($fn = mso_find_ts_file('type/page/units/page-comments.php')) require($fn);
+			
+			if ($f = mso_page_foreach('page-comments-end')) require($f);
+			
 				
 		} // end foreach
 	} // else page_content_only

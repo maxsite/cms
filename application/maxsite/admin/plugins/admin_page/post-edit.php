@@ -164,8 +164,17 @@
 
 				}
 				else $url = '';
-
-				echo '<div class="update">' . t('Страница обновлена!') . ' ' . $url . '</div>'; 
+				
+				
+				if (!isset($post['is_bsave'])) // обычное сохранение
+				{
+					echo ' | ' . $url;
+					echo '<div class="update">' . t('Страница обновлена!') . '</div>'; 
+				}
+				else // быстрое/фоновое сохранение
+				{
+					echo '<div class="update">' . t('Страница обновлена!'). ' ' . $url . '</div>'; 
+				}
 				
 				# пулучаем данные страниц
 				$CI->db->select('*');

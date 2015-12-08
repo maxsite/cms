@@ -10,7 +10,7 @@
 # поддерживаются custom/my_options.ini и custom/my_options.php
 
 echo '<h1>' . t('Настройка шаблона') . ' «'. getinfo('template_name') . '»</h1>';
-echo '<p class="info">' . t('Выберите необходимые опции') . '</p>';
+// echo '<p class="info">' . t('Выберите необходимые опции') . '</p>';
 
 // функции для работы с ini-файлом
 require_once( getinfo('common_dir') . 'inifile.php' );

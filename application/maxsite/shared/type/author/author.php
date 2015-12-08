@@ -13,7 +13,7 @@ $par = array(
 		'cut' => mso_get_option('more', 'templates', tf('Читать полностью »')),
 		'cat_order' => 'category_name', 
 		'cat_order_asc' => 'asc', 
-		'type' => false,
+		// 'type' => false,
 		'content' => $full_posts
 	); 
 

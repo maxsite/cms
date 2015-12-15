@@ -147,7 +147,7 @@
 
 				);
 
-				
+			// pr($data);	
 			require_once( getinfo('common_dir') . 'functions-edit.php' ); // функции редактирования
 			$result = mso_edit_page($data);
 			

@@ -24,7 +24,7 @@ function shjs_uninstall($args = array())
 }
 
 # вспомогательная функция, возвращает
-# имена файлов в виде #-спика для select
+# имена файлов в виде #-списка для select
 function shjs_scan_files($cat = 'css')
 {
 	$CI = & get_instance();
@@ -55,7 +55,7 @@ function shjs_scan_files($cat = 'css')
 }
 
 
-# функция отрабатывающая миниопции плагина (function плагин_mso_options)
+# функция отрабатывающая мини-опции плагина (function плагин_mso_options)
 # если не нужна, удалите целиком
 function shjs_mso_options() 
 {
@@ -103,14 +103,14 @@ function shjs_mso_options()
 [pre class="sh_javascript"] тут JavaScript-код [/pre]
 </pre>
 	<br>
-	<p class="info">Если указать язык по-умолчанию, то можно не указывать class:</p>
+	<p class="info">Если задать язык по-умолчанию, то можно не указывать class:</p>
 <pre>
 &lt;pre&gt; тут код &lt;/pre&gt;
 [pre] тут код [/pre]
 </pre><br>'
 	);
 
-	echo '<p class="info">Если вам требуется добавить другие темы оформления и языки, то их можно скачать их со страницы <a href="http://shjs.sourceforge.net/doc/download.html" target="_blank">SHJS - Syntax Highlighting</a>. По ссылке <strong>«download a binary distribution»</strong> загрузите полный архив скрипта. В нем будут присутствовать каталоги <strong>«css»</strong> (оформление) и <strong>«lang»</strong> (языки). Загрузите нужные файлы (min-версии) в аналогичные каталоги плагина MaxSite CMS (<strong>application/maxsite/plugins/shjs</strong>).';
+	echo '<p class="info">Если вам требуется добавить другие темы оформления и языки, то их можно скачать со страницы <a href="http://shjs.sourceforge.net/doc/download.html" target="_blank">SHJS - Syntax Highlighting</a>. По ссылке <strong>«download a binary distribution»</strong> загрузите полный архив скрипта. В нём будут присутствовать каталоги <strong>«css»</strong> (оформление) и <strong>«lang»</strong> (языки). Загрузите нужные файлы (min-версии) в аналогичные каталоги плагина MaxSite CMS (<strong>application/maxsite/plugins/shjs</strong>).';
 	
 }
 
@@ -153,23 +153,8 @@ function shjs_content($text = '')
 		$text = str_replace('[pre]', '[pre class="' . $options['default_lang'] . '"]', $text);
 		
 		// замены для совместимости с syntaxhighlighter
-		$text = str_replace('[pre lang=php]', '[pre class="sh_php"]', $text);
-		$text = str_replace('<pre lang=php>', '<pre class="sh_php">', $text);
-		
-		$text = str_replace('[pre lang=css]', '[pre class="sh_css"]', $text);
-		$text = str_replace('<pre lang=css>', '<pre class="sh_css">', $text);
-		
-		$text = str_replace('[pre lang=js]', '[pre class="sh_javascript"]', $text);
-		$text = str_replace('<pre lang=js>', '<pre class="sh_javascript">', $text);
-		
-		$text = str_replace('[pre lang=javascript]', '[pre class="sh_javascript"]', $text);
-		$text = str_replace('<pre lang=javascript>', '<pre class="sh_javascript">', $text);
-		
-		$text = str_replace('[pre lang=html]', '[pre class="sh_html"]', $text);
-		$text = str_replace('<pre lang=html>', '<pre class="sh_html">', $text);
-		
-		$text = str_replace('[pre lang=less]', '[pre class="sh_less"]', $text);
-		$text = str_replace('<pre lang=less>', '<pre class="sh_less">', $text);
+		$text = preg_replace('~([<\[])pre lang=js([>\]])~', '$1pre class="sh_javascript"$2', $text);
+		$text = preg_replace('~([<\[])pre lang=([a-z]*)([>\]])~', '$1pre class="sh_$2"$3', $text);
 		
 		$text = preg_replace_callback('~<pre(.*?)>(.*?)<\/pre>~si', 'shjs_pre_callback', $text);
 		
@@ -187,4 +172,4 @@ function shjs_pre_callback($matches)
 }
 
 
-# end file
+# end of file

@@ -316,11 +316,14 @@ function sape_articles_custom_page_404($args = false)
 {
 	global $SAPE_ARTICLE;
 	
+	// отправляем http-заголовок
+	header("HTTP/1.x 200 OK", TRUE);
+	
 	// добавил echo
 	echo $SAPE_ARTICLE->process_request();
-	
+
 	return true; // выходим с true
 }
 
 
-# end file
+# end of file

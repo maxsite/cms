@@ -173,21 +173,24 @@ function add_new_page($fn)
 				'page_type_id' => $page_type_id,
 				'page_meta_options' => $meta_options,
 				'page_date_publish' => (isset($conf['DATE'])) ? $conf['DATE'] : date('Y-m-d H:i:s'),
-			
-				/*
-				'page_id_parent' => $f_page_parent,
-				'page_id_autor' => $f_user_id,
-				'page_password' => $f_password,
-				'page_comment_allow' => $f_comment_allow,
-				'page_ping_allow' => $f_ping_allow,
-				'page_feed_allow' => $f_feed_allow,
-				'page_menu_order' => $page_menu_order,
-				*/
 			);
 			
 			if (isset($conf['STATUS'])) $data['page_status'] = $conf['STATUS'];
+			
+			if (isset($conf['MENU_ORDER'])) $data['page_menu_order'] = (int) $conf['MENU_ORDER'];
+			
+			if (isset($conf['COMMENT_ALLOW'])) $data['page_comment_allow'] = $conf['COMMENT_ALLOW'];
+			
+			if (isset($conf['PASSWORD'])) $data['page_password'] = $conf['PASSWORD'];
+			
+			if (isset($conf['FEED_ALLOW'])) $data['page_feed_allow'] = (int) $conf['FEED_ALLOW'];
+			
+			if (isset($conf['ID_AUTHOR'])) $data['page_id_autor'] = (int) $conf['ID_AUTHOR'];
+			
 			if (isset($conf['SLUG'])) $data['page_slug'] = $conf['SLUG'];
+			
 			if (isset($conf['TAG'])) $data['page_tags'] = $conf['TAG'];
+			
 			if ($cat) $data['page_id_cat'] = implode(',', $cat);
 			
 			// _log($data, 'mso_new_page');

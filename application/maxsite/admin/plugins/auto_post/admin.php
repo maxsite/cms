@@ -10,6 +10,10 @@
 $upload_dir = 'uploads/_temp/';
 $upload_ext = 'txt';
 
+// создадим временный каталог если его нет
+if (!is_dir($upload_dir)) @mkdir(getinfo('FCPATH') . $upload_dir, 0777);
+
+
 // $upload_ext = mso_get_option('allowed_types', 'general', 'mp3|gif|jpg|jpeg|png|svg|zip|txt|rar|doc|rtf|pdf|html|htm|css|xml|odt|avi|wmv|flv|swf|wav|xls|7z|gz|bz2|tgz');
 
 ?>

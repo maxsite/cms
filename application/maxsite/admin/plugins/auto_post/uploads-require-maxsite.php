@@ -5,15 +5,38 @@ if (!is_login()) die('no login');
 mso_checkreferer();
 if (!mso_check_allow('auto_post')) die('no allow');
 
-if (!isset($_SERVER['HTTP_X_FILENAME'])) die('no file');
-if (!isset($_SERVER['HTTP_X_FILENAME_UP_DIR'])) die('no dir');
-if (!is_dir($_SERVER['HTTP_X_FILENAME_UP_DIR'])) die('no dir');
+// pr($_SERVER);
+
+// такая муть нужна, если сервер не пропускает HTTP_X_FILENAME и HTTP_X_FILENAME_UP_DIR
+// тогда он вдруг может пропустить HTTP_X_REQUESTED_FILENAME и HTTP_X_REQUESTED_FILEUPDIR
+if (isset($_SERVER['HTTP_X_FILENAME']))
+{
+	$_fn = $_SERVER['HTTP_X_FILENAME'];
+}
+elseif (isset($_SERVER['HTTP_X_REQUESTED_FILENAME']))
+{
+	$_fn = $_SERVER['HTTP_X_REQUESTED_FILENAME'];
+}
+else die('no file');
+
+if (isset($_SERVER['HTTP_X_FILENAME_UP_DIR']))
+{
+	$_dr = $_SERVER['HTTP_X_FILENAME_UP_DIR'];
+}
+elseif (isset($_SERVER['HTTP_X_REQUESTED_FILEUPDIR']))
+{
+	$_dr = $_SERVER['HTTP_X_REQUESTED_FILEUPDIR'];
+}
+else die('no updir');
+
+
+if (!is_dir($_dr)) die('no exist updir');
 
 // файл
-$fn = _slug($_SERVER['HTTP_X_FILENAME']);
+$fn = _slug($_fn);
 
 // каталог
-$up_dir = getinfo('FCPATH') . $_SERVER['HTTP_X_FILENAME_UP_DIR'];
+$up_dir = getinfo('FCPATH') . $_dr;
 
 // file_put_contents(FCPATH . 'log.txt', $up_dir . $fn); // лог для отладки 
 
@@ -23,7 +46,7 @@ file_put_contents( $up_dir . $fn, file_get_contents('php://input') );
 if (file_exists($up_dir . $fn))
 {
 	require_once(__DIR__ . '/lib/add-new-page.php');
-	add_new_page($up_dir . $fn);
+	add_new_page($up_dir . $fn, $up_dir);
 }
 
 function _slug($slug)

@@ -9,7 +9,7 @@ TODO
 
 // добавляем новую запись из файла
 // удалять файл после публикации???
-function add_new_page($fn)
+function add_new_page($fn, $UP_DIR)
 {
 	global $MSO;
 	
@@ -72,8 +72,12 @@ function add_new_page($fn)
 			$parser = $page_meta_options['parser_content']; // парсер
 			$parser_all = mso_hook('parser_register'); // все зарегистрированные парсеры
 			
-			$func = $parser_all[$parser]['content_post_edit']; // функцию, которую нужно выполнить
-			if (function_exists($func)) $text = $func($text); // прогоняем текст через парсер
+			// если парсеры не зарегистрированы, то ничего не делаем
+			if (isset($parser_all[$parser]['content_post_edit']))
+			{
+				$func = $parser_all[$parser]['content_post_edit']; // функцию, которую нужно выполнить
+				if (function_exists($func)) $text = $func($text); // прогоняем текст через парсер
+			}
 			
 			$meta_options = '';
 			
@@ -203,12 +207,22 @@ function add_new_page($fn)
 			// _log();
 			// _log($result, 'result');
 			
-			// добавляем комментарии
-			if (isset($result['result'][0]) and $comments)
+			$page_id = 0;
+
+			if (isset($result['result'][0]))
 			{
-				
 				$page_id = $result['result'][0];
 				
+				echo($result['description'] . ' (' . str_replace($UP_DIR, '', $fn) . '): ID = ' . $page_id);
+			}
+			else
+			{
+				echo($result['description'] . ' (' . str_replace($UP_DIR, '', $fn) . ')');
+			}
+			
+			// добавляем комментарии
+			if ($page_id and $comments)
+			{
 				foreach($comments as $comment)
 				{
 					$com = _parse_key_val($comment);
@@ -230,7 +244,16 @@ function add_new_page($fn)
 					}
 				}
 			}
+			
 		}
+		else
+		{
+			echo('Неверный фрормат файла (' . str_replace($UP_DIR, '', $fn) . ')');
+		}
+	}
+	else
+	{
+		echo('Неверный фрормат файла (' . str_replace($UP_DIR, '', $fn) . ')');
 	}
 }
 

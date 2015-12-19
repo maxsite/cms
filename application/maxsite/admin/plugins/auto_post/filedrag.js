@@ -122,7 +122,6 @@ Developed by Craig Buckler (@craigbuckler) of OptimalWorks.net
 			var progress = o.appendChild(document.createElement("p"));
 			progress.appendChild(document.createTextNode("upload " + file.name));
 
-
 			// progress bar
 			xhr.upload.addEventListener("progress", function(e) {
 				var pc = parseInt(100 - (e.loaded / e.total * 100));
@@ -133,14 +132,22 @@ Developed by Craig Buckler (@craigbuckler) of OptimalWorks.net
 			xhr.onreadystatechange = function(e) {
 				if (xhr.readyState == 4) {
 					progress.className = (xhr.status == 200 ? "success" : "failure");
+					Output('<p>' + xhr.responseText + '</p>');
 				}
 			};
 			
 			// start upload
 			// xhr.open("POST", $id("upload").action, true);
 			xhr.open("POST", $id("upload_action").value, true);
+			// xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+			
+			// дублируем заголовки если сервер режет X_FILENAME и X_FILENAME_UP_DIR
+			xhr.setRequestHeader("X-Requested-FileName", unescape(encodeURIComponent(file.name)));
+			xhr.setRequestHeader("X-Requested-FileUpDir", unescape(encodeURIComponent($id("upload_dir").value)));
+			
 			xhr.setRequestHeader("X_FILENAME", unescape(encodeURIComponent(file.name)));
 			xhr.setRequestHeader("X_FILENAME_UP_DIR", unescape(encodeURIComponent($id("upload_dir").value)));
+			
 			xhr.send(file);
 		}
 	}

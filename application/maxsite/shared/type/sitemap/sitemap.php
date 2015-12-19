@@ -7,17 +7,22 @@
 
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-	echo NR . '<div class="mso-type-sitemap">' . NR;
+	echo '<div class="mso-type-sitemap"><div class="mso-page-only">';
 	
-	echo NR . '<div class="mso-page-only">' . NR;
+	echo '<header><h1 class="mso-type-sitemap">' . tf('Карта сайта (архив)') . '</h1></header>';
+	echo '<div class="mso-page-content mso-type-sitemap-content">';
 	
-	echo  '<h1>' . tf('Карта сайта (архив)') . '</h1>';
+	if ($f = mso_page_foreach('sitemap')) 
+		require($f);
+	else
+	{
+		if (function_exists('sitemap')) 
+			echo sitemap();
+		else 
+			echo mso_hook('sitemap');
+	}
 	
-	if ( function_exists('sitemap') ) echo sitemap();
-		else echo mso_hook('sitemap');
-	
-	echo NR . '</div><!-- class="mso-page-only" -->' . NR;
-	echo NR . '</div><!-- class="mso-type-sitemap" -->' . NR;
+	echo '</div></div></div><!-- mso-page-content mso-type-sitemap-content mso-page-only mso-type-sitemap -->';
 	
 	if ($f = mso_page_foreach('sitemap-posle')) require($f);
 	

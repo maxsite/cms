@@ -81,7 +81,7 @@ else
 {	
 	if ($pages or $categories or $tags) // есть страницы рубрики или метки
 	{
-		echo '<div class="mso-page-only">'
+		echo '<div class="mso-page-only"><div class="mso-page-content mso-type-search-content">'
 			. '<h1>' . tf('Поиск') . '</h1>'
 			. '<div class="mso-page-content">'
 			. '<p>' . tf('Результаты поиска по запросу') 
@@ -187,7 +187,7 @@ if ($pages) // есть страницы
 	mso_hook('pagination', $pagination);
 }
 
-if ($pages or $categories or $tags) echo '</div></div>';
+if ($pages or $categories or $tags) echo '</div></div></div>';
 
 if (!$pages and !$categories and !$tags)
 {

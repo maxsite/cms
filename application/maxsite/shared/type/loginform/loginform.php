@@ -7,7 +7,7 @@
 
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="mso-type-loginform">' . NR;
+echo NR . '<div class="mso-type-loginform"><div class="mso-page-only"><div class="mso-page-content mso-type-loginform-content">';
 
 if (is_login())
 {
@@ -46,7 +46,7 @@ else
 			'password'=> tf('Пароль'), 
 			'submit'=> '', 
 			'submit_value'=> tf('Войти'), 
-			'form_end'=>'<div class="mso-loginform-end">' . $reg . '<a href="' . getinfo('siteurl') . 'password-recovery">' . tf('Забыли пароль?') . '</a> | '. '<a href="' . getinfo('siteurl') . '">' . tf('Вернуться к сайту') . '</a></div>'
+			'form_end'=>'<p class="mso-loginform-end">' . $reg . '<a href="' . getinfo('siteurl') . 'password-recovery">' . tf('Забыли пароль?') . '</a> | '. '<a href="' . getinfo('siteurl') . '">' . tf('Вернуться к сайту') . '</a></p>'
 			),
 		$redirect_url, false);
 	
@@ -54,7 +54,7 @@ else
 	eval(mso_tmpl_ts('type/loginform/units/loginform-tmpl.php'));
 }
 
-echo NR . '</div><!-- class="mso-type-loginform" -->' . NR;
+echo '</div></div></div><!-- class="mso-type-loginform" -->' . NR;
 
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 

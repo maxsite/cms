@@ -8,6 +8,7 @@ mso_head_meta('title', t('Гостевая книга') ); // meta title стр�
 # начальная часть шаблона
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
+echo '<div class="mso-page-only"><div class="mso-page-content mso-type-guestbook-content">';
 
 $CI = & get_instance();
 
@@ -249,6 +250,8 @@ if ($query->num_rows() > 0)
 
 // здесь пагинация
 mso_hook('pagination', $pag);
+
+echo '</div></div>';
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

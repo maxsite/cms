@@ -22,7 +22,7 @@ if (!$comuser_info and mso_get_option('page_404_http_not_found', 'templates', 1)
 # начальная часть шаблона
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="mso-type-users">' . NR;
+echo NR . '<div class="mso-type-users"><div class="mso-page-only"><div class="mso-page-content mso-type-users-content">';
 
 if ($comuser_info)
 {
@@ -89,7 +89,7 @@ else
 	}
 }
 
-echo NR . '</div><!-- class="mso-type-users" -->' . NR;
+echo NR . '</div></div></div><!-- class="mso-type-users" -->' . NR;
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

@@ -8,13 +8,13 @@
 		<input type="hidden" value="0" name="freg_rules_ok">
 		<input type="hidden" value="{{ $redirect_url }}" name="freg_redirect_url">
 		
-		<p><label><span>{{ tf('Email (используется как логин)') }}</span><input type="email" name="freg_email" value="{{ $vreg_email }}"></label></p>
+		<p><label><span>{{ tf('Email (используется как логин)') }}</span><input type="email" name="freg_email" value="{{ $vreg_email }}" required></label></p>
 		
-		<p><label><span>{{ tf('Пароль (английские буквы и цифры, без пробелов, минимум 6 символов)') }}</span><input type="password" name="freg_password" value="{{ $vreg_password }}"></label></p>
+		<p><label><span>{{ tf('Пароль (английские буквы и цифры, без пробелов, минимум 6 символов)') }}</span><input type="password" name="freg_password" value="{{ $vreg_password }}" required></label></p>
 		
-		<p><label><span>{{ tf('Повторите пароль') }}</span><input type="password" name="freg_password_repeat" value="{{ $vreg_password_repeat }}"></label></p>		
+		<p><label><span>{{ tf('Повторите пароль') }}</span><input type="password" name="freg_password_repeat" value="{{ $vreg_password_repeat }}" required></label></p>		
 		
-		<p><label><span>{{ tf('Имя') }}</span><input type="text" name="freg_nik" value="{{ $vreg_nik }}"></label></p>
+		<p><label><span>{{ tf('Имя') }}</span><input type="text" name="freg_nik" value="{{ $vreg_nik }}" required></label></p>
 		
 		<p><label><span>{{ tf('Адрес сайта (если есть)') }}</span><input type="text" name="freg_url" value="{{ $vreg_url }}"></label></p>
 		

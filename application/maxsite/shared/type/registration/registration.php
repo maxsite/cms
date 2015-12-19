@@ -15,7 +15,8 @@ if (!mso_get_option('allow_comment_comusers', 'general', '1') )
 	return;
 }
 
-echo NR . '<div class="mso-type-loginform">' . NR;
+echo NR . '<div class="mso-type-loginform"><div class="mso-page-only"><div class="mso-page-content mso-type-loginform-content">';
+
 
 if (is_login())
 {
@@ -157,7 +158,7 @@ else
 	eval(mso_tmpl_ts('type/registration/units/registration-tmpl.php'));
 }
 
-echo NR . '</div><!-- class="mso-type-loginform" -->' . NR;
+echo '</div></div></div><!-- class="mso-type-loginform" -->' . NR;
 
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 

@@ -22,7 +22,7 @@ else
 # начальная часть шаблона
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="mso-type-password-recovery">' . NR;
+echo NR . '<div class="mso-type-password-recovery"><div class="mso-page-only"><div class="mso-page-content mso-type-loginform-content">';
 
 echo $res_post;
 	
@@ -32,7 +32,6 @@ if ($f = mso_page_foreach('password-recovery'))
 }
 else
 {
-
 	if (is_login())
 	{
 		eval(mso_tmpl_ts('type/loginform/units/loginform-user-tmpl.php'));
@@ -52,7 +51,7 @@ else
 	}
 }
 
-echo NR . '</div><!-- class="mso-type-password-recovery" -->' . NR;
+echo NR . '</div></div></div><!-- class="mso-type-password-recovery" -->' . NR;
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

@@ -14,14 +14,30 @@ if ($rules = trim(mso_get_option('top1_rules_output', getinfo('template'), '')))
 
 $logo = trim(mso_get_option('top1_header_logo', getinfo('template'), getinfo('template_url') . 'assets/images/logos/logo01.png'));
 
+$logo_width = (int) mso_get_option('top1_header_logo_width', getinfo('template'), 0);
+$logo_height = (int) mso_get_option('top1_header_logo_height', getinfo('template'), 0);
+$logo_type_resize = mso_get_option('top1_header_logo_type_resize', getinfo('template'), 'resize_full_crop_center');
+
+// задан размер по ширине и высоте, значит пробуем кропнуть указанное изображение и получить новое
+if ($logo_width and $logo_height)
+{
+	require_once(getinfo('shared_dir') . 'stock/thumb/thumb.php');
+	
+	if ($new_image = thumb_generate($logo, $logo_width, $logo_height, false, $logo_type_resize, false, 'mini', '-' . $logo_width . '-' . $logo_height . '-' . $logo_type_resize))
+	{
+		$logo = $new_image;
+	}
+}
+
 if ($logo) $logo = '<img src="' . $logo . '" alt="' . getinfo('name_site') . '" title="' . getinfo('name_site') . '">';
 
 if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . '</a>';
 
-?>
+$top1_block = mso_get_option('top1_block', getinfo('template'), '');
 
+?>
 <div class="menu-icons flex flex-vcenter bg-gray900 pad15-rl">
-	<div class="">
+	<div>
 		<ul class="menu menu2">
 		<?php
 			if ($menu = mso_get_option('menu2', 'templates', '/ | Главная ~ about | О сайте')) 
@@ -38,15 +54,18 @@ if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . 
 </div>
 
 <div class="logo-block flex flex-vcenter pad20">
+	<?php if ($logo) { ?>
 	<div class="w100-max"><?= $logo ?></div>
-	<div class=""><?php eval(mso_tmpl_prepare(mso_get_option('top1_block', getinfo('template'), ''))); ?></div>
+	<?php } ?>
+	
+	<?php if ($top1_block) { ?>
+	<div><?php eval(mso_tmpl_prepare($top1_block)) ?></div>
+	<?php } ?>
 </div>
 
 <div class="menu-search flex flex-vcenter mar20-rl bg-gray800 flex-wrap-tablet">
-	
 	<div class="w100-tablet"><?php if ($fn = mso_fe('components/_menu/_menu.php')) require($fn); ?></div>
-	
-	<div class="">
+	<div>
 		<form name="f_search" class="f_search" method="get">
 			<input class="my-search my-search--hidden" type="search" name="s" id="sss" placeholder="<?= tf('Поиск...') ?>"><label class="label-search i-search icon-square bg-gray700 t-gray200 cursor-pointer" for="sss"></label>
 		</form>

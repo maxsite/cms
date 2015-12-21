@@ -39,7 +39,7 @@ class Thumb
 		$this->file = str_replace(getinfo('uploads_url'), '', $url);
 		
 		// расширение файла
-		$ext = substr(strrchr($this->file, '.'), 1);
+		$ext = strtolower(substr(strrchr($this->file, '.'), 1));
 		
 		if (!in_array($ext, array('jpg', 'jpeg', 'png', 'gif')))
 		{
@@ -57,7 +57,7 @@ class Thumb
 		
 		if ($subdir)
 		{
-			$name = substr_replace($name, '/mini/', strrpos($name, '/'), 0);
+			$name = substr_replace($name, '/' . $subdir . '/', strrpos($name, '/'), 0);
 		}
 
 		// удаляем возможные лишние слеши
@@ -68,7 +68,10 @@ class Thumb
 		// pr($name);
 		
 		// новое имя
-		if (!$postfix) $postfix = '-thumb'; // проверим постфикс
+		
+		// проверим постфикс если false то без постфикса
+		if ($postfix === false) $postfix = ''; 
+		elseif (!$postfix) $postfix = '-thumb';
 		
 		$this->new_file = $name . $postfix . '.' . $ext;
 		
@@ -301,12 +304,16 @@ class Thumb
 // вспомогательные функции для использования в шаблоне
 // тип формирования указывается в $type_resize
 
-function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 'resize_full_crop_center', $replace_file = false, $subdir = 'mini')
+function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 'resize_full_crop_center', $replace_file = false, $subdir = 'mini', $postfix = true)
 {
 	// указана картинка, нужно сделать thumb заданного размера
 	if ($img) 
 	{
-		$t = new Thumb($img, '-' . $width . '-' . $height, $replace_file, $subdir);
+		// если true, то делаем из ширину+высоту
+		// если false, то постфикса не будет
+		if ($postfix === true) $postfix = '-' . $width . '-' . $height;
+		
+		$t = new Thumb($img, $postfix, $replace_file, $subdir);
 		
 		if ($t->init === true) // уже есть готовое изображение в кэше
 		{

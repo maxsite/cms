@@ -179,18 +179,18 @@
 			. NR;
 		}
 		
-		if ($description) $f .= '<p>' .  t($description) . '</p>';
-		$key = '<h4>' . t($key) . '</h4>';
+		if ($description) $f .= '<p class="italic">' .  t($description) . '</p>';
+		$key = '<p class="w25 w100-tablet bold">' . t($key) . '</p>';
 		
 		// $all_meta .= '<div>' . $key . NR . $f . '</div>';
 		
 		if (isset($row['page_type']))
 		{
 			$page_type = stripslashes(trim($row['page_type']));
-			$all_meta .= '<div class="page_meta_block ' . $page_type . '">' . $key . NR . $f . '</div>';
+			$all_meta .= '<div class="page_meta_block ' . $page_type . '"><div class="flex flex-wrap pad10-tb">' . $key . NR . '<div class="w75 w100-tablet">' . $f . '</div></div></div>';
 		}
 		else
-			$all_meta .= '<div class="page_meta_block">' . $key . NR . $f . '</div>';
+			$all_meta .= '<div class="page_meta_block"><div class="flex flex-wrap pad10-tb">' . $key . NR . '<div class="w75 w100-tablet">' . $f . '</div></div></div>';
 		
 	}
 

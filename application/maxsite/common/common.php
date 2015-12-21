@@ -3983,9 +3983,10 @@ text = _START_
 _END_
 ...
 
-*/
+Если $as_is == true, то отдается массив вхождений без обработки внутренних полей. 
 
-function mso_section_to_array($text, $pattern, $array_default = array(), $simple = false)
+*/
+function mso_section_to_array($text, $pattern, $array_default = array(), $simple = false, $as_is = false)
 {
 	$text = preg_replace_callback('!_START_(.*?)_END_!is', '_mso_section_to_array_replace_start', $text);
 	
@@ -3995,8 +3996,11 @@ function mso_section_to_array($text, $pattern, $array_default = array(), $simple
 	if (preg_match_all($pattern, $text, $array_result))
 	{
 		// массив слайдов в $array_result[1]
-		// преобразуем его в массив полей
 		
+		// отдать как есть без обработки
+		if ($as_is) return $array_result[1];
+			
+		// преобразуем его в массив полей
 		$f = array(); // массив для всех полей
 		$i = 0; // счетчик 
 		foreach($array_result[1] as $val)

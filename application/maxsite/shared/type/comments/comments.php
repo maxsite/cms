@@ -47,7 +47,7 @@ else
 
 	if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 	
-	echo NR . '<div class="mso-type-comments">' . NR;
+	echo NR . '<div class="mso-type-comments"><div class="mso-page-only"><div class="mso-page-content mso-type-comments-content">';
 
 	if ($f = mso_page_foreach('comments-do')) require($f); // подключаем кастомный вывод
 	else 
@@ -75,7 +75,7 @@ else
 
 			echo '<li><span><a href="' . getinfo('siteurl') . 'page/' . mso_slug($page_slug) . '#comment-' . $comments_id . '" name="comment-' . $comments_id . '">' . $page_title . '</a>';
 			echo ' | ' . $comments_url;
-			echo '</span><br>' . $comments_date;
+			echo '</span><br><span>' . $comments_date;
 			echo '</span><br>' . $comments_content;
 			echo '</li>';
 			

@@ -19,9 +19,9 @@ if ($n = mso_segment(3)) // указан N номер записи
 	}
 	
 	$current_dir = '_pages/' . $n;
-	
 	$path = getinfo('uploads_dir') . $current_dir;
-	
+	$update_path = getinfo('ajax') . base64_encode('admin/plugins/admin_page/all-files-update-ajax.php');
+
 	if (!is_dir($path) ) // нет каталога
 	{
 		if (!is_dir(getinfo('uploads_dir') . '_pages') ) // нет _pages
@@ -42,7 +42,7 @@ if ($n = mso_segment(3)) // указан N номер записи
 	}
 	
 	
-	$all_files = '<div class="all-files-nav"><a href="' . getinfo('site_admin_url') . 'files/' . $current_dir . '" target="_blank" class="goto-files">' . t('Управление файлами') . '</a></div>';
+	$all_files = '<div class="all-files-nav"><a href="' . getinfo('site_admin_url') . 'files/' . $current_dir . '" target="_blank" class="goto-files">' . t('Управление файлами') . '</a> <a href="#" id="all-files-upload" class="all-files-upload">' . t('Быстрая загрузка') . '</a></div>';
 	
 	// скрипт выполняет аякс
 	// первый раз при загрузке страницы
@@ -73,6 +73,10 @@ EOF;
 	
 	
 	$all_files .= '<script>
+function lbox() {
+' . $lightbox . '
+}
+
 $(function(){
 	$.post(
 		"' . getinfo('ajax') . base64_encode('admin/plugins/admin_page/all-files-update-ajax.php') . '",
@@ -82,7 +86,7 @@ $(function(){
 		function(data)
 		{
 			$("#all-files-result").html(data);
-			' . $lightbox . '
+			lbox();
 		}
 	);
 
@@ -101,11 +105,19 @@ $(function(){
 				function(data)
 				{
 					$("#all-files-result").html(data);
-					' . $lightbox . '
+					lbox();
 					localStorage.clear();
 				}
 			);
 		}
+	});
+
+	$("#all-files-upload-panel").slideToggle();
+	$("#all-files-upload").click(function(event){
+		$("#all-files-upload-panel").slideToggle();
+		$("#upload_messages").html("");
+		$("#upload_progress").html("");
+		return false;
 	});
 });
 
@@ -119,11 +131,30 @@ function addImgPage(img, t) {
 }
 </script>
 
-<script src="'. getinfo('plugins_url') . 'comment_smiles/comment_smiles.js"></script>
+<script src="'. getinfo('plugins_url') . 'comment_smiles/comment_smiles.js"></script>';
+
+$all_files .= '
+<div id="all-files-upload-panel">
+
+<input type = "hidden" id = "upload_max_file_size" name = "upload_max_file_size" value="20000000">
+<input type = "hidden" id = "upload_action" name = "upload_action" value = "' . getinfo('require-maxsite') . base64_encode('admin/plugins/admin_page/uploads-require-maxsite.php') . '">
+<input type = "hidden" id = "upload_ext" name = "upload_ext" value = "' . mso_get_option('allowed_types', 'general', 'mp3|gif|jpg|jpeg|png|svg|zip|txt|rar|doc|rtf|pdf|html|htm|css|xml|odt|avi|wmv|flv|swf|wav|xls|7z|gz|bz2|tgz') . '">
+<input type = "hidden" id = "upload_dir" name = "upload_dir" value = "' . $path . '">
+<input type = "hidden" id = "update_path" name = "update_path" value = "' . $update_path . '">
+<input type = "hidden" id = "page_id" name = "page_id" value = "' . mso_segment(3) . '">
+
+<div>
+	<div id="upload_filedrag">' . t('... перетащите файлы сюда ...') . '</div>
+	<input type="file" id="upload_fileselect" name="upload_fileselect[]" multiple="multiple">
+</div>
+
+<div id="upload_submitbutton"><button type="button">Upload Files</button></div>
+<div class="mar10-tb" id="upload_progress"></div>
+<div id="upload_messages"></div>
+</div>
 
 <div id="all-files-result" class="all-files-result">' . t('Загрузка...') . '</div>
-
-';
+<script src="' . getinfo('admin_url') . 'plugins/admin_page/filedrag.js' . '" type="text/javascript"></script>';
 }
 else
 {

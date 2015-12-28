@@ -29,7 +29,7 @@ $(function() {
 	
 	$(".mso-tabs-nav").on("click", ".mso-tabs-elem:not(.mso-tabs-current)", function() 
 	{
-		var cookieName = $(this).parents(".mso-tabs_widget").attr("class").match(/mso-tabs_widget_[0-9a-z]+/).join(),
+		var cookieName = $(this).parents(".mso-tabs_widget").prop("class").match(/mso-tabs_widget_[0-9a-z]+/).join(),
 			index = $(this).index();
 		$(this).addClass("mso-tabs-current").siblings().removeClass("mso-tabs-current")
 				.parents("div.mso-tabs").find(".mso-tabs-box").hide().eq(index).fadeIn(300);

@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Табы'),
 	'description' => t('Виджет создающий табы (закладки). В качестве содержимого таба используются другие виджеты или ушки'),
-	'version' => '2.4',
+	'version' => '2.5',
 	'author' => 'Максим',
 	'plugin_url' => 'http://max-3000.com/',
 	'author_url' => 'http://maxsite.org/',

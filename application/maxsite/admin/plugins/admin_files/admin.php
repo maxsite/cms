@@ -656,7 +656,7 @@ $.cookie.json = true; $("div.upload_file").showHide({time: 200, useID: false, cl
 			echo '</div>';
 		}
 
-		echo '<div class="sel-files"><button type="submit" name="f_delete_submit" class="i delete-file" onClick="if(confirm(\'' . t('Выделенные файы будут безвозвратно удалены! Удалять?') . '\')) {return true;} else {return false;}">' . t('Удалить') . '</button> 
+		echo '<div class="sel-files"><button type="submit" name="f_delete_submit" class="i delete-file" onClick="if(confirm(\'' . t('Выделенные файлы будут безвозвратно удалены! Удалять?') . '\')) {return true;} else {return false;}">' . t('Удалить') . '</button> 
 			<button type="button" id="check-all" class="mso-invert">' . t('Инвертировать выделение') . '</button></div>
 			
 			</form>';

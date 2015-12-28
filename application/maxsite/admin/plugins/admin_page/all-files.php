@@ -154,7 +154,7 @@ $all_files .= '
 </div>
 
 <div id="all-files-result" class="all-files-result">' . t('Загрузка...') . '</div>
-<script src="' . getinfo('admin_url') . 'plugins/admin_page/filedrag.js' . '" type="text/javascript"></script>';
+<script src="' . getinfo('admin_url') . 'plugins/admin_page/filedrag.js' . '"></script>';
 }
 else
 {

@@ -8,11 +8,11 @@
 $info = array(
 	'name' => 'Default',
 	'description' => t('Шаблон для MaxSite CMS'),
-	'version' => '6.3',
+	'version' => '6.4',
 	'author' => 'MAX',
 	'template_url' => 'http://max-3000.com/',
 	'author_url' => 'http://maxsite.org/',
-	'maxsite-min-version' => '0.93'
+	'maxsite-min-version' => '0.94'
 );
 
 # end of file

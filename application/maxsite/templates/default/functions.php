@@ -14,6 +14,9 @@ if (is_type('admin'))
 	# регистрируем сайдбар
 	mso_register_sidebar('1', tf('Первый сайдбар'));
 	
+	# набор из mso_set_val
+	if ($fn = mso_fe('custom/set_val_admin.php')) require_once($fn);
+	
 	# функции для админки
 	if ($fn = mso_fe('custom/template-admin.php')) require_once($fn);
 }

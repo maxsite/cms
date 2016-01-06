@@ -15,6 +15,8 @@ function _getFiles($rdi, $depth=0, $dir)
 		{
 			$cur = $rdi->current();
 			$cur = str_replace('\\', '/', $cur);
+			if (_is_exclude($cur)) continue;
+			
 			$cur = str_replace($dir, '', $cur);
 			
 			if ($rdi->isDir()) 
@@ -44,6 +46,23 @@ function _getFiles($rdi, $depth=0, $dir)
 	}
 	 
 	return $out;
+}
+
+// проверка части вхождения каждого элемента массива $a в строку $str
+// если вхождение есть, то отдаем true если нет, то false 
+function _is_exclude($str)
+{
+	// исключаемые из списка элементы задаются в custom/set_val_admin.php
+	// mso_set_val('editor_files_exclude', array('/node_modules/'));
+	
+	$a = mso_get_val('editor_files_exclude', array());
+	
+	foreach ($a as $find)
+	{
+		if (stripos($str, $find) !== false) return true; // найдено вхождение
+	}
+	
+	return false;
 }
 
 $directory = getinfo('template_dir');

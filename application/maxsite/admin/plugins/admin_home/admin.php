@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 
-<h1><?= t('Добро пожаловать в MaxSite CMS!') ?></h1>
+<h1 class="mar20-t"><?= t('Добро пожаловать в MaxSite CMS!') ?></h1>
 <div class="flex flex-wrap-tablet">
 
 <ul class="flex-grow3">
@@ -12,16 +12,20 @@
 	<li><a href="//maxhub.ru/"><?= t('MaxHub - сообщество MaxSite CMS') ?></a></li>
 	<li><a href="//forum.max-3000.com/"><?= t('Форум поддержки') ?></a> &bull; <a href="//maxhub.ru/category/templates"><?= t('Шаблоны') ?></a> &bull; <a href="//maxhub.ru/category/plugins"><?= t('Плагины') ?></a></li>
 </ul>
-<div class="flex-grow1 pad20 t-center t-gray100 links-no-color" style="background: #006187; align-self: flex-start;">
-	<a href="//unicss.maxsite.com.ua/" target="_blank" title="Less/Css-фреймворк UniCSS"><b>.UniCSS</b> { Less/Css: Framework }</a>
+<div class="flex-grow1">
+	<div class="bg-blue600 pad20 t-center"><a class="t-white hover-t-blue100" href="//unicss.maxsite.com.ua/" target="_blank" title="Less/Css-фреймворк UniCSS"><b>.UniCSS</b> { Less/Css: Framework }</a></div>
+	<div class="bg-red600 pad20 mar10-t t-center"><a class="i-check t-white hover-t-red100" href="//wbloger.com/" target="_blank" title="Создание сайтов на MaxSite CMS"><b>Создание сайтов на MaxSite CMS</b></a></div>
 </div>
 </div>
+<?php
+	if ($bl = mso_get_option('admin_block_for_home', 'general', '')) echo '<div>' . $bl . '</div>'; 
+?>
 
 <iframe src="//max-3000.com/check-latest?<?= getinfo('version') ?>" scrolling="auto" frameborder="no" style="width: 100%; min-height: 100px; margin-top: 20px;"></iframe>
 
 <?php
 
-# получать последние новости
+	# получать последние новости
 	$max_3000_news = mso_get_option('max_3000_news', 'general', 0);
 	
 	if ($max_3000_news)

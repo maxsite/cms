@@ -121,8 +121,11 @@
 						
 					</div> <!-- class="mso-comments-auth"-->
 				{% endif %}	<!-- / простая форма-->
-			
-			
+
+				{% if (mso_hook_present('page-comment-form')) : %}
+					<p class="mso-page-comment-form">{% mso_hook('page-comment-form') %}</p>
+				{% endif %}
+
 			{% endif %} <!-- / нет залогирования -->
 
 			{% mso_hook('comments_content_end') %}

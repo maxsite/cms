@@ -6,7 +6,7 @@
  * Dminty (d51x)
  * (c) http://d51x.ru/
  */
-
+ 
 
 # функция автоподключения плагина
 function loginza_auth_autoload()
@@ -127,7 +127,7 @@ function loginza_auth_mso_options()
 					
 			),
 		t('Настройки плагина Loginza Auth'), // титул
-		t('Авторизация на сайте через сервис <a href="http://loginza.ru">Loginza</a>')
+		t('Авторизация на сайте через сервис <a href="//loginza.ru">Loginza</a>')
 		. $curl
 		. t('<br><b>Авторизация будет работать только в том случае, если выбранный провайдер будет возвращать e-mail адрес!!!</b>')   // инфо
 	);	
@@ -138,7 +138,7 @@ function loginza_auth_mso_options()
 function loginza_auth_head($args = array())
 {
 	if (!is_login() and !is_login_comuser())
-		echo '<script src="http://loginza.ru/js/widget.js"></script>';
+		echo '<script src="//loginza.ru/js/widget.js"></script>';
 
 	return $args;
 }
@@ -172,10 +172,10 @@ function loginza_auth_login_form_auth($text = '')
 	if ( $widget_type == 0) 
 	{
 		$text .= '<a rel="nofollow" href="' .  $auth_url . '" class="loginza loginza_auth">';
-		$text .= '<img src="http://loginza.ru/img/sign_in_button_gray.gif" alt="Войти через loginza"/></a>';
+		$text .= '<img src="//loginza.ru/img/sign_in_button_gray.gif" alt="Войти через loginza"/></a>';
 		
 	} else if ($widget_type == 1) {
-	    //$text .= '<script src="http://s1.loginza.ru/js/widget.js" type="text/javascript"></script>';
+	    //$text .= '<script src="//s1.loginza.ru/js/widget.js" type="text/javascript"></script>';
 		$text .= '<a rel="nofollow" href="' .  $auth_url . '" class="loginza_auth">' . $options['auth_title_flogin'] . '</a>';
 	} else if ($widget_type ==2 ) {
 		$auth_url .= '&overlay=loginza';
@@ -214,9 +214,9 @@ function loginza_auth_page_comment_form($args = array())
 	if ( $widget_type == 0) 
 	{
 		echo '<span><a rel="nofollow" href="' .  $auth_url . '" class="loginza loginza_auth">';
-		echo '<img src="http://loginza.ru/img/sign_in_button_gray.gif" alt="Войти через loginza"/></a></span>';
+		echo '<img src="//loginza.ru/img/sign_in_button_gray.gif" alt="Войти через loginza"/></a></span>';
 	} else {
-	    echo '<script src="http://s1.loginza.ru/js/widget.js"></script>';
+	    echo '<script src="//s1.loginza.ru/js/widget.js"></script>';
 		echo '<span><a rel="nofollow" href="' .  $auth_url . '" class="loginza_auth">' . $auth_title . '</a></span>';
 	}
 	return $args;
@@ -257,7 +257,7 @@ function loginza_auth_init($arg = array())
 		if( !empty($_POST['token']) )
 		{
 			// token пришел? делаем редрект на страницу авторизации
-			$auth_url = "http://loginza.ru/api/authinfo?token=" . $_POST['token'];
+			$auth_url = "//loginza.ru/api/authinfo?token=" . $_POST['token'];
 			$profile = loginza_auth_request($auth_url);
 			$profile = json_decode($profile);
 			if (!is_object($profile) || !empty($profile->error_message) || !empty($profile->error_type)) {

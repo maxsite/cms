@@ -194,7 +194,7 @@
 			$data_table[] = $r; // добавим строчку
 		}
 		
-		$dop = '<button type="submit" name="f_submit" class="i save">' . t('Сохранить') . '</button>';
+		$dop = '<button type="submit" name="f_submit" class="button i-save">' . t('Сохранить') . '</button>';
 		
 		
 		echo mso_load_jquery('jquery.tablesorter.js') . '
@@ -216,7 +216,7 @@
 		
 		echo '<p class="hr"><strong>' . t('Добавить группу') . ' </strong>
 					<input type="text" name="f_new">
-					<button type="submit" name="f_new_submit" class="i add-new">' . t('Добавить') . '</button>
+					<button type="submit" name="f_new_submit" class="button i-plus">' . t('Добавить') . '</button>
 				</p>';
 		
 		$delete = '';
@@ -234,7 +234,7 @@
 		{
 			echo '<h3>' . t('Удаление групп') . ' </h3>'
 				. $delete 
-				. '<br><button type="submit" name="f_delete_submit" class="i delete" onClick="if(confirm(\'' . t('Уверены?') . '\')) {return true;} else {return false;}">' . t('Удалить') . '</button>';
+				. '<br><button type="submit" name="f_delete_submit" class="button i-remove" onClick="if(confirm(\'' . t('Уверены?') . '\')) {return true;} else {return false;}">' . t('Удалить') . '</button>';
 		}
 	
 		

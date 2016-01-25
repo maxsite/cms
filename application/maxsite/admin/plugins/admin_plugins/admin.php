@@ -202,8 +202,8 @@
 	
 		# добавим строчку для дополнительного действия
 		$table1 .= '<p>
-					<button type="submit" name="f_deactivate_submit" class="i plugin-deactivate">' . t('Выключить') . '</button>
-					<button type="submit" name="f_uninstall_submit" class="i plugin-uninstall">' . t('Деинсталировать') . '</button>
+					<button type="submit" name="f_deactivate_submit" class="button i-chain-broken">' . t('Выключить') . '</button>
+					<button type="submit" name="f_uninstall_submit" class="button i-remove">' . t('Деинсталировать') . '</button>
 					</p>';
 	
 	}
@@ -229,7 +229,7 @@
 		$table2 = $CI->table->generate(); // вывод подготовленной таблицы
 	
 		# добавим строчку для дополнительного действия
-		$table2 .= '<p><button type="submit" name="f_activate_submit" class="i plugin-activate">' . t('Включить') . '</button></p>';
+		$table2 .= '<p><button type="submit" name="f_activate_submit" class="button i-chain">' . t('Включить') . '</button></p>';
 	}
 	else $table2 = '';
 		

@@ -150,17 +150,17 @@
 		echo '<h3>' . t('Создать нового автора') . '</h3>';
 		echo '<p class="info">' . t('Если данные некорректны, то пользователь создан не будет. Для нового пользователя-админа нужно обновить разрешения.') . '</p>';		
 		
-		echo '<form method="post" class="fform">' . mso_form_session('f_session_id');
+		echo '<form method="post">' . mso_form_session('f_session_id');
 		
-		echo '<p><label class="fwrap"><span class="ffirst1 ftitle">' . t('Логин') . ' </span><span>' . form_input( array('name'=>'f_user_login')) . '</span></label></p>';
+		echo '<p><label>' . t('Логин') . ' ' . form_input( array('name'=>'f_user_login')) . '</label></p>';
 		
-		echo '<p><label class="fwrap"><span class="ffirst1 ftitle">E-mail</span><span>'. form_input( array( 'name'=>'f_user_email' ) ) . '</span></label></p>';
+		echo '<p><label>E-mail'. form_input( array( 'name'=>'f_user_email' ) ) . '</label></p>';
 		
-		echo '<p><label class="fwrap"><span class="ffirst1 ftitle">' . t('Пароль') . ' </span><span>'. form_input( array( 'name'=>'f_user_password' ) ) . '</span></label></p>';
+		echo '<p><label>' . t('Пароль') . ' '. form_input( array( 'name'=>'f_user_password' ) ) . '</label></p>';
 		
-		echo '<p><label class="fwrap"><span class="ffirst1 ftitle">' . t('Группа') . ' </span><span>' . form_dropdown('f_user_group', $groups, '') . '</span></label></p>';	
+		echo '<p><label>' . t('Группа') . ' ' . form_dropdown('f_user_group', $groups, '') . '</label></p>';	
 		
-		echo '<p class="hr"><span class="ffirst1 ftitle"></span><span><button type="submit" name="f_submit" class="i add-new">' . t('Создать автора') . '</button></span></p>';
+		echo '<p><button type="submit" name="f_submit" class="button i-plus">' . t('Создать автора') . '</button></p>';
 		
 		
 		echo '</form>';

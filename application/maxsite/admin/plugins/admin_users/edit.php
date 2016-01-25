@@ -254,7 +254,7 @@
 			
 			echo '<form method="post">' . mso_form_session('f_session_id');
 			echo $CI->table->generate();
-			echo '<p><button type="submit" name="f_submit[' . $id . ']" class="i save">' . t('Сохранить') . '</button>';
+			echo '<p><button type="submit" name="f_submit[' . $id . ']" class="button i-save">' . t('Сохранить') . '</button>';
 			echo '</form>';
 		}
 		else echo '<div class="error">' . t('Ошибочный запрос') . '</div>';

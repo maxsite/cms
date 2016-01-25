@@ -1,0 +1,102 @@
+/* ЭТО ЗАГОТОВКА ДЛЯ THEME АДМИН-ПАНЕЛИ. ТРЕБУЕТ ДОРАБОТКИ!  */
+
+a {
+	color: #cc1515;
+}
+
+.my-nav-panel {
+	background-color: #870e0e;
+}
+
+.my-nav-panel-tablet {
+	background-color: #851515;
+	color: #eee;
+}
+
+ul.admin-menu .admin-menu-top > a {
+    border-bottom: 1px solid #a21111;
+}
+
+ul.admin-menu .admin-menu-section-favorites, 
+ul.admin-menu .admin-menu-section-page,
+ul.admin-menu .admin-menu-section-options,
+ul.admin-menu .admin-menu-section-users,
+ul.admin-menu .admin-menu-section-plugins
+{
+    background-color: #630A0A;
+}
+
+ul.admin-menu ul a:hover {
+	background-color: #eb3d3d;
+	color: #f0f0f0;
+}
+
+li.admin-menu-selected, 
+li.admin-menu-selected a {
+    background-color: #ff943c;
+    color: #212121 !important;
+}
+
+a.my-q-site::before, 
+a.my-q-dashboard::before, 
+a.my-q-my_profile::before, 
+a.my-q-logout::before
+{
+	background-color:  #630A0A;
+	color: #dddddd;
+}
+
+a.my-q-site:hover:before, 
+a.my-q-dashboard:hover:before, 
+a.my-q-my_profile:hover:before, 
+a.my-q-logout:hover:before
+{
+	background-color: #eb3d3d;
+	color: #f0f0f0;
+}
+
+p.nav a {
+	background: #a21111;
+}
+
+p.nav a.current {
+    background-color: #590909;
+}
+
+p.nav a:hover {
+    background: #590909;
+}
+
+div.admin-h-menu a.select {
+    background-color: #590909;
+}
+
+div.admin-h-menu a:hover {
+    background: #8e0f0f;
+}
+
+#sh-my-nav-panel {
+	background: #870e0e;
+}
+
+#sh-my-nav-panel:hover {
+	background: #c21414 !important;
+}
+
+button.mso-save-ini {
+	background: #870e0e;
+}
+
+button.mso-save-ini:hover {
+	background: #c21414;
+}
+
+div.pagination strong {
+	background: #c21414;
+}
+
+div.pagination a:hover {
+    background: #870e0e;
+}
+
+

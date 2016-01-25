@@ -257,7 +257,7 @@
 			echo $CI->table->generate();
 			
 			if (mso_check_allow('edit_self_users')) // если разрешено менять анкету
-				echo '<p class="br"><input type="submit" name="f_submit[' . $id . ']" value="' . t('Изменить') . '"></p>';
+				echo '<p class="br"><button class="button i-save" type="submit" name="f_submit[' . $id . ']">' . t('Сохранить') . '</button></p>';
 			
 			echo '</form>';
 		}

@@ -1,4 +1,4 @@
-// .UniCSS v.14-09-2015 
+// .UniCSS v.20-12-2015 
 // .UniCSS -> http://unicss.maxsite.com.ua/
 
 *,
@@ -254,7 +254,8 @@ th {
         margin-right: auto; 
 }
 
-.b-hide { display: none !important; } 
+.b-hide { display: none; } 
+.b-hide-imp { display: none !important; } 
 
 .b-inline { display: inline-block; }
 .b-block  { display: block; }
@@ -398,8 +399,8 @@ th {
         &:active, 
         &:focus 
         {
-                background: @button_active_bg_color;
-                color: @button_active_text_color;
+                // background: @button_active_bg_color;
+                // color: @button_active_text_color;
         }
         
         &.disabled,
@@ -715,7 +716,6 @@ th {
   background-image: -moz-linear-gradient(top, #bdbdbd 0%, #f5f5f5 100%);
   background-image: linear-gradient(to bottom, #bdbdbd 0%, #f5f5f5 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffbdbdbd', endColorstr='#fff5f5f5', GradientType=0);
 }
 
 .gr-gray100-400 {
@@ -725,7 +725,6 @@ th {
   background-image: -moz-linear-gradient(top, #f5f5f5 0%, #bdbdbd 100%);
   background-image: linear-gradient(to bottom, #f5f5f5 0%, #bdbdbd 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffbdbdbd', endColorstr='#fff5f5f5', GradientType=0);
 }
 // .UniCSS -> http://unicss.maxsite.com.ua/
 
@@ -912,16 +911,17 @@ a {
 }
 
 .links-no-color {
-        a {
-                color: inherit !important;
+        
+        a:not([class^="t-"]):not([class*=" t-"])
+        {
+                color: inherit;
         }
 }
 
-// экспериментальный вариант возможно будет изменен
-// тоже самое, только без !important
-.links-no-color2 {
+// жесткий !important — экспериметральный вариант!
+.links-no-color-imp {
         a {
-                color: inherit;
+                color: inherit !important;
         }
 }
 // .UniCSS -> http://unicss.maxsite.com.ua/
@@ -1070,7 +1070,7 @@ a {
 .italic     { font-style: italic; }
 .underline  { text-decoration: underline; }
 .strike     { text-decoration: line-through; }
-.small-caps { font-variant: small_caps; }
+.small-caps { font-variant: small-caps; }
 .capitalize { text-transform: capitalize; }
 .upper      { text-transform: uppercase; }
 .lower      { text-transform: lowercase; }
@@ -1240,6 +1240,10 @@ a {
         max-width: @layout_max_width;
 }
 
+.w100-max {
+        max-width: 100%;
+}
+
 .w-hide { display: none; }
 .w-auto { width: auto; }
 
@@ -1296,6 +1300,7 @@ a {
 @media @SCREEN_TABLET {
         .w-hide-tablet { display: none; }
         .w-auto-tablet { width: auto; }
+        .w100-max-tablet { max-width: 100%; }
         .width_loop_percent_postfix(length(@width_list_percent), ~"-tablet");
 }
 
@@ -1303,6 +1308,7 @@ a {
 @media @SCREEN_PHONE {
         .w-hide-phone { display: none; }
         .w-auto-phone { width: auto; }
+        .w100-max-phone { max-width: 100%; }
         .width_loop_percent_postfix(length(@width_list_percent), ~"-phone");
 }
 
@@ -1310,6 +1316,7 @@ a {
 @media @SCREEN_SMALL {
         .w-hide-small { display: none; }
         .w-auto-small { width: auto; }
+        .w100-max-small { max-width: 100%; }
         .width_loop_percent_postfix(length(@width_list_percent), ~"-small");
 }
 
@@ -1317,6 +1324,7 @@ a {
 @media @SCREEN_MEDIUM {
         .w-hide-medium { display: none; }
         .w-auto-medium { width: auto; }
+        .w100-max-medium { max-width: 100%; }
         .width_loop_percent_postfix(length(@width_list_percent), ~"-medium");
 }
 
@@ -1324,5 +1332,6 @@ a {
 @media @SCREEN_LARGE {
         .w-hide-large { display: none; }
         .w-auto-large { width: auto; }
+        .w100-max-large { max-width: 100%; }
         .width_loop_percent_postfix(length(@width_list_percent), ~"-large");
 }

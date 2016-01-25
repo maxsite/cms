@@ -192,9 +192,9 @@
 		
 		echo '
 			<p class="br">' . t('C отмеченными:') . '
-			<input type="submit" name="f_aproved_submit" value="' . t('Разрешить') . '">
-			<input type="submit" name="f_unaproved_submit" value="' . t('Запретить') . '">
-			<input type="submit" name="f_delete_submit" onClick="if(confirm(\'' . t('Уверены?') . '\')) {return true;} else {return false;}" value="' . t('Удалить') . '"></p><br>
+			<button class="button i-plus" type="submit" name="f_aproved_submit">' . t('Разрешить') . '</button>
+			<button class="button i-minus" type="submit" name="f_unaproved_submit">' . t('Запретить') . '</button>
+			<button class="button i-remove" type="submit" name="f_delete_submit" onClick="if(confirm(\'' . t('Уверены?') . '\')) {return true;} else {return false;}">' . t('Удалить') . '</button></p><br>
 			';
 		echo '</form>';
 		

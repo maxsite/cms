@@ -35,11 +35,11 @@
 	
 	$current_template = $MSO->config['template'];
 	
-	echo '
-		<div class="template_current">
-		<h3>' . t('Текущий шаблон:') . ' ' . $current_template . '</h3>';
-	
-	
+	echo '<div class="mar30-b flex flex-wrap bg-gray100 pad20">
+		<h4 class="w100 mar0-t">' . t('Текущий шаблон:') . ' ' . $current_template . '</h4>
+		<div class="mar10-b">
+		';
+		
 	if (file_exists($templates_dir . $current_template . '/screenshot.png'))
 	{
 		echo '<img src="' . $MSO->config['templates_url'] . $current_template . '/screenshot.png' . '" width="250" height="200">';
@@ -48,7 +48,14 @@
 	{
 		echo '<img src="' . $MSO->config['templates_url'] . $current_template . '/screenshot.jpg' . '" width="250" height="200">';
 	}
-	
+		
+		echo '
+		
+		</div>
+		<div class="flex-grow1 pad20-l">
+		';
+		
+		
 	if (file_exists($templates_dir . $current_template . '/info.php'))
 	{
 		require($templates_dir . $current_template . '/info.php');
@@ -56,12 +63,12 @@
 		echo '<br>' . $info['description'];
 		echo '<br>' . t('Автор:') . ' <a href="' . $info['author_url'] . '">' . $info['author'] . '</a>';
 		
-		if (isset($info['maxsite-min-version'])) echo '<br>' . t('Версия MaxSite CMS:') . ' ' . $info['maxsite-min-version'];
+		if (isset($info['maxsite-min-version'])) echo '<br>' . t('Необходимая версия MaxSite CMS:') . ' ' . $info['maxsite-min-version'];
 		
 		echo '</p>';
 	}
 	
-	echo '</div>';
+	echo '</div></div>';
 	
 	
 	
@@ -81,7 +88,7 @@
 		
 		if (file_exists($index))
 		{
-			$out = '<div class="template">';
+			$out = '<div class="mar30-b t-center pad20 shadow bg-gray100">';
 			
 			if (file_exists($templates_dir . $dir . '/screenshot.png'))
 			{
@@ -108,7 +115,7 @@
 				$out .= '</p>';
 			}
 			
-			$out .= '<button type="submit" name="f_submit[' . $dir . ']" class="button">' . t('Выбрать этот шаблон') . '</button>';
+			$out .= '<button type="submit" name="f_submit[' . $dir . ']" class="button i-check">' . t('Выбрать этот шаблон') . '</button>';
 			
 			$out .= '</div>';
 

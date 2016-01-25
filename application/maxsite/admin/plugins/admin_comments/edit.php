@@ -245,8 +245,8 @@
 			echo '<p><input type="hidden" name="f_comments_email_subscribe" value="0"><label><input type="checkbox" name="f_comments_email_subscribe" value="1" ' . $checked2 . '> '
 				. t('Сразу разослать подписчикам')
 				. '</label></p>';
-			echo '<p class="br"><button type="submit" name="f_submit" class="i save">' . t('Готово') . '</button>' 
-				. ' <button type="submit" name="f_submit_delete" onClick="if(confirm(\'' . t('Уверены?') . '\')) {return true;} else {return false;}" class="i delete">' . t('Удалить комментарий') . '</button>'
+			echo '<p class="br"><button type="submit" name="f_submit" class="button i-save">' . t('Сохранить') . '</button>' 
+				. ' <button type="submit" name="f_submit_delete" onClick="if(confirm(\'' . t('Уверены?') . '\')) {return true;} else {return false;}" class="button i-remove">' . t('Удалить комментарий') . '</button>'
 				. '</p>';
 
 

@@ -143,7 +143,7 @@ $(function () {
 		// добавляем форму, а также текущую сессию
 		echo '<form method="post" class="admin_widgets">' . mso_form_session('f_session_id');
 		echo $form;
-		echo '<button type="submit" name="f_submit" class="i save">' . t('Сохранить изменения') . '</button>';
+		echo '<button type="submit" name="f_submit" class="button i-save">' . t('Сохранить изменения') . '</button>';
 		echo '</form>';
 	}
 	else

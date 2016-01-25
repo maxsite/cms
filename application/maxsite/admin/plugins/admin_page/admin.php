@@ -343,7 +343,7 @@
 		echo '<form method="post">' . mso_form_session('f_session_id');
 		echo '<h2 class="br">' . t('Удалить страницу') . '</h2><p>';
 		echo $all_pages;
-		echo ' <button type="submit" name="f_submit" class="i delete-page" onClick="if(confirm(\'' . t('Удалить страницу?') . '\')) {return true;} else {return false;}" >' . t('Удалить') . '</button></p>';
+		echo ' <button type="submit" name="f_submit" class="button i-remove" onClick="if(confirm(\'' . t('Удалить страницу?') . '\')) {return true;} else {return false;}" >' . t('Удалить') . '</button></p>';
 		echo '</form>';
 
 	}

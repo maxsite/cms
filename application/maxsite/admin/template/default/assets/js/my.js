@@ -27,7 +27,7 @@ $(function(){
 	$("#sh-my-nav-panel").click(function() 
 	{
 		$("#sh-my-nav-panel").hide();
-		$(".my-nav-panel").toggleClass("b-hide");
+		$(".my-nav-panel").toggleClass("b-hide-imp");
 		
 		if ($(".my-nav-panel").outerWidth() < 200)
 		{

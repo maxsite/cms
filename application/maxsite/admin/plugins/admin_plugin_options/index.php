@@ -342,7 +342,7 @@ function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $te
 		# выводим форму
 		echo NR . '<form method="post" class="mso_admin_plugin_options">' . mso_form_session('f_session_id');
 		echo $form;
-		echo NR . '<button type="submit" name="f_submit" class="i save">' . t('Сохранить') . '</button>';
+		echo NR . '<button type="submit" name="f_submit" class="button i-save">' . t('Сохранить') . '</button>';
 		echo '</form>' . NR;
 	}
 	else

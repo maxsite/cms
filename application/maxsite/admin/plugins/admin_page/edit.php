@@ -305,7 +305,7 @@
 		$f_return = '';
 	
 		// быстрое сохранение только в режиме редактирования
-		$f_bsave = ' <button id="bsave" type="button" class="i bsave">' . t('Сохранить в фоне') . '</button><div class="bsave_result"></div>';
+		$f_bsave = ' <button id="bsave" type="button" class="button i-save">' . t('Сохранить в фоне') . '</button><div class="bsave_result"></div>';
 		
 		# форма вынесена в отдельный файл, поскольку она одна и таже для new и edit
 		# из неё получается $do и $posle

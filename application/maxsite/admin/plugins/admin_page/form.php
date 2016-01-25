@@ -192,7 +192,7 @@
 				</p>
 									
 				' . $f_return . '
-				<button type="submit" name="' . $name_submit . '" class="i save">' . t('Готово') . '</button> ' . $f_bsave . ' <span class="autosave-editor"></span>
+				<button type="submit" name="' . $name_submit . '" class="button i-save">' . t('Сохранить') . '</button> ' . $f_bsave . ' <span class="autosave-editor"></span>
 			</div>
 			
 			<div class="page_meta_container">' 
@@ -284,7 +284,7 @@
 				</div>
 			</div>
 			
-			<button type="submit" name="' . $name_submit . '" class="i save">' . t('Сохранить') . '</button>
+			<button type="submit" name="' . $name_submit . '" class="button i-save">' . t('Сохранить') . '</button>
 	
 	</div><!-- /div.new_or_edit -->
 	';

@@ -115,7 +115,7 @@ $(function(){
 			$all_name_sidebars[$name] = $sidebar['title'];
 		}
 		
-		$form .= '<div><button type="submit" name="f_submit" class="i save">' . t('Сохранить изменения') . '</button></div>';
+		$form .= '<p><button type="submit" name="f_submit" class="button i-save">' . t('Сохранить изменения') . '</button></p>';
 	}
 	else 
 	{

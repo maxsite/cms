@@ -86,7 +86,7 @@
 		
 		echo '<form method="post">' . mso_form_session('f_session_id') . '
 		<p><strong>' . t('Новая ушка:') . '</strong> ' . ' <input name="f_ushka_new" type="text" value="">
-		<button type="submit" name="f_submit_new" class="i add-new">' . t('Добавить новую ушку') . '</button></p>
+		<button type="submit" name="f_submit_new" class="button i-plus">' . t('Добавить новую ушку') . '</button></p>
 		</form>';
 		
 		$form = '';
@@ -132,7 +132,7 @@ $.cookie.json = true; $("div.show").showHide({time: 200, useID: false, clickElem
 			echo '<form method="post">' . mso_form_session('f_session_id');
 			echo '<div class="plugin-ushki">';
 			echo $form;
-			echo '<button type="submit" name="f_submit" class="i save">' . t('Сохранить изменения') . '</button>';
+			echo '<button type="submit" name="f_submit" class="button i-save">' . t('Сохранить изменения') . '</button>';
 			echo '</div></form>';
 		}
 

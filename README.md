@@ -1,4 +1,4 @@
-(с) MaxSite CMS, 2008-2015
+(с) MaxSite CMS, 2008-2016
 
 Сайт системы: http://max-3000.com/
 

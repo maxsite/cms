@@ -8,27 +8,33 @@
 # функция автоподключения плагина
 function global_cache_autoload($args = array())
 {
-	// в админке кэш не работает
-	if (mso_segment(1) != 'admin')
+	// исключаем из кэширования адреса по первому сегменту
+	$no_cache = array('admin', 'page_404', 'contact', 'logout', 'login', 'registration', 'password-recovery', 'loginform', 'require-maxsite', 'ajax', 'remote', 'dc', 'feed', 'search');
+	
+	if (in_array(mso_segment(1), $no_cache)) return $args;
+	
+	$options = mso_get_option('plugin_global_cache', 'plugins', array());
+	
+	// кэш включен?
+	if (isset($options['on']) and $options['on'])
 	{
-		$options = mso_get_option('plugin_global_cache', 'plugins', array());
+		# сброс кэша если была отправка POST
+		if ( isset($_POST) and $_POST ) global_cache_all_flush();
 		
-		// кэш включен?
-		if (isset($options['on']) and $options['on'])
+		# дополнительные хуки, которые позволяют сбросить кэш - использовать в плагинах и т.п.
+		mso_hook_add('global_cache_key_flush', 'global_cache_key_flush'); // сброс кэша текущей страницы
+		mso_hook_add('global_cache_all_flush', 'global_cache_all_flush'); // сброс всего html-кэша
+		
+		// если залогиненность и есть опция выключения, то отключаем кэш
+		if ( (isset($options['onlogin']) and $options['onlogin']) and (is_login() or is_login_comuser()))
 		{
-			// админам включить кэш?
-			if (!isset($options['onlogin']) or (isset($options['onlogin']) and !$options['onlogin']))
-			{
-				mso_hook_add('global_cache_start', 'global_cache_start');
-				mso_hook_add('global_cache_end', 'global_cache_end');
-				
-				# дополнительные хуки, которые позволяют сбросить кэш - использовать в плагинах и т.п.
-				mso_hook_add('global_cache_key_flush', 'global_cache_key_flush'); // сброс кэша текущей страницы
-				mso_hook_add('global_cache_all_flush', 'global_cache_all_flush'); // сброс всего html-кэша
-				
-				# сброс кэша если была отправка POST
-				if ( isset($_POST) and $_POST ) global_cache_all_flush();
-			}
+			return $args;
+		}
+		else
+		{
+			// ставим хуки на кэширование
+			mso_hook_add('global_cache_start', 'global_cache_start');
+			mso_hook_add('global_cache_end', 'global_cache_end');
 		}
 	}
 }
@@ -56,6 +62,8 @@ function global_cache_key($dir = true)
 	$cache_key = $_SERVER['REQUEST_URI'];
 	$cache_key = str_replace('/', '-', $cache_key);
 	$cache_key = mso_slug(' ' . $cache_key);
+	
+	if (!$cache_key) $cache_key = 'home'; // главная
 	
 	if ($dir) $cache_key = 'html/' . $cache_key . '.html';
 		else $cache_key = $cache_key . '.html';
@@ -125,14 +133,14 @@ function global_cache_mso_options()
 							'type' => 'checkbox', 
 							'name' => t('Включить глобальное кэширование'), 
 							'description' => '', 
-							'default' => 0
+							'default' => 1
 						),
 			
 			'onlogin' => array(
 							'type' => 'checkbox', 
 							'name' => t('Выключить глобальное кэширование для авторов/админов'), 
 							'description' => '', 
-							'default' => 0
+							'default' => 1
 						),
 			
 			'time' => array(
@@ -142,7 +150,7 @@ function global_cache_mso_options()
 							'default' => '15'
 						),
 			),
-		t('Настройки глобльного кэширования'), // титул
+		t('Настройки глобального кэширования'), // титул
 		t('Кэширует страницы целиком. В кэш будет добавляться полностью сгенерированные страницы, что ускоряет работу сайта. Рекомендуется для сайтов с большой посещаемостью. Данный кэш занимает много места на диске.')   // инфо
 	);
 }

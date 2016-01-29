@@ -15,7 +15,7 @@
 	function _time_zone_current_time()
 	{
 		return 
-			  '<br>' . t('Время сервера:') . ' <strong>' . date('H:i:s Y-m-d') . '</strong>'
+			  '<br>' . t('Время сервера:') . ' <strong>' . date('H:i:s Y-m-d P') . '</strong>'
 			. '<br>' . t('С учётом поправки:') . ' <strong>' . mso_date_convert('H:i:s Y-m-d', date('Y-m-d H:i:s')) . '</strong>';
 	}
 

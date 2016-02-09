@@ -110,14 +110,14 @@
 		
 		$CI->table->add_row($id, $login, $nik, $email, $url, $groups_name, $act);
 	}
-
+	/*
 	echo mso_load_jquery('jquery.tablesorter.js') . '
 		<script>
 		$(function() {
 			$("table.tablesorter").tablesorter( {headers: { 6: {sorter: false} }});
 		});
 		</script>';
-
+	*/
 	// добавляем форму, а также текущую сессию
 	echo $CI->table->generate(); // вывод подготовленной таблицы
 	

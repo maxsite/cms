@@ -196,14 +196,14 @@
 		
 		$dop = '<button type="submit" name="f_submit" class="button i-save">' . t('Сохранить') . '</button>';
 		
-		
+		/*
 		echo mso_load_jquery('jquery.tablesorter.js') . '
 		<script>
 		$(function() {
 			$("table.tablesorter").tablesorter( {headers: { 2: {sorter: false}, 3: {sorter: false} }});
 		});
 		</script>';
-	
+		*/
 		// добавляем форму, а также текущую сессию
 		echo '<form method="post">' . mso_form_session('f_session_id');
 		echo $CI->table->generate($data_table); // вывод подготовленной таблицы

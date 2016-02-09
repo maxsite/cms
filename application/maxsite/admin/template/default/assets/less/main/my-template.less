@@ -9,11 +9,11 @@ span.admin-footer-stat {
 	.t80;
 }
 
-
 .my-nav-panel {
 	background-color: @color1; // @g_blue_gray800;
 	color: @g_gray300;
 	min-width: 200px;
+	min-height: 100vh;
 }
 
 .my-nav-panel-tablet {
@@ -656,6 +656,10 @@ div.page_meta_container {
 			a.all-files-upload:before {
 				content: @fa-var-upload;
 			}
+			
+			a.selected {
+				background: @g_blue_gray400;
+			}
 		}
 		
 		div.all-files-result {
@@ -1130,8 +1134,7 @@ div.pagination {
 }
 
 // быстрая загрузка при редактрровании записи
-#upload_filedrag
-{
+#upload_filedrag {
 	display: none;
 	font-weight: bold;
 	text-align: center;
@@ -1143,30 +1146,32 @@ div.pagination {
 	cursor: default;
 }
 
-#upload_filedrag.hover
-{
+#upload_filedrag.hover {
 	color: #36D900;
 	border-color: #36D900;
 	border-style: solid;
 }
 
-#upload_progress p
-{
-	display: block;
+#upload_progress p {
 	padding: 2px 5px;
 	margin: 2px 0;
 	border-radius: 5px;
-	background: #eee;
 	font-size: .9rem;
+	background: #ffff4c;
 }
 
-#upload_progress p.success
-{
-	background: #0c0 none 0 0 no-repeat;
+#upload_progress p.success {
+	background: #66ff66 none 0 0 no-repeat;
 }
 
-#upload_progress p.failure
-{
-	background: #c00 none 0 0 no-repeat;
+#upload_progress p.failure {
+	background: #ff9999 none 0 0 no-repeat;
 }
 
+#upload_messages p.failure {
+	padding: 2px 5px;
+	margin: 2px 0;
+	border-radius: 5px;
+	font-size: .9rem;
+	background: #ff9999;
+}

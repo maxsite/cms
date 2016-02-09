@@ -21,7 +21,7 @@ function auto_post_admin_init($args = array())
 		$this_plugin_url = 'auto_post'; // url и hook
 		//mso_admin_menu_add('page', $this_plugin_url, t('AutoPost'));
 		mso_admin_url_hook ($this_plugin_url, 'auto_post_admin');
-		mso_hook_add( 'admin_head_css', 'auto_post_admin_head_css');
+		
 	}
 		
 	return $args;
@@ -41,6 +41,7 @@ function auto_post_admin($args = array())
 	
 	mso_hook_add_dinamic( 'mso_admin_header', ' return $args . "' . t('AutoPost') . '"; ' );
 	mso_hook_add_dinamic( 'admin_title', ' return "' . t('AutoPost') . ' - " . $args; ' );
+	mso_hook_add( 'admin_head_css', 'auto_post_admin_head_css');
 	
 	require($MSO->config['admin_plugins_dir'] . 'auto_post/admin.php');
 }

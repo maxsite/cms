@@ -369,6 +369,70 @@ function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 
 }
 
 /**
+*  Поворачивает изображение (файл) на заданный угол 
+*  Код ротации как для  $CI->image_lib->rotate()
+*/
+function thumb_rotate($fn, $rotation = 0)
+{
+	if ($rotation)
+	{
+		$r_conf = array(
+			'image_library' => 'gd2',
+			'source_image' => $fn,
+			'new_image' => $fn,
+			'rotation_angle' => $rotation
+		);
+
+		$CI = &get_instance();
+		$CI->load->library('image_lib');
+		$CI->image_lib->clear();
+		$CI->image_lib->initialize($r_conf);
+		$CI->image_lib->rotate();
+	}
+}	
+
+/**
+*  Ставим водяной знак
+* Тип размещения:
+* 1||По центру 
+* 2||В левом верхнем углу
+* 3||В правом верхнем углу 
+* 4||В левом нижнем углу 
+* 5||В правом нижнем углу
+*/
+function thumb_watermark($fn, $fn_watermark, $watermark_type)
+{
+	$hor = 'right'; 
+	$vrt = 'bottom';
+	
+	if (($watermark_type == 2) or ($watermark_type == 4)) $hor = 'left';
+	
+	if (($watermark_type == 2) or ($watermark_type == 3)) $vrt = 'top';
+	
+	if ($watermark_type == 1) 
+	{
+		$hor = 'center'; 
+		$vrt = 'middle';
+	}
+
+	$r_conf = array(
+		'image_library' => 'gd2',
+		'source_image' => $fn,
+		'new_image' => $fn,
+		'wm_type' => 'overlay',
+		'wm_vrt_alignment' => $vrt,
+		'wm_hor_alignment' => $hor,
+		'wm_overlay_path' => $fn_watermark
+	);
+
+	$CI = &get_instance();
+	$CI->load->library('image_lib');
+	$CI->image_lib->clear();
+	$CI->image_lib->initialize($r_conf);
+	$CI->image_lib->watermark();
+}
+
+/**
 *  функция преобразования #-цвета в массив RGB
 *  
 *  @param $color цвет в виде #RRGGBB
@@ -452,4 +516,67 @@ function mso_holder($width = 100, $height = 100, $text = true, $background_color
 	return $src;
 }
 
-# end file
+
+/**
+* Функция фозвращает код поворота изображения для $CI->image_lib->rotate() 
+*/
+function mso_exif_rotate($fn)
+{
+	$ext = strtolower(substr(strrchr($fn, '.'), 1));
+	
+	$rotation = 0;
+	
+	if (in_array($ext, array('jpg', 'jpeg')))
+	{
+		$exif = @exif_read_data($fn, 'IFD0');
+		
+		if ($exif !== false and isset($exif['Orientation']))
+		{
+			$ort = $exif['Orientation'];
+			
+			// определяем угол поворота изображения по коду
+			switch($ort)
+			{
+				case 1: // nothing
+					$rotation = 0;
+				break;
+
+				case 2: // horizontal flip
+					$rotation = 'hor';
+				break;
+									   
+				case 3: // 180 rotate left
+					$rotation = '180';
+				break;
+						   
+				case 4: // vertical flip
+					$rotation = 'vrt';
+				break;
+					   
+				case 5: // vertical flip + 90 rotate right
+					$rotation = 0; // какой извращенец так камеру держит???
+					// $image->flipImage($fn, 2);
+					// $image->rotateImage($fn, -90);
+				break;
+					   
+				case 6: // 90 rotate right
+					 $rotation = '270';
+				break;
+					   
+				case 7: // horizontal flip + 90 rotate right
+					$rotation = 0;
+					// $image->flipImage($fn,1);   
+					// $image->rotateImage($fn, -90);
+				break;
+					   
+				case 8: // 90 rotate left
+					$rotation = '90';
+				break;
+			}
+		}
+	}
+	
+	return $rotation;
+}
+
+# end of file

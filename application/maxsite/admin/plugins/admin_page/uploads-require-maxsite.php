@@ -3,33 +3,27 @@
 // Все проверки.
 if (!is_login()) die('no login');
 
-if (isset($_SERVER['HTTP_X_FILENAME']))
-{
-	$fn = $_SERVER['HTTP_X_FILENAME'];
-}
-elseif (isset($_SERVER['HTTP_X_REQUESTED_FILENAME']))
-{
-	$fn = $_SERVER['HTTP_X_REQUESTED_FILENAME'];
-}
-else die('no file');
 
-if (isset($_SERVER['HTTP_X_FILENAME_UP_DIR']))
-{
-	$page_id = $_SERVER['HTTP_X_FILENAME_UP_DIR'];
-}
-elseif (isset($_SERVER['HTTP_X_REQUESTED_FILEUPDIR']))
-{
+if (isset($_SERVER['HTTP_X_REQUESTED_FILENAME']))
+	$fn = $_SERVER['HTTP_X_REQUESTED_FILENAME'];
+else 
+	die('no file');
+
+if (isset($_SERVER['HTTP_X_REQUESTED_FILEUPDIR']))
 	$page_id = $_SERVER['HTTP_X_REQUESTED_FILEUPDIR'];
-}
-else die('no updir');
+else 
+	die('no updir');
 
 if (!is_numeric($page_id)) die('wrong updir');
 
 mso_checkreferer();
 
-$ext = substr(strrchr($fn, '.'), 1);
+$ext = strtolower(substr(strrchr($fn, '.'), 1));
+
 $allowed_ext = explode('|', mso_get_option('allowed_types', 'general', 'mp3|gif|jpg|jpeg|png|zip|txt|rar|doc|rtf|pdf|html|htm|css|xml|odt|avi|wmv|flv|swf|wav|xls|7z|gz|bz2|tgz'));
-if (!in_array(strtolower($ext), $allowed_ext)) die('not allowed');
+
+if (!in_array($ext, $allowed_ext)) die('not allowed');
+
 // Закончили проверки.
 
 // Полный путь к каталогу.
@@ -38,154 +32,112 @@ $up_dir =  getinfo('uploads_dir') . '_pages/' . $page_id . '/';
 // Сама загрузка файла и создание миниатюр.
 _upload($up_dir, $fn);
 
+
+/**
+* Основная функция загрузки 
+*/
 function _upload($up_dir, $fn, $r = array())
 {
 	$fn = _slug($fn);
-	$ext = substr(strrchr($fn, '.'), 1);
+	$ext = strtolower(substr(strrchr($fn, '.'), 1));
 	$name = substr($fn, 0, strlen($fn) - strlen($ext) - 1);
 
 	// Если имя файла пустое, только расширение.
-	if ($fn == '.' . $ext)
-		$fn = '1' . $fn;
+	if ($fn == '.' . $ext) $fn = '1' . $fn;
 
 	// Если файл уже существует.
 	if (file_exists($up_dir . $fn))
 	{
-		for ($i = 1; $i < 100; $i++) // Метода взята из библиотеки CI. К сожалению, while(file_exists()) у меня вешает сервер.
+		for ($i = 1; $i < 100; $i++)
 		{
 			$fn = $name . '-' . $i . '.' . $ext;
-			if (!file_exists($up_dir . $fn))
-				break;
+			if (!file_exists($up_dir . $fn)) break;
 		}
 	}
-
+	
 	file_put_contents( $up_dir . $fn, file_get_contents('php://input') );
 
 	if (!in_array($ext, array('jpg', 'jpeg', 'png', 'gif')))
 	{
 		// Не картинка, загрузили, больше ничего не надо.
+		echo ' DONE! <b>' . $fn . '</b>';
 		return;
 	}
 
-	// С какими дефолтными параметрами ресайзим и делаем миниатюрки.
-	$def = array(
-					'resize_images'   => mso_get_option('resize_images',   'general', '600'),
-					'size_image_mini' => mso_get_option('size_image_mini', 'general', '150'),
-					'image_mini_type' => mso_get_option('image_mini_type', 'general', '1'),
-					'use_watermark'   => mso_get_option('use_watermark',   'general', '0'),
-					'watermark_type'  => mso_get_option('watermark_type',  'general', '1')
-				);
-	//Можем передать свои параметры в эту функцию.
-	$r = array_merge($def, $r);
-
+	$resize_images = (isset($_SERVER['HTTP_X_REQUESTED_RESIZEIMAGES'])) ? $_SERVER['HTTP_X_REQUESTED_RESIZEIMAGES'] : mso_get_option('resize_images',   'general', '600');
+	
+	$size_image_mini_w = (isset($_SERVER['HTTP_X_REQUESTED_SIZEIMAGEMINIW'])) ? $_SERVER['HTTP_X_REQUESTED_SIZEIMAGEMINIW'] : mso_get_option('size_image_mini', 'general', '150');
+	
+	$size_image_mini_h = (isset($_SERVER['HTTP_X_REQUESTED_SIZEIMAGEMINIH'])) ? $_SERVER['HTTP_X_REQUESTED_SIZEIMAGEMINIH'] : mso_get_option('size_image_mini', 'general', '150');
+	
+	// !!! тип по-умолчанию ставим resize_full_crop_center, поскольку опция image_mini_type пока еще старая в MaxSite CMS 0.94
+	$image_mini_type = (isset($_SERVER['HTTP_X_REQUESTED_TYPERESIZE'])) ? $_SERVER['HTTP_X_REQUESTED_TYPERESIZE'] : 'resize_full_crop_center';
+	
 	require(getinfo('shared_dir') . 'stock/thumb/thumb.php');
 
 	// У нас есть uploads_dir, а нужен url
 	$url = str_replace(getinfo('uploads_dir'), getinfo('uploads_url'), $up_dir);
 
+	// читаем exif на предмет ориентации
+	$rotation = mso_exif_rotate($up_dir . $fn);
+	
 	// Если картинка больше, чем нужно, то делаем ресайз, иначе ничего не делаем.
-	// $new_size пригодится, когда из новой картинки будем миниатюру делать.
+	// всегда делаем по типу resize
 	$size = $new_size = getimagesize($up_dir . $fn);
-	if ($size[0] > $r['resize_images'] || $size[1] > $r['resize_images'])
+	
+	$width = $new_width = $size[0];
+	$height = $new_height = $size[1];
+	
+	if ($width > $resize_images or $height > $resize_images)
 	{
-		if ($size[0] > $size[1])
+		echo ' RESIZE... ';
+		
+		if ($width > $height)
 		{
-			$new_size[0] = $r['resize_images'];
-			$new_size[1] = round($size[1] / ($size[0]/$new_size[0]));
+			$new_width = $resize_images;
+			$new_height = round($height / ($width/$new_width));
 		}
 		else
 		{
-			$new_size[1] = $r['resize_images'];
-			$new_size[0] = round($size[0] / ($size[1]/$new_size[1]));
+			$new_height = $resize_images;
+			$new_width = round($width / ($height/$new_height));
 		}
-		//pr($new_size);
-		thumb_generate($url . $fn, $new_size[0], $new_size[1], false, 'resize', true, '', false);
+		
+		thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false);
 	}
-
-	// Создание ватермарки, если такая опция и есть нужный файл.
-	if ($r['use_watermark'] and file_exists(getinfo('uploads_dir') . 'watermark.png'))
+	
+	// если нужно повернуть
+	if ($rotation)
 	{
-		$water_type = $r['watermark_type']; // Расположение ватермарка на картинке
-		$hor = 'right'; //Инитим дефолтом.
-		$vrt = 'bottom'; //Инитим дефолтом.
-		if (($water_type == 2) or ($water_type == 4)) $hor = 'left';
-		if (($water_type == 2) or ($water_type == 3)) $vrt = 'top';
-		if ($water_type == 1) {$hor = 'center'; $vrt = 'middle';}
-
-		$r_conf = array(
-			'image_library' => 'gd2',
-			'source_image' => $up_dir . $fn,
-			'new_image' => $up_dir . $fn,
-			'wm_type' => 'overlay',
-			'wm_vrt_alignment' => $vrt,
-			'wm_hor_alignment' => $hor,
-			'wm_overlay_path' => getinfo('uploads_dir') . 'watermark.png'
-		);
-
-		$CI = &get_instance();
-		$CI->load->library('image_lib');
-		$CI->image_lib->clear();
-
-		$CI->image_lib->initialize($r_conf );
-		if (!$CI->image_lib->watermark())
-			echo '<div class="error">' . t('Водяной знак:') . ' ' . $CI->image_lib->display_errors() . '</div>';
+		echo ' ROTATE... ';
+		thumb_rotate($up_dir . $fn, $rotation);
 	}
-
-	// $r['image_mini_type'] = 6;
-
-	switch ($r['image_mini_type'])
+	
+	// Создание ватермарки, если такая опция и есть нужный файл
+	$use_watermark = mso_get_option('use_watermark',   'general', '0');
+	
+	if ($use_watermark and file_exists(getinfo('uploads_dir') . 'watermark.png'))
 	{
-		case 1: // Пропорциональное уменьшение
-				if ($size[0] > $size[1])
-				{
-					$new_size[0] = $r['size_image_mini'];
-					$new_size[1] = round($size[1] / ($size[0]/$new_size[0]));
-					thumb_generate($url . $fn, $new_size[0], $new_size[1], false, 'resize', true, 'mini', false);
-				}
-				else
-				{
-					$new_size[1] = $r['size_image_mini'];
-					$new_size[0] = round($size[0] / ($size[1]/$new_size[1]));
-					thumb_generate($url . $fn, $new_size[0], $new_size[1], false, 'resize', true, 'mini', false);
-				}
-				break;
-
-		case 2: // Обрезки (crop) по центру
-				thumb_generate($url . $fn, $r['size_image_mini'], $r['size_image_mini'], false, 'resize_full_crop_center', true, 'mini', false);
-				break;
-
-		case 3: // Обрезки (crop) с левого верхнего края
-				thumb_generate($url . $fn, $r['size_image_mini'], $r['size_image_mini'], false, 'crop', true, 'mini', false);
-				break;
-
-		case 4: // Обрезки (crop) с левого нижнего края
-				$thumb = new Thumb($url . $fn, $postfix = '', $replace_file = true, $subdir = 'mini');
-				$thumb->crop($r['size_image_mini'], $r['size_image_mini'], 0, $new_size[1] - $r['size_image_mini']);
-				//thumb_generate($url . $fn, $width, $height, false, $type_resize = 'resize_full_crop_center', true, 'mini', false);
-				break;
-
-		case 5: // Обрезки (crop) с правого верхнего края
-				$thumb = new Thumb($url . $fn, $postfix = '', $replace_file = true, $subdir = 'mini');
-				$thumb->crop($r['size_image_mini'], $r['size_image_mini'], $new_size[0] - $r['size_image_mini'], 0);
-				//thumb_generate($url . $fn, $width, $height, false, $type_resize = 'resize_full_crop_center', true, 'mini', false);
-				break;
-
-		case 6: // Обрезки (crop) с правого нижнего края
-				$thumb = new Thumb($url . $fn, $postfix = '', $replace_file = true, $subdir = 'mini');
-				$thumb->crop($r['size_image_mini'], $r['size_image_mini'], $new_size[0] - $r['size_image_mini'], $new_size[1] - $r['size_image_mini']);
-				//thumb_generate($url . $fn, $width, $height, false, $type_resize = 'resize_full_crop_center', true, 'mini', false);
-				break;
-
-		case 7: // Уменьшения и обрезки (crop) в квадрат
-				if ($size[0] < $size[1])
-					thumb_generate($url . $fn, $r['size_image_mini'], $r['size_image_mini'], false, 'resize_crop_center', true, 'mini', false);
-				else
-					thumb_generate($url . $fn, $r['size_image_mini'], $r['size_image_mini'], false, 'resize_h_crop_center', true, 'mini', false);
-				break;
+		echo ' WATERMARK... ';
+		
+		$watermark_type = mso_get_option('watermark_type',  'general', '1');
+		
+		thumb_watermark($up_dir . $fn, getinfo('uploads_dir') . 'watermark.png', $watermark_type);
 	}
 
+	// echo 'mini ';
+	echo ' MINI... ';
+	
+	// миниатюру делаем станартно
+	thumb_generate($url . $fn, $size_image_mini_w, $size_image_mini_h, false, $image_mini_type, true, 'mini', false);
+	
+	echo ' THUMB... ';
+	
+	// 100x100 — превью в _mso_i
 	thumb_generate($url . $fn, 100, 100, false, 'resize_full_crop_center', true, '_mso_i', false);
-} // End of _upload()
+	
+	echo ' DONE! <b>' . $fn . '</b>';
+}
 
 function _slug($slug)
 {

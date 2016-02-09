@@ -40,7 +40,7 @@ $(document).ready(function() {
 		// process all File objects
 		for (var i = 0, f; f = files[i]; i++) {
 			if (f.size > $id("upload_max_file_size").value) {
-				Output("<p class='t-red'>Large file - " + f.name + " (" + f.size + " byte)</p>");
+				Output("<p class='failure'>Large file - " + f.name + " (" + f.size + " byte)</p>");
 				continue;
 			}
 			
@@ -48,7 +48,7 @@ $(document).ready(function() {
 			var upload_ext = '|' + $id("upload_ext").value + '|';
 			
 			if (upload_ext.indexOf(ext.toLowerCase()) == -1) {
-				Output("<p class='t-red'>Forbidden type file - " + f.name + " (" + f.type + ")</p>");
+				Output("<p class='failure'>Forbidden type file - " + f.name + " (" + f.type + ")</p>");
 				continue;
 			}
 
@@ -88,20 +88,25 @@ $(document).ready(function() {
 			//// create progress bar
 			var o = $id("upload_progress");
 			var progress = o.appendChild(document.createElement("p"));
-			progress.appendChild(document.createTextNode("upload " + file.name));
+			progress.appendChild(document.createTextNode("Preparing... " + file.name));
 
 
 			// progress bar
 			xhr.upload.addEventListener("progress", function(e) {
-				var pc = parseInt(100 - (e.loaded / e.total * 100));
-				progress.style.backgroundPosition = pc + "% 0";
+				// var pc = parseInt(100 - (e.loaded / e.total * 100));
+				// progress.style.backgroundPosition = pc + "% 0";
+				
+				progress.innerHTML = "Uploading " + parseInt( e.loaded / e.total * 100 ) + "% ... please wait...";
 			}, false);
 
 			// file received/failed
 			xhr.onreadystatechange = function(e) {
 				if (xhr.readyState == 4) {
-					progress.className = (xhr.status == 200 ? "success" : "failure");
-					Output('<p>' + xhr.responseText + '</p>');
+					progress.className = (xhr.status == 200 ? "success item-" + counter.value : "failure item-" + counter.value);
+					
+					// Output('<p>' + xhr.responseText + '</p>');
+					$("#upload_progress p.item-" + counter.value).fadeOut(9000);
+					
 					counter.value++;
 					//И вот когда закончен последний асинхронный запрос, запускаем обновление.
 					if (counter.value == count){
@@ -115,10 +120,16 @@ $(document).ready(function() {
 								$("#all-files-result").html(data);
 								lbox();
 								localStorage.clear();
+								
 							}
 						);
 					}
 				}
+				
+				if (xhr.readyState == 3) {
+					progress.innerHTML = xhr.responseText;
+				}
+				
 			};
 			
 			// start upload
@@ -127,10 +138,20 @@ $(document).ready(function() {
 			// xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 			
 			// дублируем заголовки если сервер режет X_FILENAME и X_FILENAME_UP_DIR
-			xhr.setRequestHeader("X-Requested-FileName", unescape(encodeURIComponent(file.name)));
-			xhr.setRequestHeader("X-Requested-FileUpDir", unescape(encodeURIComponent($id("page_id").value)));
-			xhr.setRequestHeader("X_FILENAME", unescape(encodeURIComponent(file.name)));
-			xhr.setRequestHeader("X_FILENAME_UP_DIR", unescape(encodeURIComponent($id("page_id").value)));
+			xhr.setRequestHeader("X-REQUESTED-FILENAME", unescape(encodeURIComponent(file.name)));
+			
+			xhr.setRequestHeader("X-REQUESTED-FILEUPDIR", unescape(encodeURIComponent($id("page_id").value)));
+			
+			xhr.setRequestHeader("X-REQUESTED-RESIZEIMAGES", unescape(encodeURIComponent($id("upload_resize_images").value)));
+			
+			xhr.setRequestHeader("X-REQUESTED-SIZEIMAGEMINIW", unescape(encodeURIComponent($id("upload_size_image_mini_w").value)));
+			xhr.setRequestHeader("X-REQUESTED-SIZEIMAGEMINIH", unescape(encodeURIComponent($id("upload_size_image_mini_h").value)));
+			
+			xhr.setRequestHeader("X-REQUESTED-TYPERESIZE", unescape(encodeURIComponent($id("upload_type_resize").value)));
+			
+			
+			// xhr.setRequestHeader("X_FILENAME", unescape(encodeURIComponent(file.name)));
+			//xhr.setRequestHeader("X_FILENAME_UP_DIR", unescape(encodeURIComponent($id("page_id").value)));
 			xhr.send(file);
 		}
 	}

@@ -114,9 +114,13 @@ $(function(){
 
 	$("#all-files-upload-panel").slideToggle();
 	$("#all-files-upload").click(function(event){
+		$("body,html").animate({scrollTop: 800}, 500);
 		$("#all-files-upload-panel").slideToggle();
 		$("#upload_messages").html("");
 		$("#upload_progress").html("");
+		
+		$("#all-files-upload").toggleClass("selected");
+		
 		return false;
 	});
 });
@@ -136,21 +140,40 @@ function addImgPage(img, t) {
 $all_files .= '
 <div id="all-files-upload-panel">
 
-<input type = "hidden" id = "upload_max_file_size" name = "upload_max_file_size" value="20000000">
-<input type = "hidden" id = "upload_action" name = "upload_action" value = "' . getinfo('require-maxsite') . base64_encode('admin/plugins/admin_page/uploads-require-maxsite.php') . '">
-<input type = "hidden" id = "upload_ext" name = "upload_ext" value = "' . mso_get_option('allowed_types', 'general', 'mp3|gif|jpg|jpeg|png|svg|zip|txt|rar|doc|rtf|pdf|html|htm|css|xml|odt|avi|wmv|flv|swf|wav|xls|7z|gz|bz2|tgz') . '">
-<input type = "hidden" id = "upload_dir" name = "upload_dir" value = "' . $path . '">
-<input type = "hidden" id = "update_path" name = "update_path" value = "' . $update_path . '">
-<input type = "hidden" id = "page_id" name = "page_id" value = "' . mso_segment(3) . '">
+<input type="hidden" id="upload_max_file_size" name="upload_max_file_size" value="20000000">
+<input type="hidden" id="upload_action" name="upload_action" value="' . getinfo('require-maxsite') . base64_encode('admin/plugins/admin_page/uploads-require-maxsite.php') . '">
+<input type="hidden" id="upload_ext" name="upload_ext" value="' . mso_get_option('allowed_types', 'general', 'mp3|gif|jpg|jpeg|png|svg|zip|txt|rar|doc|rtf|pdf|html|htm|css|xml|odt|avi|wmv|flv|swf|wav|xls|7z|gz|bz2|tgz') . '">
+<input type="hidden" id="upload_dir" name="upload_dir" value="' . $path . '">
+<input type="hidden" id="update_path" name="update_path" value="' . $update_path . '">
+<input type="hidden" id="page_id" name="page_id" value="' . mso_segment(3) . '">
 
 <div>
 	<div id="upload_filedrag">' . t('... перетащите файлы сюда ...') . '</div>
 	<input type="file" id="upload_fileselect" name="upload_fileselect[]" multiple="multiple">
+	
+	<div class="flex flex-wrap mar20-tb">
+	
+		<div class="flex-grow1 mar10-b mar5-r">' . t('Размер') . ' <input class="w100px" type="number" id="upload_resize_images" name="upload_resize_images" value = "' . mso_get_option('resize_images',   'general', '600') . '"></div>
+		
+		<div class="flex-grow1 mar10-b t-right">' . t('Миниатюра') . ' <input class="w100px" title="' . t('Ширина миниатюры') . '" type="number" id="upload_size_image_mini_w" name="upload_size_image_mini_w" value = "' . mso_get_option('size_image_mini', 'general', '150') . '"></div>
+		
+		<div class="flex-grow1 mar10-b mar5-r">x <input class="w100px" title="' . t('Высота миниатюры') . '" type="number" id="upload_size_image_mini_h" name="upload_size_image_mini_h" value = "' . mso_get_option('size_image_mini', 'general', '150') . '"></div>
+		
+		<div class="flex-grow1">Тип <select class="w250px" title="' . t('Способ создания миниатюры') . '" id="upload_type_resize" name="upload_type_resize">
+			<option value="resize_full_crop_center">resize_full_crop_center</option>
+			<option value="resize_crop">resize_crop</option>
+			<option value="crop_center">crop_center</option>
+			<option value="crop">crop</option>
+			<option value="resize">resize</option>
+			<option value="resize_h_crop_center">resize_h_crop_center</option>
+			<option value="resize_crop_center">resize_crop_center</option>
+			</select></div>
+	</div>
 </div>
 
 <div id="upload_submitbutton"><button type="button">Upload Files</button></div>
 <div class="mar10-tb" id="upload_progress"></div>
-<div id="upload_messages"></div>
+<div class="mar10-tb" id="upload_messages"></div>
 </div>
 
 <div id="all-files-result" class="all-files-result">' . t('Загрузка...') . '</div>

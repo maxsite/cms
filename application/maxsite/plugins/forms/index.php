@@ -67,7 +67,7 @@ function forms_content_callback($matches)
 	if (!$options) $options[0] = $def;
 	
 	if ($options) $options = $options[0];
-	
+
 	// служебная секция [files] 
 	$def = array(
 		'file_count' => 0, // количество полей - если 0, то полей нет
@@ -131,7 +131,7 @@ function forms_content_callback($matches)
 	$format['file_tip'] = '<p><span class="mso-forms-tip">[file_tip]</span></p>';
 	
 	$format['message_ok'] = '<p class="mso-forms-ok">' . tf('Ваше сообщение отправлено') . '</p>';
-	$format['message_error'] = '<p class="mso-forms-error">[error]</p>';
+	$format['message_error'] = '<p class="mso-forms-error">[message_error]</p>';
 	
 	$format['antispam'] = '<p><label><span>[antispam] [antispam_ok][require_title]</span>[input]</label></p>';
 	
@@ -358,6 +358,27 @@ function forms_content_post($options, $files, $fields, $format)
 	if ( $post = mso_check_post(array('forms_session', 'forms_fields')) )
 	{
 		mso_checkreferer();
+		
+		// pr($options);
+		// pr($post);
+		
+		// антиспам
+		if ($options['antispam'])
+		{
+			if (
+				!isset($post['forms_fields']['antispam'])
+				or
+				((int) $post['forms_fields']['antispam'] !== (int) $options['antispam_ok'])
+				)
+			{
+				$result['show_error'][] = tf('Неверно заполнено поле антиспама');
+				$result['show_form'] = true;
+				$result['fields'] = $fields;
+			
+				return $result;
+			}
+
+		}
 		
 		$subject_key = false; // если у поля отмечен subject, то ставим номер поля
 		$from_key = false; // если у поля отмечен from, то ставим номер поля

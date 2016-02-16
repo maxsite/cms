@@ -510,6 +510,7 @@ function mso_initalizing()
 	mso_hook_add('init', '_mso_require_functions_file'); // подключение functions.php текущего шаблона
 	// mso_hook_add('content_auto_tag', 'mso_auto_tag'); // авторасстановка тэгов
 	// mso_hook_add('content_balance_tags', 'mso_balance_tags'); // автозакрытие тэгов - их баланс
+	mso_hook_add('content_content', 'mso_shortcode_content', 1); // хук контента на шорткоды
 }
 
 
@@ -4156,4 +4157,68 @@ function mso_tmpl_ts($fn, $replace = true)
 		return '?>';
 }
 
-# end file
+# хук на обработку шорткодов в тексте
+function mso_shortcode_content($content = '')
+{
+	global $MSO;
+	
+	foreach($MSO->shortcode as $name=>$func)
+	{
+		if (function_exists($func))
+		{
+			if (strpos($content, '[' . $name) !== false) // есть вхождения
+			{
+				$content = preg_replace_callback('~\[' . $name . ' (.*?)\](.*?)\[\/' . $name . '\]~si', $func, $content);
+			}
+		}
+	}
+	
+	return $content;
+}
+
+# добавляет для шорткода функцию
+# [class t-red bold]text page[/class]
+# mso_shortcode_add('class', 'my_class');
+# функция my_class определяется на уровне шаблона или плагина - в ней вся обработка
+function mso_shortcode_add($shortcode, $function)
+{
+	global $MSO;
+	
+	if ($shortcode and $function) $MSO->shortcode[$shortcode] = $function;
+}
+
+# вспомогательная функция, если нужно расспарсить шорткод вида:
+# [shortcode par=val par1=val1]text page[/shortcode]
+# Array:
+# 		[par] => val
+# 		[par1] => val1
+# 		[content] => text page
+function mso_shortcode_parse($attr, $def = array(), $sep = ' ')
+{
+	$par = array();
+	
+	$par['content'] = $attr[2];
+	
+	if ($sep)
+		$s = explode($sep, trim($attr[1]));
+	else
+		$s = array(trim($attr[1]));
+		
+	$s = array_map('trim', $s);
+	
+	foreach($s as $p)
+	{
+		$p1 = explode('=', $p);
+		
+		if (count($p1) == 2) 
+			$par[$p1[0]] = $p1[1];
+		else
+			$par[] = $p;
+	}
+	
+	$par = array_merge($def, $par);
+	
+	return $par;
+}
+
+# end of file

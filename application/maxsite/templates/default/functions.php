@@ -29,5 +29,6 @@ else
 	if ($fn = mso_fe('custom/template.php')) require_once($fn);
 }
 
+if ($fn = mso_fe('custom/my-template.php')) require_once($fn);
 
 # end file

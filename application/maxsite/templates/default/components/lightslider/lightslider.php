@@ -5,7 +5,7 @@
 	Слайдер lightslider
 	
 	(c) http://sachinchoolur.github.io/lightslider/
-		http://sachinchoolur.github.io/lightslider/settings.html
+	    http://sachinchoolur.github.io/lightslider/settings.html
 */
 
 
@@ -82,7 +82,7 @@ $js = mso_section_to_array($slides0, '!\[js\](.*?)\[\/js\]!is', array(), false, 
 // данные в первом элементе
 $js = (isset($js[0])) ? $js[0] : '';
 
-echo $options['block_start'] . '<ul class="' . $options['ul_class'] . '">';
+echo $options['block_start'] . '<ul class="inline ' . $options['ul_class'] . '">';
 
 foreach ($slides as $slide) 
 {
@@ -91,8 +91,6 @@ foreach ($slides as $slide)
 }
 
 echo '</ul>' . $options['block_end'];
-
-echo mso_load_script(getinfo('template_url') . 'components/lightslider/lightslider.min.js');
 
 echo '<script>$(document).ready(function() { $("' . $options["element"] . '").lightSlider({' . $js . '}); });</script>';
 

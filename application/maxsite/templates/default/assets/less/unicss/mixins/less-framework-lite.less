@@ -42,17 +42,17 @@
 	}
 	
 	.sizing(@boxmodel: border-box) {
-		-moz-box-sizing: @boxmodel;
+		//-moz-box-sizing: @boxmodel;
 		box-sizing: @boxmodel;
 	}
 	
 	.border_box() {
-		-moz-box-sizing: border-box;
+		//-moz-box-sizing: border-box;
 		box-sizing: border-box;
 	}
 	
 	.content_box() {
-		-moz-box-sizing: content-box;
+		//-moz-box-sizing: content-box;
 		box-sizing: content-box;
 	}
 	
@@ -118,107 +118,107 @@
 	}
 
 	.display(@display: flex) {
-		display: ~"-webkit-@{display}";
-		display: ~"-moz-@{display}";
-		display: ~"-ms-@{display}box";
-		display: ~"-ms-@{display}";
+		// display: ~"-webkit-@{display}";
+		// display: ~"-moz-@{display}";
+		// display: ~"-ms-@{display}box";
+		// display: ~"-ms-@{display}";
 		display: @display;
 	}
 
 	.direction(@direction: row) {
-	  -webkit-flex-direction: @direction;
-		 -moz-flex-direction: @direction;
-		  -ms-flex-direction: @direction;
+	  // -webkit-flex-direction: @direction;
+		// -moz-flex-direction: @direction;
+		//  -ms-flex-direction: @direction;
 			  flex-direction: @direction;
 	}
 	
 	.justify_content(@justify: flex-start) {
-	  -webkit-justify-content: @justify;
-		 -moz-justify-content: @justify;
-		  -ms-justify-content: @justify;
+	  // -webkit-justify-content: @justify;
+		// -moz-justify-content: @justify;
+		 // -ms-justify-content: @justify;
 			  justify-content: @justify;
 	}
 
 	.align_items(@align: stretch) {
-	  -webkit-align-items: @align;
-		 -moz-align-items: @align;
-		  -ms-align-items: @align;
+	  //-webkit-align-items: @align;
+		// -moz-align-items: @align;
+		// -ms-align-items: @align;
 			  align-items: @align;
 	}
 
 	.wrap(@wrap: nowrap) {
-	  -webkit-flex-wrap: @wrap;
-		 -moz-flex-wrap: @wrap;
-		  -ms-flex-wrap: @wrap;
+	  //-webkit-flex-wrap: @wrap;
+		// -moz-flex-wrap: @wrap;
+		//  -ms-flex-wrap: @wrap;
 			  flex-wrap: @wrap;
 	}
 
 	.flow(@flow) {
-	  -webkit-flex-flow: @flow;
-		 -moz-flex-flow: @flow;
-		  -ms-flex-flow: @flow;
+	  //-webkit-flex-flow: @flow;
+		// -moz-flex-flow: @flow;
+		//  -ms-flex-flow: @flow;
 			  flex-flow: @flow;
 	}
 
 	.align_content(@align: stretch) {
-	  -webkit-align-content: @align;
-		 -moz-align-content: @align;
-		  -ms-align-content: @align;
+	  //-webkit-align-content: @align;
+		// -moz-align-content: @align;
+		//  -ms-align-content: @align;
 			  align-content: @align;
 	}
 
 	.basis(@width: auto) {
-	  -webkit-flex-basis: @width;
-		 -moz-flex-basis: @width;
-		  -ms-flex-basis: @width;
+	  //-webkit-flex-basis: @width;
+		// -moz-flex-basis: @width;
+		//  -ms-flex-basis: @width;
 			  flex-basis: @width;
 	}
 
 	.grow(@grow: 0) {
-	  -webkit-flex-grow: @grow;
-		 -moz-flex-grow: @grow;
-		  -ms-flex-grow: @grow;
+	  //-webkit-flex-grow: @grow;
+		// -moz-flex-grow: @grow;
+		//  -ms-flex-grow: @grow;
 			  flex-grow: @grow;
 	}
 
 	.shrink(@shrink: 1) {
-	  -webkit-flex-shrink: @shrink;
-		 -moz-flex-shrink: @shrink;
-		  -ms-flex-shrink: @shrink;
+	  //-webkit-flex-shrink: @shrink;
+		// -moz-flex-shrink: @shrink;
+		//  -ms-flex-shrink: @shrink;
 			  flex-shrink: @shrink;
 	}
 
 	.flex(@flex) {
-	  -webkit-flex: @flex;
-		 -moz-flex: @flex;
-		  -ms-flex: @flex;
+	  //-webkit-flex: @flex;
+		// -moz-flex: @flex;
+		//  -ms-flex: @flex;
 			  flex: @flex;
 	}
 
 	.align-self(@align: auto) {
-	  -webkit-align-self: @align;
-		 -moz-align-self: @align;
-		  -ms-align-self: @align;
+	  //-webkit-align-self: @align;
+		// -moz-align-self: @align;
+		 // -ms-align-self: @align;
 			  align-self: @align;
 	}
 
 	.order(@order: 0) {
-	  -webkit-order: @order;
-		 -moz-order: @order;
-		  -ms-order: @order;
+	  //-webkit-order: @order;
+		// -moz-order: @order;
+		 // -ms-order: @order;
 			  order: @order;
 	}
 }
 
 .border_radius(@tl; @tr; @br; @bl) {
-	-webkit-border-radius: @arguments;
-	-moz-border-radius: @arguments;
+	//-webkit-border-radius: @arguments;
+	//-moz-border-radius: @arguments;
 	border-radius: @arguments;
 }
 
 .border_radius(@radius) {
-	-webkit-border-radius: @radius;
-	-moz-border-radius: @radius;
+	//-webkit-border-radius: @radius;
+	//-moz-border-radius: @radius;
 	border-radius: @radius;
 }
 

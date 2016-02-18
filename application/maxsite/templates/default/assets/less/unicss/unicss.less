@@ -1,4 +1,4 @@
-// .UniCSS v.20-12-2015 
+// .UniCSS v.10-02-2016 
 // .UniCSS -> http://unicss.maxsite.com.ua/
 
 *,
@@ -269,7 +269,7 @@ th {
 .bordered { border: @gray 1px solid; }
 
 // задается классы: цвет (.bor-color1) стиль (.bor-solid) ширина (.bor1px)
-// h6(bor-color5 bor-solid-l bor3px) Пример левого border
+// h6(bor-color5 bor-solid-l bor3) Пример левого border
 // по умолчанию ширина 1px для всех цветов. её можно не указывать
 // отображение линии происходит по border-style
 // h6(bor-gray300 bor-solid) Полная граница
@@ -279,45 +279,19 @@ th {
         border-width: 1px;
 }
 
-// цвета основные, дополнительные и серые
-.bor-white, .hover-bor-white:hover { border-color: @white; }
-.bor-black, .hover-bor-black:hover  { border-color: @black; }
-.bor-red, .hover-bor-red:hover          { border-color: @red; }
-.bor-green, .hover-bor-green:hover  { border-color: @green; }
-.bor-blue, .hover-bor-blue:hover        { border-color: @blue; }
-.bor-yellow, .hover-bor-yellow:hover { border-color: @yellow; }
-.bor-orange, .hover-bor-orange:hover { border-color: @orange; }
-.bor-olive, .hover-bor-olive:hover  { border-color: @olive; }
-.bor-teal, .hover-bor-teal:hover        { border-color: @teal; }
-.bor-violet, .hover-bor-violet:hover { border-color: @violet; }
-.bor-purple, .hover-bor-purple:hover { border-color: @purple; }
-.bor-pink, .hover-bor-pink:hover        { border-color: @pink; }
-.bor-brown, .hover-bor-brown:hover  { border-color: @brown; }
+// цвета border дополнительные
+// определяются в @border_list_color
 
-.bor-color1, .hover-bor-color1:hover  { border-color: @color1; }
-.bor-color2, .hover-bor-color2:hover  { border-color: @color2; }
-.bor-color3, .hover-bor-color3:hover  { border-color: @color3; }
-.bor-color4, .hover-bor-color4:hover  { border-color: @color4; }
-.bor-color5, .hover-bor-color5:hover  { border-color: @color5; }
+// цикл
+.border_list_color_loop(@counter) when (@counter > 0) {
+        .border_list_color_loop((@counter - 1));
+        
+        @val: extract(@border_list_color, @counter);
+        
+        .bor-@{val}, .hover-bor-@{val}:hover { border-color: @@val; }
+ }
 
-.bor-colorA1, .hover-bor-colorA1:hover { border-color: @colorA1; }
-.bor-colorA2, .hover-bor-colorA2:hover { border-color: @colorA2; }
-.bor-colorA3, .hover-bor-colorA3:hover { border-color: @colorA3; }
-.bor-colorA4, .hover-bor-colorA4:hover { border-color: @colorA4; }
-.bor-colorA5, .hover-bor-colorA5:hover { border-color: @colorA5; }
-
-// все оттенки серого
-.bor-gray, .hover-bor-gray:hover       { border-color: @gray;    }
-.bor-gray50, .hover-bor-gray50:hover   { border-color: @gray50;  }
-.bor-gray100, .hover-bor-gray100:hover { border-color: @gray100; }
-.bor-gray200, .hover-bor-gray200:hover { border-color: @gray200; }
-.bor-gray300, .hover-bor-gray300:hover { border-color: @gray300; }
-.bor-gray400, .hover-bor-gray400:hover { border-color: @gray400; }
-.bor-gray500, .hover-bor-gray500:hover { border-color: @gray500; }
-.bor-gray600, .hover-bor-gray600:hover { border-color: @gray600; }
-.bor-gray700, .hover-bor-gray700:hover { border-color: @gray700; }
-.bor-gray800, .hover-bor-gray800:hover { border-color: @gray800; }
-.bor-gray900, .hover-bor-gray900:hover { border-color: @gray900; }
+.border_list_color_loop(length(@border_list_color));
 
 // тип линий — этот класс и вызывает рисование линий
 .bor-solid    { border-style: solid; }
@@ -435,136 +409,16 @@ th {
 .colors_state(~"black", @black);
 
 .colors_state(~"red", @red);
-.colors_state(~"red900",  darken(@red, 40%));
-.colors_state(~"red800",  darken(@red, 30%));
-.colors_state(~"red700",  darken(@red, 20%));
-.colors_state(~"red600",  darken(@red, 10%));
-.colors_state(~"red500",         @red);
-.colors_state(~"red400", lighten(@red, 10%));
-.colors_state(~"red300", lighten(@red, 20%));
-.colors_state(~"red200", lighten(@red, 30%));
-.colors_state(~"red100", lighten(@red, 40%));
-.colors_state(~"red50",  lighten(@red, 45%));
-
 .colors_state(~"green", @green);
-.colors_state(~"green900",  darken(@green, 40%));
-.colors_state(~"green800",  darken(@green, 30%));
-.colors_state(~"green700",  darken(@green, 20%));
-.colors_state(~"green600",  darken(@green, 10%));
-.colors_state(~"green500",         @green);
-.colors_state(~"green400", lighten(@green, 10%));
-.colors_state(~"green300", lighten(@green, 20%));
-.colors_state(~"green200", lighten(@green, 30%));
-.colors_state(~"green100", lighten(@green, 40%));
-.colors_state(~"green50",  lighten(@green, 45%));
-
 .colors_state(~"blue", @blue);
-.colors_state(~"blue900",  darken(@blue, 40%));
-.colors_state(~"blue800",  darken(@blue, 30%));
-.colors_state(~"blue700",  darken(@blue, 20%));
-.colors_state(~"blue600",  darken(@blue, 10%));
-.colors_state(~"blue500",         @blue);
-.colors_state(~"blue400", lighten(@blue, 10%));
-.colors_state(~"blue300", lighten(@blue, 20%));
-.colors_state(~"blue200", lighten(@blue, 30%));
-.colors_state(~"blue100", lighten(@blue, 40%));
-.colors_state(~"blue50",  lighten(@blue, 45%));
-
 .colors_state(~"yellow", @yellow);
-.colors_state(~"yellow900",  darken(@yellow, 40%));
-.colors_state(~"yellow800",  darken(@yellow, 30%));
-.colors_state(~"yellow700",  darken(@yellow, 20%));
-.colors_state(~"yellow600",  darken(@yellow, 10%));
-.colors_state(~"yellow500",         @yellow);
-.colors_state(~"yellow400", lighten(@yellow, 10%));
-.colors_state(~"yellow300", lighten(@yellow, 20%));
-.colors_state(~"yellow200", lighten(@yellow, 30%));
-.colors_state(~"yellow100", lighten(@yellow, 40%));
-.colors_state(~"yellow50",  lighten(@yellow, 45%));
-
 .colors_state(~"orange", @orange);
-.colors_state(~"orange900",  darken(@orange, 40%));
-.colors_state(~"orange800",  darken(@orange, 30%));
-.colors_state(~"orange700",  darken(@orange, 20%));
-.colors_state(~"orange600",  darken(@orange, 10%));
-.colors_state(~"orange500",         @orange);
-.colors_state(~"orange400", lighten(@orange, 10%));
-.colors_state(~"orange300", lighten(@orange, 20%));
-.colors_state(~"orange200", lighten(@orange, 30%));
-.colors_state(~"orange100", lighten(@orange, 40%));
-.colors_state(~"orange50",  lighten(@orange, 45%));
-
 .colors_state(~"olive", @olive);
-.colors_state(~"olive900",  darken(@olive, 40%));
-.colors_state(~"olive800",  darken(@olive, 30%));
-.colors_state(~"olive700",  darken(@olive, 20%));
-.colors_state(~"olive600",  darken(@olive, 10%));
-.colors_state(~"olive500",         @olive);
-.colors_state(~"olive400", lighten(@olive, 10%));
-.colors_state(~"olive300", lighten(@olive, 20%));
-.colors_state(~"olive200", lighten(@olive, 30%));
-.colors_state(~"olive100", lighten(@olive, 40%));
-.colors_state(~"olive50",  lighten(@olive, 45%));
-
 .colors_state(~"teal", @teal);
-.colors_state(~"teal900",  darken(@teal, 40%));
-.colors_state(~"teal800",  darken(@teal, 30%));
-.colors_state(~"teal700",  darken(@teal, 20%));
-.colors_state(~"teal600",  darken(@teal, 10%));
-.colors_state(~"teal500",         @teal);
-.colors_state(~"teal400", lighten(@teal, 10%));
-.colors_state(~"teal300", lighten(@teal, 20%));
-.colors_state(~"teal200", lighten(@teal, 30%));
-.colors_state(~"teal100", lighten(@teal, 40%));
-.colors_state(~"teal50",  lighten(@teal, 45%));
-
 .colors_state(~"violet", @violet);
-.colors_state(~"violet900",  darken(@violet, 40%));
-.colors_state(~"violet800",  darken(@violet, 30%));
-.colors_state(~"violet700",  darken(@violet, 20%));
-.colors_state(~"violet600",  darken(@violet, 10%));
-.colors_state(~"violet500",         @violet);
-.colors_state(~"violet400", lighten(@violet, 10%));
-.colors_state(~"violet300", lighten(@violet, 20%));
-.colors_state(~"violet200", lighten(@violet, 30%));
-.colors_state(~"violet100", lighten(@violet, 40%));
-.colors_state(~"violet50",  lighten(@violet, 45%));
-
 .colors_state(~"purple", @purple);
-.colors_state(~"purple900",  darken(@purple, 40%));
-.colors_state(~"purple800",  darken(@purple, 30%));
-.colors_state(~"purple700",  darken(@purple, 20%));
-.colors_state(~"purple600",  darken(@purple, 10%));
-.colors_state(~"purple500",         @purple);
-.colors_state(~"purple400", lighten(@purple, 10%));
-.colors_state(~"purple300", lighten(@purple, 20%));
-.colors_state(~"purple200", lighten(@purple, 30%));
-.colors_state(~"purple100", lighten(@purple, 40%));
-.colors_state(~"purple50",  lighten(@purple, 45%));
-
 .colors_state(~"pink", @pink);
-.colors_state(~"pink900",  darken(@pink, 40%));
-.colors_state(~"pink800",  darken(@pink, 30%));
-.colors_state(~"pink700",  darken(@pink, 20%));
-.colors_state(~"pink600",  darken(@pink, 10%));
-.colors_state(~"pink500",         @pink);
-.colors_state(~"pink400", lighten(@pink, 10%));
-.colors_state(~"pink300", lighten(@pink, 20%));
-.colors_state(~"pink200", lighten(@pink, 30%));
-.colors_state(~"pink100", lighten(@pink, 40%));
-.colors_state(~"pink50",  lighten(@pink, 45%));
-
 .colors_state(~"brown", @brown);
-.colors_state(~"brown900",  darken(@brown, 40%));
-.colors_state(~"brown800",  darken(@brown, 30%));
-.colors_state(~"brown700",  darken(@brown, 20%));
-.colors_state(~"brown600",  darken(@brown, 10%));
-.colors_state(~"brown500",         @brown);
-.colors_state(~"brown400", lighten(@brown, 10%));
-.colors_state(~"brown300", lighten(@brown, 20%));
-.colors_state(~"brown200", lighten(@brown, 30%));
-.colors_state(~"brown100", lighten(@brown, 40%));
-.colors_state(~"brown50",  lighten(@brown, 45%));
 
 // оттенки серого заданы отдельными переменными
 .colors_state(~"gray",    @gray);
@@ -589,9 +443,33 @@ th {
 .bg-op70, .hover-bg-op70:hover { background-color: rgba(0,0,0,0.7); }
 .bg-op80, .hover-bg-op80:hover { background-color: rgba(0,0,0,0.8); }
 .bg-op90, .hover-bg-op90:hover { background-color: rgba(0,0,0,0.9); }
+
+
+// цвета дополнительные
+// определяются в @color_list
+
+// цикл
+.color_ext_loop(@counter) when (@counter > 0) {
+        .color_ext_loop((@counter - 1));
+        
+        @val: extract(@color_list, @counter);
+        
+        .colors_state(~"@{val}50",  lighten(@@val, 45%));
+        .colors_state(~"@{val}100", lighten(@@val, 40%));
+        .colors_state(~"@{val}200", lighten(@@val, 30%));
+        .colors_state(~"@{val}300", lighten(@@val, 20%));
+        .colors_state(~"@{val}400", lighten(@@val, 10%));
+        .colors_state(~"@{val}500",         @@val);
+        .colors_state(~"@{val}600",  darken(@@val, 10%));
+        .colors_state(~"@{val}700",  darken(@@val, 20%));
+        .colors_state(~"@{val}800",  darken(@@val, 30%));
+        .colors_state(~"@{val}900",  darken(@@val, 38%));
+ }
+
+.color_ext_loop(length(@color_list));
 // .UniCSS -> http://unicss.maxsite.com.ua/
 
-
+// http://flexbox.help/ — визуальный построитель
 // http://the-echoplex.net/flexyboxes/ — построитель
 // http://html5.by/blog/flexbox/
 // http://frontender.info/a-guide-to-flexbox/

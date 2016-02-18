@@ -35,6 +35,10 @@
 // толщина для border-width (.bor1, .bor2) 
 @border_list: 1, 2, 3, 4, 5, 6, 7, 8, 9;
 
+// для каких @цветов делать border. @переменные должны быть определены.
+// имя совпадает с именем bor-класса: .bor-colorA1 .hover-bor-blue
+@border_list_color: white, black, color1, color2, color3, color4, color5, colorA1, colorA2, colorA3, colorA4, colorA5, gray, gray50, gray100, gray200, gray300, gray400, gray500, gray600, gray700, gray800, gray900, red, green, blue, yellow, orange, olive, teal, violet, purple, pink, brown;
+
 // position (.pos-top10, .pos10-r, .pos10-b, .pos10px-l)
 @position_list: 0, 10;
 
@@ -50,6 +54,10 @@
 // отступы базовые значения
 @padding: 20px;
 @margin: 20px;
+
+// @цвета, которые нужно сделать полной градацией (50, 100..900)
+@color_list: red, green, blue, yellow, orange, olive, teal, violet, purple, pink, brown;
+
 
 // цвета могут браться из colors-gmd.less 
 // основные и дополнительные цвета дизайна
@@ -75,7 +83,6 @@
 @green:     #21BA45;
 @blue:      #2185D0;
 @yellow:	#FBBD08;
-
 @orange: 	#F2711C;
 @olive: 	#B5CC18;
 @teal: 		#00B5AD;
@@ -96,9 +103,6 @@
 @gray700:    @g_gray700;
 @gray800:    @g_gray800;
 @gray900:    @g_gray900;
-
-// цвет линии HR
-@hr_color: #AAAAAA;
 
 // размер иконок
 @icon_size: 32px;

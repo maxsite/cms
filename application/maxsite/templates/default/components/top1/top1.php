@@ -19,7 +19,7 @@ $logo_height = (int) mso_get_option('top1_header_logo_height', getinfo('template
 $logo_type_resize = mso_get_option('top1_header_logo_type_resize', getinfo('template'), 'resize_full_crop_center');
 
 // задан размер по ширине и высоте, значит пробуем кропнуть указанное изображение и получить новое
-if ($logo_width and $logo_height)
+if ($logo_width or $logo_height)
 {
 	require_once(getinfo('shared_dir') . 'stock/thumb/thumb.php');
 	

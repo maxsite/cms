@@ -2361,46 +2361,6 @@ function mso_wordwrap($str, $wid = 80, $tag = ' ')
 		return implode($tag, $ret);
 }
 
-
-# возвращает script с jquery или +url
-# в $path можно указать http-путь к файлу
-function mso_load_jquery($plugin = '', $path = '')
-{
-	global $MSO;
-
-	if ( !isset($MSO->js['jquery'][$plugin]) ) // еще нет включения этого плагина
-	{
-		$MSO->js['jquery'][$plugin] = '1';
-	
-		if ($plugin)
-		{
-			if ($path)
-			{
-				return TAB . '<script src="' . $path . $plugin . '"></script>' . NR;
-			}
-			else
-			{
-				return TAB . '<script src="'. getinfo('common_url') . 'jquery/' . $plugin . '"></script>' . NR;
-			}
-		}
-		else
-		{
-			$jquery_type = mso_get_option('jquery_type', 'general', 'self');
-			
-			$version = '1.8.2';
-			
-			if ($jquery_type == 'google') $url = '//ajax.googleapis.com/ajax/libs/jquery/' . $version . '/jquery.min.js'; // Google Ajax API CDN 
-			elseif ($jquery_type == 'microsoft') $url = '//ajax.aspnetcdn.com/ajax/jQuery/jquery-' . $version . '.min.js'; // Microsoft CDN
-			elseif ($jquery_type == 'jquery') $url = '//code.jquery.com/jquery-' . $version . '.min.js'; //jQuery CDN
-			elseif ($jquery_type == 'huyandex') $url = '//yandex.st/jquery/' . $version . '/jquery.min.js';
-			else $url = getinfo('common_url') . 'jquery/jquery.min.js';
-			
-			return '<script src="' . $url . '"></script>' . NR;
-		}
-	}
-}
-
-
 # формируем li-элементы для меню
 # элементы представляют собой текст, где каждая строчка один пункт
 # каждый пункт делается так:  http://ссылка | название | подсказка | class | class_для_span | атрибуты ссылки
@@ -3574,25 +3534,23 @@ function mso_rss()
 
 	$out .= '<link rel="alternate" type="application/rss+xml" title="' 
 		. tf('Все новые комментарии') . '" href="' 
-		. getinfo('rss_comments_url') . '">' . NR;
+		. getinfo('rss_comments_url') . '">';
 
 	if (is_type('page') and mso_segment(2) and (isset($MSO->data['pages_is']) and $MSO->data['pages_is']))
 	{
-		
-		$out .= '<link rel="alternate" type="application/rss+xml" title="' 
+		$out .= NR . '<link rel="alternate" type="application/rss+xml" title="' 
 				. tf('Комментарии этой записи') . '" href="' 
-				. getinfo('site_url') . mso_segment(1) . '/' . mso_segment(2) . '/feed">' . NR;
+				. getinfo('site_url') . mso_segment(1) . '/' . mso_segment(2) . '/feed">';
 	}
 	elseif (is_type('category') and mso_segment(2) and (isset($MSO->data['pages_is']) and $MSO->data['pages_is']))
 	{
-		$out .= '<link rel="alternate" type="application/rss+xml" title="' 
+		$out .= NR . '<link rel="alternate" type="application/rss+xml" title="' 
 					. tf('Записи этой рубрики') . '" href="' 
-					. getinfo('site_url') . mso_segment(1) . '/' . mso_segment(2) . '/feed">' . NR;
+					. getinfo('site_url') . mso_segment(1) . '/' . mso_segment(2) . '/feed">';
 	}
 
 	return $out;
 }
-
 
 
 # Функция использует глобальный одномерный массив
@@ -3621,6 +3579,7 @@ function mso_get_val($key = '', $default = '', $array = false)
 		return (isset($MSO->key_options[$key])) ? $MSO->key_options[$key] :	$default; 
 	}
 }
+
 
 # Функция обратная mso_get_val() - задаёт для ключа $key значение $val 
 # если $val_val == null, значит присваиваем всему $key значание $val
@@ -3654,6 +3613,7 @@ function mso_set_val($key, $val, $val_val = null)
 	}
 }
 
+
 # Функция удаляет ключ $key 
 function mso_unset_val($key)
 {
@@ -3664,6 +3624,7 @@ function mso_unset_val($key)
 		unset($MSO->key_options[$key]);
 	}
 }
+
 
 # функция формирует <link rel="$REL" $ADD>
 # $rel - тип rel. Если он равен canonical, то формируется канонизация
@@ -3750,6 +3711,7 @@ function mso_link_rel($rel = 'canonical', $add = '', $url_only = false)
 	
 }
 
+
 # функция для виджетов формирует поля формы для form.fform с необходимой html-разметкой
 # каждый вызов функции - одна строчка + если есть $hint - вторая
 # $form = mso_widget_create_form('Название', поле формы, 'Подсказка');
@@ -3763,16 +3725,97 @@ function mso_widget_create_form($name = '', $input = '', $hint = '')
 	return $out;
 }
 
+
 # формирует <style> из указанного адреса 
-function mso_load_style($url = '')
+# игнорируются дубли подключений
+function mso_load_style($url = '', $nodouble = true)
 {
-	return NT . '<link rel="stylesheet" href="' . $url . '">';
+	global $MSO;
+	
+	if (!isset($MSO->data['_loaded_style'])) $MSO->data['_loaded_style'] = array();
+	if ($nodouble and in_array($url, $MSO->data['_loaded_style'])) return ''; // уже была загрузка
+	
+	$MSO->data['_loaded_style'][] = $url; // добавляем в список загруженных
+	$MSO->data['_loaded_style'] = array_unique($MSO->data['_loaded_style']);
+	
+	return NR . '<link rel="stylesheet" href="' . $url . '">';
 }
 
-# формирует <script> из указанного адреса 
-function mso_load_script($url = '')
+
+# формирует <script> из указанного адреса
+# если скрипт был уже загружен, его подключение игнорируется
+function mso_load_script($url = '', $nodouble = true, $attr = '')
 {
-	return NT . '<script src="' . $url . '"></script>';
+	global $MSO;
+	
+	if (!isset($MSO->data['_loaded_script'])) $MSO->data['_loaded_script'] = array();
+	if ($nodouble and in_array($url, $MSO->data['_loaded_script'])) return ''; // уже была загрузка
+	
+	$MSO->data['_loaded_script'][] = $url; // добавляем в список загруженных
+	$MSO->data['_loaded_script'] = array_unique($MSO->data['_loaded_script']);
+	
+	$attr = ($attr) ? ' ' . $attr : '';
+	
+	return NR . '<script' . $attr . ' src="' . $url . '"></script>';
+}
+
+
+# формирование <script> с внешним js-файлом или
+# формирование <link rel="stylesheet> с внешним css-файлом/less-файлом
+# имя файла указывается относительно каталога шаблона
+# если файла нет, то ничего не происходит
+function mso_add_file($fn)
+{
+	if (file_exists(getinfo('template_dir') . $fn)) 
+	{
+		$ext = strtolower(substr(strrchr($fn, '.'), 1)); // расширение файла
+
+		if ($ext == 'js') 
+			echo mso_load_script(getinfo('template_url') . $fn);
+		elseif ($ext == 'css') 
+			echo mso_load_style(getinfo('template_url') . $fn);
+		elseif ($ext == 'less') 
+			echo NR . '<link rel="stylesheet/less" href="' . getinfo('template_url') . $fn . '" type="text/css">';
+	}
+}
+
+
+# возвращает script с jquery или +url
+# в $path можно указать http-путь к файлу
+function mso_load_jquery($plugin = '', $path = '')
+{
+	global $MSO;
+	
+	if ( !isset($MSO->js['jquery'][$plugin]) ) // еще нет включения этого плагина
+	{
+		$MSO->js['jquery'][$plugin] = '1';
+	
+		if ($plugin)
+		{
+			if ($path)
+			{
+				return '<script src="' . $path . $plugin . '"></script>' . NR;
+			}
+			else
+			{
+				return '<script src="'. getinfo('common_url') . 'jquery/' . $plugin . '"></script>' . NR;
+			}
+		}
+		else
+		{
+			$jquery_type = mso_get_option('jquery_type', 'general', 'self');
+			
+			$version = '1.8.2';
+			
+			if ($jquery_type == 'google') $url = '//ajax.googleapis.com/ajax/libs/jquery/' . $version . '/jquery.min.js'; // Google Ajax API CDN 
+			elseif ($jquery_type == 'microsoft') $url = '//ajax.aspnetcdn.com/ajax/jQuery/jquery-' . $version . '.min.js'; // Microsoft CDN
+			elseif ($jquery_type == 'jquery') $url = '//code.jquery.com/jquery-' . $version . '.min.js'; //jQuery CDN
+			elseif ($jquery_type == 'huyandex') $url = '//yandex.st/jquery/' . $version . '/jquery.min.js';
+			else $url = getinfo('common_url') . 'jquery/jquery.min.js';
+			
+			return '<script src="' . $url . '"></script>' . NR;
+		}
+	}
 }
 
 
@@ -3922,6 +3965,7 @@ function mso_get_dirs($path, $exclude = array(), $need_file = false)
 		return array();
 	}
 }
+
 
 # Функция возвращает полный путь к файлу
 # если файла нет, то возвращается false
@@ -4102,25 +4146,6 @@ function _mso_profiler_end($point = 'first', $echo = true)
 			. $_points[$point]['mem1'] . 'MB'
 			);
 	else return $_points[$point];
-}
-
-# формирование <script> с внешним js-файлом или
-# формирование <link rel="stylesheet> с внешним css-файлом/less-файлом
-# имя файла указывается относительно каталога шаблона
-# если файла нет, то ничего не происходит
-function mso_add_file($fn)
-{
-	if (file_exists(getinfo('template_dir') . $fn)) 
-	{
-		$ext = substr(strrchr($fn, '.'), 1); // расширение файла
-		
-		if ($ext == 'js') 
-			echo NR . '<script src="' . getinfo('template_url') . $fn . '"></script>';
-		elseif ($ext == 'css') 
-			echo NR . '<link rel="stylesheet" href="' . getinfo('template_url') . $fn . '">';
-		elseif ($ext == 'less') 
-			echo NR . '<link rel="stylesheet/less" href="' . getinfo('template_url') . $fn . '" type="text/css">';
-	}
 }
 
 # HTML-шаблонизатор

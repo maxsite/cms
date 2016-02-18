@@ -47,7 +47,8 @@ function my_default_head_section()
 	{
 		foreach($autoload_css as $fn_css)
 		{
-			echo '<link rel="stylesheet" href="' . $fn_css . '">' . NR;
+			// pr($fn_css);
+			echo mso_load_style($fn_css);
 		}
 	}
 	
@@ -58,12 +59,12 @@ function my_default_head_section()
 	// своя версия jQuery, если нужно
 	if ($j = mso_get_val('jquery_url', false))
 	{
-		echo '<script src="' . $j . '"></script>' . NR;
+		echo mso_load_script($j);
 	}
 	else
 	{
 		if (mso_fe('assets/js/jquery.min.js')) 
-			echo mso_add_file('assets/js/jquery.min.js');
+			mso_add_file('assets/js/jquery.min.js');
 		else 
 			echo mso_load_jquery();
 	}
@@ -79,12 +80,14 @@ function my_default_head_section()
 		}
 	}
 	
+	my_out_component_js();
+	
 	if ($fn = mso_fe('custom/head.php')) require($fn);
 	if ($fn = mso_page_foreach('head')) require($fn);
 	if (function_exists('ushka')) echo ushka('head');
 	
 	if (mso_fe('assets/js/my.js')) 
-		echo mso_add_file('assets/js/my.js');
+		mso_add_file('assets/js/my.js');
 	
 	if ($my_style = mso_get_option('my_style', getinfo('template'), '')) 
 		echo NR . '<!-- custom css-my_style -->' . NR . '<style>' . NR . $my_style . '</style>';
@@ -187,7 +190,20 @@ function my_out_component_css($component_options = array('header_component1', 'h
 	}
 }
 
-
+# аналогично выводятся js-файлы компонент.js
+function my_out_component_js($component_options = array('header_component1', 'header_component2', 'header_component3', 'header_component4', 'header_component5', 'footer_component1', 'footer_component2', 'footer_component3', 'footer_component4', 'footer_component5'))
+{
+	// проходимся по всем заданным опциям
+	foreach($component_options as $option)
+	{
+		// и если они определены
+		if ($dir = mso_get_option($option, getinfo('template'), false))
+		{
+			$fn = 'components/' . $dir . '/' . $dir . '.js';
+			mso_add_file($fn);
+		}
+	}
+}
 
 # получает css из указанного файла
 # в css-файле можно использовать php

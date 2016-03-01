@@ -61,13 +61,13 @@ foreach ($pages as $page)
 			}
 		}
 		
-		if ($f = mso_page_foreach('page-content')) 
+		if ($f = mso_page_foreach('page-content-' . getinfo('type'))) 
 		{
 			require($f);
 		}
 		else
 		{
-			if ($f = mso_page_foreach('page-content-' . getinfo('type'))) 
+			if ($f = mso_page_foreach('page-content')) 
 			{
 				require($f);
 			}

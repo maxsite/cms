@@ -9,15 +9,29 @@ if (!$pages) return;
 
 $p = new Page_out();
 
-$p->format('title', mso_get_val('full_format_title_start', '<h2 class="mso-page-title">'), mso_get_val('full_format_title_end', '</h2>'), true);
-$p->format('date', 'D, j F Y ' . tf('г.'), '<span><time datetime="[page_date_publish_iso]">', '</time></span>');
-$p->format('cat', ' -&gt; ', '<br><span>' . tf('Рубрика') . ': ', '</span>');
-$p->format('tag', ' | ', '<br><span>' . tf('Метки') . ': ', '</span>');
-$p->format('feed', tf('Комментарии по RSS'), ' | <span>', '</span>');
-$p->format('edit', 'Edit', ' | <span>', '</span>');
-$p->format('view_count', '<br><span>' . tf('Просмотров') . ': ', '</span>');
-$p->format('comments', tf('Обсудить'), tf('Читать комментарии'), '<div class="mso-comments-link"><span>',  '</span></div>');
-
+// формат можно задать отдельно перед циклом
+if ($f = mso_page_foreach('format-full-' . getinfo('type'))) 
+{
+	require($f);
+}
+else
+{
+	if ($f = mso_page_foreach('format-full'))
+	{
+		require($f);
+	}
+	else
+	{
+		$p->format('title', mso_get_val('full_format_title_start', '<h2 class="mso-page-title">'), mso_get_val('full_format_title_end', '</h2>'), true);
+		$p->format('date', 'D, j F Y ' . tf('г.'), '<span><time datetime="[page_date_publish_iso]">', '</time></span>');
+		$p->format('cat', ' -&gt; ', '<br><span>' . tf('Рубрика') . ': ', '</span>');
+		$p->format('tag', ' | ', '<br><span>' . tf('Метки') . ': ', '</span>');
+		$p->format('feed', tf('Комментарии по RSS'), ' | <span>', '</span>');
+		$p->format('edit', 'Edit', ' | <span>', '</span>');
+		$p->format('view_count', '<br><span>' . tf('Просмотров') . ': ', '</span>');
+		$p->format('comments', tf('Обсудить'), tf('Читать комментарии'), '<div class="mso-comments-link"><span>',  '</span></div>');
+	}
+}
 
 // исключенные записи
 $exclude_page_id = mso_get_val('exclude_page_id');
@@ -61,7 +75,12 @@ foreach ($pages as $page)
 			}
 		}
 		
-		if ($f = mso_page_foreach('page-content-' . getinfo('type'))) 
+		
+		if ($f = mso_page_foreach('page-content-full')) 
+		{
+			require($f);
+		}
+		elseif ($f = mso_page_foreach('page-content-' . getinfo('type'))) 
 		{
 			require($f);
 		}
@@ -143,4 +162,4 @@ $p->div_end(mso_get_val('container_class'));
 
 mso_set_val('exclude_page_id', $exclude_page_id);
 
-# end file
+# end of file

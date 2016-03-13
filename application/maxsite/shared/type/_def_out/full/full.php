@@ -36,6 +36,7 @@ else
 // исключенные записи
 $exclude_page_id = mso_get_val('exclude_page_id');
 
+if ($f = mso_page_foreach('do-full')) require($f);
 
 $p->div_start(mso_get_val('container_class', ''));
 
@@ -49,7 +50,7 @@ foreach ($pages as $page)
 
 	$p->load($page);
 
-	$p->div_start('mso-page-only', '<article>');
+	$p->div_start(mso_get_val('page_only_class', 'mso-page-only'), '<article>');
 		
 		// для типа может быть свой info-top
 		if ($f = mso_page_foreach('info-top-' . getinfo('type'))) 
@@ -150,7 +151,7 @@ foreach ($pages as $page)
 			}
 		}
 		
-	$p->div_end('mso-page-only', '</article>');
+	$p->div_end(mso_get_val('page_only_class', 'mso-page-only'), '</article>');
 	
 	if ($f = mso_page_foreach(getinfo('type') . '-page-only-end')) require($f);
 	

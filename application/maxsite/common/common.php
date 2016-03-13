@@ -4246,4 +4246,22 @@ function mso_shortcode_parse($attr, $def = array(), $sep = ' ')
 	return $par;
 }
 
+
+# вывод произвольного шорткода
+# $shortcode — имя шорткода
+# $func — функция обработчик шорткода
+# $content — текст содержащий сам шорткод
+function mso_shortcode($shortcode, $func, $content)
+{
+	if (function_exists($func))
+	{
+		if (strpos($content, '[' . $shortcode) !== false) // есть вхождения
+		{
+			$content = preg_replace_callback('~\[' . $shortcode . ' (.*?)\](.*?)\[\/' . $shortcode . '\]~si', $func, $content);
+		}
+	}
+	
+	return $content;
+}
+
 # end of file

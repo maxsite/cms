@@ -1,4 +1,4 @@
-// .UniCSS v.10-02-2016 
+// .UniCSS v.10-03-2016 
 // .UniCSS -> http://unicss.maxsite.com.ua/
 
 *,
@@ -259,6 +259,7 @@ th {
 
 .b-inline { display: inline-block; }
 .b-block  { display: block; }
+.b-flex  { display: flex; }
 
 .b-clear { clear: both; }
 // .UniCSS -> http://unicss.maxsite.com.ua/
@@ -475,42 +476,74 @@ th {
 // http://frontender.info/a-guide-to-flexbox/
 // http://www.w3.org/TR/css3-flexbox/
 
+// базовый класс — «резиновая сетка»
 .flex {
-        .grid_flex > .container(space-between, stretch);
-        
-        &.flex-vcenter {
-                .grid_flex > .align_items(center);
-        }
-        
-        &.flex-hcenter {
-                .grid_flex > .justify_content(center);
-        }
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
 }
 
-.flex-grow0 { .grid_flex > .grow(0); }
-.flex-grow1 { .grid_flex > .grow(1); }
-.flex-grow2 { .grid_flex > .grow(2); }
-.flex-grow3 { .grid_flex > .grow(3); }
+.flex-row { flex-direction: row; }
+.flex-row-reverse { flex-direction: row-reverse; }
+.flex-column { flex-direction: column; }
+.flex-column-reverse { flex-direction: column-reverse; }
 
-.flex-order0 { .grid_flex > .order(0); }
-.flex-order1 { .grid_flex > .order(1); }
-.flex-order2 { .grid_flex > .order(2); }
-.flex-order3 { .grid_flex > .order(3); }
-.flex-order4 { .grid_flex > .order(4); }
-.flex-order5 { .grid_flex > .order(5); }
+.flex-wrap { flex-wrap: wrap; }
+.flex-wrap-reverse { flex-wrap: wrap-reverse; }
+.flex-nowrap { flex-wrap: nowrap; }
 
-.flex-wrap {
-        .grid_flex > .wrap(wrap);
-}
+// justify-content
+.flex-jc-start { justify-content: flex-start; }
+.flex-jc-end { justify-content: flex-end; }
+.flex-jc-center, .flex-hcenter { justify-content: center; }
+.flex-jc-between { justify-content: space-between; }
+.flex-jc-around { justify-content: space-around; }
 
-// миксы формрующие произвольные классы с @media
+// align-items
+.flex-ai-start {align-items: flex-start; }
+.flex-ai-end {align-items: flex-end; }
+.flex-ai-center, .flex-vcenter {align-items: center; }
+.flex-ai-baseline {align-items: baseline; }
+.flex-ai-stretch {align-items: stretch; }
+
+// align-content
+.flex-ac-start { align-content: flex-start; }
+.flex-ac-end { align-content: flex-end; }
+.flex-ac-center { align-content: center; }
+.flex-ac-between { align-content: space-between; }
+.flex-ac-around { align-content: space-around; }
+.flex-ac-stretch {align-content: stretch; }
+
+// align-self
+.flex-as-auto { align-self: auto; }
+.flex-as-start { align-self: flex-start; }
+.flex-as-end { align-self: flex-end; }
+.flex-as-center { align-self: center; }
+.flex-as-baseline { align-self: baseline; }
+.flex-as-stretch { align-self: stretch; }
+
+.flex-grow0 { flex-grow: 0; }
+.flex-grow1 { flex-grow: 1; }
+.flex-grow2 { flex-grow: 2; }
+.flex-grow3 { flex-grow: 3; }
+.flex-grow4 { flex-grow: 4; }
+.flex-grow5 { flex-grow: 5; }
+
+.flex-order0 { order: 0; }
+.flex-order1 { order: 1; }
+.flex-order2 { order: 2; }
+.flex-order3 { order: 3; }
+.flex-order4 { order: 4; }
+.flex-order5 { order: 5; }
+
+// миксы формирующие произвольные классы с @media
 .flex_media(@m; @postfix; @a_postfix)
 {
         @media @m {
                 .flex-wrap-@{postfix},
                 .flex-wrap-@{a_postfix}
                 {
-                        .grid_flex > .wrap(wrap);
+                        flex-wrap: wrap;
                 }
                 
                 .flex-@{postfix},
@@ -520,25 +553,24 @@ th {
                 }
                 
                 .flex-reverse-@{postfix} {
-                        .grid_flex > .direction(row-reverse);
+                        flex-direction: row-reverse;
                 }
                 
-                .flex-order0-@{postfix} { .grid_flex > .order(0); }
-                .flex-order1-@{postfix} { .grid_flex > .order(1); }
-                .flex-order2-@{postfix} { .grid_flex > .order(2); }
-                .flex-order3-@{postfix} { .grid_flex > .order(3); }
-                .flex-order4-@{postfix} { .grid_flex > .order(4); }
-                .flex-order5-@{postfix} { .grid_flex > .order(5); }
+                .flex-order0-@{postfix} { order: 0; }
+                .flex-order1-@{postfix} { order: 1; }
+                .flex-order2-@{postfix} { order: 2; }
+                .flex-order3-@{postfix} { order: 3; }
+                .flex-order4-@{postfix} { order: 4; }
+                .flex-order5-@{postfix} { order: 5; }
                 
-                &.flex-vcenter-@{postfix} {
-                        .grid_flex > .align_items(center);
+                .flex-vcenter-@{postfix} {
+                        align-items: center;
                 }
                 
-                &.flex-hcenter-@{postfix} {
-                        .grid_flex > .justify_content(center);
+                .flex-hcenter-@{postfix} {
+                        justify-content: center;
                 }
         }
-        
 }
 
 // тот же микс, только с двумя параметрами
@@ -547,7 +579,7 @@ th {
         @media @m {
                 .flex-wrap-@{postfix}
                 {
-                        .grid_flex > .wrap(wrap);
+                        flex-wrap: wrap;
                 }
                 
                 .flex-@{postfix}
@@ -556,22 +588,22 @@ th {
                 }
                 
                 .flex-reverse-@{postfix} {
-                        .grid_flex > .direction(row-reverse);
+                        flex-direction: row-reverse;
                 }
                 
-                .flex-order0-@{postfix} { .grid_flex > .order(0); }
-                .flex-order1-@{postfix} { .grid_flex > .order(1); }
-                .flex-order2-@{postfix} { .grid_flex > .order(2); }
-                .flex-order3-@{postfix} { .grid_flex > .order(3); }
-                .flex-order4-@{postfix} { .grid_flex > .order(4); }
-                .flex-order5-@{postfix} { .grid_flex > .order(5); }
+                .flex-order0-@{postfix} { order: 0; }
+                .flex-order1-@{postfix} { order: 1; }
+                .flex-order2-@{postfix} { order: 2; }
+                .flex-order3-@{postfix} { order: 3; }
+                .flex-order4-@{postfix} { order: 4; }
+                .flex-order5-@{postfix} { order: 5; }
                 
-                &.flex-vcenter-@{postfix} {
-                        .grid_flex > .align_items(center);
+                .flex-vcenter-@{postfix} {
+                        align-items: center;
                 }
                 
-                &.flex-hcenter-@{postfix} {
-                        .grid_flex > .justify_content(center);
+                .flex-hcenter-@{postfix} {
+                        justify-content: center;
                 }
         }
 }
@@ -1039,18 +1071,21 @@ a {
 // видимоcть блоков для разных @media
 // .visible-X только для display: block
 
-// дефолт для desktop
-.visible-desktop, 
-.visible-desktop-tablet { 
-        display: block !important; 
-}
+@media @SCREEN_DESKTOP {
 
-.visible-tablet,
-.visible-phone,
-.visible-tablet-phone, 
-.hide-desktop,
-.hide-desktop-tablet { 
-        display: none !important; 
+        // дефолт для desktop
+        .visible-desktop, 
+        .visible-desktop-tablet { 
+                display: block !important; 
+        }
+
+        .visible-tablet,
+        .visible-phone,
+        .visible-tablet-phone, 
+        .hide-desktop,
+        .hide-desktop-tablet { 
+                display: none !important; 
+        }
 }
 
 @media @SCREEN_TABLET {

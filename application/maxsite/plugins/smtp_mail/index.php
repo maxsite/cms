@@ -154,11 +154,11 @@ function smtp_mail_custom($arg = array())
 		#	$CI->email->attach($arg['preferences']['attach']);
 		#}
 			
-		if( isset($preferences['attach']) ) # письмо с вложением?
+		if( isset($arg['preferences']['attach']) ) # письмо с вложением?
 		{
-			if( is_array($preferences['attach']) ) # множественное вложение
+			if( is_array($arg['preferences']['attach']) ) # множественное вложение
 			{
-				foreach( $preferences['attach'] as $attach )
+				foreach( $arg['preferences']['attach'] as $attach )
 				{
 					if( trim($attach) != '' )
 					{
@@ -166,9 +166,9 @@ function smtp_mail_custom($arg = array())
 					}
 				}
 			}
-			elseif( trim($preferences['attach']) != '' )
+			elseif( trim($arg['preferences']['attach']) != '' )
 			{
-				$CI->email->attach($preferences['attach']);
+				$CI->email->attach($arg['preferences']['attach']);
 			}
 		}
 

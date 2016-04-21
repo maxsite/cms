@@ -238,8 +238,28 @@ function mso_view_ini($all = false)
 			$value = str_replace('_NR_', "\n", $value);
 			$value = str_replace('_QUOT_', '&quot;', $value);
 			
+			if (isset($row['rows']))
+			{
+				if ($row['rows'] == 'auto') 
+				{
+					$rr = count(explode("\n", $value));
+					if ($rr > 20) $rr = 20;
+				}
+				else
+					$rr = (int) $row['rows'];
+			}
+			else
+			{
+				$rr = count(explode("\n", $value));
+				if ($rr > 20) $rr = 20;
+			}
+			
+			if ($rr < 2)  $rr = 2;
+			
+			/*
 			if ( !isset($row['rows']) ) $rr = 7;
 				else $rr = (int) $row['rows'];
+			*/
 			
 			$f .= '<textarea rows="' . $rr . '" name="' . $name_f . '">'. $value . '</textarea>' . NR;
 		}

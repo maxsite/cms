@@ -15,6 +15,10 @@ function add_new_page($fn, $UP_DIR)
 	
 	$data = file_get_contents($fn);
 	
+	// автоматические замены по всему тексту
+	$data = str_replace('[[SITE_URL]]', getinfo('siteurl'), $data);
+	$data = str_replace('[[UPLOADS_URL]]', getinfo('uploads_url'), $data);
+	
 	if ($data and preg_match('!(.*?)\n(---)(.*)!is', $data, $conf))
 	{
 		// только если есть шапка и текст

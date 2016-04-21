@@ -43,19 +43,18 @@ if ($fn = mso_fe('components/lightslider/lightslider-shortcode.php'))
 
 function lightslider_shortcode($attr)
 {
-
 	$slides0 = $attr[2];
 	
 	if (!$slides0) return ''; // опции не определены - выходим
 
+	// замена в тексте
+	$slides0 = str_replace('TEMPLATE_URL/', getinfo('template_url'), $slides0);
+	$slides0 = str_replace('SITE_URL/', getinfo('siteurl'), $slides0);
+	
 	// ищем вхождение [slide] ... [slide]
 	$slides = mso_section_to_array($slides0, '!\[slide\](.*?)\[\/slide\]!is', array(), false, true);
 
 	if (!$slides) return ''; // нет секций - выходим
-
-	// замена в тексте
-	$slides0 = str_replace('TEMPLATE_URL/', getinfo('template_url'), $slides0);
-	$slides0 = str_replace('SITE_URL/', getinfo('siteurl'), $slides0);
 
 	// опции слайдера свои
 	$options = mso_section_to_array($slides0, '!\[options\](.*?)\[\/options\]!is', array());

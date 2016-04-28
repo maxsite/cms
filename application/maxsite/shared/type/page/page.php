@@ -90,6 +90,8 @@ if ($pages)
 			
 			$p->load($page);
 			
+			if ($f = mso_page_foreach('page-do-page-only')) require($f);
+				
 			$p->div_start('mso-page-only', '<article>');
 			
 				// у page в записи может быть метаполе info-top-custom

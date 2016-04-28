@@ -2030,6 +2030,7 @@ function mso_page_other_pages($page_id = 0, $page_categories = array())
 	{
 		// алгоритм получения записей
 		$algoritm = mso_get_option('page_other_pages_algoritm', 'templates', 'all');
+		$custom_type = 'category';
 		
 		if ($algoritm == 'lowlewel') // только из подрубрик
 		{
@@ -2051,6 +2052,11 @@ function mso_page_other_pages($page_id = 0, $page_categories = array())
 			else $bl_page_categories = $page_categories;
 			
 		}
+		elseif ($algoritm == 'no-cat') // не учитывать рубрики
+		{
+			$bl_page_categories = array(); 
+			$custom_type = 'home';
+		}
 		else
 		{
 			// обычный вывод по всем рубрикам 
@@ -2061,7 +2067,7 @@ function mso_page_other_pages($page_id = 0, $page_categories = array())
 				array(  'type'=> false, 
 						'content'=> false, 
 						'pagination'=>false, 
-						'custom_type'=> 'category', 
+						'custom_type'=> $custom_type, 
 						'categories'=>$bl_page_categories, 
 						'exclude_page_id'=>array($page_id), 
 						'limit'=> mso_get_option('page_other_pages_limit', 'templates', 7), 

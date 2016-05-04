@@ -205,8 +205,9 @@
 						<div class="mso-tabs">
 							<ul class="mso-tabs-nav">
 								<li class="mso-tabs-elem mso-tabs-current i i-cat"><span>' . t('Рубрики и метки') . '</span></li>
-								<li class="mso-tabs-elem i i-meta"><span>' . t('Дополнительные поля') . '</span></li>
-								<li class="mso-tabs-elem i i-other"><span>' . t('Прочее') . '</span></li>
+								<li class="mso-tabs-elem i i-meta"><span>' . t('Основные опции') . '</span></li>
+								<li class="mso-tabs-elem i i-other"><span>' . t('Дополнительные') . '</span></li>' 
+								. $custom_meta_i . '
 								<li class="mso-tabs-elem i i-files"><span>' . t('Файлы') . '</span></li>
 							</ul>
 
@@ -276,7 +277,10 @@
 							
 							</div><!-- /div.mso-tabs-box.tabs-other -->
 							
+							' . $custom_meta . '
+							
 							<div class="mso-tabs-box all-files">' . $all_files . '</div>
+							
 							
 						</div>
 					

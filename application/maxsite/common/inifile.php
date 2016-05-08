@@ -193,6 +193,11 @@ function mso_view_ini($all = false)
 		if ( !isset($row['default']) ) $default = '';
 			else $default = _mso_ini_check_php(stripslashes(htmlspecialchars(trim($row['default']))));
 		
+		if (!isset($row['placeholder'])) 
+			$placeholder = '';
+		else 
+			$placeholder = ' placeholder="' . _mso_ini_check_php(stripslashes(htmlspecialchars(trim($row['placeholder'])))) . '"';
+		
 		// получаем текущее значение опции из массива $all_options
 		$options_present = false;
 		$value = t($default); // нет значения, поэтому берем дефолт
@@ -225,13 +230,13 @@ function mso_view_ini($all = false)
 				else $textfield_type = stripslashes($row['textfield_type']);
 			
 			
-			$f .= '<input type="' . $textfield_type . '" name="' . $name_f . '" value="' . $value . '">' . NR;
+			$f .= '<input type="' . $textfield_type . '" name="' . $name_f . '" value="' . $value . '"' . $placeholder . '>' . NR;
 		}
 		elseif ($type == 'color')
 		{
 			$f .= mso_load_jquery('jscolor.js', getinfo('common_url') . 'jquery/jscolor/');
 			
-			$f .= '<input type="text" name="' . $name_f . '" value="' . $value . '" class="color">' . NR;
+			$f .= '<input type="text" name="' . $name_f . '" value="' . $value . '" class="color"' . $placeholder . '>' . NR;
 		}
 		elseif ($type == 'textarea')
 		{
@@ -261,7 +266,7 @@ function mso_view_ini($all = false)
 				else $rr = (int) $row['rows'];
 			*/
 			
-			$f .= '<textarea rows="' . $rr . '" name="' . $name_f . '">'. $value . '</textarea>' . NR;
+			$f .= '<textarea rows="' . $rr . '" name="' . $name_f . '"' . $placeholder . '>'. $value . '</textarea>' . NR;
 		}
 		elseif ($type == 'checkbox')
 		{

@@ -1236,6 +1236,7 @@ class Block_pages
 			'thumb_width' => 320,
 			'thumb_height' => 180,
 			'thumb_class' => 'thumb left', // css-класс картинки
+			'thumb_link_class' => '', // css-класс ссылки 
 			
 			// имя файла формируется как placehold_path + placehold_file
 			'placehold' => false, // если нет картинки, выводим плейсхолд (true) или ничего (false)
@@ -1381,7 +1382,7 @@ class Block_pages
 						$t_placehold
 					))
 				{
-					$p->thumb = '<a href="' . mso_page_url($p->val('page_slug')) . '" title="' . htmlspecialchars($p->val('page_title')). '"><img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '"></a>';
+					$p->thumb = '<a class="' . $r['thumb_link_class'] . '" href="' . mso_page_url($p->val('page_slug')) . '" title="' . htmlspecialchars($p->val('page_title')). '"><img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '"></a>';
 				}
 			}
 			

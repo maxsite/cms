@@ -42,6 +42,7 @@ else
 		'thumb_width' => 100,
 		'thumb_height' => 100,
 		'class_thumb' => 'b-left mar15-r rounded',
+		'thumb_link_class' => '',
 		
 		'content' => true,
 		'content_words' => 0,
@@ -135,6 +136,7 @@ else
 				'thumb_width' 			=> $UNIT['thumb_width'],
 				'thumb_height' 			=> $UNIT['thumb_height'],
 				'thumb_class' 			=> $UNIT['class_thumb'],
+				'thumb_link_class' 		=> $UNIT['thumb_link_class'],
 
 				'line1' 				=> $UNIT['line1'],
 				'line2' 				=> $UNIT['line2'],

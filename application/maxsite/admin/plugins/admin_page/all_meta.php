@@ -127,6 +127,11 @@ function all_meta_parse($all, $page_all_meta)
 		else 
 			$default = _mso_ini_check_php(stripslashes(htmlspecialchars(trim($row['default']))));
 		
+		if (!isset($row['placeholder'])) 
+			$placeholder = '';
+		else 
+			$placeholder = ' placeholder="' . _mso_ini_check_php(stripslashes(htmlspecialchars(trim($row['placeholder'])))) . '"';
+		
 		$options_present = true; // признак, что опция есть в базе
 		
 		// получаем текущее значение 
@@ -157,13 +162,13 @@ function all_meta_parse($all, $page_all_meta)
 			else 
 				$textfield_type = stripslashes($row['textfield_type']);
 			
-			$f .= '<input type="' . $textfield_type . '" name="' . $name_f . '" value="' . $value . '">' . NR;
+			$f .= '<input type="' . $textfield_type . '" name="' . $name_f . '" value="' . $value . '"' . $placeholder . '>' . NR;
 		}
 		elseif ($type == 'color')
 		{
 			$f .= mso_load_jquery('jscolor.js', getinfo('common_url') . 'jquery/jscolor/');
 			
-			$f .= '<input type="text" name="' . $name_f . '" value="' . $value . '" class="color">' . NR;
+			$f .= '<input type="text" name="' . $name_f . '" value="' . $value . '" class="color"' . $placeholder . '>' . NR;
 		}
 		elseif ($type == 'datetime') // пока тестовый вариант 
 		{
@@ -174,7 +179,7 @@ function all_meta_parse($all, $page_all_meta)
 			
 			$id_datetimepicker = md5($name_f);
 			
-			$f .= '<input type="text" name="' . $name_f . '" value="' . $value . '" id="' . $id_datetimepicker . '">' . NR;
+			$f .= '<input type="text" name="' . $name_f . '" value="' . $value . '" id="' . $id_datetimepicker . '"' . $placeholder . '>' . NR;
 			
 			if (isset($row['datetime_options'])) 
 				$datetime_options = $row['datetime_options']; 
@@ -190,12 +195,26 @@ function all_meta_parse($all, $page_all_meta)
 		}
 		elseif ($type == 'textarea')
 		{
-			if ( !isset($row['rows']) ) 
-				$rr = '';
-			else 
-				$rr = 'rows="' . (int) $row['rows'] . '" ';
-				
-			$f .= '<textarea ' . $rr . 'name="' . $name_f . '">'. $value . '</textarea>' . NR;
+			if (isset($row['rows']))
+			{
+				if ($row['rows'] == 'auto') 
+				{
+					$rr = count(explode("\n", $value));
+					if ($rr > 20) $rr = 20;
+				}
+				else
+					$rr = (int) $row['rows'];
+			}
+			else
+			{
+				$rr = count(explode("\n", $value));
+				if ($rr > 20) $rr = 20;
+			}
+			
+			if ($rr < 2)  $rr = 2;
+			
+			
+			$f .= '<textarea rows="' . $rr . '" name="' . $name_f . '"' . $placeholder . '>'. $value . '</textarea>' . NR;
 		}
 		elseif ($type == 'radio')
 		{

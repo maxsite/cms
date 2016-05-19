@@ -3,7 +3,7 @@
 /**
  * MaxSite CMS
  * (c) http://max-3000.com/
- * Добавления Илья Земсков <vimruler@gmail.com>
+ * Добавления Илья Земсков <ilya@vizr.ru>
  */
 
 /*
@@ -46,55 +46,47 @@ function xml_sitemap_uninstall($args = array())
 	return $args;
 }
 
-# функция плагина
+# функция плагина - создание sitemap.xml
 function xml_sitemap_custom($args = array())
 {
-	/* Настройки по-умолчанию */
+	// Настройки по-умолчанию
 	$options = mso_get_option('plugin_xml_sitemap', 'plugins', array());
-	
 
 	if(!isset($options['page_hide'])) $options['page_hide'] = '';
 	$options['page_hide'] = mso_explode($options['page_hide']);
 	
-	
 	if(!isset($options['page_cats_hide'])) $options['page_cats_hide'] = '';
 	$options['page_cats_hide'] = mso_explode($options['page_cats_hide']);
-	
 	
 	if(!isset($options['categories_show'])) $options['categories_show'] = '';
 	$options['categories_show'] = mso_explode($options['categories_show']);
 	
-	
 	if(!isset($options['tags_show'])) $options['tags_show'] = true;
 	if(!isset($options['comusers_show'])) $options['comusers_show'] = true;
 	if(!isset($options['users_show'])) $options['users_show'] = true;
-	
-	if(!isset($options['freq_priority'])) 
+
+	$freq_priority = array(
+		'home' => array( 'changefreq' => 'daily', 'priority' => '1' ),
+		'notblog' => array( 'changefreq' => 'monthly', 'priority' => '0.7' ),
+		'blog' => array( 'changefreq' => 'weekly', 'priority' => '0.5' ),
+		'category' => array( 'changefreq' => 'weekly', 'priority' => '0.3' ),
+		'tag' => array( 'changefreq' => 'weekly', 'priority' => '0.3' ),
+		'comuser' => array( 'changefreq' => 'weekly', 'priority' => '0.3' ),
+		'user' => array( 'changefreq' => 'weekly', 'priority' => '0.3' ),
+	);
+	if( isset($options['freq_priority']) && $options['freq_priority'] ) 
 	{
-		$options['freq_priority'] = 'home | daily | 1 ' . NR
-									. 'notblog | monthly | 0.7 ' . NR
-									. 'blog | weekly | 0.5 ' . NR
-									. 'category | weekly | 0.3 ' . NR
-									. 'tag | weekly | 0.3 ' . NR
-									. 'comuser | weekly | 0.3 ' . NR
-									. 'user | weekly | 0.3 ';
+		$fp = explode(NR, trim($options['freq_priority']));
+		foreach($fp as $ln)
+		{
+			$params = array_map('trim', explode('|', trim($ln)));
+			$freq_priority[$params[0]] = array('changefreq' => $params[1], 'priority' => $params[2]);
+		}
 	}
-	
-	$fp = explode(NR, trim($options['freq_priority']));
-	
-	$options['freq_priority'] = array();
-	
-	foreach($fp as $ln)
-	{
-		$params = array_map('trim', explode('|', trim($ln)));
-		$options['freq_priority'][$params[0]] = array(	'changefreq' =>$params[1],
-														'priority' => $params[2]);
-	}
-		
-	// создание sitemap.xml
-	
-	// $t = "\t"; // табулятор для отступа
-	$t = ''; // отступ для красоты
+	$options['freq_priority'] = $freq_priority;
+
+	if(!isset($options['custom_urls'])) $options['custom_urls'] = '';
+	$options['custom_urls'] = array_map('trim', explode(NR, trim($options['custom_urls'])));
 		
 	$CI = & get_instance();
 	$CI->load->helper('file'); // хелпер для работы с файлами
@@ -113,8 +105,8 @@ function xml_sitemap_custom($args = array())
 	$time_zone = $znak . $time_z[0] . ':' . $time_z[1];
 		
 	$url = getinfo('siteurl');
-	
-	
+
+	// формирование sitemap.xml
 	$out = '<'
 	. '?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -137,15 +129,14 @@ function xml_sitemap_custom($args = array())
 	else $tz = '00.00';
 	$tz = str_replace('.', ':', $tz);
 		
-		
-
-	// страницы не blog
+	// страницы notblog
 	$CI->db->select('page.page_id, page_slug, page_date_publish');
-	
+	$CI->db->from('page');
+
 	if(count($options['page_cats_hide']) > 0) 
 	{
 		$CI->db->join('cat2obj', 'cat2obj.page_id = page.page_id', 'left');
-		$CI->db->where_not_in('category_id', $options['page_cats_hide']);
+		$CI->db->where('( category_id NOT IN ('.implode(',', $options['page_cats_hide']).') or category_id IS NULL )');
 	}
 	
 	if(count($options['page_hide']) > 0) 
@@ -162,30 +153,30 @@ function xml_sitemap_custom($args = array())
 	$CI->db->order_by('page_date_publish', 'desc');
 	$CI->db->group_by('page.page_id');
 	
-	$query = $CI->db->get('page');
-	
+	$query = $CI->db->get();
 	if ($query->num_rows()>0)
 	{
 		foreach ($query->result_array() as $row)
 		{
 			$date = str_replace(' ', 'T', $row['page_date_publish']) . $time_zone;
 			
-			$out .= $t . '<url>' . NR;
-			$out .= $t . $t . '<loc>' . $url . 'page/' . $row['page_slug'] . '</loc>' . NR;
-			$out .= $t . $t . '<lastmod>' . $date . '</lastmod>' . NR;
-			$out .= $t . $t . '<changefreq>'.$options['freq_priority']['notblog']['changefreq'].'</changefreq>' . NR;
-			$out .= $t . $t . '<priority>'.$options['freq_priority']['notblog']['priority'].'</priority>' . NR;
-			$out .= $t . '</url>' . NR;
+			$out .= '<url>' . NR;
+			$out .= '<loc>' . $url . 'page/' . $row['page_slug'] . '</loc>' . NR;
+			$out .= '<lastmod>' . $date . '</lastmod>' . NR;
+			$out .= '<changefreq>'.$options['freq_priority']['notblog']['changefreq'].'</changefreq>' . NR;
+			$out .= '<priority>'.$options['freq_priority']['notblog']['priority'].'</priority>' . NR;
+			$out .= '</url>' . NR;
 		}
 	}
 		
-	// страницы
+	// страницы blog
 	$CI->db->select('page.page_id, page_slug, page_date_publish');
+	$CI->db->from('page');
 	
 	if(count($options['page_cats_hide']) > 0) 
 	{
 		$CI->db->join('cat2obj', 'cat2obj.page_id = page.page_id', 'left');
-		$CI->db->where_not_in('category_id', $options['page_cats_hide']);
+		$CI->db->where('( category_id NOT IN ('.implode(',', $options['page_cats_hide']).') or category_id IS NULL )');
 	}
 	
 	if(count($options['page_hide']) > 0) 
@@ -199,24 +190,25 @@ function xml_sitemap_custom($args = array())
 	$CI->db->join('page_type', 'page_type.page_type_id = page.page_type_id', 'left');
 	$CI->db->group_by('page.page_id');
 	$CI->db->order_by('page_date_publish', 'desc');
-	
-	$query = $CI->db->get('page');
-	
+	$query = $CI->db->get();
 	if ($query->num_rows()>0)
 	{
 		foreach ($query->result_array() as $row)
 		{
 			$date = str_replace(' ', 'T', $row['page_date_publish']) . $time_zone;
 			
-			$out .= $t . '<url>' . NR;
-			$out .= $t . $t . '<loc>' . $url . 'page/' . $row['page_slug'] . '</loc>' . NR;
-			$out .= $t . $t . '<lastmod>' . $date . '</lastmod>' . NR;
-			$out .= $t . $t . '<changefreq>' . $options['freq_priority']['blog']['changefreq'] . '</changefreq>' . NR;
-			$out .= $t . $t . '<priority>' . $options['freq_priority']['blog']['priority'] . '</priority>' . NR;
-			$out .= $t . '</url>' . NR;
+			$out .= '<url>' . NR;
+			$out .= '<loc>' . $url . 'page/' . $row['page_slug'] . '</loc>' . NR;
+			$out .= '<lastmod>' . $date . '</lastmod>' . NR;
+			$out .= '<changefreq>' . $options['freq_priority']['blog']['changefreq'] . '</changefreq>' . NR;
+			$out .= '<priority>' . $options['freq_priority']['blog']['priority'] . '</priority>' . NR;
+			$out .= '</url>' . NR;
 		}
 	}
-	
+
+	// единая дата-время обновления урла
+	$date = date('Y-m-d').'T'.date('H:i:s').$time_zone; 
+		
 	// рубрики
 	if(count($options['categories_show']) > 0) $CI->db->or_where_in('category_id', $options['categories_show']);
 	$CI->db->where('category_type', 'page');
@@ -225,18 +217,16 @@ function xml_sitemap_custom($args = array())
 	
 	if ($query->num_rows()>0)
 	{
-		$date = date('Y-m-d') . 'T' . date('H:i:s') . $time_zone;
-		
 		foreach ($query->result_array() as $row)
 		{
 			// $date = str_replace(' ', 'T', date('Y-m-d')) . $time_zone;
 			
-			$out .= $t . '<url>' . NR;
-			$out .= $t . $t . '<loc>' . $url . 'category/' . $row['category_slug'] . '</loc>' . NR;
-			$out .= $t . $t . '<lastmod>' . $date . '</lastmod>' . NR;
-			$out .= $t . $t . '<changefreq>' . $options['freq_priority']['category']['changefreq'] . '</changefreq>' . NR;
-			$out .= $t . $t . '<priority>'.$options['freq_priority']['category']['priority'] . '</priority>' . NR;
-			$out .= $t . '</url>' . NR;
+			$out .= '<url>' . NR;
+			$out .= '<loc>' . $url . 'category/' . $row['category_slug'] . '</loc>' . NR;
+			$out .= '<lastmod>' . $date . '</lastmod>' . NR;
+			$out .= '<changefreq>' . $options['freq_priority']['category']['changefreq'] . '</changefreq>' . NR;
+			$out .= '<priority>'.$options['freq_priority']['category']['priority'] . '</priority>' . NR;
+			$out .= '</url>' . NR;
 		}
 	}		
 	
@@ -249,16 +239,16 @@ function xml_sitemap_custom($args = array())
 		
 		foreach ($alltags as $tag => $count) 
 		{
-			$out .= $t . '<url>' . NR;
-			$out .= $t . $t . '<loc>' . $url . 'tag/' . htmlentities(urlencode($tag)) . '</loc>' . NR;
-			$out .= $t . $t . '<lastmod>' . $date . '</lastmod>' . NR;
-			$out .= $t . $t . '<changefreq>' . $options['freq_priority']['tag']['changefreq'] . '</changefreq>' . NR;
-			$out .= $t . $t . '<priority>' . $options['freq_priority']['tag']['priority'] . '</priority>' . NR;
-			$out .= $t . '</url>' . NR;
+			$out .= '<url>' . NR;
+			$out .= '<loc>' . $url . 'tag/' . htmlentities(urlencode($tag)) . '</loc>' . NR;
+			$out .= '<lastmod>' . $date . '</lastmod>' . NR;
+			$out .= '<changefreq>' . $options['freq_priority']['tag']['changefreq'] . '</changefreq>' . NR;
+			$out .= '<priority>' . $options['freq_priority']['tag']['priority'] . '</priority>' . NR;
+			$out .= '</url>' . NR;
 		}
 	}
 		
-	// и все комюзеры
+	// все комюзеры
 	if($options['comusers_show'])
 	{
 		$CI->db->select('comusers_id');
@@ -269,17 +259,17 @@ function xml_sitemap_custom($args = array())
 		{	
 			foreach ($query->result_array() as $row)
 			{
-				$out .= $t . '<url>' . NR;
-				$out .= $t . $t . '<loc>' . $url . 'users/' . $row['comusers_id'] . '</loc>' . NR;
-				$out .= $t . $t . '<lastmod>' . $date . '</lastmod>' . NR;
-				$out .= $t . $t . '<changefreq>'.$options['freq_priority']['comuser']['changefreq'] . '</changefreq>' . NR;
-				$out .= $t . $t . '<priority>'.$options['freq_priority']['comuser']['priority'] . '</priority>' . NR;
-				$out .= $t . '</url>' . NR;
+				$out .= '<url>' . NR;
+				$out .= '<loc>' . $url . 'users/' . $row['comusers_id'] . '</loc>' . NR;
+				$out .= '<lastmod>' . $date . '</lastmod>' . NR;
+				$out .= '<changefreq>'.$options['freq_priority']['comuser']['changefreq'] . '</changefreq>' . NR;
+				$out .= '<priority>'.$options['freq_priority']['comuser']['priority'] . '</priority>' . NR;
+				$out .= '</url>' . NR;
 			}
 		}
 	}
 		
-	// и все юзеры
+	// все юзеры
 	if($options['users_show'])
 	{
 		$CI->db->select('users_id');
@@ -290,30 +280,55 @@ function xml_sitemap_custom($args = array())
 		{	
 			foreach ($query->result_array() as $row)
 			{
-				$out .= $t . '<url>' . NR;
-				$out .= $t . $t . '<loc>' . $url . 'author/' . $row['users_id'] . '</loc>' . NR;
-				$out .= $t . $t . '<lastmod>' . $date . '</lastmod>' . NR;
-				$out .= $t . $t . '<changefreq>' . $options['freq_priority']['user']['changefreq'] . '</changefreq>' . NR;
-				$out .= $t . $t . '<priority>' . $options['freq_priority']['user']['priority'] . '</priority>' . NR;
-				$out .= $t . '</url>' . NR;
+				$out .= '<url>' . NR;
+				$out .= '<loc>' . $url . 'author/' . $row['users_id'] . '</loc>' . NR;
+				$out .= '<lastmod>' . $date . '</lastmod>' . NR;
+				$out .= '<changefreq>' . $options['freq_priority']['user']['changefreq'] . '</changefreq>' . NR;
+				$out .= '<priority>' . $options['freq_priority']['user']['priority'] . '</priority>' . NR;
+				$out .= '</url>' . NR;
+			}
+		}
+	}
+		
+	// кастомные урлы
+	if( $options['custom_urls'] )
+	{
+		if( !isset($options['freq_priority']['notblog']['changefreq']) ) $options['freq_priority']['notblog']['changefreq'] = 'monthly';
+		if( !isset($options['freq_priority']['notblog']['priority']) ) $options['freq_priority']['notblog']['priority'] = '0.7';
+			
+		foreach ($options['custom_urls'] as $url)
+		{
+			if( $url )
+			{
+				$url = parse_url($url, PHP_URL_PATH);
+				$url = substr($url, 0, 1) == '/' ? substr($url, 1) : $url;
+				$url = getinfo('site_url').$url;
+				
+				$out .= '<url>' . NR;
+				$out .= '<loc>' . $url . '</loc>' . NR;
+				$out .= '<lastmod>' . $date . '</lastmod>' . NR;
+				$out .= '<changefreq>' . $options['freq_priority']['notblog']['changefreq'] . '</changefreq>' . NR;
+				$out .= '<priority>' . $options['freq_priority']['notblog']['priority'] . '</priority>' . NR;
+				$out .= '</url>' . NR;
 			}
 		}
 	}
 		
 	$out .= mso_hook('xml_sitemap'); # хук, если нужно добавить свои данные
 	
-	$out .= NR . '</urlset>' . NR;
-	
+	$out .= '</urlset>' . NR;
+		
+	$out = mso_hook('xml_sitemap_conv', $out); # хук, если нужно как-то обработать результирующий файл. Например, разбить на части
+		
 	$fn = getinfo('FCPATH') . 'sitemap.xml';
 	write_file($fn, $out);
-
+		
 	return $args; // для обеспечения цепочки хуков
 }
 
 # функция отрабатывающая миниопции плагина (function плагин_mso_options)
 function xml_sitemap_mso_options()
 {
-	
 	if(!mso_check_allow('xml_sitemap_to_hook_edit'))
 	{
 		echo t('Доступ запрещен');
@@ -325,18 +340,15 @@ function xml_sitemap_mso_options()
         array(
 			'freq_priority' => array(
 							'type' => 'textarea', 
-							
 							'name' => 'Приоритеты и частота обновления', 
-							
 							'description' => t('Укажите значения параметров <b>changefreq</b> и <b>priority</b> для разных групп страниц сайта по формату: Группа страниц | changefreq | priority<br>Допустимые группы страниц: home, notblog, blog, category, tag, comusers, users<br>Допустимые значения changefreq: always, hourly, daily, weekly, monthly, yearly, never<br>Допустимы значения priority: от 0.0 до 1.0'),
-							
 							'default' =>	'home | daily | 1' . NR .
-											'notblog | monthly | 0.7' . NR . 
-											'blog | weekly | 0.5' . NR .
-											'category | weekly | 0.3' . NR.
-											'tag | weekly | 0.3' . NR .
-											'comuser | weekly | 0.3' . NR .
-											'user | weekly | 0.3',
+									'notblog | monthly | 0.7' . NR . 
+									'blog | weekly | 0.5' . NR .
+									'category | weekly | 0.3' . NR.
+									'tag | weekly | 0.3' . NR .
+									'comuser | weekly | 0.3' . NR .
+									'user | weekly | 0.3',
 						),
 
 			'tags_show' => array(
@@ -362,11 +374,10 @@ function xml_sitemap_mso_options()
 							'group_end' => '<hr>',
                         ),
 			
-			
             'page_hide' => array(
                             'type' => 'text', 
-                            'name' => t('Исключить страницы'), 
-                            'description' => t('Перечислите через запятую ID страниц, которые не будут добавлены в sitemap.xml'), 
+                            'name' => t('Исключить страницы (записи)'), 
+                            'description' => t('Перечислите через запятую ID записей, которые <b>не будут</b> добавлены в sitemap.xml'), 
                             'default' => ''
                         ),
 						
@@ -384,13 +395,19 @@ function xml_sitemap_mso_options()
                             'default' => ''
                         ),
 						
+			'custom_urls' => array(
+							'type' => 'textarea', 
+							'name' => 'Кастомные адреса для добавления', 
+							'description' => t('Укажите (по одному в каждой строке) абсолютные или относительные адреса нестандартных страниц или файлов (например, DOCX-файл из папки UPLOADS) сайта, которые необходимо добавить в sitemap.xml. Для этих адресов будет использованы настройки приоритета и частоты от <b>notblog</b>.'),
+							'default' =>	'',
+						),
 
             ),
 		t('Настройки XML Sitemap'), # Заголовок страницы с настройками плагина
 		
 		t('C помощью настроек плагина можно настроить частоту и приоритет обновления информации о страницах, а также убрать вывод ненужных адресов страниц в файле <b>sitemap.xml</b> и тем самым уменьшить количество сообщений об ошибках индексации в панелях вебмастера в поисковых системах («<a href="http://webmaster.yandex.ru/">Яндекс.Вебмастер</a>» и «<a href="https://www.google.com/webmasters/tools/home?hl=ru">Инструменты для веб-мастеров в Google</a>»).')  // инфа
     );
-	
+		
 	if ($_POST) xml_sitemap_custom();
 }
 

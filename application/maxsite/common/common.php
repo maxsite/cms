@@ -2234,7 +2234,6 @@ function mso_widget_get_post($option = '')
 
 
 # функция отправки письма по email
-# preferences пока не реализована
 function mso_mail($email = '', $subject = '', $message = '', $from = false, $preferences = array())
 {
 	
@@ -2265,9 +2264,6 @@ function mso_mail($email = '', $subject = '', $message = '', $from = false, $pre
 			$CI->email->attach($preferences['attach']);
 		}
 	}
-		
-	if ($from) $admin_email = $from;
-		else $admin_email = mso_get_option('admin_email_server', 'general', 'admin@site.com');
 	
 	$config['wordwrap'] = isset($preferences['wordwrap']) ? $preferences['wordwrap'] : TRUE;
 	$config['wrapchars'] = isset($preferences['wrapchars']) ? $preferences['wrapchars'] : 90;
@@ -2280,10 +2276,27 @@ function mso_mail($email = '', $subject = '', $message = '', $from = false, $pre
 
 	$CI->email->to($email);
 	
+	// (переделка из-за ужесточения правил почтовиков)
+	// $from теперь это reply-to: 
+	// а from: всегда равен admin_email_server из настроек сайта
+	$admin_email = mso_get_option('admin_email_server', 'general', 'admin@site.com');
+	$from_name = isset($preferences['from_name']) ? $preferences['from_name'] : ''; //getinfo('name_site');
+	
+	$CI->email->from($admin_email, getinfo('name_site'));
+	
+	// если указан $from, то трактуем его как Reply-to
+	if ($from)
+		$CI->email->reply_to($from, $from_name);
+	
+	/*
+	if ($from) $admin_email = $from;
+		else $admin_email = mso_get_option('admin_email_server', 'general', 'admin@site.com');
+	
 	if (isset($preferences['from_name']))
 		$CI->email->from($admin_email, $preferences['from_name']);
 	else	
 		$CI->email->from($admin_email, getinfo('name_site'));
+	*/
 	
 	$CI->email->subject($subject);
 	$CI->email->message($message);

@@ -351,7 +351,7 @@ Referer: {{ $comment_referer }}
 	$text = ob_get_contents(); ob_end_clean();
 		
 	$data = array_merge($data, array('comment' => true));      // Чтобы плагин smtp_mail точно знал, что ему подсунули коммент, а не вычислял это по subject
-	return mso_mail($email, $subject, $text, $false, $data);   // А зная о комментарии, он сможет сотворить некоторые бонусы.
+	return mso_mail($email, $subject, $text, false, $data);   // А зная о комментарии, он сможет сотворить некоторые бонусы.
 }
 
 

@@ -188,7 +188,7 @@ if ($pages)
 								
 								// связанные страницы по родителям
 								if ($page_nav = mso_page_nav($p->val('page_id'), $p->val('page_id_parent')))
-									$p->div($page_nav, 'page_nav');
+									$p->div($page_nav, 'mso-page-parents');
 								
 								// блок "Еще записи по теме"
 								if ($f = mso_page_foreach('page-other-pages')) require($f);

@@ -99,9 +99,11 @@ else
 	}
 	else
 	{
+		echo '<div class="mso-page-only"><div class="mso-page-content mso-type-page_404">';
 		echo '<h1>' . tf('404. Ничего не найдено...') . '</h1>';
 		echo '<p>' . tf('Извините, пользователь с указанным номером не найден.') . '</p>';
 		echo mso_hook('page_404');
+		echo '</div></div>';
 	}
 }
 

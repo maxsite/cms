@@ -426,19 +426,19 @@ ul.mso-tabs-nav {
 	{
 		color: #fff;
 		cursor: default;
-		background-color: #35AA47;
+		background-color: #455A64;
 		
 		&:hover {
-			background-color: #35AA47;
+			background-color: #455A64;
 		}
 	}
 	
-	
+	/*
 	li.mso-tabs-current.i-cat {
-		background-color: #35AA47;
+		background-color: #81371f;
 		
 		&:hover {
-			background-color: #35AA47;
+			background-color: #81371f;
 		}
 	}
 	
@@ -473,12 +473,19 @@ ul.mso-tabs-nav {
 			background-color: #00b386;
 		}
 	}
+	
+	*/
 }
 
 div.mso-tabs-box {
 	display: none; 
-	background-color: #eee; 
+	// background-color: #eee; 
 	// padding: 20px;
+	
+	&.tabs_bordered {
+		border: 1px solid #dddddd;
+		background-color: #F8F8F8;
+	}
 }
 
 div.mso-tabs-box.mso-tabs-visible {
@@ -553,181 +560,200 @@ div.admin-edit-widgets {
 	}
 }
 
-
-// табы в редактировании записи
-div.page_meta_container {
-	
-	// рубрики и метки
-	div.all-cat {
-		
-		padding: 20px 20px 10px 20px;
-	
-		div.page_cat {
-			
-			li {
-				vertical-align: top;
-			}
-			
-			label input {
-				margin-right: 5px;
-			}
-			
-			ul {
-				margin: 0;
-				padding: 0;
-				list-style: none;
-				
-				ul {
-					padding-left: 30px;
-				}
-			}
-			
-			li.level0 {
-				display: inline-block;
-				margin-right: 30px;
-				margin-bottom: 20px;
-				
-				> label { 
-					.bold;
-				}
-			}
-			
-			li.parent0 {
-				> label { 
-					.bold;
-				}
-			}
-		}
-		
-		div.page_tags {
-			h4 { }
-		}
-	}
-	
-	
-	// дополнительные поля
-	div.all-meta,
-	div.custom-meta 
-	{
-		
-		padding: 10px 20px 10px 20px;
-		
-		p {
-			color: @g_gray600;
-		}
-		
-		textarea,
-		select, 
-		input 
-		{
-			width: 100%;
-		}
-		
-		div.page_meta_block {
-			border-bottom: 1px dotted @g_gray400;
-			
-			&:last-child {
-				border: none;
-			}
-		}
-		
-	}
-	
-	// прочее 
-	div.other {
-		
-	}
-	
-	// файлы
-	div.all-files {
-	
-		padding: 10px 20px 10px 20px;
-		
-		div.all-files-nav {
-			padding: 10px 0 20px 0;
-			
-			a {
-				background: @g_blue_gray600;
-				padding: 5px 10px;
-				color: @g_gray100;
-				// .t90;
-				
-				&:hover {
-					background: @g_blue_gray400;
-					text-decoration: none;
-				}
-				
-				&:before {
-					.icon-fa-normal;
-					content: @fa-var-files-o;
-				}
-			}
-			
-			a.all-files-upload:before {
-				content: @fa-var-upload;
-			}
-			
-			a.selected {
-				background: @g_blue_gray400;
-			}
-		}
-		
-		div.all-files-result {
-			.flex;
-			.grid_flex > .wrap(wrap);
-			justify-content: flex-start;
-		}
-		
-		div.all-files-image {
-		
-			// display: inline-block;
-			
-			.flex;
-			.flex-vcenter;
-			margin: 0 20px 20px 0;
-			
-			// background: @g_blue_gray900;
-			background: @g_white;
-			border: 1px solid @g_gray400;
+// редактор
+div.new_or_edit {
+	div.page-header {
+		input {
+			.w100;
 			padding: 10px;
+			.t140;
+			//.bold;
+			border: 1px solid @g_gray300;
+		}
+	}
+	
+	div.page_status {
+		
+		p.page_status {
+			margin-top: 10px;
+		}
+		
+		p.page_status label {
+			margin-right: 20px;
+		}
+	}
+	
+	div.tabs_editor {
+		// margin-top: 10px;
+	}
+	
+	ul.mso-tabs-nav {
+		margin-bottom: 10px;
+	}
+}
+
+// рубрики в редактировании записи
+div.page_cat {
+	padding: 20px 20px 10px 20px;
 			
-			/*
-			margin: 0 10px 20px 10px;
-			height: 170px;
-			vertical-align: top;
-			border: 1px dotted @g_gray400;
+	li {
+		vertical-align: top;
+	}
+	
+	label input {
+		margin-right: 5px;
+	}
+	
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		
+		ul {
+			padding-left: 30px;
+		}
+	}
+	
+	li.level0 {
+		display: inline-block;
+		margin-right: 30px;
+		margin-bottom: 20px;
+		
+		> label { 
+			.bold;
+		}
+	}
+	
+	li.parent0 {
+		> label { 
+			.bold;
+		}
+	}
+}
+
+// метки 
+div.page_tags {
+	padding: 20px 20px 10px 20px;
+}
+		
+// дополнительные поля
+div.all-meta,
+div.custom-meta,
+div.all-other
+{
+	padding: 10px 20px 10px 20px;
+	
+	p {
+		color: @g_gray600;
+	}
+	
+	textarea,
+	select, 
+	input 
+	{
+		width: 100%;
+	}
+	
+	div.page_meta_block {
+		border-bottom: 1px dotted @g_gray400;
+		
+		&:last-child {
+			border: none;
+		}
+	}
+	
+}
+
+// файлы в редактировании записи
+div.all-files {
+
+	margin-top: 30px;
+	// padding: 10px 20px 10px 20px;
+	
+	div.all-files-nav {
+		padding: 10px 0 20px 0;
+		
+		a {
+			background: @g_blue_gray600;
+			padding: 5px 10px;
+			color: @g_gray100;
+			// .t90;
 			
-			*/
-			span {
-				display: block;
-				background: @g_blue_gray300;
-				padding: 2px 10px;
-				color: @g_gray100;
-				.t90;
-				cursor: pointer;
-				.t-center;
-				margin: 1px 0 0 0;
-				
-				&:hover {
-					background: @g_blue_gray500;
-				}
+			&:hover {
+				background: @g_blue_gray400;
+				text-decoration: none;
+			}
+			
+			&:before {
+				.icon-fa-normal;
+				content: @fa-var-files-o;
 			}
 		}
 		
-		div.all-files-image-mini {
-		
+		a.all-files-upload:before {
+			content: @fa-var-upload;
 		}
 		
-		div.all-files-image-actions {
-			margin: 0 0 0 10px;
+		a.selected {
+			background: @g_blue_gray400;
 		}
-		
-		img {
-			padding: 5px;
-			border: 1px solid @g_gray400;
-		}
-		
 	}
+	
+	div.all-files-result {
+		.flex;
+		.grid_flex > .wrap(wrap);
+		justify-content: flex-start;
+	}
+	
+	div.all-files-image {
+	
+		// display: inline-block;
+		
+		.flex;
+		.flex-vcenter;
+		margin: 0 20px 20px 0;
+		
+		// background: @g_blue_gray900;
+		background: @g_white;
+		border: 1px solid @g_gray400;
+		padding: 10px;
+		
+		/*
+		margin: 0 10px 20px 10px;
+		height: 170px;
+		vertical-align: top;
+		border: 1px dotted @g_gray400;
+		
+		*/
+		span {
+			display: block;
+			background: @g_blue_gray300;
+			padding: 2px 10px;
+			color: @g_gray100;
+			.t90;
+			cursor: pointer;
+			.t-center;
+			margin: 1px 0 0 0;
+			
+			&:hover {
+				background: @g_blue_gray500;
+			}
+		}
+	}
+	
+	div.all-files-image-mini {
+	
+	}
+	
+	div.all-files-image-actions {
+		margin: 0 0 0 10px;
+	}
+	
+	img {
+		padding: 5px;
+		border: 1px solid @g_gray400;
+	}
+	
 }
 
 // loginform
@@ -803,34 +829,7 @@ html.loginform {
 	100% { filter: alpha(opacity=100); opacity: 1; margin-top: 0; }
 }
 
-// редактор
-div.new_or_edit {
-	div.page-header {
-		input {
-			.w100;
-			padding: 10px;
-			.t140;
-			//.bold;
-			border: 1px solid @g_gray300;
-		}
-	}
-	
-	div.page_status {
-		
-		p.page_status {
-			margin-top: 10px;
-		}
-		
-		p.page_status label {
-			margin-right: 20px;
-		}
-		
-		a.page_files {
-			display: inline-block;
-			float: right;
-		}
-	}
-}
+
 
 // ушки
 div.plugin-ushki {

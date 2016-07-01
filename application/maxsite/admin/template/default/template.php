@@ -29,7 +29,7 @@
 	// url каталог текущего шаблона
 	$admin_template_url = getinfo('admin_url') . 'template/' . mso_get_option('admin_template', 'general', 'default') . '/';
 	
-	$admin_css = $admin_template_url . 'assets/css/style.css';
+	$admin_css = $admin_template_url . 'assets/css/style.css'; // основной css-файл
 	$admin_css = mso_hook('admin_css', $admin_css);
 	
 	$admin_css_profile = ''; // дополнительные css-файлы

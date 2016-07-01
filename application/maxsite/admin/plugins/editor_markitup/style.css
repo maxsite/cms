@@ -16,7 +16,7 @@
 	width:100%;
 }
 .markItUpContainer  {
-	border:1px solid #3C769D;	
+	border:1px solid #cccccc;	
 	background:#FFF;
 	padding:5px 10px 2px 5px;
 }
@@ -27,7 +27,7 @@
 	font-family: PT Mono, Monaco, Menlo, Consolas, Courier New, monospace;
 	padding:0;
 	border:none;
-	border-top:1px solid #3C769D;	
+	border-top:1px solid #cccccc;	
 	width:100%;
 	display:block;
 	overflow:auto;
@@ -36,12 +36,12 @@
 }
 .markItUpEditor:focus {
 	border:none;
-	border-top:1px solid #3C769D;
+	border-top:1px solid #cccccc;
 }
 .markItUpPreviewFrame	{
 	overflow:auto;
 	background-color:#FFFFFF;
-	border:1px solid #3C769D;
+	border:1px solid #cccccc;
 	width:99.9%;
 	height:300px;
 	margin:5px 0;
@@ -89,7 +89,8 @@
 	background-color:#CCC;
 }
 .markItUpHeader ul ul .markItUpSeparator {
-	width:auto; height:1px;
+	width:auto; 
+	height:1px;
 	margin:0;
 }
 /* next rows of buttons */

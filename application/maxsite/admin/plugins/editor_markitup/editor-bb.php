@@ -14,7 +14,7 @@
 	if (!is_numeric($auto_id)) $auto_id = 0; // ошибочный id
 ?>
 	
-<script language="javascript">
+<script>
 	autosaveurl = '<?= getinfo('ajax') . base64_encode('admin/plugins/editor_markitup/autosave-post-ajax.php') ?>';
 	autosaveid = '<?= $auto_id ?>';
 
@@ -23,6 +23,8 @@
 		$('#f_content').markItUp(myBbcodeSettings);
 	});
 </script>
+
+<?= $editor_config['do_script'] ?>
 
 <form method="post" <?= $editor_config['action'] ?> enctype="multipart/form-data" id="form_editor">
 <?= $editor_config['do'] ?>

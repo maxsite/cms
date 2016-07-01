@@ -33,6 +33,9 @@ function editor_markitup($args = array())
 		
 	if (isset($args['do'])) $editor_config['do'] = $args['do'];
 		else $editor_config['do'] = '';
+	
+	if (isset($args['do_script'])) $editor_config['do_script'] = $args['do_script'];
+		else $editor_config['do_script'] = '';
 		
 	if (isset($args['posle'])) $editor_config['posle'] = $args['posle'];
 		else $editor_config['posle'] = '';	
@@ -45,7 +48,6 @@ function editor_markitup($args = array())
 	{
 		$editor_options = mso_get_option('editor_options', 'admin', array());
 		
-		
 		if (isset($editor_options['editor_height']) and $editor_options['editor_height'] > 0)
 		{
 			$editor_config['height'] = (int) $editor_options['editor_height'];
@@ -56,7 +58,6 @@ function editor_markitup($args = array())
 			$editor_config['height'] = 400;
 		}
 	}
-	
 
 	# Приведение строк с <br> в первозданный вид
 	$editor_config['content'] = preg_replace('"&lt;br\s?/?&gt;"i', "\n", $editor_config['content']);

@@ -42,7 +42,7 @@ if ($n = mso_segment(3)) // указан N номер записи
 	}
 	
 	
-	$all_files = '<div class="all-files-nav"><a href="' . getinfo('site_admin_url') . 'files/' . $current_dir . '" target="_blank" class="goto-files">' . t('Управление файлами') . '</a> <a href="#" id="all-files-upload" class="all-files-upload">' . t('Быстрая загрузка') . '</a></div>';
+	$all_files = '<div class="all-files-nav"><a href="#" id="all-files-upload" class="all-files-upload">' . t('Быстрая загрузка') . '</a> <a href="' . getinfo('site_admin_url') . 'files/' . $current_dir . '" target="_blank" class="goto-files">' . t('Управление файлами') . '</a></div>';
 	
 	// скрипт выполняет аякс
 	// первый раз при загрузке страницы
@@ -181,7 +181,7 @@ $all_files .= '
 }
 else
 {
-	$all_files = t('Сохраните запись');
+	$all_files = ''; // t('Сохраните запись');
 }
 
 

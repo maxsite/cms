@@ -80,9 +80,8 @@ $custom_meta = all_meta_parse($custom_meta, $page_all_meta);
 // custom_meta может и не быть в текущем шаблоне, поэтому делаем их вывод отдельно в формате tabs
 if 	($custom_meta)
 {
-	$custom_meta = '<div class="mso-tabs-box custom-meta">' . $custom_meta . '</div>';
-	
-	$custom_meta_i = '<li class="mso-tabs-elem i i-custom-meta"><span>' . t('Шаблонные') . '</span></li>';
+	$custom_meta = '<div class="mso-tabs-box custom-meta tabs_bordered">' . $custom_meta . '</div>';
+	$custom_meta_i = '<li class="mso-tabs-elem i-custom-meta"><span>' . t('Шаблонные') . '</span></li>';
 }
 
 

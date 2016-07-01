@@ -25,18 +25,7 @@ function admin_page_admin_init($args = array())
 	{
 		$this_plugin_url = 'page'; // url и hook
 		
-		# добавляем свой пункт в меню админки
-		# первый параметр - группа в меню
-		# второй - это действие/адрес в url - http://сайт/admin/demo
-		#			можно использовать добавочный, например demo/edit = http://сайт/admin/demo/edit
-		# Третий - название ссылки	
-		# четвертый номер по порядку
-		
 		mso_admin_menu_add('page', $this_plugin_url, t('Все записи'), 2);
-
-		# прописываем для указаного admin_url_ + $this_plugin_url - (он будет в url) 
-		# связанную функцию именно она будет вызываться, когда 
-		# будет идти обращение по адресу http://сайт/admin/_null
 		mso_admin_url_hook ($this_plugin_url, 'admin_page_admin');
 	}
 	
@@ -117,33 +106,28 @@ function admin_page_hide_blocks($arg = array())
 	$options = mso_get_option('editor_options', 'admin', array());
 	
 	$css = '';
-	if ( isset($options['page_status']) and !$options['page_status']) $css .= 'p.page_status {display: none !important;}' .NR ;
-	if ( isset($options['page_files']) and !$options['page_files']) $css .= 'a.page_files {display: none !important;}' .NR ;
 	
-	if ( isset($options['page_all_parent']) and !$options['page_all_parent']) $css .= 'p.page_all_parent {display: none !important;}' .NR ;
+	if ( isset($options['page_status']) and !$options['page_status']) 
+		$css .= 'p.page_status {display: none !important;}' .NR ;
+		
+	if ( isset($options['page_files']) and !$options['page_files']) 
+		$css .= 'a.page_files {display: none !important;}' .NR ;
 	
-	if ( isset($options['cat_height']) and $options['cat_height']) $css .= 'div.tabs-box.all-cat div.page_cat {max-height: ' . ((int) $options['cat_height']) . 'px!important; overflow: auto;}' .NR ;
+	if ( isset($options['page_all_parent']) and !$options['page_all_parent']) 
+		$css .= 'p.page_all_parent {display: none !important;}' .NR ;
 	
+	if ( isset($options['cat_height']) and $options['cat_height']) 
+		$css .= 'div.tabs-box.all-cat div.page_cat {max-height: ' . ((int) $options['cat_height']) . 'px!important; overflow: auto;}' .NR ;
 	
 	if ($css)
-	{
-		echo NR . '<style>' . NR . $css . '</style>' . NR;
-	}
+		echo NR . '<style>' . $css . '</style>' . NR;
 	
 	// если второй сегмент page_edit, то в меню выделим пункт список
 	if (mso_segment(2)== 'page_edit')
 	{
-		echo '
-		<script>
-			$(function(){
-				$("li.admin-menu-page").addClass("admin-menu-selected");
-			});
-		</script>
-		';
-		
-		
-		//		$("li.admin-menu-page a").text("' . t('Список/правка') . '");
+		echo '<script> $(function(){ $("li.admin-menu-page").addClass("admin-menu-selected"); }); </script>';
 	}
 }
 
-# end file
+
+# end of file

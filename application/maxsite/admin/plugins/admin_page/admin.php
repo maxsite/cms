@@ -341,15 +341,16 @@
 
 		
 		echo '<form method="post">' . mso_form_session('f_session_id');
-		echo '<h2 class="br">' . t('Удалить страницу') . '</h2><p>';
-		echo $all_pages;
-		echo ' <button type="submit" name="f_submit" class="button i-remove" onClick="if(confirm(\'' . t('Удалить страницу?') . '\')) {return true;} else {return false;}" >' . t('Удалить') . '</button></p>';
-		echo '</form>';
+		echo '<div class="flex flex-vcenter mar20-t">';
+		
+		echo '<div class="flex-grow1 pad10-r">' . $all_pages . '</div>';
+		echo '<div class="flex-grow1"><button type="submit" name="f_submit" class="button i-remove" onClick="if(confirm(\'' . t('Удалить страницу?') . '\')) {return true;} else {return false;}" >' . t('Удалить') . '</button></div>';
+		echo '</div></form>';
 
 	}
 	else
 	{
-		echo '<h2>' . t('Страниц не найдено') . '</h2>';
+		echo '<hr><h3>' . t('Страниц не найдено') . '</h3>';
 		
 	}
 	

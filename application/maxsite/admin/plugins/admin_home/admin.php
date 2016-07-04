@@ -11,10 +11,11 @@
 	<li><a href="//max-3000.com/page/help"><?= t('Центр помощи') ?></a> &bull; <a href="//max-3000.com/page/faq"><?= t('ЧАВО для новичков') ?></a></li>
 	<li><a href="//maxhub.ru/"><?= t('MaxHub - сообщество MaxSite CMS') ?></a></li>
 	<li><a href="//forum.max-3000.com/"><?= t('Форум поддержки') ?></a> &bull; <a href="//maxhub.ru/category/templates"><?= t('Шаблоны') ?></a> &bull; <a href="//maxhub.ru/category/plugins"><?= t('Плагины') ?></a></li>
+	<li><a href="//wbloger.com/demo-templates"><?= t('Демо-каталог шаблонов') ?></a></li>
 </ul>
 <div class="flex-grow1">
-	<a class="b-block bg-blue600 pad20 t-center t-white hover-t-white hover-bg-blue500 hover-no-underline" href="//unicss.maxsite.com.ua/" target="_blank" title="Less/Css-фреймворк UniCSS"><b>.UniCSS</b> { Less/Css: Framework }</a>
-	<a class="b-block bg-red600 pad20 mar10-t t-center i-check t-white hover-t-white hover-bg-red500 hover-no-underline" href="//wbloger.com/" target="_blank" title="Создание реактивных сайтов"><b>Создание реактивных сайтов</b></a>
+	<a class="b-block bg-red600 pad20 t-center i-check t-white hover-t-white hover-bg-red500 hover-no-underline" href="//wbloger.com/" target="_blank" title="Создание реактивных сайтов"><b>Создание реактивных сайтов</b></a>
+	<a class="b-block bg-blue600 pad20 mar10-t t-center t-white hover-t-white hover-bg-blue500 hover-no-underline" href="//unicss.maxsite.com.ua/" target="_blank" title="Less/Css-фреймворк UniCSS"><b>UniCSS</b> { Css: Framework } </a>
 </div>
 </div>
 <?php

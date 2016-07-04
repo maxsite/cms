@@ -74,7 +74,8 @@
 
 			$response = array(
 							'result' => $res,
-							'description'=>''
+							'description'=>'',
+							'upd_data' => $upd_data
 							);
 			mso_flush_cache(); // сбросим кэш
 		}

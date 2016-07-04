@@ -10,13 +10,12 @@
 function admin_cat_autoload($args = array())
 {	
 	mso_hook_add( 'admin_init', 'admin_cat_admin_init');
+	mso_hook_add( 'admin_head_css', 'admin_cat_head_css');
 }
-
 
 # функция выполняется при указаном хуке admin_init
 function admin_cat_admin_init($args = array()) 
 {
-
 	if ( mso_check_allow('admin_cat') ) 
 	{
 		$this_plugin_url = 'cat'; // url и hook
@@ -34,11 +33,19 @@ function admin_cat_admin_init($args = array())
 		# связанную функцию именно она будет вызываться, когда 
 		# будет идти обращение по адресу http://сайт/admin/_null
 		mso_admin_url_hook ($this_plugin_url, 'admin_cat_admin');
-		
-		
-
 	}
 	
+	return $args;
+}
+
+function admin_cat_head_css($args = array()) 
+{
+	// пока стили так, после нужно будет перенести в шаблон
+	if( mso_segment(2) == 'cat' )
+	{
+		echo '<link rel="stylesheet" href="'. getinfo('admin_url') . 'plugins/admin_cat/style.css">';
+	}
+		
 	return $args;
 }
 

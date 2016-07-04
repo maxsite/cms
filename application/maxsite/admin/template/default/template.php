@@ -104,7 +104,7 @@
 		</div>
 	</div>
 	
-	<div class="flex-grow2 pad20-rl pad20-b w100-tablet">
+	<div class="flex-grow2 pad20-r pad30-l pad20-b w100-tablet">
 		<?= $admin_content ?>
 	</div>
 </div>

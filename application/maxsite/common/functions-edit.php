@@ -153,9 +153,12 @@
 
 				if ($res)
 				{
+					$ins_data['category_id'] = $CI->db->insert_id();
+					
 					$response =	array(
 									'result' => $res,
-									'description'=>'Inserting new category'
+									'description'=>'Inserting new category',
+									'upd_data' => $ins_data
 								);
 					mso_flush_cache(); // сбросим кэш
 				}

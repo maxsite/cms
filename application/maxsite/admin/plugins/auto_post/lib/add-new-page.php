@@ -1,12 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 
-/*
-
-TODO
-- добавить проверку даты. Принимать любой вариант и форматировать в Y-m-d H:i:s
-
-*/
-
 // добавляем новую запись из файла
 // удалять файл после публикации???
 function add_new_page($fn, $UP_DIR)
@@ -47,8 +40,11 @@ function add_new_page($fn, $UP_DIR)
 			
 			// обязательные поля только TITLE
 			if (!isset($conf['TITLE'])) return;
-			
+
 			// формируем данные для постинга
+			
+			// функции редактирования
+			require_once( getinfo('common_dir') . 'functions-edit.php' ); 
 			
 			// дополнительные мета-данные
 			// вначале формируем общий массив, после выгоняем его в ##METAFIELD##
@@ -85,7 +81,7 @@ function add_new_page($fn, $UP_DIR)
 			
 			$meta_options = '';
 			
-			foreach ($page_meta_options as $key=>$val)
+			foreach ($page_meta_options as $key => $val)
 			{
 				$meta_options .= $key . '##VALUE##' . trim($val) . '##METAFIELD##';
 			}
@@ -123,7 +119,7 @@ function add_new_page($fn, $UP_DIR)
 			
 			$cat = array();
 			
-			// рубрики указываются CAT_ID или CAT_SLUG или CAT
+			// рубрики указываются: CAT_ID или CAT_SLUG или CAT или CAT+
 			if (isset($conf['CAT_ID']))
 			{
 				if ($c1 = mso_explode($conf['CAT_ID'])) // указанные рубрики
@@ -166,12 +162,67 @@ function add_new_page($fn, $UP_DIR)
 					{
 						foreach ($all_cats as $catX)
 						{
-							if (mb_strtolower($catX['category_name']) == $name) $cat[] = $catX['category_id'];
+							if (mb_strtolower($catX['category_name']) == $name) 
+							{
+								$cat[] = $catX['category_id'];
+							}
 						}
 					}
 				}
 			}
-			
+			elseif (isset($conf['CAT+']))
+			{
+				// это работает также как и CAT, но если рубрики нет, создает её с указанным именем
+				// в $c1 — нормализованные рубрики, в $c2 — исходные с учетом регистра (используется при добавлении)
+				$c1 = explode('/', trim($conf['CAT+']));
+				$c1 = array_map('trim', $c1);
+				$c1 = array_map('trim', $c1);
+				$c1 = $c2 = array_unique($c1);
+				$c1 = array_map('mb_strtolower', $c1);
+				
+				if ($c1)
+				{
+					$cat_add = array(); // массив, где храним новые рубрики
+					
+					foreach ($c1 as $key => $name) 
+					{
+						$f_present = false; // флаг найденности рубрики
+						
+						foreach ($all_cats as $catX)
+						{
+							if (mb_strtolower($catX['category_name']) == $name)
+							{
+								$cat[] = $catX['category_id'];
+								$f_present = true;
+							}
+						}
+						
+						if (!$f_present) // рубрики нет, нужно её добавить
+						{
+							if (!in_array($c2[$key], $cat_add)) $cat_add[] = $c2[$key];
+						}
+					}
+					
+					// pr($cat_add);
+					
+					// добавляем новые рубрики
+					if ($cat_add)
+					{
+						foreach($cat_add as $c_name)
+						{
+							$res = mso_new_category(array('category_name' => $c_name));
+							
+							if ($res['result']) // успешно добавлено
+							{
+								// заносим id рубрик к записи
+								$cat[] = $res['upd_data']['category_id'];
+							}
+						}
+					}
+				}
+			}
+
+			// _pr('');
 			// _log($cat, 'cat');
 			// _log($all_cats, 'all_cats');
 			
@@ -202,9 +253,6 @@ function add_new_page($fn, $UP_DIR)
 			if ($cat) $data['page_id_cat'] = implode(',', $cat);
 			
 			// _log($data, 'mso_new_page');
-			
-			// функции редактирования
-			require_once( getinfo('common_dir') . 'functions-edit.php' ); 
 			
 			$result = mso_new_page($data);
 			
@@ -252,12 +300,12 @@ function add_new_page($fn, $UP_DIR)
 		}
 		else
 		{
-			echo('Неверный фрормат файла (' . str_replace($UP_DIR, '', $fn) . ')');
+			echo(t('Неверный формат файла') . ' (' . str_replace($UP_DIR, '', $fn) . ')');
 		}
 	}
 	else
 	{
-		echo('Неверный фрормат файла (' . str_replace($UP_DIR, '', $fn) . ')');
+		echo(t('Неверный формат файла') . ' (' . str_replace($UP_DIR, '', $fn) . ')');
 	}
 }
 

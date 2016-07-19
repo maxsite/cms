@@ -1,0 +1,42 @@
+body {
+	background: #D4DEEA;
+}
+
+div.menu-search {
+	background: #113b6c;
+}
+
+div.menu-search ul.menu > li a:hover {
+    color: #fff;
+    background-color: #1C5EA8;
+}
+
+label.label-search {
+	background-color: #0e2f56;
+} 
+
+input.my-search, 
+input.my-search:focus {
+	color: #fff !important;
+	background-color: #13457e !important;
+}
+
+div.menu-icons {
+	background: #103663;
+}
+
+ul.menu2 li.selected a,
+ul.menu2 li.selected a:hover,
+ul.menu2 > li a:hover {
+    background-color: #144279;
+    color: #fff;
+}
+
+div.footer {
+	background-color: #144279;
+}
+
+div.pagination strong {
+    background: #144279;
+}
+

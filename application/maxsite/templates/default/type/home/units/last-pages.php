@@ -3,7 +3,7 @@
 /**
  * MaxSite CMS
  * (c) http://max-3000.com/
- * 25-11-2015
+ * 12-08-2016
  */
 /*
 
@@ -17,6 +17,7 @@ limit = 3
 Значение ключей по-умолчанию см. переменную $def
 
 */
+
 
 # используем кэширование
 $home_cache_time = (int) mso_get_option('home_cache_time', 'templates', 0);
@@ -37,12 +38,16 @@ else
 		'show_cut' => false,
 		'date_now' => true,
 		'page_id_autor' => 0,
+		'function_add_custom_sql' => '',
+		'pages_reverse' => false,
 		
 		'thumb' => true,
 		'thumb_width' => 100,
 		'thumb_height' => 100,
-		'class_thumb' => 'b-left mar15-r rounded',
+		// 'class_thumb' => 'b-left mar15-r rounded',
+		'thumb_class' => 'b-left mar15-r rounded',
 		'thumb_link_class' => '',
+		'thumb_link' => true,
 		
 		'content' => true,
 		'content_words' => 0,
@@ -101,7 +106,7 @@ else
 	);
 	
 	$UNIT = mso_merge_array($UNIT, $def);
-	
+
 	ob_start();
 	
 	$b = new Block_pages( array (
@@ -116,7 +121,9 @@ else
 				'show_cut' 		=> $UNIT['show_cut'],
 				'date_now' 		=> $UNIT['date_now'],
 				'page_id_autor'	=> $UNIT['page_id_autor'],
-				'exclude_page_allow'	=> $UNIT['exclude_page_allow'],
+				'exclude_page_allow'		=> $UNIT['exclude_page_allow'],
+				'function_add_custom_sql'	=> $UNIT['function_add_custom_sql'],
+				'pages_reverse'				=> $UNIT['pages_reverse'],
 			));
 		
 		if ($b->go)
@@ -135,8 +142,9 @@ else
 				'thumb' 				=> $UNIT['thumb'],
 				'thumb_width' 			=> $UNIT['thumb_width'],
 				'thumb_height' 			=> $UNIT['thumb_height'],
-				'thumb_class' 			=> $UNIT['class_thumb'],
+				'thumb_class' 			=> $UNIT['thumb_class'],
 				'thumb_link_class' 		=> $UNIT['thumb_link_class'],
+				'thumb_link' 			=> $UNIT['thumb_link'],
 
 				'line1' 				=> $UNIT['line1'],
 				'line2' 				=> $UNIT['line2'],

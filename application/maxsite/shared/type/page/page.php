@@ -146,8 +146,8 @@ if ($pages)
 							if ($f = mso_page_foreach('content')) require($f);
 							else
 							{
-								// есть отметка не выводить миниатюру
-								if ($p->meta_val('image_for_page_out') !== 'no-page')
+								// есть отметка выводить миниатюру
+								if ($p->meta_val('image_for_page_out') === '' or $p->meta_val('image_for_page_out') === 'page')
 								{
 									// если show_thumb_type_ТИП вернул false, то картинку не ставим
 									// show_thumb - если нужно отключить для всех типов

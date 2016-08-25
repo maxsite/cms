@@ -221,6 +221,12 @@ function mso_view_ini($all = false)
 			$name_f = '';
 		
 		
+		// если это субсекция, то выводим её перед опцей
+		if (isset($row['subsection']))
+		{
+			$CI->table->add_row(array('colspan' => 2, 'class'=>'subsection' , 'data' =>  $row['subsection']));
+		}
+		
 		if ($type == 'textfield')
 		{
 			$value = str_replace('_QUOT_', '&quot;', $value);
@@ -231,6 +237,8 @@ function mso_view_ini($all = false)
 			
 			
 			$f .= '<input type="' . $textfield_type . '" name="' . $name_f . '" value="' . $value . '"' . $placeholder . '>' . NR;
+
+			
 		}
 		elseif ($type == 'color')
 		{
@@ -406,7 +414,7 @@ function mso_view_ini($all = false)
 			if ($CI->table->rows) $table .= $CI->table->generate();
 			
 			$CI->table->clear(); // очистим, если были старые данные
-			
+
 			$tmpl['table_open'] = NR . '<table class="page page-responsive section_' . mso_slug($row['section']) . '"><colgroup style="width: 25%;">';
                     
 			$CI->table->set_template($tmpl); // шаблон таблицы
@@ -430,11 +438,11 @@ function mso_view_ini($all = false)
 			}
 			
 			$nav .= '<a href="#a-' . mso_slug($row['section']) . '" id="' . mso_slug($row['section']) . '">' . t($row['section']) . '</a>    ';
+			
 		}
 		
 		if ($key) $CI->table->add_row($key, $f);
 	}
-	
 	
 	if ($CI->table->rows) $table .= $CI->table->generate(); // последняя генерация
 	

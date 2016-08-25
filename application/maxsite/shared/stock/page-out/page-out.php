@@ -254,6 +254,10 @@ class Page_out
 		$meta_title = '';
 		$page_url = '';
 		
+		$content = '';
+		$content_words = '';
+		$content_chars = '';
+		
 		// title
 		if (strpos($out, '[title]') !== false)
 		{
@@ -467,6 +471,21 @@ class Page_out
 			$out = preg_replace_callback('!(\[val@)(.*?)(\])!is', array('self', '_line_val_set'), $out);
 		}
 		
+		if (strpos($out, '[content]') !== false)
+		{
+			$content = $this->get_content();
+		}
+		
+		if (strpos($out, '[content_chars@') !== false)
+		{
+			$out = preg_replace_callback('!(\[content_chars@)(.*?)(\])!is', array('self', '_line_content_chars'), $out);
+		}
+		
+		if (strpos($out, '[content_words@') !== false)
+		{
+			$out = preg_replace_callback('!(\[content_words@)(.*?)(\])!is', array('self', '_line_content_words'), $out);
+		}
+		
 		$out = str_replace('[title]', $title, $out);
 		$out = str_replace('[page_url]', $page_url, $out);
 		$out = str_replace('[autor]', $autor, $out);
@@ -486,6 +505,8 @@ class Page_out
 		
 		$out = str_replace('[thumb]', $this->thumb, $out);
 		
+		$out = str_replace('[content]', $content, $out);
+		
 		if ($out) 
 		{
 			if ($echo === 0) return $this->out($do . $out . $posle);
@@ -503,7 +524,6 @@ class Page_out
 	{
 		$m = $matches[2];
 		$m = $this->meta_val($m);
-		// pr($m);
 		return $m;
 	}
 	
@@ -512,10 +532,25 @@ class Page_out
 	{
 		$m = $matches[2];
 		$m = $this->val($m);
-		// pr($m);
 		return $m;
-	}	
-			
+	}
+	
+	// колбак для поиска [content_chars@КОЛВО]
+	protected function _line_content_chars($matches)
+	{
+		$m = $matches[2];
+		$m = mb_substr(strip_tags($this->get_content()), 0, $m, 'UTF-8');
+		return $m;
+	}
+	
+	// колбак для поиска [content_chars@КОЛВО]
+	protected function _line_content_words($matches)
+	{
+		$m = $matches[2];
+		$m = mso_str_word(strip_tags($this->get_content()), $m);
+		return $m;
+	}			
+	
 	// только получаем контент через mso_page_content()
 	function get_content()
 	{
@@ -759,7 +794,7 @@ class Page_out
 			return mso_page_url($this->val('page_slug'));
 	}
 	
-	
+	/*
 	# формирование таблиц из строк и ячеек аля-таблица
 	// если $rows1 = true, то сразу открываем row поскольку она одна
 	function box_start($class = 'table-box', $rows1 = true)
@@ -822,7 +857,7 @@ class Page_out
 	{
 		return $this->out(NR . '</div></div>');
 	}
-	
+	*/
 	
 	// парсинг - используется парсер CodeIgniter
 	// $template - это шаблон 
@@ -856,7 +891,7 @@ class Page_out
 		return $this->parse($tmpl, $data, $echo);
 	}	
 	
-	
+	/*
 	// вывод записей по принципу ячеек таблицы
 	// Здесь задается кол-во ячеек в одной строке
 	//	1 2
@@ -921,6 +956,7 @@ class Page_out
 			$this->close_box_grid = true;
 		}
 	}
+	*/
 	
 } // end  class Page_out 
 
@@ -929,8 +965,9 @@ class Page_out
 
 /*
 	Класс для вывода записей в колонках
+	больше не используется
 */
-
+/*
 class Columns 
 {
 	protected $cols_count = 3; // количество колонок
@@ -1048,7 +1085,7 @@ class Columns
 	
 } // end  class Columns 
 
-
+*/
 
 # получение адреса первой картинки IMG в тексте
 # адрес обрабатывается, чтобы сформировать адрес полный (full), миниатюра (mini) и превью (prev)
@@ -1158,12 +1195,14 @@ class Block_pages
 			'date_now' => true, // учитывать время публикации
 			'exclude_page_allow' => true, // учитывать исключенные ранее страницы
 			// 'exclude_page_add' => true, // разрешить добавлять полученные страницы в исключенные
+			'function_add_custom_sql' => false, // дополнительная функция для sql-запроса 
+			'pages_reverse' => false, // реверс результата 
 		);
 		
 		$this->param = array_merge($default, $r); // объединяем с дефолтом
 		
 		$exclude_page_id = ($this->param['exclude_page_allow']) ? mso_get_val('exclude_page_id') : array();
-		
+			
 		$this->pages = mso_get_pages( array ( 
 			'limit' => $this->param['limit'], 
 			'cut' => $this->param['cut'],
@@ -1182,6 +1221,9 @@ class Block_pages
 			
 			'custom_type' => 'home',
 			'exclude_page_id' => $exclude_page_id, // исключаем получение уже выведенных записей
+			
+			'function_add_custom_sql' => $this->param['function_add_custom_sql'],
+			'pages_reverse' => $this->param['pages_reverse'],
 			
 			// 'get_page_categories' => false,
 			// 'get_page_count_comments' => false,
@@ -1237,6 +1279,7 @@ class Block_pages
 			'thumb_height' => 180,
 			'thumb_class' => 'thumb left', // css-класс картинки
 			'thumb_link_class' => '', // css-класс ссылки 
+			'thumb_link' => true, // формировать ссылку на запись 
 			
 			// имя файла формируется как placehold_path + placehold_file
 			'placehold' => false, // если нет картинки, выводим плейсхолд (true) или ничего (false)
@@ -1281,9 +1324,9 @@ class Block_pages
 			'content_end' => '</div>', // обрамляющий блок после
 			
 			// колонки
-			'columns' => 0, // можно указать кол-во колонок
-			'columns_class_row' => 'onerow', // css-класс
-			'columns_class_cell' => 'col w1-2', // css-класс для ячейки (по-умолчанию 2 колонки)
+			// 'columns' => 0, // можно указать кол-во колонок
+			// 'columns_class_row' => 'onerow', // css-класс
+			// 'columns_class_cell' => 'col w1-2', // css-класс для ячейки (по-умолчанию 2 колонки)
 			
 			'clearfix' => false, // отбивать после вывода $p->clearfix();
 			
@@ -1295,9 +1338,9 @@ class Block_pages
 			
 			// колонки в виде ячеек таблицы 1 2 / 3 4 / 5 6
 			// может конфликтовать с columns
-			'box_grid' => 0, // указывается количество ячеек в одной строке
-			'box_grid_class' => 'w50', // указывается css-класс ячейки
-			'box_grid_box_class' => 'table-box', // указывается css-класс строки-контейнера
+			// 'box_grid' => 0, // указывается количество ячеек в одной строке
+			// 'box_grid_class' => 'w50', // указывается css-класс ячейки
+			// 'box_grid_box_class' => 'table-box', // указывается css-класс строки-контейнера
 			
 			'exclude_page_add' => true, // разрешить добавлять полученные страницы в исключенные
 
@@ -1323,19 +1366,19 @@ class Block_pages
 		
 		if ($r['exclude_page_add']) $exclude_page_id = mso_get_val('exclude_page_id');
 		
-		if ($r['columns'])
-		{
-			$my_columns = new Columns($r['columns'], count($this->pages), $r['columns_class_row']);
-		}
+		// if ($r['columns'])
+		// {
+		// 	$my_columns = new Columns($r['columns'], count($this->pages), $r['columns_class_row']);
+		// }
 		
-		if ($r['box_grid']) $p->box_grid($r['box_grid']);
+		// if ($r['box_grid']) $p->box_grid($r['box_grid']);
 		
 		foreach ($this->pages as $page)
 		{
 			$p->load($page); // загружаем данные записи
 			
-			if ($r['box_grid']) $p->box_grid_cell($r['box_grid_class'], $r['box_grid_box_class']); 
-			if ($r['columns']) $my_columns->out($r['columns_class_cell']);
+			// if ($r['box_grid']) $p->box_grid_cell($r['box_grid_class'], $r['box_grid_box_class']); 
+			// if ($r['columns']) $my_columns->out($r['columns_class_cell']);
 			
 			// echo $r['page_start'];
 			eval(mso_tmpl_prepare($r['page_start'], false));
@@ -1382,7 +1425,11 @@ class Block_pages
 						$t_placehold
 					))
 				{
-					$p->thumb = '<a class="' . $r['thumb_link_class'] . '" href="' . mso_page_url($p->val('page_slug')) . '" title="' . htmlspecialchars($p->val('page_title')). '"><img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '"></a>';
+					if ($r['thumb_link'])
+						$p->thumb = '<a class="' . $r['thumb_link_class'] . '" href="' . mso_page_url($p->val('page_slug')) . '" title="' . htmlspecialchars($p->val('page_title')). '"><img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '"></a>';
+					else
+						$p->thumb = '<img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '">';
+						
 				}
 			}
 			
@@ -1416,17 +1463,17 @@ class Block_pages
 			eval(mso_tmpl_prepare($r['page_end'], false));
 			
 			
-			if ($r['columns']) $my_columns->next();
-			if ($r['box_grid']) $p->box_grid_next();
+			// if ($r['columns']) $my_columns->next();
+			// if ($r['box_grid']) $p->box_grid_next();
 			
 			// сохраняем id записей, чтобы их исключить из вывода
 			if ($r['exclude_page_add']) $exclude_page_id[] = $p->val('page_id'); 
 		}
 		
 		
-		if ($r['columns']) $my_columns->close();
+		// if ($r['columns']) $my_columns->close();
 		
-		if ($r['box_grid']) $p->box_grid_end();
+		// if ($r['box_grid']) $p->box_grid_end();
 		
 		if ($r['exclude_page_add']) mso_set_val('exclude_page_id', $exclude_page_id);
 		
@@ -1452,4 +1499,4 @@ class Block_pages
 
 
 
-# end file
+# end of file

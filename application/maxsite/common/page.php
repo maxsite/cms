@@ -167,6 +167,9 @@ function mso_get_pages($r = array(), &$pag)
 	// нужно ли получать данные по количеству комментариев к страницам
 	if ( !isset($r['get_page_count_comments']) )	$r['get_page_count_comments'] = true;
 	
+	// после получения записей можно изменить порядрк записей на обратный
+	// если true, то делаем реверс 
+	if ( !isset($r['pages_reverse']) )	$r['pages_reverse'] = false;
 	
 	// можно указать key и table для получения произвольных выборок мета, например метки
 	// используется только для _mso_sql_build_tag
@@ -236,6 +239,8 @@ function mso_get_pages($r = array(), &$pag)
 	if ($query and $query->num_rows() > 0) // есть записи
 	{
 		$pages = $query->result_array();
+		
+		if ($r['pages_reverse']) $pages = array_reverse($pages);
 		
 		$MSO->data['pages_is'] = true; // ставим признак, что записи получены
 		
@@ -678,8 +683,12 @@ function _mso_sql_build_home($r, &$pag)
 			$CI->db->where_not_in('page.page_id', $r['exclude_page_id']);
 
 	// экранирование CodeIgniter! Они там что мухоморов объелись?! Приходится делать свои замены! 
-	if ($r['page_id']) $CI->db->order_by('FIELD(page_id_MSO_ZAP_' . implode('_MSO_ZAP_', $r['page_id']) . ')');
-			else $CI->db->order_by($r['order'], $r['order_asc']);
+	if ($r['page_id']) 
+		$CI->db->order_by('FIELD(page_id_MSO_ZAP_' . implode('_MSO_ZAP_', $r['page_id']) . ')');
+	else 
+	{
+		if ($r['order']) $CI->db->order_by($r['order'], $r['order_asc']);
+	}
 	
 	$CI->db->group_by('page.page_id');
 

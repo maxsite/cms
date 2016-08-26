@@ -1,24 +1,36 @@
 body {
 	background: #D4DEEA;
+	_background-image: linear-gradient(to bottom, #32567a 0%, #a9b4bf 100%);
+
+}
+
+a {
+	color: #32567A;
 }
 
 div.menu-search {
-	background: #113b6c;
+	background: #32567a;
 }
 
 div.menu-search ul.menu > li a:hover {
     color: #fff;
-    background-color: #1C5EA8;
+    background-color: #38638F;
 }
 
+div.menu-search ul.menu li.selected a {
+	background-color: #355e88;
+	color: #fff;
+}
+
+
 label.label-search {
-	background-color: #0e2f56;
+	background-color: #2d4054;
 } 
 
 input.my-search, 
 input.my-search:focus {
 	color: #fff !important;
-	background-color: #13457e !important;
+	background-color: #2d4054 !important;
 }
 
 div.menu-icons {
@@ -33,10 +45,10 @@ ul.menu2 > li a:hover {
 }
 
 div.footer {
-	background-color: #144279;
+	background-color: #32567a;
 }
 
 div.pagination strong {
-    background: #144279;
+    background: #32567a;
 }
 

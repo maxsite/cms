@@ -19,6 +19,8 @@
 		<p><label><span>{{ tf('Адрес сайта (если есть)') }}</span><input type="text" name="freg_url" value="{{ $vreg_url }}"></label></p>
 		
 		<p><label><input type="checkbox" name="freg_rules_ok"> {{ tf('Обязуюсь соблюдать правила сайта') }} {{ $rules }}</label></p>
+
+		<p>{{ mso_hook('comments_content_end') }}</p>
 		
 		<p><button type="submit" name="freg_submit">{{ tf('Зарегистрироваться') }}</button></p>
 	</form>

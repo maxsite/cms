@@ -59,6 +59,7 @@ function forms_content_callback($matches)
 		'require_title' => '*', // текст для обязательного поля
 		'antispam' => tf('Наберите число'), // вопросы антиспама
 		'antispam_ok' => $antispam_num, // правильный ответ на антиспам — задается автоматом
+		'captcha' => 0, // по-умолчанию сторонняя капча не используется
 	);
 	
 	$options = mso_section_to_array($text, 'options', $def, true);
@@ -134,6 +135,8 @@ function forms_content_callback($matches)
 	$format['message_error'] = '<p class="mso-forms-error">[message_error]</p>';
 	
 	$format['antispam'] = '<p><label><span>[antispam] [antispam_ok][require_title]</span>[input]</label></p>';
+
+	$format['captcha'] = '[captcha]';
 	
 	$format['buttons'] = '<p class="mso-forms-buttons">[submit] [reset]</p>';
 	
@@ -298,7 +301,16 @@ function forms_show_form($options, $files, $fields, $format)
 	}
 	
 	// антиспам
-	if ($options['antispam'])
+	if (isset($options['captcha']) and $options['captcha'])
+	{
+		ob_start();
+		mso_hook('comments_content_end');
+		$captcha = ob_get_contents(); ob_end_clean();
+		$require_title = ' ' . $options['require_title'];
+			
+		$out .= str_replace(array('[captcha]', '[require_title]'), array($captcha, $require_title), $format['captcha']);
+	}
+	elseif ($options['antispam'])
 	{
 		$antispam = $options['antispam'];
 		$antispam_ok = $options['antispam_ok'];
@@ -363,7 +375,19 @@ function forms_content_post($options, $files, $fields, $format)
 		// pr($post);
 		
 		// антиспам
-		if ($options['antispam'])
+		
+		if (isset($options['captcha']) and $options['captcha'])
+		{
+			if ( !mso_hook('comments_new_captcha') )
+			{
+				$result['show_error'][] = tf('Неверно заполнено поле антиспама');
+				$result['show_form'] = true;
+				$result['fields'] = $fields;
+			
+				return $result;
+			}
+		}
+		elseif ($options['antispam'])
 		{
 			if (
 				!isset($post['forms_fields']['antispam'])

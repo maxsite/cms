@@ -1,22 +1,25 @@
-(с) MaxSite CMS, 2008-2015
+(с) MaxSite CMS, 2008-2016
+
+
+ПОЛЕЗНЫЕ ССЫЛКИ
 ----------------------------------------------------------------------------------------------------
-
-Полезные ссылки:
-
 	* Официальный сайт: http://max-3000.com/
-	* Автор: http://maxsite.org/, http://maxsite.com.ua/
+	* Сайт автора: http://maxsite.org/
 	* Анонсы системы: https://twitter.com/maxsite
 	
 	* Последний релиз: https://github.com/maxsite/cms
 	* DEV-версия для разработчиков: https://github.com/maxsite/cms/tree/dev						
 	
-	* Книга по MaxSite CMS: http://book.max-3000.com/
+	* Обучающая книга по MaxSite CMS: http://book.max-3000.com/
 	* ЧАВО для новичков: http://max-3000.com/page/faq
 	* Центр помощи: http://max-3000.com/help
-	* Форум поддержки: http://forum.max-3000.com/
 	
-	* Каталог шаблонов: http://forum.max-3000.com/viewforum.php?f=13
-	* Каталог плагинов: http://forum.max-3000.com/viewforum.php?f=17
+	* Форум поддержки: http://forum.max-3000.com/
+	* MaxHub - сообщество MaxSite CMS: http://maxhub.ru/
+	
+	* Каталог шаблонов: http://maxhub.ru/category/templates
+	* Каталог плагинов: http://maxhub.ru/category/plugins
+	* Демо-каталог шаблонов: http://wbloger.com/demo-templates
 
 
 ТРЕБОВАНИЯ СИСТЕМЫ

@@ -520,8 +520,8 @@ function mso_get_pages($r = array(), &$pag)
 			
 			
 			$output = mso_hook('content_complete', $output);
-			
 			$pages[$key]['page_content'] = $output;
+			$pages[$key] = mso_hook('page_complete', $pages[$key]);
 		}
 	}
 	else
@@ -601,7 +601,10 @@ function _mso_sql_build_home($r, &$pag)
 		if ($exclude_page_id)
 			$CI->db->where_not_in('page.page_id', $r['exclude_page_id']);
 
-		$CI->db->order_by('page_date_publish', 'desc');
+		// $CI->db->order_by('page_date_publish', 'desc');
+		
+		if ($r['order']) $CI->db->order_by($r['order'], $r['order_asc']);
+		
 		$CI->db->group_by('page.page_id');
 		
 		if ($function_add_custom_sql = $r['function_add_custom_sql']) $function_add_custom_sql();

@@ -193,7 +193,7 @@ CREATE TABLE _PREFIX_page (
 	page_content longtext,
 	page_content2 longtext,
 	page_date_publish datetime NOT NULL default '2008-01-01 00:00:00',
-	page_date_dead datetime NOT NULL default '0000-00-00 00:00:00',
+	page_date_dead datetime NOT NULL default '2008-01-01 00:00:00',
 	page_last_modified datetime NOT NULL default '2008-01-01 00:00:00',
 	page_status enum('publish','draft','private') NOT NULL default 'publish',
 	page_menu_order bigint(20) NOT NULL default '0',

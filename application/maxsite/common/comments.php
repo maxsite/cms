@@ -10,7 +10,7 @@
 # функция получения комментариев
 function mso_get_comments($page_id = 0, $r = array())
 {
-	global $MSO;
+	global $MSO, $page;
 	
 	$r = mso_hook('mso_get_comments_args', $r);
 
@@ -74,7 +74,11 @@ function mso_get_comments($page_id = 0, $r = array())
 	// вручную делаем этот where, потому что придурочный CodeIgniter его неверно экранирует
 	$CI->db->where($CI->db->dbprefix . 'page.page_id', $CI->db->dbprefix . 'comments.comments_page_id', false);
 	
-	$CI->db->where('page.page_status', 'publish');
+	// для private-записей комментарии разрешаем
+	if (isset($page['page_status']) and $page['page_status'] === 'private')
+		$CI->db->where('page.page_status', 'private');
+	else
+		$CI->db->where('page.page_status', 'publish');
 	
 	$CI->db->order_by('comments.comments_date', $r['order']);
 	
@@ -1946,4 +1950,4 @@ function mso_avatar($comment, $img_add = 'class="mso-gravatar"', $echo = false, 
 		else return $avatar_url;
 }
 
-# end file
+# end of file

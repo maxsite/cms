@@ -57,31 +57,36 @@ foreach ($pages as $page)
 		{
 			require($f);
 		}
+		elseif ($info = mso_get_option('info-top_' . getinfo('type') , getinfo('template'), '') and $f = mso_fe('type_foreach/info-top/' . $info))
+		{
+			require($f);
+		}
+		elseif ($f = mso_page_foreach('info-top'))
+		{
+			require($f);
+		}
 		else
 		{
-			if ($f = mso_page_foreach('info-top'))
-			{
-				require($f);
-			}
-			else
-			{
-				$p->html(NR . '<header>');
-					$p->line('[title]');
-					
-					$p->div_start('mso-info mso-info-top');
-						$p->line('[date][edit][cat][tag][view_count]');
-					$p->div_end('info info-top');
-					
-				$p->html('</header>');
-			}
+			$p->html(NR . '<header>');
+				$p->line('[title]');
+				
+				$p->div_start('mso-info mso-info-top');
+					$p->line('[date][edit][cat][tag][view_count]');
+				$p->div_end('info info-top');
+				
+			$p->html('</header>');
 		}
 		
 		
-		if ($f = mso_page_foreach('page-content-full')) 
+		if (getinfo('type') == 'page_404' and mso_segment(1) and $f = mso_page_foreach('page-content-full-segment-' . mso_segment(1)))
 		{
 			require($f);
 		}
 		elseif ($f = mso_page_foreach('page-content-' . getinfo('type'))) 
+		{
+			require($f);
+		}
+		elseif ($f = mso_page_foreach('page-content-full')) 
 		{
 			require($f);
 		}

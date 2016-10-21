@@ -105,28 +105,38 @@ if ($pages)
 				}
 				else // нет метаполя - типовой вывод
 				{
-					// для типа page может быть свой info-top
-					if ($f = mso_page_foreach('info-top-page')) 
+					// для разных page может быть свой info-top
+					if ($f = mso_page_foreach('info-top-page-status-' . $p->val('page_status'))) 
+					{
+						require($f);
+					}
+					elseif ($f = mso_page_foreach('info-top-page-type-' . $p->val('page_type_name'))) 
+					{
+						require($f);
+					}
+					elseif ($f = mso_page_foreach('info-top-page')) 
+					{
+						require($f);
+					}
+					elseif ($info = mso_get_option('info-top_page', getinfo('template'), '') and $f = mso_fe('type_foreach/info-top/' . $info))
+					{
+						require($f);
+					}
+					elseif ($f = mso_page_foreach('info-top'))
 					{
 						require($f);
 					}
 					else
 					{
-						if ($f = mso_page_foreach('info-top')) 
-						{
-							require($f);
-						}
-						else
-						{
-							$p->html(NR . '<header>');
-								$p->line('[title]');
-								
-								$p->div_start('mso-info mso-info-top');
-									$p->line('[date][edit][cat][tag][view_count]');
-								$p->div_end('mso-info mso-info-top');
-							$p->html('</header>');
-						}
+						$p->html(NR . '<header>');
+							$p->line('[title]');
+							
+							$p->div_start('mso-info mso-info-top');
+								$p->line('[date][edit][cat][tag][view_count]');
+							$p->div_end('mso-info mso-info-top');
+						$p->html('</header>');
 					}
+					
 				}
 				
 				if ($f = mso_page_foreach('page-content-' . getinfo('type'))) 

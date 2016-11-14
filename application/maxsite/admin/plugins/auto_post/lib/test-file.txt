@@ -2,17 +2,16 @@ TITLE: Договоры нарушенные Россией при присое�
 CAT+: Новости / Информация
 TAG: Крым, аннексия, оккупация
 SLUG: crimea
-DATE: 2015-12-15 12:20:30
 TYPE: blog
 STATUS: publish
 
-META-TITLE: Договоры нарушенные Россией при присоединении Крыма
-META-DESCRIPTION: Россия преступно аннексировала Крым
-META-KEYWORDS: Крым, аннексия, оккупация
-META-PAGE_TEMPLATE: left-sidebar
-META-PAGE_CSS_PROFILES: paragraph-justify.css
-META-INFO-TOP-CUSTOM: header-only.php
-META-PARSER_CONTENT: Simple
+META-title: Договоры нарушенные Россией при присоединении Крыма
+META-description: Россия преступно аннексировала Крым
+META-keywords: Крым, аннексия, оккупация
+META-page_template: left-sidebar
+META-page_css_profiles: paragraph-justify.css
+META-info-top-custom: header-only.php
+META-parser_content: Simple
 
 ---
 

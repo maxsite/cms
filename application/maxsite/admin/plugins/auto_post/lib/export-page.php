@@ -128,15 +128,39 @@ function export_page($data)
 		if ($page['page_feed_allow'] === 0)
 			$out .= 'FEED_ALLOW: 1' . NR;
 		
-		$out .= _my_meta($page, 'META-TITLE', 'title');
-		$out .= _my_meta($page, 'META-DESCRIPTION', 'description');
-		$out .= _my_meta($page, 'META-KEYWORDS', 'keywords');
-		$out .= _my_meta($page, 'META-IMAGE_FOR_PAGE', 'image_for_page');
-		$out .= _my_meta($page, 'META-IMAGE_FOR_PAGE_OUT', 'image_for_page_out');
-		$out .= _my_meta($page, 'META-PAGE_TEMPLATE', 'page_template');
-		$out .= _my_meta($page, 'META-PAGE_CSS_PROFILES', 'page_css_profiles');
-		$out .= _my_meta($page, 'META-INFO-TOP-CUSTOM', 'info-top-custom');
-		$out .= _my_meta($page, 'META-PARSER_CONTENT', 'parser_content', 'Default');
+		
+		
+		// все мета выведем в виде META-ключ: значение 
+		// [parser_content] => Array
+		// (
+		// 	[0] => Default
+		// )
+		// _pr($page['page_meta']);
+		
+		ksort($page['page_meta']);
+		
+		foreach($page['page_meta'] as $k => $v)
+		{
+			if (!isset($v[0])) continue;
+			if (!empty($v) and !empty($v[0])) 
+			{
+				// дефолтный парсер не указываем — нет смысла
+				if ($k === 'parser_content' and $v[0] === 'Default') continue;
+				
+				$out .= 'META-' . $k . ': ' . $v[0] . NR;
+			}
+		}
+		
+		// старый вариант
+		// $out .= _my_meta($page, 'META-TITLE', 'title');
+		// $out .= _my_meta($page, 'META-DESCRIPTION', 'description');
+		// $out .= _my_meta($page, 'META-KEYWORDS', 'keywords');
+		// $out .= _my_meta($page, 'META-IMAGE_FOR_PAGE', 'image_for_page');
+		// $out .= _my_meta($page, 'META-IMAGE_FOR_PAGE_OUT', 'image_for_page_out');
+		// $out .= _my_meta($page, 'META-PAGE_TEMPLATE', 'page_template');
+		// $out .= _my_meta($page, 'META-PAGE_CSS_PROFILES', 'page_css_profiles');
+		// $out .= _my_meta($page, 'META-INFO-TOP-CUSTOM', 'info-top-custom');
+		// $out .= _my_meta($page, 'META-PARSER_CONTENT', 'parser_content', 'Default');
 		
 		// $out .= 'ID_AUTHOR: ' . $page['page_id_autor'] . NR; // не используется
 
@@ -184,17 +208,17 @@ function export_page($data)
 }
 
 
-function _my_meta($page, $key, $meta, $def = false)
-{
-	if (isset($page['page_meta'][$meta][0]) and $m = $page['page_meta'][$meta][0])  
-	{
-		if ($def !== false and $def === $m)
-			return '';
-		else
-			return $key . ': ' . $m . NR;
-	}
-	else
-		return '';
-}
+// function _my_meta($page, $key, $meta, $def = false)
+// {
+// 	if (isset($page['page_meta'][$meta][0]) and $m = $page['page_meta'][$meta][0])  
+// 	{
+// 		if ($def !== false and $def === $m)
+// 			return '';
+// 		else
+// 			return $key . ': ' . $m . NR;
+// 	}
+// 	else
+// 		return '';
+// }
 
 # end of file

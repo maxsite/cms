@@ -48,8 +48,10 @@ function add_new_page($fn, $UP_DIR)
 			
 			// дополнительные мета-данные
 			// вначале формируем общий массив, после выгоняем его в ##METAFIELD##
-			$page_meta_options = array();
-			
+
+			/*
+			// старый вариант задания META
+			// новый вариант — любые мета в виде META(ключ): значение
 			$page_meta_options['title'] = (isset($conf['META-TITLE'])) ? $conf['META-TITLE'] : '';
 			
 			$page_meta_options['description'] = (isset($conf['META-DESCRIPTION'])) ? $conf['META-DESCRIPTION'] : '';
@@ -67,8 +69,15 @@ function add_new_page($fn, $UP_DIR)
 			$page_meta_options['info-top-custom'] = (isset($conf['META-INFO-TOP-CUSTOM'])) ? $conf['META-INFO-TOP-CUSTOM'] : '';
 			
 			$page_meta_options['parser_content'] = (isset($conf['META-PARSER_CONTENT'])) ? $conf['META-PARSER_CONTENT'] : 'Default';
+			*/
+			
+			$page_meta_options = _find_all_meta($conf);
+			
 			
 			// прогоняем текст через парсер
+			// если он не указан, то ставим дефолтный
+			if (!isset($page_meta_options['parser_content'])) $page_meta_options['parser_content'] = 'Default';
+			
 			$parser = $page_meta_options['parser_content']; // парсер
 			$parser_all = mso_hook('parser_register'); // все зарегистрированные парсеры
 			
@@ -78,6 +87,9 @@ function add_new_page($fn, $UP_DIR)
 				$func = $parser_all[$parser]['content_post_edit']; // функцию, которую нужно выполнить
 				if (function_exists($func)) $text = $func($text); // прогоняем текст через парсер
 			}
+			
+			// _log($conf, 'conf');
+			// _log($page_meta_options, '$page_meta_options');
 			
 			$meta_options = '';
 			
@@ -106,7 +118,6 @@ function add_new_page($fn, $UP_DIR)
 				$page_type_id = $page_type[$type];
 			else
 				$page_type_id = $page_type['blog'];
-			
 			
 			
 			// получаем все рубрики, смотрим верно ли они указаны
@@ -337,6 +348,23 @@ function _parse_key_val($s)
 	}
 	
 	return $a;
+}
+
+// поиск всех META-ключ: значение 
+// на выходе готовый массив
+function _find_all_meta($a)
+{
+	$o = array();
+	
+	foreach($a as $k => $v)
+	{
+		if (strpos($k, 'META-') === 0)
+		{
+			$o[trim(substr($k, 5))] = $v;
+		}
+	}
+	
+	return $o;
 }
 
 // просто для лога в файл

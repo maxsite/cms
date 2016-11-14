@@ -2,8 +2,10 @@
 	
 	$CI = & get_instance();
 	
-	require_once( getinfo('common_dir') . 'page.php' ); 			// функции страниц 
+	require_once( getinfo('common_dir') . 'page.php' ); // функции страниц 
 	
+	
+	// удаление страницы
 	if ( $post = mso_check_post(array('f_session_id', 'f_submit', 'f_page_delete')) )
 	{
 		mso_checkreferer();
@@ -50,6 +52,51 @@
 		}
 	}
 	
+	
+	// экспорт страницы в формат AutoPost
+	if ( $post = mso_check_post(array('f_session_id', 'f_autopost', 'f_page_delete')) )
+	{
+		mso_checkreferer();
+
+		$page_id = (int) $post['f_page_delete'];
+		if (!is_numeric($page_id)) $page_id = false; // не число
+			else $page_id = (int) $page_id;
+
+		if (!$page_id) // ошибка! 
+		{
+			echo '<div class="error">' . t('Ошибочный ID страницы') . '</div>';
+		}
+		else 
+		{
+			$data = array(
+				'page_id' => $page_id,
+			);
+			
+			// autopost
+			require_once( getinfo('admin_plugins_dir') . 'auto_post/lib/export-page.php' ); 
+			
+			$result = export_page($data);
+			
+			if (isset($result['result']) and $result['result'])
+			{
+				if ( $result['result'] ) 
+				{
+					header('Content-Type: application/octet-stream');
+					header("Content-Disposition: attachment; filename=" . $result['fn']);
+					echo $result['out'];
+					die();
+				}
+				else
+				{
+					echo '<div class="error">' . t('Ошибка') . ' ('. $result['description'] . ')</div>';
+				}
+			}
+			else
+			{
+				echo '<div class="error">' . t('Ошибка') . ' ('. $result['description'] . ')</div>';
+			}
+		}
+	}
 
 ?>
 <h1><?= t('Записи') ?></h1>
@@ -344,7 +391,7 @@
 		echo '<div class="flex flex-vcenter mar20-t">';
 		
 		echo '<div class="flex-grow1 pad10-r">' . $all_pages . '</div>';
-		echo '<div class="flex-grow1"><button type="submit" name="f_submit" class="button i-remove" onClick="if(confirm(\'' . t('Удалить страницу?') . '\')) {return true;} else {return false;}" >' . t('Удалить') . '</button></div>';
+		echo '<div class="flex-grow1 t-nowrap"><button type="submit" name="f_submit" class="button i-remove" onClick="if(confirm(\'' . t('Удалить страницу?') . '\')) {return true;} else {return false;}" >' . t('Удалить') . '</button> <button type="submit" name="f_autopost" class="button i-file-text-o icon0" title="' . t('Экспорт страницы в текстовый файл в формате AutoPost') . '"></button></div>';
 		echo '</div></form>';
 
 	}

@@ -124,12 +124,12 @@ require_once( $MSO->config['common_dir'] . 'category.php' );
 $all_cat = mso_cat_ul('<label><input name="f_cat[]" type="checkbox" %CHECKED% value="%ID%" title="id = %ID%"> %NAME%</label>', true, $f_cat, $f_cat);
 
 // опция по-умолчанию разрешение комментирования отмечать или нет
-if (isset($editor_options['comment_allow_checked']))
-	$comment_allow_checked = ($editor_options['comment_allow_checked'] == 0) ? '' : 'checked="checked"';
-else
-	$comment_allow_checked = 'checked="checked"';
+//if (isset($editor_options['comment_allow_checked']))
+//	$comment_allow_checked = ($editor_options['comment_allow_checked'] == 0) ? '' : 'checked="checked"';
+//else
+//	$comment_allow_checked = 'checked="checked"';
 
-$f_comment_allow = ($f_comment_allow) ? $comment_allow_checked : '';
+$f_comment_allow = ($f_comment_allow) ? 'checked="checked"' : '';
 
 
 // опция по-умолчанию разрешение rss отмечать или нет

@@ -52,9 +52,47 @@ foreach ($pages as $page)
 
 	$p->div_start(mso_get_val('page_only_class', 'mso-page-only'), '<article>');
 		
-		// для типа может быть свой info-top
-		if ($f = mso_page_foreach('info-top-' . getinfo('type'))) 
+		$info_top_fn = '';
+		
+		// info-top_slug по адресам — это самый высокий приоритет
+		// category/news = header-only.php
+		if ($info_top_slug = mso_get_option('info-top_slug', getinfo('template'), ''))
 		{
+			// ищем вхождение текущего адреса в списке опции
+			$current_url = mso_current_url();
+			$info_top_slug = explode("\n", $info_top_slug);
+			
+			foreach ($info_top_slug as $elem)
+			{
+				$elem = explode("=", trim($elem));
+				
+				// должно быть два элемента
+				if (count($elem) == 2)
+				{
+					$m1 = trim($elem[0]); // адрес
+					$m2 = trim($elem[1]); // info-top-файл
+					
+					if ($m1 === $current_url)
+					{
+						// есть совпадение
+						if ($fn = mso_fe('type_foreach/info-top/' . $m2)) 
+						{	
+							$info_top_fn = $fn; // выставляем путь к файлу
+						}
+						
+						break; // в любом случае рубим цикл
+					}
+				}
+			}
+		}
+		
+		if ($info_top_fn) 
+		{
+			require($info_top_fn);
+		}
+		elseif ($f = mso_page_foreach('info-top-' . getinfo('type'))) 
+		{
+		// для типа может быть свой info-top
 			require($f);
 		}
 		elseif ($info = mso_get_option('info-top_' . getinfo('type') , getinfo('template'), '') and $f = mso_fe('type_foreach/info-top/' . $info))

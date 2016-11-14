@@ -16,58 +16,97 @@ if ($fn = mso_fe('custom/main-template.php'))
 }
 else
 {
+	// main_template_slug main-шаблон по адресам — это самый высокий приоритет
+	// category/news = no-sidebar
+	// page/about = left-sidebar
+	if ($main_template_slug = mso_get_option('main_template_slug', getinfo('template'), ''))
+	{
+		// ищем вхождение текущего адреса в списке опции
+		$current_url = mso_current_url();
+		
+		$main_template_slug = explode("\n", $main_template_slug);
+		
+		foreach ($main_template_slug as $elem)
+		{
+			$elem = explode("=", trim($elem));
+			
+			// должно быть два элемента
+			if (count($elem) == 2)
+			{
+				$m1 = trim($elem[0]); // адрес
+				$m2 = trim($elem[1]); // шаблон
+				
+				if ($m1 === $current_url)
+				{
+					// есть совпадение
+					if ($fn = mso_fe('main/' . $m2 . '/main.php')) 
+					{	
+						mso_set_val('main_file', $fn); // выставляем путь к файлу
+					}
+					
+					break; // в любом случае рубим цикл
+				}
+			}
+		}
+	}
+	
+	// если main-файл не выставлен, то проверяем другие варианты 
+	
 	// main-шаблон вывода находится в meta-поле page_template
 	// это определено в shared/meta/meta.ini
 	// если метаполе не задано, то может использоваться main/type/page/main.php
-	if (is_type('page') and isset($pages) and isset($pages[0]))
+	if (!mso_get_val('main_file'))
 	{
-		if ($page_template = mso_page_meta_value('page_template', $pages[0]['page_meta']))
+		if (is_type('page') and isset($pages) and isset($pages[0]))
 		{
-			if ($fn = mso_fe('main/' . $page_template . '/main.php')) 
-			{	
-				mso_set_val('main_file', $fn); // выставляем путь к файлу
-			}
-		}
-		elseif ($fn = mso_fe('main/type/page/main.php')) // предопределенный файл
-		{	
-			mso_set_val('main_file', $fn); // выставляем путь к файлу
-		}
-		else
-		{	
-			if($page_template = mso_get_option('main_template_page', getinfo('template'), '')) // опция
+			if ($page_template = mso_page_meta_value('page_template', $pages[0]['page_meta']))
 			{
 				if ($fn = mso_fe('main/' . $page_template . '/main.php')) 
 				{	
 					mso_set_val('main_file', $fn); // выставляем путь к файлу
 				}
 			}
-		}
-	}
-	else
-	{
-		// если есть type/ТИП/main_set_val.php, то подключаем его
-		// где и выставляется нужный файл через mso_set_val('main_file', 'ФАЙЛ');
-		if ($fn = mso_fe('type/' . getinfo('type') . '/main_set_val.php')) require($fn);
-	
-		// если main-файл не выставлен, то проверяем другие варианты 
-		if (!mso_get_val('main_file'))
-		{
-			// возможно есть main-файл по type
-			// в main/type/home/main.php
-			if ($fn = mso_fe('main/type/' . getinfo('type') . '/main.php')) 
+			elseif ($fn = mso_fe('main/type/page/main.php')) // предопределенный файл
 			{	
 				mso_set_val('main_file', $fn); // выставляем путь к файлу
 			}
 			else
-			{
-				// возможно указана опця
-				// main_template_TYPE 
-				// опции заданы в ini-файлах
-				if ($page_template = mso_get_option('main_template_' . getinfo('type'), getinfo('template'), ''))
+			{	
+				if($page_template = mso_get_option('main_template_page', getinfo('template'), '')) // опция
 				{
 					if ($fn = mso_fe('main/' . $page_template . '/main.php')) 
 					{	
 						mso_set_val('main_file', $fn); // выставляем путь к файлу
+					}
+				}
+			}
+		}
+		else
+		{
+			// если есть type/ТИП/main_set_val.php, то подключаем его
+			// где и выставляется нужный файл через mso_set_val('main_file', 'ФАЙЛ');
+			if ($fn = mso_fe('type/' . getinfo('type') . '/main_set_val.php')) require($fn);
+		
+			// если main-файл не выставлен, то проверяем другие варианты 
+			if (!mso_get_val('main_file'))
+			{
+				// возможно есть main-файл по type
+				// в main/type/home/main.php
+				if ($fn = mso_fe('main/type/' . getinfo('type') . '/main.php')) 
+				{	
+					mso_set_val('main_file', $fn); // выставляем путь к файлу
+				}
+				else
+				{
+					// возможно указана опця
+					// main_template_TYPE 
+					// опции заданы в ini-файлах
+					if ($page_template = mso_get_option('main_template_' . getinfo('type'), getinfo('template'), ''))
+					{
+						if ($fn = mso_fe('main/' . $page_template . '/main.php')) 
+						{	
+							mso_set_val('main_file', $fn); // выставляем путь к файлу
+						}
 					}
 				}
 			}

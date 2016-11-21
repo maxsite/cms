@@ -147,7 +147,7 @@ function export_page($data)
 				// дефолтный парсер не указываем — нет смысла
 				if ($k === 'parser_content' and $v[0] === 'Default') continue;
 				
-				$out .= 'META-' . $k . ': ' . $v[0] . NR;
+				$out .= 'META-' . $k . ': ' . str_replace("\n", '__NR__', trim($v[0])) . NR;
 			}
 		}
 		

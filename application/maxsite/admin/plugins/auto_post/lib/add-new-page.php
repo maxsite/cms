@@ -360,7 +360,7 @@ function _find_all_meta($a)
 	{
 		if (strpos($k, 'META-') === 0)
 		{
-			$o[trim(substr($k, 5))] = $v;
+			$o[trim(substr($k, 5))] = trim(str_replace("__NR__", "\n", $v));
 		}
 	}
 	

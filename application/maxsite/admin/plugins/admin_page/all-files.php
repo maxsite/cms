@@ -153,13 +153,22 @@ $all_files .= '
 	
 	<div class="flex flex-wrap mar20-tb">
 	
-		<div class="flex-grow1 mar10-b mar5-r">' . t('Размер') . ' <input class="w100px" type="number" id="upload_resize_images" name="upload_resize_images" value = "' . mso_get_option('resize_images',   'general', '600') . '"></div>
+		<div class="flex-grow1 mar10-b mar5-r">' . t('Размер') . ' <input class="w100px-max" type="number" id="upload_resize_images" name="upload_resize_images" value = "' . mso_get_option('resize_images',   'general', '600') . '" title="' . t('Размер конечного изображения') . '">
 		
-		<div class="flex-grow1 mar10-b t-right">' . t('Миниатюра') . ' <input class="w100px" title="' . t('Ширина миниатюры') . '" type="number" id="upload_size_image_mini_w" name="upload_size_image_mini_w" value = "' . mso_get_option('size_image_mini', 'general', '150') . '"></div>
+		<select class="w-auto" title="' . t('Метод изменения размера') . '" id="upload_resize_images_type" name="upload_resize_images_type">
+			<option value="width">по ширине</option>
+			<option value="height">по высоте</option>
+			<option value="max">по максимальной</option>
+			<option value="no">не менять</option>
+			</select>
+		</div>
 		
-		<div class="flex-grow1 mar10-b mar5-r">x <input class="w100px" title="' . t('Высота миниатюры') . '" type="number" id="upload_size_image_mini_h" name="upload_size_image_mini_h" value = "' . mso_get_option('size_image_mini', 'general', '150') . '"></div>
 		
-		<div class="flex-grow1">Тип <select class="w250px" title="' . t('Способ создания миниатюры') . '" id="upload_type_resize" name="upload_type_resize">
+		<div class="flex-grow1 mar10-b t-right">' . t('Миниатюра') . ' <input class="w70px" title="' . t('Ширина миниатюры') . '" type="number" id="upload_size_image_mini_w" name="upload_size_image_mini_w" value = "' . mso_get_option('size_image_mini', 'general', '150') . '"></div>
+		
+		<div class="flex-grow1 mar10-b mar5-r">x <input class="w70px" title="' . t('Высота миниатюры') . '" type="number" id="upload_size_image_mini_h" name="upload_size_image_mini_h" value = "' . mso_get_option('size_image_mini', 'general', '150') . '">
+				
+		<select class="w250px-max" title="' . t('Способ создания миниатюры') . '" id="upload_type_resize" name="upload_type_resize">
 			<option value="resize_full_crop_center">resize_full_crop_center</option>
 			<option value="resize_crop">resize_crop</option>
 			<option value="crop_center">crop_center</option>

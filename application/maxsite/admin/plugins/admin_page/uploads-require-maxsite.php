@@ -66,6 +66,8 @@ function _upload($up_dir, $fn, $r = array())
 
 	$resize_images = (isset($_SERVER['HTTP_X_REQUESTED_RESIZEIMAGES'])) ? $_SERVER['HTTP_X_REQUESTED_RESIZEIMAGES'] : mso_get_option('resize_images',   'general', '600');
 	
+	$resize_images_type = (isset($_SERVER['HTTP_X_REQUESTED_RESIZEIMAGESTYPE'])) ? $_SERVER['HTTP_X_REQUESTED_RESIZEIMAGESTYPE'] : 'width';
+	
 	$size_image_mini_w = (isset($_SERVER['HTTP_X_REQUESTED_SIZEIMAGEMINIW'])) ? $_SERVER['HTTP_X_REQUESTED_SIZEIMAGEMINIW'] : mso_get_option('size_image_mini', 'general', '150');
 	
 	$size_image_mini_h = (isset($_SERVER['HTTP_X_REQUESTED_SIZEIMAGEMINIH'])) ? $_SERVER['HTTP_X_REQUESTED_SIZEIMAGEMINIH'] : mso_get_option('size_image_mini', 'general', '150');
@@ -81,13 +83,62 @@ function _upload($up_dir, $fn, $r = array())
 	// читаем exif на предмет ориентации
 	$rotation = mso_exif_rotate($up_dir . $fn);
 	
-	// Если картинка больше, чем нужно, то делаем ресайз, иначе ничего не делаем.
-	// всегда делаем по типу resize
-	$size = $new_size = getimagesize($up_dir . $fn);
+	// если нужно повернуть
+	// если большая картинка то это может грузить сервер, зато сразу нужная ориентация
+	if ($rotation)
+	{
+		echo ' ROTATE... ';
+		thumb_rotate($up_dir . $fn, $rotation);
+	}
 	
+	// текущие размеры
+	$size = $new_size = getimagesize($up_dir . $fn);
 	$width = $new_width = $size[0];
 	$height = $new_height = $size[1];
 	
+	if ($resize_images_type == 'width')
+	{
+		if ($width > $resize_images) 
+		{
+			echo ' RESIZE (width) ... ';
+			$new_width = $resize_images;
+			$new_height = round($height / ($width/$new_width));
+			thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false);
+		}
+		
+	}
+	elseif ($resize_images_type == 'height')
+	{
+		if ($height > $resize_images) 
+		{
+			echo ' RESIZE (height) ... ';
+			$new_height = $resize_images;
+			$new_width = round($width / ($height/$new_height));
+			thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false);
+		}
+	}
+	elseif ($resize_images_type == 'max') // автоматом вычисляем максимальную сторону
+	{
+		if ($width > $resize_images or $height > $resize_images)
+		{
+			echo ' RESIZE (max) ... ';
+			
+			if ($width > $height)
+			{
+				$new_width = $resize_images;
+				$new_height = round($height / ($width/$new_width));
+			}
+			else
+			{
+				$new_height = $resize_images;
+				$new_width = round($width / ($height/$new_height));
+			}
+			
+			thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false);
+		}
+	}
+
+	/*
 	if ($width > $resize_images or $height > $resize_images)
 	{
 		echo ' RESIZE... ';
@@ -106,14 +157,16 @@ function _upload($up_dir, $fn, $r = array())
 		thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false);
 	}
 	
-	// если нужно повернуть
-	if ($rotation)
-	{
-		echo ' ROTATE... ';
-		thumb_rotate($up_dir . $fn, $rotation);
-	}
+	*/
+	
+	// if ($rotation)
+	// {
+	// 	echo ' ROTATE... ';
+	// 	thumb_rotate($up_dir . $fn, $rotation);
+	// }
 	
 	// Создание ватермарки, если такая опция и есть нужный файл
+	// TODO: ватермарку можно и текстом выводить... 
 	$use_watermark = mso_get_option('use_watermark',   'general', '0');
 	
 	if ($use_watermark and file_exists(getinfo('uploads_dir') . 'watermark.png'))

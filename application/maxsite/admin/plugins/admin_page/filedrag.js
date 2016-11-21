@@ -144,6 +144,8 @@ $(document).ready(function() {
 			
 			xhr.setRequestHeader("X-REQUESTED-RESIZEIMAGES", unescape(encodeURIComponent($id("upload_resize_images").value)));
 			
+			xhr.setRequestHeader("X-REQUESTED-RESIZEIMAGESTYPE", unescape(encodeURIComponent($id("upload_resize_images_type").value)));
+			
 			xhr.setRequestHeader("X-REQUESTED-SIZEIMAGEMINIW", unescape(encodeURIComponent($id("upload_size_image_mini_w").value)));
 			xhr.setRequestHeader("X-REQUESTED-SIZEIMAGEMINIH", unescape(encodeURIComponent($id("upload_size_image_mini_h").value)));
 			

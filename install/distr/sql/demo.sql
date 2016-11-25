@@ -1,6 +1,6 @@
 # demo
 
-INSERT INTO _PREFIX_options (options_key, options_value) VALUES ('active_plugins', '_serialize_a:4:{i:0;s:8:"category";i:1;s:10:"pagination";i:2;s:10:"randomtext";i:3;s:10:"text_block";}');
+INSERT INTO _PREFIX_options (options_key, options_value) VALUES ('active_plugins', '_serialize_a:18:{i:0;s:6:"bbcode";i:1;s:7:"captcha";i:2;s:8:"category";i:3;s:5:"forms";i:4;s:8:"lightbox";i:5;s:10:"login_form";i:6;s:10:"pagination";i:7;s:14:"parser_default";i:8;s:13:"parser_simple";i:9;s:12:"random_pages";i:10;s:10:"randomtext";i:11;s:9:"range_url";i:12;s:7:"sitemap";i:13;s:4:"tabs";i:14;s:9:"tagclouds";i:15;s:10:"text_block";i:16;s:5:"ushki";i:17;s:11:"xml_sitemap";}');
 
 ###
 

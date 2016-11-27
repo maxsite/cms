@@ -18,4 +18,4 @@ if (is_type('home'))
 else 
 	mso_set_val('body_class', 'mso-body-all mso-body-' . getinfo('type'));
 
-# end file
+# end of file

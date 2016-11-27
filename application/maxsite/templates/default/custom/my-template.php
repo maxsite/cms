@@ -21,5 +21,17 @@ if ($fn = mso_fe('components/lightslider/lightslider-shortcode.php'))
 	mso_hook_add('head_css', 'lightslider_shortcode_css');
 }
 
+// дефолтные компоненты шаблона
+mso_set_val('default_header_component1', 'top1');
+// mso_set_val('default_header_component2', '');
+// mso_set_val('default_header_component3', '');
+// mso_set_val('default_header_component4', '');
+// mso_set_val('default_header_component5', '');
+
+mso_set_val('default_footer_component1', 'footer-copy-stat');
+// mso_set_val('default_footer_component2', '');
+// mso_set_val('default_footer_component3', '');
+// mso_set_val('default_footer_component4', '');
+// mso_set_val('default_footer_component5', '');
 
 # end of file

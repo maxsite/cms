@@ -3,6 +3,9 @@
     (c) MaxSite CMS, http://max-3000.com/
 */
 
+// если нет текста, то выходим
+if (!$opt = mso_get_option('any2_block', getinfo('template'), '')) return;
+
 // условие вывода компонента
 // php-условие как в виджетах
 if ($rules = trim(mso_get_option('any2_rules_output', getinfo('template'), '')))
@@ -11,8 +14,6 @@ if ($rules = trim(mso_get_option('any2_rules_output', getinfo('template'), '')))
 	if ($rules_result === false) $rules_result = 1;
 	if ($rules_result !== 1) return;
 }
-
-$opt = mso_get_option('any2_block', getinfo('template'), '');
 
 // используем php-шаблонизатор
 eval(mso_tmpl_prepare($opt));

@@ -3990,7 +3990,7 @@ function mso_fe($file, $dir = false)
 	
 	$file = $dir . $file;
 	
-	if (file_exists($file)) return $file;
+	if (file_exists($file) and is_file($file)) return $file;
 		else return false;
 }
 

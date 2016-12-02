@@ -237,8 +237,6 @@ function mso_view_ini($all = false)
 			
 			
 			$f .= '<input type="' . $textfield_type . '" name="' . $name_f . '" value="' . $value . '"' . $placeholder . '>' . NR;
-
-			
 		}
 		elseif ($type == 'color')
 		{
@@ -251,28 +249,26 @@ function mso_view_ini($all = false)
 			$value = str_replace('_NR_', "\n", $value);
 			$value = str_replace('_QUOT_', '&quot;', $value);
 			
-			if (isset($row['rows']))
+			if (!isset($row['rows']) or $row['rows'] == 'auto')
 			{
-				if ($row['rows'] == 'auto') 
+				$ra = explode("\n", $value);
+				$rr = count($ra);
+				
+				// если в строке больше 65 символов, добавляем row
+				foreach($ra as $rs)
 				{
-					$rr = count(explode("\n", $value));
-					if ($rr > 20) $rr = 20;
-				}
-				else
-					$rr = (int) $row['rows'];
+					$l = mb_strlen($rs, 'UTF8');
+					if ($l > 65) $rr = $rr + floor($l / 65);
+				}	
+				
+				if ($rr > 20) $rr = 20;
 			}
 			else
 			{
-				$rr = count(explode("\n", $value));
-				if ($rr > 20) $rr = 20;
+				$rr = (int) $row['rows'];
 			}
 			
 			if ($rr < 2)  $rr = 2;
-			
-			/*
-			if ( !isset($row['rows']) ) $rr = 7;
-				else $rr = (int) $row['rows'];
-			*/
 			
 			$f .= '<textarea rows="' . $rr . '" name="' . $name_f . '"' . $placeholder . '>'. $value . '</textarea>' . NR;
 		}

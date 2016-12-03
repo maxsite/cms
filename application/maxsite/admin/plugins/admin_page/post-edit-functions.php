@@ -286,5 +286,30 @@ function post_all_pages($editor_options, $f_page_parent)
 	return $all_pages;
 }
 
+// вспомогательная функция, которая формирует <options> на основе массива
+// позволяет задавать selected по ключу 
+function form_select_options($values = array(), $selected = '')
+{
+	/*
+	form_select_options(array(
+			'width' => 'по ширине',
+			'height' => 'по высоте',
+			'max' => 'по максимальной',
+			'no' => 'не менять'
+			), 'width')
+	*/
+	
+	$opt = '';
+	
+	foreach($values as $v => $s)
+	{
+		if ($v == $selected)
+			$opt .= '<option value="' . $v . '" selected="selected">' . $s . '</option>';
+		else
+			$opt .= '<option value="' . $v . '">' . $s . '</option>';
+	}
+	
+	return $opt;
+}
 
 # end of file

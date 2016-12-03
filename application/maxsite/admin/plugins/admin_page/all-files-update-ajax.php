@@ -54,11 +54,11 @@ if ( $post = mso_check_post(array('dir')) )
 		
 		$this_img = ($ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'png');
 		
+		$time_file = date(" | Y-m-d H:i:s", filemtime($uploads_dir . '/' . $file));
 		
 		if (isset($mso_descritions[$file]))
 		{
 			$title = $mso_descritions[$file] . ' / ' . htmlspecialchars($file);
-			// if ($title) $title_f = '<em>' . htmlspecialchars($title) . '</em><br>';
 		}
 		else
 		{
@@ -71,16 +71,16 @@ if ( $post = mso_check_post(array('dir')) )
 			
 			$mini_100 = $uploads_url . '/_mso_i/' . $file;
 			
-			$mini = '<a class="lightbox" target="_blank" title="' . $title . '" href="' . $uploads_url. '/' . $file . '"><img src="' . $mini_100 . '"></a> ';
+			$mini = '<a class="lightbox" target="_blank" title="' . $title  . $time_file . '" href="' . $uploads_url. '/' . $file . '"><img src="' . $mini_100 . '"></a> ';
 		}
 		else 
 		{
-			$mini = '<img src="' . getinfo('admin_url') . 'plugins/admin_files/document_plain.png" title="' . $title . '">';
+			$mini = '<img src="' . getinfo('admin_url') . 'plugins/admin_files/document_plain.png" title="' . $title . $time_file . '">';
 		}
 		
 		if ($this_img)
 		{
-			if ($title)
+			if ($title and $title != $file)
 			{
 				$img = '\n[img ' . $title . ']' . $uploads_url . '/' . $file . '[/img]\n';
 				
@@ -105,17 +105,13 @@ if ( $post = mso_check_post(array('dir')) )
 					<span title="' . t('Вставить в текст код миниатюры') . '" onclick="addSmile(\'' . $image . '\', \'f_content\');">[image]</span>
 					<span title="' . t('Использовать как изображение записи') . '" onclick="addImgPage(\'' . $uploads_url . '/' . $file . '\');">page</span>
 					';
-					
-					
 		}
-		
-		
+
 		$all_files_res .= '</div></div>'; 
 		
 	}
 	
-	
 	echo $all_files_res . '<div class="clearfix"></div>';
 }
 
-# end file
+# end of file

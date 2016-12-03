@@ -156,27 +156,31 @@ $all_files .= '
 		<div class="flex-grow1 mar10-b mar5-r">' . t('Размер') . ' <input class="w100px-max" type="number" id="upload_resize_images" name="upload_resize_images" value = "' . mso_get_option('resize_images',   'general', '600') . '" title="' . t('Размер конечного изображения') . '">
 		
 		<select class="w-auto" title="' . t('Метод изменения размера') . '" id="upload_resize_images_type" name="upload_resize_images_type">
-			<option value="width">по ширине</option>
-			<option value="height">по высоте</option>
-			<option value="max">по максимальной</option>
-			<option value="no">не менять</option>
-			</select>
+			' . form_select_options(array(
+					'width' => 'по ширине',
+					'height' => 'по высоте',
+					'max' => 'по максимальной',
+					'no' => 'не менять'
+					), mso_get_option('upload_resize_images_type', 'general', 'width')) 
+			. '</select>
 		</div>
 		
 		
 		<div class="flex-grow1 mar10-b t-right">' . t('Миниатюра') . ' <input class="w70px" title="' . t('Ширина миниатюры') . '" type="number" id="upload_size_image_mini_w" name="upload_size_image_mini_w" value = "' . mso_get_option('size_image_mini', 'general', '150') . '"></div>
 		
-		<div class="flex-grow1 mar10-b mar5-r">x <input class="w70px" title="' . t('Высота миниатюры') . '" type="number" id="upload_size_image_mini_h" name="upload_size_image_mini_h" value = "' . mso_get_option('size_image_mini', 'general', '150') . '">
+		<div class="flex-grow1 mar10-b mar5-r">x <input class="w70px" title="' . t('Высота миниатюры') . '" type="number" id="upload_size_image_mini_h" name="upload_size_image_mini_h" value = "' . mso_get_option('size_image_mini_height', 'general', '150') . '">
 				
 		<select class="w250px-max" title="' . t('Способ создания миниатюры') . '" id="upload_type_resize" name="upload_type_resize">
-			<option value="resize_full_crop_center">resize_full_crop_center</option>
-			<option value="resize_crop">resize_crop</option>
-			<option value="crop_center">crop_center</option>
-			<option value="crop">crop</option>
-			<option value="resize">resize</option>
-			<option value="resize_h_crop_center">resize_h_crop_center</option>
-			<option value="resize_crop_center">resize_crop_center</option>
-			</select></div>
+			' . form_select_options(array(
+					'resize_full_crop_center' => 'resize_full_crop_center',
+					'resize_crop' => 'resize_crop',
+					'crop_center' => 'crop_center',
+					'crop' => 'crop',
+					'resize' => 'resize',
+					'resize_h_crop_center' => 'resize_h_crop_center',
+					'resize_crop_center' => 'resize_crop_center',
+					), mso_get_option('upload_type_resize', 'general', 'resize_full_crop_center')) 
+			. '</select></div>
 	</div>
 </div>
 

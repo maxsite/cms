@@ -7,7 +7,7 @@
 
 class Maxsite_lib 
 {
-	public $version = '0.954';
+	public $version = '0.955';
 	public $config = array();
 	public $data = array();
 	public $hooks = array();

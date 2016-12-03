@@ -4225,11 +4225,18 @@ function mso_shortcode_add($shortcode, $function)
 	if ($shortcode and $function) $MSO->shortcode[$shortcode] = $function;
 }
 
-# вспомогательная функция, если нужно расспарсить шорткод вида:
-# [shortcode par=val par1=val1]text page[/shortcode]
+# callback к mso_shortcode_parse
+function _mso_shortcode_parse_callback($matches)
+{
+	return '=' . str_replace(' ', '__NBSP__', $matches[1]);
+}
+
+# функция, если нужно расспарсить шорткод вида:
+# [shortcode par=val par1=val1 par2="val val val"]text page[/shortcode]
 # Array:
 # 		[par] => val
 # 		[par1] => val1
+# 		[par2] => val val val
 # 		[content] => text page
 function mso_shortcode_parse($attr, $def = array(), $sep = ' ')
 {
@@ -4237,15 +4244,20 @@ function mso_shortcode_parse($attr, $def = array(), $sep = ' ')
 	
 	$par['content'] = $attr[2];
 	
+	// замена атрибутов в кавычках
+	$attr[1] = preg_replace_callback('!\=\"(.*?)\"!', '_mso_shortcode_parse_callback', $attr[1]);
+		
 	if ($sep)
 		$s = explode($sep, trim($attr[1]));
 	else
 		$s = array(trim($attr[1]));
-		
+	
 	$s = array_map('trim', $s);
 	
 	foreach($s as $p)
 	{
+		$p = str_replace('__NBSP__', ' ',$p);
+		
 		$p1 = explode('=', $p);
 		
 		if (count($p1) == 2) 

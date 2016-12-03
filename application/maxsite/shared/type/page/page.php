@@ -151,7 +151,10 @@ if ($pages)
 					}
 					else
 					{
-						$p->div_start('mso-page-content mso-type-' . getinfo('type') . '-content');
+						if ($add_class_page = $p->meta_val('mso-page-content-add-class', '', '')) 
+							$add_class_page = ' ' . $add_class_page;
+						
+						$p->div_start('mso-page-content mso-type-' . getinfo('type') . '-content' . $add_class_page);
 							
 							if ($f = mso_page_foreach('content')) require($f);
 							else

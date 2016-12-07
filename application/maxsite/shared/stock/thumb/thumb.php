@@ -267,6 +267,55 @@ class Thumb
 	}	
 	
 	
+	// аналогично resize_full_crop_center, но кроп от верхнего левого угла
+	function resize_full_crop_top_left($width = 0, $height = 0)
+	{
+		// определяем пропорции реальные к требуемым
+		// от них и скачем
+		$w = $this->image_info[0] / $width;
+		$h = $this->image_info[1] / $height;
+	
+		if ($w > $h)
+		{
+			$this->resize(0, $height);
+		}
+		else
+		{
+			$this->resize($width, 0);
+		}
+		
+		$image_info = GetImageSize(getinfo('uploads_dir') . $this->new_file);
+		$x = 0;
+		$y = 0;
+		
+		return $this->crop($width, $height, $x, $y, $this->new_file, $this->new_file);
+	}		
+	
+	// аналогично resize_full_crop_center, но кроп от верхнего центра
+	function resize_full_crop_top_center($width = 0, $height = 0)
+	{
+		// определяем пропорции реальные к требуемым
+		// от них и скачем
+		$w = $this->image_info[0] / $width;
+		$h = $this->image_info[1] / $height;
+	
+		if ($w > $h)
+		{
+			$this->resize(0, $height);
+		}
+		else
+		{
+			$this->resize($width, 0);
+		}
+		
+		$image_info = GetImageSize(getinfo('uploads_dir') . $this->new_file);
+		$x = round($image_info[0] / 2 - $width / 2);
+		$y = 0;
+		
+		return $this->crop($width, $height, $x, $y, $this->new_file, $this->new_file);
+	}		
+	
+	
 	# функция готовит превьюшку в _mso_i 
 	function preview()
 	{
@@ -351,6 +400,14 @@ function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 
 			elseif ($type_resize == 'resize_crop_center')
 			{
 				$t->resize_crop_center($width, $height);
+			}
+			elseif ($type_resize == 'resize_full_crop_top_left')
+			{
+				$t->resize_full_crop_top_left($width, $height);
+			}
+			elseif ($type_resize == 'resize_full_crop_top_center')
+			{
+				$t->resize_full_crop_top_center($width, $height);
 			}
 			else
 			{

@@ -29,10 +29,19 @@ if ( $post = mso_check_post(array('dir')) )
 	
 	// все файлы в массиве $dirs
 	$dirs = directory_map($uploads_dir, 2); // только в текущем каталоге
-
+	
 	if (!$dirs) $dirs = array();
 
-	asort($dirs);
+	// отсортировать файлы в обратно порядке по времени загрузки — новые в начало списка!
+	$dirs0 = array();
+	foreach ($dirs as $file)
+	{
+		if (is_array($file)) continue;
+		$dirs0[filemtime($uploads_dir . '/' . $file)] = $file;
+	}
+	
+	krsort($dirs0);
+	$dirs = $dirs0;
 	
 	
 	$fn_mso_descritions = $uploads_dir . '/_mso_i/_mso_descriptions.dat';

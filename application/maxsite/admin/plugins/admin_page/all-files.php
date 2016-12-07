@@ -172,13 +172,15 @@ $all_files .= '
 				
 		<select class="w250px-max" title="' . t('Способ создания миниатюры') . '" id="upload_type_resize" name="upload_type_resize">
 			' . form_select_options(array(
-					'resize_full_crop_center' => 'resize_full_crop_center',
-					'resize_crop' => 'resize_crop',
-					'crop_center' => 'crop_center',
-					'crop' => 'crop',
-					'resize' => 'resize',
-					'resize_h_crop_center' => 'resize_h_crop_center',
-					'resize_crop_center' => 'resize_crop_center',
+					'resize_full_crop_center' => 'resize_full_crop_center||'. t('Обрезка по центру с соблюдением пропорций'),
+					'resize_full_crop_top_left' => 'resize_full_crop_top_left||' . t('Обрезка от верхнего левого угла (пропорции)'),
+					'resize_full_crop_top_center' => 'resize_full_crop_top_center||' . t('Обрезка от верхнего центра (пропорции)'),
+					'resize_crop' => 'resize_crop||'. t('Обрезка пропорционально ширине'),
+					'resize' => 'resize||'. t('Простое изменение размера'),
+					'resize_crop_center' => 'resize_crop_center||'. t('Пропорциональная ширина и обрезка по центру'),
+					'resize_h_crop_center' => 'resize_h_crop_center||'. t('Пропорциональная высота и обрезка по центру'),
+					'crop' => 'crop||'. t('Обрезка по лерхнему левому углу'),
+					'crop_center' => 'crop_center||'. t('Обрезка по центру'),
 					), mso_get_option('upload_type_resize', 'general', 'resize_full_crop_center')) 
 			. '</select></div>
 	</div>

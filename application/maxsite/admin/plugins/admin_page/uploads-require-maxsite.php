@@ -181,13 +181,14 @@ function _upload($up_dir, $fn, $r = array())
 	// echo 'mini ';
 	echo ' MINI... ';
 	
-	// миниатюру делаем станартно
+	// миниатюру делаем стандартно
 	thumb_generate($url . $fn, $size_image_mini_w, $size_image_mini_h, false, $image_mini_type, true, 'mini', false);
 	
 	echo ' THUMB... ';
 	
-	// 100x100 — превью в _mso_i
-	thumb_generate($url . $fn, 100, 100, false, 'resize_full_crop_center', true, '_mso_i', false);
+	// 100x100 — превью в _mso_i с тем же типом кропа
+	thumb_generate($url . $fn, 100, 100, false, $image_mini_type, true, '_mso_i', false);
+	// thumb_generate($url . $fn, 100, 100, false, 'resize_full_crop_center', true, '_mso_i', false);
 	
 	echo ' DONE! <b>' . $fn . '</b>';
 }

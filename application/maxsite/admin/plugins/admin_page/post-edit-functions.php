@@ -291,6 +291,8 @@ function post_all_pages($editor_options, $f_page_parent)
 function form_select_options($values = array(), $selected = '')
 {
 	/*
+		value => текст||title
+		
 	form_select_options(array(
 			'width' => 'по ширине',
 			'height' => 'по высоте',
@@ -303,10 +305,20 @@ function form_select_options($values = array(), $selected = '')
 	
 	foreach($values as $v => $s)
 	{
+		$title = '';
+		
+		if (strpos($s, '||') !== false) // указан title для элемента
+		{
+			$a = explode('||', $s);
+			$s = $a[0];
+			if (isset($a[1]) and $a[1]) 
+				$title = ' title="' . htmlspecialchars($a[1]) . '"';  
+		}
+		
 		if ($v == $selected)
-			$opt .= '<option value="' . $v . '" selected="selected">' . $s . '</option>';
+			$opt .= '<option' . $title . ' value="' . $v . '" selected="selected">' . $s . '</option>';
 		else
-			$opt .= '<option value="' . $v . '">' . $s . '</option>';
+			$opt .= '<option' . $title . ' value="' . $v . '">' . $s . '</option>';
 	}
 	
 	return $opt;

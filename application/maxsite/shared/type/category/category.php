@@ -48,29 +48,49 @@ if ($f = mso_page_foreach('category-do')) require($f);
 
 if ($pages) // есть страницы
 {
-	if ($fn = mso_find_ts_file('type/category/units/category-header.php')) require($fn);
-
-	if ($f = mso_page_foreach('category-do-pages')) require($f); // подключаем кастомный вывод
-	if (function_exists('ushka')) echo ushka('category-do-pages');
+	// category_unit шаблон вывода для определенной рубрики
+	// slug рубрики = юнит-файл
+	// news = 2col.php
+	// ford = 3col.php
+	// если в этой опции рубрика не задана, то используется стандартный вариант вывода
+	// юнит файл располагается в шаблоне в type/category/units/
+	// дефолтный юнит: type/category/units/category-default.php
 	
-	if ($fn = mso_find_ts_file('type/category/units/category-do-pages.php')) require($fn);
+	$use_unit = false; // флаг использования юнита
 	
-	// цикл вывода в отдельных юнитах
-	
-	if ($full_posts) // полные записи
+	if ($category_unit = mso_get_option('category_unit', getinfo('template'), ''))
 	{
-		if ($fn = mso_find_ts_file('type/category/units/category-full.php')) require($fn);
-	}
-	else // вывод в виде списка
-	{
-		if ($fn = mso_find_ts_file('type/category/units/category-list.php')) require($fn);
+		$current_url = mso_segment(2); // текущая рубрика определяется по slug
+		$category_unit = explode("\n", $category_unit);
+		
+		foreach ($category_unit as $elem)
+		{
+			$elem = explode("=", trim($elem));
+			
+			if (count($elem) == 2) // должно быть два элемента
+			{
+				$m1 = trim($elem[0]); // slug
+				$m2 = trim($elem[1]); // файл
+				
+				if ($m1 === $current_url)
+				{
+					// есть совпадение
+					if ($fn = mso_fe('type/category/units/' . $m2)) 
+					{	
+						$use_unit = $fn; // выставляем путь к файлу
+					}
+					
+					break; // в любом случае рубим цикл
+				}
+			}
+		}
 	}
 	
-	if ($f = mso_page_foreach('category-posle-pages')) require($f); // подключаем кастомный вывод
-	if (function_exists('ushka')) echo ushka('category-posle-pages');
-	
-	mso_hook('pagination', $pagination);
-
+	if ($use_unit) 
+		require($use_unit);
+	else 
+		// стандартный вывод
+		if ($fn = mso_find_ts_file('type/category/units/category-default.php')) require($fn);
 }
 else 
 {

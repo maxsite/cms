@@ -22,7 +22,8 @@ else
 	if ($main_template_slug = mso_get_option('main_template_slug', getinfo('template'), ''))
 	{
 		// ищем вхождение текущего адреса в списке опции
-		$current_url = mso_current_url();
+		// сразу убираем пагинацию из адреса 
+		$current_url = str_replace('/next/' . mso_current_paged(), '', mso_current_url());
 		
 		$main_template_slug = explode("\n", $main_template_slug);
 		

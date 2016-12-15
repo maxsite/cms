@@ -151,6 +151,8 @@ $(document).ready(function() {
 			
 			xhr.setRequestHeader("X-REQUESTED-TYPERESIZE", unescape(encodeURIComponent($id("upload_type_resize").value)));
 			
+			xhr.setRequestHeader("X-REQUESTED-REPLACEFILE", unescape(encodeURIComponent($id("upload_replace_file").checked )));
+			
 			
 			// xhr.setRequestHeader("X_FILENAME", unescape(encodeURIComponent(file.name)));
 			//xhr.setRequestHeader("X_FILENAME_UP_DIR", unescape(encodeURIComponent($id("page_id").value)));

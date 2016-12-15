@@ -45,8 +45,11 @@ function _upload($up_dir, $fn, $r = array())
 	// Если имя файла пустое, только расширение.
 	if ($fn == '.' . $ext) $fn = '1' . $fn;
 
-	// Если файл уже существует.
-	if (file_exists($up_dir . $fn))
+	// значение checked передается как строка!
+	$replace_file = isset($_SERVER['HTTP_X_REQUESTED_REPLACEFILE']) ? $_SERVER['HTTP_X_REQUESTED_REPLACEFILE'] : 'false';
+	
+	// Если файл уже существует и нельзя заменять ищем новое имя
+	if (strtolower($replace_file) == 'false' and file_exists($up_dir . $fn))
 	{
 		for ($i = 1; $i < 100; $i++)
 		{
@@ -105,7 +108,6 @@ function _upload($up_dir, $fn, $r = array())
 			$new_height = round($height / ($width/$new_width));
 			thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false);
 		}
-		
 	}
 	elseif ($resize_images_type == 'height')
 	{

@@ -36,13 +36,14 @@ if ( $post = mso_check_post(array('dir')) )
 	$dirs0 = array();
 	foreach ($dirs as $file)
 	{
-		if (is_array($file)) continue;
-		$dirs0[filemtime($uploads_dir . '/' . $file)] = $file;
+		if (is_array($file)) continue; // это каталог, пропускаем
+		
+		// ключ = время.файл чтобы учесть одно и тоже время разных файлов 
+		$dirs0[filemtime($uploads_dir . '/' . $file) . $file] = $file;
 	}
 	
 	krsort($dirs0);
 	$dirs = $dirs0;
-	
 	
 	$fn_mso_descritions = $uploads_dir . '/_mso_i/_mso_descriptions.dat';
 	if (file_exists( $fn_mso_descritions )) 
@@ -52,6 +53,7 @@ if ( $post = mso_check_post(array('dir')) )
 		$mso_descritions = unserialize( read_file($fn_mso_descritions) );
 	}
 	else $mso_descritions = array();
+	
 	
 	foreach ($dirs as $file)
 	{
@@ -64,6 +66,8 @@ if ( $post = mso_check_post(array('dir')) )
 		$this_img = ($ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'png');
 		
 		$time_file = date(" | Y-m-d H:i:s", filemtime($uploads_dir . '/' . $file));
+		
+		
 		
 		if (isset($mso_descritions[$file]))
 		{

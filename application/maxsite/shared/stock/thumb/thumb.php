@@ -136,6 +136,10 @@ class Thumb
 		// пропорции
 		$image_info = GetImageSize(getinfo('uploads_dir') . $file); // информация о файле исходном
 		
+		// отрицательные значения интепретируем как положительные
+		$width = abs($width);
+		$height = abs($height);
+		
 		// если задана только ширина, то высоту расчитываем пропорцией от исходного файла
 		if ($height === 0)
 		{
@@ -162,6 +166,20 @@ class Thumb
 		
 		return getinfo('uploads_url') . $new_file;
 	
+	}
+	
+	// пропорциональное уменьшение от ширины
+	function resize_w($width = 0, $height = 0, $x = 0, $y = 0)
+	{
+		$width = ($width > 0 ) ? $width : 1;
+		return $this->resize($width, 0);
+	}
+	
+	// пропорциональное уменьшение от высоты
+	function resize_h($width = 0, $height = 0, $x = 0, $y = 0)
+	{
+		$height = ($height > 0) ? $height : 1;
+		return $this->resize(0, $height);
 	}
 	
 	// кроп 
@@ -199,11 +217,15 @@ class Thumb
 	// кроп по центру изображения 
 	function crop_center($width = 0, $height = 0)
 	{
+		$width = ($width > 0 ) ? $width : 1;
+		$height = ($height > 0) ? $height : 1;
+		
 		$x = round($this->image_info[0] / 2 - $width / 2);
 		$y = round($this->image_info[1]/ 2 - $height / 2);
 		
 		return $this->crop($width, $height, $x, $y);
 	}
+	
 	
 	
 	// вначале пропорциональная ширина
@@ -218,6 +240,9 @@ class Thumb
 	// после обрезка кроп до указанных размеров по центру
 	function resize_crop_center($width = 0, $height = 0)
 	{
+		$width = ($width > 0 ) ? $width : 1;
+		$height = ($height > 0) ? $height : 1;
+		
 		$this->resize($width, 0);
 		
 		$image_info = GetImageSize(getinfo('uploads_dir') . $this->new_file);
@@ -231,6 +256,9 @@ class Thumb
 	// после обрезка кроп до указанных размеров по центру
 	function resize_h_crop_center($width = 0, $height = 0)
 	{
+		$width = ($width > 0 ) ? $width : 1;
+		$height = ($height > 0) ? $height : 1;
+		
 		$this->resize(0, $height);
 		
 		$image_info = GetImageSize(getinfo('uploads_dir') . $this->new_file);
@@ -245,6 +273,10 @@ class Thumb
 	// высота или ширина выбирается та, что больше, чтобы не было пустот в итоге
 	function resize_full_crop_center($width = 0, $height = 0)
 	{
+		
+		$width = ($width > 0 ) ? $width : 1;
+		$height = ($height > 0) ? $height : 1;
+		
 		// определяем пропорции реальные к требуемым
 		// от них и скачем
 		$w = $this->image_info[0] / $width;
@@ -270,6 +302,9 @@ class Thumb
 	// аналогично resize_full_crop_center, но кроп от верхнего левого угла
 	function resize_full_crop_top_left($width = 0, $height = 0)
 	{
+		$width = ($width > 0 ) ? $width : 1;
+		$height = ($height > 0) ? $height : 1;
+		
 		// определяем пропорции реальные к требуемым
 		// от них и скачем
 		$w = $this->image_info[0] / $width;
@@ -294,6 +329,9 @@ class Thumb
 	// аналогично resize_full_crop_center, но кроп от верхнего центра
 	function resize_full_crop_top_center($width = 0, $height = 0)
 	{
+		$width = ($width > 0 ) ? $width : 1;
+		$height = ($height > 0) ? $height : 1;
+		
 		// определяем пропорции реальные к требуемым
 		// от них и скачем
 		$w = $this->image_info[0] / $width;
@@ -408,6 +446,14 @@ function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 
 			elseif ($type_resize == 'resize_full_crop_top_center')
 			{
 				$t->resize_full_crop_top_center($width, $height);
+			}
+			elseif ($type_resize == 'resize_w')
+			{
+				$t->resize_w($width, $height);
+			}
+			elseif ($type_resize == 'resize_h')
+			{
+				$t->resize_h($width, $height);
 			}
 			else
 			{

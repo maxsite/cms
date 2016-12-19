@@ -95,15 +95,15 @@ if ( $post = mso_check_post(array('dir')) )
 		{
 			if ($title and $title != $file)
 			{
-				$img = '\n[img ' . $title . ']' . $uploads_url . '/' . $file . '[/img]\n';
+				$img = '[img ' . $title . ']' . $uploads_url . '/' . $file . '[/img]';
 				
-				$image = '\n[image=' . $uploads_url . '/mini/' . $file . ' ' . $title . ']' . $uploads_url . '/' . $file . '[/image]\n';
+				$image = '[image=' . $uploads_url . '/mini/' . $file . ' ' . $title . ']' . $uploads_url . '/' . $file . '[/image]';
 			}
 			else
 			{
-				$img = '\n[img]' . $uploads_url . '/' . $file . '[/img]\n';
+				$img = '[img]' . $uploads_url . '/' . $file . '[/img]';
 				
-				$image = '\n[image=' . $uploads_url . '/mini/' . $file . ']' . $uploads_url . '/' . $file . '[/image]\n';
+				$image = '[image=' . $uploads_url . '/mini/' . $file . ']' . $uploads_url . '/' . $file . '[/image]';
 			}
 		}
 		

@@ -147,43 +147,53 @@ $all_files .= '
 <input type="hidden" id="update_path" name="update_path" value="' . $update_path . '">
 <input type="hidden" id="page_id" name="page_id" value="' . mso_segment(3) . '">
 
-<div>
-	<div id="upload_filedrag">' . t('... перетащите файлы сюда ...') . '</div>
-	<input class="w-auto" type="file" id="upload_fileselect" name="upload_fileselect[]" multiple="multiple">
-	<label class="b-inline pad10"><input type="checkbox" id="upload_replace_file" name="upload_replace_file" checked> ' . t('Разрешить заменять существующие файлы') .'</label>
-
-	<div class="flex flex-wrap mar20-tb">
+<div class="flex flex-wrap">
 	
-		<div class="flex-grow1 mar10-b mar5-r">' . t('Размер') . ' <input class="w100px-max" type="number" id="upload_resize_images" name="upload_resize_images" value = "' . mso_get_option('resize_images',   'general', '600') . '" title="' . t('Размер конечного изображения') . '">
+	<div class="flex-grow1 pad20-r">
+		<div id="upload_filedrag">' . t('... перетащите файлы сюда ...') . '</div>
+		<input class="w-auto mar10-b" type="file" id="upload_fileselect" name="upload_fileselect[]" multiple="multiple">
+	</div>
+	
+	<div class="flex-grow1">
 		
-		<select class="w-auto" title="' . t('Метод изменения размера') . '" id="upload_resize_images_type" name="upload_resize_images_type">
+		<div class="mar10-t">' . t('Размер') . ' <input class="w100px-max" type="number" min="1" id="upload_resize_images" name="upload_resize_images" value = "' . mso_get_option('resize_images',   'general', '600') . '" title="' . t('Размер конечного изображения') . '">
+			
+			<select class="w-auto" title="' . t('Метод изменения размера') . '" id="upload_resize_images_type" name="upload_resize_images_type">
 			' . form_select_options(array(
 					'width' => t('по ширине'),
 					'height' => t('по высоте'),
-					'max' => t('по максимальной'),
-					'no' => t('не менять')
+					'max' => t('по максимальной стороне'),
+					'no' => t('не менять (исходный размер)')
 					), mso_get_option('upload_resize_images_type', 'general', 'width')) 
 			. '</select>
 		</div>
 		
+		<div class="mar10-tb">
+			
+			' . t('Миниатюра') . ' <input class="w70px" title="' . t('Ширина миниатюры') . '" type="number" min="1" id="upload_size_image_mini_w" name="upload_size_image_mini_w" value = "' . mso_get_option('size_image_mini', 'general', '150') . '">
+			
+			x <input class="w70px" title="' . t('Высота миниатюры') . '" type="number" min="1" id="upload_size_image_mini_h" name="upload_size_image_mini_h" value = "' . mso_get_option('size_image_mini_height', 'general', '150') . '">
+					
+			<select class="w250px-max" title="' . t('Способ создания миниатюры') . '" id="upload_type_resize" name="upload_type_resize">
+				' . form_select_options(array(
+						'resize_full_crop_center' => 'resize_full_crop_center||'. t('Обрезка по центру с соблюдением пропорций'),
+						'resize_full_crop_top_left' => 'resize_full_crop_top_left||' . t('Обрезка от верхнего левого угла (пропорции)'),
+						'resize_full_crop_top_center' => 'resize_full_crop_top_center||' . t('Обрезка от верхнего центра (пропорции)'),
+						'resize_crop' => 'resize_crop||'. t('Обрезка пропорционально ширине'),
+						'resize_crop_center' => 'resize_crop_center||'. t('Пропорциональная ширина и обрезка по центру'),
+						'resize_h_crop_center' => 'resize_h_crop_center||'. t('Пропорциональная высота и обрезка по центру'),
+						'crop' => 'crop||'. t('Обрезка по верхнему левому углу'),
+						'crop_center' => 'crop_center||'. t('Обрезка по центру'),
+						'resize' => 'resize||'. t('Непропорциональное изменение до указанных размеров'),
+						'resize_w' => 'resize_w||'. t('Пропорциональное изменение до указанной ширины'),
+						'resize_h' => 'resize_h||'. t('Пропорциональное изменение до указанной высоты'),
+						
+						), mso_get_option('upload_type_resize', 'general', 'resize_full_crop_center')) 
+			. '</select>
+		</div>
 		
-		<div class="flex-grow1 mar10-b t-right">' . t('Миниатюра') . ' <input class="w70px" title="' . t('Ширина миниатюры') . '" type="number" id="upload_size_image_mini_w" name="upload_size_image_mini_w" value = "' . mso_get_option('size_image_mini', 'general', '150') . '"></div>
+		<label class="b-inline pad10-b"><input type="checkbox" id="upload_replace_file" name="upload_replace_file" checked> ' . t('Разрешить заменять существующие файлы') .'</label>
 		
-		<div class="flex-grow1 mar10-b mar5-r">x <input class="w70px" title="' . t('Высота миниатюры') . '" type="number" id="upload_size_image_mini_h" name="upload_size_image_mini_h" value = "' . mso_get_option('size_image_mini_height', 'general', '150') . '">
-				
-		<select class="w250px-max" title="' . t('Способ создания миниатюры') . '" id="upload_type_resize" name="upload_type_resize">
-			' . form_select_options(array(
-					'resize_full_crop_center' => 'resize_full_crop_center||'. t('Обрезка по центру с соблюдением пропорций'),
-					'resize_full_crop_top_left' => 'resize_full_crop_top_left||' . t('Обрезка от верхнего левого угла (пропорции)'),
-					'resize_full_crop_top_center' => 'resize_full_crop_top_center||' . t('Обрезка от верхнего центра (пропорции)'),
-					'resize_crop' => 'resize_crop||'. t('Обрезка пропорционально ширине'),
-					'resize_crop_center' => 'resize_crop_center||'. t('Пропорциональная ширина и обрезка по центру'),
-					'resize_h_crop_center' => 'resize_h_crop_center||'. t('Пропорциональная высота и обрезка по центру'),
-					'resize' => 'resize||'. t('Простое изменение размера'),
-					'crop' => 'crop||'. t('Обрезка по лерхнему левому углу'),
-					'crop_center' => 'crop_center||'. t('Обрезка по центру'),
-					), mso_get_option('upload_type_resize', 'general', 'resize_full_crop_center')) 
-			. '</select></div>
 	</div>
 </div>
 
@@ -201,4 +211,4 @@ else
 }
 
 
-# end file
+# end of file

@@ -534,7 +534,7 @@ function forms_files_post($files)
 	// формирование папки для временных файлов вложений
 	$cache_folder = getinfo('cache_dir').'forms_attaches/';
 	
-	if( !file_exists($cache_folder) ) mkdir($cache_folder, 0666);
+	if( !file_exists($cache_folder) ) mkdir($cache_folder, 0777);
 		
 	// параметры для mso_upload
 	// конфиг CI-библиотеки upload

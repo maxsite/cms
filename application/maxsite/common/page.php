@@ -2075,6 +2075,10 @@ function mso_page_other_pages($page_id = 0, $page_categories = array())
 			$bl_page_categories = $page_categories; 
 		}
 		
+		// своя функция sql-запроса для function_add_custom_sql
+		// задается через mso_set_val()
+		$fasc = mso_get_val('page_other_pages_function_add_custom_sql', false);
+		
 		$bl_pages = mso_get_pages(
 				array(  'type'=> false, 
 						'content'=> false, 
@@ -2084,7 +2088,8 @@ function mso_page_other_pages($page_id = 0, $page_categories = array())
 						'exclude_page_id'=>array($page_id), 
 						'limit'=> mso_get_option('page_other_pages_limit', 'templates', 7), 
 						'order'=>mso_get_option('page_other_pages_order', 'templates', 'page_date_publish'),
-						'order_asc'=>mso_get_option('page_other_pages_order_asc', 'templates', 'random')
+						'order_asc'=>mso_get_option('page_other_pages_order_asc', 'templates', 'random'),
+						'function_add_custom_sql' => $fasc,
 					),
 					$_temp);
 		

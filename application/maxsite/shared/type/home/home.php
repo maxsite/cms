@@ -51,6 +51,17 @@ else
 	
 	if ($home_units)
 	{
+		// если в тексте юнита есть вхождение @use_tmpl@
+		// то разрешим в файле исполнять PHP через шаблонизатор
+		if (strpos($home_units, '@use_tmpl@'))
+		{
+			$home_units = mso_tmpl_prepare($home_units, false);
+			ob_start();
+			eval($home_units);
+			$home_units = ob_get_contents();
+			ob_end_clean();
+		}
+		
 		// ищем вхождение [unit] ... [/unit]
 		$units = mso_section_to_array($home_units, '!\[unit\](.*?)\[\/unit\]!is', array('file'=>''));
 		

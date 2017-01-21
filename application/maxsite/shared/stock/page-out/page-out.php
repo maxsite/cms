@@ -1303,8 +1303,8 @@ class Block_pages
 			'line2_end' => '',
 
 			'line3' => '[date] [cat]', // третья линия — перед контентом
-			'line3_start' => '<p class="home-last-page-info">',
-			'line3_end' => '</p>', 
+			'line3_start' => '',
+			'line3_end' => '', 
 			
 			'line4' => '', // четвертая линия — после контента
 			'line4_start' => '',

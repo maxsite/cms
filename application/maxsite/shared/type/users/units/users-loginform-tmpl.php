@@ -2,7 +2,7 @@
 
 <h3>{{ tf('Для редактирования введите свой email и пароль') }}</h3>
 
-<form method="post" class="mso-comusers-form">{{ mso_form_session('f_session_id') }}
+<form method="post" class="mso-comusers-form">{{ mso_form_session('flogin_session_id') }}
 
 	<input type="hidden" value="{{ $login_redirect }}" name="flogin_redirect">
 

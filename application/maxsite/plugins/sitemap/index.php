@@ -160,7 +160,7 @@ function sitemap_cat($arg = '')
 	
 	$all = mso_cat_array('page', 0, 'category_menu_order', 'asc', 'category_name', 'asc', array(), array(), 0, 0, true);
 
-	$out .= mso_create_list($all, array('function' => '_sitemap_cat_elem', 'childs'=>'childs', 'format'=>'<h3>[TITLE_HTML]</h3><p><em>[DESCR_HTML]</em></p>[FUNCTION]', 'format_current'=>'', 'class_ul'=>'', 'title'=>'category_name', 'link'=>'category_slug', 'current_id'=>false, 'prefix'=>'category/', 'count'=>'pages_count', 'slug'=>'category_slug', 'id'=>'category_id', 'menu_order'=>'category_menu_order', 'id_parent'=>'category_id_parent') );
+	$out .= mso_create_list($all, array('function' => '_sitemap_cat_elem', 'childs'=>'childs', 'format'=>'<h3>[TITLE_HTML]</h3><p><em>[DESCR]</em></p>[FUNCTION]', 'format_current'=>'', 'class_ul'=>'', 'title'=>'category_name', 'link'=>'category_slug', 'current_id'=>false, 'prefix'=>'category/', 'count'=>'pages_count', 'slug'=>'category_slug', 'id'=>'category_id', 'menu_order'=>'category_menu_order', 'id_parent'=>'category_id_parent') );
 
 	$out .= NR . mso_hook('sitemap_posle') . '</div>' . NR;
 	

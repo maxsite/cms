@@ -62,6 +62,9 @@ if (!$slides) return; // нет секций - выходим
 $slides0 = str_replace('TEMPLATE_URL/', getinfo('template_url'), $slides0);
 $slides0 = str_replace('SITE_URL/', getinfo('siteurl'), $slides0);
 
+$slides = str_replace('TEMPLATE_URL/', getinfo('template_url'), $slides);
+$slides = str_replace('SITE_URL/', getinfo('siteurl'), $slides);
+
 // опции слайдера свои
 $options = mso_section_to_array($slides0, '!\[options\](.*?)\[\/options\]!is', array());
 

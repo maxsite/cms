@@ -86,6 +86,15 @@ if ($pages) // есть страницы
 		}
 	}
 	
+	// если нет юнита, возможно указан дефолтный
+	if (!$use_unit and ($category_unit_default = mso_get_option('category_unit_default', getinfo('template'), ''))) 
+	{
+		if ($fn = mso_fe('type/category/units/' . $category_unit_default)) 
+		{	
+			$use_unit = $fn; // выставляем путь к файлу
+		}
+	}
+	
 	if ($use_unit) 
 		require($use_unit);
 	else 

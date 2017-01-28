@@ -31,23 +31,5 @@ function default_profiles()
 	return $all;
 }
 
-/*
-# возвращает файлы для логотипа
-function default_header_logo()
-{
-	$all = mso_get_path_files(getinfo('template_dir') . 'assets/images/logos/', getinfo('template_url') . 'assets/images/logos/', false);
-	
-	return implode($all, '#');
-}
-*/
-/*
-# возвращает каталоги в uploads, где могут храниться файлы для шапки 
-function default_header_image()
-{
-	$dirs = mso_get_dirs(getinfo('uploads_dir'), array('_mso_float', 'mini', '_mso_i', 'smiles'));
-	
-	return '-template-||' . tf('Каталог шаблона') . '#' . implode($dirs, '#');
-}
-*/
 
 # end of file

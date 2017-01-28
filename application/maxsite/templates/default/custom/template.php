@@ -8,33 +8,28 @@
  *
  */
 
-
-
 # типовой вывод секции HEAD
 # можно использовать в header.php
 function my_default_head_section()
 {
 	global $page;
 	
+	// атирибуты <HTML>
+	$html_attr = mso_get_val('head_section_html_add');
+	$html_attr = mso_hook('html_attr', $html_attr);
+	$html_attr = $html_attr ? ' ' . $html_attr : '';
+	
 	echo 
 '<!DOCTYPE HTML>
-<html' . mso_get_val('head_section_html_add') . '><head>' . mso_hook('head_start') . '
+<html' . $html_attr . '><head>' . mso_hook('head_start') . '
 <meta charset="UTF-8">
 <title>' . mso_head_meta('title') . '</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="MaxSite CMS">
 <meta name="description" content="' . mso_head_meta('description') . '">
 <meta name="keywords" content="' . mso_head_meta('keywords') . '">
-<meta property="og:title" content="' . mso_head_meta('title') . '">
-<meta property="og:description" content="' . mso_head_meta('description') . '">
-<meta property="og:url" content="' . mso_link_rel('canonical', '', true) . '">
 <link rel="shortcut icon" href="' . getinfo('uploads_url') . 'favicons/' . mso_get_option('default_favicon', 'templates', 'favicon1.png') . '" type="image/x-icon">
 ';
-
-	if (is_type('page') and isset($page['page_meta']['image_for_page'][0]))
-	{
-		echo '<meta property="og:image" content="' . $page['page_meta']['image_for_page'][0] . '">';
-	}
 	
 	if (mso_get_option('default_canonical', 'templates', 0)) echo mso_link_rel('canonical');
 

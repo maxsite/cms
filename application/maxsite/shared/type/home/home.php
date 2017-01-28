@@ -51,78 +51,7 @@ else
 	
 	if ($home_units)
 	{
-		// если в тексте юнита есть вхождение @use_tmpl@
-		// то разрешим в файле исполнять PHP через шаблонизатор
-		if (strpos($home_units, '@use_tmpl@'))
-		{
-			$home_units = mso_tmpl_prepare($home_units, false);
-			ob_start();
-			eval($home_units);
-			$home_units = ob_get_contents();
-			ob_end_clean();
-		}
-		
-		// ищем вхождение [unit] ... [/unit]
-		$units = mso_section_to_array($home_units, '!\[unit\](.*?)\[\/unit\]!is', array('file'=>''));
-		
-		// pr($units);
-		
-		// подключаем каждый указанный unit 
-		// _rules — php-условие, при котором юнит выводится
-		// параметр file где указывается файл юнита в каталоге type/home/units/
-		// если file нет, то проверяются другие параметры если есть:
-		// html — выводится как есть текстом/ Можно использовать php-шаблонизатор {{ }} и {% %}
-		// require — подключается файл в шаблоне (пусть относительно каталога шаблона)
-		// ushka — ушка
-		// component — компонент шаблона
-		// option_key и option_type и option_default — опция
-		if ($units) 
-		{
-			$UNIT_NUM = 0; // порядковый номер юнита (можно использовать для кэширования)
-			
-			foreach ($units as $UNIT)
-			{
-				$UNIT_NUM++;
-				
-				if (isset($UNIT['_rules']) and trim($UNIT['_rules']))
-				{
-					$rules = 'return ( ' . trim($UNIT['_rules']) . ' ) ? 1 : 0;';
-					$rules_result = eval($rules); // выполяем
-					if ($rules_result === false) $rules_result = 1; // возможно произошла ошибка
-					if ($rules_result !== 1) continue;
-				}
-				
-				if (trim($UNIT['file']))
-				{
-					// в подключаемом файле доступна переменная $UNIT — массив параметров
-					if ($fn = mso_find_ts_file('type/home/units/' . trim($UNIT['file']))) require($fn);
-				}
-				elseif (isset($UNIT['html']) and trim($UNIT['html']))
-				{
-					eval(mso_tmpl_prepare(trim($UNIT['html']), false));
-				}
-				elseif (isset($UNIT['require']) and trim($UNIT['require']))
-				{
-					if ($fn = mso_fe(trim($UNIT['require']))) require($fn);
-				}
-				elseif (isset($UNIT['ushka']) and trim($UNIT['ushka']) and function_exists('ushka'))
-				{
-					echo ushka(trim($UNIT['ushka']));
-				}
-				elseif (isset($UNIT['component']) and trim($UNIT['component']))
-				{
-					if ($_fn = mso_fe( 'components/' . trim($UNIT['component']) . '/' . trim($UNIT['component']) . '.php' )) require($_fn);
-				}
-				elseif (isset($UNIT['option_key'], $UNIT['option_type'], $UNIT['option_default']) and trim($UNIT['option_key']) and trim($UNIT['option_type']) and trim($UNIT['option_default']))
-				{
-					echo mso_get_option(trim($UNIT['option_key']), trim($UNIT['option_type']), trim($UNIT['option_default']));
-				}
-				elseif (isset($UNIT['sidebar']) and trim($UNIT['sidebar']))
-				{
-					mso_show_sidebar($UNIT['sidebar']);
-				}
-			}
-		}
+		mso_units_out($home_units);
 	}
 	else // типовой вывод главной
 	{
@@ -157,4 +86,4 @@ else
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 
-# end file
+# end of file

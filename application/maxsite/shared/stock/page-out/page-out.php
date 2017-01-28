@@ -160,7 +160,6 @@ class Page_out
 			return '';
 	}
 	
-	
 	// вспомогательная функция для вывода результатов
 	protected function out($out)
 	{
@@ -598,8 +597,7 @@ class Page_out
 		// mso_page_meta($meta = '', $page_meta = array(), $do = '', $posle = '', $razd = ', ', $echo = true
 		
 		return $this->out(mso_page_meta($meta, $this->val('page_meta'), $do, $posle, $razd, false));
-	}	
-	
+	}
 	
 	// вывод произвольного html
 	function html($text = '')
@@ -700,7 +698,6 @@ class Page_out
 		return $this->out(NR . $out . '<!--' . $out_comment . '-->' . NR . NR);
 	}
 	
-	
 	// вывод div.clearfix
 	// или можно указать 
 	function clearfix($class = 'mso-clearfix')
@@ -722,8 +719,7 @@ class Page_out
 	{
 		if ($out) return $this->out($do . $out . $posle);
 	}
-	
-	
+
 	// формируем <a>
 	// возвращаем только по return
 	function link($url = '#', $name = '', $title = '', $class = '')
@@ -733,7 +729,7 @@ class Page_out
 		
 		return '<a href="' . $url . '"' . $class . $title . '>' . $name . '</a>';
 	}
-	
+
 	// формируем <img>
 	// возвращаем только по return
 	function img($src = '', $class = '', $title = '', $alt = '', $width = '', $height = '')
@@ -746,8 +742,7 @@ class Page_out
 		
 		return '<img src="' . $src . '"' . $class . $title . $alt . $width . $height . '>';
 	}
-	
-	
+
 	// для заголовка можно использовать отдельную функцию
 	// в этом случае можно указать отдельные параметры
 	// $echo работает как в line 
@@ -772,8 +767,7 @@ class Page_out
 			elseif ($echo === false) return $out;
 		}
 	}
-	
-	
+
 	// возвращает название сайта только по return
 	// если это не home, то в виде A-ссылки
 	function name_site()
@@ -783,7 +777,7 @@ class Page_out
 				: 
 					getinfo('name_site');
 	}
-	
+
 	// возвращает адрес записи всегда по return
 	// если $html_link = true, то формирует <a href="адрес">
 	function page_url($html_link = false)
@@ -793,72 +787,7 @@ class Page_out
 		else
 			return mso_page_url($this->val('page_slug'));
 	}
-	
-	/*
-	# формирование таблиц из строк и ячеек аля-таблица
-	// если $rows1 = true, то сразу открываем row поскольку она одна
-	function box_start($class = 'table-box', $rows1 = true)
-	{
-		if ($class) $class = ' class="' . $class . '"';
-		
-		if ($rows1) $text = NR . '<div' . $class . '><div class="row">';
-		else $text = NR . '<div' . $class . '>';
-	
-		return $this->out($text);
-	}
-	
-	// закрываем блок
-	function box_end($rows1 = true)
-	{
-		if ($rows1) $text = NR . '</div></div>' . NR;
-		else $text = NR . '</div>' . NR;
-	
-		return $this->out($text);
-	}	
-	
-	// открываем row
-	function row_start()
-	{
-		return $this->out(NR . '<div class="row">');
-	}	
-	
-	// закрываем row
-	function row_end()
-	{
-		return $this->out('</div>');
-	}		
-	
-	// выводим содержимое ячейки
-	function cell($text = '', $class = '')
-	{
-		if ($class) $class = ' ' . $class;
-		
-		return $this->out(NR . '<div class="cell' . $class . '"><div class="wrap">' . $text . '</div></div>');
-	}
-	
-	// выводим ячейку в качестве пустого разделителя
-	function cell_sep($text = '&nbsp;', $class = 'sep')
-	{
-		if ($class) $class = ' class="' . $class . '"';
-		
-		return $this->out(NR . '<div' . $class . '>' . $text . '</div>');
-	}
-	
-	// старт cell
-	function cell_start($class = '')
-	{
-		if ($class) $class = ' ' . $class;
-		
-		return $this->out(NR . '<div class="cell' . $class . '"><div class="wrap">');
-	}
-	
-	// завершение cell
-	function cell_end()
-	{
-		return $this->out(NR . '</div></div>');
-	}
-	*/
-	
+
 	// парсинг - используется парсер CodeIgniter
 	// $template - это шаблон 
 	// $data - данные в виде массива
@@ -877,8 +806,7 @@ class Page_out
 		
 		return $out;
 	}
-	
-	
+
 	// парсинг через файл-шаблон, указанный в $file
 	// путь указывается полный на сервере
 	// $data - данные в виде массива как и в parse()
@@ -891,201 +819,8 @@ class Page_out
 		return $this->parse($tmpl, $data, $echo);
 	}	
 	
-	/*
-	// вывод записей по принципу ячеек таблицы
-	// Здесь задается кол-во ячеек в одной строке
-	//	1 2
-	//  3 4
-	//  5 6
-	function box_grid($count_cells = 2)
-	{
-		$this->count_cells = $count_cells;
-		$this->cur_cells = 1;
-	}
-	
-	
-	// вывод записи
-	function box_grid_cell($class = '', $class_box = 'table-box')
-	{
-		// для первой ячейки нужно открыть блоки
-		if ($this->cur_cells == 1)
-		{
-			$this->box_start($class_box, false);
-			$this->row_start();
-			$this->close_box_grid = false;
-		}
-		
-		// добавляем специфичные классы для ячейки
-		// автоматом формируем номер ячейки
-		
-		if ($class) 
-			$class .= ' cell_' . $this->cur_cells;
-		else
-			$class = 'cell_' . $this->cur_cells;
-			
-		$this->cell_start($class);
-	}	
-	
-	// следующая итерация цикла - увеличиваем счетчик
-	function box_grid_next()
-	{
-		$this->cell_end(); // закрыли ячейку
-		
-		// если это последняя ячейка в строке, то закрываем
-		if ($this->cur_cells >= $this->count_cells)
-		{
-			$this->cur_cells = 1;
-			$this->row_end();
-			$this->box_end(false);
-			$this->close_box_grid = true;
-		
-		}
-		else
-		{
-			$this->cur_cells++;
-		}
-	}	
-	
-	// закрываем все открытие ячейки
-	function box_grid_end()
-	{
-		if (!$this->close_box_grid) // есть не закрытый div 
-		{
-			$this->row_end();
-			$this->box_end(false);
-			$this->close_box_grid = true;
-		}
-	}
-	*/
-	
 } // end  class Page_out 
 
-
-
-
-/*
-	Класс для вывода записей в колонках
-	больше не используется
-*/
-/*
-class Columns 
-{
-	protected $cols_count = 3; // количество колонок
-	protected $pages_count = 1; // всего количество записей
-	protected $cut = 1; // кол-во записей в одной колонке
-	protected $_echo = true; // выводить данные по echo - иначе return
-	protected $cut_i = 1; // номер записи в колонке
-	protected $cut_num_col = 1; // номер колонки
-	protected $cut_close_div = false; // признак закрытого DIV
-	
-	function __construct($cols_count = 3, $pages_count = 1, $class = 'columns', $_echo = true)
-	{
-		// запомним
-		$this->cols_count = $cols_count;
-		$this->pages_count = $pages_count;
-		
-		// режим вывода
-		$this->_echo = $_echo;
-		
-		// вычислим
-		$this->cut = ceil($pages_count/$cols_count); // кол-во записей в одной колонке
-		
-		// основной контейнер
-		if ($this->_echo) echo NR . NR . '<div class="' . $class . '"><div class="' . $class . '-wrap">';
-				else return NR . NR . '<div class="' . $class . '"><div class="' . $class . '-wrap">';
-
-	}
-	
-	// вывод внутри цикла
-	function out($class = 'left', $style = '')
-	{
-		if ($this->cut_i == 1)
-		{
-			$this->cut_close_div = false;
-			
-			if ($style) $style = ' style="' . $style . '"';
-			
-			$out = NR . '<div class="' . $class 
-					. ' column column-' . $this->cut_num_col
-					. ' column-' . $this->cut_num_col . '-of-' . $this->cols_count
-					. ( ($this->cut_num_col == 1) ? ' column-first':'' ) 
-					. ( ($this->cut_num_col == $this->cols_count) ? ' column-last':'' ) 
-					. '"' 
-					. $style . '>'
-					. NR . '<div class="column-content">';
-					
-			if ($this->_echo) echo $out;
-				else return $out;
-		}
-	}
-	
-	// следующая итерация
-	function next()
-	{
-		$this->cut_i++;
-
-		if ($this->cut_i > $this->cut)
-		{
-			$this->cut_i = 1;
-			$this->cut_close_div = true;
-			$this->cut_num_col++;
-
-			if ($this->_echo) echo '</div></div>' . NR;
-				else return '</div></div>' . NR;
-		}
-	}
-	
-	// завершение вывода колонок
-	function close()
-	{
-		$out = '';
-		
-		// незакрытый div left
-		if (!$this->cut_close_div) $out .= '</div></div>' . NR;
-		
-		// основной контейнер
-		$out .= '<div class="clearfix"></div></div></div><!-- end columns -->' . NR;
-
-		if ($this->_echo) echo $out;
-		else return $out;
-		
-	}
-	
-	// можно задать старт новой колонки явно
-	function new_col($class = 'left', $style = '')
-	{
-		$this->cut_close_div = true; // флаг, чтобы не ставить лишний div в close()
-		
-		if ($style) $style = ' style="' . $style . '"';
-			
-		$out = NR . '<div class="' . $class 
-				. ' column"' 
-				. $style . '>'
-				. '<div class="column-content">';
-				
-		if ($this->_echo) echo $out;
-			else return $out;
-	}
-	
-	
-	// можно задать конец колонки явно
-	function end_col()
-	{
-		if ($this->_echo) echo '</div></div>' . NR;
-				else return '</div></div>' . NR;
-	}	
-	
-	
-	// подчистка float
-	function clearfix()
-	{
-		if ($this->_echo) echo '<div class="clearfix"></div>' . NR;
-				else return '<div class="clearfix"></div>' . NR;
-	}	
-	
-} // end  class Columns 
-
-*/
 
 # получение адреса первой картинки IMG в тексте
 # адрес обрабатывается, чтобы сформировать адрес полный (full), миниатюра (mini) и превью (prev)
@@ -1176,7 +911,6 @@ class Block_pages
 		if ($r1 !== false ) $this->get_pages($r1); // сразу получаем записи
 	}
 	
-	
 	// метод, где получаются записи
 	protected function get_pages($r)
 	{
@@ -1238,10 +972,10 @@ class Block_pages
 	{
 		$this->pages = $pages;
 		$this->pagination = $pagination;
+		if ($pagination) $this->param['pagination'] = true;
 		$this->go = ($this->pages) ? true : false;
 	}
-	
-	
+
 	// метод, выводящий записи
 	public function output($r = array())
 	{
@@ -1323,11 +1057,6 @@ class Block_pages
 			'content_start' => '<div class="mso-page-content">', // обрамляющий блок до
 			'content_end' => '</div>', // обрамляющий блок после
 			
-			// колонки
-			// 'columns' => 0, // можно указать кол-во колонок
-			// 'columns_class_row' => 'onerow', // css-класс
-			// 'columns_class_cell' => 'col w1-2', // css-класс для ячейки (по-умолчанию 2 колонки)
-			
 			'clearfix' => false, // отбивать после вывода $p->clearfix();
 			
 			'page_start' => '', // html в начале вывода записи 
@@ -1335,24 +1064,15 @@ class Block_pages
 			
 			'pagination_start' => '', // html в начале пагинации 
 			'pagination_end' => '', // html в конце пагинации
-			
-			// колонки в виде ячеек таблицы 1 2 / 3 4 / 5 6
-			// может конфликтовать с columns
-			// 'box_grid' => 0, // указывается количество ячеек в одной строке
-			// 'box_grid_class' => 'w50', // указывается css-класс ячейки
-			// 'box_grid_box_class' => 'table-box', // указывается css-класс строки-контейнера
-			
+			'pagination_in_block' => true, // пагинации внутри block_start и block_end
+						
 			'exclude_page_add' => true, // разрешить добавлять полученные страницы в исключенные
-
 		);
 		
 		$r = array_merge($default, $r); // объединяем
 		
-		// $r = array_map('trim', $r);
-		
 		$p = new Page_out; // шаблонизатор
 		
-		// echo $r['block_start'];
 		eval(mso_tmpl_prepare($r['block_start'], false));
 		
 		// формат записи
@@ -1366,21 +1086,10 @@ class Block_pages
 		
 		if ($r['exclude_page_add']) $exclude_page_id = mso_get_val('exclude_page_id');
 		
-		// if ($r['columns'])
-		// {
-		// 	$my_columns = new Columns($r['columns'], count($this->pages), $r['columns_class_row']);
-		// }
-		
-		// if ($r['box_grid']) $p->box_grid($r['box_grid']);
-		
 		foreach ($this->pages as $page)
 		{
 			$p->load($page); // загружаем данные записи
 			
-			// if ($r['box_grid']) $p->box_grid_cell($r['box_grid_class'], $r['box_grid_box_class']); 
-			// if ($r['columns']) $my_columns->out($r['columns_class_cell']);
-			
-			// echo $r['page_start'];
 			eval(mso_tmpl_prepare($r['page_start'], false));
 			
 			if ($r['thumb']) // миниатюра
@@ -1392,7 +1101,6 @@ class Block_pages
 					{
 						if ($r['placehold_file'] == 'data')
 						{
-							
 							// сами генерируем плейсхолд
 						  // mso_holder($width = 100, $height = 100, $text = true, $background_color = '#CCCCCC', $text_color = '#777777', $font_size = 5)
 							$t_placehold = mso_holder($r['thumb_width'], $r['thumb_height'], false, $r['placehold_data_bg']);
@@ -1415,8 +1123,7 @@ class Block_pages
 				{
 					$t_placehold = false;
 				}
-				
-	
+
 				if (
 					$thumb = thumb_generate(
 						$p->meta_val('image_for_page'), // адрес
@@ -1429,15 +1136,13 @@ class Block_pages
 						$p->thumb = '<a class="' . $r['thumb_link_class'] . '" href="' . mso_page_url($p->val('page_slug')) . '" title="' . htmlspecialchars($p->val('page_title')). '"><img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '"></a>';
 					else
 						$p->thumb = '<img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '">';
-						
 				}
 			}
 			
 			$p->line($r['line1'], $r['line1_start'], $r['line1_end']);
 			$p->line($r['line2'], $r['line2_start'], $r['line2_end']);
 			$p->line($r['line3'], $r['line3_start'], $r['line3_end']);
-			
-			
+
 			if ($r['content'])
 			{
 				if ($r['content_chars'])
@@ -1459,44 +1164,30 @@ class Block_pages
 			
 			if ($r['clearfix']) $p->clearfix();
 			
-			// echo $r['page_end'];
 			eval(mso_tmpl_prepare($r['page_end'], false));
-			
-			
-			// if ($r['columns']) $my_columns->next();
-			// if ($r['box_grid']) $p->box_grid_next();
 			
 			// сохраняем id записей, чтобы их исключить из вывода
 			if ($r['exclude_page_add']) $exclude_page_id[] = $p->val('page_id'); 
 		}
 		
-		
-		// if ($r['columns']) $my_columns->close();
-		
-		// if ($r['box_grid']) $p->box_grid_end();
-		
 		if ($r['exclude_page_add']) mso_set_val('exclude_page_id', $exclude_page_id);
-		
+
+		if ($r['pagination_in_block'] == false)
+			eval(mso_tmpl_prepare($r['block_end'], false));
 		
 		if ($this->param['pagination']) 
 		{
 			if (mso_hook_present('pagination'))
 			{
-				// echo $r['pagination_start'];
 				eval(mso_tmpl_prepare($r['pagination_start'], false));
-				
 				mso_hook('pagination', $this->pagination);
-				
-				// echo $r['pagination_end'];
 				eval(mso_tmpl_prepare($r['pagination_end'], false));
 			}
 		}
 		
-		// echo $r['block_end'];
-		eval(mso_tmpl_prepare($r['block_end'], false));
+		if ($r['pagination_in_block'] == true)
+			eval(mso_tmpl_prepare($r['block_end'], false));
 	}
 } // end block_pages
-
-
 
 # end of file

@@ -10,7 +10,7 @@
 
 // mso_set_val('jquery_url', 'URL-адрес загрузки jQuery');
 
-mso_set_val('head_section_html_add', ' lang="ru" prefix="og: http://ogp.me/ns#"');
+mso_set_val('head_section_html_add', 'lang="ru"');
 
 // можно указать css-класс для BODY
 if (is_type('home')) 

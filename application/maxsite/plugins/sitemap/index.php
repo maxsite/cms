@@ -36,9 +36,10 @@ function sitemap404($text = '')
 # явный вызов функции - отдается карта сайта
 function sitemap($arg = '')
 {
-	if (mso_segment(2) == 'cat') return sitemap_cat($arg);
-	
 	global $MSO;
+	
+	if (mso_segment(2) == 'cat') return sitemap_cat($arg);
+	if (mso_segment(2) == 'cat-list') return sitemap_cat_list($arg);
 
 	// кэш строим по url, потому что у он меняется от пагинации
 	$cache_key = 'sitemap' . serialize($MSO->data['uri_segment']);
@@ -69,9 +70,9 @@ function sitemap($arg = '')
 	
 	if ($pages)
 	{
-		$out .= '<div class="page_content"><div class="sitemap sitemap_list">' . NR . mso_hook('sitemap_do');
+		$out .= '<div class="page_content"><div class="sitemap sitemap_list">' . mso_hook('sitemap_do');
 		
-		$out .= '<div class="sitemap-link"><a href="' . getinfo('siteurl') . 'sitemap/cat">' . tf('Группировка по рубрикам') . '</a>' . NR . '</div>';
+		$out .= sitemap_bread('date'); 
 		
 		$first = true;
 		foreach ($pages as $page)
@@ -80,12 +81,12 @@ function sitemap($arg = '')
 			
 			if ($first) 
 			{
-				$out .= '<h3>' . $date . '</h3>' . NR . '<ul>' . NR;
+				$out .= '<h3>' . $date . '</h3><ul>';
 				$first = false;
 			}
 			elseif ($date1 != $date)
 			{
-				$out .= '</ul>' . NR . '<h3>' . $date . '</h3>' . NR . '<ul>' . NR;
+				$out .= '</ul><h3>' . $date . '</h3><ul>';
 			}
 			
 			$slug = mso_slug($page['page_slug']);
@@ -98,21 +99,13 @@ function sitemap($arg = '')
 				$out .=  ' <span>('
 						. mso_page_cat_link($page['page_categories'], ' &rarr; ', '', '', false)
 						. ')</span>';
-					# синонимы ссылок
-					/*
-					. ' ('
-					. '<a href="' . getinfo('siteurl') . $slug . '" title="slug: ' . $slug . '">slug</a>, '
-					. '<a href="' . getinfo('siteurl') . 'page/' . $page['page_id'] . '" title="page: ' . $page['page_id'] . '">page: ' . $page['page_id'] . '</a>, '
-					. '<a href="' . getinfo('siteurl') . $page['page_id'] . '" title="id: ' . $page['page_id'] . '">id: ' . $page['page_id'] . '</a>)'
-					*/
-					# /синонимы ссылок
-					
-			$out .=  '</li>' . NR;
+				
+			$out .=  '</li>';
 					
 			$date1 = $date;
 		}
 
-		$out .= '</ul>' . NR . mso_hook('sitemap_posle') . '</div></div>' . NR;
+		$out .= '</ul>' . mso_hook('sitemap_posle') . '</div></div>';
 	}
 	
 	
@@ -121,7 +114,6 @@ function sitemap($arg = '')
 	mso_hook('pagination', $pagination);
 	$out .=  ob_get_contents();
 	ob_end_clean();
-	
 
 	mso_add_cache($cache_key, $out); // сразу в кэш добавим
 	
@@ -154,15 +146,15 @@ function sitemap_cat($arg = '')
 
 	$out = '';
 	
-	$out .= '<div class="page_content sitemap sitemap_cat">' . NR . mso_hook('sitemap_do');
-		
-	$out .= '<div class="sitemap-link"><a href="' . getinfo('siteurl') . 'sitemap">' . tf('Группировка по датам') . '</a>' . NR . '</div>';
+	$out .= '<div class="page_content sitemap sitemap_cat">' . mso_hook('sitemap_do');
+	
+	$out .= sitemap_bread('cat'); 
 	
 	$all = mso_cat_array('page', 0, 'category_menu_order', 'asc', 'category_name', 'asc', array(), array(), 0, 0, true);
 
-	$out .= mso_create_list($all, array('function' => '_sitemap_cat_elem', 'childs'=>'childs', 'format'=>'<h3>[TITLE_HTML]</h3><p><em>[DESCR]</em></p>[FUNCTION]', 'format_current'=>'', 'class_ul'=>'', 'title'=>'category_name', 'link'=>'category_slug', 'current_id'=>false, 'prefix'=>'category/', 'count'=>'pages_count', 'slug'=>'category_slug', 'id'=>'category_id', 'menu_order'=>'category_menu_order', 'id_parent'=>'category_id_parent') );
+	$out .= mso_create_list($all, array('function' => '_sitemap_cat_elem', 'childs'=>'childs', 'format'=>'<h3>[TITLE_HTML]</h3><p class="sitemap_descr">[DESCR]</p>[FUNCTION]', 'format_current'=>'', 'class_ul'=>'', 'title'=>'category_name', 'link'=>'category_slug', 'current_id'=>false, 'prefix'=>'category/', 'count'=>'pages_count', 'slug'=>'category_slug', 'id'=>'category_id', 'menu_order'=>'category_menu_order', 'id_parent'=>'category_id_parent') );
 
-	$out .= NR . mso_hook('sitemap_posle') . '</div>' . NR;
+	$out .= mso_hook('sitemap_posle') . '</div>';
 	
 	mso_add_cache($cache_key, $out); // сразу в кэш добавим
 	
@@ -224,4 +216,63 @@ function _sitemap_cat_elem($elem)
 	return $out;
 }
 
-# end file
+function sitemap_cat_list($arg = '')
+{
+	$cache_key = 'sitemap_cat_list';
+	$k = mso_get_cache($cache_key);
+	if ($k) return $k; // да есть в кэше
+
+	$out = '';
+	
+	$out .= '<div class="page_content sitemap sitemap_cat_list">' . mso_hook('sitemap_do');
+	
+	$out .= sitemap_bread('cat-list'); 
+	
+	$all = mso_cat_array('page', 0, 'category_menu_order', 'asc', 'category_name', 'asc', array(), array(), 0, 0, true);
+
+	$out .= mso_create_list($all, array('childs'=>'childs', 'format'=>'<h3>[LINK][TITLE_HTML][/LINK] <sup>[COUNT]</sup></h3><p class="sitemap_descr">[DESCR]</p>', 'format_current'=>'', 'class_ul'=>'', 'title'=>'category_name', 'link'=>'category_slug', 'current_id'=>false, 'prefix'=>'category/', 'count'=>'pages_count', 'slug'=>'category_slug', 'id'=>'category_id', 'menu_order'=>'category_menu_order', 'id_parent'=>'category_id_parent') );
+
+	$out .= mso_hook('sitemap_posle') . '</div>';
+	
+	mso_add_cache($cache_key, $out); // сразу в кэш добавим
+	
+	return $out;
+}
+
+// вспомогательная для хлебных крошек
+function sitemap_bread($r)
+{
+	$out = '<div class="sitemap-link">';
+	
+	$link_base = getinfo('siteurl') . 'sitemap';
+	
+	$s1 = '<a href="' . $link_base . '">' . tf('Группировка по датам') . '</a>';
+	$s1_s = '<span class="sitemap-current">' . tf('Группировка по датам') . '</span>';
+	
+	$s2 = '<a href="' . $link_base . '/cat">' . tf('Группировка по рубрикам') . '</a>';
+	$s2_s = '<span class="sitemap-current">' . tf('Группировка по рубрикам') . '</span>';
+	
+	$s3 = '<a href="' . $link_base . '/cat-list">' . tf('Только рубрики') . '</a>';
+	$s3_s = '<span class="sitemap-current">' . tf('Только рубрики') . '</span>';
+	
+	$sep = '<span class="sitemap-sep"> / </span>';
+	
+	if ($r == 'date')
+	{
+		$out .= $s1_s . $sep . $s2 . $sep . $s3;
+	}
+	elseif ($r == 'cat')
+	{
+		$out .= $s1 . $sep . $s2_s . $sep . $s3;
+	}
+	elseif ($r == 'cat-list')
+	{
+		$out .= $s1 . $sep . $s2 . $sep . $s3_s;
+	}
+	
+	$out .= '</div>';
+	
+	return $out;
+}
+
+# end of file

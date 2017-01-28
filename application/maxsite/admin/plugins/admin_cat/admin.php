@@ -69,7 +69,7 @@ $format = '
 		<label class="flex-grow1 mar20-r">' . t('Родитель') . ' <input class="w-auto w100px-max" type="number" name="cat[[ID]][category_parent]" value="[ID_PARENT]"></label>
 		<label class="flex-grow1">' . t('Порядок') . ' <input class="w-auto w100px-max" type="number" name="cat[[ID]][category_order]" value="[MENU_ORDER]"></label>
 	</p>
-	<p><button type="button" class="button do-remove i-remove" data-id="[ID]">' . t('Удалить') . '</button> <button type="button" class="button do-save i-save" data-id="[ID]">' . t('Сохранить') . '</button></p>
+	<p><button type="button" class="button do-save i-save" data-id="[ID]">' . t('Сохранить') . '</button> <button type="button" class="button do-remove i-remove" data-id="[ID]">' . t('Удалить') . '</button></p>
 </div>
 <div class="msg pos-fixed pos10-t pos0-r" id="cat[[ID]][msg]"></div>
 ';

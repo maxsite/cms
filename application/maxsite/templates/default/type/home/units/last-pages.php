@@ -3,9 +3,7 @@
 /**
  * MaxSite CMS
  * (c) http://max-3000.com/
- * 12-08-2016
- */
-/*
+ * 27-01-2017
 
 Универсальный юнит для вывода записей по множеству критериев
 
@@ -18,15 +16,15 @@ limit = 3
 
 */
 
-
-# используем кэширование
 $home_cache_time = (int) mso_get_option('home_cache_time', 'templates', 0);
 $home_cache_key = getinfo('template') . '-' .  __FILE__ . '-' . mso_current_paged() . '-' . $UNIT_NUM;
 
-if ($home_cache_time > 0 and $k = mso_get_cache($home_cache_key) ) echo $k; // да есть в кэше
+if ($home_cache_time > 0 and $k = mso_get_cache($home_cache_key) ) echo $k;
 else
 {
 	$def = array(
+		'my_pages' => true, // если true то готовые записи уже в $PAGES
+		
 		'limit' => 3,
 		'cat_id' => "0",
 		'page_id' => "0",
@@ -62,6 +60,17 @@ else
 		'line4' => '[cat]',
 		'line5' => '<p class="t-right"><a href="[page_url]">Читать дальше</a></p>',
 		
+		'line1_start' => '',
+		'line1_end' => '', 
+		'line2_start' => '',
+		'line2_end' => '', 		
+		'line3_start' => '',
+		'line3_end' => '', 
+		'line4_start' => '',
+		'line4_end' => '', 		
+		'line5_start' => '',
+		'line5_end' => '', 		
+
 		'title_start' => '<h4>',
 		'title_end' => '</h4>',
 		
@@ -101,15 +110,25 @@ else
 
 		'pagination_start' => '',
 		'pagination_end' => '',
+		'pagination_in_block' => true,
+		
 		'exclude_page_allow' => true,
 		'exclude_page_add' => true,
+		
 	);
 	
 	$UNIT = mso_merge_array($UNIT, $def);
 
 	ob_start();
 	
-	$b = new Block_pages( array (
+	if ($PAGES and $UNIT['my_pages']) // записи в $PAGES
+	{
+		$b = new Block_pages(false);
+		$b->set_pages($PAGES, $PAGINATION);
+	}
+	else
+	{
+		$b = new Block_pages( array (
 				'limit' 		=> $UNIT['limit'],
 				'cat_id' 		=> $UNIT['cat_id'],
 				'page_id' 		=> $UNIT['page_id'],
@@ -121,80 +140,93 @@ else
 				'show_cut' 		=> $UNIT['show_cut'],
 				'date_now' 		=> $UNIT['date_now'],
 				'page_id_autor'	=> $UNIT['page_id_autor'],
+				
 				'exclude_page_allow'		=> $UNIT['exclude_page_allow'],
 				'function_add_custom_sql'	=> $UNIT['function_add_custom_sql'],
 				'pages_reverse'				=> $UNIT['pages_reverse'],
-			));
+		));
+	}
 		
-		if ($b->go)
-		{
-			$b->output(	array (
-				'block_start' 			=> $UNIT['block_start'],
-				'block_end' 			=> $UNIT['block_end'],
+	if ($b->go)
+	{
+		$b->output(	array (
+			'block_start' 			=> $UNIT['block_start'],
+			'block_end' 			=> $UNIT['block_end'],
 
-				'content' 				=> $UNIT['content'],
-				'content_words' 		=> $UNIT['content_words'],
-				'content_chars' 		=> $UNIT['content_chars'],
-				'content_cut' 			=> $UNIT['content_cut'],
-				'content_start' 		=> $UNIT['content_start'],
-				'content_end' 			=> $UNIT['content_end'],
+			'content' 				=> $UNIT['content'],
+			'content_words' 		=> $UNIT['content_words'],
+			'content_chars' 		=> $UNIT['content_chars'],
+			'content_cut' 			=> $UNIT['content_cut'],
+			'content_start' 		=> $UNIT['content_start'],
+			'content_end' 			=> $UNIT['content_end'],
 
-				'thumb' 				=> $UNIT['thumb'],
-				'thumb_width' 			=> $UNIT['thumb_width'],
-				'thumb_height' 			=> $UNIT['thumb_height'],
-				'thumb_class' 			=> $UNIT['thumb_class'],
-				'thumb_link_class' 		=> $UNIT['thumb_link_class'],
-				'thumb_link' 			=> $UNIT['thumb_link'],
+			'thumb' 				=> $UNIT['thumb'],
+			'thumb_width' 			=> $UNIT['thumb_width'],
+			'thumb_height' 			=> $UNIT['thumb_height'],
+			'thumb_class' 			=> $UNIT['thumb_class'],
+			'thumb_link_class' 		=> $UNIT['thumb_link_class'],
+			'thumb_link' 			=> $UNIT['thumb_link'],
 
-				'line1' 				=> $UNIT['line1'],
-				'line2' 				=> $UNIT['line2'],
-				'line3' 				=> $UNIT['line3'],
-				'line4' 				=> $UNIT['line4'],
-				'line5' 				=> $UNIT['line5'],
+			'line1' 				=> $UNIT['line1'],
+			'line2' 				=> $UNIT['line2'],
+			'line3' 				=> $UNIT['line3'],
+			'line4' 				=> $UNIT['line4'],
+			'line5' 				=> $UNIT['line5'],
+			
+			'line1_start' 			=> $UNIT['line1_start'],
+			'line1_end' 			=> $UNIT['line1_end'],
+			'line2_start' 			=> $UNIT['line2_start'],
+			'line2_end' 			=> $UNIT['line2_end'],
+			'line3_start' 			=> $UNIT['line3_start'],
+			'line3_end' 			=> $UNIT['line3_end'],
+			'line4_start' 			=> $UNIT['line4_start'],
+			'line4_end' 			=> $UNIT['line4_end'],
+			'line5_start' 			=> $UNIT['line5_start'],
+			'line5_end' 			=> $UNIT['line5_end'],
 
-				'title_start' 			=> $UNIT['title_start'],
-				'title_end' 			=> $UNIT['title_end'],
+			'title_start' 			=> $UNIT['title_start'],
+			'title_end' 			=> $UNIT['title_end'],
 
-				'page_start' 			=> $UNIT['page_start'],
-				'page_end' 				=> $UNIT['page_end'], 
+			'page_start' 			=> $UNIT['page_start'],
+			'page_end' 				=> $UNIT['page_end'], 
+			
+			'date' 					=> $UNIT['date'],
+			'date_start' 			=> $UNIT['date_start'],
+			'date_end' 				=> $UNIT['date_end'],
+
+			'cat_start' 			=> $UNIT['cat_start'],
+			'cat_end' 				=> $UNIT['cat_end'],
+			'cat_sep' 				=> $UNIT['cat_sep'],
+
+			'tag_start' 			=> $UNIT['tag_start'],
+			'tag_end' 				=> $UNIT['tag_end'],
+			'tag_sep' 				=> $UNIT['tag_sep'],
+			
+			'author_start' 			=> $UNIT['author_start'],
+			'author_end' 			=> $UNIT['author_end'],
+
+			'read' 					=> $UNIT['read'],
+			'read_start' 			=> $UNIT['read_start'],
+			'read_end' 				=> $UNIT['read_end'],
+
+			'comments_count_start' 	=> $UNIT['comments_count_start'],
+			'comments_count_end' 	=> $UNIT['comments_count_start'],
+
+			'placehold'				=> $UNIT['placehold'],
+			'placehold_path' 		=> $UNIT['placehold_path'],
+			'placehold_pattern' 	=> $UNIT['placehold_pattern'],
+			'placehold_file' 		=> $UNIT['placehold_file'],
+			'placehold_data_bg' 	=> $UNIT['placehold_data_bg'],
 				
-				'date' 					=> $UNIT['date'],
-				'date_start' 			=> $UNIT['date_start'],
-				'date_end' 				=> $UNIT['date_end'],
-
-				'cat_start' 			=> $UNIT['cat_start'],
-				'cat_end' 				=> $UNIT['cat_end'],
-				'cat_sep' 				=> $UNIT['cat_sep'],
-
-				'tag_start' 			=> $UNIT['tag_start'],
-				'tag_end' 				=> $UNIT['tag_end'],
-				'tag_sep' 				=> $UNIT['tag_sep'],
-				
-				'author_start' 			=> $UNIT['author_start'],
-				'author_end' 			=> $UNIT['author_end'],
-
-				'read' 					=> $UNIT['read'],
-				'read_start' 			=> $UNIT['read_start'],
-				'read_end' 				=> $UNIT['read_end'],
-
-				'comments_count_start' 	=> $UNIT['comments_count_start'],
-				'comments_count_end' 	=> $UNIT['comments_count_start'],
-
-				'placehold'				=> $UNIT['placehold'],
-				'placehold_path' 		=> $UNIT['placehold_path'],
-				'placehold_pattern' 	=> $UNIT['placehold_pattern'],
-				'placehold_file' 		=> $UNIT['placehold_file'],
-				'placehold_data_bg' 	=> $UNIT['placehold_data_bg'],
-					
-				'pagination_start' 		=> $UNIT['pagination_start'],
-				'pagination_end' 		=> $UNIT['pagination_end'], 
-				
-				'exclude_page_add'		=> $UNIT['exclude_page_add'],
-			));
-		}
+			'pagination_start' 		=> $UNIT['pagination_start'],
+			'pagination_end' 		=> $UNIT['pagination_end'], 
+			'pagination_in_block' 	=> $UNIT['pagination_in_block'], 
+			
+			'exclude_page_add'		=> $UNIT['exclude_page_add'],
+		));
+	}
 
 	mso_add_cache($home_cache_key, ob_get_flush(), $home_cache_time * 60);
-
 }
 
 # end of file

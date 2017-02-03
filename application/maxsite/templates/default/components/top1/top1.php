@@ -18,6 +18,9 @@ $logo_width = (int) mso_get_option('top1_header_logo_width', getinfo('template')
 $logo_height = (int) mso_get_option('top1_header_logo_height', getinfo('template'), 0);
 $logo_type_resize = mso_get_option('top1_header_logo_type_resize', getinfo('template'), 'resize_full_crop_center');
 
+$logo_attr = mso_get_option('top1_header_logo_attr', getinfo('template'), '');
+$logo_attr = $logo_attr ? ' ' . $logo_attr : '';
+
 // задан размер по ширине и высоте, значит пробуем кропнуть указанное изображение и получить новое
 if ($logo_width or $logo_height)
 {
@@ -29,7 +32,7 @@ if ($logo_width or $logo_height)
 	}
 }
 
-if ($logo) $logo = '<img src="' . $logo . '" alt="' . getinfo('name_site') . '" title="' . getinfo('name_site') . '">';
+if ($logo) $logo = '<img src="' . $logo . '" alt="' . getinfo('name_site') . '" title="' . getinfo('name_site') . '"' . $logo_attr . '>';
 
 if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . '</a>';
 
@@ -53,15 +56,28 @@ $top1_block = mso_get_option('top1_block', getinfo('template'), '');
 	</div>
 </div>
 
-<div class="logo-block flex flex-vcenter pad20">
-	<?php if ($logo) { ?>
-	<div class="w100-max"><?= $logo ?></div>
-	<?php } ?>
+<?php 
+
+if ($logo) 
+{ 
+	echo '<div class="logo-block flex flex-wrap flex-vcenter pad20"><div class="w100-max">' .  $logo . '</div>';
 	
-	<?php if ($top1_block) { ?>
-	<div><?php eval(mso_tmpl_prepare($top1_block)) ?></div>
-	<?php } ?>
-</div>
+	if ($top1_block) 
+	{
+		echo '<div class="flex-grow3">';
+		eval(mso_tmpl_prepare($top1_block));
+		echo '</div>';
+	}
+	echo '</div>';
+}
+else
+{
+	echo '<div class="logo-block">';
+	if ($top1_block) eval(mso_tmpl_prepare($top1_block));
+	echo '</div>';
+}
+
+?>
 
 <div class="menu-search flex flex-vcenter mar20-rl bg-gray800 flex-wrap-tablet">
 	<div class="w100-tablet"><?php if ($fn = mso_fe('components/_menu/_menu.php')) require($fn); ?></div>

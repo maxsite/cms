@@ -2116,18 +2116,29 @@ function mso_page_other_pages($page_id = 0, $page_categories = array())
 }
 
 # получить следующую и предыдущую запись после указанной
-# происходит учет рубрики
-# возвращает масив $out['prev'] и $out['next']. 
+# возвращает масив $out['prev'] и $out['next'] с данными записей 
 # Если записей нет, то ключи равны false
 function mso_next_prev_page($r = array())
 {
+	// TODO: переделать: Если есть $next_id и $prev_id, то просто 
+	// получаем записи, без прочих условий	
+	// $par сделать единый вариант
+	
+	global $page;
+	
 	$out = array();
+	
+	$out['next'] = false;
+	$out['prev'] = false;
+	
+	// если это page, то смотрим глобальную $page, где есть мета 
+	// next_page_id и prev_page_id — id страниц на далее и ранее
+	$next_id = (isset($page['page_meta']['next_page_id'][0]) and $page['page_meta']['next_page_id'][0]) ? (int) $page['page_meta']['next_page_id'][0] : 0;
+	
+	$prev_id = (isset($page['page_meta']['prev_page_id'][0]) and $page['page_meta']['prev_page_id'][0]) ? (int) $page['page_meta']['prev_page_id'][0] : 0;
 	
 	if (!isset($r['page_id']) or !isset($r['page_categories']) or !isset($r['page_date_publish']))
 	{
-		$out['next'] = false;
-		$out['prev'] = false;
-		
 		return $out;
 	}
 	
@@ -2137,6 +2148,7 @@ function mso_next_prev_page($r = array())
 	// $r['use_category'] — если нужно учитывать рубрику
 	if (!isset($r['use_category'])) $r['use_category'] = true;
 
+	$cat = ''; // рубрика не учитывается
 	
 	if ($r['use_category'])
 	{
@@ -2162,52 +2174,62 @@ function mso_next_prev_page($r = array())
 		
 		$cat = implode(',', $cat);
 	}
-	else
-	{
-		$cat = ''; // рубрика не учитывается
-	}
 	
 	if (!isset($r['type'])) $r['type'] = 'blog'; // можно задать тип записей
 
-   
 	// next
-	if ( $pages = mso_get_pages(array(
+	$par = array(
 			'content' => false,
 			'cat_id' => $cat,
 			'order_asc' => 'asc',
 			'limit' => 1,
 			'pagination' => false,
+			'work_cut' => false,
 			'custom_type' => 'home',
 			'function_add_custom_sql' => '_sql_next_page',
 			'get_page_categories' => false,
 			'get_page_meta_tags' => false,
 			'get_page_count_comments' => false,
 			'type' => $r['type'],
-			'exclude_page_id' => $r['page_id'] ), $temp) 
-		) 
-		$out['next'] = $pages[0];
-	else
-		$out['next'] = false;
+			'exclude_page_id' => $r['page_id'] 
+		);
+	
+	if ($next_id)
+	{
+		unset($par['cat_id']);
+		unset($par['exclude_page_id']);
+		unset($par['function_add_custom_sql']);
+		$par['page_id'] = $next_id;
+	}
+	
+	if ($pages = mso_get_pages($par, $temp)) $out['next'] = $pages[0];
 	
 	// prev
-	if ( $pages = mso_get_pages(array(
+	$par = array(
 			'content' => false,
 			'cat_id' => $cat,
 			'order_asc' => 'desc',
 			'limit' => 1,
 			'pagination' => false,
+			'work_cut' => false,
 			'custom_type' => 'home',
 			'function_add_custom_sql' => '_sql_prev_page',
 			'get_page_categories' => false,
 			'get_page_meta_tags' => false,
 			'get_page_count_comments' => false,
 			'type' => $r['type'],
-			'exclude_page_id' => $r['page_id'] ), $temp) 
-		) 
-		$out['prev'] = $pages[0];
-	else
-		$out['prev'] = false;
+			'exclude_page_id' => $r['page_id'] 
+		);
 	
+	if ($prev_id)
+	{
+		unset($par['cat_id']);
+		unset($par['exclude_page_id']);
+		unset($par['function_add_custom_sql']);
+		$par['page_id'] = $prev_id;
+	}
+	
+	if ($pages = mso_get_pages($par, $temp)) $out['prev'] = $pages[0];
 	
 	// $r['reverse'] — меняем местами пункты
 	if (isset($r['reverse']) and $r['reverse'])

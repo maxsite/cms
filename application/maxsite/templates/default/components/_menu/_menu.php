@@ -14,7 +14,9 @@
 			if (is_login())
 			{
 				$menu .= NR . '[';
-				$menu .= NR . 'admin | ' . getinfo('users_nik') . ' | Админ-панель | | i-user';
+				$menu .= NR . 'admin | | Админ-панель MaxSite CMS | | i-maxcdn';
+				// $menu .= NR . 'admin | ' . getinfo('users_nik') . ' | Админ-панель | | i-user';
+				$menu .= NR . 'admin | Консоль | Консоль | | i-user';
 				$menu .= NR . 'admin/page_new | Создать запись | | | i-edit';
 				$menu .= NR . '---';
 				$menu .= NR . 'admin/page | Список записей | | | i-newspaper-o';

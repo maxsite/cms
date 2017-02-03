@@ -137,7 +137,7 @@ function shtags(sh)
 	// только первые 20
 	$f_all_tags .= tagclouds_widget_custom(array(
 		'max_num' => isset($editor_options['tags_count']) ? $editor_options['tags_count'] : 20,
-		'max_size' => '180',
+		'max_size' => '130',
 		'sort' => isset($editor_options['tags_sort']) ? $editor_options['tags_sort'] : 0, 
 		'block_start' => '<p id="f_all_tags_max_num">',
 		'block_end' => ' <a title="' . t('Показать все метки') . '" href="#" onClick="shtags(1); return false;">&gt;&gt;&gt;</a></p>',
@@ -147,7 +147,7 @@ function shtags(sh)
 	// все метки
 	$f_all_tags .= tagclouds_widget_custom(array(
 		'max_num' => 9999,
-		'max_size' => '180',
+		'max_size' => '130',
 		'sort' => isset($editor_options['tags_sort']) ? $editor_options['tags_sort'] : 0, 
 		'block_start' => '<p id="f_all_tags_all" style="display: none;">',
 		'block_end' => ' <a title="' . t('Показать только самые популярные метки') . '" href="#" onClick="shtags(2); return false;">&lt;&lt;&lt;</a></p>',

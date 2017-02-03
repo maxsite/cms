@@ -131,6 +131,9 @@ function all_meta_parse($all, $page_all_meta)
 		else 
 			$placeholder = ' placeholder="' . _mso_ini_check_php(stripslashes(htmlspecialchars(trim($row['placeholder'])))) . '"';
 		
+		// дополнительные атрибуты
+		$attr = (isset($row['attr'])) ? ' ' . trim($row['attr']) : '';
+		
 		$options_present = true; // признак, что опция есть в базе
 		
 		// получаем текущее значение 
@@ -161,7 +164,7 @@ function all_meta_parse($all, $page_all_meta)
 			else 
 				$textfield_type = stripslashes($row['textfield_type']);
 			
-			$f .= '<input type="' . $textfield_type . '" name="' . $name_f . '" value="' . $value . '"' . $placeholder . '>' . NR;
+			$f .= '<input type="' . $textfield_type . '" name="' . $name_f . '" value="' . $value . '"' . $placeholder . $attr . '>' . NR;
 		}
 		elseif ($type == 'color')
 		{
@@ -213,7 +216,7 @@ function all_meta_parse($all, $page_all_meta)
 			if ($rr < 2)  $rr = 2;
 			
 			
-			$f .= '<textarea rows="' . $rr . '" name="' . $name_f . '"' . $placeholder . '>'. $value . '</textarea>' . NR;
+			$f .= '<textarea rows="' . $rr . '" name="' . $name_f . '"' . $placeholder . $attr . '>'. $value . '</textarea>' . NR;
 		}
 		elseif ($type == 'radio')
 		{

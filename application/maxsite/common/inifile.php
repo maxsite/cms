@@ -198,6 +198,9 @@ function mso_view_ini($all = false)
 		else 
 			$placeholder = ' placeholder="' . _mso_ini_check_php(stripslashes(htmlspecialchars(trim($row['placeholder'])))) . '"';
 		
+		// дополнительные атрибуты
+		$attr = (isset($row['attr'])) ? ' ' . trim($row['attr']) : '';
+				
 		// получаем текущее значение опции из массива $all_options
 		$options_present = false;
 		$value = t($default); // нет значения, поэтому берем дефолт
@@ -235,8 +238,7 @@ function mso_view_ini($all = false)
 			if ( !isset($row['textfield_type']) ) $textfield_type = 'text';
 				else $textfield_type = stripslashes($row['textfield_type']);
 			
-			
-			$f .= '<input type="' . $textfield_type . '" name="' . $name_f . '" value="' . $value . '"' . $placeholder . '>' . NR;
+			$f .= '<input type="' . $textfield_type . '" name="' . $name_f . '" value="' . $value . '"' . $placeholder . $attr . '>' . NR;
 		}
 		elseif ($type == 'color')
 		{
@@ -270,7 +272,7 @@ function mso_view_ini($all = false)
 			
 			if ($rr < 2)  $rr = 2;
 			
-			$f .= '<textarea rows="' . $rr . '" name="' . $name_f . '"' . $placeholder . '>'. $value . '</textarea>' . NR;
+			$f .= '<textarea rows="' . $rr . '" name="' . $name_f . '"' . $placeholder . $attr . '>'. $value . '</textarea>' . NR;
 		}
 		elseif ($type == 'checkbox')
 		{

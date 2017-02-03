@@ -32,12 +32,7 @@ speed: 400,
 
 Подключать в custom/my-template.php
 
-if ($fn = mso_fe('components/lightslider/lightslider-shortcode.php'))
-{
-	require_once($fn);
-	mso_shortcode_add('lightslider', 'lightslider_shortcode');
-	mso_hook_add('head_css', 'lightslider_shortcode_css');
-}
+if ($fn = mso_fe('components/lightslider/lightslider-shortcode.php')) require_once($fn);
 
 */
 
@@ -103,4 +98,9 @@ function lightslider_shortcode_css($attr)
 	mso_add_file('components/lightslider/style.css');
 }
 
+
+// включение шорткода
+mso_shortcode_add('lightslider', 'lightslider_shortcode');
+mso_hook_add('head_css', 'lightslider_shortcode_css');
+	
 # end of file

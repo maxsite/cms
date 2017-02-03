@@ -1,32 +1,12 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 
-/*
-// простой демо-пример
-// [class t-red bold]text page[/class]
-
-mso_shortcode_add('class', 'my_class');
-
-function my_class($attr)
-{
-	return  '<span class="' . $attr[1] . '">'. $attr[2] . '</span>';
-}
-*/
-
-if ($fn = mso_fe('components/lightslider/lightslider-shortcode.php'))
-{
-	require_once($fn);
-	
-	mso_shortcode_add('lightslider', 'lightslider_shortcode');
-	
-	mso_hook_add('head_css', 'lightslider_shortcode_css');
-}
-
+// шорткод lightslider, если нужен в шаблоне
+if ($fn = mso_fe('components/lightslider/lightslider-shortcode.php')) require_once($fn);
 
 // Инициализация опций шаблона. 
 // Для принудительной инициализации нужно раскоментировать строчку
 // достаточно один раз обновить любую страницу сайта, после вновь закоментировать 
-// mso_delete_option('template_set_component_options', getinfo('template'));
-
+# mso_delete_option('template_set_component_options', getinfo('template'));
 
 if (mso_get_option('template_set_component_options', getinfo('template'), false) === false)
 {
@@ -48,6 +28,7 @@ if (mso_get_option('template_set_component_options', getinfo('template'), false)
 	my_set_opt('top1_header_logo_width', 0);
 	my_set_opt('top1_header_logo_height', 0);
 	my_set_opt('top1_header_logo_type_resize', 'resize_full_crop_center');
+	my_set_opt('top1_header_logo_attr', '');
 	my_set_opt('top1_block', '');
 	my_set_opt('top1_rules_output', '');
 	

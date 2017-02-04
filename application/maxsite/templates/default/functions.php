@@ -31,4 +31,4 @@ else
 
 if ($fn = mso_fe('custom/my-template.php')) require_once($fn);
 
-# end file
+# end of file

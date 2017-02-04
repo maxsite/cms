@@ -32,6 +32,8 @@ if (mso_get_option('template_set_component_options', getinfo('template'), false)
 	my_set_opt('top1_block', '');
 	my_set_opt('top1_rules_output', '');
 	
+	my_set_opt('info-top_page', 'next-prev.php');
+	
 	// опция-флаг, указывающая, что компоненты были установлены 
 	// и больше не требуют обновлений
 	my_set_opt('template_set_component_options', true);

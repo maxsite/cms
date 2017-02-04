@@ -25,7 +25,7 @@ if (is_type('page') and $p->val('page_type_name') == 'blog')
 
 	if ($np['prev'])
 	{
-		$np_out .= '<div class="b-right pad20-l pad5-t">' . $p->link( mso_page_url($np['prev']['page_slug']), $np['prev']['page_title'] ) . ' <i class="i-long-arrow-right"></i></div>';
+		$np_out .= '<div class="b-right pad20-l">' . $p->link( mso_page_url($np['prev']['page_slug']), $np['prev']['page_title'] ) . ' <i class="i-long-arrow-right"></i></div>';
 	}
 	
 	$p->block($np_out, '<div class="next-prev-page clearfix t90 mar10-t">', '</div>');

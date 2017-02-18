@@ -121,7 +121,7 @@ else
 
 	ob_start();
 	
-	if ($PAGES and $UNIT['my_pages']) // записи в $PAGES
+	if (isset($PAGES) and $PAGES and $UNIT['my_pages']) // записи в $PAGES
 	{
 		$b = new Block_pages(false);
 		$b->set_pages($PAGES, $PAGINATION);

@@ -76,6 +76,8 @@ if ($pages)
 		$p->format('edit', 'Edit', ' | <span>', '</span>');
 		$p->format('view_count', '<br><span>' . tf('Просмотров') . ': ', '</span>');
 
+		if ($f = mso_page_foreach('format-page')) require($f);
+		
 		foreach ($pages as $page)
 		{
 			if ($f = mso_page_foreach('page')) 
@@ -114,11 +116,11 @@ if ($pages)
 					{
 						require($f);
 					}
-					elseif ($f = mso_page_foreach('info-top-page')) 
+					elseif ($info = mso_get_option('info-top_page', getinfo('template'), '') and $f = mso_fe('type_foreach/info-top/' . $info))
 					{
 						require($f);
 					}
-					elseif ($info = mso_get_option('info-top_page', getinfo('template'), '') and $f = mso_fe('type_foreach/info-top/' . $info))
+					elseif ($f = mso_page_foreach('info-top-page')) 
 					{
 						require($f);
 					}

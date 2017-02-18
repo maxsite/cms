@@ -349,16 +349,15 @@ function mso_checksession($session_id, $redirect = false)
 
 # удаляем все лишнее в формах
 # если второй параметр = true то возвращает false, если данные после стрипа изменились и $s - теже
-function mso_strip($s = '', $logical = false, $arr_strip = array('\\', '|', '/', '?', '%', '*', '`', '<', '>'))
+function mso_strip($s = '', $logical = false, $arr_strip = array('\\', '|', '/', '%', '*', '`', '<', '>'))
 {
 	$s1 = $s;
 	$s1 = stripslashes($s1);
 	$s1 = strip_tags($s1);
-	$s1 = htmlspecialchars($s1, ENT_QUOTES);
-
+	// $s1 = htmlspecialchars($s1, ENT_QUOTES);
 	$s1 = str_replace($arr_strip, '', $s1);
 	$s1 = trim($s1);
-
+	
 	if ($logical)
 	{
 		if ($s1 === $s) return $s;
@@ -3145,10 +3144,10 @@ function _mso_login()
 			'flogin_submit' => 'base',
 			'flogin_redirect' => 'base',
 			'flogin_user' => 'base',
-			'flogin_password' => 'base',
+			'flogin_password' => 'trim|xss|strip_tags',
 			'flogin_session_id' => 'base',
 			));
-	
+
 	if ($_POST 	and isset($_POST['flogin_submit']) 
 				and isset($_POST['flogin_redirect'])
 				and isset($_POST['flogin_user'])

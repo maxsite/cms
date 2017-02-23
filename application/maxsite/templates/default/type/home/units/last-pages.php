@@ -3,7 +3,7 @@
 /**
  * MaxSite CMS
  * (c) http://max-3000.com/
- * 27-01-2017
+ * 23-02-2017
 
 Универсальный юнит для вывода записей по множеству критериев
 
@@ -46,6 +46,8 @@ else
 		'thumb_class' => 'b-left mar15-r rounded',
 		'thumb_link_class' => '',
 		'thumb_link' => true,
+		'thumb_add_start' => '',
+		'thumb_add_end' => '',
 		
 		'content' => true,
 		'content_words' => 0,
@@ -166,6 +168,8 @@ else
 			'thumb_class' 			=> $UNIT['thumb_class'],
 			'thumb_link_class' 		=> $UNIT['thumb_link_class'],
 			'thumb_link' 			=> $UNIT['thumb_link'],
+			'thumb_add_start' 		=> $UNIT['thumb_add_start'],
+			'thumb_add_end' 		=> $UNIT['thumb_add_end'],
 
 			'line1' 				=> $UNIT['line1'],
 			'line2' 				=> $UNIT['line2'],

@@ -1014,6 +1014,8 @@ class Block_pages
 			'thumb_class' => 'thumb left', // css-класс картинки
 			'thumb_link_class' => '', // css-класс ссылки 
 			'thumb_link' => true, // формировать ссылку на запись 
+			'thumb_add_start' => '', // произвольная добавка перед img 
+			'thumb_add_end' => '', // произвольная добавка после img 
 			
 			// имя файла формируется как placehold_path + placehold_file
 			'placehold' => false, // если нет картинки, выводим плейсхолд (true) или ничего (false)
@@ -1133,9 +1135,9 @@ class Block_pages
 					))
 				{
 					if ($r['thumb_link'])
-						$p->thumb = '<a class="' . $r['thumb_link_class'] . '" href="' . mso_page_url($p->val('page_slug')) . '" title="' . htmlspecialchars($p->val('page_title')). '"><img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '"></a>';
+						$p->thumb = '<a class="' . $r['thumb_link_class'] . '" href="' . mso_page_url($p->val('page_slug')) . '" title="' . htmlspecialchars($p->val('page_title')). '">' . $r['thumb_add_start'] . '<img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '">' . $r['thumb_add_end'] . '</a>';
 					else
-						$p->thumb = '<img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '">';
+						$p->thumb = $r['thumb_add_start'] . '<img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '">' . $r['thumb_add_end'];
 				}
 			}
 			

@@ -153,7 +153,7 @@ foreach ($pages as $page)
 	
 } // end foreach
 
-$p->div_end(mso_get_val('container_class'));
+$p->div_end(mso_get_val('container_class', ''));
 
 mso_set_val('exclude_page_id', $exclude_page_id);
 

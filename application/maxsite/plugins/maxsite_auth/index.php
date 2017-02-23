@@ -149,7 +149,7 @@ function maxsite_auth_custom($args = array())
 		// посетитель должен указать только адрес своего сайта
 		// в hidden указываем нужные данные
 		
-		$redirect_url = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : getinfo('siteurl');
+		$redirect_url = (isset($_SERVER['HTTP_REFERER'])) ? mso_clean_str($_SERVER['HTTP_REFERER'], 'xss') : getinfo('siteurl');
 		
 		echo '<!DOCTYPE html><html><head>
 <meta charset="UTF-8">

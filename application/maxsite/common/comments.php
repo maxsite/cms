@@ -306,7 +306,7 @@ Referer: {{ $comment_referer }}
 		
 	$comment_ip = $data['comments_author_ip'];	
 		
-	$comment_referer = $_SERVER['HTTP_REFERER'];
+	$comment_referer = mso_clean_str($_SERVER['HTTP_REFERER'], 'xss');
 		
 	$comment_date = $data['comments_date'];
 		

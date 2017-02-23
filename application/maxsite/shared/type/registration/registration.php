@@ -36,7 +36,7 @@ elseif ($comuser = is_login_comuser())
 else
 {
 	
-	$redirect_url = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : getinfo('siteurl');
+	$redirect_url = (isset($_SERVER['HTTP_REFERER'])) ? mso_clean_str($_SERVER['HTTP_REFERER'], 'xss') : getinfo('siteurl');
 	
 	// для запоминания уже введенных полей
 	$vreg_email = $vreg_password = $vreg_password_repeat = $vreg_nik = $vreg_url = '';

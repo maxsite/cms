@@ -187,7 +187,7 @@ function down_count_init($args = array())
 				die( sprintf('<b><font color="red">' . t('Данная ссылка доступна только со <a href="%s">страниц сайта</a>') . '</font></b>', getinfo('siteurl')) );
 			
 			// проверяем реферер - откуда пришел
-			$p = parse_url($_SERVER['HTTP_REFERER']);
+			$p = parse_url(mso_clean_str($_SERVER['HTTP_REFERER'], 'xss'));
 			if (isset($p['host'])) $p = $p['host'];
 				else $p = '';
 			if ( $p != $_SERVER['HTTP_HOST'] ) // чужой сайт

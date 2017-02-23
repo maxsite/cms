@@ -314,8 +314,8 @@ function mso_checkreferer()
 	{
 		if (!isset($_SERVER['HTTP_REFERER'])) die('<b><font color="red">Achtung! XSS attack! No REFERER!</font></b>');
 
-		$ps = parse_url($_SERVER['HTTP_REFERER']);
-		
+		$ps = parse_url(mso_clean_str($_SERVER['HTTP_REFERER'], 'xss'));
+
 		if (isset($ps['host'])) $p = $ps['host'];
 			else $p = '';
 		
@@ -3322,7 +3322,7 @@ function _mso_logout()
 {
 	$ci = & get_instance();
 	$ci->session->sess_destroy();
-	$url = (isset($_SERVER['HTTP_REFERER']) and $_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
+	$url = (isset($_SERVER['HTTP_REFERER']) and $_SERVER['HTTP_REFERER']) ? mso_clean_str($_SERVER['HTTP_REFERER'], 'xss') : '';
 	
 	// проверяем, чтобы url был текущего сайта
 	$pos = strpos($url, getinfo('site_url'));

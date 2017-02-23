@@ -25,7 +25,7 @@ $admin_template_url = getinfo('admin_url') . 'template/' . mso_get_option('admin
 	</div>
 </div>
 <?php if (!is_login()) :
-		$redirect_url = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : getinfo('siteurl') . mso_current_url();
+		$redirect_url = (isset($_SERVER['HTTP_REFERER'])) ? mso_clean_str($_SERVER['HTTP_REFERER'], 'xss') : getinfo('siteurl') . mso_current_url();
 		mso_remove_hook('login_form_auth'); # удалим все хуки для авторизации
 ?>
 <form method="post" action="<?= $MSO->config['site_url'] . 'login' ?>" name="flogin">

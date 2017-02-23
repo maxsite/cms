@@ -26,7 +26,7 @@ elseif ($comuser = is_login_comuser())
 }
 else
 {
-	$redirect_url = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : getinfo('siteurl');
+	$redirect_url = (isset($_SERVER['HTTP_REFERER'])) ? mso_clean_str($_SERVER['HTTP_REFERER'], 'xss') : getinfo('siteurl');
 	
 	if (mso_segment(2) == 'error')
 	{

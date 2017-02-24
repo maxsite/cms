@@ -60,10 +60,12 @@ function mso_get_pages($r = array(), &$pag)
 	// можно указать номера страниц через запятую
 	if ( !isset($r['page_id']) )		$r['page_id'] = 0;
 	
-	
 	// можно указать номера рубрик через запятую
 	if ( !isset($r['cat_id']) )			$r['cat_id'] = 0; // если 0, значит все рубрики - только для главной
 
+	// исключить указанные в массиве рубрики
+	if ( !isset($r['exclude_cat_id']) ) $r['exclude_cat_id'] = 0;
+	
 	if ( !isset($r['type']) )			$r['type'] = 'blog'; // если false - то все, иначе blog или static
 	if ($r['page_id']) $r['type'] = false; // если указан номер, то тип страницы сбрасываем
 
@@ -95,6 +97,7 @@ function mso_get_pages($r = array(), &$pag)
 
 	// исключить указанные в массиве записи
 	if ( !isset($r['exclude_page_id']) )$r['exclude_page_id'] = array();
+	
 
 	// произвольный slug - используется там, где вычисляется mso_segment(2)
 	// страница, рубрика, метка, поиск
@@ -547,19 +550,18 @@ function _mso_sql_build_home($r, &$pag)
 
 	$offset = 0;
 
-	if ($r['cat_id']) $cat_id = mso_explode($r['cat_id']);
-	else $cat_id = false;
+	$cat_id = $r['cat_id'] ? mso_explode($r['cat_id']) : false;
+
+	$exclude_cat_id = $r['exclude_cat_id'] ? mso_explode($r['exclude_cat_id']) : false;
 	
 	$r['page_id'] = mso_explode($r['page_id']);
 		
 	// еслу указан массив номеров рубрик, значит выводим только его
-	if ($r['categories']) $categories = true;
-	else $categories = false;
-
-	// если указаны номера записей, котоыре следует исключить
-	if ($r['exclude_page_id']) $exclude_page_id = true;
-	else $exclude_page_id = false;
+	$categories = $r['categories'] ? true : false;
 	
+	// если указаны номера записей, котоыре следует исключить
+	$exclude_page_id = $r['exclude_page_id'] ? true : false;
+
 	if ($r['pagination'])
 	{
 		# пагинация
@@ -567,6 +569,7 @@ function _mso_sql_build_home($r, &$pag)
 		# сама пагинация выводится отдельным плагином
 		# запрос один в один, кроме limit и юзеров
 		$CI->db->select('SQL_BUFFER_RESULT ' . $CI->db->dbprefix('page') . '.`page_id`', false);
+		
 		$CI->db->from('page');
 
 		if ($r['page_status']) $CI->db->where('page.page_status', $r['page_status']);
@@ -578,40 +581,46 @@ function _mso_sql_build_home($r, &$pag)
 	
 		if ($r['type']) 
 		{
-			if (is_array($r['type'])) $CI->db->where_in('page_type.page_type_name', $r['type']);
-				else $CI->db->where('page_type.page_type_name', $r['type']);
+			if (is_array($r['type'])) 
+				$CI->db->where_in('page_type.page_type_name', $r['type']);
+			else 
+				$CI->db->where('page_type.page_type_name', $r['type']);
 		}
-
-		if ($r['page_id']) $CI->db->where_in('page.page_id', $r['page_id']);
-
-		if ($r['page_id_autor']) $CI->db->where('page.page_id_autor', $r['page_id_autor']);
 
 		$CI->db->join('page_type', 'page_type.page_type_id = page.page_type_id');
+		$CI->db->join('cat2obj', 'cat2obj.page_id = page.page_id', 'left');
+		$CI->db->join('category', 'cat2obj.category_id = category.category_id');
 
-		if ($cat_id) // указаны рубрики
-		{
-			$CI->db->join('cat2obj', 'cat2obj.page_id = page.page_id', 'left');
-			$CI->db->join('category', 'cat2obj.category_id = category.category_id');
+		if ($r['page_id']) 
+			$CI->db->where_in('page.page_id', $r['page_id']);
+
+		if ($r['page_id_autor']) 
+			$CI->db->where('page.page_id_autor', $r['page_id_autor']);
+
+		if ($cat_id)
 			$CI->db->where_in('category.category_id', $cat_id);
-		}
-
+		
 		if ($categories)
 			$CI->db->where_in('category.category_id', $r['categories']);
 
 		if ($exclude_page_id)
 			$CI->db->where_not_in('page.page_id', $r['exclude_page_id']);
 
-		// $CI->db->order_by('page_date_publish', 'desc');
+		if ($exclude_cat_id)
+			$CI->db->where_not_in('category.category_id', $exclude_cat_id);
 		
-		if ($r['order']) $CI->db->order_by($r['order'], $r['order_asc']);
+		if ($r['order']) 
+			$CI->db->order_by($r['order'], $r['order_asc']);
 		
 		$CI->db->group_by('page.page_id');
 		
-		if ($function_add_custom_sql = $r['function_add_custom_sql']) $function_add_custom_sql();
+		if ($function_add_custom_sql = $r['function_add_custom_sql']) 
+			$function_add_custom_sql();
 		
 		$query = $CI->db->get();
 
 		$pag_row = $query->num_rows();
+		
 		if ($pag_row > 0)
 		{
 			$pag['maxcount'] = ceil($pag_row / $r['limit']); // всего станиц пагинации
@@ -651,57 +660,68 @@ function _mso_sql_build_home($r, &$pag)
 
 	$CI->db->from('page');
 
+	$CI->db->join('users', 'users.users_id = page.page_id_autor', 'left');
+	$CI->db->join('page_type', 'page_type.page_type_id = page.page_type_id', 'left');
+	$CI->db->join('cat2obj', 'cat2obj.page_id = page.page_id', 'left');
+	$CI->db->join('category', 'cat2obj.category_id = category.category_id');
+	
 	if ($r['page_id']) $CI->db->where_in('page.page_id', $r['page_id']);
 		
 	if ($r['page_status']) $CI->db->where('page_status', $r['page_status']);
-
 	
 	if ($r['type']) 
 	{
-		if (is_array($r['type'])) $CI->db->where_in('page_type_name', $r['type']);
-			else $CI->db->where('page_type_name', $r['type']);
+		if (is_array($r['type'])) 
+			$CI->db->where_in('page_type_name', $r['type']);
+		else 
+			$CI->db->where('page_type_name', $r['type']);
 	}
 	
 	// $CI->db->where('page_date_publish < ', 'DATE_ADD(NOW(), INTERVAL "' . $r['time_zone'] . '" HOUR_MINUTE)', false);
-	if ($r['date_now'] and $r['page_id_date_now']) $CI->db->where_not_in('page.page_id', $r['page_id_date_now']);
+	if ($r['date_now'] and $r['page_id_date_now']) 
+		$CI->db->where_not_in('page.page_id', $r['page_id_date_now']);
 	
-	if ($r['only_feed']) $CI->db->where('page_feed_allow', '1');
+	if ($r['only_feed']) 
+		$CI->db->where('page_feed_allow', '1');
 
-	if ($r['page_id_autor']) $CI->db->where('page.page_id_autor', $r['page_id_autor']);
+	if ($r['page_id_autor']) 
+		$CI->db->where('page.page_id_autor', $r['page_id_autor']);
 
-	$CI->db->join('users', 'users.users_id = page.page_id_autor', 'left');
-	$CI->db->join('page_type', 'page_type.page_type_id = page.page_type_id', 'left');
-
-	if ($cat_id) // указаны рубрики
-	{
-		$CI->db->join('cat2obj', 'cat2obj.page_id = page.page_id', 'left');
-		$CI->db->join('category', 'cat2obj.category_id = category.category_id');
+	if ($cat_id)
 		$CI->db->where_in('category.category_id', $cat_id);
-	}
 
 	if ($categories)
 		$CI->db->where_in('category.category_id', $r['categories']);
 
 	if ($exclude_page_id)
-			$CI->db->where_not_in('page.page_id', $r['exclude_page_id']);
+		$CI->db->where_not_in('page.page_id', $r['exclude_page_id']);
+	
+	if ($exclude_cat_id)
+		$CI->db->where_not_in('category.category_id', $exclude_cat_id);
 
-	// экранирование CodeIgniter! Они там что мухоморов объелись?! Приходится делать свои замены! 
+	// экранирование CodeIgniter! Приходится делать свои замены! 
 	if ($r['page_id']) 
+	{
 		$CI->db->order_by('FIELD(page_id_MSO_ZAP_' . implode('_MSO_ZAP_', $r['page_id']) . ')');
+	}
 	else 
 	{
-		if ($r['order']) $CI->db->order_by($r['order'], $r['order_asc']);
+		if ($r['order']) 
+			$CI->db->order_by($r['order'], $r['order_asc']);
 	}
 	
 	$CI->db->group_by('page.page_id');
 
 	if (!$r['no_limit'])
 	{
-		if ($pag and $offset) $CI->db->limit($r['limit'], $offset);
-			else $CI->db->limit($r['limit']);
+		if ($pag and $offset) 
+			$CI->db->limit($r['limit'], $offset);
+		else 
+			$CI->db->limit($r['limit']);
 	}
 	
-	if ($function_add_custom_sql = $r['function_add_custom_sql']) $function_add_custom_sql();
+	if ($function_add_custom_sql = $r['function_add_custom_sql']) 
+		$function_add_custom_sql();
 }
 
 # одиночная страница по id или slug

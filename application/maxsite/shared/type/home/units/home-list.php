@@ -6,8 +6,9 @@
  */
  
 $par = array( 
-		'page_id' => mso_get_option('home_page_id', 'templates', '0'), // явно указаны номера записей
-		'cat_id' => mso_get_option('home_cat_id', 'templates', '0'), // явно указаны рубрики для главной
+		'page_id' => mso_get_option('home_page_id', 'templates', '0'),
+		'cat_id' => mso_get_option('home_cat_id', 'templates', '0'),
+		'exclude_cat_id' => mso_get_option('home_exclude_cat_id', 'templates', ''),
 		'limit' => mso_get_option('home_limit_post', 'templates', '7'), 
 		'cut' => mso_get_option('more', 'templates', tf('Читать полностью »')),
 		'cat_order' => 'category_id_parent', 

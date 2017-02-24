@@ -4205,7 +4205,7 @@ function mso_shortcode_content($content = '')
 		{
 			if (strpos($content, '[' . $name) !== false) // есть вхождения
 			{
-				$content = preg_replace_callback('~\[' . $name . ' (.*?)\](.*?)\[\/' . $name . '\]~si', $func, $content);
+				$content = preg_replace_callback('~\[' . $name . '[= ](.*?)\](.*?)\[\/' . $name . '\]~si', $func, $content);
 			}
 		}
 	}
@@ -4215,6 +4215,7 @@ function mso_shortcode_content($content = '')
 
 # добавляет для шорткода функцию
 # [class t-red bold]text page[/class]
+# или [class=t-red bold]text page[/class]
 # mso_shortcode_add('class', 'my_class');
 # функция my_class определяется на уровне шаблона или плагина - в ней вся обработка
 function mso_shortcode_add($shortcode, $function)
@@ -4242,7 +4243,7 @@ function mso_shortcode_parse($attr, $def = array(), $sep = ' ')
 	$par = array();
 	
 	$par['content'] = $attr[2];
-	
+
 	// замена атрибутов в кавычках
 	$attr[1] = preg_replace_callback('!\=\"(.*?)\"!', '_mso_shortcode_parse_callback', $attr[1]);
 		
@@ -4281,7 +4282,7 @@ function mso_shortcode($shortcode, $func, $content)
 	{
 		if (strpos($content, '[' . $shortcode) !== false) // есть вхождения
 		{
-			$content = preg_replace_callback('~\[' . $shortcode . ' (.*?)\](.*?)\[\/' . $shortcode . '\]~si', $func, $content);
+			$content = preg_replace_callback('~\[' . $shortcode . '[= ](.*?)\](.*?)\[\/' . $shortcode . '\]~si', $func, $content);
 		}
 	}
 	

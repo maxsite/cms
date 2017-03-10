@@ -589,7 +589,7 @@ function _mso_sql_build_home($r, &$pag)
 
 		$CI->db->join('page_type', 'page_type.page_type_id = page.page_type_id');
 		$CI->db->join('cat2obj', 'cat2obj.page_id = page.page_id', 'left');
-		$CI->db->join('category', 'cat2obj.category_id = category.category_id');
+		$CI->db->join('category', 'cat2obj.category_id = category.category_id', 'left');
 
 		if ($r['page_id']) 
 			$CI->db->where_in('page.page_id', $r['page_id']);
@@ -663,7 +663,7 @@ function _mso_sql_build_home($r, &$pag)
 	$CI->db->join('users', 'users.users_id = page.page_id_autor', 'left');
 	$CI->db->join('page_type', 'page_type.page_type_id = page.page_type_id', 'left');
 	$CI->db->join('cat2obj', 'cat2obj.page_id = page.page_id', 'left');
-	$CI->db->join('category', 'cat2obj.category_id = category.category_id');
+	$CI->db->join('category', 'cat2obj.category_id = category.category_id', 'left');
 	
 	if ($r['page_id']) $CI->db->where_in('page.page_id', $r['page_id']);
 		
@@ -719,7 +719,7 @@ function _mso_sql_build_home($r, &$pag)
 		else 
 			$CI->db->limit($r['limit']);
 	}
-	
+	// pr(_sql($query));
 	if ($function_add_custom_sql = $r['function_add_custom_sql']) 
 		$function_add_custom_sql();
 }

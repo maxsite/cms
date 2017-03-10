@@ -508,15 +508,14 @@ function thumb_watermark($fn, $fn_watermark, $watermark_type)
 	$hor = 'right'; 
 	$vrt = 'bottom';
 	
-	if (($watermark_type == 2) or ($watermark_type == 4)) $hor = 'left';
-	
-	if (($watermark_type == 2) or ($watermark_type == 3)) $vrt = 'top';
-	
 	if ($watermark_type == 1) 
 	{
 		$hor = 'center'; 
 		$vrt = 'middle';
 	}
+
+	if (($watermark_type == 2) or ($watermark_type == 3)) $vrt = 'top';
+	if (($watermark_type == 2) or ($watermark_type == 4)) $hor = 'left';
 
 	$r_conf = array(
 		'image_library' => 'gd2',
@@ -525,7 +524,9 @@ function thumb_watermark($fn, $fn_watermark, $watermark_type)
 		'wm_type' => 'overlay',
 		'wm_vrt_alignment' => $vrt,
 		'wm_hor_alignment' => $hor,
-		'wm_overlay_path' => $fn_watermark
+		'wm_overlay_path' => $fn_watermark,
+		'wm_opacity' => 100,
+		
 	);
 
 	$CI = &get_instance();

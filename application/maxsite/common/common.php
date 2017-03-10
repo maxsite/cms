@@ -3677,7 +3677,7 @@ function mso_link_rel($rel = 'canonical', $add = '', $url_only = false)
 				{
 					if (mso_segment(2))
 					{
-						$url = getinfo('site_url') . mso_segment(1) . '/' . mso_segment(2);
+						$url = getinfo('site_url') . mso_segment(1) . '/' . urlencode(mso_segment(2));
 					}
 					else
 					{

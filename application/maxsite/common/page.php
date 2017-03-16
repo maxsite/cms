@@ -702,7 +702,7 @@ function _mso_sql_build_home($r, &$pag)
 	// экранирование CodeIgniter! Приходится делать свои замены! 
 	if ($r['page_id']) 
 	{
-		$CI->db->order_by('FIELD(page_id_MSO_ZAP_' . implode('_MSO_ZAP_', $r['page_id']) . ')');
+		$CI->db->order_by('FIELD(`' . $CI->db->dbprefix . 'page`.`page_id`_MSO_ZAP_' . implode('_MSO_ZAP_', $r['page_id']) . ')');
 	}
 	else 
 	{

@@ -11,6 +11,28 @@ if (!is_login()) die('no login');
 // проверим разрешение на редактирование записей
 if (!mso_check_allow('admin_page_edit')) die('no allow');
 
+
+if ( $post = mso_check_post(array('dir', 'deletefile')) )
+{
+	mso_checkreferer(); // защищаем реферер
+	
+	$current_dir = $post['dir'];
+	$deletefile = $post['deletefile'];
+	
+	$uploads_dir = getinfo('uploads_dir') . $current_dir . '/';
+	
+	$file = $uploads_dir . $deletefile;
+	$mini = $uploads_dir . 'mini/' . $deletefile;
+	$mini_100 = $uploads_dir . '_mso_i/' . $deletefile;
+	
+	if (file_exists($file))
+	{
+		@unlink($file);
+		if (file_exists($mini)) @unlink($mini);
+		if (file_exists($mini_100)) @unlink($mini_100);
+	}
+}
+
 if ( $post = mso_check_post(array('dir')) )
 {
 	mso_checkreferer(); // защищаем реферер
@@ -21,7 +43,6 @@ if ( $post = mso_check_post(array('dir')) )
 
 	$uploads_dir = getinfo('uploads_dir') . $current_dir;
 	$uploads_url = getinfo('uploads_url') . $current_dir;
-	
 	
 	$CI = & get_instance();
 	$CI->load->helper('directory');
@@ -45,21 +66,11 @@ if ( $post = mso_check_post(array('dir')) )
 	krsort($dirs0);
 	$dirs = $dirs0;
 	
-	$fn_mso_descritions = $uploads_dir . '/_mso_i/_mso_descriptions.dat';
-	if (file_exists( $fn_mso_descritions )) 
-	{
-		// массив данных: fn => описание )
-		// получим из файла все описания
-		$mso_descritions = unserialize( read_file($fn_mso_descritions) );
-	}
-	else $mso_descritions = array();
-	
-	
 	foreach ($dirs as $file)
 	{
 		if (is_array($file)) continue; // каталог — это массив — нам здесь не нужен
 		
-		$title = $title_f = '';
+		$title = '';
 		
 		$ext = strtolower(str_replace('.', '', strrchr($file, '.'))); // расширение файла
 		
@@ -67,59 +78,55 @@ if ( $post = mso_check_post(array('dir')) )
 		
 		$time_file = date(" | Y-m-d H:i:s", filemtime($uploads_dir . '/' . $file));
 		
+		$title = htmlspecialchars($file);
 		
+		$u_file = $mini = $mini_100 = $uploads_url. '/' . $file;
 		
-		if (isset($mso_descritions[$file]))
+		if ($this_img) 
 		{
-			$title = $mso_descritions[$file] . ' / ' . htmlspecialchars($file);
-		}
-		else
-		{
-			$title = htmlspecialchars($file);
-		}
-		
-		if ($this_img and file_exists($uploads_dir . '/mini/' . $file)) 
-		{
-			$mini = $uploads_url . '/mini/' . $file;
+			if (file_exists($uploads_dir . '/_mso_i/' . $file))
+				$mini_100 = $mini = $uploads_url . '/_mso_i/' . $file;
 			
-			$mini_100 = $uploads_url . '/_mso_i/' . $file;
+			if (file_exists($uploads_dir . '/mini/' . $file))
+				$mini = $uploads_url . '/mini/' . $file;
+		}
+		
+		if ($this_img) 
+		{
+			$mini_html = '<a class="lightbox" target="_blank" title="' . $title  . $time_file . '" href="' . $u_file . '"><img class="w100px-max" src="' . $mini_100 . '"></a> ';
 			
-			$mini = '<a class="lightbox" target="_blank" title="' . $title  . $time_file . '" href="' . $uploads_url. '/' . $file . '"><img src="' . $mini_100 . '"></a> ';
+			$img = '[img]' . $u_file . '[/img]';
+			
+			$image = '[image=' . $mini . ']' . $u_file . '[/image]';
 		}
 		else 
 		{
-			$mini = '<img src="' . getinfo('admin_url') . 'plugins/admin_files/document_plain.png" title="' . $title . $time_file . '">';
-		}
-		
-		if ($this_img)
-		{
-			if ($title and $title != $file)
-			{
-				$img = '[img ' . $title . ']' . $uploads_url . '/' . $file . '[/img]';
-				
-				$image = '[image=' . $uploads_url . '/mini/' . $file . ' ' . $title . ']' . $uploads_url . '/' . $file . '[/image]';
-			}
-			else
-			{
-				$img = '[img]' . $uploads_url . '/' . $file . '[/img]';
-				
-				$image = '[image=' . $uploads_url . '/mini/' . $file . ']' . $uploads_url . '/' . $file . '[/image]';
-			}
+			$mini_html = '<a target="_blank" href="' . $u_file . '"><img src="' . getinfo('admin_url') . 'plugins/admin_files/document_plain.png" title="' . $title . $time_file . '"></a>';
 		}
 		
 		$all_files_res .= '<div class="all-files-image">' 
-					. '<div class="all-files-image-mini">' . $mini . '</div>' 
-					. '<div class="all-files-image-actions"><span title="' . t('Получить URL-адрес файла') . '" onclick="jAlert(\'<textarea cols=70 rows=3>' . $uploads_url . '/' . $file . '</textarea>\', \'' . t('Адрес файла') . '\'); return false;">URL</span>';
+					. '<div class="all-files-image-mini">' . $mini_html . '</div>' 
+					. '<div class="all-files-image-actions"><span title="' . t('Получить URL-адрес файла') . '" onclick="jAlert(\'<textarea cols=70 rows=3>' . $u_file . '</textarea>\', \'' . t('Адрес файла') . '\'); return false;">URL</span>';
 					
 		if ($this_img)			
 		{
 			$all_files_res .= '
 					<span title="' . t('Вставить в текст код изображения') . '" onclick="addSmile(\'' . $img . '\', \'f_content\');">[img]</span>
 					<span title="' . t('Вставить в текст код миниатюры') . '" onclick="addSmile(\'' . $image . '\', \'f_content\');">[image]</span>
-					<span title="' . t('Использовать как изображение записи') . '" onclick="addImgPage(\'' . $uploads_url . '/' . $file . '\');">page</span>
+					<span title="' . t('Использовать как изображение записи') . '" onclick="addImgPage(\'' . $u_file . '\');">page</span>
+					';
+		}
+		else
+		{
+			$all_files_res .= '
+					<span title="' . t('Вставить в текст адрес файла') . '" onclick="addSmile(\'' . $u_file . '\', \'f_content\');">Link</span>
 					';
 		}
 
+		$all_files_res .= '
+					<span title="' . t('Удалить файл') . '" onclick="del_file(\'' . $file .'\')">' . t('Удалить') . '</span>
+					';
+					
 		$all_files_res .= '</div></div>'; 
 		
 	}

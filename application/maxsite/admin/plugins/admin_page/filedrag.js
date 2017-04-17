@@ -147,11 +147,14 @@ $(document).ready(function() {
 			xhr.setRequestHeader("X-REQUESTED-RESIZEIMAGESTYPE", unescape(encodeURIComponent($id("upload_resize_images_type").value)));
 			
 			xhr.setRequestHeader("X-REQUESTED-SIZEIMAGEMINIW", unescape(encodeURIComponent($id("upload_size_image_mini_w").value)));
+			
 			xhr.setRequestHeader("X-REQUESTED-SIZEIMAGEMINIH", unescape(encodeURIComponent($id("upload_size_image_mini_h").value)));
 			
 			xhr.setRequestHeader("X-REQUESTED-TYPERESIZE", unescape(encodeURIComponent($id("upload_type_resize").value)));
 			
 			xhr.setRequestHeader("X-REQUESTED-REPLACEFILE", unescape(encodeURIComponent($id("upload_replace_file").checked )));
+			
+			xhr.setRequestHeader("X-REQUESTED-WATERMARK", unescape(encodeURIComponent($id("upload_watermark").checked )));
 			
 			
 			// xhr.setRequestHeader("X_FILENAME", unescape(encodeURIComponent(file.name)));

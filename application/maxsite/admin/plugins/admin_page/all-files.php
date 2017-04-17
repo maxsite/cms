@@ -42,7 +42,7 @@ if ($n = mso_segment(3)) // указан N номер записи
 	}
 	
 	
-	$all_files = '<div class="all-files-nav"><a href="#" id="all-files-upload" class="all-files-upload">' . t('Быстрая загрузка') . '</a> <a href="' . getinfo('site_admin_url') . 'files/' . $current_dir . '" target="_blank" class="goto-files">' . t('Управление файлами') . '</a></div>';
+	$all_files = '<div class="all-files-nav"><a href="#" id="all-files-upload" class="all-files-upload">' . t('Быстрая загрузка') . '</a><!--  <a href="' . getinfo('site_admin_url') . 'files/' . $current_dir . '" target="_blank" class="goto-files">' . t('Управление файлами') . '</a> --></div>';
 	
 	// скрипт выполняет аякс
 	// первый раз при загрузке страницы
@@ -75,6 +75,25 @@ EOF;
 	$all_files .= '<script>
 function lbox() {
 ' . $lightbox . '
+}
+
+
+function del_file(f) {
+	if(confirm("' . t('Удалить файл') . ' " + f + " ?")) 
+	{
+		$.post(
+			"' . getinfo('ajax') . base64_encode('admin/plugins/admin_page/all-files-update-ajax.php') . '",
+			{
+				dir: "' . $current_dir . '",
+				deletefile : f
+			},
+			function(data)
+			{
+				$("#all-files-result").html(data);
+				lbox();
+			}
+		);
+	} 
 }
 
 $(function(){
@@ -137,6 +156,8 @@ function addImgPage(img, t) {
 
 <script src="'. getinfo('plugins_url') . 'comment_smiles/comment_smiles.js"></script>';
 
+$check_use_watermark = mso_get_option('use_watermark', 'general', '0') ? ' checked' : '';
+
 $all_files .= '
 <div id="all-files-upload-panel">
 
@@ -176,6 +197,7 @@ $all_files .= '
 					
 			<select class="w250px-max" title="' . t('Способ создания миниатюры') . '" id="upload_type_resize" name="upload_type_resize">
 				' . form_select_options(array(
+						'none' => t('Не создавать миниатюру') . '||'. t('Не создавать миниатюру'),
 						'resize_full_crop_center' => 'resize_full_crop_center||'. t('Обрезка по центру с соблюдением пропорций'),
 						'resize_full_crop_top_left' => 'resize_full_crop_top_left||' . t('Обрезка от верхнего левого угла (пропорции)'),
 						'resize_full_crop_top_center' => 'resize_full_crop_top_center||' . t('Обрезка от верхнего центра (пропорции)'),
@@ -192,7 +214,9 @@ $all_files .= '
 			. '</select>
 		</div>
 		
-		<label class="b-inline pad10-b"><input type="checkbox" id="upload_replace_file" name="upload_replace_file" checked> ' . t('Разрешить заменять существующие файлы') .'</label>
+		<label class="b-inline pad10-b mar20-r"><input type="checkbox" id="upload_replace_file" name="upload_replace_file" checked> ' . t('Заменять существующие файлы') .'</label>
+		
+		<label class="b-inline pad10-b"><input type="checkbox" id="upload_watermark" name="upload_watermark"' . $check_use_watermark . '> ' . t('Водяной знак') .'</label>
 		
 	</div>
 </div>

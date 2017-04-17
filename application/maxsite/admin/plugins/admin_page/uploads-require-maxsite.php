@@ -45,7 +45,7 @@ function _upload($up_dir, $fn, $r = array())
 	// Если имя файла пустое, только расширение.
 	if ($fn == '.' . $ext) $fn = '1' . $fn;
 
-	// значение checked передается как строка!
+	// значение checked передается как строка
 	$replace_file = isset($_SERVER['HTTP_X_REQUESTED_REPLACEFILE']) ? $_SERVER['HTTP_X_REQUESTED_REPLACEFILE'] : 'false';
 	
 	// Если файл уже существует и нельзя заменять ищем новое имя
@@ -77,6 +77,23 @@ function _upload($up_dir, $fn, $r = array())
 	
 	// !!! тип по-умолчанию ставим resize_full_crop_center, поскольку опция image_mini_type пока еще старая в MaxSite CMS 0.94
 	$image_mini_type = (isset($_SERVER['HTTP_X_REQUESTED_TYPERESIZE'])) ? $_SERVER['HTTP_X_REQUESTED_TYPERESIZE'] : 'resize_full_crop_center';
+	
+	// ватермарка
+	if (file_exists(getinfo('uploads_dir') . 'watermark.png'))
+	{
+		// преобразования  поскольку checked передается как строка
+		$use_watermark = mso_get_option('use_watermark',   'general', '0');
+		
+		$use_watermark = $use_watermark ? 'true' : 'false';
+		
+		$watermark = (isset($_SERVER['HTTP_X_REQUESTED_WATERMARK'])) ? $_SERVER['HTTP_X_REQUESTED_WATERMARK'] : $use_watermark;
+		
+		$use_watermark = (strtolower($watermark) == 'false') ? false : true; 
+	}
+	else
+	{
+		$use_watermark = false;
+	}
 	
 	require(getinfo('shared_dir') . 'stock/thumb/thumb.php');
 
@@ -140,38 +157,7 @@ function _upload($up_dir, $fn, $r = array())
 		}
 	}
 
-	/*
-	if ($width > $resize_images or $height > $resize_images)
-	{
-		echo ' RESIZE... ';
-		
-		if ($width > $height)
-		{
-			$new_width = $resize_images;
-			$new_height = round($height / ($width/$new_width));
-		}
-		else
-		{
-			$new_height = $resize_images;
-			$new_width = round($width / ($height/$new_height));
-		}
-		
-		thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false);
-	}
-	
-	*/
-	
-	// if ($rotation)
-	// {
-	// 	echo ' ROTATE... ';
-	// 	thumb_rotate($up_dir . $fn, $rotation);
-	// }
-	
-	// Создание ватермарки, если такая опция и есть нужный файл
-	// TODO: ватермарку можно и текстом выводить... 
-	$use_watermark = mso_get_option('use_watermark',   'general', '0');
-	
-	if ($use_watermark and file_exists(getinfo('uploads_dir') . 'watermark.png'))
+	if ($use_watermark)
 	{
 		echo ' WATERMARK... ';
 		
@@ -180,11 +166,13 @@ function _upload($up_dir, $fn, $r = array())
 		thumb_watermark($up_dir . $fn, getinfo('uploads_dir') . 'watermark.png', $watermark_type);
 	}
 
-	// echo 'mini ';
-	echo ' MINI... ';
-	
 	// миниатюру делаем стандартно
-	thumb_generate($url . $fn, $size_image_mini_w, $size_image_mini_h, false, $image_mini_type, true, 'mini', false);
+	if ($image_mini_type != 'none') // если не делать миниатюру
+	{
+		echo ' MINI... ';
+		thumb_generate($url . $fn, $size_image_mini_w, $size_image_mini_h, false, $image_mini_type, true, 'mini', false);
+		
+	}
 	
 	echo ' THUMB... ';
 	

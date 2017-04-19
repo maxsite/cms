@@ -53,13 +53,13 @@ if('delete' == $mode && is_numeric($mode_id)){
 // Закрываем
 if('close' == $mode && is_numeric($mode_id)){
 	$CI->db->update('sp_questions',array('q_active' => 0),array('q_id' => $mode_id));
-	$CI->db->insert('sp_logs',array('l_qid'=>$mode_id,'l_host'=>t('Закрыто'),'l_timestamp'=>mktime(),'l_user'=>is_login()?$MSO->data['session']['users_login']:'-'));
+	$CI->db->insert('sp_logs',array('l_qid'=>$mode_id,'l_host'=>t('Закрыто'),'l_timestamp'=>time(),'l_user'=>is_login()?$MSO->data['session']['users_login']:'-'));
 }
 
 // Открываем
 if('open' == $mode && is_numeric($mode_id)){
 	$CI->db->update('sp_questions',array('q_active' => 1),array('q_id' => $mode_id));
-	$CI->db->insert('sp_logs',array('l_qid'=>$mode_id,'l_host'=>t('Открыто'),'l_timestamp'=>mktime(),'l_user'=>is_login()?$MSO->data['session']['users_login']:'-'));
+	$CI->db->insert('sp_logs',array('l_qid'=>$mode_id,'l_host'=>t('Открыто'),'l_timestamp'=>time(),'l_user'=>is_login()?$MSO->data['session']['users_login']:'-'));
 }
 
 // Голосование добавленно
@@ -118,7 +118,7 @@ if( $query->num_rows() ){
 		}
 		else
 		{
-			$cell5 = $row->q_expiry ? declination(ceil(($row->q_expiry+-mktime())/60/60/24)) : t('Бессрочное');
+			$cell5 = $row->q_expiry ? declination(ceil(($row->q_expiry+-time())/60/60/24)) : t('Бессрочное');
 			$cell6 = "<a href='{$url_path}list/close/{$id}'><img src='{$plug_path}img/close.png' title='".t('Закрыть голосование')."'></a>";
 		}
 		

@@ -133,7 +133,7 @@ function calendar_widget_custom($arg = array(), $num = 1)
 	$CI->load->library('calendar', $prefs);
 	
 	
-	$mktime = mktime() + getinfo('time_zone') * 60 * 60; // с учетом часового пояса ?
+	$mktime = time() + getinfo('time_zone') * 60 * 60; // с учетом часового пояса ?
 	
 	# если это архив, то нужно показать календарь на этот год и месяц
 	if (is_type('archive'))

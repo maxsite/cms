@@ -1116,7 +1116,7 @@ function _mso_sql_build_archive($r, &$pag)
 	$count_segment = count($seg) - 1;
 	
 	$year = (int) mso_segment(2, true, $seg); // используем свой массив сегментов
-	if ($year > date('Y', mktime()) or $year < 2006) $year = date('Y', mktime());
+	if ($year > date('Y', time()) or $year < 2006) $year = date('Y', time());
 	
 	$month = (int) mso_segment(3, true, $seg);
 	$day = (int) mso_segment(4, true, $seg);
@@ -1159,7 +1159,7 @@ function _mso_sql_build_archive($r, &$pag)
 	{
 		// ничего не указано - выводим архив за все время
 		
-		$year = date('Y', mktime());
+		$year = date('Y', time());
 		$date_in = mso_date_convert('Y-m-d H:i:s', '2006-01-01 00:00:00', false);
 		$date_in_59 = mso_date_convert('Y-m-d H:i:s', $year . '-12-31 23:59:59', false);
 	}

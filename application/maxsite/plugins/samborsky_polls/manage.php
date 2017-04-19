@@ -199,12 +199,12 @@ if($post = mso_check_post(array('f_session_id', 'f_submit')))
 		
 		if($_POST['act'] == 'edit')
 		{
-			$CI->db->insert('sp_logs',array('l_qid'=>$id,'l_host'=>t('Отредактировано'),'l_timestamp'=>mktime(),'l_user'=>is_login()?$MSO->data['session']['users_login']:'-'));
+			$CI->db->insert('sp_logs',array('l_qid'=>$id,'l_host'=>t('Отредактировано'),'l_timestamp'=>time(),'l_user'=>is_login()?$MSO->data['session']['users_login']:'-'));
 			header("Location: " .getinfo('site_url') ."admin/samborsky_polls/list/edit_ok");
 		}
 		else
 		{
-			$CI->db->insert('sp_logs',array('l_qid'=>$id,'l_host'=>t('Создано'),'l_timestamp'=>mktime(),'l_user'=>is_login()?$MSO->data['session']['users_login']:'-'));
+			$CI->db->insert('sp_logs',array('l_qid'=>$id,'l_host'=>t('Создано'),'l_timestamp'=>time(),'l_user'=>is_login()?$MSO->data['session']['users_login']:'-'));
 			header("Location: " .getinfo('site_url') ."admin/samborsky_polls/list/add_ok");
 			
 		}

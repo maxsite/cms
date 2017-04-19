@@ -109,11 +109,10 @@ function sp_write_logs(){
 			'l_aid' 		=> $a_id,
 			'l_ip'			=> $ip,
 			'l_host'		=> $host,
-			'l_timestamp'	=> mktime(),
+			'l_timestamp'	=> time(),
 			'l_userid'		=> is_login() ? $MSO->data['session']['users_id'] : 0,
 			'l_user'		=> is_login() ? $MSO->data['session']['users_login'] : '-'
 		));
 	}
 }	
 
-?>

@@ -63,11 +63,11 @@
 				{
 					$close_time = $this->data->q_expiry;
 					$close_time += $this->options['close_after_hour']*60*60;
-					if($close_time < mktime())
+					if($close_time < time())
 					{
 						$this->data->q_active = 0;
 						$this->update();
-						$CI->db->insert('sp_logs',array('l_qid'=>$this->id,'l_host'=>t('Закрыто'),'l_timestamp'=>mktime()));
+						$CI->db->insert('sp_logs',array('l_qid'=>$this->id,'l_host'=>t('Закрыто'),'l_timestamp'=>time()));
 					}
 				}
 				

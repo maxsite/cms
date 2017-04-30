@@ -124,6 +124,14 @@ function global_cache_mso_options()
 		echo t('Доступ запрещен');
 		return;
 	}
+
+	// сброс всего кэша
+	if ( $post = mso_check_post(array('f_submit_clear_global_cache', 'f_session_id')) )
+	{
+		global_cache_all_flush();
+		echo '<div class="update">'. t('Кэш очищен') . '</div>';
+	}
+
 	
 	# ключ, тип, ключи массива
 	mso_admin_plugin_options('plugin_global_cache', 'plugins', 
@@ -153,6 +161,11 @@ function global_cache_mso_options()
 		t('Настройки глобального кэширования'), // титул
 		t('Кэширует страницы целиком. В кэш будет добавляться полностью сгенерированные страницы, что ускоряет работу сайта. Рекомендуется для сайтов с большой посещаемостью. Данный кэш занимает много места на диске.')   // инфо
 	);
+	
+	echo '<form method="post">' . mso_form_session('f_session_id');
+	echo '<p><button class="button i-stack-overflow" type="submit" name="f_submit_clear_global_cache">'. t('Сбросить кэш') . '</button></p>';
+	echo '</form>';
+	
 }
 
 # end file

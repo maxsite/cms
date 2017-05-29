@@ -1016,6 +1016,7 @@ class Block_pages
 			'thumb_link' => true, // формировать ссылку на запись 
 			'thumb_add_start' => '', // произвольная добавка перед img 
 			'thumb_add_end' => '', // произвольная добавка после img 
+			'thumb_type_resize' => 'resize_full_crop_center', // тип создания миниатюры  
 			
 			// имя файла формируется как placehold_path + placehold_file
 			'placehold' => false, // если нет картинки, выводим плейсхолд (true) или ничего (false)
@@ -1125,13 +1126,27 @@ class Block_pages
 				{
 					$t_placehold = false;
 				}
-
+				
+				// если используется thumb_type_resize != resize_full_crop_center, то меняем постфикс
+				
+				$thumb_postfix = true;
+				
+				if ($r['thumb_type_resize'] !== 'resize_full_crop_center')
+				{
+					
+					$thumb_postfix = '-' . $r['thumb_width'] . '-' . $r['thumb_height'] . '-' . $r['thumb_type_resize'];
+				}
+			
 				if (
 					$thumb = thumb_generate(
 						$p->meta_val('image_for_page'), // адрес
 						$r['thumb_width'], //ширина
 						$r['thumb_height'], //высота
-						$t_placehold
+						$t_placehold,
+						$r['thumb_type_resize'], // тип создания
+						false,
+						'mini',
+						$thumb_postfix
 					))
 				{
 					if ($r['thumb_link'])

@@ -228,11 +228,16 @@ function mso_get_pages($r = array(), &$pag)
 	
 	// нужно добавить SQL_BUFFER_RESULT
 	// поскольку CodeIgniteryt не позволяет добавлять его явно, придется извращаться	
-	$query_sql = str_replace('SELECT ', 'SELECT SQL_BUFFER_RESULT ', $CI->db->_compile_select());
+	// $query_sql = str_replace('SELECT ', 'SELECT SQL_BUFFER_RESULT ', $CI->db->_compile_select());
 	
-	// дурацкое экранирование CodeIgniter - используем свои костыли для запятых в запросе
+	// SQL_BUFFER_RESULT - убрал, неактуально на новых версиях mysql
+	$query_sql = $CI->db->_compile_select();
+	
+	// экранирование CodeIgniter - используем свои костыли для запятых в запросе
 	$query_sql = str_replace('_MSO_ZAP_', ',', $query_sql);
 
+	// pr($query_sql);
+	
 	$query = $CI->db->query($query_sql);
 	$CI->db->_reset_select();
 	

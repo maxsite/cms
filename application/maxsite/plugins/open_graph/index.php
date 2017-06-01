@@ -32,6 +32,17 @@ function open_graph_uninstall($args = array())
 	return $args;
 }
 
+# атрибуты HTML
+# отдавать результат по return
+function open_graph_html_attr($arg = '')
+{
+	// если уже есть подключение og, то ничего не делаем
+	if (strpos($arg, 'prefix="og: http://ogp.me/ns#"') === false)
+		$arg .= ' prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"';
+
+	return $arg;
+}
+
 # функция отрабатывающая миниопции плагина (function плагин_mso_options)
 # если не нужна, удалите целиком
 function open_graph_mso_options() 
@@ -43,31 +54,49 @@ function open_graph_mso_options()
 	}
 	
 	# ключ, тип, ключи массива
-	// mso_admin_plugin_options('plugin_open_graph', 'plugins', 
-	// 	array(
-	// 		'option1' => array(
-	// 						'type' => 'text', 
-	// 						'name' => t('Название'), 
-	// 						'description' => t('Описание'), 
-	// 						'default' => ''
-	// 					),
-	// 		),
-	// 	t('Настройки плагина Open Graph'), // титул
-	// 	t('Укажите необходимые опции.')   // инфо
-	// );
+	mso_admin_plugin_options('plugin_open_graph1', 'plugins', 
+		array(
+			'image_width' => array(
+							'type' => 'text', 
+							'name' => t('Ширина изображения'), 
+							'description' => t('Используется для формирования миниатюры записи'), 
+							'default' => '1000'
+						),
+			'image_height' => array(
+							'type' => 'text', 
+							'name' => t('Высота изображения'), 
+							'description' => t('Используется для формирования миниатюры записи'), 
+							'default' => '500'
+						),
+						
+			'image_type_resize' => array(
+							'type' => 'select', 
+							'name' => t('Способ формирования изображения'), 
+							'description' => t(''), 
+							'values' => 'resize_full_crop_center # resize_full_crop_top_left # resize_full_crop_top_center # resize_crop # resize_crop_center # resize_h_crop_center # crop # crop_center # resize # resize_w # resize_h',
+							'default' => 'resize_full_crop_center'
+						),
+						
+			'locale' => array(
+							'type' => 'text', 
+							'name' => t('Язык локали'), 
+							'description' => t('Например <code>ru_RU</code> или <code>en_US</code>'), 
+							'default' => 'ru_RU'
+						),
+			'twitter_site' => array(
+							'type' => 'text', 
+							'name' => t('Имя в Twitter'), 
+							'description' => t('Указывайте с <code>@</code>'), 
+							'default' => ''
+						),
+			
+			),
+		t('Настройки плагина Open Graph'), // титул
+		t('Протокол Open Graph позволяет странице стать полноценным объектом в социальных сетях.')   // инфо
+	);
 	
 }
 
-# атрибуты HTML
-# отдавать результат по return
-function open_graph_html_attr($arg = '')
-{
-	// если уже есть подключение og, то ничего не делаем
-	if (strpos($arg, 'prefix="og: http://ogp.me/ns#"') === false)
-		$arg .= ' prefix="og: http://ogp.me/ns#"';
-	
-	return $arg;
-}
 
 # meta-данные
 # выводятся через echo
@@ -75,22 +104,82 @@ function open_graph_head($arg = '')
 {
 	global $page;
 	
+	$o = mso_get_option('plugin_open_graph1', 'plugins', array());
+	
+	$locale = isset($o['locale']) ? $o['locale'] : 'ru_RU';
+	$twitter_site = isset($o['twitter_site']) ? $o['twitter_site'] : '';
+	
+	// http://ruogp.me/#types
+	
 	if (is_type('home'))
-		echo '<meta property="og:type" content="website">';
+	{
+		_meta_content('og:type', 'website');
+	}
 	else
-		echo '<meta property="og:type" content="article">';
-		
-	echo '<meta property="og:title" content="' . mso_head_meta('title') . '">';
-	echo '<meta property="og:description" content="' . mso_head_meta('description') . '">';
-	echo '<meta property="og:url" content="' . mso_link_rel('canonical', '', true) . '">';
+	{
+		_meta_content('og:type', 'article');
+	}
+	
+	_meta_content('og:title', mso_head_meta('title'));
+	_meta_content('og:description', mso_head_meta('description'));
+	_meta_content('og:url', mso_link_rel('canonical', '', true));
+	_meta_content('og:locale', $locale);
+	_meta_content('og:site_name', getinfo('name_site'));
+	
+	_meta_content('twitter:title', mso_head_meta('title'));
+	_meta_content('twitter:description', mso_head_meta('description'));
+	_meta_content('twitter:url', mso_link_rel('canonical', '', true));
+	_meta_content('twitter:domain', getinfo('siteurl'));
+	
+	_meta_content('twitter:site', $twitter_site);
+	_meta_content('twitter:creator', $twitter_site);
 	
 	if (is_type('page') and isset($page['page_meta']['image_for_page'][0]))
 	{
-		echo '<meta property="og:image" content="' . $page['page_meta']['image_for_page'][0] . '">';
+		$image_width = isset($o['image_width']) ? $o['image_width'] : 1000;
+		$image_height = isset($o['image_height']) ? $o['image_height'] : 500;
+		
+		$image_type_resize = isset($o['image_type_resize']) ? $o['image_type_resize'] : 'resize_full_crop_center';
+		
+		if ($image_type_resize !== 'resize_full_crop_center')
+		{
+			$postfix = '-' . $image_width . '-' . $image_height . '-' . $image_type_resize;
+		}
+		else
+		{
+			$postfix = '-' . $image_width . '-' . $image_height;
+		}
+		
+		if (
+			$image_url = thumb_generate(
+				$page['page_meta']['image_for_page'][0], // адрес
+				$image_width, //ширина
+				$image_height, //высота
+				false,
+				$image_type_resize, // тип создания
+				false,
+				'mini',
+				$postfix
+			))
+		{
+			_meta_content('og:image', $image_url);
+			_meta_content('og:image:width', $image_width);
+			_meta_content('og:image:height', $image_height);
+			_meta_content('twitter:image', $image_url);
+			_meta_content('twitter:card', 'summary_large_image');
+		}
 	}
 	
 	return $arg;
 }
 
+# вспомогательная для формирования <meta property="" content="">
+function _meta_content($meta = '', $content = '', $echo = true)
+{
+	if ($echo) 
+		echo '<meta property="' . $meta . '" content="' . $content . '">' . NR;
+	else
+		return '<meta property="' . $meta . '" content="' . $content . '">';
+}
 
 # end of file

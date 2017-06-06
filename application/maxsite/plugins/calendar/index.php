@@ -71,15 +71,15 @@ function calendar_widget_update($num = 1)
 function calendar_widget_custom($arg = array(), $num = 1) 
 {
 	# массив названий месяцев
-	if ( !isset($arg['months']) ) $arg['months'] = array(t('Январь'), t('Февраль'), 
-													t('Март'), t('Апрель'), t('Май'), 
-													t('Июнь'), t('Июль'), t('Август'), 
-													t('Сентябрь'), t('Октябрь'), t('Ноябрь'), 
-													t('Декабрь'));
+	if ( !isset($arg['months']) ) $arg['months'] = array(tf('Январь'), tf('Февраль'), 
+													tf('Март'), tf('Апрель'), tf('Май'), 
+													tf('Июнь'), tf('Июль'), tf('Август'), 
+													tf('Сентябрь'), tf('Октябрь'), tf('Ноябрь'), 
+													tf('Декабрь'));
 	# массив названий дней недели
-	if ( !isset($arg['days']) ) $arg['days'] = array(t('Пн'), t('Вт'), t('Ср'), 
-													t('Чт'), 
-													t('Пт'), t('Сб'), t('Вс'));
+	if ( !isset($arg['days']) ) $arg['days'] = array(tf('Пн'), tf('Вт'), tf('Ср'), 
+													tf('Чт'), 
+													tf('Пт'), tf('Сб'), tf('Вс'));
 	
 	# оформление виджета
 	if ( !isset($arg['header']) ) $arg['header'] = '<div class="mso-widget-header"><span>' . t('Календарь') . '</span></div>';

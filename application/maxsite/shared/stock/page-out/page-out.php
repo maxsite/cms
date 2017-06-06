@@ -1146,7 +1146,8 @@ class Block_pages
 						$r['thumb_type_resize'], // тип создания
 						false,
 						'mini',
-						$thumb_postfix
+						$thumb_postfix,
+						mso_get_option('upload_resize_images_quality', 'general', 90)
 					))
 				{
 					if ($r['thumb_link'])

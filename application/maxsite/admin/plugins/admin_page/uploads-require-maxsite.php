@@ -38,6 +38,9 @@ _upload($up_dir, $fn);
 */
 function _upload($up_dir, $fn, $r = array())
 {
+	// качество картинок задаётся через опцию
+	$quality = mso_get_option('upload_resize_images_quality', 'general', 90);
+	
 	$fn = _slug($fn);
 	$ext = strtolower(substr(strrchr($fn, '.'), 1));
 	$name = substr($fn, 0, strlen($fn) - strlen($ext) - 1);
@@ -108,7 +111,7 @@ function _upload($up_dir, $fn, $r = array())
 	if ($rotation)
 	{
 		echo ' ROTATE... ';
-		thumb_rotate($up_dir . $fn, $rotation);
+		thumb_rotate($up_dir . $fn, $rotationя, $quality);
 	}
 	
 	// текущие размеры
@@ -123,7 +126,7 @@ function _upload($up_dir, $fn, $r = array())
 			echo ' RESIZE (width) ... ';
 			$new_width = $resize_images;
 			$new_height = round($height / ($width/$new_width));
-			thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false);
+			thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false, $quality);
 		}
 	}
 	elseif ($resize_images_type == 'height')
@@ -133,7 +136,7 @@ function _upload($up_dir, $fn, $r = array())
 			echo ' RESIZE (height) ... ';
 			$new_height = $resize_images;
 			$new_width = round($width / ($height/$new_height));
-			thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false);
+			thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false, $quality);
 		}
 	}
 	elseif ($resize_images_type == 'max') // автоматом вычисляем максимальную сторону
@@ -153,7 +156,7 @@ function _upload($up_dir, $fn, $r = array())
 				$new_width = round($width / ($height/$new_height));
 			}
 			
-			thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false);
+			thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false, $quality);
 		}
 	}
 
@@ -170,14 +173,14 @@ function _upload($up_dir, $fn, $r = array())
 	if ($image_mini_type != 'none') // если не делать миниатюру
 	{
 		echo ' MINI... ';
-		thumb_generate($url . $fn, $size_image_mini_w, $size_image_mini_h, false, $image_mini_type, true, 'mini', false);
+		thumb_generate($url . $fn, $size_image_mini_w, $size_image_mini_h, false, $image_mini_type, true, 'mini', false, $quality);
 		
 	}
 	
 	echo ' THUMB... ';
 	
 	// 100x100 — превью в _mso_i с тем же типом кропа
-	thumb_generate($url . $fn, 100, 100, false, $image_mini_type, true, '_mso_i', false);
+	thumb_generate($url . $fn, 100, 100, false, $image_mini_type, true, '_mso_i', false, $quality);
 	// thumb_generate($url . $fn, 100, 100, false, 'resize_full_crop_center', true, '_mso_i', false);
 	
 	echo ' DONE! <b>' . $fn . '</b>';

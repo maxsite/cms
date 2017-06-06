@@ -24,7 +24,13 @@ $p->div_start('mso-page-content mso-type-' . getinfo('type') . '-content');
 				if ($image_for_page = thumb_generate(
 						$p->meta_val('image_for_page'), 
 						mso_get_option('image_for_page_width', getinfo('template'), 280),
-						mso_get_option('image_for_page_height', getinfo('template'), 210)
+						mso_get_option('image_for_page_height', getinfo('template'), 210),
+						false, 
+						'resize_full_crop_center', 
+						false, 
+						'mini', 
+						true, 
+						mso_get_option('upload_resize_images_quality', 'general', 90)
 					))
 				{
 					if (mso_get_option('image_for_page_link', getinfo('template'), 1))

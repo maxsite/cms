@@ -169,11 +169,18 @@ if ($pages)
 									if ( mso_get_val('show_thumb', true)
 										and mso_get_val('show_thumb_type_' . getinfo('type'), true) )
 									{
+
 										// вывод миниатюры перед записью
 										if ($image_for_page = thumb_generate(
 												$p->meta_val('image_for_page'), 
 												mso_get_option('image_for_page_width', getinfo('template'), 280),
-												mso_get_option('image_for_page_height', getinfo('template'), 210)
+												mso_get_option('image_for_page_height', getinfo('template'), 210),
+												false, 
+												'resize_full_crop_center', 
+												false, 
+												'mini', 
+												true, 
+												mso_get_option('upload_resize_images_quality', 'general', 90)
 											))
 										{
 											echo $p->img($image_for_page, mso_get_option('image_for_page_css_class', getinfo('template'), 'image_for_page'), '', $p->val('page_title'));

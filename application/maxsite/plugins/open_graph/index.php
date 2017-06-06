@@ -159,7 +159,8 @@ function open_graph_head($arg = '')
 				$image_type_resize, // тип создания
 				false,
 				'mini',
-				$postfix
+				$postfix,
+				mso_get_option('upload_resize_images_quality', 'general', 90)
 			))
 		{
 			_meta_content('og:image', $image_url);

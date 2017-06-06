@@ -18,6 +18,7 @@ class Thumb
 	var $new_img = ''; // конечный url полный
 
 	protected $image_info = array(); // информация об изображении
+	protected $image_quality = 90; // качество изображения — по-умолчанию 90%
 
 	var $init = ''; // возврат при инициализации
 		// true - есть готовое новое изображение (в кэше)
@@ -25,7 +26,7 @@ class Thumb
 		// всё остальное - можно сделать 
 		
 
-	function __construct($url, $postfix = '-thumb', $replace_file = false, $subdir = '')
+	function __construct($url, $postfix = '-thumb', $replace_file = false, $subdir = '', $quality = 90)
 	{
 		// проверим входящий url
 		if (strpos($url, getinfo('uploads_url')) === false) 
@@ -102,6 +103,8 @@ class Thumb
 			return;
 		}
 		
+		$this->image_quality = $quality;
+		
 		// проверим существование mini-каталога нового файла
 		// если его нет, попробуем создать
 		$new_dir = dirname(getinfo('uploads_dir') . $this->new_file);
@@ -131,6 +134,7 @@ class Thumb
 				'source_image' => getinfo('uploads_dir') . $file,
 				'new_image' => getinfo('uploads_dir') . $new_file,
 				'maintain_ratio' => false, // размеры по пропорции вычислим сами
+				'quality' => $this->image_quality,
 			);
 		
 		// пропорции
@@ -198,6 +202,7 @@ class Thumb
 				'source_image' => getinfo('uploads_dir') . $file,
 				'new_image' => getinfo('uploads_dir') . $new_file,
 				'maintain_ratio' => false, // размеры по пропорции вычислим сами
+				'quality' => $this->image_quality,
 			);
 		
 		$r_conf['x_axis'] = $x;
@@ -377,7 +382,8 @@ class Thumb
 				'new_image' => getinfo('uploads_dir') . $prev_file,
 				'maintain_ratio' => false, // размеры по пропорции вычислим сами
 				'width' => 100,
-				'height' => 100
+				'height' => 100,
+				'quality' => $this->image_quality,
 			);
 			
 		$CI->image_lib->initialize($r_conf);
@@ -391,7 +397,7 @@ class Thumb
 // вспомогательные функции для использования в шаблоне
 // тип формирования указывается в $type_resize
 
-function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 'resize_full_crop_center', $replace_file = false, $subdir = 'mini', $postfix = true)
+function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 'resize_full_crop_center', $replace_file = false, $subdir = 'mini', $postfix = true, $quality = 90)
 {
 	// указана картинка, нужно сделать thumb заданного размера
 	if ($img) 
@@ -400,7 +406,7 @@ function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 
 		// если false, то постфикса не будет
 		if ($postfix === true) $postfix = '-' . $width . '-' . $height;
 		
-		$t = new Thumb($img, $postfix, $replace_file, $subdir);
+		$t = new Thumb($img, $postfix, $replace_file, $subdir, $quality);
 		
 		if ($t->init === true) // уже есть готовое изображение в кэше
 		{
@@ -475,7 +481,7 @@ function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 
 *  Поворачивает изображение (файл) на заданный угол 
 *  Код ротации как для  $CI->image_lib->rotate()
 */
-function thumb_rotate($fn, $rotation = 0)
+function thumb_rotate($fn, $rotation = 0, $quality = 90)
 {
 	if ($rotation)
 	{
@@ -483,7 +489,8 @@ function thumb_rotate($fn, $rotation = 0)
 			'image_library' => 'gd2',
 			'source_image' => $fn,
 			'new_image' => $fn,
-			'rotation_angle' => $rotation
+			'rotation_angle' => $rotation,
+			'quality' => $quality,
 		);
 
 		$CI = &get_instance();
@@ -503,7 +510,7 @@ function thumb_rotate($fn, $rotation = 0)
 * 4||В левом нижнем углу 
 * 5||В правом нижнем углу
 */
-function thumb_watermark($fn, $fn_watermark, $watermark_type)
+function thumb_watermark($fn, $fn_watermark, $watermark_type, $quality = 90)
 {
 	$hor = 'right'; 
 	$vrt = 'bottom';
@@ -526,7 +533,7 @@ function thumb_watermark($fn, $fn_watermark, $watermark_type)
 		'wm_hor_alignment' => $hor,
 		'wm_overlay_path' => $fn_watermark,
 		'wm_opacity' => 100,
-		
+		'quality' => $quality,
 	);
 
 	$CI = &get_instance();

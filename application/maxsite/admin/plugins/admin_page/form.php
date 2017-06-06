@@ -25,7 +25,7 @@ require($MSO->config['admin_plugins_dir'] . 'admin_page/form-do_script.php');
 # до 
 // div.new_or_edit общий контейнер: открывается в $do, закрывается в $posle
 $do = mso_form_session('f_session_id') . '<div class="new_or_edit">
-<div class="page-header"><input value="' . $f_header . '" name="f_header" class="f_header" title="' . t('Заголовок записи') . '" placeholder="' . t('Укажите заголовок') . '"></div>'
+<div class="page-header"><input value="' . $f_header . '" name="f_header" class="f_header" title="' . t('Заголовок записи (нажмите Enter, чтобы сохранить запись)') . '" placeholder="' . t('Укажите заголовок') . '"></div>'
 
 . mso_hook('admin_page_form_pre_all_meta')
 

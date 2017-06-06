@@ -9,10 +9,19 @@
 
 $id = 0; // поскольку это новая запись
 
+// дефолтные настройки новой записи
+$f_content = $f_header = $f_tags = $f_slug = $f_page_parent = $f_password = '';
+$f_status = $f_page_type = $f_comment_allow = $f_ping_allow = $f_feed_allow = '1';
+$page_menu_order = '0';
+$f_cat = array();
+$f_user_id = $MSO->data['session']['users_id'];
+	
+
 // $CI = & get_instance();
 
 // файл функций
 require_once(getinfo('admin_plugins_dir') . 'admin_page/post-edit-functions.php'); 
+
 
 
 if ( $post = mso_check_post(array('f_session_id', 'f_submit', 'f_content')) )
@@ -71,15 +80,6 @@ if ( $post = mso_check_post(array('f_session_id', 'f_submit', 'f_content')) )
 			echo '<div class="error">' . t('Ошибка создания страницы') . '</div>';
 	}
 }
-else // if post
-{
-	// дефолтные настройки новой записи
-	$f_content = $f_header = $f_tags = $f_slug = $f_page_parent = $f_password = '';
-	$f_status = $f_page_type = $f_comment_allow = $f_ping_allow = $f_feed_allow = '1';
-	$page_menu_order = '0';
-	$f_cat = array();
-	$f_user_id = $MSO->data['session']['users_id'];
-};
 
 
 echo '<h1>' . t('Новая запись') . '</h1>';
@@ -147,11 +147,19 @@ require($MSO->config['admin_plugins_dir'] . 'admin_page/all_meta.php');
 // закладка файлы вынесена отдельно
 // её результат — переменная $all_files
 require($MSO->config['admin_plugins_dir'] . 'admin_page/all-files.php');
-	
-$f_status_draft = $f_status_private = '';
-$f_status_publish = 'checked';
 
-$f_return = '<input name="f_return" type="checkbox" title="' . t('После сохранения вернуться к редактированию') . '">';
+// начальный статус записи зависит от опции
+$page_status_default = mso_get_option('page_status_default', 'templates', 'publish');
+
+$f_status_publish = $f_status_draft = $f_status_private = '';
+
+if ($page_status_default == 'draft') $f_status_draft = 'checked';
+elseif ($page_status_default == 'private') $f_status_private = 'checked';
+else $f_status_publish = 'checked';
+
+
+
+$f_return = '<input name="f_return" type="checkbox" checked="checked" title="' . t('После сохранения вернуться к редактированию') . '">';
 
 // быстрое сохранение только в режиме редактирования
 $f_bsave = '';

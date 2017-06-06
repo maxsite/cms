@@ -91,7 +91,7 @@
 				</div>
 			</div>
 			
-			<div class="flex">
+			<div class="flex flex-wrap">
 				<a href="<?= getinfo('site_url') ?>" class="my-q-site" title="<?= t('Переход к сайту') ?>"></a>
 				<a href="<?= getinfo('site_admin_url') ?>home" class="my-q-dashboard" title="<?= t('Консоль') ?>"></a>
 				<a href="<?= getinfo('site_admin_url') ?>users_my_profile" class="my-q-my_profile" title="<?= t('Мой профиль') ?>"></a>

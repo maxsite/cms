@@ -192,3 +192,23 @@ $lang['Извините, пользователь с указанным номе
 $lang['г.']='y.';
 $lang['Комментарии по RSS']='RSS comments';
 $lang['Читать комментарии']='Read comments';
+$lang['Январь']='January';
+$lang['Февраль']='February';
+$lang['Март']='March';
+$lang['Апрель']='April';
+$lang['Май']='May';
+$lang['Июнь']='June';
+$lang['Июль']='July';
+$lang['Август']='August';
+$lang['Сентябрь']='September';
+$lang['Октябрь']='October';
+$lang['Ноябрь']='November';
+$lang['Декабрь']='December';
+$lang['Пн']='Mon';
+$lang['Вт']='Tue';
+$lang['Ср']='Wed';
+$lang['Чт']='Thu';
+$lang['Пт']='Fri';
+$lang['Сб']='Sat';
+$lang['Вс']='Sun';
+

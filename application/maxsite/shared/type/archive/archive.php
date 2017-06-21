@@ -62,6 +62,7 @@ if ($pages) // есть страницы
 	}
 	
 	if ($f = mso_page_foreach('archive-posle-pages')) require($f);
+	if (function_exists('ushka')) echo ushka('archive-posle-pages');
 	
 	mso_hook('pagination', $pagination);
 }

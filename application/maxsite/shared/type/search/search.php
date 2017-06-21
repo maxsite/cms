@@ -184,6 +184,9 @@ if ($pages) // есть страницы
 	
 	echo '</ul>';
 	
+	if ($f = mso_page_foreach('search-posle-pages')) require($f); // подключаем кастомный вывод
+	if (function_exists('ushka')) echo ushka('search-posle-pages');
+
 	mso_hook('pagination', $pagination);
 }
 

@@ -42,7 +42,19 @@ function mso_get_all_tags_page($options = array())
 
 	$CI->db->where( 'page_status', 'publish'); // только опубликованные
 	//$CI->db->where('page_date_publish <', date('Y-m-d H:i:s')); // и только раньше текущей
-	$CI->db->where('page_date_publish < ', 'NOW()', false); // и только раньше текущей
+	
+	$time_zone = getinfo('time_zone');
+	if ($time_zone < 10 and $time_zone > 0) $time_zone = '0' . $time_zone;
+	elseif ($time_zone > -10 and $time_zone < 0) 
+	{ 
+		$time_zone = '0' . $time_zone; 
+		$time_zone = str_replace('0-', '-0', $time_zone); 
+	}
+	else $time_zone = '00.00';
+	$time_zone = str_replace('.', ':', $time_zone);
+	
+	$CI->db->where('page_date_publish < ', 'DATE_ADD(NOW(), INTERVAL "' . $time_zone . '" HOUR_MINUTE)', false);
+	// $CI->db->where('page_date_publish < ', 'NOW()', false); // и только раньше текущей
 
 	$CI->db->group_by('meta_value');
 	$query = $CI->db->get('meta');

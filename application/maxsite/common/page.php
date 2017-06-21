@@ -131,7 +131,7 @@ function mso_get_pages($r = array(), &$pag)
 	// сложного select без использования NOW()
 	if ($r['date_now'])
 	{
-		$CI->db->select('SQL_BUFFER_RESULT `page_id`', false);
+		$CI->db->select('`page_id`', false);
 		$CI->db->where('page_date_publish > ', 'DATE_ADD(NOW(), INTERVAL "' . $r['time_zone'] . '" HOUR_MINUTE)', false);
 		$query = $CI->db->get('page');
 		if ($query and $query->num_rows() > 0) 

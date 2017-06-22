@@ -25,6 +25,12 @@ function global_cache_autoload($args = array())
 		mso_hook_add('global_cache_key_flush', 'global_cache_key_flush'); // сброс кэша текущей страницы
 		mso_hook_add('global_cache_all_flush', 'global_cache_all_flush'); // сброс всего html-кэша
 		
+		// кэшировать только главную
+		if (isset($options['home-only']) and $options['home-only'])
+		{
+			if (!is_type('home')) return $args;
+		}
+		
 		// если залогиненность и есть опция выключения, то отключаем кэш
 		if ( (isset($options['onlogin']) and $options['onlogin']) and (is_login() or is_login_comuser()))
 		{
@@ -143,6 +149,13 @@ function global_cache_mso_options()
 							'description' => '', 
 							'default' => 1
 						),
+						
+			'home-only' => array(
+							'type' => 'checkbox', 
+							'name' => t('Кэшировать только главную страницу'), 
+							'description' => '', 
+							'default' => 0
+						),
 			
 			'onlogin' => array(
 							'type' => 'checkbox', 
@@ -159,7 +172,7 @@ function global_cache_mso_options()
 						),
 			),
 		t('Настройки глобального кэширования'), // титул
-		t('Кэширует страницы целиком. В кэш будет добавляться полностью сгенерированные страницы, что ускоряет работу сайта. Рекомендуется для сайтов с большой посещаемостью. Данный кэш занимает много места на диске.')   // инфо
+		t('Кэширует страницы целиком. В кэш будет добавляться полностью сгенерированные страницы, что ускоряет работу сайта. Рекомендуется для сайтов с большой посещаемостью. Данный кэш может занимать много места на диске.')   // инфо
 	);
 	
 	echo '<form method="post">' . mso_form_session('f_session_id');
@@ -168,4 +181,4 @@ function global_cache_mso_options()
 	
 }
 
-# end file
+# end of file

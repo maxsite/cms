@@ -4293,6 +4293,8 @@ function mso_shortcode($shortcode, $func, $content)
 # $text_units содержит полный текст с юнитами
 # пример использования см. shared/type/home/home.php
 # через $PAGES и $PAGINATION можно передать в юнит заранее подготовленные записи
+# спецкод @fromfile файл — позволяет подключать любой файл в виде текста. 
+# файл относительно шаблона. Не зависит от вложенности в [unit]
 function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $path_file = 'type/home/units/')
 {
 	// если в тексте юнита есть вхождение @USE_PHP@
@@ -4306,10 +4308,13 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 		ob_end_clean();
 	}
 	
+	// подключаем файл как текст @fromfile
+	$text_units = preg_replace_callback('!@fromfile (.*?)\n!is', '_mso_units_out_fromfile', $text_units);
+	
 	// ищем вхождение [unit] ... [/unit]
 	$units = mso_section_to_array($text_units, '!\[unit\](.*?)\[\/unit\]!is', array('file'=>''));
 	
-	// pr($units);
+	// pr($units, 1);
 	
 	// подключаем каждый указанный unit 
 	// _rules — php-условие, при котором юнит выводится
@@ -4368,5 +4373,24 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 		}
 	}
 }
+
+# callback к mso_units_out()
+function _mso_units_out_fromfile($matches)
+{
+	$fn = trim(str_replace('=', '', $matches[1]));
+
+	if ($fn = mso_fe($fn)) 
+	{
+		$data = file_get_contents($fn);
+		// pr($data, 1);
+		return $data;
+	}
+	else
+	{
+		return '';
+	}
+}
+
+
 
 # end of file

@@ -4422,7 +4422,7 @@ function mso_text_find_key($text, $find = false, $delim = "=")
 			
 		$val = trim($elem[1]); // данные могут быть любыми
 		
-		if ($find)
+		if ($find !== false)
 		{
 			if ($find == $key) // если нужен поиск по ключу
 			{

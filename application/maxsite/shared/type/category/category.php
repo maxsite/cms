@@ -20,6 +20,25 @@ $par = array(
 		'content' => $full_posts
 	); 
 
+// сортировка рубрик может быть задана в опции category_sort шаблона
+// news = page_date_publish asc
+// book = page_menu_order desc
+if ($category_sort = mso_get_option('category_sort', getinfo('template'), ''))
+{
+	if ($sort = mso_text_find_key($category_sort, mso_segment(2)))
+	{
+		$oa = mso_explode($sort, false);
+		
+		// order ставим как есть, не проверяя, поскольку их слишком много
+		if (isset($oa[0])) $par['order'] = $oa[0];
+		
+		// asc проверяем на корректность
+		if (isset($oa[1]) and ($oa[1] == 'asc' or $oa[1] == 'desc' or $oa[1] == 'random') ) 
+			$par['order_asc'] = $oa[1];
+	}
+}
+
+
 // подключаем кастомный вывод, где можно изменить массив параметров $par для своих задач
 if ($f = mso_page_foreach('category-mso-get-pages')) require($f); 
 
@@ -60,28 +79,11 @@ if ($pages) // есть страницы
 	
 	if ($category_unit = mso_get_option('category_unit', getinfo('template'), ''))
 	{
-		$current_url = mso_segment(2); // текущая рубрика определяется по slug
-		$category_unit = explode("\n", $category_unit);
-		
-		foreach ($category_unit as $elem)
+		if ($u = mso_text_find_key($category_unit, mso_segment(2)))
 		{
-			$elem = explode("=", trim($elem));
-			
-			if (count($elem) == 2) // должно быть два элемента
-			{
-				$m1 = trim($elem[0]); // slug
-				$m2 = trim($elem[1]); // файл
-				
-				if ($m1 === $current_url)
-				{
-					// есть совпадение
-					if ($fn = mso_fe('type/category/units/' . $m2)) 
-					{	
-						$use_unit = $fn; // выставляем путь к файлу
-					}
-					
-					break; // в любом случае рубим цикл
-				}
+			if ($fn = mso_fe('type/category/units/' . $u)) 
+			{	
+				$use_unit = $fn; // выставляем путь к файлу
 			}
 		}
 	}
@@ -124,4 +126,4 @@ echo NR . '</section></div><!-- /div.mso-type-category -->' . NR;
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	
-# end file
+# end of file

@@ -25,28 +25,11 @@ else
 		// сразу убираем пагинацию из адреса 
 		$current_url = str_replace('/next/' . mso_current_paged(), '', mso_current_url());
 		
-		$main_template_slug = explode("\n", $main_template_slug);
-		
-		foreach ($main_template_slug as $elem)
+		if ($m = mso_text_find_key($main_template_slug, $current_url))
 		{
-			$elem = explode("=", trim($elem));
-			
-			// должно быть два элемента
-			if (count($elem) == 2)
-			{
-				$m1 = trim($elem[0]); // адрес
-				$m2 = trim($elem[1]); // шаблон
-				
-				if ($m1 === $current_url)
-				{
-					// есть совпадение
-					if ($fn = mso_fe('main/' . $m2 . '/main.php')) 
-					{	
-						mso_set_val('main_file', $fn); // выставляем путь к файлу
-					}
-					
-					break; // в любом случае рубим цикл
-				}
+			if ($fn = mso_fe('main/' . $m . '/main.php')) 
+			{	
+				mso_set_val('main_file', $fn); // выставляем путь к файлу
 			}
 		}
 	}

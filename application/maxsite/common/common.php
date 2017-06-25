@@ -4392,5 +4392,52 @@ function _mso_units_out_fromfile($matches)
 }
 
 
+# Поиск/получение из многострочного текста ключ=значение. Ключи регистрозависимы
+# Примеры. На входе текст $text:
+# a = 10
+# b = 20 30 40
+# b = 50 60
+#
+# результат: mso_text_find_key($text)
+# массив [a] => 10
+#        [b] => 50 60
+# если не указан крритерий поиска, то одинаковые ключи будут затерты нижними
+#
+# результат: mso_text_find_key($text, 'b')
+# строка: 20 30 40
+# находится только первый ключ, остальные ниже игнорируются
+function mso_text_find_key($text, $find = false, $delim = "=")
+{
+	$all_text = explode("\n", $text); // в массив весь текст построчно
+	
+	$out = array();
+	
+	foreach ($all_text as $elem)
+	{
+		$elem = explode($delim, trim($elem));
+		if (count($elem) < 2) continue; // должно быть как минимум два элемента
+		
+		$key = trim($elem[0]); // ключ
+		if (!$key) continue; // если ключ пустой, то продолжим цикл
+			
+		$val = trim($elem[1]); // данные могут быть любыми
+		
+		if ($find)
+		{
+			if ($find == $key) // если нужен поиск по ключу
+			{
+				$out = $val;
+				break; // нашли что нужно и выходим
+			}
+		}
+		else
+		{
+			// все элементы в кучу
+			$out[$key] = $val;
+		}
+	}
+	
+	return $out;
+}
 
 # end of file

@@ -60,13 +60,13 @@ function open_graph_mso_options()
 							'type' => 'text', 
 							'name' => t('Ширина изображения'), 
 							'description' => t('Используется для формирования миниатюры записи'), 
-							'default' => '1000'
+							'default' => '900'
 						),
 			'image_height' => array(
 							'type' => 'text', 
 							'name' => t('Высота изображения'), 
 							'description' => t('Используется для формирования миниатюры записи'), 
-							'default' => '500'
+							'default' => '600'
 						),
 						
 			'image_type_resize' => array(

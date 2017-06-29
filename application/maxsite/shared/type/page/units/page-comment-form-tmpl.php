@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<div class="mso-comment-leave">{{ tf('Оставьте комментарий!') }}</div>
+<div class="mso-comment-leave">{{ mso_get_option('leave_a_comment', 'templates',  tf('Оставьте комментарий!')) }}</div>
 
 <div class="mso-comment-form">
 	<form method="post">

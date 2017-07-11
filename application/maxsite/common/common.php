@@ -4362,9 +4362,15 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 			{
 				if ($_fn = mso_fe( 'components/' . trim($UNIT['component']) . '/' . trim($UNIT['component']) . '.php' )) require($_fn);
 			}
-			elseif (isset($UNIT['option_key'], $UNIT['option_type'], $UNIT['option_default']) and trim($UNIT['option_key']) and trim($UNIT['option_type']) and trim($UNIT['option_default']))
+			elseif (isset($UNIT['option_key'], $UNIT['option_type'], $UNIT['option_default']) and trim($UNIT['option_key']) and trim($UNIT['option_type']))
 			{
-				echo mso_get_option(trim($UNIT['option_key']), trim($UNIT['option_type']), trim($UNIT['option_default']));
+				$ot = trim($UNIT['option_type']);
+				
+				// если option_type = %TEMPLATE% — меняем на текущий шаблон
+				if (trim($UNIT['option_type']) === '%TEMPLATE%') 
+					$ot = getinfo('template');
+				
+				echo mso_get_option(trim($UNIT['option_key']), $ot, trim($UNIT['option_default']));
 			}
 			elseif (isset($UNIT['sidebar']) and trim($UNIT['sidebar']))
 			{

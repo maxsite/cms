@@ -45,15 +45,17 @@ if ($comuser_info)
 		
 		if ($comusers_description) 
 		{
-			$comusers_description = strip_tags($comusers_description);
+			$comusers_description = mso_clean_str($comusers_description);
 			$comusers_description = str_replace("\n", '<br>', $comusers_description);
 			$comusers_description = str_replace('<br><br>', '<br>', $comusers_description);
 		}
 		
-		if (!$comusers_date_birth 
-			or $comusers_date_birth == '1970-01-01 00:00:00' 
-			or $comusers_date_birth == '0000-00-00 00:00:00') 
-			$comusers_date_birth = '';
+		// скрыть дату рождения для всех
+		// if (!$comusers_date_birth 
+		// 	or $comusers_date_birth == '1970-01-01 00:00:00' 
+		// 	or $comusers_date_birth == '0000-00-00 00:00:00') 
+		// 	$comusers_date_birth = '';
+		$comusers_date_birth = '';
 		
 		if (getinfo('comusers_id') == $comusers_id )
 			$edit_link = getinfo('siteurl') . 'users/' . $comusers_id . '/edit';

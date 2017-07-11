@@ -86,6 +86,10 @@ if ($comuser_info)
 				
 				$check_subscribe_admin = (isset($comusers_meta['subscribe_admin']) and $comusers_meta['subscribe_admin']=='1') ? ' checked="checked"' : '';
 				
+				// в файле можно выполнить инициализацию переменных, которую можно использовать
+				// в форме в type_foreach-файлах users-form-edit-tmpl1 и users-form-edit-tmpl2
+				if ($f = mso_page_foreach('users-form-edit-tmpl0')) require($f);
+				
 				eval(mso_tmpl_ts('type/users/units/users-form-edit-tmpl.php'));
 			}
 		}

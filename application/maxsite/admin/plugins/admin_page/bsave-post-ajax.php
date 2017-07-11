@@ -51,15 +51,15 @@
 			
 			parse_str($params, $post);
 			
-			function _array_stripcslashes($s)
-			{
-				if (is_string($s)) 
-					return stripcslashes($s);
-				else 
-					return $s;
-			}
-			
-			$post = array_map('_array_stripcslashes', $post);
+			// function _array_stripcslashes($s)
+			// {
+			// 	if (is_string($s)) 
+			// 		return stripcslashes($s);
+			// 	else 
+			// 		return $s;
+			// }
+			//
+			// $post = array_map('_array_stripcslashes', $post);
 			
 			// в $post все переданные поля формы
 			

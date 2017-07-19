@@ -2172,6 +2172,9 @@ function mso_next_prev_page($r = array())
 	
 	// $r['use_category'] — если нужно учитывать рубрику
 	if (!isset($r['use_category'])) $r['use_category'] = true;
+	if (!isset($r['get_page_categories'])) $r['get_page_categories'] = false;
+	if (!isset($r['get_page_meta_tags'])) $r['get_page_meta_tags'] = false;
+	
 
 	$cat = ''; // рубрика не учитывается
 	
@@ -2212,8 +2215,8 @@ function mso_next_prev_page($r = array())
 			'work_cut' => false,
 			'custom_type' => 'home',
 			'function_add_custom_sql' => '_sql_next_page',
-			'get_page_categories' => false,
-			'get_page_meta_tags' => false,
+			'get_page_categories' => $r['get_page_categories'],
+			'get_page_meta_tags' => $r['get_page_meta_tags'],
 			'get_page_count_comments' => false,
 			'type' => $r['type'],
 			'exclude_page_id' => $r['page_id'] 
@@ -2239,8 +2242,8 @@ function mso_next_prev_page($r = array())
 			'work_cut' => false,
 			'custom_type' => 'home',
 			'function_add_custom_sql' => '_sql_prev_page',
-			'get_page_categories' => false,
-			'get_page_meta_tags' => false,
+			'get_page_categories' => $r['get_page_categories'],
+			'get_page_meta_tags' => $r['get_page_meta_tags'],
 			'get_page_count_comments' => false,
 			'type' => $r['type'],
 			'exclude_page_id' => $r['page_id'] 

@@ -3,7 +3,7 @@
 /**
  * MaxSite CMS
  * (c) http://max-3000.com/
- * 29-05-2017
+ * 28-07-2017
 
 Универсальный юнит для вывода записей по множеству критериев
 
@@ -82,6 +82,7 @@
 		'tag_start' => '<p class="i-tag t90">',
 		'tag_end' => '</p>',
 		'tag_sep' => ',&NBSP;',
+		'tag_class' => '',
 		
 		'author_start' => '',
 		'author_end' => '',
@@ -186,6 +187,7 @@
 			'tag_start' 			=> $UNIT['tag_start'],
 			'tag_end' 				=> $UNIT['tag_end'],
 			'tag_sep' 				=> $UNIT['tag_sep'],
+			'tag_class' 			=> $UNIT['tag_class'],
 			
 			'author_start' 			=> $UNIT['author_start'],
 			'author_end' 			=> $UNIT['author_end'],

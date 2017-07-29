@@ -62,6 +62,7 @@ class Page_out
 				(
 					', ',
 					'',
+					'',
 					''
 				),
 
@@ -339,7 +340,7 @@ class Page_out
 				false);
 		}
 		
-		// mso_page_tag_link($tags = array(), $sep = ', ', $do = '', $posle = '', $echo = true, $type = 'tag', $link = true
+		// mso_page_tag_link($tags = array(), $sep = ', ', $do = '', $posle = '', $echo = true, $type = 'tag', $link = true, $class = ''
 		if (strpos($out, '[tag]') !== false)
 		{
 			$tag = mso_page_tag_link(
@@ -347,7 +348,11 @@ class Page_out
 				$this->get_formats_args('tag', 1), // $sep 
 				$this->get_formats_args('tag', 2), // $do
 				$this->get_formats_args('tag', 3), // $posle
-				false);
+				false, // $echo
+				'tag', // $type
+				true,  // $link
+				$this->get_formats_args('tag', 4)  // $class
+				);
 		}
 		
 		// edit
@@ -997,6 +1002,7 @@ class Block_pages
 			'tag_start' => ' | <span class="tag">', 
 			'tag_end' => '</span>', 
 			'tag_sep' => ', ',
+			'tag_class' => '',
 			
 			'author_start' => '',
 			'author_end' => '',
@@ -1083,7 +1089,7 @@ class Block_pages
 		$p->format('date', $r['date'], $r['date_start'], $r['date_end']);
 		$p->format('author', $r['author_start'], $r['author_end']);
 		$p->format('cat', $r['cat_sep'], $r['cat_start'], $r['cat_end']);
-		$p->format('tag', $r['tag_sep'], $r['tag_start'], $r['tag_end']);
+		$p->format('tag', $r['tag_sep'], $r['tag_start'], $r['tag_end'], $r['tag_class']);
 		$p->format('read', $r['read'], $r['read_start'], $r['read_end']);
 		$p->format('comments_count', $r['comments_count_start'], $r['comments_count_end']);
 		

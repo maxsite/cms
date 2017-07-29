@@ -1554,11 +1554,12 @@ function  mso_page_cat_link($cat = array(), $sep = ', ', $do = '', $posle = '', 
 }
 
 # получить ссылки на метки указанной страницы
-function mso_page_tag_link($tags = array(), $sep = ', ', $do = '', $posle = '', $echo = true, $type = 'tag', $link = true)
+function mso_page_tag_link($tags = array(), $sep = ', ', $do = '', $posle = '', $echo = true, $type = 'tag', $link = true, $class = '')
 {
 	global $MSO;
 
 	if (!$tags) return '';
+	if ($class) $class = ' class="' . $class . '"';
 
 	$out = '';
 	
@@ -1568,7 +1569,7 @@ function mso_page_tag_link($tags = array(), $sep = ', ', $do = '', $posle = '', 
 	{
 		if ($link)
 		{
-			$out .=  '<a href="'
+			$out .=  '<a' . $class . ' href="'
 					. $MSO->config['site_url']
 					. $type
 					. urlencode($tag)

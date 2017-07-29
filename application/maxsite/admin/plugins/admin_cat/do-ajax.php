@@ -22,7 +22,9 @@ if ( $post = mso_check_post(array('do', 'session_id', 'category_id')) )
 	# обновляем рубрику
 	if( $post['do'] == 'update' )
 	{
-		#_pr($_POST);
+		// mso_log(0);
+		// mso_log($_POST);
+		
 		$cat_id = $post['category_id'];
 
 		# подготавливаем данные
@@ -44,9 +46,19 @@ if ( $post = mso_check_post(array('do', 'session_id', 'category_id')) )
 
 		$result = mso_edit_category($data);
 
-				
 		if (isset($result['result']) and $result['result'])
 		{
+			// mso_log($post['cat'][$cat_id]['category_meta']);
+			
+			// теперь обновим мета
+			if (isset($post['cat'][$cat_id]['category_meta']))
+			{
+				foreach($post['cat'][$cat_id]['category_meta'] as $meta_key => $meta_value)
+				{
+					mso_add_meta($meta_key, $cat_id, $meta_table = 'category', $meta_value);
+				}
+			}
+			
 			mso_flush_cache(); // сбросим кэш
 			$msg = '<div class="update">' . t('Рубрика сохранена!') . '</div>';
 		}

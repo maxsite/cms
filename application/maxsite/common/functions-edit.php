@@ -63,6 +63,7 @@
 			$CI->db->where('category_id', $category_id);
 
 			$upd_data = array (
+					'category_id' => $category_id,
 					'category_id_parent' => $category_id_parent,
 					'category_menu_order' => $category_menu_order,
 					'category_name' => $category_name,

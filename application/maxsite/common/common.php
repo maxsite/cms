@@ -2649,6 +2649,11 @@ function mso_create_list($a = array(), $options = array(), $child = false)
 	# эта функция получает в качестве параметра текущий массив $elem
 	if (!isset($options['function'])) $options['function'] = false;
 	
+	# функция которая просто срабатывают в теле цикла — 
+	# принимает текущий элемент, выходную строчку и опцию function1_data
+	if (!isset($options['function1'])) $options['function1'] = false;
+	if (!isset($options['function1_data'])) $options['function1_data'] = array(); 
+	
 	
 	if (!isset($options['nofollow']) or !$options['nofollow']) $options['nofollow'] = ''; // можно указать rel="nofollow" для ссылок
 		else $options['nofollow'] = ' rel="nofollow"';
@@ -2760,6 +2765,11 @@ function mso_create_list($a = array(), $options = array(), $child = false)
 			$e = str_replace('[FUNCTION]', $function, $e);
 		}
 		else $e = str_replace('[FUNCTION]', '', $e);
+		
+		if ($options['function1'] and function_exists($options['function1']))
+		{
+			$e = $options['function1']($e, $elem, $options['function1_data']);
+		}
 
 		if (isset($elem[$options['childs']]))
 		{
@@ -4449,6 +4459,23 @@ function mso_text_find_key($text, $find = false, $delim = "=")
 	}
 	
 	return $out;
+}
+
+
+
+# лог в файл mso_log('текст', 'заголовок', '_log.txt');
+# Для сброса mso_log() или mso_log(0)
+function mso_log($var = 0, $name = 'LOG', $f = '_log.txt')
+{
+	if ($var === 0)
+	{
+		file_put_contents(FCPATH . $f,  "");
+		return;
+	}
+		
+	if ( !is_scalar($var) ) $var = print_r($var, true);
+	
+	file_put_contents(FCPATH . $f, "\n================= " . $name . " =================\n" . $var . "\n================= /" . $name . " =================\n", FILE_APPEND);
 }
 
 # end of file

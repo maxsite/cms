@@ -74,7 +74,7 @@ function mso_get_all_tags_page($options = array())
 # получение данных из таблицы mso_meta
 # если указать id, то возвращается meta_value для указанного meta_id_obj
 # если не указано, то возвращаются все meta_value ключа
-function mso_get_meta($meta_key = '', $meta_table = '', $id = 0)
+function mso_get_meta($meta_key = '', $meta_table = '', $id = 0, $field = false)
 {
 	if (!$meta_key or !$meta_table) return array();
 
@@ -90,9 +90,21 @@ function mso_get_meta($meta_key = '', $meta_table = '', $id = 0)
 
 	if ($query->num_rows() > 0)
 	{
-		return $query->result_array();
+		$r = $query->result_array();
+		
+		if ($field)
+		{
+			if (isset($r[0][$field])) return $r[0][$field];
+		}
+		else
+		{
+			return $r;
+		}
 	}
-	else return array();
+	else 
+	{
+		return ($field) ? '' : array();
+	}
 }
 
 # Запись данных в таблицу mso_meta
@@ -146,4 +158,4 @@ function mso_add_meta($meta_key = '', $meta_id_obj = '', $meta_table = '', $meta
 }
 
 
-# end file
+# end of file

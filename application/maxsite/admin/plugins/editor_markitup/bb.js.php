@@ -94,18 +94,19 @@ myBbcodeSettings = {
 			{name:'<?= t('Заголовок 6') ?>', openWith:'[h6]', closeWith:'[/h6]', className:"h6"}, 
 		]},
 		
-		{name:'<?= t('Выравнивание') ?>', openWith:'[pleft]', closeWith:'[/pleft]', className:"left", dropMenu :[  
-			{name:'<?= t('Абзац влево') ?>', openWith:'[pleft]', closeWith:'[/pleft]', className:"left" },
-			{name:'<?= t('Абзац по центру') ?>', openWith:'[pcenter]', closeWith:'[/pcenter]', className:"center" },
-			{name:'<?= t('Абзац вправо') ?>', openWith:'[pright]', closeWith:'[/pright]', className:"right" },
-			{name:'<?= t('Абзац по формату') ?>', openWith:'[pjustify]', closeWith:'[/pjustify]', className:"justify" },
+		{name:'<?= t('Выравнивание') ?>', openWith:'[p(t(left)]', closeWith:'[/p]', className:"left", dropMenu :[  
+			{name:'<?= t('Абзац влево') ?>', openWith:'[p(t-left)]', closeWith:'[/p]', className:"left" },
+			{name:'<?= t('Абзац по центру') ?>', openWith:'[p(t-center)]', closeWith:'[/p]', className:"center" },
+			{name:'<?= t('Абзац вправо') ?>', openWith:'[p(t-right)]', closeWith:'[/p]', className:"right" },
+			{name:'<?= t('Абзац по формату') ?>', openWith:'[p(t-justify)]', closeWith:'[/p]', className:"justify" },
 			
+			/*
 			{separator:'---------------' },
 			
-			{name:'<?= t('Блок влево') ?>', openWith:'[left]', closeWith:'[/left]', className:"text-padding-left"}, 
-			{name:'<?= t('Блок по центру') ?>', openWith:'[center]', closeWith:'[/center]', className:"text-padding-center"},       
-			{name:'<?= t('Блок вправо') ?>', openWith:'[right]', closeWith:'[/right]', className:"text-padding-right"}, 
-			{name:'<?= t('Блок по формату') ?>', openWith:'[justify]', closeWith:'[/justify]', className:"text-padding-justify"}, 
+			{name:'<?= t('Блок влево') ?>', openWith:'[div(b-left)]', closeWith:'[/div]', className:"text-padding-left"}, 
+			{name:'<?= t('Блок по центру') ?>', openWith:'[div(b-center)]', closeWith:'[/div]', className:"text-padding-center"},       
+			{name:'<?= t('Блок вправо') ?>', openWith:'[div(b-right)]', closeWith:'[/div]', className:"text-padding-right"}, 
+			*/
 			
 			{separator:'---------------' },
 			
@@ -115,25 +116,12 @@ myBbcodeSettings = {
 			
 			{name:'div.class', openBlockWith:'[div([![Css class]!])]', closeBlockWith:'[/div]', className:"add"}, 
 			{name:'span.class', openBlockWith:'[span([![Css class]!])]', closeBlockWith:'[/span]', className:"add"}, 
-			{name:'&lt;div <?= t('свойства') ?>&gt;', openBlockWith:'[div [![<?= t('Свойства') ?>]!]]', closeBlockWith:'[/div]', className:"add"}, 
-			{name:'&lt;span <?= t('свойства') ?>&gt;', openBlockWith:'[span [![<?= t('Свойства') ?>]!]]', closeBlockWith:'[/span]', className:"add"}, 
+			{name:'[div <?= t('свойства') ?>]', openBlockWith:'[div [![<?= t('Свойства') ?>]!]]', closeBlockWith:'[/div]', className:"add"}, 
+			{name:'[span <?= t('свойства') ?>]', openBlockWith:'[span [![<?= t('Свойства') ?>]!]]', closeBlockWith:'[/span]', className:"add"}, 
 		]},
 
-		/*
-		{name:'<?= t('Сообщения') ?>', openWith:'[div(message [![Css message]!])]', closeWith:'[/div]', className:"page-red", dropMenu :[  
-			{name:'Note', openBlockWith:'[div(message note)]', closeBlockWith:'[/div]', className:"add"}, 
-			{name:'Alert', openBlockWith:'[div(message alert)]', closeBlockWith:'[/div]', className:"add"}, 
-			{name:'Idea', openBlockWith:'[div(message idea)]', closeBlockWith:'[/div]', className:"add"}, 
-			{name:'Error', openBlockWith:'[div(message error)]', closeBlockWith:'[/div]', className:"add"}, 
-			{name:'Ok', openBlockWith:'[div(message ok)]', closeBlockWith:'[/div]', className:"add"}, 
-			{name:'About', openBlockWith:'[div(message about)]', closeBlockWith:'[/div]', className:"add"}, 
-			{name:'Mail', openBlockWith:'[div(message mail)]', closeBlockWith:'[/div]', className:"add"}, 
-			{name:'Home', openBlockWith:'[div(message home)]', closeBlockWith:'[/div]', className:"add"}, 
-			{name:'Question', openBlockWith:'[div(message question)]', closeBlockWith:'[/div]', className:"add"}, 
-		]},
-		*/
 		
-		{name: '<?= t('Список') ?>', className:"list-bullet", openBlockWith:'[list]\n', openWith:'[*]', closeWith:'', closeBlockWith:'\n[/list]', multiline:true, dropMenu: [ 
+		{name: '<?= t('Список') ?>', className:"list-bullet", openBlockWith:'[ul]\n', openWith:'[*]', closeWith:'', closeBlockWith:'\n[/ul]', multiline:true, dropMenu: [ 
 			{name:'<?= t('Номера') ?>', className:'list-numeric', openBlockWith:'[ol]\n', openWith:'[*]', closeWith:'', closeBlockWith:'\n[/ol]', multiline:true}, 
 			{name:'<?= t('Элемент списка') ?>', openWith:'[*]', className:"list-item"},
 		
@@ -179,16 +167,21 @@ myBbcodeSettings = {
 			
 			{name:'<?= t('Очистить текст от HTML') ?>', className:"clean", replaceWith:function(h) { return h.selection.replace(/\<(.*?)\>/g, "") }, className:"clean"},
 
-			{name:'<?= t('Замена в тексте') ?>', className:'qrepl', beforeInsert:function(markItUp) { miu.repl(markItUp) }},
+			{name:'<?= t('Замена в тексте') ?>', className:'qrepl', beforeInsert:function(markItUp) { miu.repl(markItUp) }},			
+			
+		]},
+		
+		
+		{separator:'---------------'},
 
-			{separator:'---------------' },
-
+		{name:'<?= t('Прочие') ?>', openBlockWith:'', closeBlockWith:'', className:"script-edit", dropMenu: [
+		
 			{name:'<?= t('Задать HTML/JS-код') ?>', openBlockWith:'[html]', closeBlockWith:'[/html]', className:"html-code"}, 
 			
 			<?php if (function_exists('run_php_custom')) { ?>
 			{name:'<?= t('Исполняемый PHP-код') ?>', openBlockWith:'[php]', closeBlockWith:'[/php]', className:"php"},
 			<?php } ?>
-
+			
 			{separator:'---------------' },
 			
 			{name:'<?= t('Текст (demo)') ?>', openBlockWith:'[text-demo]', closeBlockWith:'', className:"add"}, 
@@ -214,7 +207,6 @@ myBbcodeSettings = {
 			{name:'<?= t('FAQ (заготовка)') ?>', openBlockWith:'[faqs]\n[faq=<?= t('вопрос') ?>]<?= t('ответ') ?>[/faq]\n[faq=<?= t('вопрос2') ?>]<?= t('ответ2') ?>[/faq]\n[/faqs]', closeBlockWith:'', className:"add"}, 
 			<?php } ?>
 
-
 			<?php if (function_exists('spoiler_custom')) { ?>
 			{name:'<?= t('Показать/спрятать (spoiler)') ?>', openBlockWith:'[spoiler=[![<?= t('Заголовок блока') ?>]!]]', closeBlockWith:'[/spoiler]', className:"add"}, 
 			<?php } ?>
@@ -223,14 +215,13 @@ myBbcodeSettings = {
 			{name:'<?= t('Спрятать от незалогиненных') ?>', openBlockWith:'[auth]', closeBlockWith:'[/auth]', className:"add"}, 
 			<?php } ?>
 			
-			/*
-			<?php if (function_exists('forms_content')) { ?>
-			{name:'<?= t('Форма (заготовка)') ?>', openBlockWith:'[form] \n[email=mylo@sait.com] \n[redirect=http://site.com/] \n[subject=<?= t('Моя форма') ?>] \n \n[field] \nrequire = 1   \ntype = select \ndescription = <?= t('Выберите специалиста') ?> \nvalues = <?= t('Иванов # Петров # Сидоров') ?>\ndefault = <?= t('Иванов') ?>\ntip = <?= t('Подсказка к полю') ?> \n[/field] \n \n[field] \nrequire = 0   \ntype = text \ndescription = <?= t('Ваш город') ?>\ntip = <?= t('Указывайте вместе со страной') ?>\n[/field] \n \n[field] \nrequire = 1 \ntype = textarea \ndescription = <?= t('Ваш вопрос') ?> \n[/field] \n \n[/form]', closeBlockWith:'', className:"add"}, 
-			<?php } ?>
-			*/
-
-
+			
+			<?php mso_hook('editor_markitup_bbcode_other') ?>
+			
 		]},
+		
+		
+		<?php mso_hook('editor_markitup_bbcode_add') ?>
 
 		{separator:'---------------' },
 
@@ -238,8 +229,6 @@ myBbcodeSettings = {
 			{name:'<?= t('Отрезать анонс') ?>', replaceWith:'\n[xcut]\n', className:"separator2"},
 		]}, 
 		
-		
-			
 			
 		{separator:'---------------' },
 

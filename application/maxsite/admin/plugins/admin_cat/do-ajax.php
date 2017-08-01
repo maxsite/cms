@@ -42,7 +42,7 @@ if ( $post = mso_check_post(array('do', 'session_id', 'category_id')) )
 		$reload = $old['category_menu_order'] != $data['category_menu_order'] || $old['category_id_parent'] != $data['category_id_parent'] ? true : false;
 
 		# выполняем запрос и получаем результат
-		require_once( getinfo('common_dir') . 'functions-edit.php' ); // функции редактирования
+		require_once(getinfo('common_dir') . 'functions-edit.php'); // функции редактирования
 
 		$result = mso_edit_category($data);
 
@@ -53,6 +53,8 @@ if ( $post = mso_check_post(array('do', 'session_id', 'category_id')) )
 			// теперь обновим мета
 			if (isset($post['cat'][$cat_id]['category_meta']))
 			{
+				require_once(getinfo('common_dir') . 'meta.php');
+				
 				foreach($post['cat'][$cat_id]['category_meta'] as $meta_key => $meta_value)
 				{
 					mso_add_meta($meta_key, $cat_id, $meta_table = 'category', $meta_value);

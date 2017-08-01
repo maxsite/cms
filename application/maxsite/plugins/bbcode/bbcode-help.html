@@ -124,19 +124,24 @@
 <table>
 	<tr><th>BB-код</th><th>Описание</th><th>Представление в HTML</th></tr>
 	<tr><td><span>[img]</span>адрес<span>[/img]</span></td><td>Картинка</td><td><i>&lt;img src=&quot;адрес&quot;&gt;</i></td></tr>
-	<tr><td><span>[img=300x500]</span>адрес<span>[/img]</span></td><td>Картинка с размерами</td><td><i>&lt;img src=&quot;адрес&quot; style=&quot;width: 300px; height: 500px&quot;&gt;</i></td></tr>
+	<!-- <tr><td><span>[img=300x500]</span>адрес<span>[/img]</span></td><td>Картинка с размерами</td><td><i>&lt;img src=&quot;адрес&quot; style=&quot;width: 300px; height: 500px&quot;&gt;</i></td></tr>
 	<tr><td><span>[imgleft]</span>адрес<span>[/imgleft]</span></td><td>Картинка влево</td><td><i>&lt;img src=&quot;адрес&quot; style=&quot;float: left; margin: 0 10px 0 0;&quot;&gt;</i></td></tr>
 	<tr><td><span>[imgright]</span>адрес<span>[/imgright]</span></td><td>Картинка вправо</td><td><i>&lt;img src=&quot;адрес&quot; style=&quot;float: right; margin: 0 0 0 10px;&quot;&gt;</i></td></tr>
-	<tr><td><span>[imgcenter]</span>адрес<span>[/imgcenter]</span></td><td>Картинка по центру</td><td><i>&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;адрес&quot;&gt;&lt;/div&gt;</i></td></tr>
-	<tr><th colspan="3"><center>Аналогичные, только с названиями/всплывающими подсказками. <b>В названии нельзя использовать кавычки!</b></center></th></tr>
+	<tr><td><span>[imgcenter]</span>адрес<span>[/imgcenter]</span></td><td>Картинка по центру</td><td><i>&lt;div style=&quot;text-align: center&quot;&gt;&lt;img src=&quot;адрес&quot;&gt;&lt;/div&gt;</i></td></tr> -->
+	<tr><th colspan="3"><center>В названии нельзя использовать кавычки!</b></center></th></tr>
 	<tr><td><span>[img Название]</span>адрес<span>[/img]</span></td><td></td><td></td></tr>
-	<tr><td><span>[imgleft Название]</span>адрес<span>[/imgleft]</span></td><td></td><td></td></tr>
+<!-- 	<tr><td><span>[imgleft Название]</span>адрес<span>[/imgleft]</span></td><td></td><td></td></tr>
 	<tr><td><span>[imgright Название]</span>адрес<span>[/imgright]</span></td><td></td><td></td></tr>
 	<tr><td><span>[imgcenter Название]</span>адрес<span>[/imgcenter]</span></td><td></td><td></td></tr>
 	<tr><td><span>[imgleft=300x500]</span>адрес<span>[/imgleft]</span></td><td>Картинка с размерами влево</td><td></td></tr>
-	<tr><td><span>[imgright=300x500]</span>адрес<span>[/imgright]</span></td><td>Картинка с размерами вправо</td><td></td></tr>
-	<tr><td><span>[img(cssClass)]</span>адрес<span>[/img]</span></td><td>Картинка с указанным css-классом</td><td></td></tr>
+<!-- 	<tr><td><span>[imgright=300x500]</span>адрес<span>[/imgright]</span></td><td>Картинка с размерами вправо</td><td></td></tr>
+ -->	<tr><td><span>[img(cssClass)]</span>адрес<span>[/img]</span></td><td>Картинка с указанным css-классом</td><td></td></tr>
+	
 	<tr><td><span>[img(cssClass) Описание]</span>адрес<span>[/img]</span></td><td>Картинка с указанным css-классом и описанием</td><td></td></tr>
+	
+	<tr><td><span>[image атрибуты]</span>адрес<span>[/image]</span></td><td>Картинка с указанием произвольных атрибутов</td><td><i>&lt;img src=&quot;адрес&quot; атрибуты&gt;</i></td></tr>
+	
+	
 	<tr><th colspan="3"><center>Миниатюра (адрес-mini) со ссылкой на оригинал</center></th></tr>
 	<tr><td><span>[imgmini=_адрес-mini]</span>адрес<span>[/imgmini]</span></td><td>Открыть в новом окне</td><td><i>&lt;a href=&quot;адрес&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;адрес-mini&quot;&gt;&lt;/a&gt;</i></td></tr>
 	<tr><td><span>[imgmini=адрес-mini]</span>адрес<span>[/imgmini]</span></td><td>Открыть в том же окне</td><td><i>&lt;a href=&quot;адрес&quot;&gt;&lt;img src=&quot;адрес-mini&quot;&gt;&lt;/a&gt;</i></td></tr>

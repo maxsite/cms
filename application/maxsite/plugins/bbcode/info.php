@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('BB-коды'),
 	'description' => t('Конвертирует тэги BBCode в HTML'),
-	'version' => '3.1',
+	'version' => '4.0',
 	'author' => 'MAX',
 	'plugin_url' => 'http://max-3000.com/',
 	'author_url' => 'http://maxsite.org/',

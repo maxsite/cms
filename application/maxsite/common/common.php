@@ -717,7 +717,34 @@ function mso_head_meta($info = 'title', $args = '', $format = '%page_title%', $s
 				{
 					$page_title = implode(', ', $args[0]['page_meta']['tags']); // разбиваем массив меток в строку
 				}
+				
+				
+				// для страниц, если не указан description вытягиваем его из самого текста
+				if ($info == 'description' and is_type('page') and $w = mso_get_option('description_of_page', 'general', 50) ) 
+				{
+					
+					
+					// вообще нет поля
+					if (!isset($args[0]['page_meta']['description'][0])) $d = 333;
+					
+					// поле есть, но оно пустое
+					if (isset($args[0]['page_meta']['description'][0]) and !$args[0]['page_meta']['description'][0]) $d = 333;
+					
+					if ($d == 333) // если есть признак
+					{
+						$t = strip_tags($args[0]['page_content']);
+						$t = trim(str_replace("\r", "", $t));
+						$t = trim(str_replace("\n", ' ', $t));
+						$t = trim(str_replace("\t", ' ', $t));
+						$t = trim(str_replace('   ', ' ', $t));
+						$t = trim(str_replace('  ', ' ', $t));
+						
+						$page_title = mso_str_word($t, $w);
+					}
+				}
 			}
+			
+			// pr($page_title);
 			
 			$arr_key = array( '%title%', '%page_title%',  '%category_name%', '%category_desc%', '%users_nik%', '|' );
 			$arr_val = array( htmlspecialchars($title), htmlspecialchars($page_title), htmlspecialchars($category_name), htmlspecialchars($category_desc), htmlspecialchars($users_nik), $sep );
@@ -2020,7 +2047,7 @@ function mso_str_word($text, $counttext = 10, $sep = ' ')
 {
 	$words = explode($sep, $text);
 	if ( count($words) > $counttext )
-		$text = join($sep, array_slice($words, 0, $counttext));
+		$text = implode($sep, array_slice($words, 0, $counttext));
 	return $text;
 }
 

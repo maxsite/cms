@@ -112,23 +112,23 @@ function open_graph_head($arg = '')
 	// http://ruogp.me/#types
 	
 	if (is_type('home'))
-	{
 		_meta_content('og:type', 'website');
-	}
 	else
-	{
 		_meta_content('og:type', 'article');
-	}
 	
-	_meta_content('og:title', mso_head_meta('title'));
-	_meta_content('og:description', mso_head_meta('description'));
-	_meta_content('og:url', mso_link_rel('canonical', '', true));
+	$description = mso_head_meta('description');
+	$title = mso_head_meta('title');
+	$url = mso_link_rel('canonical', '', true);
+	
+	_meta_content('og:title', $title);
+	_meta_content('og:description', $description);
+	_meta_content('og:url', $url);
 	_meta_content('og:locale', $locale);
 	_meta_content('og:site_name', getinfo('name_site'));
 	
-	_meta_content('twitter:title', mso_head_meta('title'));
-	_meta_content('twitter:description', mso_head_meta('description'));
-	_meta_content('twitter:url', mso_link_rel('canonical', '', true));
+	_meta_content('twitter:title', $title);
+	_meta_content('twitter:description', $description);
+	_meta_content('twitter:url', $url);
 	_meta_content('twitter:domain', getinfo('siteurl'));
 	
 	_meta_content('twitter:site', $twitter_site);
@@ -136,8 +136,8 @@ function open_graph_head($arg = '')
 	
 	if (is_type('page') and isset($page['page_meta']['image_for_page'][0]))
 	{
-		$image_width = isset($o['image_width']) ? $o['image_width'] : 1000;
-		$image_height = isset($o['image_height']) ? $o['image_height'] : 500;
+		$image_width = isset($o['image_width']) ? $o['image_width'] : 900;
+		$image_height = isset($o['image_height']) ? $o['image_height'] : 600;
 		
 		$image_type_resize = isset($o['image_type_resize']) ? $o['image_type_resize'] : 'resize_full_crop_center';
 		

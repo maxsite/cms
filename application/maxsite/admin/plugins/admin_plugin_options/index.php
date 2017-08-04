@@ -183,7 +183,9 @@ function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $te
 			
 			$group_end = (isset($val['group_end'])) ? $val['group_end'] : '';
 		
-			
+			$attr = isset($val['attr']) ? ' ' .	$val['attr'] : '';
+					
+					
 			/*
 			// обрамление группы опций
 			if (isset($val['group_start']))
@@ -218,7 +220,7 @@ function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $te
 							. htmlspecialchars($options[$m]) 
 							. '" name="'
 							. $key . '-' . $type . '[' . $m . ']'
-							. '">' 
+							. '"' . $attr . '>' 
 							. $val['description']
 							. '</p>'
 							. $group_end . NR;
@@ -231,7 +233,7 @@ function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $te
 							. htmlspecialchars($options[$m]) 
 							. '" name="'
 							. $key . '-' . $type . '[' . $m . ']'
-							. '"></label>' 
+							. '"' . $attr . '></label>' 
 							. $val['description']
 							. '</p>'
 							. $group_end . NR;
@@ -247,7 +249,7 @@ function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $te
 						. t($val['name']) . '</span>'
 						. '<textarea rows="' . $rows . '" name="'
 						. $key . '-' . $type . '[' . $m . ']'
-						. '">'
+						. '"' . $attr . '>'
 						. htmlspecialchars($options[$m]) 
 						. '</textarea></label>' 
 						. $val['description']
@@ -263,7 +265,7 @@ function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $te
 				
 				$form .= $group_start  
 						. '<p><label><input class="checkbox" type="checkbox" value="' . $ch_val . '"'
-						. ' name="' . $key . '-' . $type . '[' . $m . ']' . '" ' . $checked . '> <span>'
+						. ' name="' . $key . '-' . $type . '[' . $m . ']' . '" ' . $checked . $attr . '> <span>'
 						. $val['name']
 						. '</span></label>' 
 						. $val['description']
@@ -280,7 +282,7 @@ function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $te
 						. $val['name'] . '</span>'
 						. '<select name="'
 						. $key . '-' . $type . '[' . $m . ']'
-						. '">';
+						. '"' . $attr . '>';
 				
 				// если есть values, то выводим - правила задания, как в ini-файлах
 				if (isset($val['values']))
@@ -330,7 +332,7 @@ function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $te
 						if (htmlspecialchars($options[$m]) == $v) $checked = 'checked="checked"';
 							else $checked = '';
 						
-						$form .= NR . '<label><input type="radio" value="' . $v . '" ' . $checked . ' name="' . $key . '-' . $type . '[' . $m . ']' . '"> ' . $v_t . '</label>' . $delimer;
+						$form .= NR . '<label><input type="radio" value="' . $v . '" ' . $checked . ' name="' . $key . '-' . $type . '[' . $m . ']' . '"' . $attr . '> ' . $v_t . '</label>' . $delimer;
 					}
 				}
 				
@@ -352,4 +354,4 @@ function mso_admin_plugin_options($key, $type, $ar, $title = '', $info = '', $te
 	
 }
 
-# end file
+# end of file

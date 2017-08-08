@@ -3859,7 +3859,6 @@ function mso_load_jquery($plugin = '', $path = '')
 			if ($jquery_type == 'google') $url = '//ajax.googleapis.com/ajax/libs/jquery/' . $version . '/jquery.min.js'; // Google Ajax API CDN 
 			elseif ($jquery_type == 'microsoft') $url = '//ajax.aspnetcdn.com/ajax/jQuery/jquery-' . $version . '.min.js'; // Microsoft CDN
 			elseif ($jquery_type == 'jquery') $url = '//code.jquery.com/jquery-' . $version . '.min.js'; //jQuery CDN
-			elseif ($jquery_type == 'huyandex') $url = '//yandex.st/jquery/' . $version . '/jquery.min.js';
 			else $url = getinfo('common_url') . 'jquery/jquery.min.js';
 			
 			return '<script src="' . $url . '"></script>' . NR;

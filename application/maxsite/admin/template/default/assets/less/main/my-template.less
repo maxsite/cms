@@ -834,11 +834,35 @@ html.loginform {
 }
 
 
+// элемент show-hide 
+// <div class="show"><div class="show-header"><a href="#" class="link"> -ОПИСАНИЕ- </a></div><div class="show-text"> -TEXT- </div></div>
+
+div.show {
+	.show-header {
+		margin-bottom: 5px;
+	}
+
+	.show-header a {
+		text-decoration: none;
+		outline: none;
+		
+		&:before {
+			.icon-fa-normal;
+			content: @fa-var-caret-right;
+			min-width: 9px; // чтобы избежать неприятного скачка текста из-за разной ширины иконки
+		}
+		
+		&.link.visible:before {
+			.icon-fa-normal;
+			content: @fa-var-caret-down;
+		}
+	}
+}
 
 // ушки
 div.plugin-ushki {
 	
-	dt.show-header a {
+	.show-header a {
 		display: block;
 		text-decoration: none;
 		color: @g_gray900;
@@ -865,6 +889,10 @@ div.plugin-ushki {
 		}
 	}
 	
+	dl {
+		margin: 0;
+	}
+	
 	dd {
 		background: @g_gray50;
 		border: 1px solid @g_gray300;
@@ -873,14 +901,12 @@ div.plugin-ushki {
 	}
 	
 	textarea {
-		height: 200px;
+		// height: 200px;
 	}
 	
 	input.ushka_name {
 		width: 400px;
 	}
-	
-
 	
 	select {
 		width: 120px;

@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Ушки'),
 	'description' => t('Ушки позволяют размещать произвольный код/текст на сайте.'),
-	'version' => '1.5',
+	'version' => '2',
 	'author' => 'Максим',
 	'plugin_url' => 'http://max-3000.com/',
 	'author_url' => 'http://maxsite.org/',
@@ -11,4 +11,4 @@ $info = array(
 	'options_url' => getinfo('site_admin_url') . 'plugin_ushki',
 );
 
-# end file
+# end of file

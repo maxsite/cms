@@ -16,8 +16,8 @@ $(function(){
 	visible: true
 	});
 	
-	$("div.update").fadeOut(4000);
-	$("div.error").fadeOut(4000);
+	$("div.update").fadeOut(15000);
+	$("div.error").fadeOut(15000);
 	
 	if ($.cookie('sh-my-nav-panel-off') == 1)
 	{

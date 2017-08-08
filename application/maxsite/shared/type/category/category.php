@@ -44,10 +44,10 @@ if ($f = mso_page_foreach('category-mso-get-pages')) require($f);
 
 $pages = mso_get_pages($par, $pagination);
 
-if ($f = mso_page_foreach('category-head-meta')) 
-{
+if ($f = mso_find_ts_file('type/category/units/category-head-meta.php')) 
 	require($f);
-}
+elseif ($f = mso_page_foreach('category-head-meta')) 
+	require($f);
 else
 { 
 	mso_head_meta('title', $pages, '%category_name%'); //  meta title страницы

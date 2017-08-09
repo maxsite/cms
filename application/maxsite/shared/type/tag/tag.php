@@ -22,49 +22,38 @@ if ($f = mso_page_foreach('tag-mso-get-pages')) require($f);
 		
 $pages = mso_get_pages($par, $pagination);
 
-if ($f = mso_page_foreach('tag-head-meta')) 
-{
+// meta title страницы
+if ($f = mso_find_ts_file('type/tag/units/tag-head-meta.php')) 
 	require($f);
-}
+elseif ($f = mso_page_foreach('tag-head-meta')) 
+	require($f);
 else
 {
-	mso_head_meta('title', mso_segment(2)); //  meta title страницы
+	$t = $d = htmlspecialchars(mso_segment(2));
+	
+	if (function_exists('ushka'))
+	{
+		$t = trim(htmlspecialchars(ushka('tag/' . mb_strtolower($t) . '/title', '', $t)));
+		$d = trim(htmlspecialchars(ushka('tag/' . mb_strtolower($d) . '/descr', '', $d)));
+	}
+	
+	mso_head_meta('title', $t);
+	mso_head_meta('description', $d);
 }
+
 
 if (!$pages and mso_get_option('page_404_http_not_found', 'templates', 1) ) 
 	header('HTTP/1.0 404 Not Found'); 
 
+if ($f = mso_find_ts_file('main/main-start.php')) require($f);
 
-if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
+echo '<div class="mso-type-tag"><section>';
 
-echo NR . '<div class="mso-type-tag"><section>' . NR;
-
-if ($f = mso_page_foreach('tag-do')) 
-		require($f);
-	else 
-		echo '<h1 class="mso-tag">' . htmlspecialchars(mso_segment(2)) . '</h1>';
+if ($f = mso_page_foreach('tag-do')) require($f);
 
 if ($pages) // есть страницы
 {
-	if ($fn = mso_find_ts_file('type/tag/units/tag-do-pages.php')) require($fn);
-	
-	if (function_exists('ushka')) echo ushka('tag-do-pages');
-	
-	// цикл вывода в отдельных юнитах
-	
-	if ($full_posts) // полные записи
-	{
-		if ($fn = mso_find_ts_file('type/tag/units/tag-full.php')) require($fn);
-	}
-	else // вывод в виде списка
-	{
-		if ($fn = mso_find_ts_file('type/tag/units/tag-list.php')) require($fn);
-	}
-	
-	if ($f = mso_page_foreach('tag-posle-pages')) require($f); // подключаем кастомный вывод
-	if (function_exists('ushka')) echo ushka('tag-posle-pages');
-	
-	mso_hook('pagination', $pagination);
+	if ($f = mso_find_ts_file('type/tag/units/tag-default.php')) require($f);
 }
 else 
 {
@@ -85,9 +74,9 @@ else
 if ($f = mso_page_foreach('tag-posle')) require($f);
 
 
-echo NR . '</section></div><!-- class="mso-type-tag" -->' . NR;
+echo '</section></div><!-- class="mso-type-tag" -->';
 
-# конечная часть шаблона
-if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
-	
+// конечная часть шаблона
+if ($f = mso_find_ts_file('main/main-end.php')) require($f);
+
 # end of file

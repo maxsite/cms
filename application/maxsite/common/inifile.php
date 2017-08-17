@@ -172,6 +172,8 @@ function mso_view_ini($all = false)
 		if (!isset($row['options_type'])) $options_type = 'general';
 		else $options_type = stripslashes(trim($row['options_type']));
 		
+		if ($options_type === '%TEMPLATE%') $options_type = getinfo('template');
+		
 		
 		if ( !isset($row['type']) )
 		{ 
@@ -397,9 +399,9 @@ function mso_view_ini($all = false)
 		if ($options_key != 'none')
 		{
 			if (!$options_present) 
-				$key = '<span title="' . $options_key . ' (' . $row['options_type'] . ')" class="mso-alert">* ' . t($key) . '</span>';
+				$key = '<span title="' . $options_key . ' (' . $options_type . ')" class="mso-alert">* ' . t($key) . '</span>';
 			else
-				$key = '<strong title="' . $options_key . ' (' . $row['options_type'] . ')">' . t($key) . '</strong>';
+				$key = '<strong title="' . $options_key . ' (' . $options_type . ')">' . t($key) . '</strong>';
 		}
 		else
 			$key = '';

@@ -753,6 +753,8 @@ function mso_head_meta($info = 'title', $args = '', $format = '%page_title%', $s
 			$out = str_replace($arr_key, $arr_val, $format);
 		}
 	}
+	
+	// pr($out);
 
 	// отдаем результат, сразу же указывая измененный $info в $MSO
 	$out = $MSO->$info = trim($out);

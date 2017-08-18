@@ -421,7 +421,7 @@ function mso_get_pages($r = array(), &$pag)
 		if ($r['get_page_meta_tags'])
 		{
 			// по этому же принципу получаем все метки
-			$CI->db->select('SQL_BUFFER_RESULT `meta_id_obj`, `meta_key`, `meta_value`', false);
+			$CI->db->select('`meta_id_obj`, `meta_key`, `meta_value`', false);
 			$CI->db->where( array (	'meta_table' => 'page' ) );
 			$CI->db->where_in('meta_id_obj', $all_page_id);
 			$CI->db->order_by($r['meta_order'], $r['meta_order_asc']); // сортировка мета
@@ -440,7 +440,7 @@ function mso_get_pages($r = array(), &$pag)
 		// нужно получить колво комментариев к записям
 		if ($r['get_page_count_comments'])
 		{
-			$CI->db->select('SQL_BUFFER_RESULT `comments_page_id`, COUNT(`comments_id`) AS `page_count_comments`', false);
+			$CI->db->select('`comments_page_id`, COUNT(`comments_id`) AS `page_count_comments`', false);
 			$CI->db->where_in('comments_page_id', $all_page_id);
 			$CI->db->where('comments_approved', '1');
 			$CI->db->group_by('comments_page_id');
@@ -573,7 +573,7 @@ function _mso_sql_build_home($r, &$pag)
 		# для неё нужно при том же запросе указываем общее кол-во записей и кол-во на страницу
 		# сама пагинация выводится отдельным плагином
 		# запрос один в один, кроме limit и юзеров
-		$CI->db->select('SQL_BUFFER_RESULT ' . $CI->db->dbprefix('page') . '.`page_id`', false);
+		$CI->db->select($CI->db->dbprefix('page') . '.`page_id`', false);
 		
 		$CI->db->from('page');
 
@@ -630,6 +630,7 @@ function _mso_sql_build_home($r, &$pag)
 		{
 			$pag['maxcount'] = ceil($pag_row / $r['limit']); // всего станиц пагинации
 			$pag['limit'] = $r['limit']; // записей на страницу
+			$pag['rows'] = $pag_row; // всего записей
 
 			$current_paged = mso_current_paged($r['pagination_next_url']);
 			if ($current_paged > $pag['maxcount']) $current_paged = $pag['maxcount'];
@@ -822,7 +823,7 @@ function _mso_sql_build_category($r, &$pag)
 		# запрос один в один, кроме limit и юзеров
 		//$CI->db->select('page.page_id');
 		
-		$CI->db->select('SQL_BUFFER_RESULT ' . $CI->db->dbprefix('page') . '.`page_id`', false);
+		$CI->db->select($CI->db->dbprefix('page') . '.`page_id`', false);
 		
 		$CI->db->from('page');
 
@@ -871,6 +872,7 @@ function _mso_sql_build_category($r, &$pag)
 		{
 			$pag['maxcount'] = ceil($pag_row / $r['limit']); // всего станиц пагинации
 			$pag['limit'] = $r['limit']; // записей на страницу
+			$pag['rows'] = $pag_row; // всего записей
 
 			$current_paged = mso_current_paged($r['pagination_next_url']);
 			if ($current_paged > $pag['maxcount']) $current_paged = $pag['maxcount'];
@@ -992,7 +994,7 @@ function _mso_sql_build_tag($r, &$pag)
 		# для неё нужно при том же запросе указываем общее кол-во записей и кол-во на страницу
 		# сама пагинация выводится отдельным плагином
 		# запрос один в один, кроме limit и юзеров
-		$CI->db->select('SQL_BUFFER_RESULT ' . $CI->db->dbprefix('page') . '.`page_id`', false);
+		$CI->db->select($CI->db->dbprefix('page') . '.`page_id`', false);
 		$CI->db->from('page');
 		if ($r['page_status']) $CI->db->where('page_status', $r['page_status']);
 
@@ -1028,6 +1030,7 @@ function _mso_sql_build_tag($r, &$pag)
 		{
 			$pag['maxcount'] = ceil($pag_row / $r['limit']); // всего станиц пагинации
 			$pag['limit'] = $r['limit']; // записей на страницу
+			$pag['rows'] = $pag_row; // всего записей
 
 			$current_paged = mso_current_paged($r['pagination_next_url']);
 			if ($current_paged > $pag['maxcount']) $current_paged = $pag['maxcount'];
@@ -1180,7 +1183,7 @@ function _mso_sql_build_archive($r, &$pag)
 		# для неё нужно при том же запросе указываем общее кол-во записей и кол-во на страницу
 		# сама пагинация выводится отдельным плагином
 		# запрос один в один, кроме limit и юзеров
-		$CI->db->select('SQL_BUFFER_RESULT ' . $CI->db->dbprefix('page') . '.`page_id`', false);
+		$CI->db->select($CI->db->dbprefix('page') . '.`page_id`', false);
 		$CI->db->from('page');
 		if ($r['page_status']) $CI->db->where('page_status', $r['page_status']);
 
@@ -1212,6 +1215,7 @@ function _mso_sql_build_archive($r, &$pag)
 		{
 			$pag['maxcount'] = ceil($pag_row / $r['limit']); // всего станиц пагинации
 			$pag['limit'] = $r['limit']; // записей на страницу
+			$pag['rows'] = $pag_row; // всего записей
 
 			$current_paged = mso_current_paged($r['pagination_next_url']);
 			if ($current_paged > $pag['maxcount']) $current_paged = $pag['maxcount'];
@@ -1293,7 +1297,7 @@ function _mso_sql_build_search($r, &$pag)
 		# для неё нужно при том же запросе указываем общее кол-во записей и кол-во на страницу
 		# сама пагинация выводится отдельным плагином
 		# запрос один в один, кроме limit и юзеров
-		$CI->db->select('SQL_BUFFER_RESULT ' . $CI->db->dbprefix('page') . '.`page_id`', false);
+		$CI->db->select($CI->db->dbprefix('page') . '.`page_id`', false);
 		$CI->db->from('page');
 		if ($r['page_status']) $CI->db->where('page_status', $r['page_status']);
 
@@ -1324,6 +1328,7 @@ function _mso_sql_build_search($r, &$pag)
 		{
 			$pag['maxcount'] = ceil($pag_row / $r['limit']); // всего станиц пагинации
 			$pag['limit'] = $r['limit']; // записей на страницу
+			$pag['rows'] = $pag_row; // всего записей
 
 			$current_paged = mso_current_paged($r['pagination_next_url']);
 			if ($current_paged > $pag['maxcount']) $current_paged = $pag['maxcount'];
@@ -1405,7 +1410,7 @@ function _mso_sql_build_author($r, &$pag)
 		# для неё нужно при том же запросе указываем общее кол-во записей и кол-во на страницу
 		# сама пагинация выводится отдельным плагином
 		# запрос один в один, кроме limit и юзеров
-		$CI->db->select('SQL_BUFFER_RESULT ' . $CI->db->dbprefix('page') . '.`page_id`', false);
+		$CI->db->select($CI->db->dbprefix('page') . '.`page_id`', false);
 		$CI->db->from('page');
 
 		if ($r['page_status']) $CI->db->where('page_status', $r['page_status']);
@@ -1433,6 +1438,7 @@ function _mso_sql_build_author($r, &$pag)
 		{
 			$pag['maxcount'] = ceil($pag_row / $r['limit']); // всего станиц пагинации
 			$pag['limit'] = $r['limit']; // записей на страницу
+			$pag['rows'] = $pag_row; // всего записей
 
 			$current_paged = mso_current_paged($r['pagination_next_url']);
 			if ($current_paged > $pag['maxcount']) $current_paged = $pag['maxcount'];

@@ -17,56 +17,53 @@ $par = array(
 		'content' => $full_posts
 	); 
 
-
 // подключаем кастомный вывод, где можно изменить массив параметров $par для своих задач
 if ($f = mso_page_foreach('author-mso-get-pages')) require($f); 
 		
 $pages = mso_get_pages($par, $pagination);
-$title_page = mso_head_meta('title', $pages, '%users_nik%'); // заголовок для записи на основе титла
 
-if ($f = mso_page_foreach('author-head-meta')) 
-{
+
+// meta title страницы
+if ($f = mso_find_ts_file('type/author/units/author-head-meta.php')) 
 	require($f);
-}
+elseif ($f = mso_page_foreach('author-head-meta')) 
+	require($f);
 else
 {
-	mso_head_meta('title', $pages, '%users_nik%|%title%', ' » '); //  meta title страницы
-	mso_head_meta('description', $pages, '%users_nik%'); // meta description страницы
-	mso_head_meta('keywords', $pages, '%users_nik%'); // meta keywords страницы
+	$t = $d = '';
+	
+	if (function_exists('ushka'))
+	{
+		// по идее здесь только число пусть будет обработка
+		$t1 = $d1 = htmlspecialchars(mso_segment(2)); 
+		
+		$t = trim(htmlspecialchars(ushka('author/' . mb_strtolower($t1) . '/title', '', '')));
+		$d = trim(htmlspecialchars(ushka('author/' . mb_strtolower($d1) . '/descr', '', '')));
+	}
+	
+	if ($t) 
+		mso_head_meta('title', $t);
+	else
+		mso_head_meta('title', $pages, '%users_nik%|%title%', ' » '); //  meta title страницы
+	
+	if ($d) 
+		mso_head_meta('description', $d);
+	else
+		mso_head_meta('description', $pages, '%users_nik%'); // meta description страницы
 }
 
 if (!$pages and mso_get_option('page_404_http_not_found', 'templates', 1) ) 
 	header('HTTP/1.0 404 Not Found'); 
 
-
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="mso-type-author">' . NR;
+echo '<div class="mso-type-author"><section>';
 
-if ($f = mso_page_foreach('author-do')) 
-		require($f);
-	else 
-		echo '<h1 class="mso-author">' . $title_page . '</h1>';
+if ($f = mso_page_foreach('author-do')) require($f);
 
 if ($pages) // есть страницы
 {
-	if ($fn = mso_find_ts_file('type/author/units/author-do-pages.php')) require($fn);
-	
-	if (function_exists('ushka')) echo ushka('author-do-pages');
-	
-	// цикл вывода в отдельных юнитах
-	if ($full_posts) // полные записи
-	{
-		if ($fn = mso_find_ts_file('type/author/units/author-full.php')) require($fn);
-	}
-	else // вывод в виде списка
-	{
-		if ($fn = mso_find_ts_file('type/author/units/author-list.php')) require($fn);
-	}
-	
-	if ($f = mso_page_foreach('author-posle-pages')) require($f);
-	
-	mso_hook('pagination', $pagination);
+	if ($f = mso_find_ts_file('type/author/units/author-default.php')) require($f);
 }
 else 
 {
@@ -86,8 +83,7 @@ else
 
 if ($f = mso_page_foreach('author-posle')) require($f);
 
-
-echo NR . '</div><!-- class="mso-type-author" -->' . NR;
+echo '<section></div><!-- class="mso-type-author" -->';
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

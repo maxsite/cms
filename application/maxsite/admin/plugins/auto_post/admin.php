@@ -21,23 +21,24 @@ if (!is_dir($upload_dir)) @mkdir(getinfo('FCPATH') . $upload_dir, 0777);
 
 <h1><?= t('AutoPost') ?></h1>
 
+<p class="info"><?= t('С помощью AutoPost можно публиковать записи из обычного текстового файла. Текстовый файл содержит служебную часть (название записи, рубрики и т.п.) и непосредственно сам текст записи.') ?> <a href="<?= getinfo('admin_url') . 'plugins/auto_post/lib/format.txt'?>" target="_blank"><?= t('См. подробное описание') ?></a></p>
+
+
+
 <form action="" method="POST" enctype="multipart/form-data">
-	<fieldset>
-	<legend>File Upload</legend>
-	
+
 	<input type="hidden" id="upload_max_file_size" name="upload_max_file_size" value="20000000">
 	<input type="hidden" id="upload_action" name ="upload_action" value="<?= getinfo('require-maxsite') . base64_encode('admin/plugins/auto_post/uploads-require-maxsite.php') ?>">
 	<input type="hidden" id="upload_ext" name ="upload_ext" value="<?= $upload_ext ?>">
 	<input type="hidden" id="upload_dir" name ="upload_dir" value="<?= $upload_dir ?>">
 	
 	<div>
-		<div id="upload_filedrag">or drop files here</div>
+		<div id="upload_filedrag"><?= t('... перетащите файлы сюда ...') ?></div>
 		<input type="file" id="upload_fileselect" name="upload_fileselect[]" multiple="multiple">
 	</div>
 
 	<div id="upload_submitbutton"><button type="button">Upload Files</button></div>
 
-	</fieldset>
 </form>
 
 <div id="upload_progress"></div>

@@ -42,7 +42,7 @@ if ($n = mso_segment(3)) // указан N номер записи
 	}
 	
 	
-	$all_files = '<div class="all-files-nav"><a href="#" id="all-files-upload" class="all-files-upload">' . t('Быстрая загрузка') . '</a><!--  <a href="' . getinfo('site_admin_url') . 'files/' . $current_dir . '" target="_blank" class="goto-files">' . t('Управление файлами') . '</a> --></div>';
+	$all_files = ''; // '<div class="all-files-nav"><a href="#" id="all-files-upload1" class="all-files-upload">' . t('Быстрая загрузка') . '</a><!--  <a href="' . getinfo('site_admin_url') . 'files/' . $current_dir . '" target="_blank" class="goto-files">' . t('Управление файлами') . '</a> --></div>';
 	
 	// скрипт выполняет аякс
 	// первый раз при загрузке страницы
@@ -133,15 +133,26 @@ $(function(){
 
 	$("#all-files-upload-panel").slideToggle();
 	$("#all-files-upload").click(function(event){
+		all_files_upload_toggle();
+		return false;
+	});
+	
+	
+	function all_files_upload_toggle()
+	{
 		$("body,html").animate({scrollTop: 800}, 500);
 		$("#all-files-upload-panel").slideToggle();
 		$("#upload_messages").html("");
 		$("#upload_progress").html("");
-		
 		$("#all-files-upload").toggleClass("selected");
-		
-		return false;
-	});
+	}
+	
+	var timerId;
+	
+	$("#all-files-upload").mouseenter( function(){ timerId = setTimeout(all_files_upload_toggle, 1000); } );
+	
+	$("#all-files-upload").mouseleave( function(){ clearTimeout(timerId); } );
+	
 });
 
 function addImgPage(img, t) {
@@ -157,6 +168,7 @@ function addImgPage(img, t) {
 <script src="'. getinfo('plugins_url') . 'comment_smiles/comment_smiles.js"></script>';
 
 $check_use_watermark = mso_get_option('use_watermark', 'general', '0') ? ' checked' : '';
+$check_use_watermark_mini = mso_get_option('use_watermark_mini', 'general', '0') ? ' checked' : '';
 
 $all_files .= '
 <div id="all-files-upload-panel">
@@ -216,7 +228,9 @@ $all_files .= '
 		
 		<label class="b-inline pad10-b mar20-r"><input type="checkbox" id="upload_replace_file" name="upload_replace_file" checked> ' . t('Заменять существующие файлы') .'</label>
 		
-		<label class="b-inline pad10-b"><input type="checkbox" id="upload_watermark" name="upload_watermark"' . $check_use_watermark . '> ' . t('Водяной знак') .'</label>
+		<label class="b-inline pad10-b" title="' . t('Водяной знак для миниатюры') . '"><input type="checkbox" id="upload_watermark_mini" name="upload_watermark_mini"' . $check_use_watermark_mini . '> </label>
+		
+		<label class="b-inline pad10-b" title="' . t('Водяной знак для основного изображения') . '"><input type="checkbox" id="upload_watermark" name="upload_watermark"' . $check_use_watermark . '> ' . t('Водяной знак') .'</label>
 		
 	</div>
 </div>

@@ -82,7 +82,7 @@ if ( $post = mso_check_post(array('f_session_id', 'f_submit', 'f_content')) )
 }
 
 
-echo '<h1>' . t('Новая запись') . '</h1>';
+echo '<h1>' . t('Новая запись') . ' <a class="t100" href="' . getinfo('site_admin_url') . 'auto_post">или AutoPost</a></h1>';
 
 // получим все опции редактора
 $editor_options = mso_get_option('editor_options', 'admin', array());
@@ -163,6 +163,9 @@ $f_return = '<input name="f_return" type="checkbox" checked="checked" title="' .
 
 // быстрое сохранение только в режиме редактирования
 $f_bsave = '';
+
+// быстрая загрузка только в режиме редактирования
+$f_bfiles_upload = '';
 
 // форма вынесена в отдельный файл, поскольку она одна и таже для new и edit
 // из неё получается $do и $posle

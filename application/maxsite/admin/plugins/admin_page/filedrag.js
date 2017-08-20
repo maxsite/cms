@@ -156,6 +156,8 @@ $(document).ready(function() {
 			
 			xhr.setRequestHeader("X-REQUESTED-WATERMARK", unescape(encodeURIComponent($id("upload_watermark").checked )));
 			
+			xhr.setRequestHeader("X-REQUESTED-WATERMARKMINI", unescape(encodeURIComponent($id("upload_watermark_mini").checked )));
+			
 			
 			// xhr.setRequestHeader("X_FILENAME", unescape(encodeURIComponent(file.name)));
 			//xhr.setRequestHeader("X_FILENAME_UP_DIR", unescape(encodeURIComponent($id("page_id").value)));

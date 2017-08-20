@@ -133,7 +133,7 @@ $posle = '
 </div><!-- div.mso-tabs_widget.mso-tabs_widget_000 -->
 
 ' . $f_return . '
-<button type="submit" name="' . $name_submit . '" class="button i-save">' . t('Сохранить') . '</button> ' . $f_bsave . ' <span class="autosave-editor"></span>
+<button type="submit" name="' . $name_submit . '" class="button i-save">' . t('Сохранить') . '</button> ' . $f_bsave . $f_bfiles_upload . ' <span class="autosave-editor mar10-l t90"></span><div class="bsave_result"></div>
 				
 <div class="all-files">' . $all_files . '</div>
 	

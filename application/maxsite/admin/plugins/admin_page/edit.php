@@ -191,7 +191,10 @@ require($MSO->config['admin_plugins_dir'] . 'admin_page/all-files.php');
 $f_return = '';
 
 // быстрое сохранение только в режиме редактирования
-$f_bsave = ' <button id="bsave" type="button" class="button i-save">' . t('Сохранить в фоне') . '</button><div class="bsave_result"></div>';
+$f_bsave = ' <button id="bsave" type="button" class="button i-save">' . t('Сохранить в фоне') . '</button>';
+
+// быстрая загрузка
+$f_bfiles_upload = ' <button type="text" id="all-files-upload" class="all-files-upload button i-upload">' . t('Быстрая загрузка') . '</button>';
 
 // форма вынесена в отдельный файл, поскольку она одна и таже для new и edit
 // из неё получается $do и $posle

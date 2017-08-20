@@ -86,16 +86,25 @@ function _upload($up_dir, $fn, $r = array())
 	{
 		// преобразования  поскольку checked передается как строка
 		$use_watermark = mso_get_option('use_watermark',   'general', '0');
-		
 		$use_watermark = $use_watermark ? 'true' : 'false';
 		
 		$watermark = (isset($_SERVER['HTTP_X_REQUESTED_WATERMARK'])) ? $_SERVER['HTTP_X_REQUESTED_WATERMARK'] : $use_watermark;
 		
 		$use_watermark = (strtolower($watermark) == 'false') ? false : true; 
+		
+		
+		// аналогичные преобразования для миниатюры
+		$use_watermark_mini = mso_get_option('use_watermark_mini',   'general', '0');
+		$use_watermark_mini = $use_watermark_mini ? 'true' : 'false';
+		
+		$watermark_mini = (isset($_SERVER['HTTP_X_REQUESTED_WATERMARKMINI'])) ? $_SERVER['HTTP_X_REQUESTED_WATERMARKMINI'] : $use_watermark_mini;
+				
+		$use_watermark_mini = (strtolower($watermark_mini) == 'false') ? false : true; 
 	}
 	else
 	{
 		$use_watermark = false;
+		$use_watermark_mini = false;
 	}
 	
 	require(getinfo('shared_dir') . 'stock/thumb/thumb.php');
@@ -160,6 +169,39 @@ function _upload($up_dir, $fn, $r = array())
 		}
 	}
 
+	
+	// миниатюру делаем стандартно
+	if ($image_mini_type != 'none') // если не делать миниатюру
+	{
+		echo ' MINI... ';
+		
+		$image_mini_url = thumb_generate($url . $fn, $size_image_mini_w, $size_image_mini_h, false, $image_mini_type, true, 'mini', false, $quality);
+		
+		
+		// если у миниатюры нужно поставить водяной знак
+		if ($use_watermark_mini)
+		{
+			echo ' WATERMARK MINI... ';
+			
+			$watermark_type = mso_get_option('watermark_type',  'general', '1');
+			
+			$image_mini_fn = str_replace(getinfo('uploads_url'), getinfo('uploads_dir'), $image_mini_url);
+			
+			if (file_exists($image_mini_fn))
+				thumb_watermark($image_mini_fn, getinfo('uploads_dir') . 'watermark.png', $watermark_type);
+		}
+	}
+	
+	// водяной знак на основное изображение
+	if ($use_watermark)
+	{
+		echo ' WATERMARK... ';
+		$watermark_type = mso_get_option('watermark_type',  'general', '1');
+		
+		thumb_watermark($up_dir . $fn, getinfo('uploads_dir') . 'watermark.png', $watermark_type);
+	}
+	
+	/*
 	if ($use_watermark)
 	{
 		echo ' WATERMARK... ';
@@ -176,6 +218,8 @@ function _upload($up_dir, $fn, $r = array())
 		thumb_generate($url . $fn, $size_image_mini_w, $size_image_mini_h, false, $image_mini_type, true, 'mini', false, $quality);
 		
 	}
+	
+	*/
 	
 	echo ' THUMB... ';
 	

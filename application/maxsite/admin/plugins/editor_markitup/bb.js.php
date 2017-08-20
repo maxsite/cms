@@ -253,7 +253,7 @@ miu = {
 			function(response) 
 			{
 				var dd = new Date();
-				$('span.autosave-editor').html('<a target="_blank" href="' + response + '"><?= t('Сохранено в') ?> ' + dd.toLocaleTimeString() + '</a>');
+				$('.autosave-editor').html('<a target="_blank" href="' + response + '"><?= t('Сохранено в') ?> ' + dd.toLocaleTimeString() + '</a>'); //.fadeOut(15000);
 				// alert("<?= t('Сохранено!') ?>");
 				
 			});

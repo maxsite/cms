@@ -105,8 +105,8 @@ if ( $post = mso_check_post(array('dir')) )
 		}
 		
 		$all_files_res .= '<div class="all-files-image">' 
-					. '<div class="all-files-image-mini">' . $mini_html . '</div>' 
-					. '<div class="all-files-image-actions"><span title="' . t('Получить URL-адрес файла') . '" onclick="jAlert(\'<textarea cols=70 rows=3>' . $u_file . '</textarea>\', \'' . t('Адрес файла') . '\'); return false;">URL</span>';
+					. '<div class="all-files-image-mini">' . $mini_html . '<div class="mar5-t"><span title="' . t('Получить URL-адрес файла') .' - ' . $u_file . '" onclick="jAlert(\'<textarea cols=70 rows=3>' . $u_file . '</textarea>\', \'' . t('Адрес файла') . '\'); return false;">URL</span></div></div>' 
+					. '<div class="all-files-image-actions">';
 					
 		if ($this_img)			
 		{

@@ -46,13 +46,16 @@
 	
 	$admin_title = t('Админ-панель') . ' - ' . mso_hook('admin_title', mso_head_meta('title'));
 
+	
+	$default_favicon_admin = getinfo('uploads_url') . 'favicons/' . mso_get_option('default_favicon_admin', 'templates', 'favicon1.png');
+	
 ?><!DOCTYPE HTML>
 <html><head>
 <meta charset="UTF-8">
 <title><?= $admin_title ?></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="MaxSite CMS">
-<link rel="shortcut icon" href="<?= $admin_template_url . 'assets/images/favicons/favicon1.png' ?>" type="image/x-icon">
+<link rel="shortcut icon" href="<?= $default_favicon_admin ?>" type="image/x-icon">
 <link rel="stylesheet" href="<?= $admin_css ?>">
 <?= $admin_css_profile ?>
 <?= mso_load_jquery() ?>

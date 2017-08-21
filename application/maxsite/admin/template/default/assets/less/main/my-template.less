@@ -499,7 +499,61 @@ div.mso-tabs-box.mso-tabs-visible {
 
 // таб опции плагинов
 div.tab-options-plugins {
-	padding: 20px;
+	padding: 20px 20px 10px 20px;
+	background: #eeeeee;
+}
+
+
+
+table.active-plugins {
+	th { background: #80be80; }
+	
+	&.page tr:nth-of-type(2n+1) td {
+		background: #d5e9d5;
+	}
+	
+	&.page tr:nth-of-type(2n) td {
+		background: #edf5ed;
+	}
+	
+	a {
+		color: #489048;
+	}
+}
+
+li.mso-tabs-elem.active-plugins.mso-tabs-current {
+	background: #649663;
+	
+	&:hover {
+		background: #649663;
+	}
+}
+
+
+
+
+table.inactive-plugins {
+	th { background: #A2BAC4; }
+	
+	&.page tr:nth-of-type(2n+1) td {
+		background: #d1dee2;
+	}
+	
+	&.page tr:nth-of-type(2n) td {
+		background: #e1e9ec;
+	}
+	
+	a {
+		color: #5d77d7;
+	}
+}
+
+li.mso-tabs-elem.inactive-plugins.mso-tabs-current {
+	background: #6f8189;
+	
+	&:hover {
+		background: #6f8189;
+	}
 }
 
 // настройка виджетов

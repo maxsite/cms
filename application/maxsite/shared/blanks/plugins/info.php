@@ -5,6 +5,7 @@ $info = array(
 	'description' => t('Описание'),
 	'version' => '1.0',
 	'author' => 'Максим',
+	'editors' => '',
 	'plugin_url' => 'http://max-3000.com/',
 	'author_url' => 'http://maxsite.org/',
 	'group' => 'template',
@@ -14,4 +15,4 @@ $info = array(
 	# 'options_url' => getinfo('site_admin_url') . 'pluginX_', 
 );
 
-# end file
+# end of file

@@ -27,8 +27,6 @@ function admin_plugins_admin_init($args = array())
 		#			можно использовать добавочный, например demo/edit = http://сайт/admin/demo/edit
 		# Третий - название ссылки	
 		# Четвертый - номер в меню
-		
-		
 		mso_admin_menu_add('options', $this_plugin_url, t('Плагины'));
 
 		# прописываем для указаного admin_url_ + $this_plugin_url - (он будет в url) 
@@ -57,4 +55,4 @@ function admin_plugins_admin($args = array())
 	require($MSO->config['admin_plugins_dir'] . 'admin_plugins/admin.php');
 }
 
-?>
+# end of file

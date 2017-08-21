@@ -5,9 +5,9 @@ $info = array(
 	'description' => t('Пагинация страниц (&lt;&lt; &lt; 1 2 ... 5 6 7 &gt; &gt;&gt;)'),
 	'version' => '2.1',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
+	'plugin_url' => '',
+	'author_url' => '//maxsite.org/',
 	'group' => 'template'
 );
 
-# end file
+# end of file

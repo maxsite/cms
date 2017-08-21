@@ -7,7 +7,7 @@ $info = array(
   'author' => 'quantum',
   'plugin_url' => 'http://maxsitecms.ru/top-commentators',
   'author_url' => 'http://maxsitecms.ru/',
-  'group' => 'template'
+  'group' => 'widget'
 );
 
 # end file

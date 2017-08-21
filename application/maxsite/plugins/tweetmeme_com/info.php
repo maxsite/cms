@@ -2,12 +2,12 @@
 
 $info = array(
 	'name' => t('Блок tweet me'),
-	'description' => t('Выводит блок, в котором указывается количество поддержавших запись пользователей <a href="http://twitter.com/" target="_blank">Twitter</a>'),
+	'description' => t('Выводит блок, в котором указывается количество поддержавших запись пользователей <a href="//twitter.com/" target="_blank">Twitter</a>'),
 	'version' => '2.0',
-	'author' => 'MAX',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
-	'group' => 'template'
+	'author' => 'Максим',
+	'plugin_url' => '',
+	'author_url' => '//maxsite.org/',
+	'group' => 'seo'
 );
 
-# end file
+# end of file

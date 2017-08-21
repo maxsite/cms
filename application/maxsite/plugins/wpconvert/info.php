@@ -5,10 +5,10 @@ $info = array(
 	'description' => t('Конвертирование записей, страниц, рубрик и комментариев из WordPress в MaxSite CMS'),
 	'version' => '1.3',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
+	'plugin_url' => '',
+	'author_url' => '//maxsite.org/',
 	'group' => 'template',
 	'options_url' => getinfo('site_admin_url') . 'plugin_wpconvert',
 );
 
-# end file
+# end of file

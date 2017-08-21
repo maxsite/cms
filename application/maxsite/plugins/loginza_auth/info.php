@@ -4,10 +4,11 @@ $info = array(
 	'name' => t('Авторизация Loginza'),
 	'description' => t('Авторизация через Loginza'),
 	'version' => '1.5',
-	'author' => 'Максим, Dminty (d51x)',
+	'author' => 'Dminty (d51x)',
+	'editors' => 'Максим',
 	'plugin_url' => 'http://d51x.ru/',
 	'author_url' => 'http://d51x.ru/',
-	'group' => 'template'
+	'group' => 'system'
 );
 
-# end file
+# end of file

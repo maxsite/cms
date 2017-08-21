@@ -5,9 +5,9 @@ $info = array(
 	'description' => t('Виджеты текстового блока. Можно использовать HTML и PHP'),
 	'version' => '1.0',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
+	'plugin_url' => '',
 	'author_url' => 'http://maxsite.org/',
-	'group' => 'template'
+	'group' => 'widget'
 );
 
-# end file
+# end of file

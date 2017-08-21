@@ -5,10 +5,10 @@ $info = array(
 	'description' => t('Отправка email-сообщений по списку рассылки'),
 	'version' => '1.0',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
+	'plugin_url' => '',
+	'author_url' => '//maxsite.org/',
 	'group' => 'template',
 	'options_url' => getinfo('site_admin_url') . 'mail_send',
 );
 
-# end file
+# end of file

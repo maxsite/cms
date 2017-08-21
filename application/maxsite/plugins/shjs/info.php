@@ -5,9 +5,9 @@ $info = array(
 	'description' => t('Подсветка кодов (JS, PHP, CSS, HTML, LESS). Подробное описание см. в опциях плагина.'),
 	'version' => '1.7',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://shjs.sourceforge.net/',
-	'group' => 'template'
+	'plugin_url' => '',
+	'author_url' => '//shjs.sourceforge.net/',
+	'group' => 'text'
 );
 
-# end file
+# end of file

@@ -5,9 +5,9 @@ $info = array(
 	'description' => t('Форма логина (виджет)'),
 	'version' => '1.7',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
-	'group' => 'template'
+	'plugin_url' => '',
+	'author_url' => '//maxsite.org/',
+	'group' => 'widget'
 );
 
-#end file
+#end of file

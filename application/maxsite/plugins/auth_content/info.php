@@ -7,7 +7,7 @@ $info = array(
 	'author' => 'Nikita A Menkovich',
 	'plugin_url' => 'http://libc6.org/',
 	'author_url' => 'http://libc6.org/',
-	'group' => 'template'
+	'group' => 'text'
 );
 
 # end file

@@ -2,16 +2,12 @@
 
 $info = array(
 	'name' => t('Open Graph'),
-	'description' => t('Протокол Open Graph позволяет любой веб-странице стать полноценным объектом в социальных сетях. Тестовая версия плагина.'),
+	'description' => t('Протокол Open Graph позволяет любой веб-странице стать полноценным объектом в социальных сетях.'),
 	'version' => '1.1',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
-	'group' => 'template',
-	# 'help' => getinfo('plugins_url') . 'pluginX/help.txt', # ссылка на help плагина 
-	
-	# ссылка на свою страницу настроек (только если используется свой admin.php!)
-	# 'options_url' => getinfo('site_admin_url') . 'pluginX_', 
+	'plugin_url' => '',
+	'author_url' => '//maxsite.org/',
+	'group' => 'seo',
 );
 
-# end file
+# end of file

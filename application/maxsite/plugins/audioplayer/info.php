@@ -7,7 +7,7 @@ $info = array(
 	'author' => 'Martin Laine',
 	'plugin_url' => 'http://wpaudioplayer.com/standalone',
 	'author_url' => 'http://wpaudioplayer.com/standalone',
-	'group' => 'template'
+	'group' => 'media'
 );
 
 # end file

@@ -5,9 +5,9 @@ $info = array(
 	'description' => t('Генерирует статичные html-страницы, значильно снижая нагрузку на сервере.'),
 	'version' => '1.5',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
-	'group' => 'template'
+	'plugin_url' => '',
+	'author_url' => '//maxsite.org/',
+	'group' => 'system'
 );
 
-# end file
+# end of file

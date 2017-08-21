@@ -5,10 +5,11 @@ $info = array(
 	'description' => t('Виджет создающий табы (закладки). В качестве содержимого таба используются другие виджеты или ушки'),
 	'version' => '2.5',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
+	'editors' => '<a href="//dimox.name/universal-jquery-tabs-script/">Dimox</a>',
+	'plugin_url' => '',
 	'author_url' => 'http://maxsite.org/',
-	'group' => 'template',
+	'group' => 'widget',
 	'help' => getinfo('plugins_url') . 'tabs/tabs-help.txt',
 );
 
-# end file
+# end of file

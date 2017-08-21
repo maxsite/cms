@@ -7,7 +7,7 @@ $info = array(
 	'author' => 'Moringotto',
 	'plugin_url' => 'http://moringotto.ru/page/simplecaptcha.html',
 	'author_url' => 'http://moringotto.ru/',
-	'group' => 'template'
+	'group' => 'security'
 );
 
 # end file

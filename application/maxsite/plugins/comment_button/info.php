@@ -4,10 +4,11 @@ $info = array(
 	'name' => t('Кнопки комментирования'),
 	'description' => t('Кнопки форматирования для формы комментария'),
 	'version' => '1.3',
-	'author' => 'Максим, Илья Земсков',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
+	'author' => 'Максим',
+	'editors' => '<a href="//vizr.ru/">Илья Земсков</a>',
+	'plugin_url' => '',
+	'author_url' => '//maxsite.org/',
 	'group' => 'template'
 );
 
-# end file
+# end of file

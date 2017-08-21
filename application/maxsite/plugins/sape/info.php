@@ -5,10 +5,10 @@ $info = array(
 	'description' => t('Плагин для работы с <a href="http://www.sape.ru/r.aa92aef9c6.php" target="_blank">sape.ru</a>'),
 	'version' => '1.5',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
-	'group' => 'template',
+	'plugin_url' => '',
+	'author_url' => '//maxsite.org/',
+	'group' => 'seo',
 	'options_url' => getinfo('site_admin_url') . 'plugin_sape',
 );
 
-# end file
+# end of file

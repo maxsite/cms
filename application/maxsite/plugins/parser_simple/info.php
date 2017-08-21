@@ -5,10 +5,10 @@ $info = array(
 	'description' => t('Обрабатывает текст в HTML'),
 	'version' => '1.0',
 	'author' => 'Максим',
-	'plugin_url' => 'http://lpf.maxsite.com.ua/autotag-single',
-	'author_url' => 'http://max-3000.com/',
-	'group' => 'template',
-	# 'help' => getinfo('plugins_url') . 'pluginX/help.txt', # ссылка на help плагина 
+	'plugin_url' => '//lpf.maxsite.com.ua/simple',
+	'help' => '//lpf.maxsite.com.ua/simple', # ссылка на help плагина 
+	'author_url' => '//max-3000.com/',
+	'group' => 'system',
 );
 
-# end file
+# end of file

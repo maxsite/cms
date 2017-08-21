@@ -4,10 +4,11 @@ $info = array(
 	'name' => t('XML-карта сайта'),
 	'description' => t('Создание xml-карты сайта - sitemap.xml'),
 	'version' => '1.7',
-	'author' => 'Максим, Илья Земсков',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
-	'group' => 'template'
+	'author' => 'Максим',
+	'editors' => '<a href="//vizr.ru/">Илья Земсков</a>',
+	'plugin_url' => '',
+	'author_url' => '//maxsite.org/',
+	'group' => 'seo'
 );
 
-# end file
+# end of file

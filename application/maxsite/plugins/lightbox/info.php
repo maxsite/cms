@@ -6,11 +6,11 @@ $info = array(
 	'description' => t('Подключение LightBox к вашему сайту. Делает красивый вывод картинок, а также небольших галерей'),
 	'version' => '1.3',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
-	'group' => 'template',
+	'plugin_url' => '',
+	'author_url' => '//maxsite.org/',
+	'group' => 'images',
 	'help' => getinfo('plugins_url') . 'lightbox/help.txt',
 	
 );
 
-# end file
+# end of file

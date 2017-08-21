@@ -5,10 +5,10 @@ $info = array(
 	'description' => t('Переключение тем оформления сайта посетителями'),
 	'version' => '1.5',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
+	'plugin_url' => '',
+	'author_url' => '//maxsite.org/',
 	'group' => 'template',
 	'options_url' => getinfo('site_admin_url') . 'theme_switch',
 );
 
-# end file
+# end of file

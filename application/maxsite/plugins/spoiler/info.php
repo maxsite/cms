@@ -7,7 +7,7 @@ $info = array(
 	'author' => 'Tux',
 	'plugin_url' => 'http://6log.ru/spoiler',
 	'author_url' => 'http://6log.ru/',
-	'group' => 'template'
+	'group' => 'text'
 );
 
 # end file

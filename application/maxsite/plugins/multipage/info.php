@@ -7,7 +7,7 @@ $info = array(
 	'author' => 'Wave',
 	'plugin_url' => 'http://wave.fantregata.com/page/work-for-maxsite',
 	'author_url' => 'http://wave.fantregata.com/',
-	'group' => 'template'
+	'group' => 'text'
 );
 
 # end file

@@ -5,10 +5,9 @@ $info = array(
 	'description' => t('Обрабатывает текст в HTML'),
 	'version' => '1.0',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
+	'plugin_url' => '',
 	'author_url' => 'http://maxsite.org/',
-	'group' => 'template',
-	# 'help' => getinfo('plugins_url') . 'pluginX/help.txt', # ссылка на help плагина 
+	'group' => 'system',
 );
 
-# end file
+# end of file

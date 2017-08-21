@@ -4,10 +4,10 @@ $info = array(
 	'name' => t('Рейтинг записей'),
 	'description' => t('Оценка статей посетителями'),
 	'version' => '1.3',
-	'author' => 'MAX',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
+	'author' => 'Максим',
+	'plugin_url' => '',
+	'author_url' => '//maxsite.org/',
 	'group' => 'template'
 );
 
-# end file
+# end of file

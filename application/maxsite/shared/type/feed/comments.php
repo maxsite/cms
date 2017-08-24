@@ -5,9 +5,7 @@
  * (c) http://max-3000.com/
  */
 
-
-header('Content-type: text/html; charset=utf-8');
-header('Content-Type: application/rss+xml');
+header('Content-Type: application/rss+xml; charset=utf-8');
 
 $cache_key = mso_md5('feed_' . mso_current_url());
 $k = mso_get_cache($cache_key);

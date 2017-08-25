@@ -175,7 +175,7 @@ function getinfo($info = '')
 				break;
 
 		case 'plugins_url' :
-				$out = $MSO->config['plugins_url'];;
+				$out = '//' . str_replace(array('http://', 'https://'), '' , $MSO->config['plugins_url']);
 				break;
 
 		case 'plugins_dir' :
@@ -183,7 +183,7 @@ function getinfo($info = '')
 				break;
 
 		case 'ajax' :
-				$out = $MSO->config['site_url'] . 'ajax/';
+				$out = '//' . str_replace(array('http://', 'https://'), '' , $MSO->config['site_url']) . 'ajax/';
 				break;
 				
 		case 'require-maxsite' :

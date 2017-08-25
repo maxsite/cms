@@ -5,7 +5,7 @@
  * http://max-3000.com/
  *
  * Функции для работы с шаблоном
- *
+ * версия 2017-08-25
  */
 
 # типовой вывод секции HEAD
@@ -333,4 +333,27 @@ function my_clean_html_posle($matches)
 }
 
 
-# end file
+/**
+*  заменяет в тексте все вхождения http:// и https:// на // 
+*  
+*  @param $text текст
+*  
+*  @return string
+*/
+function my_remove_protocol($text)
+{
+	# защищенный текст
+	$text = preg_replace_callback('!(<pre.*?>)(.*?)(</pre>)!is', 'my_clean_pre_do', $text);
+	$text = preg_replace_callback('!(<code.*?>)(.*?)(</code>)!is', 'my_clean_pre_do', $text);
+	$text = preg_replace_callback('!(<script.*?>)(.*?)(</script>)!is', 'my_clean_html_script', $text);
+	$text = preg_replace_callback('!(<textarea.*?>)(.*?)(</textarea>)!is', 'my_clean_html_script', $text);
+	
+	$text = str_replace('https://', '//', $text);
+	$text = str_replace('http://', '//', $text);
+	
+	$text = preg_replace_callback('!\[html_base64\](.*?)\[\/html_base64\]!is', 'my_clean_html_posle', $text);
+		
+	return $text;
+}
+
+# end of file

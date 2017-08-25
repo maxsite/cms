@@ -86,141 +86,144 @@ function addzakl_mso_options()
 							'description' => '', 
 							'default' => '1'
 						),
-			'vkontakte' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/vkontakte.png"> vkontakte', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'odnoklassniki' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/odnoklassniki.png"> odnoklassniki', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'mail-ru' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/mail-ru.png"> mail-ru', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'yaru' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/yaru.png"> yaru', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'rutvit' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/rutvit.png"> rutvit', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'myspace' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/myspace.png"> myspace', 
-							'description' => '', 
-							'default' => '1'
-						),
-	
-			'technorati' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/technorati.png"> technorati', 
-							'description' => '', 
-							'default' => '1'
-						),			
-			'digg' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/digg.png"> digg', 
-							'description' => '', 
-							'default' => '1'
-						),			
-			'friendfeed' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/friendfeed.png"> friendfeed', 
-							'description' => '', 
-							'default' => '1'
-						),			
-			'pikabu' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/pikabu.png"> pikabu', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'blogger' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/blogger.png"> blogger', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'liveinternet' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/liveinternet.png"> liveinternet', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'livejournal' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/livejournal.png"> livejournal', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'memori' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/memori.png"> memori', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'google-bookmarks' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/google-bookmarks.png"> google-bookmarks', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'bobrdobr' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/bobrdobr.png"> bobrdobr', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'mister-wong' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/mister-wong.png"> mister-wong', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'yahoo-bookmarks' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/yahoo-bookmarks.png"> yahoo-bookmarks', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'yandex' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/yandex.png"> yandex', 
-							'description' => '', 
-							'default' => '1'
-						),
-			'delicious' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/delicious.png"> delicious', 
-							'description' => '', 
-							'default' => '1'
-						),
-			
-			'delicious' => array(
-							'type' => 'checkbox', 
-							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/delicious.png"> delicious', 
-							'description' => '', 
-							'default' => '1'
-						),
-			
+						
 			'gplusone' => array(
 							'type' => 'checkbox', 
 							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/gplusone.png"> Google +1', 
 							'description' => '', 
 							'default' => '1'
 						),
+						
+			'vkontakte' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/vkontakte.png"> vkontakte', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'odnoklassniki' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/odnoklassniki.png"> odnoklassniki', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'mail-ru' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/mail-ru.png"> mail-ru', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'yaru' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/yaru.png"> yaru', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'rutvit' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/rutvit.png"> rutvit', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'myspace' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/myspace.png"> myspace', 
+							'description' => '', 
+							'default' => '0'
+						),
+	
+			'technorati' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/technorati.png"> technorati', 
+							'description' => '', 
+							'default' => '0'
+						),			
+			'digg' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/digg.png"> digg', 
+							'description' => '', 
+							'default' => '0'
+						),			
+			'friendfeed' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/friendfeed.png"> friendfeed', 
+							'description' => '', 
+							'default' => '0'
+						),			
+			'pikabu' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/pikabu.png"> pikabu', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'blogger' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/blogger.png"> blogger', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'liveinternet' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/liveinternet.png"> liveinternet', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'livejournal' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/livejournal.png"> livejournal', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'memori' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/memori.png"> memori', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'google-bookmarks' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/google-bookmarks.png"> google-bookmarks', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'bobrdobr' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/bobrdobr.png"> bobrdobr', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'mister-wong' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/mister-wong.png"> mister-wong', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'yahoo-bookmarks' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/yahoo-bookmarks.png"> yahoo-bookmarks', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'yandex' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/yandex.png"> yandex', 
+							'description' => '', 
+							'default' => '0'
+						),
+			'delicious' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/delicious.png"> delicious', 
+							'description' => '', 
+							'default' => '0'
+						),
+			
+			'delicious' => array(
+							'type' => 'checkbox', 
+							'name' => ' <img width="24" height="24" align="absmiddle" src="' . getinfo('plugins_url') . 'addzakl/images24/delicious.png"> delicious', 
+							'description' => '', 
+							'default' => '0'
+						),
+			
+
 			
 			
 										
@@ -244,28 +247,27 @@ function addzakl_content_end($args = array())
 		
 		'twitter' => 1, 
 		'facebook' => 1, 
-		'vkontakte' => 1, 
-		'odnoklassniki' => 1, 
-		'mail-ru' => 1, 
-		'yaru' => 1, 
-		'rutvit' => 1, 
-		'myspace' => 1, 
-	//	'buzz' => 1, 
-		'technorati' => 1, 
-		'digg' => 1, 
-		'friendfeed' => 1, 
-		'pikabu' => 1, 
-		'blogger' => 1, 
-		'liveinternet' => 1, 
-		'livejournal' => 1, 
-		'memori' => 1, 
-		'google-bookmarks' => 1, 
-		'bobrdobr' => 1, 
-		'mister-wong' => 1, 
-		'yahoo-bookmarks' => 1, 
-		'yandex' => 1, 
-		'delicious' => 1, 
 		'gplusone' => 1, 
+		'vkontakte' => 0, 
+		'odnoklassniki' => 0, 
+		'mail-ru' => 0, 
+		'yaru' => 0, 
+		'rutvit' => 0, 
+		'myspace' => 0, 
+		'technorati' => 0, 
+		'digg' => 0, 
+		'friendfeed' => 0, 
+		'pikabu' => 0, 
+		'blogger' => 0, 
+		'liveinternet' => 0, 
+		'livejournal' => 0, 
+		'memori' => 0, 
+		'google-bookmarks' => 0, 
+		'bobrdobr' => 0, 
+		'mister-wong' => 0, 
+		'yahoo-bookmarks' => 0, 
+		'yandex' => 0, 
+		'delicious' => 0, 
 		);
 	
 	$options = array_merge($def_options, $options);
@@ -289,28 +291,28 @@ function addzakl_content_end($args = array())
 	if ($options['twitter'])
 	{
 		$img_src = 'twitter.png';
-		$link = '<a rel="nofollow" href="http://twitter.com/home/?status=' . urlencode (stripslashes(mb_substr($page['page_title'], 0, 139 - mb_strlen($post_link, 'UTF8'), 'UTF8') . ' ' . $post_link)) . '">';
+		$link = '<a rel="nofollow" href="//twitter.com/home/?status=' . urlencode (stripslashes(mb_substr($page['page_title'], 0, 139 - mb_strlen($post_link, 'UTF8'), 'UTF8') . ' ' . $post_link)) . '">';
 		$out .= $link . '<img title="Добавить в Twitter" alt="twitter.com" src="' . $path . $img_src  . '"' . $width_height . '></a>';	
 	}
 	
 	if ($options['facebook'])
 	{
 		$img_src = 'facebook.png';
-		$link = '<a rel="nofollow" href="http://www.facebook.com/sharer.php?u=' . $post_link . '">';
+		$link = '<a rel="nofollow" href="//www.facebook.com/sharer.php?u=' . $post_link . '">';
 		$out .= $sep . $link . '<img title="Поделиться в Facebook" alt="facebook.com" src="' . $path . $img_src  . '"' . $width_height . '></a>';		
 	}
 	
 	if ($options['vkontakte'])
 	{	
 		$img_src = 'vkontakte.png';
-		$link = '<a rel="nofollow" href="http://vkontakte.ru/share.php?url=' . $post_link . '&amp;title=' . $post_title  . '">';
+		$link = '<a rel="nofollow" href="//vkontakte.ru/share.php?url=' . $post_link . '&amp;title=' . $post_title  . '">';
 		$out .= $sep . $link . '<img title="Поделиться В Контакте" alt="vkontakte.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['odnoklassniki'])
 	{
 		$img_src = 'odnoklassniki.png';
-		$link = '<a rel="nofollow" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&amp;st._surl=' . $post_link . '&amp;title=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//www.odnoklassniki.ru/dk?st.cmd=addShare&amp;st._surl=' . $post_link . '&amp;title=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Добавить в Одноклассники" alt="odnoklassniki.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	
 	}
@@ -318,7 +320,7 @@ function addzakl_content_end($args = array())
 	if ($options['mail-ru'])
 	{
 		$img_src = 'mail-ru.png';
-		$link = '<a rel="nofollow" href="http://connect.mail.ru/share?url=' . $post_link . '&amp;title=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//connect.mail.ru/share?url=' . $post_link . '&amp;title=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Поделиться в Моем Мире@Mail.Ru" alt="mail.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 
 	}
@@ -326,84 +328,77 @@ function addzakl_content_end($args = array())
 	if ($options['yaru'])
 	{
 		$img_src = 'yaru.png';
-		$link = '<a rel="nofollow" href="http://my.ya.ru/posts_add_link.xml?URL=' . $post_link . '&amp;title=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//my.ya.ru/posts_add_link.xml?URL=' . $post_link . '&amp;title=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Поделиться в Я.ру" alt="ya.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['rutvit'])
 	{
 		$img_src = 'rutvit.png';
-		$link = '<a rel="nofollow" href="http://rutvit.ru/tools/widgets/share/popup?url=' . $post_link . '&amp;title=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//rutvit.ru/tools/widgets/share/popup?url=' . $post_link . '&amp;title=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Добавить в РуТвит" alt="rutvit.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['myspace'])
 	{
 		$img_src = 'myspace.png';
-		$link = '<a rel="nofollow" href="http://www.myspace.com/Modules/PostTo/Pages/?u=' . $post_link . '&amp;t=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//www.myspace.com/Modules/PostTo/Pages/?u=' . $post_link . '&amp;t=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Добавить в MySpace" alt="myspace.com" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
-	/*
-	if ($options['buzz'])
-	{
-		$img_src = 'buzz.png';
-		$link = '<a rel="nofollow" href="http://www.google.com/buzz/post?message=' . $post_link . '&amp;url=' . $post_title . '&amp;srcURL=' . getinfo('siteurl') . '">';
-		$out .= $sep . $link . '<img title="Добавить в Google Buzz" alt="Google Buzz" src="' . $path . $img_src  . '"' . $width_height . '></a>';		
-	}
-	*/
+
 	if ($options['technorati'])
 	{
 		$img_src = 'technorati.png';
-		$link = '<a rel="nofollow" href="http://www.technorati.com/faves?add=' . $post_link . '">';
+		$link = '<a rel="nofollow" href="//www.technorati.com/faves?add=' . $post_link . '">';
 		$out .= $sep . $link . '<img title="Добавить в Technorati" alt="technorati.com" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['digg'])
 	{
 		$img_src = 'digg.png';
-		$link = '<a rel="nofollow" href="http://digg.com/submit?url=' . $post_link .  '">';
+		$link = '<a rel="nofollow" href="//digg.com/submit?url=' . $post_link .  '">';
 		$out .= $sep . $link . '<img title="Добавить в Digg" alt="digg.com" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['friendfeed'])
 	{
 		$img_src = 'friendfeed.png';
-		$link = '<a rel="nofollow" href="http://www.friendfeed.com/share?title=' . $post_link .  '">';
+		$link = '<a rel="nofollow" href="//www.friendfeed.com/share?title=' . $post_link .  '">';
 		$out .= $sep . $link . '<img title="Добавить в FriendFeed" alt="friendfeed.com" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['pikabu'])
 	{
 		$img_src = 'pikabu.png';
-		$link = '<a rel="nofollow" href="http://pikabu.ru/add_story.php?story_url=' . $post_link . '&amp;title=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//pikabu.ru/add_story.php?story_url=' . $post_link . '&amp;title=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Добавить в Pikabu" alt="pikabu.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['blogger'])
 	{
 		$img_src = 'blogger.png';
-		$link = '<a rel="nofollow" href="http://www.blogger.com/blog_this.pyra?t&amp;u=' . $post_link . '&amp;n=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//www.blogger.com/blog_this.pyra?t&amp;u=' . $post_link . '&amp;n=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Опубликовать в Blogger.com" alt="blogger.com" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['liveinternet'])
 	{
 		$img_src = 'liveinternet.png';
-		$link = '<a rel="nofollow" href="http://www.liveinternet.ru/journal_post.php?action=n_add&amp;cnurl=' . $post_link . '&amp;cntitle=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//www.liveinternet.ru/journal_post.php?action=n_add&amp;cnurl=' . $post_link . '&amp;cntitle=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Опубликовать в LiveInternet" alt="liveinternet.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['livejournal'])
 	{
 		$img_src = 'livejournal.png';
-		$link = '<a rel="nofollow" href="http://www.livejournal.com/update.bml?event=' . $post_link . '&amp;subject=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//www.livejournal.com/update.bml?event=' . $post_link . '&amp;subject=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Опубликовать в LiveJournal" alt="livejournal.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['memori'])
 	{
 		$img_src = 'memori.png';
-		$link = '<a rel="nofollow" href="http://memori.ru/link/">';
+		$link = '<a rel="nofollow" href="//memori.ru/link/">';
 		$out .= $sep . $link . '<img title="Сохранить закладку в Memori.ru" alt="memori.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
@@ -411,42 +406,42 @@ function addzakl_content_end($args = array())
 	if ($options['google-bookmarks'])
 	{
 		$img_src = 'google-bookmarks.png';
-		$link = '<a rel="nofollow" href="http://www.google.com/bookmarks/mark?op=edit&amp;bkmk=' . $post_link . '&amp;title=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//www.google.com/bookmarks/mark?op=edit&amp;bkmk=' . $post_link . '&amp;title=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Сохранить закладку в Google" alt="google.com" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['bobrdobr'])
 	{	
 		$img_src = 'bobrdobr.png';
-		$link = '<a rel="nofollow" href="http://bobrdobr.ru/addext.html?url=' . $post_link . '&amp;title=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//bobrdobr.ru/addext.html?url=' . $post_link . '&amp;title=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Забобрить" alt="bobrdobr.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['mister-wong'])
 	{
 		$img_src = 'mister-wong.png';
-		$link = '<a rel="nofollow" href="http://www.mister-wong.ru/index.php?action=addurl&amp;bm_url=' . $post_link . '&amp;bm_description=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//www.mister-wong.ru/index.php?action=addurl&amp;bm_url=' . $post_link . '&amp;bm_description=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Сохранить закладку в Мистер Вонг" alt="mister-wong.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['yahoo-bookmarks'])
 	{
 		$img_src = 'yahoo-bookmarks.png';
-		$link = '<a rel="nofollow" href="http://bookmarks.yahoo.com/toolbar/savebm?u=' . $post_link . '&amp;t=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//bookmarks.yahoo.com/toolbar/savebm?u=' . $post_link . '&amp;t=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Добавить в Yahoo! Закладки" alt="yahoo.com" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
 	if ($options['yandex'])
 	{
 		$img_src = 'yandex.png';
-		$link = '<a rel="nofollow" href="http://zakladki.yandex.ru/newlink.xml?url=' . $post_link . '&amp;name=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//zakladki.yandex.ru/newlink.xml?url=' . $post_link . '&amp;name=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Добавить в Яндекс.Закладки" alt="yandex.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 
 	if ($options['delicious'])
 	{
 		$img_src = 'delicious.png';
-		$link = '<a rel="nofollow" href="http://del.icio.us/post?url=' . $post_link . '&amp;title=' . $post_title .  '">';
+		$link = '<a rel="nofollow" href="//del.icio.us/post?url=' . $post_link . '&amp;title=' . $post_title .  '">';
 		$out .= $sep . $link . '<img title="Сохранить закладку в Delicious" alt="del.icio.us" src="' . $path . $img_src  . '"' . $width_height . '></a>';
 	}
 	
@@ -463,27 +458,12 @@ function addzakl_content_end($args = array())
 		}
 			
 		$out .= $sep . '
-		<script src="https://apis.google.com/js/plusone.js"></script>
+		<script src="//apis.google.com/js/plusone.js"></script>
 		<div class="g-plusone" data-size="' . $sg . '" data-count="true"></div>
 		<script> gapi.plusone.render("g-plusone", {"size": "' . $sg . '", "count": "true"}); </script>
 		';
 	}
 
-	/*$img_src = 'linkstore.gif';
-	$link = '<a rel="nofollow" href="http://www.linkstore.ru/servlet/LinkStore?a=add&amp;url=' . $post_link . '&amp;title=' . $post_title .  '">';
-	$out .= $sep . $link . '<img title="linkstore.ru" alt="linkstore.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
-	
-	$img_src = 'news2-ru.gif';
-	$link = '<a rel="nofollow" href="http://news2.ru/add_story.php?url=' . $post_link . '">';
-	$out .= $sep . $link . '<img title="news2.ru" alt="news2.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
-
-	$img_src = 'rumark.gif';
-	$link = '<a rel="nofollow" href="http://rumarkz.ru/bookmarks/?action=add&amp;popup=1&amp;address=' . $post_link . '&amp;title=' . $post_title .  '">';
-	$out .= $sep . $link . '<img title="rumarkz.ru" alt="rumarkz.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';
-	
-	$img_src = 'moemesto.gif';
-	$link = '<a rel="nofollow" href="http://moemesto.ru/post.php?url=' . $post_link . '&amp;title=' . $post_title .  '">';
-	$out .= $sep . $link . '<img title="moemesto.ru" alt="moemesto.ru" src="' . $path . $img_src  . '"' . $width_height . '></a>';*/
 
 	if ($out)
 		echo NR . '<div class="addzakl">' . $options['text-do'] . $out . $options['text-posle'] . '</div>' . NR;
@@ -491,4 +471,4 @@ function addzakl_content_end($args = array())
 	return $args;
 }
 
-# end file
+# end of file

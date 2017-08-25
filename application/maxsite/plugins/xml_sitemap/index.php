@@ -64,6 +64,8 @@ function xml_sitemap_custom($args = array())
 	if(!isset($options['tags_show'])) $options['tags_show'] = true;
 	if(!isset($options['comusers_show'])) $options['comusers_show'] = true;
 	if(!isset($options['users_show'])) $options['users_show'] = true;
+	
+	if(!isset($options['url_protocol'])) $options['url_protocol'] = '';
 
 	$freq_priority = array(
 		'home' => array( 'changefreq' => 'daily', 'priority' => '1' ),
@@ -106,6 +108,13 @@ function xml_sitemap_custom($args = array())
 		
 	$url = getinfo('siteurl');
 
+	if ($options['url_protocol'])
+	{
+		$url = str_replace('http://', '', $url);
+		$url = str_replace('https://', '', $url);
+		$url = $options['url_protocol'] . $url;
+	}
+	
 	// формирование sitemap.xml
 	$out = '<'
 	. '?xml version="1.0" encoding="UTF-8"?>
@@ -401,6 +410,15 @@ function xml_sitemap_mso_options()
 							'description' => t('Укажите (по одному в каждой строке) абсолютные или относительные адреса нестандартных страниц или файлов (например, DOCX-файл из папки UPLOADS) сайта, которые необходимо добавить в sitemap.xml. Для этих адресов будет использованы настройки приоритета и частоты от <b>notblog</b>.'),
 							'default' =>	'',
 						),
+						
+			'url_protocol' => array(
+                            'type' => 'select', 
+                            'name' => t('HTTP протокол сайта'), 
+							'values' => '||Не менять # http://||http # https://||https',
+                            'description' => t('Можно явно задать протокол сайт.'), 
+                            'default' => ''
+                        ),
+						
 
             ),
 		t('Настройки XML Sitemap'), # Заголовок страницы с настройками плагина
@@ -411,4 +429,4 @@ function xml_sitemap_mso_options()
 	if ($_POST) xml_sitemap_custom();
 }
 
-# end file
+# end of file

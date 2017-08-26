@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Последние записи'),
 	'description' => t('Виджет вывода последних записей на основе PHP-класса Block_pages (расширенные настройки виджета)'),
-	'version' => '1.1',
+	'version' => '2',
 	'author' => 'Максим',
 	'editors' => '<a href="//vizr.ru/">Илья Земсков</a>',
 	'plugin_url' => '',

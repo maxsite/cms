@@ -1651,6 +1651,8 @@ function mso_merge_array($a, $def)
 {
 	$out = array();
 	
+	$def = array_merge($def, $a);
+	
 	foreach ($def as $d_key => $d_val)
 	{
 		if (isset($a[$d_key]))

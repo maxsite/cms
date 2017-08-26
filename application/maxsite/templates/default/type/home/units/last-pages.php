@@ -3,7 +3,7 @@
 /**
  * MaxSite CMS
  * (c) http://max-3000.com/
- * 28-07-2017
+ * 26-08-2017
 
 Универсальный юнит для вывода записей по множеству критериев
 
@@ -149,7 +149,7 @@ else
 				'exclude_page_allow'		=> $UNIT['exclude_page_allow'],
 				'function_add_custom_sql'	=> $UNIT['function_add_custom_sql'],
 				'pages_reverse'				=> $UNIT['pages_reverse'],
-		));
+		), $UNIT);
 	}
 		
 	if ($b->go)

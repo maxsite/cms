@@ -243,6 +243,7 @@ class Page_out
 		$comments = '';
 		$comments_count = ''; // только колво комментариев числом
 		$cat = '';
+		$cat_cat_id = '';
 		$tag = '';
 		$edit = '';
 		$date = '';
@@ -340,6 +341,25 @@ class Page_out
 				false);
 		}
 		
+		
+		// [cat/cat_id] — тоже, что и [cat], только отсекаются рубрики не указанные в cat_id
+		// должен быть указан cat_id. Если нет, то отдаём как [cat] 
+		if (strpos($out, '[cat/cat_id]') !== false)
+		{
+			$c = $this->val('page_categories'); // данные из $page
+			
+			if (isset($this->page['UNIT']['cat_id']))
+				$c = array_intersect(mso_explode($this->page['UNIT']['cat_id']), $c);
+				
+			$cat_cat_id = mso_page_cat_link(
+				$c, 
+				$this->get_formats_args('cat', 1), // $sep 
+				$this->get_formats_args('cat', 2), // $do
+				$this->get_formats_args('cat', 3), // $posle
+				false);
+		}
+		
+		
 		// mso_page_tag_link($tags = array(), $sep = ', ', $do = '', $posle = '', $echo = true, $type = 'tag', $link = true, $class = ''
 		if (strpos($out, '[tag]') !== false)
 		{
@@ -365,8 +385,6 @@ class Page_out
 				$this->get_formats_args('edit', 2), // $do
 				$this->get_formats_args('edit', 3), // $posle
 				false);
-				
-				//pr($this->page);
 		}
 		
 		
@@ -475,6 +493,12 @@ class Page_out
 			$out = preg_replace_callback('!(\[val@)(.*?)(\])!is', array('self', '_line_val_set'), $out);
 		}
 		
+		// [var@cat] — произвольное значение поля из UNIT
+		if (strpos($out, '[var@') !== false)
+		{
+			$out = preg_replace_callback('!(\[var@)(.*?)(\])!is', array('self', '_line_var_set'), $out);
+		}
+		
 		if (strpos($out, '[content]') !== false)
 		{
 			$content = $this->get_content();
@@ -506,6 +530,7 @@ class Page_out
 		$out = str_replace('[view_count]', $view_count, $out);
 		$out = str_replace('[meta_description]', $meta_description, $out);
 		$out = str_replace('[meta_title]', $meta_title, $out);
+		$out = str_replace('[cat/cat_id]', $cat_cat_id, $out);
 		
 		$out = str_replace('[thumb]', $this->thumb, $out);
 		
@@ -537,6 +562,17 @@ class Page_out
 		$m = $matches[2];
 		$m = $this->val($m);
 		return $m;
+	}
+
+	// колбак для поиска [var@UNIT]
+	protected function _line_var_set($matches)
+	{
+		$m = 'var@' . $matches[2];
+		
+		if (isset($this->page['UNIT'][$m]))
+			return $this->page['UNIT'][$m];
+		else 
+			return '';
 	}
 	
 	// колбак для поиска [content_chars@КОЛВО]
@@ -911,13 +947,13 @@ class Block_pages
 	
 	var $go = false; // признак, что можно делать вывод
 	
-	function __construct($r1 = array())
+	function __construct($r1 = array(), $UNIT = array())
 	{
-		if ($r1 !== false ) $this->get_pages($r1); // сразу получаем записи
+		if ($r1 !== false ) $this->get_pages($r1, $UNIT); // сразу получаем записи
 	}
 	
 	// метод, где получаются записи
-	protected function get_pages($r)
+	protected function get_pages($r, $UNIT = array())
 	{
 		// дефолтные значения для получения записей
 		$default = array(
@@ -971,6 +1007,13 @@ class Block_pages
 		$this->pagination);
 		
 		$this->go = ($this->pages) ? true : false;
+		
+		// цепляем $UNIT к каждой записи
+		if ($this->pages)
+		{	
+			for($i = 0; $i < count($this->pages); $i++)
+				$this->pages[$i]['UNIT'] = $UNIT;
+		}
 	}
 	
 	public function set_pages($pages, $pagination)

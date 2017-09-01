@@ -11,8 +11,8 @@
 # функция автоподключения плагина
 function %%%_autoload()
 {
-	mso_hook_add( 'admin_init', '%%%_admin_init'); # хук на админку
-	mso_register_widget('%%%_widget', t('%%%')); # регистрируем виджет
+	mso_hook_add( 'admin_init', '%%%_admin_init'); // хук на админку
+	mso_register_widget('%%%_widget', t('%%%')); // регистрируем виджет
 }
 
 # функция выполняется при активации (вкл) плагина
@@ -38,17 +38,17 @@ function %%%_admin_init($args = array())
 	{
 		$this_plugin_url = '%%%'; // url и hook
 		
-		# добавляем свой пункт в меню админки
-		# первый параметр - группа в меню
-		# второй - это действие/адрес в url - http://сайт/admin/demo
-		#			можно использовать добавочный, например demo/edit = http://сайт/admin/demo/edit
-		# Третий - название ссылки	
+		// добавляем свой пункт в меню админки
+		// первый параметр - группа в меню
+		// второй - это действие/адрес в url - http://сайт/admin/demo
+		//			можно использовать добавочный, например demo/edit = http://сайт/admin/demo/edit
+		// Третий - название ссылки	
 		
 		mso_admin_menu_add('plugins', $this_plugin_url, t('Плагин %%%'));
 
-		# прописываем для указаного admin_url_ + $this_plugin_url - (он будет в url) 
-		# связанную функцию именно она будет вызываться, когда 
-		# будет идти обращение по адресу http://сайт/admin/%%%
+		// прописываем для указаного admin_url_ + $this_plugin_url - (он будет в url) 
+		// связанную функцию именно она будет вызываться, когда 
+		// будет идти обращение по адресу http://сайт/admin/%%%
 		mso_admin_url_hook ($this_plugin_url, '%%%_admin_page');
 	}
 	
@@ -64,7 +64,7 @@ function %%%_admin_page($args = array())
 		return $args;
 	}
 
-	# выносим админские функции отдельно в файл
+	// выносим админские функции отдельно в файл
 	mso_hook_add_dinamic( 'mso_admin_header', ' return $args . "' . t('%%%') . '"; ' );
 	mso_hook_add_dinamic( 'admin_title', ' return "' . t('%%%') . ' - " . $args; ' );
 	require(getinfo('plugins_dir') . '%%%/admin.php');
@@ -118,7 +118,7 @@ function %%%_widget_update($num = 1)
 	// получаем опции
 	$options = $newoptions = mso_get_option($widget, 'plugins', array());
 	
-	# обрабатываем POST
+	// обрабатываем POST
 	$newoptions['header'] = mso_widget_get_post($widget . 'header');
 	
 	if ( $options != $newoptions ) 
@@ -145,4 +145,4 @@ function %%%_widget_custom($options = array(), $num = 1)
 }
 
 
-# end file
+# end of file

@@ -46,7 +46,7 @@ function %%%_mso_options()
 		return;
 	}
 	
-	# ключ, тип, ключи массива
+	// ключ, тип, ключи массива
 	mso_admin_plugin_options('plugin_%%%', 'plugins', 
 		array(
 			'option1' => array(
@@ -68,4 +68,4 @@ function %%%_custom($arg = array())
 	
 }
 
-# end file
+# end of file

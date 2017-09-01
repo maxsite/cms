@@ -11,13 +11,15 @@
 # функция автоподключения плагина
 function %%%_autoload()
 {
-	mso_register_widget('%%%_widget', t('%%%') ); # регистрируем виджет
+	// регистрируем виджет
+	mso_register_widget('%%%_widget', t('%%%') ); 
 }
 
 # функция выполняется при деинсталяции плагина
 function %%%_uninstall($args = array())
 {	
-	mso_delete_option_mask('%%%_widget_', 'plugins' ); // удалим созданные опции
+	// удалим созданные опции
+	mso_delete_option_mask('%%%_widget_', 'plugins' ); 
 	return $args;
 }
 
@@ -27,7 +29,7 @@ function %%%_widget($num = 1)
 	$widget = '%%%_widget_' . $num; // имя для опций = виджет + номер
 	$options = mso_get_option($widget, 'plugins', array() ); // получаем опции
 	
-	// заменим заголовок, чтобы был в  h2 class="box"
+	// заменим заголовок, чтобы был в .mso-widget-header
 	if ( isset($options['header']) and $options['header'] ) 
 		$options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
 	else $options['header'] = '';
@@ -69,7 +71,7 @@ function %%%_widget_update($num = 1)
 	// получаем опции
 	$options = $newoptions = mso_get_option($widget, 'plugins', array());
 	
-	# обрабатываем POST
+	// обрабатываем POST
 	$newoptions['header'] = mso_widget_get_post($widget . 'header');
 	
 	if ( $options != $newoptions ) 
@@ -95,4 +97,4 @@ function %%%_widget_custom($options = array(), $num = 1)
 	return $out;	
 }
 
-# end file
+# end of file

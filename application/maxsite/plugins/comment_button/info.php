@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Кнопки комментирования'),
 	'description' => t('Кнопки форматирования для формы комментария'),
-	'version' => '1.3',
+	'version' => '2',
 	'author' => 'Максим',
 	'editors' => '<a href="//vizr.ru/">Илья Земсков</a>',
 	'plugin_url' => '',

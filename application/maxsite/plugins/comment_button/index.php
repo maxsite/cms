@@ -23,7 +23,7 @@ function comment_button_uninstall($args = array())
 # подключаем JS в head
 function comment_button_head($arg = array())
 {
-	if (is_type('page')) mso_load_script(getinfo('plugins_url') . 'comment_button/comment_button.js');
+	if (is_type('page')) echo mso_load_script(getinfo('plugins_url') . 'comment_button/comment_button.js');
 	return $arg;
 }
 

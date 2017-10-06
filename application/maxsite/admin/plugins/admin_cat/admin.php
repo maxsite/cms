@@ -71,6 +71,12 @@ if ($category_meta)
 			
 			$all[$id_cat]['category_meta'][$key_meta] = $m;
 		}
+		
+		// если есть childs запускаем рекурсию
+		if (isset($all[$id_cat]['childs']))
+		{
+			$all[$id_cat]['childs'] = my_cat_childs($all[$id_cat]['childs'], $all_keys_meta);
+		}
 	}
 	
 	// pr($all);
@@ -194,5 +200,30 @@ function my_function_meta($e, $elem, $data)
 	// pr($e, 1);
 	return $e;
 }
+
+// рекурсивная для childs
+function my_cat_childs($a, $all_keys_meta)
+{
+	$all_keys_cats = array_keys($a); // все id рубрик в массиве
+	
+	foreach($all_keys_cats as $id_cat)
+	{
+		foreach($all_keys_meta as $key_meta)
+		{
+			$m = mso_get_meta($key_meta, 'category', $id_cat, 'meta_value');
+			$a[$id_cat]['category_meta'][$key_meta] = $m;
+		}
+		
+		// если есть childs запускаем рекурсию
+		if (isset($a[$id_cat]['childs']))
+		{
+			$a[$id_cat]['childs'] = my_cat_childs($a[$id_cat]['childs'], $all_keys_meta);
+		}
+	}
+	
+	return $a;
+}
+
+
 
 # end of file

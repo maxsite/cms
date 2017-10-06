@@ -26,6 +26,13 @@
 		$segments .= '/' . $current_sub_dir;
 	}
 	
+	if ($current_sub_dir_5 = mso_segment(5))
+	{
+		$current_dir .= $current_sub_dir_5 . '/';
+		$segments .= '/' . $current_sub_dir_5;
+	}
+	
+	
 	$path = getinfo('uploads_dir') . $current_dir;
 	
 	if (!is_dir($path) ) // нет каталога

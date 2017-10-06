@@ -189,7 +189,7 @@ $all_files .= '
 	
 	<div class="flex-grow1">
 		
-		<div class="mar10-t">' . t('Размер') . ' <input class="w100px-max" type="number" min="1" id="upload_resize_images" name="upload_resize_images" value = "' . mso_get_option('resize_images',   'general', '600') . '" title="' . t('Размер конечного изображения') . '">
+		<div class="mar10-t links-no-color">' . t('Размер') . ' <input class="w100px-max" type="number" min="1" id="upload_resize_images" name="upload_resize_images" value = "' . mso_get_option('resize_images',   'general', '600') . '" title="' . t('Размер конечного изображения') . '">
 			
 			<select class="w-auto" title="' . t('Метод изменения размера') . '" id="upload_resize_images_type" name="upload_resize_images_type">
 			' . form_select_options(array(
@@ -199,6 +199,9 @@ $all_files .= '
 					'no' => t('не менять (исходный размер)')
 					), mso_get_option('upload_resize_images_type', 'general', 'width')) 
 			. '</select>
+			
+			<a class="i-picture-o t150 mar10-l icon0" href="' . getinfo('site_admin_url') . 'files/_pages/' . mso_segment(3) . '/mini" target="_blank" title="' . t('Управление миниатюрами') . '"></a>
+			
 		</div>
 		
 		<div class="mar10-tb">
@@ -231,6 +234,8 @@ $all_files .= '
 		<label class="b-inline pad10-b" title="' . t('Водяной знак для миниатюры') . '"><input type="checkbox" id="upload_watermark_mini" name="upload_watermark_mini"' . $check_use_watermark_mini . '> </label>
 		
 		<label class="b-inline pad10-b" title="' . t('Водяной знак для основного изображения') . '"><input type="checkbox" id="upload_watermark" name="upload_watermark"' . $check_use_watermark . '> ' . t('Водяной знак') .'</label>
+		
+		
 		
 	</div>
 </div>

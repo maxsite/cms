@@ -579,7 +579,10 @@ class Page_out
 	protected function _line_content_chars($matches)
 	{
 		$m = $matches[2];
-		$m = mb_substr(strip_tags($this->get_content()), 0, $m, 'UTF-8');
+		
+		$content = $this->content_do_cut($this->get_content());
+		
+		$m = mb_substr(strip_tags($content), 0, $m, 'UTF-8');
 		return $m;
 	}
 	
@@ -587,7 +590,10 @@ class Page_out
 	protected function _line_content_words($matches)
 	{
 		$m = $matches[2];
-		$m = mso_str_word(strip_tags($this->get_content()), $m);
+		
+		$content = $this->content_do_cut($this->get_content());
+		
+		$m = mso_str_word(strip_tags($content), $m);
 		return $m;
 	}			
 	
@@ -613,7 +619,9 @@ class Page_out
 	{
 		if ($cut) $cut = ' ' . $this->page_url(true) . $cut . '</a>';
 		
-		return $this->out(NR . $do . mso_str_word(strip_tags($this->get_content()), $max_words) . $cut . $posle);
+		$content = $this->content_do_cut($this->get_content());
+		
+		return $this->out(NR . $do . mso_str_word(strip_tags($content), $max_words) . $cut . $posle);
 	}
 	
 	// обрезка контента по кол-ву символов
@@ -621,7 +629,28 @@ class Page_out
 	{
 		if ($cut) $cut = ' ' . $this->page_url(true) . $cut . '</a>';
 		
-		return $this->out(NR . $do . mb_substr(strip_tags($this->get_content()), 0, $max_chars, 'UTF-8') . $cut . $posle);
+		$content = $this->content_do_cut($this->get_content());
+		
+		return $this->out(NR . $do . mb_substr(strip_tags($content), 0, $max_chars, 'UTF-8') . $cut . $posle);
+	}
+	
+	// обрезка контента/текста до [cut]  
+	function content_do_cut($content)
+	{
+		$content = preg_replace('|\[cut\]\s*<br|', '[cut]<br', $content);
+		$content = preg_replace('|\[cut\](\&nbsp;)*<br|', '[cut]<br', $content);
+		$content = preg_replace('|\[cut\](\&nbsp;)*(\s)*<br|', '[cut]<br', $content);
+		
+		if (preg_match('/\[cut(.*?)?\]/', $content, $matches) )
+		{
+			$content = explode($matches[0], $content, 2);
+		}
+		else
+		{
+			$content = array($content);
+		}
+		
+		return $content[0];
 	}
 	
 	// вывод мета - только значение мета по return

@@ -40,7 +40,8 @@ if ($category_sort = mso_get_option('category_sort', getinfo('template'), ''))
 
 
 // подключаем кастомный вывод, где можно изменить массив параметров $par для своих задач
-if ($f = mso_page_foreach('category-mso-get-pages')) require($f); 
+if ($f = mso_page_foreach('def-mso-get-pages')) require($f);
+if ($f = mso_page_foreach('category-mso-get-pages')) require($f);
 
 $pages = mso_get_pages($par, $pagination);
 

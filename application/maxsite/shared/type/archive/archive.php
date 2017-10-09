@@ -19,6 +19,7 @@ $par = array(
 
 
 // подключаем кастомный вывод, где можно изменить массив параметров $par для своих задач
+if ($f = mso_page_foreach('def-mso-get-pages')) require($f);
 if ($f = mso_page_foreach('archive-mso-get-pages')) require($f); 
 		
 $pages = mso_get_pages($par, $pagination);

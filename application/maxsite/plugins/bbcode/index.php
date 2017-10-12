@@ -13,12 +13,11 @@ function bbcode_autoload($args = array())
 	
 	if (!array_key_exists('bbcode_level', $options)) $options['bbcode_level'] = 1;
 	
-	if ( ($options['bbcode_level'] == 1) or ($options['bbcode_level'] == 3) ) mso_hook_add( 'content', 'bbcode_custom', 20); # хук на вывод контента
+	if ( ($options['bbcode_level'] == 1) or ($options['bbcode_level'] == 3) ) mso_hook_add('content', 'bbcode_custom', 20); # хук на вывод контента
 	
-	if ( ($options['bbcode_level'] == 2) or ($options['bbcode_level'] == 3) ) mso_hook_add( 'comments_content', 'bbcode_custom', 20);
+	if ( ($options['bbcode_level'] == 2) or ($options['bbcode_level'] == 3) ) mso_hook_add('comments_content', 'bbcode_custom', 20);
 	
 	mso_hook_add('editor_content', 'bbcode_editor_content'); // обработка текста для визуального редактора
-	
 }
 
 # функция выполняется при деинсталяции плагина
@@ -27,18 +26,6 @@ function bbcode_uninstall($args = array())
 	mso_delete_option('plugin_bbcode', 'plugins' ); // удалим созданные опции
 
 	return $args;
-}
-
-function bbcode_pre_callback($matches)
-{
-	$m = $matches[2];
-
-	$m = str_replace('[', '&#91;', $m);
-	$m = str_replace(']', '&#93;', $m);
-
-	$m = '<pre' . $matches[1] . '>' . $m . '</pre>';
-
-	return $m;
 }
 
 function bbcode_mso_options()
@@ -61,6 +48,30 @@ function bbcode_mso_options()
 							'values' => t('1||На страницах #2||В комментариях #3||На страницах и в комментариях'),
 							'default' => '1'
 						),
+						
+			'old_codes' => array(
+							'type' => 'checkbox',
+							'name' => t('Использовать устаревшие bb-коды'),
+							'description' => t('Вместо старого варианта, используйте новый:') . '<pre class="t80">
+imgleft			[img(left)]my.jpg[/img]
+imgright		[img(right)]my.jpg[/img]
+imgcenter		[img(center)]my.jpg[/img]
+
+left			[div(t-left)]текст[/div]
+right			[div(t-right)]текст[/div]
+center			[div(t-center)]текст[/div]
+justify			[div(t-justify)]текст[/div]
+
+pleft			[p(t-left)]текст[/p]
+pright			[p(t-right)]текст[/p]
+pcenter			[p(t-center)]текст[/p]
+pjustify		[p(t-justify)]текст[/p]
+
+div=			[div style="стили"]текст[/div]
+span=			[span style="стили"]текст[/div]
+</pre>',
+							'default' => '1'
+						),
 			),
 		t('Настройки плагина bbcode'),
 		t('Укажите необходимые опции.')
@@ -70,36 +81,12 @@ function bbcode_mso_options()
 # функции плагина
 function bbcode_custom($text = '')
 {
+	$options = mso_get_option('plugin_bbcode', 'plugins', array());
+	$old_codes = isset($options['old_codes']) ? $options['old_codes'] : 1;
+
 	$text = preg_replace_callback('~\[pre(.*?)\](.*?)\[\/pre\]~si', 'bbcode_pre_callback', $text );
 
-/* у */  // <- так отмечены устаревшие коды 
-// будут закоментированы в MaxSite CMS 0.97 
-// будут удалены в MaxSite CMS 0.98 
-
-/*
-устаревшие 			следует использовать
-
-	imgleft			[img(left)]my.jpg[/img]
-	imgright		[img(right)]my.jpg[/img]
-	imgcenter		[img(center)]my.jpg[/img]
-
-	left			[div(t-left)]текст[/div]
-	right			[div(t-right)]текст[/div]
-	center			[div(t-center)]текст[/div]
-	justify			[div(t-justify)]текст[/div]
-	
-	pleft			[p(t-left)]текст[/p]
-	pright			[p(t-right)]текст[/p]
-	pcenter			[p(t-center)]текст[/p]
-	pjustify		[p(t-justify)]текст[/p]
-	
-	div=			[div style="стили"]текст[/div]
-	span=			[span style="стили"]текст[/div]
-
-*/
-
     $preg = array(
-		
 		// b - важное выделение в тексте 
 		'~\[b (.*?)\](.*?)\[\/b\]~si'			=> '<strong $1>$2</strong>',
 		'~\[b\](.*?)\[\/b\]~si'					=> '<strong>$1</strong>',
@@ -169,41 +156,13 @@ function bbcode_custom($text = '')
 		'~\[url=(.[^\s]*?) (.*?)\](.*?)\[\/url\]~si'	=> '<a href="$1" $2>$3</a>',
 		'~\[url (.*?)\](.*?)\[\/url\]~si'				=> '<a href="$2" $1>$2</a>', 
 		
-		
 		# schema.org -> itemprop
 		# [schema#Recipe] — основной контейнер 
 		'~\[schema#(.*?)\](.*?)\[\/schema\]~si'	=> '<div itemscope itemtype="//schema.org/$1">$2</div>',
 		
-		
-		# стиль для блока [div=color: red]текст[/div]
-/* у */ '~\[div=(.*?)\](.*?)\[\/div\]~si'		=> '<div style="$1">$2</div>',
-/* у */ '~\[span=(.*?)\](.*?)\[\/span\]~si'		=> '<span style="$1">$2</span>',
-		
-		# div
-/* у */ '~\[left (.*?)\](.*?)\[\/left\]~si'		=> '<div style="text-align: left; $1">$2</div>',
-/* у */ '~\[left\](.*?)\[\/left\]~si'			=> '<div style="text-align: left;">$1</div>',
-
-/* у */	'~\[right (.*?)\](.*?)\[\/right\]~si'	=> '<div style="text-align: right; $1">$2</div>',
-/* у */	'~\[right\](.*?)\[\/right\]~si'			=> '<div style="text-align: right;">$1</div>',
-
-/* у */ '~\[center (.*?)\](.*?)\[\/center\]~si'	=> '<div style="text-align: center; $1">$2</div>',
-/* у */	'~\[center\](.*?)\[\/center\]~si'		=> '<div style="text-align: center;">$1</div>',
-
-/* у */	'~\[justify (.*?)\](.*?)\[\/justify\]~si'	=> '<div style="text-align: justify; $1">$2</div>',
-/* у */	'~\[justify\](.*?)\[\/justify\]~si'			=> '<div style="text-align: justify;">$1</div>',
-		
-		
-		
 		# p
 		'~\[p=(.*?)\](.*?)\[\/p\]~si'			=> '<p style="$1">$2</p>',
 		'~\[p\((.*?)\)\](.*?)\[\/p\]~si' 	=> '<p class="$1">$2</p>', // [p(класс)] [/p] 
-		
-/* у */	'~\[pleft\](.*?)\[\/pleft\]~si'			=> '<p style="text-align: left;">$1</p>',
-/* у */	'~\[pright\](.*?)\[\/pright\]~si'		=> '<p style="text-align: right;">$1</p>',
-/* у */	'~\[pcenter\](.*?)\[\/pcenter\]~si'		=> '<p style="text-align: center;">$1</p>',
-/* у */	'~\[pjustify\](.*?)\[\/pjustify\]~si'	=> '<p style="text-align: justify;">$1</p>',
-		
-		
 		
 		# специальные замены - значение формируется автоматом
 		'~\[getinfo siteurl\]~si' => getinfo('siteurl'), // адрес сайта
@@ -211,25 +170,6 @@ function bbcode_custom($text = '')
 		'~\[getinfo uploads_url\]~si' => getinfo('uploads_url'), // адрес uploads
 		'~\[getinfo shared_url\]~si' => getinfo('shared_url'), // адрес shared
 		
-
-		// images
-
-/* у */	'~\[imgleft=(.*?)x(.*?)\](.*?)\[\/imgleft\]~si'	 	=> '<img src="$3" style="float: left; margin: 0 10px 0 0; width: $1px; height: $2px">',
-
-/* у */	'~\[imgleft\](.*?)\[\/imgleft\]~si'		 			=> '<img src="$1" style="float: left; margin: 0 10px 0 0;">',
-
-/* у */	'~\[imgleft (.*?)\](.*?)\[\/imgleft\]~si'	   		=> '<img src="$2" title="$1" alt="$1" style="float: left; margin: 0 10px 0 0;">',
-
-/* у */	'~\[imgright=(.*?)x(.*?)\](.*?)\[\/imgright\]~si'	=> '<img src="$3" style="float: right; margin: 0 0 0 10px; width: $1px; height: $2px">',
-		
-/* у */	'~\[imgright\](.*?)\[\/imgright\]~si'	 			=> '<img src="$1" style="float: right; margin: 0 0 0 10px;">',
-		
-/* у */	'~\[imgright (.*?)\](.*?)\[\/imgright\]~si'	   		=> '<img src="$2" title="$1" alt="$1" style="float: right; margin: 0 0 0 10px;">',
-
-/* у */	'~\[imgcenter\](.*?)\[\/imgcenter\]~si'	 			=> '<div style="text-align: center"><img src="$1"></div>',
-		
-/* у */	'~\[imgcenter (.*?)\](.*?)\[\/imgcenter\]~si'  		=> '<div style="text-align: center"><img src="$2" title="$1" alt="$1"></div>',
-
 
 		# [imgmini=mini-адрес]адрес[/imgmini]
 		'~\[imgmini=_(.*?)\](.*?)\[\/imgmini\]~si' 			=> '<a href="$2" target="_blank" class="lightbox"><img src="$1"></a>',
@@ -264,7 +204,6 @@ function bbcode_custom($text = '')
 		
 		
 		// универсальные замены для тэгов:
-
 		
 		# [span#recipeIngredient]текст[/span]
 		# <span itemprop="recipeIngredient">текст</span>
@@ -291,10 +230,234 @@ function bbcode_custom($text = '')
 		# [span]текст[/span]
 		# <span>текст</span>
 		'~\[(span|div|p|ul|ol|h1|h2|h3|h4|h5|h6|code|del|u|s|sub|sup|small|q|cite|address|dfn|dl|dt|dd|ins|blockquote)\](.*?)\[\/\1\]~si' => '<$1>$2</$1>',
-		
-		
+	);
 
+	
+	// устаревшие коды
+	if ($old_codes)
+	{
+		/*
+		устаревшие 			следует использовать
+
+			imgleft			[img(left)]my.jpg[/img]
+			imgright		[img(right)]my.jpg[/img]
+			imgcenter		[img(center)]my.jpg[/img]
+
+			left			[div(t-left)]текст[/div]
+			right			[div(t-right)]текст[/div]
+			center			[div(t-center)]текст[/div]
+			justify			[div(t-justify)]текст[/div]
+			
+			pleft			[p(t-left)]текст[/p]
+			pright			[p(t-right)]текст[/p]
+			pcenter			[p(t-center)]текст[/p]
+			pjustify		[p(t-justify)]текст[/p]
+			
+			div=			[div style="стили"]текст[/div]
+			span=			[span style="стили"]текст[/div]
+
+		*/
 		
+		$preg_old = array(
+			'~\[div=(.*?)\](.*?)\[\/div\]~si'		=> '<div style="$1">$2</div>',
+			'~\[span=(.*?)\](.*?)\[\/span\]~si'		=> '<span style="$1">$2</span>',
+					
+			'~\[left (.*?)\](.*?)\[\/left\]~si'		=> '<div style="text-align: left; $1">$2</div>',
+			'~\[left\](.*?)\[\/left\]~si'			=> '<div style="text-align: left;">$1</div>',
+
+			'~\[right (.*?)\](.*?)\[\/right\]~si'	=> '<div style="text-align: right; $1">$2</div>',
+			'~\[right\](.*?)\[\/right\]~si'			=> '<div style="text-align: right;">$1</div>',
+
+			'~\[center (.*?)\](.*?)\[\/center\]~si'	=> '<div style="text-align: center; $1">$2</div>',
+			'~\[center\](.*?)\[\/center\]~si'		=> '<div style="text-align: center;">$1</div>',
+
+			'~\[justify (.*?)\](.*?)\[\/justify\]~si'	=> '<div style="text-align: justify; $1">$2</div>',
+			'~\[justify\](.*?)\[\/justify\]~si'			=> '<div style="text-align: justify;">$1</div>',
+					
+			'~\[pleft\](.*?)\[\/pleft\]~si'			=> '<p style="text-align: left;">$1</p>',
+			'~\[pright\](.*?)\[\/pright\]~si'		=> '<p style="text-align: right;">$1</p>',
+			'~\[pcenter\](.*?)\[\/pcenter\]~si'		=> '<p style="text-align: center;">$1</p>',
+			'~\[pjustify\](.*?)\[\/pjustify\]~si'	=> '<p style="text-align: justify;">$1</p>',
+
+			'~\[imgleft=(.*?)x(.*?)\](.*?)\[\/imgleft\]~si'	 	=> '<img src="$3" style="float: left; margin: 0 10px 0 0; width: $1px; height: $2px">',
+			'~\[imgleft\](.*?)\[\/imgleft\]~si'		 			=> '<img src="$1" style="float: left; margin: 0 10px 0 0;">',
+			'~\[imgleft (.*?)\](.*?)\[\/imgleft\]~si'	   		=> '<img src="$2" title="$1" alt="$1" style="float: left; margin: 0 10px 0 0;">',
+			'~\[imgright=(.*?)x(.*?)\](.*?)\[\/imgright\]~si'	=> '<img src="$3" style="float: right; margin: 0 0 0 10px; width: $1px; height: $2px">',
+			'~\[imgright\](.*?)\[\/imgright\]~si'	 			=> '<img src="$1" style="float: right; margin: 0 0 0 10px;">',
+			'~\[imgright (.*?)\](.*?)\[\/imgright\]~si'	   		=> '<img src="$2" title="$1" alt="$1" style="float: right; margin: 0 0 0 10px;">',
+			'~\[imgcenter\](.*?)\[\/imgcenter\]~si'	 			=> '<div style="text-align: center"><img src="$1"></div>',
+			'~\[imgcenter (.*?)\](.*?)\[\/imgcenter\]~si'  		=> '<div style="text-align: center"><img src="$2" title="$1" alt="$1"></div>',		
+		);
+		
+		$preg = array_merge($preg, $preg_old);
+	}
+	
+	
+	if (strpos($text, '[text-demo]') !== false) // есть вхождение [text-demo]
+	{
+		if (file_exists(getinfo('plugins_dir') . 'bbcode/text-demo.txt') )
+		{
+			$text_demo = file_get_contents(getinfo('plugins_dir') . 'bbcode/text-demo.txt');
+			$text = str_replace('[text-demo]', $text_demo, $text);
+		}
+	}
+	
+	if (strpos($text, '[text-normalize]') !== false) // есть вхождение [text-normalize]
+	{
+		if (file_exists(getinfo('plugins_dir') . 'bbcode/text-normalize.txt') )
+		{
+			$text_normalize = file_get_contents(getinfo('plugins_dir') . 'bbcode/text-normalize.txt');
+			$text = str_replace('[text-normalize]', $text_normalize, $text);
+		}
+	}
+
+	$text = preg_replace(array_keys($preg), array_values($preg), $text);
+	
+	# другие сложные патерны и замены
+	
+	// создание ul/li списка по принципу меню
+	$pattern = '~\[create_list\((.*?)\)\](.*?)\[/create_list\]~si'; // с указаным css-классом
+	$text = preg_replace_callback($pattern, 'bbcode_create_list_callback', $text);
+	
+	$pattern = '~\[create_list\](.*?)\[/create_list\]~si'; // без класса
+	$text = preg_replace_callback($pattern, 'bbcode_create_list_callback', $text);	
+
+	// !TODO! - ДОДЕЛАТЬ JS-СКРИПТ 
+	// [show Показать...@Скрыть...] текст [/show]
+	// $pattern = '~\[show (.*?)@(.*?)\](.*?)\[\/show\]~si';
+	// $text = preg_replace_callback($pattern, 'bbcode_show_callback', $text);	
+	
+	// [show Показать...] текст [/show]
+	$pattern = '~\[show (.*?)\](.*?)\[\/show\]~si';
+	$text = preg_replace_callback($pattern, 'bbcode_show_callback', $text);
+	
+	// [show] текст [/show]
+	$pattern = '~\[show\](.*?)\[\/show\]~si';
+	$text = preg_replace_callback($pattern, 'bbcode_show_callback', $text);	
+
+	
+	// по хуку bbcode можно выполнить свои замены
+	$text = mso_hook('bbcode', $text);
+	
+	// pr($text, 1);
+	
+	return $text;
+}
+
+
+# callback-функция для pre
+function bbcode_pre_callback($matches)
+{
+	$m = $matches[2];
+
+	$m = str_replace('[', '&#91;', $m);
+	$m = str_replace(']', '&#93;', $m);
+
+	$m = '<pre' . $matches[1] . '>' . $m . '</pre>';
+
+	return $m;
+}
+
+# callback-функция для create_list
+function bbcode_create_list_callback($matches)
+{
+	// содержимое create_list в $matches[1]
+	
+	// два параметра, значит указан css-класс
+	if (isset($matches[2])) $text = $matches[2];
+		else $text = $matches[1];
+		
+	$arr1 = array('<p>', '</p>', '',   '<br />', '<br>', '&nbsp;', '&amp;', '&lt;', '&gt;', '&quot;');
+	$arr2 = array('',    '',     "\t", "\n",     "\n",   ' ',      '&',     '<',    '>',    '"');
+	
+	$text = trim(str_replace($arr1, $arr2, $text));
+	
+	// указан css-класс
+	if (isset($matches[2]) and $matches[1]) $class = ' class="' . $matches[1] . '"';
+		else $class = '';
+	
+	$text = '<ul' . $class . '>' . mso_menu_build($text) . '</ul>';
+	
+	return $text;
+}
+
+
+function bbcode_show_callback($matches)
+{
+	static $js = false;
+	
+	$out = '';
+	
+	if (!$js)
+	{
+		$out .=  mso_load_jquery('jquery.cookie.js');
+		$out .=  mso_load_jquery('jquery.showhide.js');
+		
+		$out .= ' <script> $(function () {
+$.cookie.json = true; $("div.mso-show").showHide({time: 400, useID: false, clickElem: "a.mso-show-link", foldElem: "div.mso-show-text", visible: false});
+}); </script> ' ;
+		
+		$js = true;
+	}
+	
+	// !TODO! - ДОДЕЛАТЬ JS-СКРИПТ 
+	// [show Показать...@Скрыть...] текст [/show]
+
+	
+	// несколько параметров, значит указаны текст  заголовок
+	if (isset($matches[3]))
+	{
+		$header = $matches[1];
+		// $header_hide = $matches[2];
+		$text = $matches[3];
+	}
+	elseif (isset($matches[2]))
+	{
+		$header = $matches[1];
+		// $header_hide = tf('Свернуть...');
+		$text = $matches[2];
+	}
+	else
+	{
+		$header = tf('Показать/Скрыть...');
+		// $header_hide = tf('Свернуть...');
+		$text = $matches[1];
+	}
+		
+	$out .= '<div class="mso-show">'
+				. '<p class="mso-show-header"><a href="#" class="mso-show-link">' 
+				. $header
+				. '</a></p>'
+				. '<div class="mso-show-text">'
+				. $text
+				. '</div>'
+			. '</div>' . NR;
+	
+	return $out;
+}
+
+function bbcode_editor_content_callback($matches)
+{
+	$m = $matches[2];
+
+	$m = htmlspecialchars($m);
+	
+	$m = str_replace("&amp;lt;br&amp;gt;", "<br>", $m);
+	$m = str_replace("&amp;", "&", $m);
+
+	$m = '[pre' . $matches[1] . ']' . $m . '[/pre]';
+
+	return $m;
+}
+
+function bbcode_editor_content($text = '')
+{
+	$text = preg_replace_callback('~\[pre(.*?)\](.*?)\[\/pre\]~si', 'bbcode_editor_content_callback', $text);
+	
+	return $text;
+}
+
+
 
 // удаленные регулярки — сохранил пока как резерв — удалю чуть позже
 
@@ -375,128 +538,5 @@ function bbcode_custom($text = '')
 #		'~\[dd (.*?)\](.*?)\[\/dd\]~si' 		=> '<dd $1">$2</dd>',
 #		'~\[ins\](.*?)\[\/ins\]~si'	  			=> '<ins>$1</ins>',
 #		'~\[ins (.*?)\](.*?)\[\/ins\]~si' 		=> '<ins $1">$2</ins>',
-		
-	);
-
-	if (strpos($text, '[text-demo]') !== false) // есть вхождение [text-demo]
-	{
-		if (file_exists(getinfo('plugins_dir') . 'bbcode/text-demo.txt') )
-		{
-			$text_demo = file_get_contents(getinfo('plugins_dir') . 'bbcode/text-demo.txt');
-			$text = str_replace('[text-demo]', $text_demo, $text);
-		}
-	}
-	
-	if (strpos($text, '[text-normalize]') !== false) // есть вхождение [text-normalize]
-	{
-		if (file_exists(getinfo('plugins_dir') . 'bbcode/text-normalize.txt') )
-		{
-			$text_normalize = file_get_contents(getinfo('plugins_dir') . 'bbcode/text-normalize.txt');
-			$text = str_replace('[text-normalize]', $text_normalize, $text);
-		}
-	}
-
-	$text = preg_replace(array_keys($preg), array_values($preg), $text);
-	
-	# другие сложные патерны и замены
-	
-	// создание ul/li списка по принципу меню
-	$pattern = '~\[create_list\((.*?)\)\](.*?)\[/create_list\]~si'; // с указаным css-классом
-	$text = preg_replace_callback($pattern, 'bbcode_create_list_callback', $text);
-	
-	$pattern = '~\[create_list\](.*?)\[/create_list\]~si'; // без класса
-	$text = preg_replace_callback($pattern, 'bbcode_create_list_callback', $text);	
-
-	// [show Вопрос] текст [/show]
-	$pattern = '~\[show (.*?)\](.*?)\[\/show\]~si';
-	$text = preg_replace_callback($pattern, 'bbcode_show_callback', $text);	
-	
-	// по хуку bbcode можно выполнить свои замены
-	$text = mso_hook('bbcode', $text);
-	
-	// pr($text, 1);
-	
-	return $text;
-}
-
-# callback-функция для create_list
-function bbcode_create_list_callback($matches)
-{
-	// содержимое create_list в $matches[1]
-	
-	// два параметра, значит указан css-класс
-	if (isset($matches[2])) $text = $matches[2];
-		else $text = $matches[1];
-		
-	$arr1 = array('<p>', '</p>', '',   '<br />', '<br>', '&nbsp;', '&amp;', '&lt;', '&gt;', '&quot;');
-	$arr2 = array('',    '',     "\t", "\n",     "\n",   ' ',      '&',     '<',    '>',    '"');
-	
-	$text = trim(str_replace($arr1, $arr2, $text));
-	
-	// указан css-класс
-	if (isset($matches[2]) and $matches[1]) $class = ' class="' . $matches[1] . '"';
-		else $class = '';
-	
-	$text = '<ul' . $class . '>' . mso_menu_build($text) . '</ul>';
-	
-	return $text;
-}
-
-
-function bbcode_show_callback($matches)
-{
-	static $js = false;
-	
-	$out = '';
-	
-	if (!$js)
-	{
-		$out .=  mso_load_jquery('jquery.cookie.js');
-		$out .=  mso_load_jquery('jquery.showhide.js');
-		
-		$out .= ' <script>
-$(function () {
-$.cookie.json = true; $("div.show").showHide({time: 400, useID: false, clickElem: "a.link", foldElem: "dd.show-text", visible: false});
-});
-</script> ' ;
-		
-		$js = true;
-	}
-	
-	$out .= '<div class="show"><dl>'
-				. '<dt class="show-header"><a href="#" class="link">' 
-				. $matches[1] 
-				. '</a></dt>'
-				
-				. '<dd class="show-text">'
-				. $matches[2]
-				. '</dd>'
-				
-			. '</dl></div>' . NR;
-	
-	return $out;
-	
-}
-
-function bbcode_editor_content_callback($matches)
-{
-	$m = $matches[2];
-
-	$m = htmlspecialchars($m);
-	
-	$m = str_replace("&amp;lt;br&amp;gt;", "<br>", $m);
-	$m = str_replace("&amp;", "&", $m);
-
-	$m = '[pre' . $matches[1] . ']' . $m . '[/pre]';
-
-	return $m;
-}
-
-function bbcode_editor_content($text = '')
-{
-	$text = preg_replace_callback('~\[pre(.*?)\](.*?)\[\/pre\]~si', 'bbcode_editor_content_callback', $text);
-	
-	return $text;
-}
 
 # end of file

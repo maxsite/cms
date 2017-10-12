@@ -6,12 +6,27 @@ function add_new_page($fn, $UP_DIR)
 {
 	global $MSO;
 	
+	$CI = & get_instance();
+	
 	$data = file_get_contents($fn);
 	
 	// автоматические замены по всему тексту
+	
+	// пробуем определить следующий автоинкремент — id записи
+	$query  = $CI->db->query("SHOW TABLE STATUS FROM `" . $CI->db->database . "` LIKE '" . $CI->db->dbprefix('page') . "'");
+	$result = $query->result_array();
+		
+	if ($result)
+	{
+		$next_id = $result[0]['Auto_increment'];
+		
+		$data = str_replace('[[PAGE_FILES]]', getinfo('uploads_url') . '_pages/' . $next_id . '/', $data);
+	}
+	
+	// прочие замены
 	$data = str_replace('[[SITE_URL]]', getinfo('siteurl'), $data);
 	$data = str_replace('[[UPLOADS_URL]]', getinfo('uploads_url'), $data);
-	
+		
 	if ($data and preg_match('!(.*?)\n(---)(.*)!is', $data, $conf))
 	{
 		// только если есть шапка и текст
@@ -49,28 +64,6 @@ function add_new_page($fn, $UP_DIR)
 			// дополнительные мета-данные
 			// вначале формируем общий массив, после выгоняем его в ##METAFIELD##
 
-			/*
-			// старый вариант задания META
-			// новый вариант — любые мета в виде META(ключ): значение
-			$page_meta_options['title'] = (isset($conf['META-TITLE'])) ? $conf['META-TITLE'] : '';
-			
-			$page_meta_options['description'] = (isset($conf['META-DESCRIPTION'])) ? $conf['META-DESCRIPTION'] : '';
-			
-			$page_meta_options['keywords'] = (isset($conf['META-KEYWORDS'])) ? $conf['META-KEYWORDS'] : '';
-			
-			$page_meta_options['image_for_page'] = (isset($conf['META-IMAGE_FOR_PAGE'])) ? $conf['META-IMAGE_FOR_PAGE'] : '';
-			
-			$page_meta_options['image_for_page_out'] = (isset($conf['META-IMAGE_FOR_PAGE_OUT'])) ? $conf['META-IMAGE_FOR_PAGE_OUT'] : '';
-			
-			$page_meta_options['page_template'] = (isset($conf['META-PAGE_TEMPLATE'])) ? $conf['META-PAGE_TEMPLATE'] : '';
-			
-			$page_meta_options['page_css_profiles'] = (isset($conf['META-PAGE_CSS_PROFILES'])) ? $conf['META-PAGE_CSS_PROFILES'] : '';
-			
-			$page_meta_options['info-top-custom'] = (isset($conf['META-INFO-TOP-CUSTOM'])) ? $conf['META-INFO-TOP-CUSTOM'] : '';
-			
-			$page_meta_options['parser_content'] = (isset($conf['META-PARSER_CONTENT'])) ? $conf['META-PARSER_CONTENT'] : 'Default';
-			*/
-			
 			$page_meta_options = _find_all_meta($conf);
 			
 			
@@ -101,7 +94,7 @@ function add_new_page($fn, $UP_DIR)
 			
 			// TYPE: blog — тип записи — делаем запрос к существующим типам
 			// поскольку тип нужно будет преобразовать в его id
-			$CI = & get_instance();
+			
 			$query = $CI->db->get('page_type');
 			$res = $query->result_array();
 			

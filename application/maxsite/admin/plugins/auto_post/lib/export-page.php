@@ -147,23 +147,32 @@ function export_page($data)
 				// дефолтный парсер не указываем — нет смысла
 				if ($k === 'parser_content' and $v[0] === 'Default') continue;
 				
-				$out .= 'META-' . $k . ': ' . str_replace("\n", '__NR__', trim($v[0])) . NR;
+				$u = str_replace("\n", '__NR__', trim($v[0]));
+				$out .= 'META-' . $k . ': ' . $u . NR;
 			}
 		}
 		
-		// старый вариант
-		// $out .= _my_meta($page, 'META-TITLE', 'title');
-		// $out .= _my_meta($page, 'META-DESCRIPTION', 'description');
-		// $out .= _my_meta($page, 'META-KEYWORDS', 'keywords');
-		// $out .= _my_meta($page, 'META-IMAGE_FOR_PAGE', 'image_for_page');
-		// $out .= _my_meta($page, 'META-IMAGE_FOR_PAGE_OUT', 'image_for_page_out');
-		// $out .= _my_meta($page, 'META-PAGE_TEMPLATE', 'page_template');
-		// $out .= _my_meta($page, 'META-PAGE_CSS_PROFILES', 'page_css_profiles');
-		// $out .= _my_meta($page, 'META-INFO-TOP-CUSTOM', 'info-top-custom');
-		// $out .= _my_meta($page, 'META-PARSER_CONTENT', 'parser_content', 'Default');
 		
 		// $out .= 'ID_AUTHOR: ' . $page['page_id_autor'] . NR; // не используется
 
+		
+		// добавим все связанные файлы в _pages 
+		$pages_dir = getinfo('uploads_dir') . '_pages/' . $data['page_id'] . '/';
+		$pages_url = '[[R_1]]_pages/' . $data['page_id'] . '/';
+		
+		$CI->load->helper('directory');
+		$dirs = directory_map($pages_dir, 2); // только в текущем каталоге
+		
+		if ($dirs)
+		{
+			$out .= NR;
+			foreach ($dirs as $file)
+			{
+				if (is_array($file)) continue; // каталог — это массив
+				$out .= $pages_url . $file . NR;
+			}
+		}
+		
 		$out .= '---' . NR;
 		
 		// нужно ли делать эту замену???
@@ -171,8 +180,14 @@ function export_page($data)
 		
 		$out .= $page['page_content'] . NR;
 		
+		
+		$out = str_replace(getinfo('uploads_url') . '_pages/' . $data['page_id'] . '/', '[[PAGE_FILES]]', $out);
+		
 		$out = str_replace(getinfo('uploads_url'), '[[UPLOADS_URL]]', $out);
 		$out = str_replace(getinfo('siteurl'), '[[SITE_URL]]', $out);
+		
+		// спецзамены
+		$out = str_replace('[[R_1]]', getinfo('uploads_url'), $out);
 		
 		
 		if ($page['comments'])

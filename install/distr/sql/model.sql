@@ -262,7 +262,7 @@ CREATE TABLE _PREFIX_comments (
 	comments_parent_id bigint(20) NOT NULL default '0',
 	comments_users_id bigint(20) NOT NULL default '0',
 	comments_comusers_id bigint(20) NOT NULL default '0',
-	comments_author_name varchar(255) NOT NULL,
+	comments_author_name varchar(255) NOT NULL default '',
 	comments_author_ip varchar(100) NOT NULL default '',
 	comments_date datetime NOT NULL default '2008-01-01 00:00:00',
 	comments_content longtext,

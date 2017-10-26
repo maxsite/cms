@@ -783,6 +783,7 @@ function mso_get_new_comment($args = array())
 							'comments_content' => $comments_content,
 							'comments_approved' => $comments_com_approved,
 							'comments_parent_id' => $comments_parent_id,
+							'comments_author_name' => '',
 							);
 							
 						// проверим время последнего комментария чтобы не очень часто

@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Смайлики'),
 	'description' => t('Отображение графических смайликов в тексте и комментариях'),
-	'version' => '1.0',
+	'version' => '2',
 	'author' => 'Максим',
 	'plugin_url' => '',
 	'author_url' => '//maxsite.org/',

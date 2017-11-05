@@ -224,8 +224,19 @@ function post_all_users($f_user_id)
 }
 
 // дата-время
-function post_date_time()
+function post_date_time($date = false)
 {
+	if ($date === false) $date = date('Y-m-d H:i:s');
+	
+	// pr($date); // 2017-11-04 12:00:00
+	
+	$k_y = mso_date_convert('Y', $date, false, false);
+	$k_m = mso_date_convert('m', $date, false, false);
+	$k_d = mso_date_convert('d', $date, false, false);
+	$k_h = mso_date_convert('H', $date, false, false);
+	$k_i = mso_date_convert('i', $date, false, false);
+	$k_s = mso_date_convert('s', $date, false, false);
+	
 	$date_all_y = array();
 	for ($i=2005; $i<2021; $i++) $date_all_y[$i] = $i;
 	
@@ -235,9 +246,9 @@ function post_date_time()
 	$date_all_d = array();
 	for ($i=1; $i<32; $i++) $date_all_d[$i] = $i;
 	
-	$out['date_y'] = form_dropdown('f_date_y', $date_all_y, date('Y'), ' style="width: 100px;" ');
-	$out['date_m'] = form_dropdown('f_date_m', $date_all_m, date('m'), ' style="width: 60px;" ');
-	$out['date_d'] = form_dropdown('f_date_d', $date_all_d, date('d'), ' style="width: 60px;" ');
+	$out['date_y'] = form_dropdown('f_date_y', $date_all_y, $k_y, ' style="width: 100px;" ');
+	$out['date_m'] = form_dropdown('f_date_m', $date_all_m, $k_m, ' style="width: 60px;" ');
+	$out['date_d'] = form_dropdown('f_date_d', $date_all_d, $k_d, ' style="width: 60px;" ');
 	
 	$time_all_h = array();
 	for ($i=0; $i<24; $i++) $time_all_h[$i] = $i;
@@ -247,9 +258,9 @@ function post_date_time()
 
 	$time_all_s = $time_all_m;
 	
-	$out['time_h'] = form_dropdown('f_time_h', $time_all_h, date('H'), ' style="width: 60px;" ');
-	$out['time_m'] = form_dropdown('f_time_m', $time_all_m, date('i'), ' style="width: 60px;" ');
-	$out['time_s'] = form_dropdown('f_time_s', $time_all_s, date('s'), ' style="width: 60px;" ');
+	$out['time_h'] = form_dropdown('f_time_h', $time_all_h, $k_h, ' style="width: 60px;" ');
+	$out['time_m'] = form_dropdown('f_time_m', $time_all_m, $k_i, ' style="width: 60px;" ');
+	$out['time_s'] = form_dropdown('f_time_s', $time_all_s, $k_s, ' style="width: 60px;" ');
 	
 	return $out;
 }

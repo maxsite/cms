@@ -69,6 +69,9 @@ else
 {
 	// echo ' | <a href="' . mso_get_permalink_page($id) . '">' . t('Посмотреть запись') . '</a> (<a target="_blank" href="' . mso_get_permalink_page($id) . '">' . t('в новом окне') . '</a>)</p>';
 	
+	// очистим кэш БД
+	$CI->db->cache_delete_all();
+	
 	// получаем данные записи
 	$CI->db->select('*');
 	$CI->db->where(array('page_id' => $id));
@@ -168,7 +171,9 @@ $date_time = t('Сохранено:') . ' ' . $page_date_publish;
 $date_time .= '<br>' . t('На сайте как:') . ' ' . mso_date_convert('Y-m-d H:i:s', $page_date_publish);
 $date_time .= '<br>' . t('Текущее время:') . ' ' . date('Y-m-d H:i:s');
 
-$td = post_date_time();
+$td = post_date_time($page_date_publish);
+
+// pr($td);
 $date_y = $td['date_y'];
 $date_m = $td['date_m'];
 $date_d = $td['date_d'];

@@ -5,9 +5,10 @@
 
 (function( $, window, document, undefined ) {
 
+
 	var pluginName = 'showHide',
 		defaults = {
-			cookieName : ( window.location.host + window.location.pathname ).replace( /\//g, '-' ),
+			cookieName : ( encodeURIComponent(window.location.host) + window.location.pathname ).replace( /\//g, '-' ),
 			visible : false,
 			time : 400,
 			clickElem : null,

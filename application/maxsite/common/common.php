@@ -23,6 +23,8 @@ function getinfo($info = '')
 {
 	global $MSO;
 
+	static $ajax = false;
+	
 	$out = '';
 
 	switch ($info) :
@@ -183,7 +185,26 @@ function getinfo($info = '')
 				break;
 
 		case 'ajax' :
-				$out = '//' . str_replace(array('http://', 'https://'), '' , $MSO->config['site_url']) . 'ajax/';
+				if ($ajax !== false) 
+				{
+					$out = $ajax;
+				}
+				else
+				{
+					// проверка IDN-домена для аякса
+					if (stripos($MSO->config['site_url'], 'xn--') !== false )
+					{
+						require_once($MSO->config['base_dir'] . 'common/idna.php');
+						
+						$host = parse_url($MSO->config['site_url'] );
+						$out = $ajax = '//' . mso_DecodePunycodeIDN($host['host']) . '/ajax/';
+					}
+					else
+					{
+						$out = $ajax = '//' . str_replace(array('http://', 'https://'), '' , $MSO->config['site_url']) . 'ajax/';
+					}
+				}
+				
 				break;
 				
 		case 'require-maxsite' :

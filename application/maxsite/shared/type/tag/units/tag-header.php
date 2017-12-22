@@ -34,6 +34,7 @@ echo '<header>';
 	// имя метки должно быть полностью в нижнем регистре
 	// например: tag/солнечная система   tag/земля
 	if (function_exists('ushka')) echo ushka('tag/' . mb_strtolower(htmlspecialchars(mso_segment(2))));
+	if ($f = mso_find_ts_file('type/tag/units/tag-info.php')) require($f);
 
 echo '</header>';
 

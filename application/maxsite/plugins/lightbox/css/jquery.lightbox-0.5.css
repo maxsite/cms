@@ -39,7 +39,7 @@
 	min-height: 100px;
 	margin: 0 auto;
 }
-#lightbox-container-image { padding: 10px; }
+#lightbox-container-image { padding-bottom: 10px; }
 #lightbox-loading {
 	position: absolute;
 	top: 40%;

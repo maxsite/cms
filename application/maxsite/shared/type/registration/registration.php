@@ -109,7 +109,7 @@ else
 			$error .= '<div class="mso-message-error">' . tf('Пароль и его повтор не совпадают') . '</div>';
 		}
 		
-		if ( !mso_hook('comments_new_captcha') )
+		if (mso_hook_present('comments_new_captcha') and !mso_hook('comments_new_captcha') )
 		{
 			$error .= '<div class="mso-message-error">' . tf('Неверный код капчи') . '</div>';
 		}

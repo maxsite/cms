@@ -6,6 +6,10 @@ $MSO->config['secret_key'] = '';
 # можно указать свой ключ для удаленного постинга
 # $MSO->config['remote_key'] = '0';
 
+# если используется IDN-адрес (кириллический), то может понадобиться
+# Punycode-кодирование адерса для ajax-запроса
+// $MSO->config['DecodePunycodeIDN'] = 1;
+
 # можно указать язык сайта
 //$MSO->language = 'en'; // english
 //$MSO->language = 'ua'; // украинский

@@ -191,8 +191,7 @@ function getinfo($info = '')
 				}
 				else
 				{
-					// проверка IDN-домена для аякса
-					if (stripos($MSO->config['site_url'], 'xn--') !== false )
+					if (isset($MSO->config['DecodePunycodeIDN']))
 					{
 						require_once($MSO->config['base_dir'] . 'common/idna.php');
 						
@@ -203,6 +202,21 @@ function getinfo($info = '')
 					{
 						$out = $ajax = '//' . str_replace(array('http://', 'https://'), '' , $MSO->config['site_url']) . 'ajax/';
 					}
+					
+					/* // старый вариант — автоопределение
+					// проверка IDN-домена для аякса
+					if (stripos($MSO->config['site_url'], 'xn--') !== false)
+					{
+						require_once($MSO->config['base_dir'] . 'common/idna.php');
+						
+						$host = parse_url($MSO->config['site_url'] );
+						$out = $ajax = '//' . mso_DecodePunycodeIDN($host['host']) . '/ajax/';
+					}
+					else
+					{
+						$out = $ajax = '//' . str_replace(array('http://', 'https://'), '' , $MSO->config['site_url']) . 'ajax/';
+					}
+					*/
 				}
 				
 				break;

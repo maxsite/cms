@@ -112,31 +112,27 @@ function spoiler_head($args = array())
 	if ( !isset($options['style'])  ) $options['style'] = '';
 	if ($options['style'] != '')
 	{
-		echo '
-		<link rel="stylesheet" href="' . getinfo('plugins_url') . 'spoiler/style/' . $options['style'] . '">';
+		echo '<link rel="stylesheet" href="' . getinfo('plugins_url') . 'spoiler/style/' . $options['style'] . '">';
 	}	
 	
-	echo '	
-	<script>
-	
-	function SpoilerToggle(id, link, showtext, hidetext)
+	echo '<script>
+function SpoilerToggle(id, link, showtext, hidetext)
+{
+	var spoiler = document.getElementById(id);
+	if (spoiler.style.display != "none")
 	{
-		var spoiler = document.getElementById(id);
-    	if (spoiler.style.display != "none")
-		{
-           	spoiler.style.display = "none";
-            link.innerHTML = showtext;
-            link.className = "spoiler_link_show";
-        }
-		else
-		{
-	       	spoiler.style.display = "block";
-            link.innerHTML = hidetext;
-            link.className = "spoiler_link_hide";
-        }
-    }
-	</script>
-	';
+		spoiler.style.display = "none";
+		link.innerHTML = showtext;
+		link.className = "spoiler_link_show";
+	}
+	else
+	{
+		spoiler.style.display = "block";
+		link.innerHTML = hidetext;
+		link.className = "spoiler_link_hide";
+	}
+}
+</script>';
 }
 
 # функция отрабатывающая миниопции плагина (function плагин_mso_options)

@@ -10,6 +10,12 @@ if (function_exists('ushka'))
 
 mso_hook('body_end'); 
 
+// assets/css/-lazy.css
+if ($lazy_css = mso_fe('assets/css/-lazy.css'))
+{
+	echo mso_load_style(getinfo('template_url') . 'assets/css/-lazy.css');
+}
+
 // lazy-загрузка js-файлов
 if ($lazy_js = mso_get_path_files(getinfo('template_dir') . 'assets/js/lazy/', getinfo('template_url') . 'assets/js/lazy/', true, array('js')))
 {

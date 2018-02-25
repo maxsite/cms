@@ -153,9 +153,16 @@ if ($pages)
 					}
 					else
 					{
-						if ($add_class_page = $p->meta_val('mso-page-content-add-class', '', '')) 
-							$add_class_page = ' ' . $add_class_page;
+						$add_class_page = '';
 						
+						if ($add1 = $p->meta_val('mso-page-content-add-class', '', '')) 
+							$add_class_page .= ' ' . $add1;
+						
+						if ($add2 = mso_get_val('mso-page-content-add-class', ''))
+							$add_class_page .= ' ' . $add2;
+						
+						if ($add_class_page) $add_class_page = ' ' . trim($add_class_page);
+							
 						$p->div_start('mso-page-content mso-type-' . getinfo('type') . '-content' . $add_class_page);
 							
 							if ($f = mso_page_foreach('content')) require($f);

@@ -10,10 +10,19 @@ if (function_exists('ushka'))
 
 mso_hook('body_end'); 
 
-// assets/css/-lazy.css
-if ($lazy_css = mso_fe('assets/css/-lazy.css'))
+// одиночный assets/css/-lazy.css
+if (mso_fe('assets/css/-lazy.css'))
 {
 	echo mso_load_style(getinfo('template_url') . 'assets/css/-lazy.css');
+}
+
+// lazy-загрузка css-файлов
+if ($lazy_css = mso_get_path_files(getinfo('template_dir') . 'assets/css/lazy/', getinfo('template_url') . 'assets/css/lazy/', true, array('css')))
+{
+	foreach($lazy_css as $fn_css)
+	{
+		echo '<link rel="stylesheet" href="' . $fn_css . '">';
+	}
 }
 
 // lazy-загрузка js-файлов
@@ -21,7 +30,7 @@ if ($lazy_js = mso_get_path_files(getinfo('template_dir') . 'assets/js/lazy/', g
 {
 	foreach($lazy_js as $fn_js)
 	{
-		echo '<script src="' . $fn_js . '"></script>' . NR;
+		echo '<script src="' . $fn_js . '"></script>';
 	}
 }
 

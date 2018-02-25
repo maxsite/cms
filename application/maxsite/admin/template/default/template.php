@@ -111,6 +111,7 @@
 		<?= $admin_content ?>
 	</div>
 </div>
+<link rel="stylesheet" href="<?= $admin_template_url ?>assets/css/-lazy.css">
 <?= mso_load_jquery('jquery.cookie.js') ?>
 <?= mso_load_jquery('jquery.showhide.js') ?>
 <script src="<?= $admin_template_url ?>assets/js/jquery.tablesorter.js"></script>

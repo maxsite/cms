@@ -54,10 +54,13 @@ function catclouds_widget_form($num = 1)
 		else $options['max_size'] = (int) $options['max_size'];
 		
 	if ( !isset($options['cat_id']) ) $options['cat_id'] = 0;
-		else $options['cat_id'] = (int) $options['cat_id'];		
+		else $options['cat_id'] = (int) $options['cat_id'];	
 		
 	if ( !isset($options['format']) ) 
 		$options['format'] = '<span style="font-size: [SIZE]%"><a href="[URL]">[CAT]</a><sub style="font-size: 12px;">[COUNT]</sub></span>';
+	
+	if ( !isset($options['current']) ) 
+		$options['current'] = '<span style="font-size: [SIZE]%"><b><a href="[URL]">[CAT]</a></b><sub style="font-size: 12px;">[COUNT]</sub></span>';
 	
 	if ( !isset($options['sort']) ) $options['sort'] = 0;
 		else $options['sort'] = (int) $options['sort'];
@@ -69,7 +72,9 @@ function catclouds_widget_form($num = 1)
 	
 	$form = mso_widget_create_form(t('Заголовок'), form_input( array( 'name'=>$widget . 'header', 'value'=>$options['header'] ) ), '');
 	
-	$form .= mso_widget_create_form(t('Формат'), form_textarea( array( 'name'=>$widget . 'format', 'value'=>$options['format'] ) ), '[SIZE] [URL] [CAT] [COUNT]');
+	$form .= mso_widget_create_form(t('Формат'), form_textarea( array( 'name'=>$widget . 'format', 'value'=>$options['format'], 'rows' => 3 ) ), '[SIZE] [URL] [CAT] [COUNT] [CURRENT]');
+	
+	$form .= mso_widget_create_form(t('Формат текущей'), form_textarea( array( 'name'=>$widget . 'current', 'value'=>$options['current'], 'rows' => 3 ) ), '[SIZE] [URL] [CAT] [COUNT] [CURRENT]');
 	
 	$form .= mso_widget_create_form(t('Мин. размер (%)'), form_input( array( 'name'=>$widget . 'min_size', 'value'=>$options['min_size'] ) ), '');
 	
@@ -87,7 +92,6 @@ function catclouds_widget_form($num = 1)
 									   '2'=>t('По алфавиту'), 
 									   '3'=>t('По алфавиту (обратно)')), 
 									   $options['sort'] ), '');
-	
 	
 	return $form;
 }
@@ -109,6 +113,7 @@ function catclouds_widget_update($num = 1)
 	$newoptions['min_size'] = mso_widget_get_post($widget . 'min_size');
 	$newoptions['max_size'] = mso_widget_get_post($widget . 'max_size');
 	$newoptions['format'] = mso_widget_get_post($widget . 'format');
+	$newoptions['current'] = mso_widget_get_post($widget . 'current');
 	$newoptions['sort'] = mso_widget_get_post($widget . 'sort');
 	$newoptions['cat_id'] = mso_widget_get_post($widget . 'cat_id');
 	
@@ -119,77 +124,121 @@ function catclouds_widget_update($num = 1)
 # функции плагина
 function catclouds_widget_custom($options = array(), $num = 1)
 {
-	// кэш 
-	$cache_key = 'catclouds_widget_custom' . serialize($options) . $num;
-	$k = mso_get_cache($cache_key);
-	
-	if ($k) return $k; // да есть в кэше
-	
-	// формат вывода  [SIZE] [URL] %TAG% [COUNT] 
-	// параметры $min_size $max_size $block_start $block_end
-	// сортировка 
+	global $page;
 	
 	$out = '';
-	
+
 	if ( !isset($options['header']) ) $options['header'] = '';
 	
 	if ( !isset($options['block_start']) ) $options['block_start'] = '<div class="mso-catclouds">';
-	if ( !isset($options['block_end']) ) $options['block_end'] = '</div>';
+	if ( !isset($options['block_end']) )   $options['block_end'] = '</div>';
 	
-	if ( !isset($options['min_size']) ) $min_size = 90;
-		else $min_size = (int) $options['min_size'];
+	if ( !isset($options['min_size']) ) 
+		$min_size = 90;
+	else 
+		$min_size = (int) $options['min_size'];
 		
-	if ( !isset($options['max_size']) ) $max_size = 230;
-		else $max_size = (int) $options['max_size'];
+	if ( !isset($options['max_size']) ) 
+		$max_size = 230;
+	else 
+		$max_size = (int) $options['max_size'];
 		
-	if ( !isset($options['cat_id']) ) $cat_id = 0;
-		else $cat_id = (int) $options['cat_id'];		
+	if ( !isset($options['cat_id']) ) 
+		$cat_id = 0;
+	else 
+		$cat_id = (int) $options['cat_id'];		
 		
 	if ( !isset($options['format']) ) 
 		$options['format'] = '<span style="font-size: [SIZE]%"><a href="[URL]">[CAT]</a><sub style="font-size: 12px;">[COUNT]</sub></span>';
 	
-	if ( !isset($options['sort']) ) $sort = 0;
-		else $sort = (int) $options['sort'];
-    
-    $url = getinfo('siteurl') . 'category/';
-		
-	require_once( getinfo('common_dir') . 'category.php' ); // функции мета
-	$all_cat = mso_cat_array_single('page', 'category_name', 'ASC', 'blog');
+	if ( !isset($options['current']) ) 
+		$options['current'] = '<span style="font-size: [SIZE]%"><b><a href="[URL]">[CAT]</a></b><sub style="font-size: 12px;">[COUNT]</sub></span>';
 	
-	$catcloud = array();
-	foreach ($all_cat as $key => $val)
+	if ( !isset($options['sort']) ) 
+		$sort = 0;
+	else 
+		$sort = (int) $options['sort'];
+	
+	$url = getinfo('siteurl') . 'category/';
+	
+	// кэш — в нем только catcloud
+	$cache_key = 'catclouds_widget_custom' . serialize($options) . $num;
+	$k = mso_get_cache($cache_key);
+	
+	if (!$k) // catcloud нет в кэше
 	{
-		if ($cat_id) // указана рубрика
+		require_once( getinfo('common_dir') . 'category.php' ); // функции мета
+		$all_cat = mso_cat_array_single('page', 'category_name', 'ASC', 'blog');
+		
+		$catcloud = array();
+		
+		foreach ($all_cat as $key => $val)
 		{
-			// выводим саму рубрику и всех её детей
-			if ( $val['category_id'] == $cat_id or $val['category_id_parent'] == $cat_id )
+			if ($cat_id) // указана рубрика
+			{
+				// выводим саму рубрику и всех её детей
+				if ( $val['category_id'] == $cat_id or $val['category_id_parent'] == $cat_id )
+				{
+					if ( count($val['pages'])>0 ) // кол-во страниц в этой рубрике > 0
+						$catcloud[$val['category_name']] = array( 'count'=>count($val['pages']), 'slug' => $val['category_slug'] );
+				}
+			}
+			else // рубрика не указана - выводим все что есть
 			{
 				if ( count($val['pages'])>0 ) // кол-во страниц в этой рубрике > 0
-					$catcloud[$val['category_name']] = array( 'count'=>count($val['pages']), 'slug' => $val['category_slug'] );
+						$catcloud[$val['category_name']] = array( 'count'=>count($val['pages']), 'slug' => $val['category_slug'] );
 			}
 		}
-		else // рубрика не указана - выводим все что есть
-		{
-			if ( count($val['pages'])>0 ) // кол-во страниц в этой рубрике > 0
-					$catcloud[$val['category_name']] = array( 'count'=>count($val['pages']), 'slug' => $val['category_slug'] );
-		}
+		
+		asort($catcloud);
+		$min = reset($catcloud);
+		$min = $min['count'];
+		$max = end($catcloud);
+		$max = $max['count'];
+	  
+		if ($max == $min) $max++;
+		
+		// сортировка перед выводом
+		if ($sort == 0) arsort($catcloud); // по количеству обратно
+		elseif ($sort == 1) asort($catcloud); // по количеству 
+		elseif ($sort == 2) ksort($catcloud); // по алфавиту
+		elseif ($sort == 3) krsort($catcloud); // обратно по алфавиту
+		else arsort($catcloud); // по умолчанию
+		
+		// сохраним в массиве слкужебный элемент MIN_MAX — они нужный для вывода
+		$catcloud['_MSO_CATCLOUD_MIN_MAX']['MIN'] = $min;
+		$catcloud['_MSO_CATCLOUD_MIN_MAX']['MAX'] = $max;
+		
+		mso_add_cache($cache_key, $catcloud); // в кэш
+		
+		unset($catcloud['_MSO_CATCLOUD_MIN_MAX']);
+	}
+	else
+	{
+		// catcloud есть в кэше
+		$catcloud = $k;
+		
+		$min = $catcloud['_MSO_CATCLOUD_MIN_MAX']['MIN'];
+		$max = $catcloud['_MSO_CATCLOUD_MIN_MAX']['MAX'];
+		unset($catcloud['_MSO_CATCLOUD_MIN_MAX']);
 	}
 	
-	asort($catcloud);
-	$min = reset($catcloud);
-	$min = $min['count'];
-    $max = end($catcloud);
-	$max = $max['count'];
-  
-    if ($max == $min) $max++;
-    
-    // сортировка перед выводом
-    if ($sort == 0) arsort($catcloud); // по количеству обратно
-    elseif ($sort == 1) asort($catcloud); // по количеству 
-    elseif ($sort == 2) ksort($catcloud); // по алфавиту
-    elseif ($sort == 3) krsort($catcloud); // обратно по алфавиту
-    else arsort($catcloud); // по умолчанию
-    
+	// определим текущую рубрику
+	$current_cat_slug = array(); // здесь все slug рубрик
+	
+	if (is_type('page') and isset($page['page_categories_detail']))
+	{
+		// нас интересует только slug
+		foreach($page['page_categories_detail'] as $i => $d)
+		{
+			if ($d['category_slug']) $current_cat_slug[] = $d['category_slug'];
+		}
+	}
+	elseif (is_type('category')) // это рубрика, просто смотрим сегмент
+	{
+		$current_cat_slug[] = mso_segment(2);
+	}
+	
     foreach ($catcloud as $cat => $ar) 
     {
 		$count = $ar['count'];
@@ -197,18 +246,17 @@ function catclouds_widget_custom($options = array(), $num = 1)
 	
         $font_size = round( (($count - $min)/($max - $min)) * ($max_size - $min_size) + $min_size );
         
+		$f = in_array($slug, $current_cat_slug) ? $options['current'] : $options['format'];
+		
         $af = str_replace(array('[SIZE]', '[URL]', '[CAT]', '[COUNT]'), 
-						  array($font_size, $url . $slug, $cat, $count), $options['format']);
+						  array($font_size, $url . $slug, $cat, $count), $f);
 
 		$out .= $af . ' '; 	
     }
-	
-	
+		
 	if ($out) $out = $options['header'] . $options['block_start'] . $out . $options['block_end'] ;
-	
-	mso_add_cache($cache_key, $out); // сразу в кэш добавим
 	
 	return $out;
 }
 
-# end file
+# end of file

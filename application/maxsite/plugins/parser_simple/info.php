@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Парсер текста Simple'),
 	'description' => t('Обрабатывает текст в HTML'),
-	'version' => '1.0',
+	'version' => '2018.02.16',
 	'author' => 'Максим',
 	'plugin_url' => '//lpf.maxsite.com.ua/simple',
 	'help' => '//lpf.maxsite.com.ua/simple', # ссылка на help плагина 

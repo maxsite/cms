@@ -1,0 +1,46 @@
+// Можно добавтить в свой шаблон
+
+// верхняя панель theme-switch с картинками
+div.theme-switch-panel-screenshot {
+	height: 100px;
+	overflow: auto; 
+	white-space: nowrap;
+	
+	img {
+		height: 80px;
+		width: auto;
+		margin: 0 5px 0 0;
+		opacity: .5; 
+		
+		&:hover {
+		 	opacity: 1; 
+		}
+	}
+	
+	a.current img {
+		border: 3px solid #d90000;
+		opacity: 1;
+	}
+}
+
+// верхняя панель theme-switch выпадающий список
+div.theme-switch-panel-combo {
+	
+	background: #222;
+	font-size: .9rem;
+	padding: 5px 0;
+	
+	.wrap {
+		@extend .layout-center;
+	}
+	
+	select {
+		width: 100%;
+		background: #dddddd;
+		
+		[selected] { 
+			background: #b30000;
+			color: #fff;
+		}
+	}
+}

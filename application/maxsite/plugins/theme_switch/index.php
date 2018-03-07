@@ -229,67 +229,117 @@ function theme_switch_body_start($args = '')
 	$opt = mso_get_option('theme_switch', 'plugins', array());
 	if ( !isset($opt['show_panel']) or !$opt['show_panel']) return $args; // не отмечена панель
 	if ( !isset($opt['templates']) ) return $args; // нет выбранных шаблонов
-	
-	// $height_img = isset($opt['height_img']) ? $opt['height_img'] : 125; 
-	
+	if ( !isset($opt['show_panel_type']) ) $opt['show_panel_type'] = 'screenshot';
+		
 	$current_template = getinfo('template');
 	
-	$imgs = '';
-	
-	// извраты со счетчиками, чтобы сделать красивый скролинг к выбранному элементу
-	$i = 1;
-	$i_cur = 1;
-	
-	
-	foreach($opt['templates'] as $key=>$val)
+	if ($opt['show_panel_type'] == 'screenshot')
 	{
-		if ($key == $current_template) 
+		// скриншотами
+		
+		$imgs = '';
+		
+		// извраты со счетчиками, чтобы сделать красивый скролинг к выбранному элементу
+		$i = 1;
+		$i_cur = 1;
+		
+		
+		foreach($opt['templates'] as $key => $val)
+		{
+			if ($key == $current_template) 
 			{
 				$class = 'current';
 				$i_cur = $i;
 			}
-			else $class = '';
-		
-		$class = trim($class . ' img' . $i);
-		
-		if (file_exists(getinfo('templates_dir') . $key . '/screenshot.png' )) $fn = 'screenshot.png';
-		else $fn = 'screenshot.jpg';
-		
-		
-		$imgs  .= '<a href="' . getinfo('siteurl') . '?theme=' . $key . '" title="' . $val 
-			. '" class="' . $class . '"><img src=' . getinfo('templates_url') . $key . '/' . $fn . '></a>';
+			else 
+				$class = '';
 			
+			$class = trim($class . ' img' . $i);
+			
+			if (file_exists(getinfo('templates_dir') . $key . '/screenshot.png' )) 
+				$fn = 'screenshot.png';
+			else 
+				$fn = 'screenshot.jpg';
+			
+			
+			$imgs  .= '<a href="' . getinfo('siteurl') . '?theme=' . $key . '" title="' . $val 
+				. '" class="' . $class . '"><img src=' . getinfo('templates_url') . $key . '/' . $fn . '></a>';
+			
+			$i++;
+		}
 		
-		$i++;
+		// куда скролируем = на 4 картинки назад
+		$i_go = $i_cur - 4;
+		if ($i_go < 1) $i_go = 1;
+		
+		$info_template = '';
+		$fn_info = getinfo('templates_dir') . $current_template . '/info.php';
+		
+		if (file_exists($fn_info)) 
+		{
+			require($fn_info);
+			$info_template .= $info['name'] . ' ' . $info['version'];
+		}
+		
+		$out = mso_load_jquery('jquery.scrollto.js') . '
+		
+		<div class="theme-switch-panel theme-switch-panel-screenshot"><div class="wrap">'
+			. $imgs
+		. '</div></div><!-- div class=theme-switch-panel -->
+		
+		<script>
+			$("div.theme-switch-panel").scrollTo("a.current img", 500);
+			$("div.theme-switch-panel").scrollTo("a.img' . $i_go . ' img", 800);
+		</script>
+		
+		';
+		
+		echo $out;
 	}
-	
-	// куда скролируем = на 4 картинки назад
-	$i_go = $i_cur - 4;
-	if ($i_go < 1) $i_go = 1;
-	
-	$info_template = '';
-	$fn_info = getinfo('templates_dir') . $current_template . '/info.php';
-	if (file_exists($fn_info)) 
+	else
 	{
-		require($fn_info);
+		// выпадающим списком
+		$elements = '';
 		
-		$info_template .= $info['name'] . ' ' . $info['version'];
+		foreach($opt['templates'] as $key => $val)
+		{
+			$selected = ($key == $current_template) ? ' selected' : '';
+			$elements  .= '<option value="' . $key .'"' . $selected .'>' . $val . ' (' . $key . ')</option>';
+		}
+		
+		echo '<div class="theme-switch-panel theme-switch-panel-combo"><div class="wrap">
+		<select id="theme_switch_panel_combo_select">' . $elements . '</select>
+		</div></div><!-- div class=theme-switch-panel -->';
+		
+		// ' . getinfo('siteurl') . '?theme=' . $key
+		
+		// getinfo('siteurl')
+		$su = getinfo('siteurl');
+		
+		echo <<<EOF
+<script>
+jQuery(function($) {
+	
+	$('#theme_switch_panel_combo_select').change(function(){
+		
+		var f = $("#theme_switch_panel_combo_select :selected").val();
+		
+		if (f)
+		{
+			location.href = '$su' + '?theme=' + f;
+		}
+	})
+	
+});
+</script>
+
+EOF;
+		
+		
+		
 	}
 	
-	$out = mso_load_jquery('jquery.scrollto.js') . '
 	
-	<div class="theme-switch-panel"><div class="wrap">'
-		. $imgs
-	. '</div></div><!-- div class=theme-switch-panel -->
-	
-	<script>
-		$("div.theme-switch-panel").scrollTo("a.current img", 500);
-		$("div.theme-switch-panel").scrollTo("a.img' . $i_go . ' img", 800);
-	</script>
-	
-	';
-	
-	echo $out;
 
 	return $args;
 }

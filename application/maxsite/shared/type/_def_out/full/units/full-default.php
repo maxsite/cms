@@ -61,9 +61,15 @@ $p->div_start('mso-page-content mso-type-' . getinfo('type') . '-content');
 	
 		mso_page_content_end();
 		
-		$p->clearfix();
-		
-		$p->line('[comments]');
+		if ($f = mso_page_foreach('full-default-content-end')) 
+		{
+			require($f);
+		}
+		else
+		{
+			$p->clearfix();
+			$p->line('[comments]');
+		}
 		
 	$p->html('</aside>');
 	

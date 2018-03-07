@@ -2074,6 +2074,10 @@ function mso_page_other_pages($page_id = 0, $page_categories = array())
 	{
 		// алгоритм получения записей
 		$algoritm = mso_get_option('page_other_pages_algoritm', 'templates', 'all');
+		
+		$type_page = mso_get_option('page_other_pages_type_page', 'templates', '');
+		if (!$type_page) $type_page = false;
+		
 		$custom_type = 'category';
 		
 		if ($algoritm == 'lowlewel') // только из подрубрик
@@ -2112,7 +2116,7 @@ function mso_page_other_pages($page_id = 0, $page_categories = array())
 		$fasc = mso_get_val('page_other_pages_function_add_custom_sql', false);
 		
 		$bl_pages = mso_get_pages(
-				array(  'type'=> false, 
+				array(  'type'=> $type_page, 
 						'content'=> false, 
 						'pagination'=>false, 
 						'custom_type'=> $custom_type, 

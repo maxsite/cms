@@ -18,7 +18,23 @@
 			  '<br>' . t('Время сервера:') . ' <strong>' . date('H:i:s Y-m-d P') . '</strong>'
 			. '<br>' . t('С учётом поправки:') . ' <strong>' . mso_date_convert('H:i:s Y-m-d', date('Y-m-d H:i:s')) . '</strong>';
 	}
-
+	
+	function _all_type_pages()
+	{
+		$CI = & get_instance();
+		
+		$CI->db->order_by('page_type_name', 'asc');
+		$query = $CI->db->get('page_type');
+		
+		$out = '';
+		
+		foreach ($query->result_array() as $row)
+		{
+			$out .= '# ' . $row['page_type_name'] . '||' .   htmlspecialchars(t($row['page_type_desc']), ENT_QUOTES) . ' - ' . $row['page_type_name'];
+		}
+		
+		return $out;
+	}
 
 
 	// $CI = & get_instance();

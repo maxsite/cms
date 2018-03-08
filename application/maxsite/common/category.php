@@ -406,13 +406,14 @@ function _get_child($type = 'page', $parent_id = 0, $order = 'category_menu_orde
 # автоматом вычисляются родители (parents) и дочерние элементы (childs)
 # дополнительный параметр level указывает на левый отступ от края списка
 # $pages_detail = true — формировать детальный список записей
-function mso_cat_array_single($type = 'page', $order = 'category_name', $asc = 'ASC', $type_page = '', $cache = true, $pages_detail = true)
+# $page_status - статус страниц. Если статус не нужен, то указывается пустая строка ''
+function mso_cat_array_single($type = 'page', $order = 'category_name', $asc = 'ASC', $type_page = '', $cache = true, $pages_detail = true, $page_status = 'publish')
 {
 	if ($cache) // можно кэшировать
 	{
 		
 		// возможно, что этот список уже сформирован, поэтому посмотрим в кэше
-		$cache_key = mso_md5( __FUNCTION__ . $type . $order . $asc . $type_page . ($pages_detail ? '1' : '0') );
+		$cache_key = mso_md5( __FUNCTION__ . $type . $order . $asc . $type_page . ($pages_detail ? '1' : '0') . $page_status );
 		
 		$k = mso_get_cache($cache_key);
 		
@@ -507,7 +508,9 @@ function mso_cat_array_single($type = 'page', $order = 'category_name', $asc = '
 	$CI->db->join('cat2obj', 'cat2obj.category_id = category.category_id');
 	$CI->db->join('page', 'cat2obj.page_id = page.page_id', 'left');
 	$CI->db->join('page_type', 'page_type.page_type_id = page.page_type_id');
-	$CI->db->where('page_status', 'publish');
+	
+	if ($page_status) $CI->db->where('page_status', $page_status);
+	
 	// $CI->db->where('page_date_publish <', date('Y-m-d H:i:s'));
 	
 	// учитываем дату с временной поправкой

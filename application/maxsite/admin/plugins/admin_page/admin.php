@@ -37,7 +37,7 @@
 				if ( $result['result'] ) 
 				{
 					# mso_flush_cache(); // сбросим кэш перенес в mso_delete_page
-					echo '<div class="update">' . t('Страница удалена') . '</div>';
+					echo '<div class="update pos-fixed pos10-t pos0-r">' . t('Страница удалена') . '</div>';
 				}
 				else
 				{

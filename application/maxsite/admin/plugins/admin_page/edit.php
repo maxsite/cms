@@ -20,7 +20,9 @@ $permalink_page = mso_get_permalink_page($id);
 // на новую ссылку через post-edit.php
 ?>
 
-<h1><a id="permalink_page1" href="<?= $permalink_page ?>" title="<?= t('Посмотреть на сайте') ?>"><?= t('Редактирование записи') ?></a> <a id="permalink_page2" class="i-external-link t110 icon0" href="<?= $permalink_page ?>" target="_blank" title="<?= t('Открыть в новом окне') ?>"></a></h1>
+
+
+<form method="post" action="<?= getinfo('site_admin_url') ?>page"><?= mso_form_session('f_session_id') ?><input type="hidden" name="f_page_delete" value="<?= $id ?>"><input type="hidden" name="f_submit" value=""><h1><a id="permalink_page1" href="<?= $permalink_page ?>" title="<?= t('Посмотреть на сайте') ?>"><?= t('Редактирование записи') ?></a> <a id="permalink_page2" class="i-external-link t110 icon0" href="<?= $permalink_page ?>" target="_blank" title="<?= t('Открыть в новом окне') ?>"></a><span class="b-inline b-right t80"><button type="submit" name="f_delete" class="button i-remove icon0 pad10 bg-gray hover-bg-red600 " title="<?= t('Удалить запись') ?>" onclick="if(confirm('Удалить страницу?')) {return true;} else {return false;}"></button></span></h1></form>
 
 <?php
 	

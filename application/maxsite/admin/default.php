@@ -124,7 +124,7 @@ mso_create_allow('admin_comments_edit', t('Админ-доступ к редак
 
 mso_create_allow('admin_comusers', t('Админ-доступ к «Комментаторам»'));
 
-mso_create_allow('admin_home', t('Разрешить доступ (выборочно) к «Информация»'));
+mso_create_allow('admin_home', t('Разрешить просмотр информации Консоли'));
 
 mso_create_allow('editor_files', t('Разрешить доступ к редактору файлов'));
 

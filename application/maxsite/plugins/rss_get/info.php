@@ -3,7 +3,7 @@
 $info = array(
 	'name' => 'RSS get',
 	'description' => t('Получение в вывод RSS-лент'),
-	'version' => '1.2',
+	'version' => '2',
 	'author' => 'Максим',
 	'plugin_url' => '',
 	'author_url' => '//maxsite.org/',

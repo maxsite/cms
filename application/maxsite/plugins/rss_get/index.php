@@ -236,7 +236,7 @@ function rss_get_go($arg)
 				$value = mso_str_word($value, $arg['max_word_description']);
 			
 			// если поле содержит date, то пробуем его преобразовать в нужный нам формат даты
-			if ( (strpos($field, 'dc:date') !== false) or (strpos($field, 'date') !== false) or $field == 'published' or $field == 'updated' )
+			if ( (strpos($field, 'dc:date') !== false) or (strpos($field, 'date') !== false) or (strpos($field, 'pubDate') !== false) or $field == 'published' or $field == 'updated' )
 			{
 				if ( ($d = strtotime($value)) !== -1) // успешное преобразование
 					$value = date($arg['format_date'], $d);

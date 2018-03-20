@@ -173,7 +173,11 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 		
 		foreach($m as $id=>$count)
 		{
-			$k = round($count * 100 / $max1);
+			if ($max1 > 0)
+				$k = round($count * 100 / $max1);
+			else
+				$k = 0;
+				
 			$h = round($count * 100 / $max) + 40;
 			
 			if ($count == 0) $h = 0;

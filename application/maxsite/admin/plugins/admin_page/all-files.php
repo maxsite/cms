@@ -196,6 +196,10 @@ $all_files .= '
 					'width' => t('по ширине'),
 					'height' => t('по высоте'),
 					'max' => t('по максимальной стороне'),
+					'crop_center_ratio_auto' => t('кроп по центру (авто-высота)'),
+					'crop_center_ratio_4_3' => t('кроп по центру (пропорция 4:3)'), 
+					'crop_center_ratio_3_2' => t('кроп по центру (пропорция 3:2)'),
+					'crop_center_ratio_16_9' => t('кроп по центру (пропорция 16:9)'),
 					'no' => t('не менять (исходный размер)')
 					), mso_get_option('upload_resize_images_type', 'general', 'width')) 
 			. '</select>
@@ -224,6 +228,17 @@ $all_files .= '
 						'resize' => 'resize||'. t('Непропорциональное изменение до указанных размеров'),
 						'resize_w' => 'resize_w||'. t('Пропорциональное изменение до указанной ширины'),
 						'resize_h' => 'resize_h||'. t('Пропорциональное изменение до указанной высоты'),
+						'crop_center_ratio_auto' => 'crop_center_ratio_auto||'. t('Обрезка по центру с авто-высотой'),
+						'crop_center_ratio_4_3' => 'crop_center_ratio_4_3||'. t('Обрезка по центру с пропорцией 4:3'),
+						'crop_center_ratio_3_2' => 'crop_center_ratio_3_2||'. t('Обрезка по центру с пропорцией 3:2'),
+						'crop_center_ratio_16_9' => 'crop_center_ratio_16_9||'. t('Обрезка по центру с пропорцией 16:9'),
+						'zoom25' => 'zoom25||'. t('Масштаб 25% (от обработанного)'),
+						'zoom50' => 'zoom50||'. t('Масштаб 50% (от обработанного)'),
+						'zoom75' => 'zoom75||'. t('Масштаб 75% (от обработанного)'),
+						'zoom25_crop_center_ratio_auto' => 'zoom25_crop_center_ratio_auto||'. t('Масштаб 25%, после обрезка по центру'),
+						'zoom50_crop_center_ratio_auto' => 'zoom50_crop_center_ratio_auto||'. t('Масштаб 50%, после обрезка по центру'),
+						'zoom75_crop_center_ratio_auto' => 'zoom75_crop_center_ratio_auto||'. t('Масштаб 75%, после обрезка по центру'),
+						
 						
 						), mso_get_option('upload_type_resize', 'general', 'resize_full_crop_center')) 
 			. '</select>

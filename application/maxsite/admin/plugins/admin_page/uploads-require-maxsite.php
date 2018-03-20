@@ -168,6 +168,42 @@ function _upload($up_dir, $fn, $r = array())
 			thumb_generate($url . $fn, $new_width, $new_height, false, 'resize', true, '', false, $quality);
 		}
 	}
+	elseif ($resize_images_type == 'crop_center_ratio_auto') // кроп по центру с автовысотой
+	{
+		if ($width > $resize_images)
+		{
+			echo ' RESIZE (crop auto-height) ... ';
+			$new_width = $resize_images;
+			thumb_generate($url . $fn, $new_width, 0, false, 'crop_center_ratio_auto', true, '', false, $quality);
+		}
+	}
+	elseif ($resize_images_type == 'crop_center_ratio_4_3') // кроп по центру в пропорции 4:3
+	{
+		if ($width > $resize_images)
+		{
+			echo ' RESIZE (crop 4:3) ... ';
+			$new_width = $resize_images;
+			thumb_generate($url . $fn, $new_width, '4-3', false, 'crop_center_ratio_4_3', true, '', false, $quality);
+		}
+	}
+	elseif ($resize_images_type == 'crop_center_ratio_3_2') // кроп по центру в пропорции 3:2
+	{
+		if ($width > $resize_images)
+		{
+			echo ' RESIZE (crop 3:2) ... ';
+			$new_width = $resize_images;
+			thumb_generate($url . $fn, $new_width, '3-2', false, 'crop_center_ratio_3_2', true, '', false, $quality);
+		}
+	}
+	elseif ($resize_images_type == 'crop_center_ratio_16_9') // кроп по центру в пропорции 16:9
+	{
+		if ($width > $resize_images)
+		{
+			echo ' RESIZE (crop 16:9) ... ';
+			$new_width = $resize_images;
+			thumb_generate($url . $fn, $new_width, '16-9', false, 'crop_center_ratio_16_9', true, '', false, $quality);
+		}
+	}
 
 	
 	// миниатюру делаем стандартно
@@ -200,26 +236,6 @@ function _upload($up_dir, $fn, $r = array())
 		
 		thumb_watermark($up_dir . $fn, getinfo('uploads_dir') . 'watermark.png', $watermark_type);
 	}
-	
-	/*
-	if ($use_watermark)
-	{
-		echo ' WATERMARK... ';
-		
-		$watermark_type = mso_get_option('watermark_type',  'general', '1');
-		
-		thumb_watermark($up_dir . $fn, getinfo('uploads_dir') . 'watermark.png', $watermark_type);
-	}
-
-	// миниатюру делаем стандартно
-	if ($image_mini_type != 'none') // если не делать миниатюру
-	{
-		echo ' MINI... ';
-		thumb_generate($url . $fn, $size_image_mini_w, $size_image_mini_h, false, $image_mini_type, true, 'mini', false, $quality);
-		
-	}
-	
-	*/
 	
 	echo ' THUMB... ';
 	

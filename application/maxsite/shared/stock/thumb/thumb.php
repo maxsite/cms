@@ -231,7 +231,24 @@ class Thumb
 		return $this->crop($width, $height, $x, $y);
 	}
 	
-	
+	// кроп по центру, где высота определяется пропорцией
+	// если $ratio = 0, то пропорция высоты от самого изображения
+	function crop_center_ratio($width = 0, $ratio = 0)
+	{
+		$width = ($width > 0 ) ? $width : 1;
+		
+		if ($ratio == 0)
+		{
+			$ratio = $this->image_info[0] / $this->image_info[1]; // w/h
+			$height = ceil($width / $ratio);
+		}
+		else
+		{
+			$height = ceil($width / $ratio);
+		}
+
+		return $this->crop_center($width, $height);
+	}	
 	
 	// вначале пропорциональная ширина
 	// после обрезка кроп до указанных размеров
@@ -301,7 +318,7 @@ class Thumb
 		$y = round($image_info[1]/ 2 - $height / 2);
 		
 		return $this->crop($width, $height, $x, $y, $this->new_file, $this->new_file);
-	}	
+	}
 	
 	
 	// аналогично resize_full_crop_center, но кроп от верхнего левого угла
@@ -329,7 +346,7 @@ class Thumb
 		$y = 0;
 		
 		return $this->crop($width, $height, $x, $y, $this->new_file, $this->new_file);
-	}		
+	}
 	
 	// аналогично resize_full_crop_center, но кроп от верхнего центра
 	function resize_full_crop_top_center($width = 0, $height = 0)
@@ -356,7 +373,68 @@ class Thumb
 		$y = 0;
 		
 		return $this->crop($width, $height, $x, $y, $this->new_file, $this->new_file);
-	}		
+	}
+	
+	// пропорциональное изменение размеров в процентах
+	function zoom($zoom = 50)
+	{
+		$zoom = ($zoom > 0 ) ? $zoom : 100;
+		
+		$w = $this->image_info[0] * $zoom / 100;
+		$h = $this->image_info[1] * $zoom / 100;
+		
+		return $this->resize($w, $h);
+	}
+	
+	// комбинация zoom и crop_center_ratio
+	function zoom_crop_center($zoom, $width, $ratio = 0)
+	{
+		$fu = $this->zoom($zoom); // результат url нового файла
+		
+		// вторая операция отдельно, поскольку это уже новый файл
+		
+		if (!$fu) return false;
+		
+		$fi = getinfo('uploads_dir') . str_replace(getinfo('uploads_url'), '', $fu);
+		
+		$image_info = GetImageSize($fi);
+		
+		$w = $image_info[0]; // ширина текущего
+		
+		// если размер меньше требуемого, то отдаем как есть без кропа
+		if ($w < $width) return $fu;
+		
+		$h = $image_info[1]; // высота текущего
+		
+		if ($ratio == 0) $ratio = $w / $h;
+		
+		$height = ceil($width / $ratio); // конечная высота
+		
+		// смещение к центру
+		$x = round($w / 2 - $width / 2);
+		$y = round($h/ 2 - $height / 2);
+		
+		// параметры для image_lib - начальные
+		$r_conf = array(
+				'source_image' => $fi,
+				'new_image' => $fi,
+				'maintain_ratio' => false, // размеры по пропорции вычислим сами
+				'quality' => $this->image_quality,
+				'x_axis' => $x,
+				'y_axis' => $y,
+				'width' => $width,
+				'height' => $height
+			);
+			
+		$CI = & get_instance();
+		$CI->load->library('image_lib');
+		$CI->image_lib->clear();
+		$CI->image_lib->initialize($r_conf);
+		
+		if (!$CI->image_lib->crop()) return false; // произошла какая-то ошибка
+		
+		return $fu;	
+	}	
 	
 	
 	# функция готовит превьюшку в _mso_i 
@@ -418,7 +496,7 @@ function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 
 			$img = $def_img; // ставим дефолтное изображение 
 		}
 		else
-		{	
+		{
 			// получаем изображение
 			
 			if ($type_resize == 'resize_crop')
@@ -428,6 +506,26 @@ function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 
 			elseif ($type_resize == 'crop_center')
 			{
 				$t->crop_center($width, $height);
+			}
+			elseif ($type_resize == 'crop_center_ratio_auto')
+			{
+				$t->crop_center_ratio($width, 0); // автовысота
+			}
+			elseif ($type_resize == 'crop_center_ratio')
+			{
+				$t->crop_center_ratio($width, $height); // здесь высота — это пропорция
+			}
+			elseif ($type_resize == 'crop_center_ratio_4_3')
+			{
+				$t->crop_center_ratio($width, (4/3));
+			}
+			elseif ($type_resize == 'crop_center_ratio_3_2')
+			{
+				$t->crop_center_ratio($width, (3/2));
+			}
+			elseif ($type_resize == 'crop_center_ratio_16_9')
+			{
+				$t->crop_center_ratio($width, (16/9));
 			}
 			elseif ($type_resize == 'crop')
 			{
@@ -460,6 +558,34 @@ function thumb_generate($img, $width, $height, $def_img = false, $type_resize = 
 			elseif ($type_resize == 'resize_h')
 			{
 				$t->resize_h($width, $height);
+			}
+			elseif ($type_resize == 'zoom')
+			{
+				$t->zoom($width); // здесь $width — это масштаб
+			}
+			elseif ($type_resize == 'zoom25')
+			{
+				$t->zoom(25);
+			}
+			elseif ($type_resize == 'zoom50')
+			{
+				$t->zoom(50);
+			}
+			elseif ($type_resize == 'zoom75')
+			{
+				$t->zoom(75);
+			}
+			elseif ($type_resize == 'zoom25_crop_center_ratio_auto')
+			{
+				$t->zoom_crop_center(25, $width, 0);
+			}
+			elseif ($type_resize == 'zoom50_crop_center_ratio_auto')
+			{
+				$t->zoom_crop_center(50, $width, 0);
+			}
+			elseif ($type_resize == 'zoom75_crop_center_ratio_auto')
+			{
+				$t->zoom_crop_center(75, $width, 0);
 			}
 			else
 			{

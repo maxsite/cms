@@ -45,7 +45,7 @@ else
 	if ($t) 
 		mso_head_meta('title', $t);
 	else
-		mso_head_meta('title', $pages, '%users_nik%|%title%', ' » '); //  meta title страницы
+		mso_head_meta('title', $pages, '%users_nik%||%title%', ' » '); //  meta title страницы
 	
 	if ($d) 
 		mso_head_meta('description', $d);

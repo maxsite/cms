@@ -701,7 +701,7 @@ function mso_head_meta($info = 'title', $args = '', $format = '%page_title%', $s
 		else // входной массив - скорее всего это страница
 		{
 			// %page_title% %title% %category_name%
-			// | это разделитель, который = $sep
+			// || это разделитель, который = $sep
 			// pr($args);
 
 			$category_name = '';
@@ -780,8 +780,7 @@ function mso_head_meta($info = 'title', $args = '', $format = '%page_title%', $s
 			}
 			
 			// pr($page_title);
-			
-			$arr_key = array( '%title%', '%page_title%',  '%category_name%', '%category_desc%', '%users_nik%', '|' );
+			$arr_key = array( '%title%', '%page_title%',  '%category_name%', '%category_desc%', '%users_nik%', '||' );
 			$arr_val = array( htmlspecialchars($title), htmlspecialchars($page_title), htmlspecialchars($category_name), htmlspecialchars($category_desc), htmlspecialchars($users_nik), $sep );
 			//$arr_val = array( $title ,  $page_title, $category_name, $category_desc, $users_nik, $sep );
 			

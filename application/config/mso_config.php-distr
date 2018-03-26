@@ -14,7 +14,7 @@
 // Аналогично для рубрик: есть рубрика news, тогда
 // http://сайт/category/news и http://сайт/news - будут синонимами
 
-# $config['mso_permalink_no_slug'] = "yes"; // пазрешиьт сининимы 
+# $config['mso_permalink_no_slug'] = "yes"; // разрешить синонимы 
 # $config['mso_permalink_slug_cat'] = "yes"; // разрешить также синонимы рубрик
 
 

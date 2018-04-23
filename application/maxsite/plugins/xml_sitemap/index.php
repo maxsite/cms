@@ -32,16 +32,10 @@ function xml_sitemap_activate($args = array())
 	return $args;
 }
 
-# функция выполняется при деактивации (выкл) плагина
-function xml_sitemap_to_hook_deactivate($args = array())
-{	
-	mso_delete_option('plugin_xml_sitemap', 'plugins'); # удалим созданные опции
-	return $args;
-}
-
 # функция выполняется при деинсталяции плагина
 function xml_sitemap_uninstall($args = array())
 {
+	mso_delete_option('plugin_xml_sitemap', 'plugins'); # удалим созданные опции
 	mso_remove_allow('xml_sitemap_to_hook_edit'); # удалим созданные разрешения
 	return $args;
 }

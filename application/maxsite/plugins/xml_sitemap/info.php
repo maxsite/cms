@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('XML-карта сайта'),
 	'description' => t('Создание xml-карты сайта - sitemap.xml'),
-	'version' => '1.8',
+	'version' => '2',
 	'author' => 'Максим',
 	'editors' => '<a href="//vizr.ru/">Илья Земсков</a>',
 	'plugin_url' => '',

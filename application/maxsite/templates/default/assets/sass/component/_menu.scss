@@ -1,0 +1,174 @@
+// меню 
+
+$menu_bg: $color5; // основной цвет меню
+$menu_color2: $colorA5; // фон при наведении
+
+$menu_height: 40px; // высота меню
+$menu_height_submenu: 40px; // высота подменю горизонтального
+
+$menu_divider: #cccccc; // цвет разделителя
+
+$menu_menu1_padding_hor: 0; // padding-rl для tablet 
+
+// top
+$menu_top_text: #ffffff; // текст
+$menu_top_bg: transparent; // фон
+$menu_top_hover_text: #ffffff; // текст при наведении
+$menu_top_hover_bg: $menu_color2; // фон при наведении
+
+// top selected
+$menu_selected_text: #ffffff; // текст
+$menu_selected_bg: darken($menu_color2, 5%); // фон
+$menu_selected_hover_text: $menu_selected_text; // текст при наведении
+$menu_selected_hover_bg: $menu_selected_bg; // фон при наведении
+
+// group верхний пункт при наведении
+$menu_top_group_hover_text: #ffffff; // текст при наведении
+$menu_top_group_hover_bg: $menu_color2; // фон при наведении
+
+// group_open открытое подменю
+$menu_top_group_open_hover_text: #ffffff; // текст при наведении
+$menu_top_group_open_hover_bg: $menu_color2; // фон при наведении
+
+// подменю
+$menu_submenu_text: #333; // текст
+$menu_submenu_bg: #ffffff; // фон
+$menu_submenu_hover_text: #ffffff; // текст при наведении
+$menu_submenu_hover_bg: #444444; // фон при наведении
+$menu_submenu_selected_text: #333; // текст selected в подменю
+
+// tablet
+$menu_tablet_base_bg: $menu_bg; // общий фон меню
+
+$menu_tablet_control_text: #ffffff; // текст кнопки
+$menu_tablet_control_bg: $menu_bg; // фон кнопки
+
+$menu_tablet_hover_text: #333; // текст при наведении
+$menu_tablet_hover_bg: #eeeeee; // фон при наведении
+
+// подменю
+$menu_tablet_submenu_text: #333; // текст
+$menu_tablet_submenu_bg: #ffffff; // фон
+$menu_tablet_submenu_hover_text: #333; // текст
+$menu_tablet_submenu_hover_bg: #eeeeee; // фон
+
+$menu_tablet_divider: darken($menu_bg, 5%); // разделитель
+
+@import 'mix-menu';
+
+.menu-control {
+	display: none;
+}
+
+div.menu1 {
+	background: $menu_bg;
+	position: relative;
+}
+
+ul.menu {
+
+	@include menu-base(15);
+	
+	@include menu-top-height($menu_height, $menu_height, 0 20px 0 20px, 0 0 0 0);
+	@include menu-top-color($menu_top_text, $menu_top_bg); 
+	@include menu-top-hover($menu_top_hover_text, $menu_top_hover_bg);
+	@include menu-submenu-height($menu_height_submenu, $menu_height_submenu, 0 40px 0 10px);
+	@include menu-submenu-color($menu_submenu_text, $menu_submenu_bg);
+	@include menu-submenu-hover($menu_submenu_hover_text, $menu_submenu_hover_bg);
+	@include menu-submenu-nowrap;
+	@include menu-divider($menu_divider 1px solid);
+	@include menu-set-arrows(FontAwesome, "\f107", "\f105");
+	
+	li.selected a 
+	{
+		@include menu-selected-color($menu_selected_text, $menu_selected_bg);
+		@include menu-selected-hover($menu_selected_hover_text, $menu_selected_hover_bg);
+	}
+	
+	a {
+		transition: color 0.2s, background-color 0.1s;
+	}
+	
+	// верхние пункты (без группы) при наведении
+	> li:not([class^="group"]):hover > a {
+	}
+	
+	li.group ul {
+		box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.4);
+	}
+	
+	li.group ul li.selected a {
+		font-weight: bold;
+		color: $menu_submenu_selected_text;
+	}
+	
+	li.group-open > a {
+		color: $menu_top_group_open_hover_text;
+		background-color: $menu_top_group_open_hover_bg;
+	}
+	
+	> li.group:hover > a {
+		color: $menu_top_group_hover_text;
+		background-color: $menu_top_group_hover_bg;
+	}
+}
+
+@media #{$SCREEN_TABLET} {
+	
+	div.menu1-tablet {
+		background: transparent;
+	}
+	
+	@include menu-tablet-control();
+	
+	label.menu-control {
+		display: inline-block;
+		padding: 0 10px;
+		height: $menu_height;
+		line-height: $menu_height;
+		width: 100%;
+		font-weight: bold;
+		background: $menu_tablet_control_bg;
+		color: $menu_tablet_control_text;
+	}
+	
+	ul.menu-tablet {
+		@include menu-tablet-base();
+		
+		$p1: $menu_menu1_padding_hor * 2;
+		
+		top: $menu_height;
+		//width: ~"calc(100% - ${p1})"; 
+		width: 100%; 
+		background-color: $menu_tablet_base_bg;
+		
+		box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.5), -1px 0px 2px -2px rgba(0, 0, 0, 0.5), 1px 0px 2px -2px rgba(0, 0, 0, 0.5);
+	
+		@include menu-top-hover($menu_tablet_hover_text, $menu_tablet_hover_bg);
+		
+		@include menu-submenu-height($menu_height, $menu_height, 0 20px 0 40px);
+		@include menu-submenu-color($menu_tablet_submenu_text, $menu_tablet_submenu_bg);
+	
+		@include menu-divider($menu_tablet_divider 1px dotted, 0 35px, $menu_tablet_submenu_bg);
+		
+		li.group-open > a {
+			color: $menu_tablet_submenu_text;
+			background-color: $menu_tablet_submenu_bg;
+		}
+		
+		// верхние пункты при наведении
+		> li:not([class^="group"]):hover > a {
+			border: none;
+		}
+	
+		li.group ul {
+			border: none;
+		}
+		
+		> li.group:hover > a {
+			color: $menu_tablet_submenu_hover_text;
+			background-color: $menu_tablet_submenu_hover_bg;
+		}
+		
+	}
+}

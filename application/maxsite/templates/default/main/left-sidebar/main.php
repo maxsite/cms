@@ -6,41 +6,50 @@
  *
  * HTML-структура шаблона
  *
+ * Левый сайдбар «резиновые» колонки
  */
 
 if ($fn = mso_fe('main/blocks/_start.php')) require($fn);
  
 if ($fn = mso_fe('main/blocks/body-start.php')) require($fn) ?>
 
-<div class="my-all-container layout-center-wrap"><div class="wrap shadow bg-white">
+<div class="my-all-container"><div class="my-all-container-wrap">
 
-	<div class="header clearfix">
-		<?php if ($fn = mso_fe('main/blocks/header.php')) require($fn) ?>
-	</div>
+<div class="header">
+	<?php if ($fn = mso_fe('main/blocks/header.php')) require($fn) ?>
+</div>
 
-	<?php if ($fn = mso_fe('main/blocks/header-out.php')) require($fn) ?>
+<?php if ($fn = mso_fe('main/blocks/header-out.php')) require($fn) ?>
 
-	<div class="main flex flex-wrap-tablet">
+<div class="layout-center-wrap my-main-container bg-white"><div class="layout-wrap">
+	
+	<div class="flex flex-wrap-tablet my-container-content-sidebar">
+		
+		<div class="w30 w100-tablet my-left-sidebar flex-order2-tablet mar20-r mar0-r-tablet">
+			<div class="flex-tablet-phone flex-wrap-tablet-phone flex-jc-around-tablet-phone"><?php mso_show_sidebar('1') ?></div>
+		</div>
 
-		<?php if ($fn = mso_fe('main/blocks/main-start.php')) require($fn) ?>
+		<div class="w68 w100-tablet flex-order1-tablet">
+			<div class="">
+				<?php if ($fn = mso_fe('main/blocks/main-start.php')) require($fn) ?>
 
-		<div class="content flex-order2 flex-order1-tablet w70 w100-tablet pad20">
-			<?php if ($fn = mso_fe('main/blocks/content.php')) require($fn) ?>
+				<div class="content">
+					<?php if ($fn = mso_fe('main/blocks/content.php')) require($fn) ?>
+				</div>
+
+				<?php if ($fn = mso_fe('main/blocks/main-end.php')) require($fn) ?>
+			</div>
 		</div>
 		
-		<div class="sidebar flex-order1 w30 w100-tablet pad20 pad40-t flex-tablet-phone flex-wrap-tablet-phone">
-			<?php mso_show_sidebar('1') ?>
-		</div>
-
-		<?php if ($fn = mso_fe('main/blocks/main-end.php')) require($fn) ?>
-
+		
 	</div>
+</div></div>
 
-	<?php if ($fn = mso_fe('main/blocks/footer-pre.php')) require($fn) ?>
+<?php if ($fn = mso_fe('main/blocks/footer-pre.php')) require($fn) ?>
 
-	<div class="footer pad20 bg-gray700 t-white bor6px bor-gray400 bor-solid-t">
-		<?php if ($fn = mso_fe('main/blocks/footer.php')) require($fn) ?>
-	</div>
+<div class="footer">
+	<?php if ($fn = mso_fe('main/blocks/footer.php')) require($fn) ?>
+</div>
 
 </div></div>
 

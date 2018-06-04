@@ -2,19 +2,25 @@
 /*
 	(c) MaxSite CMS, http://max-3000.com/
 */
+$toggle_id = 'toggle' . crc32(__FILE__);
 ?>
 
-<div class="MainMenu"><div class="wrap">
-	<nav><ul class="menu menu_responsive">
+<div class="menu1 menu1-tablet clearfix"><div class="wrap">
+	<nav>
+	
+	<input class="menu-control" type="checkbox" id="<?= $toggle_id ?>">
+	<label class="menu-control" for="<?= $toggle_id ?>"><i class="i-plus"></i>Меню</label>
+	
+	<ul class="menu menu-no-load menu-hover menu-tablet">
 	
 		<?php
 
-			$menu = mso_get_option('top_menu', 'templates', tf('/ | Главная ~ page/about | О сайте ~ comments | Комментарии ~ contact | Контакты ~ sitemap | Архив ~ feed | RSS'));
+			$menu = '';
 			
 			if (is_login())
 			{
 				$menu .= NR . '[';
-				$menu .= NR . 'admin | | Админ-панель MaxSite CMS | | i-maxcdn';
+				$menu .= NR . '# | | Админ-панель MaxSite CMS | | i-maxcdn';
 				// $menu .= NR . 'admin | ' . getinfo('users_nik') . ' | Админ-панель | | i-user';
 				$menu .= NR . 'admin | Консоль | Консоль | | i-user';
 				$menu .= NR . 'admin/page_new | Создать запись | | | i-edit';
@@ -50,10 +56,11 @@
 				
 				$menu .= NR . '[';
 				
-				if ($comuser['comusers_nik'])
-					$menu .= NR . '# | ' . $comuser['comusers_nik'] . ' | Своя страница | | i-user';
-				else
-					$menu .= NR . '# | Ваши ссылки';
+				// if ($comuser['comusers_nik'])
+				// 	$menu .= NR . '# | ' . $comuser['comusers_nik'] . ' | Своя страница | | i-user';
+				// else
+				// 	$menu .= NR . '# | Ваши ссылки';
+				$menu .= NR . '# | | Своя страница | | i-user';
 				
 				$menu .= NR . 'users/' . $comuser['comusers_id'] . ' | Своя страница';
 				
@@ -64,8 +71,11 @@
 				$menu .= NR . ']';
 
 			}
-
+			
+			$menu .= NR .  mso_get_option('top_menu', 'templates', tf('/ | Главная ~ page/about | О сайте ~ comments | Комментарии ~ contact | Контакты ~ sitemap | Архив ~ feed | RSS'));
+			
 			if ($menu) echo mso_menu_build($menu, 'selected', false);
 		?>
 	</ul></nav>
+	
 </div></div><!-- div.wrap div.MainMenu -->

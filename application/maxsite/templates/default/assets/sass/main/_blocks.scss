@@ -1,0 +1,69 @@
+// pre, code, blockquote ...
+
+pre {
+	
+	$max_height: 400px; // or 0 for disable scrollbar
+
+	padding: 10px 15px;
+	background: #FAFAFA;
+	color: #444444;
+	border: #DFDFDF solid 1px;
+	font-size: 14px;
+	-moz-tab-size: 4;
+	tab-size: 4;
+	font-family: PT Mono, Monaco, Menlo, Consolas, Courier New, monospace;
+	line-height: 1.7;
+	border-radius: 3px;
+	white-space: pre-wrap;
+	
+	& code {
+		color: inherit;
+		white-space: pre-wrap;
+	}
+	
+	@if $max_height {
+		overflow-y: auto;
+		max-height: $max_height;
+	}
+}
+
+code {
+	color: #777777;
+	background: #EEEEEE;
+	white-space: nowrap;
+	display: inline-block;
+	padding-left: 5px;
+	padding-right: 5px;
+	font-family: PT Mono, Monaco, Menlo, Consolas, Courier New, monospace;
+	font-size: .9em;
+}
+
+kbd,
+samp,
+var {
+	font-family: PT Mono, Monaco, Menlo, Consolas, Courier New, monospace;
+	font-style: normal;
+	background-color: $gray200;
+	padding: 5px;
+	font-size: .9em;
+}
+
+blockquote {
+	margin: 20px 0;
+	padding: 5px 0 5px 25px;
+	border-left: 5px solid $colorA5;
+	color: #6F6F6F;
+	
+	p {
+		margin: 0 0 5px 0;
+	}
+}
+
+abbr {}
+address {}
+cite {}
+del {}
+dfn {}
+ins {}
+mark {}
+q {}

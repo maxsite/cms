@@ -1,0 +1,11 @@
+// (c) UniCSS, http://unicss.maxsite.com.ua/
+
+.rounded { border-radius: 10px; }
+
+.b-circle { border-radius: 50%; }
+
+
+// border-radius
+@each $var in $rounded_list {
+	.rounded#{$var} { border-radius: #{$var}px; }
+}

@@ -1,0 +1,39 @@
+// (c) UniCSS, http://unicss.maxsite.com.ua/
+
+// max size layout
+.w-max-layout {
+	width: 100%;
+	max-width: $layout_max_width;
+}
+
+.w100-max { max-width: 100%; }
+.w-hide   { display: none; }
+.w-auto   { width: auto; }
+
+
+@each $var in $width_list_px {
+	.w#{$var}px { width: #{$var}px; }
+	.w#{$var}px-min { min-width: #{$var}px; }
+	.w#{$var}px-max { max-width: #{$var}px; }
+}
+
+@each $var in $width_list_percent {
+	.w#{$var} { width: unquote($var + "%"); }
+	.w#{$var}-min { min-width: unquote($var + "%"); }
+	.w#{$var}-max { max-width: unquote($var + "%"); }
+}
+
+
+// for @media
+@each $postfix, $m in $screen_media_width_step_list {
+	@media #{$m} {
+		.w-hide-#{$postfix} { display: none; }
+		.w-auto-#{$postfix} { width: auto; }
+		.w100-max-#{$postfix} { max-width: 100%; }
+		.w0-min-#{$postfix} { min-width: 0; }
+
+		@each $var in $width_list_percent {
+			.w#{$var}-#{$postfix}  { width: unquote($var + "%"); }
+		}
+	}
+}

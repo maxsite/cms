@@ -1,0 +1,93 @@
+// (c) UniCSS, http://unicss.maxsite.com.ua/
+
+// opacity
+.bg-op10, .hover-bg-op10:hover { background-color: rgba(0,0,0,0.1); }
+.bg-op20, .hover-bg-op20:hover { background-color: rgba(0,0,0,0.2); }
+.bg-op30, .hover-bg-op30:hover { background-color: rgba(0,0,0,0.3); }
+.bg-op40, .hover-bg-op40:hover { background-color: rgba(0,0,0,0.4); }
+.bg-op50, .hover-bg-op50:hover { background-color: rgba(0,0,0,0.5); }
+.bg-op60, .hover-bg-op60:hover { background-color: rgba(0,0,0,0.6); }
+.bg-op70, .hover-bg-op70:hover { background-color: rgba(0,0,0,0.7); }
+.bg-op80, .hover-bg-op80:hover { background-color: rgba(0,0,0,0.8); }
+.bg-op90, .hover-bg-op90:hover { background-color: rgba(0,0,0,0.9); }
+
+.opacity10, .hover-opacity10:hover { opacity: .1; }
+.opacity20, .hover-opacity20:hover { opacity: .2; }
+.opacity30, .hover-opacity30:hover { opacity: .3; }
+.opacity40, .hover-opacity40:hover { opacity: .4; }
+.opacity50, .hover-opacity50:hover { opacity: .5; }
+.opacity60, .hover-opacity60:hover { opacity: .6; }
+.opacity70, .hover-opacity70:hover { opacity: .7; }
+.opacity80, .hover-opacity80:hover { opacity: .8; }
+.opacity90, .hover-opacity90:hover { opacity: .9; }
+
+.bg-transparent { background-color: transparent !important; }
+.t-transparent { color: transparent !important; }
+
+.bg-size-auto    { background-size: auto; }
+.bg-size-cover   { background-size: cover; }
+.bg-size-contain { background-size: contain; }
+
+
+@mixin colors_state($name, $color) {
+	
+	.t-#{$name} {
+		color: $color; 
+	}
+	
+	.bg-#{$name} {
+		background: $color; 
+	}
+	
+	.hover-t-#{$name}:hover
+	{
+		color: $color !important; 
+	}
+	
+	.hover-bg-#{$name}:hover
+	{
+		background: $color !important; 
+	}
+}
+
+// base colors
+@each $name, $color in $color_base_list {
+	@include colors_state($name, $color);
+}
+
+// color gradient 0..900
+@each $name, $color in $color_step_list {
+	
+	@each $step in $colors_state_step_list {
+	
+		@if $step == 50  { @include colors_state(#{$name}50,  lighten($color, 45%)); }
+		@if $step == 100 { @include colors_state(#{$name}100, lighten($color, 40%)); }
+		@if $step == 200 { @include colors_state(#{$name}200, lighten($color, 30%)); }
+		@if $step == 300 { @include colors_state(#{$name}300, lighten($color, 20%)); }
+		@if $step == 400 { @include colors_state(#{$name}400, lighten($color, 10%)); }
+		@if $step == 500 { @include colors_state(#{$name}500, $color); }
+		@if $step == 600 { @include colors_state(#{$name}600, darken($color, 10%)); }
+		@if $step == 700 { @include colors_state(#{$name}700, darken($color, 20%)); }
+		@if $step == 800 { @include colors_state(#{$name}800, darken($color, 30%)); }
+		@if $step == 900 { @include colors_state(#{$name}900, darken($color, 38%)); }
+
+	}
+}
+
+
+@mixin colors_state_links_hover($name, $color) {
+
+	.links-hover-t-#{$name} a:not([class^="hover-t-"]):not([class*=" hover-t-"]):hover
+	{
+		color: $color !important; 
+	}
+	
+	.links-hover-bg-#{$name} a:not([class^="hover-bg-"]):not([class*=" hover-bg-"]):hover
+	{
+		background: $color !important; 
+	}
+}
+
+@each $name, $color in $color_links_hover_list {
+	@include colors_state_links_hover($name, $color);
+}

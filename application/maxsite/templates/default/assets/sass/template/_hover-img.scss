@@ -1,0 +1,36 @@
+// эффект при наведении (увеличение и осветление)
+//	<a class="my-hover-img" href="1"><img 1><div></div></a> 
+
+.my-hover-img {
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	
+	> div {
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		transition: all .5s ease;
+		color: #999;
+	}
+	
+	> img {
+		transition: all .5s ease;
+	}
+		
+	&:hover {
+		> div {
+			background-color: rgba(0,0,0,.2);
+			box-shadow: inset 0 0 0 10px rgba(0,0,0,.4);
+		}
+		
+		> img {
+			transform: scale(1.1);
+		}
+	}
+	
+}

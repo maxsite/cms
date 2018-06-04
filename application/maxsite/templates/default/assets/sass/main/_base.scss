@@ -1,0 +1,57 @@
+// Base typo
+
+
+body {
+	font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+	// font-family: Ubuntu, Helvetica Neue, Helvetica, Arial, sans-serif;
+	// font-family: Arimo, Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	font-weight: normal;
+	color: #444;
+	line-height: 1.4;
+}
+
+a {
+	color: $colorLink;
+	text-decoration: none;
+	
+	&:hover {
+		color: $colorLinkHover;
+		text-decoration: underline;
+	}
+}
+
+p, hr, ul, ol, dl, blockquote, pre, address, fieldset, figure, table 
+{ 
+	margin: 0 0 14px 0;
+}
+
+* + p, * + hr, * + ul, * + ol, * + dl, * + blockquote, * + pre, * + address, * + fieldset, * + figure, * + table { 
+	margin-top: 10px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 10px 0;
+}
+
+* + h1, * + h2, * + h3, * + h4, * + h5, * + h6 {
+	margin-top: 30px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+}
+
+h1 {font-size: 1.8em;}
+h2 {font-size: 1.6em;}
+h3 {font-size: 1.5em;}
+h4 {font-size: 1.3em;}
+h5 {font-size: 1.1em;}
+h6 {font-size: 1em;}
+
+h1 + p { margin-top: 30px; }
+h2 + p { margin-top: 25px; }
+h3 + p { margin-top: 15px; }
+h4 + p { margin-top: 15px; }
+h5 + p { margin-top: 15px; }
+h6 + p { margin-top: 15px; }

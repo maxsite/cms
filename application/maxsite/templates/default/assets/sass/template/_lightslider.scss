@@ -1,0 +1,31 @@
+// лайтслайдер для full-width
+
+// <div class="ls-fullwidth h500px-large h400px h300px-tablet h200px-phone" style="background-image: url(АДРЕС);"><div class="ls-text bold t120 t-white">Текст <a href="#">ссылка</a></div></div>
+
+
+// контейнер для одного слайда
+.ls-fullwidth {
+	@extend .pos-relative;
+	
+	// режим растягивания изображения
+	background-size: cover;
+	//background-size: contain;
+	
+	background-repeat: no-repeat;
+	background-position: center center;
+		
+	// текст внутри блока
+	.ls-text {
+		@extend .pos0-b;
+		@extend .pos-absolute;
+		@extend .w100;
+		// @extend .t-center;
+		@extend .bor1;
+		@extend .bor-solid-t;
+		@extend .bor-gray900;
+		@extend .links-no-color;
+		@extend .bg-op40;
+		padding: 10px;
+	}
+}
+

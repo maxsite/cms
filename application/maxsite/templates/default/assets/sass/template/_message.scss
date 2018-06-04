@@ -1,0 +1,25 @@
+// системные сообщения
+
+.mso-message-alert {
+	color: $red;
+}
+
+.mso-message-ok {
+	color: $green;
+}
+
+.mso-message-error,
+.comment-error 
+{
+	color: #fff;
+	padding: 10px;
+	margin: 0 0 20px 0;
+	background: $red;
+	
+	&:after {
+		@extend .icon-fa-normal;
+		content: $fa-var-exclamation-triangle;
+		float: right;
+		margin-top: 5px;
+	}
+}

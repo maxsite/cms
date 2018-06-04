@@ -1,0 +1,102 @@
+// (c) UniCSS, http://unicss.maxsite.com.ua/
+
+// Text
+
+// reset text to normal
+// .normal, // deprecated!
+.t-reset {
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+	line-height: 1em;
+}
+
+.bold        { font-weight: bold; }
+.bold-normal { font-weight: normal; }
+.italic      { font-style: italic; }
+.underline   { text-decoration: underline; }
+.strike      { text-decoration: line-through; }
+.small-caps  { font-variant: small-caps; }
+.capitalize  { text-transform: capitalize; }
+.upper       { text-transform: uppercase; }
+.lower       { text-transform: lowercase; }
+
+.t-right   { text-align: right; }
+.t-left    { text-align: left; }
+.t-center  { text-align: center; }
+.t-justify { text-align: justify; }
+
+.t-nowrap      { white-space: nowrap; }
+.t-wrap        { white-space: normal; }
+.t-pre-wrap    { white-space: pre-wrap; }
+.t-break-word  { word-wrap: break-word; }
+
+.t-georgia { font-family: Georgia, Times New Roman, serif; }
+.t-times   { font-family: Times New Roman, serif; }
+.t-arial   { font-family: Arial, Helvetica, Verdana, sans-serif; }
+.t-verdana { font-family: Verdana, Arial, Helvetica, sans-serif; }
+.t-mono    { font-family: PT Mono, Monaco, Menlo, Consolas, Courier New, monospace; }
+
+/* deprecated — use .lh100 .lh150em etc _other.scss*/
+// .t-lh100   { line-height: 1; }
+// .t-lh150   { line-height: 1.5; }
+// .t-lh200   { line-height: 2; }
+// .t-lh100em { line-height: 1em; }
+// .t-lh150em { line-height: 1.5em; }
+// .t-lh200em { line-height: 2em; }
+
+.t-clip {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@each $var in $text_rem {
+	$var1: round($var * 100);
+	
+	.t#{$var1} {
+		font-size: #{$var}rem;
+	}
+}
+
+@each $var in $text_em {
+	$var1: round($var * 100);
+	
+	.t#{$var1}em {
+		font-size: #{$var}em;
+	}
+}
+
+@each $var in $text_px {
+	.t#{$var}px {
+		font-size: #{$var}px;
+	}
+}
+
+// for @media text-align white-space
+@each $postfix, $m in $screen_media_text_step_list {
+	@media #{$m} {
+		.t-right-#{$postfix}   { text-align: right; }
+		.t-left-#{$postfix}    { text-align: left; }
+		.t-center-#{$postfix}  { text-align: center; }
+		.t-justify-#{$postfix} { text-align: justify; }	
+		.t-nowrap-#{$postfix}  { white-space: nowrap; }
+		.t-wrap-#{$postfix}    { white-space: normal; }
+	}
+}
+
+// for @media rem font-size
+@each $postfix, $m in $screen_media_text_step_list {
+	@media #{$m} {
+		@each $var in $text_rem_screen {
+			$var1: round($var * 100);
+	
+			.t#{$var1}-#{$postfix} {
+				font-size: #{$var}rem;
+			}
+		}
+	}
+}
+

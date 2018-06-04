@@ -1,0 +1,51 @@
+// table
+
+table {
+	width: 100%;
+
+	th { 
+		text-align: left;
+		background: #EEEEEE;
+	}
+	
+	td { 
+		vertical-align: top; 
+	}
+
+	th, td {
+		padding: 3px 5px;
+	}
+	
+	thead th { 
+		vertical-align: bottom; 
+	}
+	
+	caption { 
+		text-align: left;
+		font-style: italic;
+	}
+
+	caption {
+		background: #DDDDDD;
+		color: #333333;
+		font-size: 1.2em;
+		padding: 10px;
+	}
+ 	
+ 	&.striped {
+		tr:nth-of-type(odd) td { 
+			background: #FFFFFF; 
+		}
+		
+		tr:nth-of-type(even) td { 
+			background: #DDDDDD; 
+		}
+ 	}
+	
+	&.hover {
+		tr:hover td { 
+			background: #CCCCCC;
+			cursor: pointer;
+		}
+	}
+}

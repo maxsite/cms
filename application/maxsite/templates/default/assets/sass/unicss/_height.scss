@@ -1,0 +1,21 @@
+// (c) UniCSS, http://unicss.maxsite.com.ua/
+
+// height
+
+.h100 { height: 100%; }
+.h-auto { height: auto; }
+
+@each $var in $height_list {
+
+	.h#{$var}px {
+		height: #{$var}px;
+	}
+	
+	.h#{$var}px-min {
+		min-height: #{$var}px !important;
+	}
+	
+	.h#{$var}px-max {
+		max-height: #{$var}px !important;
+	}
+}

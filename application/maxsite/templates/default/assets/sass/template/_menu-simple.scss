@@ -1,0 +1,31 @@
+// простое меню в одну строчку без групп
+
+ul.menu-simple {
+	
+	list-style: none; 
+	margin: 0; 
+	padding: 0;
+	
+	li {
+		display: inline-block;
+		margin: 0;
+		padding: 0;
+	}
+	
+	a {
+		transition: all 0.2s;
+		display: inline-block;
+		height: 35px;
+		line-height: 35px;
+		padding: 0 10px;
+		
+		&:hover {
+			text-decoration: none;
+			background: rgba(0,0,0, .6);
+		}
+	}
+	
+	li.selected a {
+		background: rgba(0,0,0, .6);
+	}
+}

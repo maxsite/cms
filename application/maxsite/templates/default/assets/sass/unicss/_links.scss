@@ -1,0 +1,45 @@
+// (c) UniCSS, http://unicss.maxsite.com.ua/
+
+a {
+	// reset color for :hover
+	&.hover-no-color {
+		&:hover {
+			color: inherit;
+		}
+	}
+	
+	// reset underlone for :hover
+	&.hover-no-underline {
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
+// for child
+.hover-no-color {
+	a:hover {
+		color: inherit;
+	}
+}
+
+.hover-no-underline {
+	a:hover {
+		text-decoration: none;
+	}
+}
+
+.link-no-color,
+.links-no-color {
+	a:not([class^="t-"]):not([class*=" t-"])
+	{
+		color: inherit;
+	}
+}
+
+.link-no-color-imp,
+.links-no-color-imp {
+	a {
+		color: inherit !important;
+	}
+}

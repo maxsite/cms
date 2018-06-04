@@ -1,0 +1,60 @@
+// плагин forms
+// и прочие типовые варианты форм
+
+div.mso-forms,
+div.mso-registration-form,
+div.mso-loginform-common,
+div.mso-recovery-form,
+div.mso-comusers-form,
+div.mso-comusers-form-rp,
+div.mso-guestbook // плагин guestbook
+{
+	
+	label > span {
+		@extend .bold;
+	}
+	
+	span.mso-forms-tip {
+		@extend .italic;
+		color: $gray500;
+	}
+	
+	input,
+	textarea,
+	select
+	{
+		width: 100%;
+	}
+	
+	input[type="checkbox"] {
+		width: auto;
+	}
+	
+	p.mso-forms-buttons {
+		margin-top: 30px;
+	}
+	
+	// ссылка «Я забыл пароль» 
+	a.mso-i-forgot-password {
+		margin-left: 20px;
+	}
+}
+
+// плагин forms
+p.mso-forms-buttons {
+	margin-top: 30px;
+}
+
+p.mso-forms-ok {
+	color: white;
+	padding: 20px;
+	background: lighten($green, 20%);
+}
+
+p.mso-forms-error {
+	color: white;
+	padding: 10px;
+	background: lighten($red, 20%);
+}
+
+span.mso-forms-tip {}

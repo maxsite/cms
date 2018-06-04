@@ -1,0 +1,18 @@
+// (c) UniCSS, http://unicss.maxsite.com.ua/
+
+// position and z-index
+
+.pos-fixed    { position: fixed; }
+.pos-absolute { position: absolute; }
+.pos-relative { position: relative; }
+
+@each $var in $position_list {
+	.pos#{$var}-t { top: #{$var}px; }
+	.pos#{$var}-r { right: #{$var}px; }
+	.pos#{$var}-b { bottom: #{$var}px; }
+	.pos#{$var}-l { left: #{$var}px; }
+}
+
+@each $var in $zindex_list {
+	.z-index#{$var} { z-index: $var; }
+}

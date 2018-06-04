@@ -1,0 +1,22 @@
+// Lines
+
+hr {
+	display: block;
+	padding: 0;
+	border: 0;
+	border-top: 1px solid #AAAAAA;
+	margin: 30px 0;
+	
+	&.dashed {
+		border-top-style: dashed;
+	}
+	
+	&.dotted {
+		border-top-style: dotted;
+	}
+	
+	&.double {
+		border-width: 3px;
+		border-top-style: double;
+	}
+}

@@ -1,0 +1,53 @@
+// Icons
+
+.t-icon        { font-size: $icon_size; }
+.t-icon-small  { font-size: $icon_size_small; }
+.t-icon-medium { font-size: $icon_size_medium; }
+.t-icon-large  { font-size: $icon_size_large; }
+
+.icon0:before {
+	margin-right: 0 !important;
+}
+
+.icon-circle,
+.icon-square,
+.icon-rounded
+{
+	line-height: 2; 
+	width: 2em;
+	height: 2em;
+	display: inline-block;
+	text-align: center;
+	
+	&:before {
+		margin: 0 !important;
+	}
+}
+
+.icon-circle {
+	border-radius: 50%;
+}
+
+.icon-rounded {
+	border-radius: 5px;
+}
+
+// base class for icons FontAwesome
+.icon-fa-normal {
+	font-family: FontAwesome;
+	display: inline-block;
+	font-size: inherit;
+	font-weight: normal;
+	font-style: normal;
+	line-height: 1;
+	margin-right: $icon_right_margin;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+[class^="i-"]:before, 
+[class*=" i-"]:before 
+{
+	@extend .icon-fa-normal;
+}

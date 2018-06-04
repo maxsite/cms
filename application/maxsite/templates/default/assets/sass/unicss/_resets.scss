@@ -1,0 +1,12 @@
+// (c) UniCSS, http://unicss.maxsite.com.ua/
+
+*,
+*:before,
+*:after {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+hr {
+  box-sizing: content-box;
+}

@@ -39,52 +39,62 @@ if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . 
 $top1_block = mso_get_option('top1_block', getinfo('template'), '');
 
 ?>
-<div class="menu-icons flex flex-vcenter bg-gray900 pad15-rl">
-	<div>
-		<ul class="menu menu2">
+<div class="layout-center-wrap bg-red"><div class="layout-wrap flex flex-wrap-phone">
+	<nav class="flex-grow5 w100-tablet"><ul class="menu-simple t-center-phone t-white t80 links-no-color upper">
 		<?php
 			if ($menu = mso_get_option('menu2', 'templates', '/ | Главная ~ about | О сайте')) 
 				echo mso_menu_build($menu, 'selected', false);
 		?>
-		</ul>
-	</div>
-	
-	<div class="t15px t-gray500 links-no-color links-hover-t-gray100">
+	</ul></nav>
+
+	<div class="flex-grow1 t-right t-white t120 links-no-color t-center-phone t-nowrap">
 	<?php
 		if ($fn = mso_fe('components/_social/_social.php')) require($fn);
 	?>
 	</div>
-</div>
+</div></div>
 
-<?php 
-
-if ($logo) 
-{ 
-	echo '<div class="logo-block flex flex-wrap flex-vcenter pad20"><div class="w100-max">' .  $logo . '</div>';
-	
-	if ($top1_block) 
-	{
-		echo '<div class="flex-grow3">';
-		eval(mso_tmpl_prepare($top1_block));
+<div class="layout-center-wrap bg-white"><div class="layout-wrap pad5-tb">
+	<?php
+	if ($logo) 
+	{ 
+		echo '<div class="logo-block flex flex-wrap flex-vcenter pad10"><div class="w100-max">' .  $logo . '</div>';
+		
+		if ($top1_block) 
+		{
+			echo '<div class="flex-grow3">';
+			eval(mso_tmpl_prepare($top1_block));
+			echo '</div>';
+		}
 		echo '</div>';
 	}
-	echo '</div>';
-}
-else
-{
-	echo '<div class="logo-block">';
-	if ($top1_block) eval(mso_tmpl_prepare($top1_block));
-	echo '</div>';
-}
+	else
+	{
+		echo '<div class="logo-block">';
+		if ($top1_block) eval(mso_tmpl_prepare($top1_block));
+		echo '</div>';
+	}
 
-?>
+	?>
+</div></div>
 
-<div class="menu-search flex flex-vcenter mar20-rl bg-gray800 flex-wrap-tablet">
-	<div class="w100-tablet"><?php if ($fn = mso_fe('components/_menu/_menu.php')) require($fn); ?></div>
-	<div>
-		<form name="f_search" class="f_search" method="get">
-			<input class="my-search my-search--hidden" type="search" name="s" id="sss" placeholder="<?= tf('Поиск...') ?>"><label class="label-search i-search icon-square bg-gray700 t-gray200 cursor-pointer" for="sss"></label>
-		</form>
-		<script> var searchForm = $(".f_search"); var searchInput = $(".my-search"); var searchLabel = $(".label-search"); searchForm.submit(function (e) { e.preventDefault(); window.location.href = "<?= getinfo('siteurl') ?>search/" + encodeURIComponent(searchInput.val()).replace(/%20/g, '+'); }); searchLabel.click(function (e) { if (searchInput.val() === "") { searchInput.toggleClass("my-search--hidden"); } else { e.preventDefault(); searchForm.submit(); } }); $(document).click(function(e) { if ( !$(e.target).hasClass("label-search") && !$(e.target).hasClass("my-search") && (searchInput.val() === "") ) { searchInput.addClass("my-search--hidden"); } }); </script>
+<div class="layout-center-wrap bg-color5 menuToFixed"><div class="layout-wrap">
+	<?php if ($fn = mso_fe('components/_menu/_menu.php')) require($fn); ?>
+</div></div>
+
+<div class="layout-center-wrap bg-gray200"><div class="layout-wrap pad10-tb pad20-rl flex flex-vcenter">
+	
+	<div class="w70 mar10-tb t-gray700 links-no-color t90">
+	<?php
+		if ($fn = mso_fe('components/_breadcrumbs/_breadcrumbs.php')) require($fn);
+	?>
 	</div>
-</div>
+	
+	<div class="flex-grow2 t-right t-nowrap">
+		<form name="f_search" class="f_search" method="get">
+			<input class="my-search" type="search" name="s" id="sss" placeholder="<?= tf('Поиск...') ?>"><label class="label-search i-search icon-square bg-gray700 t-gray200 cursor-pointer" for="sss"></label>
+		</form>
+		<script> window.search_url = "<?= getinfo('siteurl') ?>search/"; </script>
+	</div>
+
+</div></div>

@@ -3,7 +3,7 @@
 Например: Настройка шаблона — Главная — Свой вариант вывода главной:
 
 [unit]
-file = home-last-page.php
+file = last-pages.php
 [/unit]
 
 Где каждый блок вывода это [unit] ... [/unit].

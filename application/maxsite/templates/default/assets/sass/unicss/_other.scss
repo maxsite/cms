@@ -1,0 +1,43 @@
+// (c) UniCSS, http://unicss.maxsite.com.ua/
+
+// Other
+
+.cursor-pointer { 
+	cursor: pointer; 
+}
+
+.drop-cap { 
+	&:first-letter {
+		float: left;
+		font-size: 3em;
+		font-weight: bold;
+		margin-right: 0.75rem;
+		text-transform: uppercase;
+		line-height: 1;
+	}
+}
+
+.trans05-all { transition: all ease .5s; }
+.trans02-all { transition: all ease .2s; }
+
+.t-label {
+	color: white;
+	background: $blue;
+	font-size: .75rem;
+	padding: 1px 10px;
+	border-radius: 3px;
+}
+
+.lh100   { line-height: 1; }
+.lh150   { line-height: 1.5; }
+.lh200   { line-height: 2; }
+.lh100em { line-height: 1em; }
+.lh150em { line-height: 1.5em; }
+.lh200em { line-height: 2em; }
+
+.va-baseline    { vertical-align: baseline; }
+.va-top         { vertical-align: top; }
+.va-middle      { vertical-align: middle; }
+.va-bottom      { vertical-align: bottom; }
+.va-text-top    { vertical-align: text-top; }
+.va-text-bottom { vertical-align: text-bottom; }

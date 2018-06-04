@@ -1,0 +1,189 @@
+// Комментарии
+
+.mso-comments,
+.mso-comment-form
+{
+	padding: 30px 10px;
+}
+
+div.mso-type-page-comments {
+	padding-bottom: 30px;
+}
+
+.mso-comments-count {
+	@extend .t100;
+	@extend .upper;
+	@extend .t-gray700;
+	border-bottom: 3px solid $gray300;
+	
+	&:before {
+		@extend .icon-fa-normal;
+		content: $fa-var-comments-o;
+	}
+	
+	.mso-comments-rss {
+		@extend .b-inline;
+		@extend .b-right;
+		@extend .t90;
+		
+		&:before {
+			@extend .icon-fa-normal;
+			content: $fa-var-rss;
+		}
+	}
+}
+
+.mso-comments-textarea {
+	
+	textarea {
+		width: 100%;
+	}
+}
+
+.mso-comments-input-author {
+	width: 100%;
+}
+
+.mso-comment-article {
+	@extend .mar20-t;
+	@extend .pad20-b;
+	border-bottom: 1px dotted $gray600;
+	
+	&:last-of-type {
+		border-bottom: none;
+	}
+}
+
+// оставьте комментарий
+.mso-comment-leave {
+	margin: 20px 0;
+	@extend .bold;
+	@extend .t120;
+}
+
+.mso-comment-info {
+	@extend .t90;
+	@extend .t-gray700;
+	
+	.mso-comment-num {
+		@extend .bg-gray200;
+		@extend .t-gray600;
+		@extend .pad5-rl;
+		@extend .rounded5;
+	}
+	
+	a {
+		@extend .t-gray700;
+	}
+	
+	.mso-comment-author {
+		@extend .mar10-l;
+		
+		&:before {
+			@extend .icon-fa-normal;
+			content: $fa-var-user;
+		}
+	}
+	
+	.mso-comuser-url {
+		@extend .mar10-l;
+		
+		&:before {
+			@extend .icon-fa-normal;
+			content: $fa-var-link;
+		}
+	}
+	
+	.mso-comment-date {
+		@extend .mar10-l;
+		
+		&:before {
+			@extend .icon-fa-normal;
+			content: $fa-var-calendar-o;
+		}
+	}
+	
+	.mso-comment-edit {
+		@extend .mar10-l;
+		
+		&:before {
+			@extend .icon-fa-normal;
+			content: $fa-var-edit;
+		}
+	}
+}
+
+// аватарка
+img.mso-gravatar {
+	@extend .b-right;
+	margin: 10px 0 15px 15px;
+}
+
+// раскраска юзеров 
+.mso-comment-users .mso-comment-author,
+.mso-comment-users .mso-comment-author a 
+{
+	color: $green;
+}
+		
+.mso-comment-comusers .mso-comment-author,
+.mso-comment-comusers .mso-comment-author a 
+{
+	color: $green;
+}
+	
+.mso-comment-anonim .mso-comment-author {
+	color: $gray700;
+}
+
+// принудительный перенос для длинных строк в комментариях
+.mso-comment-content {
+	word-wrap: break-word;
+	
+	pre {
+		white-space: pre-wrap;
+	}
+}
+
+.mso-comment-form {
+	padding-bottom: 20px;
+	
+	button[name="comments_submit"] {
+		@extend .button;
+	}
+	
+	.mso-comments-auth {
+		margin-top: 20px;
+	}
+	
+	textarea,
+	input[type="text"]
+	{
+		background: #f6f6f6;
+		
+		&:focus {
+			background: #ffffff;
+		}
+	}
+	
+}
+
+.mso-comments-user {
+	margin: 0 0 20px 0;
+	@extend .t120;
+	
+	a[href*="/logout"] {
+		@extend .b-inline;
+		@extend .b-right;
+		
+		&:before {
+			@extend .icon-fa-normal;
+			content: $fa-var-unlock;
+		}
+	}
+}
+
+div.mso-type-comments-content {
+	padding-bottom: 20px;
+}
+

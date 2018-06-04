@@ -1,0 +1,165 @@
+// специфичные стили шаблона
+
+body {
+	// цвет подбирается под фоновую картинку
+	background: #280A08 url("../images/backgrounds/1.jpg") no-repeat right top;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+
+// читать далее
+span.mso-cut {
+
+}
+
+
+// основной main-контейнер <div class="layout-center-wrap">
+// использовать для задания отступов от браузера, если требуется
+.my-main-container {
+	padding: 20px;
+	// margin-top: 20px;
+}
+
+// основной контейнер для header+main+footer
+.my-all-container {
+	> .my-all-container-wrap {
+		width: 100%;
+		max-width: $layout_max_width;
+		margin: 20px auto;
+	}
+}
+
+
+.mso-page-only,
+.mso-type-users-all,
+body.mso-body-users .mso-type-users-form
+{
+	@extend .clearfix;
+	margin-bottom: 40px;	
+}
+
+div.mso-type-page-content {
+	padding-bottom: 20px;
+}
+
+
+// название рубрики/метки и т.п.
+h1.mso-type-sitemap,
+h1.mso-tag,
+h1.mso-author,
+h1.mso-archive,
+h1.mso-category {
+	margin-top: 0;
+	background: $gray200;
+	padding: 10px 10px;
+	border-right: $colorA5 solid 4px;
+}
+
+// описание рубрики
+.mso-category-desc {
+	margin: 10px 0 30px 10px;	
+}
+
+
+// особые коррекции
+body.mso-body-contact .mso-page-only, 
+.mso-type-page_404 .mso-page-only
+{
+	padding-bottom: 20px;
+}
+
+body.mso-body-loginform .mso-page-only 
+{	
+	button {
+		@extend .button;
+		margin-top: 15px;
+	}
+}
+
+div.mso-type-password-recovery {
+	.mso-recovery-form button {
+		@extend .button;
+		margin-top: 15px;
+	}
+}
+
+.mso-loginform,
+.mso-registration-form {
+	padding: 20px 0;
+	
+	h3 { 
+		margin: 0 0 30px 0; 
+	}
+	
+	button {
+		@extend .button;
+		margin-top: 20px;
+	}
+}
+
+div.mso-page-parents {
+	margin-top: 20px;
+	
+	ul {
+		margin: 0;
+		padding-left: 20px;
+	}
+}
+
+
+// форма редактирования данных юзера
+div.mso-type-users-form {
+
+	form {
+		p.row label {
+			@extend .flex;
+			@extend .flex-wrap;
+		
+			span { 
+				width: 40%; 
+				//max-width: 180px; 
+				text-align: right;
+				padding-right: 20px;
+			
+			}
+			
+			input, 
+			textarea
+			{
+				width: 60%;
+			}
+		}
+		
+		input[type="checkbox"] {
+			margin: 0 10px;
+		}
+		
+		button {
+			margin-top: 20px;
+		}
+	}
+}
+
+// отключаем menuToFixed/scrollToFixed для малого экрана
+@media #{$SCREEN_TABLET}  {
+	.menuToFixed {
+		position: relative !important;
+	} 
+}
+
+
+// вывод записей блоками на главной
+.mso-header-home-cat {
+	margin-top: 0;
+	// background: $gray200;
+	padding: 10px 0 10px 0;
+	border-bottom: $colorA5 solid 2px;
+	border-top: $colorA5 solid 2px;
+	font-size: 1.9em;
+}
+
+// описание рубрики на главной
+.mso-description-cat {
+	margin: 20px 0;
+}

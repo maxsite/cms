@@ -63,11 +63,13 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 	
 	if ($draft_pages)
 	{
-		echo '<h4 class="mar30-t">' . t('Последние черновики') .'</h4><ul>';
+		echo '<h4 class="mar30-t i-coffee">' . t('Последние черновики') .'</h4><ul>';
 		
 		foreach($draft_pages as $p)
 		{
 			$ex_pages[] = $p['page_id'];
+			
+			if (!$p['page_title']) $p['page_title'] = t('Без заголовка');
 			
 			echo '<li class=""><a href="' . getinfo('site_admin_url') .'page_edit/' . $p['page_id'] .'">' . $p['page_title'] . '</a>';
 			
@@ -111,10 +113,12 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 	
 	if ($draft_pages)
 	{
-		echo '<h4 class="mar30-t">' . t('Самые старые черновики') .'</h4><ul>';
+		echo '<h4 class="mar50-t i-calendar-o">' . t('Самые старые черновики') .'</h4><ul>';
 		
 		foreach($draft_pages as $p)
 		{
+			if (!$p['page_title']) $p['page_title'] = t('Без заголовка');
+			
 			echo '<li class=""><a href="' . getinfo('site_admin_url') .'page_edit/' . $p['page_id'] .'">' . $p['page_title'] . '</a>';
 			
 			$ddd = $p['page_date_publish'];
@@ -169,7 +173,7 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 
 		$m = array_slice($m, 0, 50, true); // срез, чтобы не было слишком много
 		
-		echo '<h4 class="mar30-t">' . t('Статистика рубрик') .'</h4>';
+		echo '<h4 class="mar50-t i-bar-chart">' . t('Статистика рубрик') .'</h4>';
 		
 		foreach($m as $id=>$count)
 		{
@@ -182,7 +186,10 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 			
 			if ($count == 0) $h = 0;
 				
-			echo '<a style="background-color: hsl(' . $h . ', 95%, 30%); color: hsl(' . $h .', 10%, 100%)" class="b-inline pad5-tb pad10-rl mar5-b hover-no-underline hover-bg-blue600" href="' . getinfo('site_admin_url') .'page/category/' . $id .'">' . $cats[$id]['category_name'] . ' <sup>' . $count . '</sup> <sub>' . $k .'%</sub></a> ';
+			// echo '<a style="background-color: hsl(' . $h . ', 30%, 20%); color: hsl(' . $h .', 10%, 100%)" class="b-inline pad5-tb pad10-rl mar5-b hover-no-underline hover-bg-blue600" href="' . getinfo('site_admin_url') .'page/category/' . $id .'">' . $cats[$id]['category_name'] . ' <sup>' . $count . '</sup> <sub>' . $k .'%</sub></a> ';
+			
+			
+			echo '<a style="background-color: #b9bed7; color: #111111" class="b-inline pad5-tb pad10-rl mar5-b hover-no-underline hover-bg-blue700 hover-t-white" href="' . getinfo('site_admin_url') .'page/category/' . $id .'">' . $cats[$id]['category_name'] . ' <sup>' . $count . '</sup> <sub>' . $k .'%</sub></a> ';
 		}
 	
 	
@@ -202,7 +209,7 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 		$max = count($cat_date);
 		$cat_date = array_slice($cat_date, 0, 45, true); // срез, чтобы не было слишком много
 		
-		echo '<h4 class="mar30-t">' . t('Последние публикации в рубриках') .'</h4><div class="flex flex-wrap">';
+		echo '<h4 class="mar50-t i-calendar">' . t('Последние публикации в рубриках') .'</h4><div class="flex flex-wrap">';
 		
 		$i = 0;
 		foreach($cat_date as $id=>$date)
@@ -212,7 +219,9 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 			
 			$ddd = mso_date_convert('j F Y',  $date, false, t('Понедельник Вторник Среда Четверг Пятница Суббота Воскресенье'), t('января февраля марта апреля мая июня июля августа сентября октября ноября декабря'));
 			
-			echo '<div class="w24 w46-tablet w100-phone mar5-b"><a style="background-color: hsl(' . $h . ', 95%, 30%); color: hsl(' . $h .', 10%, 100%); height: 100%;" class="b-inline w100 pad5-tb pad10-rl hover-no-underline hover-bg-blue600" href="' . getinfo('site_admin_url') .'page/category/' . $id .'">' . $cats[$id]['category_name'] . ' <br><span class="t90">' . $ddd . '</span></a></div>';
+			// echo '<div class="w24 w46-tablet w100-phone mar5-b"><a style="background-color: hsl(' . $h . ', 95%, 30%); color: hsl(' . $h .', 10%, 100%); height: 100%;" class="b-inline w100 pad5-tb pad10-rl hover-no-underline hover-bg-blue600" href="' . getinfo('site_admin_url') .'page/category/' . $id .'">' . $cats[$id]['category_name'] . ' <br><span class="t90">' . $ddd . '</span></a></div>';
+			
+			echo '<div class="w24 w46-tablet w100-phone mar5-b"><a style="background-color: #b9bed7; color: #111111; height: 100%;" class="b-inline w100 pad5-tb pad10-rl hover-no-underline hover-bg-blue700 hover-t-white" href="' . getinfo('site_admin_url') .'page/category/' . $id .'">' . $cats[$id]['category_name'] . ' <br><span class="t90">' . $ddd . '</span></a></div>';
 		}
 	
 		echo '</div>';
@@ -239,7 +248,7 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 		
 		if ($rss)
 		{
-			echo '<h4 class="mar30-t">' . t('Новости MaxSite CMS') . '</h4>';
+			echo '<h4 class="mar50-t i-maxcdn">' . t('Новости MaxSite CMS') . '</h4>';
 			echo '<ul>' . $rss . '</ul>';
 			
 		}

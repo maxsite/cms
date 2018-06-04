@@ -21,6 +21,7 @@
 		$options['templates'] = $post['f_templates'];
 		
 		$options['show_panel'] = isset($post['f_show_panel']) ? 1 : 0;
+		$options['only_home'] = isset($post['f_only_home']) ? 1 : 0;
 		$options['show_panel_type'] = isset($post['f_show_panel_type']) ? $post['f_show_panel_type'] : 'screenshot';
 		
 		// переделаем массив в [default] => Default из info.php [name]
@@ -49,8 +50,8 @@ var theMessage = $(this).attr('content');
 $('<div class="tooltip">' + theMessage + '</div>').appendTo('body').fadeIn('slow');
 $(this).bind('mousemove', function(e){
 			$('div.tooltip').css({
-				'top': e.pageY - ($('div.tooltip').height())+120,
-				'left': e.pageX + 30
+				'top': e.pageY - ($('div.tooltip').height()) + 120,
+				'left': e.pageX + 40
 			});
 		});
 	}).bind('mouseout', function(){
@@ -88,20 +89,22 @@ $(this).bind('mousemove', function(e){
 	if ( !isset($options['templates']) ) $options['templates'] = array();
 	
 	if ( !isset($options['show_panel']) ) $options['show_panel'] = false;
+	if ( !isset($options['only_home']) ) $options['only_home'] = false;
 	
 	if ( !isset($options['show_panel_type']) ) $options['show_panel_type'] = 'screenshot';
 	
-	$form = $checked = $checked1 = $checked2 = '';
+	$form = $form1 = $checked = $checked1 = $checked2 = $checked3 = '';
 	
-	if ($options['show_panel']) 
-		$checked = ' checked';
+	if ($options['show_panel']) $checked = ' checked';
+	if ($options['only_home'])  $checked3 = ' checked';
 	
 	if ($options['show_panel_type'] == 'screenshot')
 		$checked1 = ' checked';
 	else
 		$checked2 = ' checked';
 		
-	$form .= '<p><label><input type="checkbox" name="f_show_panel"' . $checked . '> ' . t('Отображать верхнюю панель') . '</label> &nbsp;&nbsp;&nbsp;<label><input type="radio" name="f_show_panel_type" value="screenshot"' . $checked1 . '> ' . t('скриншотами') . '</label> &nbsp;&nbsp;<label><input type="radio" name="f_show_panel_type" value="combo"' . $checked2 . '> ' . t('выпадающим списком') . '</label></p><hr>';
+	$form1 .= '<p><label><input type="checkbox" name="f_show_panel"' . $checked . '> ' . t('Отображать верхнюю панель') . '</label> &nbsp;&nbsp;<label><input type="checkbox" name="f_only_home"' . $checked3 . '> ' . t('Только на главной') . '</label></p>
+	<p><label><input type="radio" name="f_show_panel_type" value="screenshot"' . $checked1 . '> ' . t('скриншотами') . '</label> &nbsp;&nbsp;<label><input type="radio" name="f_show_panel_type" value="combo"' . $checked2 . '> ' . t('выпадающим списком') . '</label></p><hr>';
 	
 	// получаем все шаблоны на диске
 	// выводим их списком с чекбоксами
@@ -143,6 +146,7 @@ $(this).bind('mousemove', function(e){
 	}
 
 	echo '<form method="post">' . mso_form_session('f_session_id');
+	echo '<div>' . $form1 . '</div>';
 	echo '<div class="flex flex-wrap">' . $form . '</div>';
 	echo '<button class="button i-save mar30-tb" type="submit" name="f_submit">' . t('Сохранить изменения') . '</button>';
 	echo '</form>';

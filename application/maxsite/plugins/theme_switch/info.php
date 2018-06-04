@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Шаблоны сайта'),
 	'description' => t('Переключение тем оформления сайта посетителями'),
-	'version' => '2',
+	'version' => '3',
 	'author' => 'Максим',
 	'plugin_url' => '',
 	'author_url' => '//maxsite.org/',

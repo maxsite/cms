@@ -228,6 +228,12 @@ function theme_switch_body_start($args = '')
 {
 	$opt = mso_get_option('theme_switch', 'plugins', array());
 	if ( !isset($opt['show_panel']) or !$opt['show_panel']) return $args; // не отмечена панель
+	
+	if ( isset($opt['only_home']) and $opt['only_home']) 
+	{
+		if (!is_type('home')) return $args; // только на главной
+	}
+	
 	if ( !isset($opt['templates']) ) return $args; // нет выбранных шаблонов
 	if ( !isset($opt['show_panel_type']) ) $opt['show_panel_type'] = 'screenshot';
 		

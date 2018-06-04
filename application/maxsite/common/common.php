@@ -2513,8 +2513,10 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 				and strpos($url, 'https://') === false
 			) 
 			{
-				if ($url == '/') $url = getinfo('siteurl'); // это главная
-					else $url = getinfo('siteurl') . $url;
+				if ($url == '/') 
+					$url = getinfo('siteurl'); // это главная
+				else 
+					$url = getinfo('siteurl') . $url;
 			}
 			
 			# если текущий адрес совпал, значит мы на этой странице
@@ -2556,13 +2558,11 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 				
 				if ($a_link)
 				{
-					$out .= '<li class="group' . $class . '"><a href="' . $url . '"' . $title . $link_attr . '><span' . $class_span . '>' . $name . '</span></a>' 
-							. NR . '<ul>' . NR;
+					$out .= '<li class="group' . $class . '"><a href="' . $url . '"' . $title . $link_attr . '><span' . $class_span . '>' . $name . '</span></a><ul>';
 				}
 				else
 				{
-					$out .= '<li class="group' . $class . '"><span' .$class_span . '>' . $name . '</span>' 
-							. NR . '<ul>' . NR;
+					$out .= '<li class="group' . $class . '"><span' .$class_span . '>' . $name . '</span><ul>';
 				}
 				
 				
@@ -2575,11 +2575,11 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 				
 				if ($a_link)
 				{
-					$out .= '<li class="' . trim($class) . '"><a href="' . $url . '"' . $title  . $link_attr . '><span' . $class_span . '>' . $name . '</span></a></li>' . NR;
+					$out .= '<li class="' . trim($class) . '"><a href="' . $url . '"' . $title  . $link_attr . '><span' . $class_span . '>' . $name . '</span></a></li>';
 				}
 				else
 				{
-					$out .= '<li class="' . trim($class) . '"><span' .$class_span . '>' . $name . '</span></li>' . NR;
+					$out .= '<li class="' . trim($class) . '"><span' .$class_span . '>' . $name . '</span></li>';
 				}
 			}
 			
@@ -2610,12 +2610,12 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 				$group_elem = 0;
 				$group_in = false;
 				$group_work = false;
-				$out .= '</ul>' . NR . '</li>' . NR;
+				$out .= '</ul></li>';
 			}
 			
 			if ($elem[0] == '---') // разделитель
 			{
-				$out .= '<li class="divider"><span></span></li>' . NR;
+				$out .= '<li class="divider"><span></span></li>';
 			}
 			
 		}

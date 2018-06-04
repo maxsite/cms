@@ -611,7 +611,7 @@ class Page_out
 	// вывод контента
 	function content($do = '<div class="mso-page-content">', $posle = '</div>')
 	{
-		return $this->out(NR . $do . $this->get_content() . $posle);
+		return $this->out($do . $this->get_content() . $posle);
 	}
 	
 	// обрезка контента по кол-ву слов
@@ -621,7 +621,7 @@ class Page_out
 		
 		$content = $this->content_do_cut($this->get_content());
 		
-		return $this->out(NR . $do . mso_str_word(strip_tags($content), $max_words) . $cut . $posle);
+		return $this->out($do . mso_str_word(strip_tags($content), $max_words) . $cut . $posle);
 	}
 	
 	// обрезка контента по кол-ву символов
@@ -631,7 +631,7 @@ class Page_out
 		
 		$content = $this->content_do_cut($this->get_content());
 		
-		return $this->out(NR . $do . mb_substr(strip_tags($content), 0, $max_chars, 'UTF-8') . $cut . $posle);
+		return $this->out($do . mb_substr(strip_tags($content), 0, $max_chars, 'UTF-8') . $cut . $posle);
 	}
 	
 	// обрезка контента/текста до [cut]  
@@ -704,7 +704,7 @@ class Page_out
 		
 		if ($numargs === 0) 
 		{
-			return $this->out(NR . '<div>'); // нет аргументов, одиночный div
+			return $this->out('<div>'); // нет аргументов, одиночный div
 		}
 
 		$args = func_get_args(); // массив всех полученных аргументов
@@ -717,13 +717,13 @@ class Page_out
 			// его выводим как есть
 			
 			if ( 0 === strpos($class, '<'))
-				$out .= NR . $class;
+				$out .= $class;
 			else
 			{
 				if ($class) 
-					$out .= NR . '<div class="' . $class . '">';
+					$out .= '<div class="' . $class . '">';
 				else
-					$out .= NR . '<div>';
+					$out .= '<div>';
 			}
 		}
 		
@@ -737,7 +737,7 @@ class Page_out
 		
 		if ($numargs === 0) 
 		{
-			return $this->out('</div>' . NR); // нет аргументов, одиночный div
+			return $this->out('</div>'); // нет аргументов, одиночный div
 		}
 
 		$args = func_get_args(); // массив всех полученных аргументов
@@ -765,7 +765,7 @@ class Page_out
 			}
 		}
 		
-		return $this->out(NR . $out . '<!--' . $out_comment . '-->' . NR . NR);
+		return $this->out($out . '<!--' . $out_comment . '-->');
 	}
 	
 	// вывод div.clearfix

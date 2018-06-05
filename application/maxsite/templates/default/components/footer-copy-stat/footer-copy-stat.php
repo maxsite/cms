@@ -7,7 +7,7 @@
 
 $CI = & get_instance();	
 
-$copy_maxsite = sprintf( tf('Работает на <a href="//max-3000.com/">MaxSite CMS</a> | Время: {elapsed_time} | SQL: %s | Память: {memory_usage}'), $CI->db->query_count) . '<!--global_cache_footer--> | ';
+$copy_maxsite = sprintf( tf('Работает на <a href="http://max-3000.com/">MaxSite CMS</a> | Время: {elapsed_time} | SQL: %s | Память: {memory_usage}'), $CI->db->query_count) . '<!--global_cache_footer--> | ';
 
 if (is_login())
 	$login = '<a href="' . getinfo('siteurl') . 'admin">' . tf('Управление') . '</a> | '

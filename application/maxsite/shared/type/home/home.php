@@ -39,14 +39,18 @@ else
 	// свой вариант вывода главной на основе опций с [unit]
 	$home_units = false;
 	
-	// если есть units.php, то получаем из него текст с [unit]
-	if ($fn = mso_find_ts_file('type/home/units.php')) 
+	// разрешены юниты в этом шаблоне?
+	if (mso_get_option('home_units_enable', getinfo('template'), 1))
 	{
-		$home_units = file_get_contents($fn);
-	}
-	else
-	{
-		$home_units = mso_get_option('home_units', getinfo('template'), ''); // или из опции
+		// если есть units.php, то получаем из него текст с [unit]
+		if ($fn = mso_find_ts_file('type/home/units.php')) 
+		{
+			$home_units = file_get_contents($fn);
+		}
+		else
+		{
+			$home_units = mso_get_option('home_units', getinfo('template'), ''); // или из опции
+		}
 	}
 	
 	if ($home_units)

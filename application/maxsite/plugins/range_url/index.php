@@ -44,7 +44,6 @@ function range_url_mso_options()
 		return;
 	}
 	
-	
 	# ключ, тип, ключи массива
 	mso_admin_plugin_options('plugin_range_url', 'plugins', 
 		array(
@@ -78,6 +77,7 @@ function range_url_mso_options()
 (page)(*)(next)(*)'), 
 							'default' => ''
 						),
+						
 			'min-count-segment' => array(
 							'type' => 'text', 
 							'name' => t('Минимальное количество сегментов URL которые будут разрешены автоматически'), 
@@ -125,14 +125,12 @@ function range_url_init($arg = array())
 	$current_url = mso_current_url(); // текущий адрес
 	if ($current_url === '') return $arg; // главная
 	
-	
 	// отдельно правило для главной
 	// если это home, но без next, то 301-редиректим на главную
 	if (mso_segment(1) == 'home' and mso_segment(2) != 'next')
 	{
 		mso_redirect('', false, 301);
 	}
-	
 	
 	if (!isset($options['templates']) ) $options['templates'] = '';
 	$templates = explode("\n", trim($options['templates'])); // разобъем по строкам
@@ -225,7 +223,13 @@ function range_url_init($arg = array())
 	
 	if (count(explode('/', $current_url)) <= $options['min-count-segment']) return $arg; // адрес имеет менее N сегментов
 
-	$allow = false; // результат 
+	// разрешить все адреса, если первый сегмент есть как php-файл в type-каталоге шаблона
+	$seg1 = mso_segment(1);
+	$seg1 = 'type/' . $seg1 . '/' . $seg1 . '.php';
+	
+	if (mso_fe($seg1)) return $arg; // есть такой файл
+	
+	$allow = false; // результат
 	
 	foreach($templates as $template)
 	{
@@ -245,22 +249,15 @@ function range_url_init($arg = array())
 		}
 	}
 	
-	// pr($allow);
-	
-
-	
 	if (!$allow)
 	{
-	
 		if ($options['page_404_header']) @header('HTTP/1.0 404 Not Found');
 		
 		if ($options['page_404_redirect']) mso_redirect('page_404');
 			else $MSO->data['type'] = 'page_404';
-
 	}
-	
 	
 	return $arg;
 }
 
-# end file
+# end of file

@@ -37,6 +37,7 @@ if ($logo) $logo = '<img src="' . $logo . '" alt="' . getinfo('name_site') . '" 
 if (!is_type('home')) $logo = '<a href="' . getinfo('siteurl') . '">' . $logo . '</a>';
 
 $top1_block = mso_get_option('top1_block', getinfo('template'), '');
+$top1_cart_url = mso_get_option('top1_cart_url', getinfo('template'), 'page/cart');
 
 ?>
 <div class="layout-center-wrap bg-red"><div class="layout-wrap flex flex-wrap-phone">
@@ -50,7 +51,14 @@ $top1_block = mso_get_option('top1_block', getinfo('template'), '');
 	<div class="flex-grow1 t-right t-white t120 links-no-color t-center-phone t-nowrap">
 	<?php
 		if ($fn = mso_fe('components/_social/_social.php')) require($fn);
+		
+		if (defined('CART') and $top1_cart_url)
+		{
+			echo '<i class="i-shopping-cart mar20-l"></i><a class="cart-all-count t90 pad10-r" href="' . getinfo('siteurl') . $top1_cart_url. '"></a>';
+		}
 	?>
+	
+	
 	</div>
 </div></div>
 

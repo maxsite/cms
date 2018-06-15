@@ -3,8 +3,10 @@
 // шорткод lightslider, если нужен в шаблоне
 if ($fn = mso_fe('components/lightslider/lightslider-shortcode.php')) require_once($fn);
 
+// корзина
+if ($fn = mso_fe('custom/cart/cart.php')) require_once($fn);
 
-$this_version_template = '20180604';
+$this_version_template = '20180615';
 
 // иммитация старого default
 // mso_delete_option('template_set_component_options', getinfo('template'));

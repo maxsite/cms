@@ -12,6 +12,10 @@ if ($thumb = thumb_generate($p->meta_val('image_for_page'), $_width, $_height))
 	
 	$p->thumb = '<a class="my-hover-img" href="' . $p->page_url() . '">' . $p->thumb . '<div></div></a>';
 }
+else
+{
+	$p->thumb = '<a class="my-hover-img" href="' . $p->page_url() . '"><img src="' . mso_holder($_width, $_height, '< IMGAGE >', '#dddddd') .'" alt=""><div></div></a>';
+}	
 
 $p->format('title', '<h1 class="t140 t-gray900 links-no-color mar0 small-caps">', '</h1>', true);
 

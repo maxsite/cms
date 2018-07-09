@@ -4,7 +4,7 @@
  * MaxSite CMS
  * (c) http://max-3000.com/
  *
- * HTML-структура шаблона
+ * HTML-структура шаблона (лендинг)
  *
  */
 
@@ -20,15 +20,6 @@ echo '<body' . ((mso_get_val('body_class')) ? ' class="' . mso_get_val('body_cla
 global $CONTENT_OUT; 
 echo $CONTENT_OUT; 
 
-if (function_exists('ushka')) echo ushka('google_analytics'); 
-
-// lazy-загрузка js-файлов
-if ($lazy_js = mso_get_path_files(getinfo('template_dir') . 'assets/js/lazy/', getinfo('template_url') . 'assets/js/lazy/', true, array('js')))
-{
-	foreach($lazy_js as $fn_js)
-	{
-		echo '<script src="' . $fn_js . '"></script>' . NR;
-	}
-}
+if ($fn = mso_fe('main/blocks/body-end.php')) require($fn);
 
 ?></body></html><?php if ($fn = mso_fe('main/blocks/_end.php')) require($fn) ?>

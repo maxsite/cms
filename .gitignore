@@ -1,6 +1,8 @@
 .htaccess
 sitemap.xml
 robots.txt
+nbproject/
+
 !/install/distr/sitemap.xml
 !/install/distr/robots.txt
 

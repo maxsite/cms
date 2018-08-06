@@ -155,10 +155,11 @@ myBbcodeSettings = {
 			{name:'<?= t('LESS/CSS-код') ?>', openBlockWith:'[pre lang=less]', closeBlockWith:'[/pre]', className:"css" },
 			{name:'<?= t('CSS-код') ?>', openBlockWith:'[pre lang=css]', closeBlockWith:'[/pre]', className:"css" },
 			{name:'<?= t('JavaScript-код') ?>', openBlockWith:'[pre lang=js]', closeBlockWith:'[/pre]', className:"js" },
-			{name:'<?= t('Delphi/Pascal-код') ?>', openBlockWith:'[pre lang=delphi]', closeBlockWith:'[/pre]', className:"delphi" },
+			{name:'<?= t('Delphi/Pascal-код') ?>', openBlockWith:'[pre lang=pascal]', closeBlockWith:'[/pre]', className:"pascal" },
 			{name:'<?= t('SQL-код') ?>', openBlockWith:'[pre lang=sql]', closeBlockWith:'[/pre]', className:"sql" },
 			{name:'<?= t('C#-код') ?>', openBlockWith:'[pre lang=csharp]', closeBlockWith:'[/pre]', className:"csharp" },
-			{name:'<?= t('XML-код') ?>', openBlockWith:'[pre lang=xml]', closeBlockWith:'[/pre]', className:"xml" }
+			{name:'<?= t('XML-код') ?>', openBlockWith:'[pre lang=xml]', closeBlockWith:'[/pre]', className:"xml" },
+			{name:'<?= t('Java-код') ?>', openBlockWith:'[pre lang=java]', closeBlockWith:'[/pre]', className:"java" }
 		]},
 
 		{name:'<?= t('Очистить текст от BB-кодов') ?>', className:"clean", replaceWith:function(h) { return h.selection.replace(/\[(.*?)\]/g, "") }, className:"clean", dropMenu: [

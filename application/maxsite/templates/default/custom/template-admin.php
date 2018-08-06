@@ -8,7 +8,13 @@
  *
  */
 
-# возвращает файлы для компонент
+
+/**
+ * возвращает файлы для компонент
+ * 
+ * @staticvar boolean $all
+ * @return type
+ */
 function default_components()
 {
 	// запоминаем результат, чтобы несколько раз не вызывать функцию mso_get_path_files
@@ -20,7 +26,11 @@ function default_components()
 	return '0||' . tf('Отсутствует') . '#' . implode($all, '#');
 }
 
-# возвращает файлы для css-профиля
+
+/**
+ * возвращает файлы для css-профиля
+ * @return string
+ */
 function default_profiles()
 {
 	$all = mso_get_path_files(getinfo('template_dir') . 'assets/css/profiles/', getinfo('template_url') . 'assets/css/profiles/', false, array('css'));

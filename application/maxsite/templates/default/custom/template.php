@@ -8,11 +8,14 @@
  * версия 2017-08-25
  */
 
-# типовой вывод секции HEAD
-# можно использовать в header.php
+/**
+ * типовой вывод секции HEAD
+ * можно использовать в header.php
+ * @global type $page Доступна во всех 
+ */
 function my_default_head_section()
 {
-	global $page;
+	// global $page;
 	
 	// атирибуты <HTML>
 	$html_attr = mso_get_val('head_section_html_add');
@@ -95,7 +98,11 @@ function my_default_head_section()
 } 
  
  
-# вывод подключенных css-профилей
+/**
+ * вывод подключенных css-профилей
+ * @global type $page
+ * @param type $path
+ */
 function my_default_out_profiles($path = 'assets/css/profiles/')
 {
 	global $page;
@@ -148,11 +155,14 @@ function my_default_out_profiles($path = 'assets/css/profiles/')
 }
 
 
-# функция возвращает полный путь к файлу компонента для указанной опции
-# $option - опция
-# $def_component - компонент по умолчанию
-# пример использования
-# if ($fn = my_get_component_fn('header_component2', 'menu')) require($fn);
+/**
+ * функция возвращает полный путь к файлу компонента для указанной опции
+ * 
+ * @example if ($fn = my_get_component_fn('header_component2', 'menu')) require($fn);
+ * @param type $option опция
+ * @param type $def_component Компонент по умолчанию
+ * @return boolean|string
+ */
 function my_get_component_fn($option = '', $def_component = '')
 {
 	if ($dir = mso_get_option($option, getinfo('template'), $def_component)) // получение опции
@@ -167,10 +177,13 @@ function my_get_component_fn($option = '', $def_component = '')
 }
 
 
-# функция подключает файлы css-style установленных компонентов и выводит их содержимое в едином блоке <style>
-# использовать в head 
-# $component_options - названия опций, которыми определяются компоненты в шаблоне
-# css-файл компонента находится в общем css-каталоге шаблона с именем компонента, например menu.php и menu.css
+/**
+ * функция подключает файлы css-style установленных компонентов и выводит их содержимое в едином блоке <style>
+ * <br>использовать в head 
+ * <br>css-файл компонента находится в общем css-каталоге шаблона с именем компонента, например menu.php и menu.css
+ * 
+ * @param type $component_options - названия опций, которыми определяются компоненты в шаблоне
+ */
 function my_out_component_css($component_options = array('header_component1', 'header_component2', 'header_component3', 'header_component4', 'header_component5', 'footer_component1', 'footer_component2', 'footer_component3', 'footer_component4', 'footer_component5'))
 {
 	// проходимся по всем заданным опциям
@@ -185,7 +198,12 @@ function my_out_component_css($component_options = array('header_component1', 'h
 	}
 }
 
-# аналогично выводятся js-файлы компонент.js
+/**
+ * функция подключает файлы js-файлы, аналогична my_out_component_css()
+ * 
+ * @see my_out_component_css()
+ * @param type $component_options - названия опций, которыми определяются компоненты в шаблоне 
+ */
 function my_out_component_js($component_options = array('header_component1', 'header_component2', 'header_component3', 'header_component4', 'header_component5', 'footer_component1', 'footer_component2', 'footer_component3', 'footer_component4', 'footer_component5'))
 {
 	// проходимся по всем заданным опциям
@@ -200,13 +218,21 @@ function my_out_component_js($component_options = array('header_component1', 'he
 	}
 }
 
-# получает css из указанного файла
-# в css-файле можно использовать php
-# осуществляется сжатие css
-# автозамена [TEMPLATE_URL] на url-шаблона
-# функция возвращает только стили, без обрамляющего <style>
-# Если <style> нужны, то $tag_style = true
-# Если нужен сразу вывод в браузер, то $echo = true
+
+/**
+ * получает css из указанного файла
+ * <br>в css-файле можно использовать php
+ * <br>осуществляется сжатие css
+ * <br>автозамена [TEMPLATE_URL] на url-шаблона
+ * <br>функция возвращает только стили, без обрамляющего <style>
+ * <br>Если <style> нужны, то $tag_style = true
+ * <br>Если нужен сразу вывод в браузер, то $echo = true
+ * 
+ * @param string $fn имя файла
+ * @param type $tag_style флаг для обрамления в STYLE
+ * @param type $echo флаг вывода результата по echo
+ * @return string
+ */
 function my_out_css_file($fn, $tag_style = true, $echo = true)
 {
 	
@@ -237,14 +263,11 @@ function my_out_css_file($fn, $tag_style = true, $echo = true)
 }
 
 
-// функции из LPF
-// http://lpf.maxsite.com.ua/
-
 /**
 *  сжатие HTML-текста путём удаления лишних пробелов
-*  
-*  @param $text 
-*  
+*  функция из LPF http://lpf.maxsite.com.ua/
+* 
+*  @param $text входной текст
 *  @return string
 */
 function my_compress_text($text)
@@ -277,8 +300,7 @@ function my_compress_text($text)
 /**
 *  pre, которое загоняется в [html_base64]
 *  
-*  @param $matches 
-*  
+*  @param $matches matches
 *  @return string
 */
 function my_clean_pre_do($matches)
@@ -308,8 +330,7 @@ function my_clean_pre_do($matches)
 /**
 *  script, который загоняется в [html_base64]
 *  
-*  @param $matches 
-*  
+*  @param $matches matches
 *  @return string
 */
 function my_clean_html_script($matches)
@@ -323,8 +344,7 @@ function my_clean_html_script($matches)
 /**
 *  декодирование из [html_base64]
 *  
-*  @param $matches 
-*  
+*  @param $matches matches
 *  @return string
 */
 function my_clean_html_posle($matches)
@@ -337,7 +357,6 @@ function my_clean_html_posle($matches)
 *  заменяет в тексте все вхождения http:// и https:// на // 
 *  
 *  @param $text текст
-*  
 *  @return string
 */
 function my_remove_protocol($text)

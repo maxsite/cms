@@ -61,7 +61,7 @@ if (file_exists(getinfo('template_dir') . 'custom/my_options.ini'))
 // подключаем только те опции и ini компонентов, которые реально существуют
 
 // каждый компонент в своем каталоге
-$all_component =  mso_get_dirs(getinfo('template_dir') . 'components/', array(), true);
+$all_component =  mso_get_dirs(getinfo('template_dir') . 'components/', array(), true, false);
 
 // проверяем опции (options.php)
 foreach($all_component as $dir) 
@@ -95,4 +95,4 @@ foreach($all_component as $dir)
 // вывод всех ini-опций
 echo mso_view_ini($options);
 
-# end file
+# end of file

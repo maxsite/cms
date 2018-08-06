@@ -62,8 +62,8 @@ $(function(){
 	});
 	
 	$('nav').on('mouseenter', 'ul.menu-hover li.group', function(e) {
-		// $(this).children('ul').slideDown(200);
-		$(this).children('ul').fadeIn(200);
+		// $(this).children('ul').hide().slideDown(200);
+		$(this).children('ul').hide().fadeIn(200);
 	});
 	
 	$('nav').on('mouseleave', 'ul.menu-hover li.group', function(e) {

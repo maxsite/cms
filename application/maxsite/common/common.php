@@ -3973,7 +3973,7 @@ function mso_find_ts_file($fn, $default = false)
 # функция возвращает массив $path_url-файлов по указанному $path - каталог на сервере
 # $full_path - нужно ли возвращать полный адрес (true) или только имя файла (false)
 # $exts - массив требуемых расширений. По-умолчанию - картинки
-function mso_get_path_files($path = '', $path_url = '', $full_path = true, $exts = array('jpg', 'jpeg', 'png', 'gif', 'ico', 'svg'))
+function mso_get_path_files($path = '', $path_url = '', $full_path = true, $exts = array('jpg', 'jpeg', 'png', 'gif', 'ico', 'svg'), $minus = true)
 {
 	// если не указаны пути, то отдаём пустой массив
 	if (!$path) return array();
@@ -3997,8 +3997,11 @@ function mso_get_path_files($path = '', $path_url = '', $full_path = true, $exts
 		// расширение подходит?
 		if (in_array($ext, $exts))
 		{
-			if (strpos($file, '_') === 0) continue; // исключаем файлы, начинающиеся с _
-			if (strpos($file, '-') === 0) continue; // исключаем файлы, начинающиеся с -
+			if ($minus)
+			{
+				if (strpos($file, '_') === 0) continue; // исключаем файлы, начинающиеся с _
+				if (strpos($file, '-') === 0) continue; // исключаем файлы, начинающиеся с -
+			}
 			
 			// добавим файл в массив сразу с полным адресом
 			if ($full_path)
@@ -4019,7 +4022,7 @@ function mso_get_path_files($path = '', $path_url = '', $full_path = true, $exts
 # в $need_file можно указать обязательный файл в подкаталоге 
 # если $need_file = true то обязательный php-файл в подкаталоге должен совпадать с именем подкаталога
 # например для /menu/ это menu.php 
-function mso_get_dirs($path, $exclude = array(), $need_file = false)
+function mso_get_dirs($path, $exclude = array(), $need_file = false, $minus = true)
 {
 	$CI = & get_instance(); // подключение CodeIgniter
 	$CI->load->helper('directory'); // хелпер для работы с каталогами
@@ -4031,9 +4034,12 @@ function mso_get_dirs($path, $exclude = array(), $need_file = false)
 			// нас интересуют только каталоги
 			if (is_dir($path . $d) and !in_array($d, $exclude))
 			{
-				if (strpos($d, '_') === 0) continue; // исключаем файлы, начинающиеся с _
-				if (strpos($d, '-') === 0) continue; // исключаем файлы, начинающиеся с -
-				
+				if ($minus)
+				{
+					if (strpos($d, '_') === 0) continue; // исключаем файлы, начинающиеся с _
+					if (strpos($d, '-') === 0) continue; // исключаем файлы, начинающиеся с -
+				}
+								
 				// если указан обязательный файл, то проверяем его существование
 				if($need_file === true and !file_exists($path . $d . '/' . $d . '.php')) continue;
 				if($need_file !== true and $need_file and !file_exists($path . $d . '/' . $need_file)) continue;

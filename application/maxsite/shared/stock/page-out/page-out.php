@@ -256,8 +256,8 @@ class Page_out
 		$page_url = '';
 		
 		$content = '';
-		$content_words = '';
-		$content_chars = '';
+		//$content_words = '';
+		//$content_chars = '';
 		
 		// title
 		if (strpos($out, '[title]') !== false)
@@ -359,7 +359,7 @@ class Page_out
 				false);
 		}
 		
-		
+
 		// mso_page_tag_link($tags = array(), $sep = ', ', $do = '', $posle = '', $echo = true, $type = 'tag', $link = true, $class = ''
 		if (strpos($out, '[tag]') !== false)
 		{
@@ -480,6 +480,7 @@ class Page_out
 		}
 		
 		// [meta@price]
+		// [meta@priceа|<b>|</b>]
 		if (strpos($out, '[meta@') !== false)
 		{
 			//pr($out);
@@ -493,11 +494,13 @@ class Page_out
 			$out = preg_replace_callback('!(\[val@)(.*?)(\])!is', array('self', '_line_val_set'), $out);
 		}
 		
+		/*
 		// [var@cat] — произвольное значение поля из UNIT
 		if (strpos($out, '[var@') !== false)
 		{
 			$out = preg_replace_callback('!(\[var@)(.*?)(\])!is', array('self', '_line_var_set'), $out);
 		}
+		*/
 		
 		if (strpos($out, '[content]') !== false)
 		{
@@ -514,6 +517,14 @@ class Page_out
 			$out = preg_replace_callback('!(\[content_words@)(.*?)(\])!is', array('self', '_line_content_words'), $out);
 		}
 		
+		/**
+		 * количество записей в указанной рубрике [cat_pages_count@7]
+		 */
+		if (strpos($out, '[cat_pages_count@') !== false) 
+		{
+			$out = preg_replace_callback('!(\[cat_pages_count@)(.*?)(\])!is', array('self', '_cat_pages_count'), $out);
+		}
+
 		$out = str_replace('[title]', $title, $out);
 		$out = str_replace('[page_url]', $page_url, $out);
 		$out = str_replace('[autor]', $autor, $out);
@@ -549,10 +560,28 @@ class Page_out
 	}
 	
 	// колбак для поиска [meta@мета]
+	// можно указать обрамление: [meta@мета|<b>|</b>]
+	// если мета пустое, то обрамление не выводится
 	protected function _line_meta_set($matches)
 	{
 		$m = $matches[2];
-		$m = $this->meta_val($m);
+		
+		if (strpos($m, '|') !== false)
+		{
+			$k = explode('|', $m);
+			$m = $this->meta_val($k[0]);
+			
+			if ($m)
+			{
+				if (isset($k[1])) $m = $k[1] . $m;
+				if (isset($k[2])) $m .= $k[2];
+			}
+		}
+		else
+		{
+			$m = $this->meta_val($m);
+		}
+		
 		return $m;
 	}
 	
@@ -563,18 +592,18 @@ class Page_out
 		$m = $this->val($m);
 		return $m;
 	}
-
+/*
 	// колбак для поиска [var@UNIT]
 	protected function _line_var_set($matches)
 	{
 		$m = 'var@' . $matches[2];
-		
+
 		if (isset($this->page['UNIT'][$m]))
 			return $this->page['UNIT'][$m];
 		else 
 			return '';
 	}
-	
+*/	
 	// колбак для поиска [content_chars@КОЛВО]
 	protected function _line_content_chars($matches)
 	{
@@ -596,6 +625,12 @@ class Page_out
 		$m = mso_str_word(strip_tags($content), $m);
 		return $m;
 	}			
+	
+	// колбак для поиска [cat_pages_count@7]
+	protected function _cat_pages_count($matches)
+	{
+		return mso_get_cat_pages_count($matches[2]);
+	}		
 	
 	// только получаем контент через mso_page_content()
 	function get_content()
@@ -1041,7 +1076,9 @@ class Block_pages
 		if ($this->pages)
 		{	
 			for($i = 0; $i < count($this->pages); $i++)
+			{
 				$this->pages[$i]['UNIT'] = $UNIT;
+			}
 		}
 	}
 	

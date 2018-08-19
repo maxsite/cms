@@ -181,7 +181,7 @@ function getinfo($info = '')
 				break;
 
 		case 'plugins_dir' :
-				$out = $MSO->config['plugins_dir'];;
+				$out = $MSO->config['plugins_dir'];
 				break;
 
 		case 'ajax' :
@@ -645,7 +645,7 @@ function is_type_slug($type = '', $slug = '')
 # если $and_name = true , то ищем и по category_name
 function is_page_cat($slug = '', $and_id = true, $and_name = true)
 {
-	global $MSO, $page;
+	global $page;
 
 	if (!$slug) return false; // slug не указан
 	if (!is_type('page')) return false; // тип не page
@@ -997,8 +997,10 @@ function mso_refresh_options()
 	$cache_options = array();
 
 	foreach ($query->result() as $row)
+	{
 		$cache_options[$row->options_type][$row->options_key] = $row->options_value;
-
+	}
+	
 	mso_add_cache('options', $cache_options);
 
 	return $cache_options;
@@ -1068,7 +1070,7 @@ function mso_delete_option_mask($mask, $type = 'general')
 	$mask = str_replace('_', '/_', $mask);
 	$mask = str_replace('%', '/%', $mask);
 
-	$query = $CI->db->query('DELETE FROM ' . $CI->db->dbprefix('options') . ' WHERE options_type="' . $type . '" AND options_key LIKE "'. $mask . '%" ESCAPE "/"');
+	$CI->db->query('DELETE FROM ' . $CI->db->dbprefix('options') . ' WHERE options_type="' . $type . '" AND options_key LIKE "'. $mask . '%" ESCAPE "/"');
 
 	mso_refresh_options(); # обновляем опции из базы
 
@@ -3387,7 +3389,7 @@ function _mso_login()
 		
 		if ( file_exists($template_file) ) require($template_file);
 			else show_error('Ошибка - отсутствует файл шаблона index.php');
-	};
+	}
 }
 
 
@@ -4391,10 +4393,14 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 	// подключаем файл как текст @fromfile
 	$text_units = preg_replace_callback('!@fromfile (.*?)\n!is', '_mso_units_out_fromfile', $text_units);
 	
+	// замены по всему тексту юнитов
+	$text_units = str_replace('[siteurl]', getinfo('siteurl'), $text_units);
+	$text_units = str_replace('[templateurl]', getinfo('template_url'), $text_units);
+				
 	// ищем вхождение [unit] ... [/unit]
 	$units = mso_section_to_array($text_units, '!\[unit\](.*?)\[\/unit\]!is', array('file'=>''));
 	
-	// pr($units, 1);
+	// pr($units[0], 1);
 	
 	// подключаем каждый указанный unit 
 	// _rules — php-условие, при котором юнит выводится
@@ -4412,6 +4418,33 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 		foreach ($units as $UNIT)
 		{
 			$UNIT_NUM++;
+			
+			// в юните в произвольном поле может быть вхождение [var@ПЕРЕМЕННАЯ]
+			// нужно их обработать и заменить
+			$UNIT1 = array();
+			
+			foreach ($UNIT as $k=>$v)
+			{
+				if (strpos($v, '[var@') !== false) 
+				{
+					preg_match_all('!(\[var@)(.*?)(\])!is', $v, $matches, PREG_SET_ORDER);
+					
+					if ($matches)
+					{
+						foreach($matches as $m)
+						{
+							if (isset($UNIT['var@' . $m[2]]))
+							{
+								$v = str_replace('[var@' . $m[2] .']', trim($UNIT['var@' . $m[2]]), $v);
+							}
+						}
+					}
+				}
+				
+				$UNIT1[$k] = $v;
+			}
+			
+			$UNIT = $UNIT1;
 
 			if (isset($UNIT['_rules']) and trim($UNIT['_rules']))
 			{

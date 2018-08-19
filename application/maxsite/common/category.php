@@ -25,7 +25,9 @@ function mso_get_cat_page($id = 0)
 	{
 		$cat = array();
 		foreach ($query->result_array() as $row)
+		{
 			$cat[] = $row['category_id'];
+		}
 	
 		return $cat;
 	}
@@ -837,4 +839,32 @@ function mso_get_cat_key($find_key = 'category_name', $slug = '')
 	return mso_get_cat_from_id(mso_get_cat_from_slug($slug), $find_key);
 }
 
-# end file
+
+/**
+ * Возвращает количество записей указанной рубрики
+ * 
+ * @param int $cat_id ID рубрики
+ * @return int Количество записей
+ */
+function mso_get_cat_pages_count($cat_id) 
+{
+	static $all_cats = false;
+			
+	if ($all_cats === false)
+	{
+		$all = mso_cat_array_single('page', 'category_name', 'ASC', '', true, false);
+		
+		foreach($all as $id => $cat)
+		{
+			$all_cats[$id] = count($cat['pages']);
+		}
+	}
+	
+	if (isset($all_cats[$cat_id])) 
+		return $all_cats[$cat_id];
+	else
+		return 0;
+	
+}
+
+# end of file

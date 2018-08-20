@@ -73,9 +73,10 @@ function lightbox_content($text = '')
 		'~\[image=(.[^\s]*?) (.*?)\](.*?)\[\/image\]~is' => '<a href="$3" class="lightbox" title="$2"><img src="$1" alt="$2"></a>',
 		
 		
-		// !!! какая-то сбойная регулярка — пока отключил
+		// !!! какая-то сбойная регулярка — нужно разобраться
+		// почему сбойная???
 		# [image(left)=http://localhost/uploads/mini/2008-07.jpg Картинка]http://localhost/uploads/2008-07.jpg[/image]
-	//	'~\[image\((.[^\s]*?)\)=(.[^\s]*?) (.*?)\](.*?)\[\/image\]~si' => '<a href="$4" class="lightbox" title="$3"><img src="$2" alt="$3" class="$1"></a>',
+		'~\[image\((.[^\s]*?)\)=(.[^\s]*?) (.*?)\](.*?)\[\/image\]~si' => '<a href="$4" class="lightbox" title="$3"><img src="$2" alt="$3" class="$1"></a>',
 		
 		# [image(left)=http://localhost/uploads/mini/2008-07.jpg]http://localhost/uploads/2008-07.jpg[/image]
 		'~\[image\((.[^ ]*?)\)=(.[^ ]*?)\](.*?)\[\/image\]~si' => '<a href="$3" class="lightbox"><img src="$2" alt="" class="$1"></a>',
@@ -92,4 +93,4 @@ function lightbox_content($text = '')
 	return preg_replace(array_keys($preg), array_values($preg), $text);
 }
 
-# end file
+# end of file

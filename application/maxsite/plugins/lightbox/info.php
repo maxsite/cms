@@ -4,7 +4,7 @@
 $info = array(
 	'name' => t('Lightbox'),
 	'description' => t('Подключение LightBox к вашему сайту. Делает красивый вывод картинок, а также небольших галерей'),
-	'version' => '1.3',
+	'version' => '1.4',
 	'author' => 'Максим',
 	'plugin_url' => '',
 	'author_url' => '//maxsite.org/',

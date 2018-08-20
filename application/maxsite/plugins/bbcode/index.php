@@ -188,9 +188,13 @@ function bbcode_custom($text = '')
 		'~\[img\((.[^ ]*?)\)#(.[^ ]*?) (.*?)\](.*?)\[\/img\]~si' => '<img class="$1" itemprop="$2" src="$4" alt="$3" title="$3">',
 		
 		# обычные img
+		# [img=200x300]адрес[/img]
 		'~\[img=(.*?)x(.*?)\](.*?)\[\/img\]~si'	 			=> '<img src="$3" style="width: $1px; height: $2px">',
-
+		
+		# [img картинка]адрес[/img]
 		'~\[img (.*?)\](.*?)\[\/img\]~si'			   		=> '<img src="$2" title="$1" alt="$1">',
+		
+		# [img]адрес[/img]
 		'~\[img\](.*?)\[\/img\]~si'				 			=> '<img src="$1" title="" alt="">',
 
 		# [img(right)]адрес[/img]
@@ -199,7 +203,7 @@ function bbcode_custom($text = '')
 		# [img(right) Описание файла]адрес[/img]
 		'~\[img\((.[^ ]*?)\) (.*?)\](.*?)\[\/img\]~si' 		=> '<img class="$1" src="$3" alt="$2" title="$2">',
 		
-		# [image class="left"]адрес[/image] - произвольные атрибуты
+		# [image class="left" title="картинка"]адрес[/image] - произвольные атрибуты
 		'~\[image (.*?)\](.*?)\[\/image\]~si' 	=> '<img src="$2" $1>',
 		
 		

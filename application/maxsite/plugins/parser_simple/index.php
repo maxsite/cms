@@ -1,17 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
-
-/**
- * MaxSite CMS
- * (c) http://max-3000.com/
- * http://lpf.maxsite.com.ua/autotag-single
- */
 /*
 	(с) Landing Page Framework (LPF)
 	(c) MAX — http://lpf.maxsite.com.ua/
 	
-	См. http://lpf.maxsite.com.ua/autotag-simple
+	См. http://lpf.maxsite.com.ua/simple
 	
-	Версия: 2018-02-16
+	Версия: 2018-08-25
 	
 	Простой autotag. Можно комбинировать с обычным HTML.
 
@@ -27,6 +21,7 @@
 	
 	_ абзац P
 	
+	__ блок DIV в одной строке
 	
 	Тэги в одну строку:
 	h1|h2|h3|h4|h5|h6|li|dt|dd
@@ -155,6 +150,12 @@ function autotag_simple($text)
 	$text = preg_replace('!^\s*_\s(.*?)\n!m', "\n\n<p>$1</p>\n", $text);
 	$text = preg_replace('!^\s*_\((.*?)\)\((.*?)\)\s(.*?)\n!m', "\n\n<p class=\"$1\" style=\"$2\">$3</p>\n", $text);
 	$text = preg_replace('!^\s*_\((.*?)\)\s(.*?)\n!m', "\n\n<p class=\"$1\">$2</p>\n", $text);
+	
+	# __ DIV в одной строке
+	$text = preg_replace('!^\s*__\s(.*?)\n!m', "\n\n<div>$1</div>\n", $text);
+	$text = preg_replace('!^\s*__\s(.*?)\n!m', "\n\n<div>$1</div>\n", $text);
+	$text = preg_replace('!^\s*__\((.*?)\)\((.*?)\)\s(.*?)\n!m', "\n\n<div class=\"$1\" style=\"$2\">$3</div>\n", $text);
+	$text = preg_replace('!^\s*__\((.*?)\)\s(.*?)\n!m', "\n\n<div class=\"$1\">$2</div>\n", $text);
 	
 	# __  I __      _ EM _
 	$text = preg_replace('! __(.*?)__!', " <i>$1</i>", $text);

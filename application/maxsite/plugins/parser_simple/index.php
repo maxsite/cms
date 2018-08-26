@@ -212,6 +212,13 @@ function autotag_simple($text)
 	$text = str_replace('<bq', '<blockquote', $text);
 	$text = str_replace('</bq>', '</blockquote>', $text);
 	
+	
+	# [br]
+	$text = str_replace('[br]', '<br style="clear:both">', $text);
+	$text = str_replace('[br none]', '<br>', $text);
+	$text = str_replace('[br left]', '<br style="clear:left">', $text);
+	$text = str_replace('[br right]', '<br style="clear:right">', $text);
+	
 	return trim($text);
 }
 

@@ -7,7 +7,7 @@
 <li><a href="//github.com/maxsite/cms/issues"><?= t('Сообщить о проблеме. Обсуждения') ?></a></li>
 <li><a href="http://max-3000.com/page/help"><?= t('Центр помощи') ?></a> &bull; <a href="http://max-3000.com/page/faq"><?= t('ЧАВО для новичков') ?></a> &bull; <a href="http://book.max-3000.com/"><?= t('Обучающая книга') ?></a></li>
 <li><a href="//maxhub.ru/"><?= t('MaxHub - сообщество MaxSite CMS') ?></a> &bull; <a href="//maxhub.ru/category/templates"><?= t('Шаблоны') ?></a> &bull; <a href="//maxhub.ru/category/plugins"><?= t('Плагины') ?></a></li>
-<li><a href="http://maxsite.org/demo-templates"><?= t('Демо-каталог шаблонов') ?></a> &bull; <a href="http://maxsite.org/page/templates"><?= t('Авторские шаблоны') ?></a></li>
+<li><a href="http://maxsite.org/demo-templates"><?= t('Демо-каталог шаблонов') ?></a> &bull; <a href="http://maxsite.org/page/templates"><?= t('Готовые шаблоны') ?></a></li>
 </ul>
 <div class="flex-grow1">
 	<iframe src="http://maxsite.github.io/version.html?version=<?= getinfo('version') ?>" scrolling="no" frameborder="no" style="width: 100%; height: 60px; "></iframe>
@@ -23,8 +23,29 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 		
 		$show_clear_cache = false;
 		mso_flush_cache(true); // сбросим весь кэш
+		
+		// удалим пустые каталоги в uploads/_pages
+		$CI = & get_instance();
+		$CI->load->helper('directory');
+		$CI->load->helper('file');
+		
+		$p = getinfo('uploads_dir') . '_pages/';
+		
+		if ($a = directory_map($p, 1))
+		{
+			foreach($a as $m)
+			{
+				$f = get_filenames($p . $m, false, false);
+				
+				if (count($f) === 0)
+				{
+					delete_files($p . $m, true);	
+					@rmdir($p . $m);
+				}
+			}
+		}
+		
 		echo '<p class="i-check"><a href="' . getinfo('site_admin_url') .'home">' . t('Кэш очищен') . '</a></p>';
-		// mso_redirect('admin/home');
 	}
 
 	if ($show_clear_cache)

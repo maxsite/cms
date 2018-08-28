@@ -220,8 +220,13 @@ if ($pages)
 									$p->div($page_nav, 'mso-page-parents');
 								
 								// блок "Еще записи по теме"
-								if ($f = mso_page_foreach('page-other-pages')) require($f);
-									else mso_page_other_pages($p->val('page_id'), $p->val('page_categories'));
+								if ($p->meta_val('show_page_other_pages', 1))
+								{
+									if ($f = mso_page_foreach('page-other-pages')) 
+										require($f);
+									else 
+										mso_page_other_pages($p->val('page_id'), $p->val('page_categories'));
+								}
 									
 							$p->html('</aside>');
 							

@@ -379,6 +379,12 @@ function mso_get_pages($r = array(), &$pag)
 			$output = mso_hook('content_in', $output);
 			$output = mso_hook('content', $output);
 			
+			
+			// спецзамены — экспериментальный вариант — после выделить отдельными функциями
+			// замена [pi] и [page_images] на http://сайт/uploads/_pages/IDзаписи/ 
+			$output = str_replace(array('[pi]', '[page_images]'), getinfo('uploads_url') . '_pages/' . $page['page_id'] . '/', $output);
+			
+			
 			/*
 			$output = mso_hook('content_auto_tag', $output);
 			$output = mso_hook('content_balance_tags', $output);

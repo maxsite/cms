@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Табы'),
 	'description' => t('Виджет создающий табы (закладки). В качестве содержимого таба используются другие виджеты или ушки'),
-	'version' => '2.5',
+	'version' => '2.6',
 	'author' => 'Максим',
 	'editors' => '<a href="//dimox.name/universal-jquery-tabs-script/">Dimox</a>',
 	'plugin_url' => '',

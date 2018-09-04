@@ -2,8 +2,8 @@
 
 $info = array(
 	'name' => t('Выполнение PHP'),
-	'description' => t('Выполнение произвольного PHP-кода в тексте. Обрамите его в [php]код[/php]'),
-	'version' => '1.1',
+	'description' => t('Выполнение произвольного PHP-кода в тексте. Обрамите его в [php]код[/php] или [php_in]код[/php_in]'),
+	'version' => '2',
 	'author' => 'Максим',
 	'plugin_url' => '',
 	'author_url' => '//maxsite.org/',

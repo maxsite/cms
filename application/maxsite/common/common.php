@@ -2045,9 +2045,11 @@ function mso_get_permalink_cat_slug($slug = '', $prefix = 'category/')
 # если $int = true, то дополнительно преобразуется в числа
 # если $probel = true, то разделителем может быть пробел
 # если $unique = true, то убираем дубли
-function mso_explode($s = '', $int = true, $probel = true, $unique = true )
+# если $range_dot = true, то формируется диапазон - «1..10» преобразуется в 1 2 3 4 5 6 7 8 9 10
+function mso_explode($s = '', $int = true, $probel = true, $unique = true, $range_dot = true)
 {
 	//$s = trim( str_replace(',', ',', $s) );
+	
 	$s = trim( str_replace(';', ',', $s) );
 	if ($probel)
 	{
@@ -2059,6 +2061,17 @@ function mso_explode($s = '', $int = true, $probel = true, $unique = true )
 	}
 
 	$s = trim( str_replace(',,', ',', $s) );
+
+	if ($range_dot and strpos($s,  '..') !== false)
+	{
+		$d = explode('..', trim($s));
+	
+		if (isset($d[0]) and isset($d[1]))
+		{
+			$k = range($d[0], $d[1]);
+			$s = implode(',', $k);
+		}
+	}
 	
 	$s = explode(',', trim($s));
 	if ($unique) $s = array_unique($s);

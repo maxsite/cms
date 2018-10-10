@@ -24,6 +24,7 @@ class Page_out
 	var $close_box_grid = false; // признак, что div-строка box_grid не закрыта
 	
 	var $thumb = ''; // миниатюра для [thumb]
+	var $thumb_url = ''; // адрес миниатюры для [thumb]
 	
 	function __construct()
 	{
@@ -140,6 +141,7 @@ class Page_out
 	{
 		$this->page = $page;
 		$this->thumb = '';
+		$this->thumb_url = '';
 		
 		$this->num++; // счетчик увеличим
 		$this->last = ($this->num >= $this->max) ; // ставим признак true, если это последняя запись
@@ -544,6 +546,7 @@ class Page_out
 		$out = str_replace('[cat/cat_id]', $cat_cat_id, $out);
 		
 		$out = str_replace('[thumb]', $this->thumb, $out);
+		$out = str_replace('[thumb_url]', $this->thumb_url, $out);
 		
 		$out = str_replace('[content]', $content, $out);
 		
@@ -1208,8 +1211,6 @@ class Block_pages
 		{
 			$p->load($page); // загружаем данные записи
 			
-			eval(mso_tmpl_prepare($r['page_start'], false));
-			
 			if ($r['thumb']) // миниатюра
 			{
 				// плейсхолд
@@ -1269,8 +1270,14 @@ class Block_pages
 						$p->thumb = '<a class="' . $r['thumb_link_class'] . '" href="' . mso_page_url($p->val('page_slug')) . '" title="' . htmlspecialchars($p->val('page_title')). '">' . $r['thumb_add_start'] . '<img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '">' . $r['thumb_add_end'] . '</a>';
 					else
 						$p->thumb = $r['thumb_add_start'] . '<img src="' . $thumb . '" class="' . $r['thumb_class'] . '" alt="' . htmlspecialchars($p->val('page_title')). '">' . $r['thumb_add_end'];
+					
+					$p->thumb_url = $thumb;
+					$r['thumb_url'] = $thumb;
 				}
 			}
+			
+			// eval(mso_tmpl_prepare($r['page_start'], false));
+			$p->line($r['page_start']); // можно использовать все []-коды
 			
 			$p->line($r['line1'], $r['line1_start'], $r['line1_end']);
 			$p->line($r['line2'], $r['line2_start'], $r['line2_end']);
@@ -1297,7 +1304,8 @@ class Block_pages
 			
 			if ($r['clearfix']) $p->clearfix();
 			
-			eval(mso_tmpl_prepare($r['page_end'], false));
+			// eval(mso_tmpl_prepare($r['page_end'], false));
+			$p->line($r['page_end']); // можно использовать все []-коды
 			
 			// сохраняем id записей, чтобы их исключить из вывода
 			if ($r['exclude_page_add']) $exclude_page_id[] = $p->val('page_id'); 

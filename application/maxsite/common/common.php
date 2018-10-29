@@ -4421,9 +4421,13 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 	// если file нет, то проверяются другие параметры если есть:
 	// html — выводится как есть текстом/ Можно использовать php-шаблонизатор {{ }} и {% %}
 	// require — подключается файл в шаблоне (пусть относительно каталога шаблона)
+	//			у require также можно указать 
+	//			парсер parser = autotag_simple — функция, которая через которую прогонится файл
+	//			php-шаблонизатор: tmpl = 1
 	// ushka — ушка
 	// component — компонент шаблона
 	// option_key и option_type и option_default — опция
+	
 	if ($units) 
 	{
 		$UNIT_NUM = 0; // порядковый номер юнита (можно использовать для кэширования)
@@ -4478,7 +4482,27 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 			}
 			elseif (isset($UNIT['require']) and trim($UNIT['require']))
 			{
-				if ($fn = mso_fe(trim($UNIT['require']))) require($fn);
+				if ($fn = mso_fe(trim($UNIT['require']))) 
+				{	
+					ob_start();
+					require($fn);
+					$t1 = ob_get_contents();
+					ob_end_clean();
+					
+					// парсер текста
+					if (isset($UNIT['parser']) and trim($UNIT['parser']))
+					{
+						$f= trim($UNIT['parser']);
+						if (function_exists($f)) $t1 = $f($t1);
+					}
+					
+					// php-шаблонизатор
+					if (isset($UNIT['tmpl']) and trim($UNIT['tmpl']))
+						eval(mso_tmpl_prepare($t1, false));
+					else
+						echo $t1;
+					
+				}
 			}
 			elseif (isset($UNIT['ushka']) and trim($UNIT['ushka']) and function_exists('ushka'))
 			{

@@ -162,13 +162,15 @@ myBbcodeSettings = {
 			{name:'<?= t('Java-код') ?>', openBlockWith:'[pre lang=java]', closeBlockWith:'[/pre]', className:"java" }
 		]},
 
-		{name:'<?= t('Очистить текст от BB-кодов') ?>', className:"clean", replaceWith:function(h) { return h.selection.replace(/\[(.*?)\]/g, "") }, className:"clean", dropMenu: [
+		{name:'<?= t('Очистить текст от BB-кодов') ?>', className:"clean", replaceWith:function(h) { return h.selection.replace(/\[(.*?)\]/g, "") }, dropMenu: [
 	
-			{name:'<?= t('Очистить текст от BB-кодов') ?>', className:"clean", replaceWith:function(h) { return h.selection.replace(/\[(.*?)\]/g, "") }, className:"clean"},
+			{name:'<?= t('Очистить текст от BB-кодов') ?>', className:"clean", replaceWith:function(h) { return h.selection.replace(/\[(.*?)\]/g, "") }},
 			
-			{name:'<?= t('Очистить текст от HTML') ?>', className:"clean", replaceWith:function(h) { return h.selection.replace(/\<(.*?)\>/g, "") }, className:"clean"},
+			{name:'<?= t('Очистить текст от HTML') ?>', className:"clean", replaceWith:function(h) { return h.selection.replace(/\<(.*?)\>/g, "") }},
 
-			{name:'<?= t('Замена в тексте') ?>', className:'qrepl', beforeInsert:function(markItUp) { miu.repl(markItUp) }},			
+			{name:'<?= t('Заменить адреса на [page_images]') ?>', className:'pi', beforeInsert:function(markItUp) { miu.repl_pi(markItUp) }},
+			
+			{name:'<?= t('Замена в тексте') ?>', className:'qrepl', beforeInsert:function(markItUp) { miu.repl(markItUp) }},	
 			
 		]},
 		
@@ -270,7 +272,7 @@ miu = {
 		markItUp.textarea.value = str.replace(new RegExp(s_search,'g'), s_replace)
 		
 		alert("<?= t('Выполнено!') ?>");
-	},	
+	},
 	
 	help_bb: function()
 	{
@@ -281,6 +283,18 @@ miu = {
 	{
 		window.open('<?= getinfo('admin_url') ?>plugins/editor_markitup/color-table.html');
 	},
+	
+	repl_pi: function(markItUp) 
+	{
+		str = markItUp.textarea.value;
+		
+		var s_search = "<?= getinfo('uploads_url') . '_pages/' ?>" + autosaveid + "/";
+		
+		markItUp.textarea.value = str.replace(new RegExp(s_search,'g'), "[page_images]")
+		
+		alert("<?= t('Выполнено!') ?>");
+	},
+	
 	
 }
 

@@ -119,7 +119,7 @@ $(document).ready(function() {
 							{
 								$("#all-files-result").html(data);
 								lbox();
-								localStorage.clear();
+								// localStorage.clear();
 								
 							}
 						);

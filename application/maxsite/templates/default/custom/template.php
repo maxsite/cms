@@ -5,17 +5,17 @@
  * http://max-3000.com/
  *
  * Функции для работы с шаблоном
- * версия 2017-08-25
+ * версия 2018-11-09
  */
 
 /**
  * типовой вывод секции HEAD
  * можно использовать в header.php
- * @global type $page Доступна во всех 
+ * @global type $page Доступна во всех type_foreach-файлах
  */
 function my_default_head_section()
 {
-	// global $page;
+	global $page;
 	
 	// атирибуты <HTML>
 	$html_attr = mso_get_val('head_section_html_add');
@@ -43,9 +43,20 @@ function my_default_head_section()
 	// autoload файлов
 	if ($autoload_css = mso_get_path_files(getinfo('template_dir') . 'assets/css/', getinfo('template_url') . 'assets/css/', true, array('css')))
 	{
+		// поднимаем style.css самым первым
+		$fn_style_css = getinfo('template_url') . 'assets/css/style.css';
+		
+		if ($key = array_search($fn_style_css, $autoload_css))
+		{
+			if ($key !== false)
+			{
+				unset($autoload_css[$key]);
+				array_unshift($autoload_css, $fn_style_css);
+			}
+		}
+		
 		foreach($autoload_css as $fn_css)
 		{
-			// pr($fn_css);
 			echo mso_load_style($fn_css);
 		}
 	}

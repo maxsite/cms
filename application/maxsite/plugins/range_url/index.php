@@ -169,6 +169,8 @@ function range_url_init($arg = array())
 			'(sitemap)(next)(*)', 
 			'(sitemap)(cat)', 
 			'(sitemap)(cat)(next)(*)', 
+			'(sitemap)(cat-list)', 
+			'(sitemap)(cat-list)(next)(*)', 
 			
 			'(home)(next)(*)',
 			

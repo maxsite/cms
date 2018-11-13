@@ -69,7 +69,17 @@ function _upload($up_dir, $fn, $r = array())
 		echo ' DONE! <b>' . $fn . '</b>';
 		return;
 	}
+	
+	
+	$file_asis = isset($_SERVER['HTTP_X_REQUESTED_ASIS']) ? $_SERVER['HTTP_X_REQUESTED_ASIS'] : 'false';
 
+	if (strtolower($file_asis) !== 'false')
+	{
+		// загружаем без обработки как есть
+		echo ' DONE! <b>' . $fn . '</b>';
+		return;
+	}
+	
 	$resize_images = (isset($_SERVER['HTTP_X_REQUESTED_RESIZEIMAGES'])) ? $_SERVER['HTTP_X_REQUESTED_RESIZEIMAGES'] : mso_get_option('resize_images',   'general', '600');
 	
 	$resize_images_type = (isset($_SERVER['HTTP_X_REQUESTED_RESIZEIMAGESTYPE'])) ? $_SERVER['HTTP_X_REQUESTED_RESIZEIMAGESTYPE'] : 'width';

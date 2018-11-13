@@ -206,6 +206,8 @@ $all_files .= '
 			
 			<a class="i-picture-o t150 mar10-l icon0" href="' . getinfo('site_admin_url') . 'files/_pages/' . mso_segment(3) . '/mini" target="_blank" title="' . t('Управление миниатюрами') . '"></a>
 			
+			<label class="b-inline mar10-l pad10-b" title="' . t('Загрузить файлы без обработки') . '"><input type="checkbox" id="upload_asis" name="upload_asis"> </label>
+			
 		</div>
 		
 		<div class="mar10-tb">

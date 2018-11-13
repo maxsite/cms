@@ -158,6 +158,8 @@ $(document).ready(function() {
 			
 			xhr.setRequestHeader("X-REQUESTED-WATERMARKMINI", unescape(encodeURIComponent($id("upload_watermark_mini").checked )));
 			
+			xhr.setRequestHeader("X-REQUESTED-ASIS", unescape(encodeURIComponent($id("upload_asis").checked )));
+			
 			
 			// xhr.setRequestHeader("X_FILENAME", unescape(encodeURIComponent(file.name)));
 			//xhr.setRequestHeader("X_FILENAME_UP_DIR", unescape(encodeURIComponent($id("page_id").value)));

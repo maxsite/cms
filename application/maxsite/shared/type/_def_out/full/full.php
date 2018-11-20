@@ -36,9 +36,64 @@ else
 // исключенные записи
 $exclude_page_id = mso_get_val('exclude_page_id');
 
+// определяем info_top-файл
+$info_top_fn = '';
+$info_top_class = ''; // автоматический css-класс для контейнера mso-tf-full-default
+
+// info-top_slug по адресам — это самый высокий приоритет
+// category/news = header-only.php
+if ($info_top_slug = mso_get_option('info-top_slug', getinfo('template'), ''))
+{
+	// в текущем url нужно отсечь /next/ - пагинацию
+	$cur_url = mso_current_url();
+	
+	if (strpos($cur_url, '/next/') !== false)
+	{
+		$cur_url = explode('/next/', $cur_url);
+		$cur_url = $cur_url[0];
+	}
+
+	if ($i = mso_text_find_key($info_top_slug, $cur_url))
+	{
+		if ($fn = mso_fe('type_foreach/info-top/' . $i)) 
+		{	
+			$info_top_fn = $fn; // выставляем путь к файлу
+		}
+	}
+}
+
+if (!$info_top_fn) 
+{
+	if ($fn = mso_page_foreach('info-top-' . getinfo('type'))) 
+	{
+		// для типа может быть свой info-top
+		$info_top_fn = $fn;
+	}
+	elseif ($info = mso_get_option('info-top_' . getinfo('type'), getinfo('template'), '') and $fn = mso_fe('type_foreach/info-top/' . $info))
+	{
+		// или опция
+		$info_top_fn = $fn;
+	}
+	elseif ($fn = mso_page_foreach('info-top-full'))
+	{
+		$info_top_fn = $fn;
+	}
+	elseif ($fn = mso_page_foreach('info-top'))
+	{
+		$info_top_fn = $fn;
+	}
+}
+
+if ($info_top_fn)
+{
+	// css-класс делается на основе имени файла type_foreach/info-top/ файла
+	// с префиксом mso-tf-
+	$info_top_class = 'mso-tf-' . str_replace('.php', '', str_replace(getinfo('template_dir') . 'type_foreach/info-top/', '', $info_top_fn));	
+}
+
 if ($f = mso_page_foreach('do-full')) require($f);
 
-$p->div_start(mso_get_val('container_class', ''));
+$p->div_start(trim(mso_get_val('container_class' , '') . ' ' . $info_top_class));
 
 foreach ($pages as $page)
 {
@@ -52,45 +107,13 @@ foreach ($pages as $page)
 
 	$p->div_start(mso_get_val('page_only_class', 'mso-page-only'), '<article>');
 		
-		$info_top_fn = '';
-		
-		// info-top_slug по адресам — это самый высокий приоритет
-		// category/news = header-only.php
-		if ($info_top_slug = mso_get_option('info-top_slug', getinfo('template'), ''))
-		{
-			if ($i = mso_text_find_key($info_top_slug, mso_current_url()))
-			{
-				if ($fn = mso_fe('type_foreach/info-top/' . $i)) 
-				{	
-					$info_top_fn = $fn; // выставляем путь к файлу
-				}
-			}
-		}
-		
-		if ($info_top_fn) 
+		if ($info_top_fn)
 		{
 			require($info_top_fn);
 		}
-		elseif ($f = mso_page_foreach('info-top-' . getinfo('type'))) 
-		{
-		// для типа может быть свой info-top
-			require($f);
-		}
-		elseif ($info = mso_get_option('info-top_' . getinfo('type') , getinfo('template'), '') and $f = mso_fe('type_foreach/info-top/' . $info))
-		{
-			require($f);
-		}
-		elseif ($f = mso_page_foreach('info-top-full'))
-		{
-			require($f);
-		}
-		elseif ($f = mso_page_foreach('info-top'))
-		{
-			require($f);
-		}
 		else
 		{
-			$p->html(NR . '<header>');
+			$p->html('<header>');
 				$p->line('[title]');
 				
 				$p->div_start('mso-info mso-info-top');
@@ -99,7 +122,6 @@ foreach ($pages as $page)
 				
 			$p->html('</header>');
 		}
-		
 		
 		if (getinfo('type') == 'page_404' and mso_segment(1) and $f = mso_page_foreach('page-content-full-segment-' . mso_segment(1)))
 		{

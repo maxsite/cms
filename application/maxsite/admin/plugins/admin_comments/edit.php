@@ -41,18 +41,18 @@
 				{
 					$data['comments_author_name'] = mso_xss_clean(trim($post['f_comments_author_name']));
 				}
-				$data['comments_users_id'] = 'NULL';
-				$data['comments_comusers_id'] = 'NULL';
+				$data['comments_users_id'] = 0;
+				$data['comments_comusers_id'] = 0;
 			}
 			elseif ( substr($post['f_comments_author'], 0, 1) == '1' )
 			{
 				$data['comments_users_id'] = (int) substr($post['f_comments_author'], 2);
-				$data['comments_comusers_id'] = 'NULL';
+				$data['comments_comusers_id'] = 0;
 			}
 			else
 			{
 				$data['comments_comusers_id'] = (int) substr($post['f_comments_author'], 2);
-				$data['comments_users_id'] = 'NULL';
+				$data['comments_users_id'] = 0;
 			}
 
 			if ($CI->db->update('comments', $data ) )

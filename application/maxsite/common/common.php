@@ -3925,6 +3925,8 @@ function mso_load_jquery($plugin = '', $path = '')
 # 	if ($fn = mso_dispatcher()) require($fn);
 function mso_dispatcher()
 {
+	global $MSO;
+	
 	# тип данных
 	$type = getinfo('type');
 
@@ -3951,6 +3953,12 @@ function mso_dispatcher()
 	{
 		$seg = mso_strip(mso_segment(1));
 		$fn = 'type/' . $seg . '/' . $seg . '.php';
+		
+		// !!! пробный вариант, который непонятно как сработает !!!
+		// создаем новый тип по сегменту — это позволит использовать is_type() для этих типов
+		// если не будетвыявлено ошибок, то оставить (внесено: 2018-11-20 ver. 100.6)
+		if (mso_find_ts_file($fn)) $MSO->data['type'] = $seg;
+		
 	}
 	else
 	{

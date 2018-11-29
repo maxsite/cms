@@ -112,7 +112,7 @@
 	echo $CI->table->generate(); // вывод подготовленной таблицы
 	
 	# добавим строчку для добавления нового типа
-	echo '<p><span class="ffirst1 ftitle">' . t('Новый тип') . '</span><span><input type="text" name="f_new_name"></span></p>';
+	echo '<p><span class="ffirst1 ftitle">' . t('Новый тип (по английски, без пробелов и спецсимволов)') . '</span><span><input type="text" name="f_new_name"></span></p>';
 	echo '<p><span class="ffirst1 ftitle">' . t('Описание') . '</span><span><input type="text" name="f_new_desc"></span></p>';
 	echo '<p><span class="ffirst1"></span><span><button type="submit" name="f_new_submit" class="button i-plus-circle">' . t('Добавить новый тип') . '</button></span></p>';
 	

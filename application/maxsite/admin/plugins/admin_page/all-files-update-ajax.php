@@ -82,6 +82,9 @@ if ( $post = mso_check_post(array('dir')) )
 		
 		$u_file = $mini = $mini_100 = $uploads_url. '/' . $file;
 		
+		// адрес относительно сайта
+		$u_file_site = str_replace(getinfo('site_url'), '', $u_file);
+		
 		if ($this_img) 
 		{
 			if (file_exists($uploads_dir . '/_mso_i/' . $file))
@@ -113,7 +116,7 @@ if ( $post = mso_check_post(array('dir')) )
 			$all_files_res .= '
 					<span title="' . t('Вставить в текст код изображения') . '" onclick="addSmile(\'' . $img . '\', \'f_content\');">[img]</span>
 					<span title="' . t('Вставить в текст код миниатюры') . '" onclick="addSmile(\'' . $image . '\', \'f_content\');">[image]</span>
-					<span title="' . t('Использовать как изображение записи') . '" onclick="addImgPage(\'' . $u_file . '\');">page</span>
+					<span title="' . t('Использовать как изображение записи') . '" onclick="addImgPage(\'' . $u_file_site . '\');">page</span>
 					';
 		}
 		else

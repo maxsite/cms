@@ -267,7 +267,11 @@ function getinfo($info = '')
 				
 		case 'base_dir' : // каталог /maxsite/
 				$out = $MSO->config['base_dir'];
-				break;		
+				break;
+				
+		case 'site_protocol' : // по какому протоколу работает сайт
+				$out = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http";
+				break;
 
 		endswitch;
 

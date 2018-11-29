@@ -2,7 +2,7 @@
 
 /**
  * MaxSite CMS
- * (c) http://maxsite.org/
+ * (c) http://max-3000.com/
  * Класс для формирования thumb-изображений
  * указывается url входящего изображения
  * на выходе url нового изображения
@@ -23,11 +23,32 @@ class Thumb
 	var $init = ''; // возврат при инициализации
 		// true - есть готовое новое изображение (в кэше)
 		// false - ошибка 
-		// всё остальное - можно сделать 
+		// всё остальное - можно сделать новый файл
 		
 
 	function __construct($url, $postfix = '-thumb', $replace_file = false, $subdir = '', $quality = 90)
 	{
+		// хук где можно обработать входящий url
+		$url = mso_hook('thumb_in_url', $url);
+
+		// если get-ключ thumb_in_url == true, то орбабатываем входящий url
+		if (mso_get_val('thumb_in_url', true))
+		{
+			// если есть вхождение http в начале адреса, то «выравниваем» протоколы
+			if (strpos($url, 'http') === 0)
+			{
+				$url = getinfo('site_protocol') . '://' . str_replace(array('http://', 'https://'), '' , $url);
+			}
+			else
+			{
+				// это относительный адрес, добавляем адрес сайта
+				
+				// если ведущий /, то его нужно удалить
+				if (strpos($url, '/') === 0) $url = substr($url, 1);
+				$url = getinfo('site_url') . $url;
+			}
+		}
+		
 		// проверим входящий url
 		if (strpos($url, getinfo('uploads_url')) === false) 
 		{

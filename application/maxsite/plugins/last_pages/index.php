@@ -194,9 +194,16 @@ function last_pages_widget_custom($arg = array(), $num = 1)
 			
 			if (!$img and $arg['img_prev_def']) $img = $arg['img_prev_def'];
 			
-			if ($img) 
+			if ($img)			
 			{
-				$img = '<a href="' . $url . '"><img src="' . $img . '" alt="' . $page['page_title'] . '" ' . $arg['img_prev_attr'] . '></a>';
+				
+				if ($image_for_page = thumb_generate($img, 330, 230, false, 'resize_full_crop_center', false, 'mini', true, 70))
+				{
+					$img = '<a href="' . $url . '"><img src="' . $image_for_page . '" alt="' . $page['page_title'] . '" ' . $arg['img_prev_attr'] . '></a>';
+				}
+				
+				// старый вариант без миниатюры
+				// $img = '<a href="' . $url . '"><img src="' . $img . '" alt="' . $page['page_title'] . '" ' . $arg['img_prev_attr'] . '></a>';
 			}
 			
 			if ($page['page_count_comments'])
@@ -230,4 +237,4 @@ function last_pages_widget_custom($arg = array(), $num = 1)
 	return $out;
 }
 
-# end file
+# end of file

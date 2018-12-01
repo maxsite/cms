@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Последние записи'),
 	'description' => t('Вывод последних записей'),
-	'version' => '2.2',
+	'version' => '3',
 	'author' => 'Максим',
 	'plugin_url' => '',
 	'author_url' => '//maxsite.org/',

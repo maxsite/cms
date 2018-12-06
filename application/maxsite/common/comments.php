@@ -149,7 +149,7 @@ function mso_get_comments($page_id = 0, $r = array())
 						
 						$lt = mso_xss_clean($lt, 'Error', $lt, true); // зачистка XSS
 						
-						$comment['comments_url'] = '<a href="http://twitter.com/' . $lt . '" rel="nofollow">@' . $lt . '</a>';
+						$comment['comments_url'] = '<a href="https://twitter.com/' . $lt . '" rel="nofollow">@' . $lt . '</a>';
 					}
 					else $comment['comments_url'] = $comment['comments_author_name'] . $r['anonim_title']; 
 				}
@@ -1915,27 +1915,38 @@ function mso_avatar($comment, $img_add = 'class="mso-gravatar"', $echo = false, 
 		}
 		
 		if ($gravatar_type = mso_get_option('gravatar_type', 'templates', ''))
+		{
 			$d = '&amp;d=' . urlencode($gravatar_type);
+		}
 		else
 		{
-			$def = getinfo('uploads_dir') . 'gravatar-default.png';
+			$d = '';
+			
+			$def = getinfo('template_dir') . 'assets/images/gravatar-default.png';
 			
 			if (file_exists($def))
-				$d = '&amp;d=' . urlencode(getinfo('uploads_url') . 'gravatar-default.png');
+			{
+				$d = '&amp;d=' . urlencode(getinfo('template_url') . 'assets/images/gravatar-default.png');
+			}
 			else
-				$d = '';
+			{
+				$def = getinfo('uploads_dir') . 'gravatar-default.png';
+				
+				if (file_exists($def))
+					$d = '&amp;d=' . urlencode(getinfo('uploads_url') . 'gravatar-default.png');
+			}
 		}
 		
 		if (!empty($_SERVER['HTTPS'])) 
 		{
-		   $avatar_url = "https://secure.gravatar.com/avatar.php?gravatar_id="
+			$avatar_url = "https://secure.gravatar.com/avatar.php?gravatar_id="
 				. md5($grav_email)
 				. "&amp;size=" . $avatar_size
 				. $d;
 		} 
 		else 
 		{
-		   $avatar_url = "http://www.gravatar.com/avatar.php?gravatar_id="
+			$avatar_url = "http://www.gravatar.com/avatar.php?gravatar_id="
 				. md5($grav_email)
 				. "&amp;size=" . $avatar_size
 				. $d;

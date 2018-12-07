@@ -86,9 +86,9 @@ if (!$info_top_fn)
 
 if ($info_top_fn)
 {
-	// css-класс делается на основе имени файла type_foreach/info-top/ файла
+	// css-класс делается на основе имени файла type_foreach-файла (берется только имя файла)
 	// с префиксом mso-tf-
-	$info_top_class = 'mso-tf-' . str_replace('.php', '', str_replace(getinfo('template_dir') . 'type_foreach/info-top/', '', $info_top_fn));	
+	$info_top_class = 'mso-tf-' . str_replace('.php', '', basename($info_top_fn));	
 }
 
 if ($f = mso_page_foreach('do-full')) require($f);

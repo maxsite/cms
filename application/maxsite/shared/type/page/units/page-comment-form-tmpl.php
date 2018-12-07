@@ -12,7 +12,7 @@
 			{%  if (is_login()) : %}
 				<input type="hidden" name="comments_user_id" value="{{ getinfo('users_id') }}">
 				<div class="mso-comments-user">
-					{{ tf('Привет') }}, {{ getinfo('users_nik') }}! <a href="{{ getinfo('siteurl') }}logout">{{ tf('Выйти') }}</a>
+					{{ tf('Привет') }}, {{ getinfo('users_nik') }}! <a class="mso-comments-logout" href="{{ getinfo('siteurl') }}logout">{{ tf('Выйти') }}</a>
 				</div>
 			{% endif %}
 		
@@ -30,7 +30,7 @@
 						{{ tf('Привет,') }} <a href="{{ getinfo('siteurl') . 'users/' . $comuser['comusers_id'] }}">{{ $comuser['comusers_nik'] }}</a>!
 					{% endif %}
 					
-					<a href="{{ getinfo('siteurl') }}logout">{{ tf('Выйти') }}</a>
+					<a class="mso-comments-logout" href="{{ getinfo('siteurl') }}logout">{{ tf('Выйти') }}</a>
 				</div>
 			{% endif %}
 		

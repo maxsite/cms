@@ -14,7 +14,7 @@ if (isset($page['page_password']) and $page['page_password']) // есть пар
 	$page_text_ok = (isset($page['page_password_ok'])); // нет отметки, что пароль пройден
 }
 
-echo '<span><a id="comments"></a></span>';
+// echo '<span><a id="comments"></a></span>';
 
 if ($f = mso_page_foreach('page_comments_start')) require($f);
 mso_hook('page_comments_start');
@@ -22,13 +22,8 @@ mso_hook('page_comments_start');
 // получаем список комментариев текущей страницы
 require_once( getinfo('common_dir') . 'comments.php' ); // функции комментариев
 
-// если был отправлен новый коммент, то обрабатываем его и выводим сообщение в случае ошибки
-if ($out = mso_get_new_comment( array('page_title'=>$page['page_title']) ))
-{
-	$out .= mso_load_jquery('jquery.scrollto.js');
-	$out .= '<script>$(document).ready(function(){$.scrollTo("#comments", 500);})</script>';
-	echo $out;
-}
+// если был отправлен новый коммент, то обрабатываем его и выводим (внизу перед формой) сообщение в случае ошибки
+$message_out = mso_get_new_comment( array('page_title'=>$page['page_title']));
 
 // получаем все разрешенные комментарии
 $comments = mso_get_comments($page['page_id']);
@@ -48,7 +43,7 @@ if (isset($MSO->data['session']['comments']) and $MSO->data['session']['comments
 if (is_login()) $edit_link = getinfo('siteurl') . 'admin/comments/edit/';
 	else $edit_link = '';
 
-if ($comments or $page['page_comment_allow']) echo NR . '<div class="mso-type-page-comments">' . NR;
+if ($comments or $page['page_comment_allow']) echo NR . '<div class="mso-type-page-comments">';
 
 if ($f = mso_page_foreach('page-comments-do-list')) require($f);
 
@@ -96,7 +91,7 @@ if ($page_text_ok and $comments) // есть страницы
 	}
 	
 	echo '</section>';
-	echo '</div>' . NR;
+	echo '</div>';
 }
 
 if ($f = mso_page_foreach('page-comments-posle-list')) require($f);
@@ -128,12 +123,18 @@ if ($page['page_comment_allow'] and $page_text_ok)
 		}
 		else
 		{
+			if ($message_out)
+			{
+				echo '<a id="comments_message"></a>' . $message_out . '<script>$(window).load(function () {$("body,html").stop().animate({scrollTop: $("#comments_message").offset().top-50}, 500);}); </script>';
+			}
+			
 			eval(mso_tmpl_ts('type/page/units/page-comment-form-tmpl.php')); 
 		}
 	}
 }
 
 if ($comments or $page['page_comment_allow']) 
-	echo NR . '</div><!-- /div.mso-type-page-comments -->' . NR;
+	echo '</div><!-- /div.mso-type-page-comments -->' . NR;
 
-# end file
+
+# end of file

@@ -235,6 +235,7 @@ function mso_view_ini($all = false)
 		if ($type == 'textfield')
 		{
 			$value = str_replace('_QUOT_', '&quot;', $value);
+			$value = str_replace('_NBSP_', ' ', $value);
 			
 			// в этом типе может быть свой type для input
 			if ( !isset($row['textfield_type']) ) $textfield_type = 'text';
@@ -252,6 +253,7 @@ function mso_view_ini($all = false)
 		{
 			$value = str_replace('_NR_', "\n", $value);
 			$value = str_replace('_QUOT_', '&quot;', $value);
+			$value = str_replace('_NBSP_', ' ', $value);
 			
 			if (!isset($row['rows']) or $row['rows'] == 'auto')
 			{

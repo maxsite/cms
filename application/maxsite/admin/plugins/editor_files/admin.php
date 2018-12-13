@@ -30,10 +30,15 @@ function _getFiles($rdi, $depth=0, $dir)
 			if ($rdi->isFile())
 			{
 				$file_ext = strtolower(str_replace('.', '', strrchr($cur, '.')));
-				
-				if (in_array($file_ext, array('php', 'txt', 'css', 'less', 'js', 'html', 'htm', 'ini', 'sass', 'scss'))) 
+
+				// php', 'txt', 'css', 'less', 'js', 'html', 'htm', 'ini', 'sass', 'scss'
+				if (in_array($file_ext, array('php', 'txt', 'css', 'js', 'html', 'htm', 'ini'))) 
 				{
-					if (is_writable($rdi->getPathname())) $out[] = $cur;
+					$pn = $rdi->getPathname();
+					// $pn = str_replace('\\', '/', $pn); // замена из-за windows
+					
+					if (is_writable($pn)) $out[] = $cur;
+					
 				}
 			}
 			

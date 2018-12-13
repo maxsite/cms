@@ -4151,9 +4151,10 @@ _END_
 ...
 
 Если $as_is == true, то отдается массив вхождений без обработки внутренних полей. 
+	$as_is_key — номер ключа массива, если false, то все
 
 */
-function mso_section_to_array($text, $pattern, $array_default = array(), $simple = false, $as_is = false)
+function mso_section_to_array($text, $pattern, $array_default = array(), $simple = false, $as_is = false, $as_is_key = 1)
 {
 	$text = preg_replace_callback('!_START_(.*?)_END_!is', '_mso_section_to_array_replace_start', $text);
 	
@@ -4165,16 +4166,23 @@ function mso_section_to_array($text, $pattern, $array_default = array(), $simple
 		// массив слайдов в $array_result[1]
 		
 		// отдать как есть без обработки
-		if ($as_is) return $array_result[1];
-			
+		if ($as_is)
+		{
+			if ($as_is_key !== false) // если указан номер ключа
+				return $array_result[$as_is_key];
+			else 
+				return $array_result; // отдать всё
+		}
+		
 		// преобразуем его в массив полей
 		$f = array(); // массив для всех полей
 		$i = 0; // счетчик 
+		
 		foreach($array_result[1] as $val)
 		{
 			$val = trim($val);
-
-			if (!$val) continue;
+			
+			//if (!$val) continue; !!! пока убрал, поскольку опция может быть пустой
 			
 			$val = str_replace(' = ', '=', $val);
 			$val = str_replace('= ', '=', $val);

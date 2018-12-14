@@ -1205,7 +1205,7 @@ class Block_pages
 		$p->format('read', $r['read'], $r['read_start'], $r['read_end']);
 		$p->format('comments_count', $r['comments_count_start'], $r['comments_count_end']);
 		
-		if ($r['exclude_page_add']) $exclude_page_id = mso_get_val('exclude_page_id');
+		if ($r['exclude_page_add']) $exclude_page_id = mso_get_val('exclude_page_id', array());
 		
 		foreach ($this->pages as $page)
 		{
@@ -1307,7 +1307,7 @@ class Block_pages
 			// eval(mso_tmpl_prepare($r['page_end'], false));
 			$p->line($r['page_end']); // можно использовать все []-коды
 			
-			// сохраняем id записей, чтобы их исключить из вывода
+			// сохраняем id записей, чтобы их исключить из вывода			
 			if ($r['exclude_page_add']) $exclude_page_id[] = $p->val('page_id'); 
 		}
 		

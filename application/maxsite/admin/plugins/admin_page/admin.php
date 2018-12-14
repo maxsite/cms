@@ -23,8 +23,8 @@
 		else 
 		{
 			$data = array(
-				'user_login' => $MSO->data['session']['users_login'],
-				'password' => $MSO->data['session']['users_password'],
+				'user_login' => getinfo('session_users_login'),
+				'password' => getinfo('session_users_password'),
 				'page_id' => $page_id,
 			);
 			

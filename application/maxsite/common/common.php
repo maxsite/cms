@@ -136,6 +136,20 @@ function getinfo($info = '')
 				else $out = '';
 				break;
 				
+		case 'session_users_password' :
+				if (isset($MSO->data['session']['users_password']))
+					// $out = $MSO->data['session']['users_password'];
+					$out = mso_de_code($MSO->data['session']['users_password'], 'decode');
+				else $out = '';
+				break;
+				
+		case 'session_users_login' :
+				if (isset($MSO->data['session']['users_login']))
+					// $out = $MSO->data['session']['users_login'];
+					$out = mso_de_code($MSO->data['session']['users_login'], 'decode');
+				else $out = '';
+				break;
+				
 		case 'comusers_id' :
 				if (isset($MSO->data['session']['comuser']['comusers_id']))
 					$out = $MSO->data['session']['comuser']['comusers_id'];
@@ -272,6 +286,8 @@ function getinfo($info = '')
 		case 'site_protocol' : // по какому протоколу работает сайт
 				$out = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http";
 				break;
+				
+		
 
 		endswitch;
 
@@ -474,10 +490,13 @@ function mso_initalizing()
 		$CI->db->from('users'); # таблица users
 		$CI->db->select('users_id, users_groups_id');
 		$CI->db->limit(1); # одно значение
-
-		$CI->db->where( array('users_login'=>$CI->session->userdata['users_login'],
-							  'users_password'=>$CI->session->userdata['users_password']) );
-
+		
+		// $CI->db->where( array('users_login'    => $CI->session->userdata['users_login'],
+		// 					  'users_password' => $CI->session->userdata['users_password']) );
+		
+		$CI->db->where( array('users_login'    => mso_de_code($CI->session->userdata['users_login'], 'decode'),
+		 					  'users_password' => mso_de_code($CI->session->userdata['users_password'], 'decode')) );
+		
 		$query = $CI->db->get();
 
 		if (!$query or $query->num_rows() == 0) # нет такого - возможно взлом
@@ -515,6 +534,7 @@ function mso_initalizing()
 	// но при этом сразу сохраняем все данные комюзера, чтобы потом не обращаться к БД
 
 	$comuser = mso_get_cookie('maxsite_comuser', false);
+	
 	if ($comuser)
 	{
 		$comuser = unserialize($comuser);
@@ -530,8 +550,12 @@ function mso_initalizing()
 
 		$CI->db->select('comusers_id, comusers_password, comusers_email');
 		$CI->db->where('comusers_id', $comuser['comusers_id']);
-		$CI->db->where('comusers_password', $comuser['comusers_password']);
+		
+		// $CI->db->where('comusers_password', $comuser['comusers_password']);		
+		$CI->db->where('comusers_password', mso_de_code($comuser['comusers_password'], 'decode'));
+		
 		$CI->db->where('comusers_email', $comuser['comusers_email']);
+		
 		$query = $CI->db->get('comusers');
 		if ($query->num_rows()) // есть такой комюзер
 		{
@@ -3298,8 +3322,13 @@ function _mso_login()
 				$data = array(
 					'users_id' => $userdata[0]['users_id'],
 					'users_nik' => $userdata[0]['users_nik'],
-					'users_login' => $userdata[0]['users_login'],
-					'users_password' => $userdata[0]['users_password'],
+					
+					//'users_login' => $userdata[0]['users_login'],
+					'users_login' => mso_de_code($userdata[0]['users_login'], 'encode'),
+					
+					//'users_password' => $userdata[0]['users_password'],
+					'users_password' => mso_de_code($userdata[0]['users_password'], 'encode'),
+					
 					'users_groups_id' => $userdata[0]['users_groups_id'],
 					'users_last_visit' => $userdata[0]['users_last_visit'],
 					'users_show_smiles' => $userdata[0]['users_show_smiles'],
@@ -3330,6 +3359,8 @@ function _mso_login()
 				if ($query->num_rows()) // есть такой комюзер
 				{
 					$comuser_info = $query->row_array(1); // вся инфа о комюзере
+					
+					$comuser_info['comusers_password'] = mso_de_code($comuser_info['comusers_password'], 'encode');
 					
 					// сразу же обновим поле последнего входа
 					$CI->db->where('comusers_id', $comuser_info['comusers_id']);
@@ -3374,8 +3405,13 @@ function _mso_login()
 				$data = array(
 					'users_id' => $userdata[0]['users_id'],
 					'users_nik' => $userdata[0]['users_nik'],
-					'users_login' => $userdata[0]['users_login'],
-					'users_password' => $userdata[0]['users_password'],
+					
+					// 'users_login' => $userdata[0]['users_login'],
+					'users_login' => mso_de_code($userdata[0]['users_login'], 'encode'),
+					
+					//'users_password' => $userdata[0]['users_password'],
+					'users_password' => mso_de_code($userdata[0]['users_password'], 'encode'),
+					
 					'users_groups_id' => $userdata[0]['users_groups_id'],
 					'users_last_visit' => $userdata[0]['users_last_visit'],
 					'users_show_smiles' => $userdata[0]['users_show_smiles'],
@@ -3430,7 +3466,10 @@ function _mso_logout()
 		$name_cookies = 'maxsite_comuser';
 		$expire  = time() - 31500000;
 		$value = ''; 
-
+		
+		if (isset($ci->session->userdata['comuser']))
+			unset($ci->session->userdata['comuser']);
+		
 		//_pr($url);
 		// mso_add_to_cookie('mso_edit_form_comuser', '', $expire); 
 		//mso_add_to_cookie($name_cookies, $value, $expire, getinfo('siteurl') . mso_current_url()); // в куку для всего сайта
@@ -3439,6 +3478,7 @@ function _mso_logout()
 	}
 	elseif ($url) mso_redirect($url, true);
 	else mso_redirect(getinfo('site_url'), true);
+	
 }
 
 
@@ -4637,5 +4677,63 @@ function mso_log($var = 0, $name = 'LOG', $f = '_log.txt')
 	
 	file_put_contents(FCPATH . $f, "\n================= " . $name . " =================\n" . $var . "\n================= /" . $name . " =================\n", FILE_APPEND);
 }
+
+
+/**
+	функция кодирования/декодирования данных
+	см. http://php.net/manual/ru/function.openssl-encrypt.php
+	
+	// кодирование
+	$a = mso_de_code('текст', 'encode');
+	
+	// раскодирование
+	$b = mso_de_code($a, 'decode'); 
+	
+*/
+function mso_de_code($data, $encode = 'encode')
+{
+	global $MSO;
+	
+	$ekey = $MSO->config['secret_key']; // ключ общий для всего сайта
+	$cipher = "AES-128-CBC";
+	$sha2len = 32;
+	
+	if ($encode == 'encode') // кодировать
+	{
+		$cipher = "AES-128-CBC";
+		$ivlen = openssl_cipher_iv_length($cipher);
+		$iv = openssl_random_pseudo_bytes($ivlen);
+		$ciphertext_raw = openssl_encrypt($data, $cipher, $ekey, OPENSSL_RAW_DATA, $iv);
+		$hmac = hash_hmac('sha256', $ciphertext_raw, $ekey, true);
+		
+		$ciphertext = base64_encode( $iv.$hmac.$ciphertext_raw );
+		
+		// добавляем префикс, указывающий на само кодирование
+		return 'MSO-' . $ciphertext;
+	}
+	else
+	{
+		// расскодирование
+		// если нет префикса, то отдаем текст как есть
+		if (strpos($data, 'MSO-') === 0)
+		{
+			$data = substr($data, 4);
+			
+			$c = base64_decode($data);
+			$ivlen = openssl_cipher_iv_length($cipher);
+			$iv = substr($c, 0, $ivlen);
+			$hmac = substr($c, $ivlen, $sha2len);
+			$ciphertext_raw = substr($c, $ivlen + $sha2len);
+			$original = openssl_decrypt($ciphertext_raw, $cipher, $ekey, OPENSSL_RAW_DATA, $iv);
+			
+			return $original;
+		}
+		else
+		{
+			return $data;
+		}
+	}
+}
+
 
 # end of file

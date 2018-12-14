@@ -19,10 +19,10 @@
 		$CI = & get_instance();
 
 		if (isset($data['user_login'])) $user_login = $data['user_login'];
-			else $user_login = $MSO->data['session']['users_login'];
+			else $user_login = getinfo('session_users_login');
 
 		if (isset($data['password'])) $password = $data['password'];
-			else $password = $MSO->data['session']['users_password'];
+			else $password = getinfo('session_users_password');
 
 		# проверка доступа этому пользователю с этим паролем и этим разрешением
 		if ( !mso_check_user_password($user_login, $password, 'admin_cat') )
@@ -98,10 +98,10 @@
 		$CI = & get_instance();
 
 		if (isset($data['user_login'])) $user_login = $data['user_login'];
-			else $user_login = $MSO->data['session']['users_login'];
+			else $user_login = getinfo('session_users_login');
 
 		if (isset($data['password'])) $password = $data['password'];
-			else $password = $MSO->data['session']['users_password'];
+			else $password = getinfo('session_users_password');
 
 		# проверка доступа этому пользователю с этим паролем и этим разрешением
 		if ( !mso_check_user_password($user_login, $password, 'admin_cat') )
@@ -194,10 +194,10 @@
 		$CI = & get_instance();
 
 		if (isset($data['user_login'])) $user_login = $data['user_login'];
-			else $user_login = $MSO->data['session']['users_login'];
+			else $user_login = getinfo('session_users_login');
 
 		if (isset($data['password'])) $password = $data['password'];
-			else $password = $MSO->data['session']['users_password'];
+			else $password = getinfo('session_users_password');
 
 		# проверка доступа этому пользователю с этим паролем и этим разрешением
 		if ( !mso_check_user_password($user_login, $password, 'admin_cat') )
@@ -248,10 +248,10 @@
 		$CI = & get_instance();
 
 		if (isset($data['user_login'])) $user_login = $data['user_login'];
-			else $user_login = $MSO->data['session']['users_login'];
+			else $user_login = getinfo('session_users_login');
 
 		if (isset($data['password'])) $password = $data['password'];
-			else $password = $MSO->data['session']['users_password'];
+			else $password = getinfo('session_users_password');
 
 
 		# проверка можно ли редактировать этому пользователю с этим паролем и этим разрешением
@@ -387,10 +387,10 @@
 		$CI = & get_instance();
 
 		if (isset($data['user_login'])) $user_login = $data['user_login'];
-			else $user_login = $MSO->data['session']['users_login'];
+			else $user_login = getinfo('session_users_login');
 
 		if (isset($data['password'])) $password = $data['password'];
-			else $password = $MSO->data['session']['users_password'];
+			else $password = getinfo('session_users_password');
 
 		# нужно ли проверять разрешение?
 		if ($check_user_password)
@@ -499,10 +499,10 @@
 		$CI = & get_instance();
 
 		if (isset($data['user_login'])) $user_login = $data['user_login'];
-			else $user_login = $MSO->data['session']['users_login'];
+			else $user_login = getinfo('session_users_login');
 
 		if (isset($data['password'])) $password = $data['password'];
-			else $password = $MSO->data['session']['users_password'];
+			else $password = getinfo('session_users_password');
 
 		# нужно ли проверять разрешение?
 		if ($check_user_password)
@@ -582,10 +582,10 @@
 		
 		
 		if (isset($data['user_login'])) $user_login = $data['user_login'];
-			else $user_login = $MSO->data['session']['users_login'];
+			else $user_login = getinfo('session_users_login');
 
 		if (isset($data['password'])) $password = $data['password'];
-			else $password = $MSO->data['session']['users_password'];
+			else $password = getinfo('session_users_password');
 
 		if (!isset($data['page_id_autor'])) $data['page_id_autor'] = $MSO->data['session']['users_id'];
 
@@ -824,10 +824,10 @@
 		$data = mso_xss_clean_data($data, array('user_login', 'password', 'page_id_autor', 'page_title', 'page_slug', 'page_password', 'page_date_publish', 'page_type_id', 'page_id_parent', 'page_status'));
 		
 		if (isset($data['user_login'])) $user_login = $data['user_login'];
-			else $user_login = $MSO->data['session']['users_login'];
+			else $user_login = getinfo('session_users_login');
 
 		if (isset($data['password'])) $password = $data['password'];
-			else $password = $MSO->data['session']['users_password'];
+			else $password = getinfo('session_users_password');
 
 		if (!isset($data['page_id_autor'])) $data['page_id_autor'] = $MSO->data['session']['users_id'];
 
@@ -1096,10 +1096,10 @@
 		$CI = & get_instance();
 
 		if (isset($data['user_login'])) $user_login = $data['user_login'];
-			else $user_login = $MSO->data['session']['users_login'];
+			else $user_login = getinfo('session_users_login');
 
 		if (isset($data['password'])) $password = $data['password'];
-			else $password = $MSO->data['session']['users_password'];
+			else $password = getinfo('session_users_password');
 
 		# проверка доступа этому пользователю с этим паролем и этим разрешением
 		if ( !mso_check_user_password($user_login, $password, 'admin_page_delete') )
@@ -1159,10 +1159,10 @@
 		$data = mso_xss_clean_data($data, array('user_login', 'password', 'comusers_email', 'comusers_new_password', 'comusers_nik', 'comusers_icq', 'comusers_url', 'comusers_msn', 'comusers_jaber', 'comusers_skype', 'comusers_avatar_url', 'comusers_description', 'comusers_date_birth_y', 'comusers_date_birth_m', 'comusers_date_birth_d', 'comusers_notify', 'comusers_language', 'comusers_activate_key', 'comusers_activate_string', 'comusers_admin_note'));
 		
 		if (isset($data['user_login'])) $user_login = $data['user_login'];
-			else $user_login = $MSO->data['session']['users_login'];
+			else $user_login = getinfo('session_users_login');
 
 		if (isset($data['password'])) $password = $data['password'];
-			else $password = $MSO->data['session']['users_password'];
+			else $password = getinfo('session_users_password');
 
 
 		# проверка можно ли редактировать этому пользователю с этим паролем и этим разрешением

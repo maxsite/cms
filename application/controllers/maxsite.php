@@ -38,6 +38,7 @@ if (!class_exists('Maxsite'))
 
 			$this->data_def['session'] = $this->session->userdata;
 			
+			// pr($this->data_def['session']);
 			# $this->session->sess_destroy(); // для тестирования - обнуление сессии
 		}
 		
@@ -114,6 +115,8 @@ if (!class_exists('Maxsite'))
 				if (isset($this->session->userdata['_add_to_cookie_redirect']))
 				{
 					$r = $this->session->userdata['_add_to_cookie_redirect'];
+					
+					$this->session->unset_userdata('_add_to_cookie_redirect');
 					
 					if (is_bool($r) or is_numeric($r)) // === true or $r === false) // логическая переменная
 						mso_redirect(getinfo('siteurl'), true); // редирект на главную

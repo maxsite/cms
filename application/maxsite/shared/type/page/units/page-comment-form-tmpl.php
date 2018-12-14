@@ -18,7 +18,7 @@
 		
 			{% if ($comuser = is_login_comuser()) : %}
 				<input type="hidden" name="comments_email" value="{{ $comuser['comusers_email'] }}">
-				<input type="hidden" name="comments_password" value="{{ $comuser['comusers_password'] }}">
+				<input type="hidden" name="comments_password" value="{{ mso_de_code($comuser['comusers_password'], 'decode') }}">
 				<input type="hidden" name="comments_password_md" value="1">
 				<input type="hidden" name="comments_reg" value="reg">
 				

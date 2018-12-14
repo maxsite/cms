@@ -10,8 +10,8 @@
 		
 		// подготавливаем данные
 		$data = array(
-			'user_login' => $MSO->data['session']['users_login'],
-			'password' => $MSO->data['session']['users_password'],
+			'user_login' => getinfo('session_users_login'),
+			'password' => getinfo('session_users_password'),
 			
 			'users_login' => $post['f_user_login'],
 			'users_email' => $post['f_user_email'],
@@ -41,8 +41,8 @@
 
 		// подготавливаем данные
 		$data = array(
-			'user_login' => $MSO->data['session']['users_login'],
-			'password' => $MSO->data['session']['users_password'],
+			'user_login' => getinfo('session_users_login'),
+			'password' => getinfo('session_users_password'),
 			
 			'users_id' => $post['f_user_delete'],
 			'delete_user_comments' => isset($post['f_delete_user_comments']) ? true : false,

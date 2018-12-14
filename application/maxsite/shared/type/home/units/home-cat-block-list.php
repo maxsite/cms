@@ -21,7 +21,7 @@ $par = array(
 			'cat_order' => 'category_id_parent', 
 			'cat_order_asc' => 'asc',
 			'pagination' => false,
-			'exclude_page_id' => mso_get_val('exclude_page_id'),
+			'exclude_page_id' => mso_get_val('exclude_page_id', array()),
 		); 
 
 $home_cat_block = mso_explode(mso_get_option('home_cat_id', 'templates', '0')); // в массив

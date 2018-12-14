@@ -14,7 +14,7 @@ $par = array(
 		'cat_order' => 'category_name', 
 		'cat_order_asc' => 'asc',
 		'pagination' => false,
-		'exclude_page_id' => mso_get_val('exclude_page_id'),
+		'exclude_page_id' => mso_get_val('exclude_page_id', array()),
 		);
 		
 // подключаем кастомный вывод, где можно изменить массив параметров $par для своих задач

@@ -12,7 +12,7 @@ $par = array(
 		'cut' => mso_get_option('more', 'templates', tf('Читать полностью »')),
 		'cat_order' => 'category_id_parent', 
 		'cat_order_asc' => 'asc',
-		'exclude_page_id' => mso_get_val('exclude_page_id'),
+		'exclude_page_id' => mso_get_val('exclude_page_id', array()),
 		'order' => mso_get_option('home_order', 'templates', 'page_date_publish'),
 		'order_asc' => mso_get_option('home_order_asc', 'templates', 'desc'),
 	);

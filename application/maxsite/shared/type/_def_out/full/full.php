@@ -34,7 +34,7 @@ else
 }
 
 // исключенные записи
-$exclude_page_id = mso_get_val('exclude_page_id');
+$exclude_page_id = mso_get_val('exclude_page_id', array());
 
 // определяем info_top-файл
 $info_top_fn = '';

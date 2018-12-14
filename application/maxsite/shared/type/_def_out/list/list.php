@@ -28,7 +28,7 @@ else
 }
 
 // исключенные записи
-$exclude_page_id = mso_get_val('exclude_page_id');
+$exclude_page_id = mso_get_val('exclude_page_id', array());
 
 $line_format = mso_get_val('list_line_format', '[title] - [date]');
 

@@ -4680,27 +4680,34 @@ function mso_log($var = 0, $name = 'LOG', $f = '_log.txt')
 
 
 /**
-	функция кодирования/декодирования данных
-	см. http://php.net/manual/ru/function.openssl-encrypt.php
-	
-	// кодирование
-	$a = mso_de_code('текст', 'encode');
-	
-	// раскодирование
-	$b = mso_de_code($a, 'decode'); 
-	
+*	функция кодирования/декодирования данных
+*	см. http://php.net/manual/ru/function.openssl-encrypt.php
+*	
+*	$data - входные данные 
+*	$encode - 'encode' - закодировать, 'decode' - раскодировать
+*	$ekey - ключ шифра, если false, то используется скретная фраза сайта
+* 
+*	// кодирование
+*	$a = mso_de_code('текст', 'encode');
+*	
+*	// раскодирование
+*	$b = mso_de_code($a, 'decode');
+*	
 */
-function mso_de_code($data, $encode = 'encode')
+function mso_de_code($data, $encode = 'encode', $ekey = false)
 {
 	global $MSO;
 	
-	$ekey = $MSO->config['secret_key']; // ключ общий для всего сайта
+	if (!$ekey) $ekey = $MSO->config['secret_key'];
+	
 	$cipher = "AES-128-CBC";
 	$sha2len = 32;
 	
+	// для php 5.3
+	if (!defined('OPENSSL_RAW_DATA')) define('OPENSSL_RAW_DATA', (int) 1);
+	
 	if ($encode == 'encode') // кодировать
 	{
-		$cipher = "AES-128-CBC";
 		$ivlen = openssl_cipher_iv_length($cipher);
 		$iv = openssl_random_pseudo_bytes($ivlen);
 		$ciphertext_raw = openssl_encrypt($data, $cipher, $ekey, OPENSSL_RAW_DATA, $iv);

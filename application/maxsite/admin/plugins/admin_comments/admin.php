@@ -111,7 +111,8 @@
 	$query = $CI->db->get();
 
 	$pagination = mso_sql_found_rows($limit); // определим общее кол-во записей для пагинации
-	mso_hook('pagination', $pagination);
+
+	mso_admin_pagination($pagination);
 	
 		
 	// если есть данные, то выводим
@@ -205,7 +206,7 @@
 			});
 			</script>';
 			
-		mso_hook('pagination', $pagination);
+		mso_admin_pagination($pagination);
 	}
 	else
 	{

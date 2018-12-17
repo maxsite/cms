@@ -1173,8 +1173,10 @@ html.my-html-no-scroll {
 // плагин пагинации
 div.pagination {
 	
-	.mar40-t;
+	.mar20-t;
 	.mar10-b;
+	
+	text-align: center;
 	
 	a, span, strong {
 		.b-inline;
@@ -1184,6 +1186,7 @@ div.pagination {
 		
 		min-width: 28px;
 		.t-center;
+		margin: 0 1px;
 	}
 	
 	a:hover {
@@ -1197,11 +1200,55 @@ div.pagination {
 		font-weight: normal;
 	}
 	
-	span.pagination-first { .b-hide; }	
-	span.pagination-prev { .b-hide; }
-	.pagination-start {}
+	.pagination-first { .b-hide; }	
+	// .pagination-start {}
 	span.pagination-next { .b-hide; }
-	span.pagination-last { .b-hide; }
+	span.pagination-prev { .b-hide; }
+	.pagination-last { .b-hide; }
+	
+	.pagination-prev
+	{
+		float: left;
+		margin-right: 5px;
+		
+		background: none;
+		color: @button_bg_color;
+		// border-color: @button_text_color;
+		
+		&:before {
+			.icon-fa-normal;
+			content: @fa-var-chevron-left;
+			margin: 0;
+		}
+		
+		&:hover {
+			color: @blue;
+			background: none;
+		}
+	}
+	
+	.pagination-next
+	{
+		float: right;
+		margin-left: 5px;
+		
+		background: none;
+		color: @button_bg_color;
+		// border-color: @button_text_color;
+		
+		&:before {
+			// @extend .icon-fa-normal;
+			.icon-fa-normal;
+			content: @fa-var-chevron-right;
+			margin: 0;
+		}
+		
+		&:hover {
+			color: @blue;
+			background: none;
+		}
+	}
+	
 }
 
 // плагин paginator

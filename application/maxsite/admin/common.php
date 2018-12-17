@@ -198,4 +198,27 @@ function mso_plugin_uninstall($f_name)
 	else return false;
 }
 
-?>
+/**
+* Пагинация для админки
+* отдельной функцией, чтобы отвязаться от внешних плагинов
+*/
+function mso_admin_pagination($r)
+{
+	
+	// используем плагин pagination
+	if (!function_exists('pagination_go'))
+		require_once(getinfo('plugins_dir') . 'plugins\pagination\index.php');
+	
+	// только со своими настройками, не зависимо от опций плагина 
+	$r['format'] = array();
+	$r['format_first'] = '';
+	$r['format_prev']  = '';
+	$r['format_next']  = '';
+	$r['format_last']  = '';
+	$r['sep'] = '';	
+	$r['sep2'] = '';	
+	
+	pagination_go($r);
+}
+
+# end of file

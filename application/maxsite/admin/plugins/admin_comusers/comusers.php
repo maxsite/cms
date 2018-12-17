@@ -123,7 +123,7 @@
 		$CI->table->add_row($id, $id_out, $nik, $activat, $row['comusers_count_comments'], $date, $email, $url);
 	}
 
-	mso_hook('pagination', $pag);
+	mso_admin_pagination($pag);
 	//echo '<br>'; // вывод навигации
 
 	echo '
@@ -141,6 +141,6 @@
 		<p class="br">' . t('C отмеченными:') . '
 		<button class="button i-remove" type="submit" name="f_delete_submit" onClick="if(confirm(\'' . t('Уверены?') . '\')) {return true;} else {return false;}">' . t('Удалить') . '</button></p></form>';
 	
-	mso_hook('pagination', $pag);
+	mso_admin_pagination($pag);
 
-# End of file
+# end of file

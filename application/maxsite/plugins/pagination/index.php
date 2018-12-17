@@ -155,7 +155,7 @@ function _pagination($max, $page_number, $base_url, $diappazon = 4, $url_first =
 		} 
 		else 
 		{
-			$middle_page_links .= ' <strong>' . $counter . '</strong>';
+			$middle_page_links .= '<strong>' . $counter . '</strong>';
 			if ($counter < $count_to) $middle_page_links .= $sep;
 		}
 	}

@@ -373,7 +373,7 @@
 
 		$pagination['type'] = '';
 		$pagination['range'] = 10;
-		mso_hook('pagination', $pagination);
+		mso_admin_pagination($pagination);
 	
 		echo $CI->table->generate(); // вывод подготовленной таблицы
 	
@@ -384,7 +384,8 @@
 
 		$pagination['type'] = '';
 		$pagination['range'] = 10;
-		mso_hook('pagination', $pagination);
+		
+		mso_admin_pagination($pagination);
 
 		
 		echo '<form method="post">' . mso_form_session('f_session_id');

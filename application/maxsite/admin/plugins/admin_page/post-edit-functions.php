@@ -15,7 +15,7 @@ function post_prepare($post)
 	if ( isset($post['f_options']['parser_content']) and $post['f_options']['parser_content'] != 'none' )
 	{
 		$parser = $post['f_options']['parser_content']; // парсер
-		$parser_all = mso_hook('parser_register'); // все зарегистрированные парсеры
+		$parser_all = mso_hook('parser_register', array()); // все зарегистрированные парсеры
 		
 		$func = $parser_all[$parser]['content_post_edit']; // функцию, которую нужно выполнить
 		if ( function_exists($func) ) $f_content = $func($f_content);

@@ -72,7 +72,7 @@ function add_new_page($fn, $UP_DIR)
 			if (!isset($page_meta_options['parser_content'])) $page_meta_options['parser_content'] = 'Default';
 			
 			$parser = $page_meta_options['parser_content']; // парсер
-			$parser_all = mso_hook('parser_register'); // все зарегистрированные парсеры
+			$parser_all = mso_hook('parser_register', array()); // все зарегистрированные парсеры
 			
 			// если парсеры не зарегистрированы, то ничего не делаем
 			if (isset($parser_all[$parser]['content_post_edit']))

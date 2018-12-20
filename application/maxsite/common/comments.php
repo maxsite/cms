@@ -578,7 +578,6 @@ function mso_get_new_comment($args = array())
 		}
 		
 		
-		
 		if (is_login()) // коммент от автора
 		{
 			$comments_users_id = $MSO->data['session']['users_id'];
@@ -590,7 +589,8 @@ function mso_get_new_comment($args = array())
 				'comments_date' => $comments_date,
 				'comments_content' => $comments_content,
 				'comments_parent_id' => $comments_parent_id,
-				'comments_approved' => 1 // авторы могут сразу публиковать комменты без модерации
+				'comments_approved' => 1, // авторы могут сразу публиковать комменты без модерации
+				'comments_author_name' => '', 
 				);
 
 			$res = ($CI->db->insert('comments', $ins_data)) ? '1' : '0';

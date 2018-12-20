@@ -195,8 +195,12 @@ if ($pages)
 									}
 								}
 								
-								$p->content('', '');
-								$p->clearfix();
+								if ($f = mso_page_foreach('page-content-out-content')) require($f);
+								else
+								{
+									$p->content('', '');
+									$p->clearfix();
+								}
 							}
 							
 							// для page возможен свой info-bottom

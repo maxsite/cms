@@ -185,19 +185,12 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 		
 		asort($m); // здесь id-рубрик в прямом порядке по колву записей
 		
-		// нужно определить процентность по каждой рубрике
-		// для этого берем последнюю — это самое большое кол-во записей
-		if (count($m) > 1)
-			$max = array_pop($m);
-		else
-		{	
-			// из-за особенностей array_pop работаем с копией массива
-			$mp = $m;
-			$max = array_pop($mp);
-		}
-		
+		// из-за особенностей array_pop работаем с копией массива
+		$mp = $m;
+		array_pop($mp);
+			
 		// по колву записей — их сумма
-		$max1 = array_sum($m); // всего записей
+		$max = array_sum($m); // всего записей
 
 		$m = array_slice($m, 0, 50, true); // срез, чтобы не было слишком много
 		
@@ -206,17 +199,10 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 		
 		foreach($m as $id=>$count)
 		{
-			if ($max1 > 0)
-				$k = round($count * 100 / $max1);
+			if ($max > 0)
+				$k = round($count * 100 / $max);
 			else
 				$k = 0;
-				
-			$h = round($count * 100 / $max) + 40;
-			
-			if ($count == 0) $h = 0;
-				
-			// echo '<a style="background-color: hsl(' . $h . ', 30%, 20%); color: hsl(' . $h .', 10%, 100%)" class="b-inline pad5-tb pad10-rl mar5-b hover-no-underline hover-bg-blue600" href="' . getinfo('site_admin_url') .'page/category/' . $id .'">' . $cats[$id]['category_name'] . ' <sup>' . $count . '</sup> <sub>' . $k .'%</sub></a> ';
-			
 			
 			echo '<a style="background-color: #b9bed7; color: #111111" class="b-inline pad5-tb pad10-rl mar5-b hover-no-underline hover-bg-blue700 hover-t-white" href="' . getinfo('site_admin_url') .'page/category/' . $id .'">' . $cats[$id]['category_name'] . ' <sup>' . $count . '</sup> <sub>' . $k .'%</sub></a> ';
 		}
@@ -235,23 +221,18 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 		}
 		
 		asort($cat_date); //вверху рубрики, где давно не было обновлений
-		$max = count($cat_date);
+		
 		$cat_date = array_slice($cat_date, 0, 45, true); // срез, чтобы не было слишком много
 		
 		arsort($cat_date); // последние вверху 
 		
 		echo '<h4 class="mar50-t i-calendar">' . t('Последние публикации в рубриках') .'</h4><div class="flex flex-wrap">';
 		
-		$i = 0;
 		foreach($cat_date as $id=>$date)
 		{
-			$i++;
-			$h = round($i * 100 / $max);
 			
 			$ddd = mso_date_convert('j F Y',  $date, false, t('Понедельник Вторник Среда Четверг Пятница Суббота Воскресенье'), t('января февраля марта апреля мая июня июля августа сентября октября ноября декабря'));
-			
-			// echo '<div class="w24 w46-tablet w100-phone mar5-b"><a style="background-color: hsl(' . $h . ', 95%, 30%); color: hsl(' . $h .', 10%, 100%); height: 100%;" class="b-inline w100 pad5-tb pad10-rl hover-no-underline hover-bg-blue600" href="' . getinfo('site_admin_url') .'page/category/' . $id .'">' . $cats[$id]['category_name'] . ' <br><span class="t90">' . $ddd . '</span></a></div>';
-			
+
 			echo '<div class="w24 w46-tablet w100-phone mar5-b"><a style="background-color: #b9bed7; color: #111111; height: 100%;" class="b-inline w100 pad5-tb pad10-rl hover-no-underline hover-bg-blue700 hover-t-white" href="' . getinfo('site_admin_url') .'page/category/' . $id .'">' . $cats[$id]['category_name'] . ' <br><span class="t90">' . $ddd . '</span></a></div>';
 		}
 	

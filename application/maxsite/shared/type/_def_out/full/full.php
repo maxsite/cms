@@ -9,6 +9,8 @@ if (!$pages) return;
 
 $p = new Page_out();
 
+$p->reset_counter(count($pages));
+
 // формат можно задать отдельно перед циклом
 if ($f = mso_page_foreach('format-full-' . getinfo('type'))) 
 {

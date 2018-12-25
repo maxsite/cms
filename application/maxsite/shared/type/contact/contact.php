@@ -15,7 +15,7 @@ if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 echo NR . '<div class="mso-type-contact"><div class="mso-page-only">' . NR;
 
 
-echo '<h1>' . $title_contact . '</h1>';
+echo '<h3>' . $title_contact . '</h3>';
 
 echo '<div class="mso-page-content">';
 

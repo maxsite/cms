@@ -31,13 +31,15 @@ if (!$comuser_info and mso_get_option('page_404_http_not_found', 'templates', 1)
 // теперь сам вывод
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
-echo NR . '<div class="mso-type-users-form">' . NR;
+echo NR . '<div class="mso-type-users-form">';
 
 echo $res_post;
 	
 if ($comuser_info)
 {
 	extract($comuser_info[0]);
+	
+	echo '<div class="mso-page-only">';
 	
 	// pr($comuser_info[0]);
 	if ($f = mso_page_foreach('users-form')) require($f); // подключаем кастомный вывод
@@ -94,6 +96,8 @@ if ($comuser_info)
 			}
 		}
 	} // mso_page_foreach
+	
+	echo '</div>';
 }
 else
 {
@@ -111,7 +115,7 @@ else
 	}
 }
 
-echo NR . '</div><!-- class="mso-type-users-form" -->' . NR;
+echo '</div><!-- mso-type-users-form -->' . NR;
 
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);

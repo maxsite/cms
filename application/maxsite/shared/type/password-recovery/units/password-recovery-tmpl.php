@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<h1>{{ tf('Восстановление пароля') }}</h1>
+<h3>{{ tf('Восстановление пароля') }}</h3>
 
 <p><a href="{{ getinfo('siteurl') }}users">{{ tf('Список комментаторов') }}</a></p>
 

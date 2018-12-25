@@ -20,7 +20,7 @@
 		
 		<p><label><input type="checkbox" name="freg_rules_ok"> {{ tf('Обязуюсь соблюдать правила сайта') }} {{ $rules }}</label></p>
 
-		<p>{{ mso_hook('comments_content_end') }}</p>
+		{{ mso_hook('comments_content_end') }}
 		
 		<p><button type="submit" name="freg_submit">{{ tf('Зарегистрироваться') }}</button></p>
 	</form>

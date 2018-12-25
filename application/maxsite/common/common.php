@@ -3197,41 +3197,59 @@ function mso_parse_url_get($s = '')
 }
 
 
-# кастомный вывод цикла
-# $f - идентификатор цикла
-# $f - варианты см. в templates/default/type_foreach/
+# подключаемый type_foreach-файл
+# должен находиться в каталоге шаблона /type_foreach/
+# либо в /take/ — это второй альтернативный каталог (они работают одновременно)
+# каталог take можно переопределить через mso_set_val('type_foreach_alt_dir', 'my_take');
 function mso_page_foreach($type_foreach_file = false)
 {
 	global $MSO;
 	
-	# при первом обращении занесем сюда все файлы из шаблонного type_foreach
-	# чтобы потом результат считывать из масива, а не по file_exists
+	// при первом обращении занесем сюда все файлы из шаблонного type_foreach
+	// чтобы потом результат считывать из масива, а не по file_exists
 	static $files = false; 
+	static $files_alt = false; 
 
 	$MSO->data['type_foreach_file'] = $type_foreach_file; // помещаем в $MSO вызываемый тип
 	
-	// описание см. default/type_foreach/_general.php
+	// альтернативный каталог
+	$alt = mso_get_val('type_foreach_alt_dir', 'take') . '/';
+	
+	// можно переопределить файлы через type_foreach/_general.php
 	if (file_exists(getinfo('template_dir') . 'type_foreach/general.php'))
-		include(getinfo('template_dir') . 'type_foreach/general.php'); 
+		include(getinfo('template_dir') . 'type_foreach/general.php');
 	
 	// можно поменять type_foreach-файл через хук
 	$type_foreach_file = mso_hook('type-foreach-file-general', $type_foreach_file);
 	
 	if ($type_foreach_file)
-	{
+	{	
 		if ($files === false)
 		{
 			$CI = & get_instance();
 			$CI->load->helper('directory');
 			$files = directory_map(getinfo('template_dir') . 'type_foreach/', true); // только в type_foreach
 			if (!$files) $files = array();
+			
+			$files_alt = directory_map(getinfo('template_dir') . $alt, true);
+			if (!$files_alt) $files_alt = array();			
 		}
-
-		if (in_array($type_foreach_file . '.php', $files)) // есть файл в шаблоне
-			return getinfo('template_dir') . 'type_foreach/' . $type_foreach_file . '.php';
-		else 
-		{	
-			// файла нет
+		
+		$find_file = $type_foreach_file . '.php'; // какой файл ищем
+		
+		if (in_array($find_file, $files))
+		{
+			// есть в type_foreach/
+			return getinfo('template_dir') . 'type_foreach/' . $find_file;
+		}
+		elseif (in_array($find_file, $files_alt))
+		{
+			// есть в альтернативном каталоге
+			return getinfo('template_dir') . $alt . $find_file;
+		}
+		else
+		{
+			// нет файла
 			// если есть хук type-foreach-file
 			if (mso_hook_present('type-foreach-file'))
 			{
@@ -3242,8 +3260,11 @@ function mso_page_foreach($type_foreach_file = false)
 				else 
 					return false; // вернул false
 			}
-			else // нет хука type-foreach-file
+			else
+			{
+				// нет хука type-foreach-file
 				return false;
+			}
 		}
 	}
 	

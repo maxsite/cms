@@ -1961,10 +1961,13 @@ function mso_date_convert($format = 'Y-m-d H:i:s', $data, $timezone = true, $day
 
 	if ($timezone)
 	{
+		$tz = (float) getinfo('time_zone'); // на всякий случай делаем приведение типа (php 7.1 ???)
+				
 		if ($timezone === -1) // в случаях, если нужно убрать таймзону
-			$time = $time - getinfo('time_zone') * 60 * 60;
+			$time = $time - $tz * 60 * 60;
 		else
-			$time = $time + getinfo('time_zone') * 60 * 60;
+			$time = $time + $tz * 60 * 60;
+
 	}
 
 	$out = date($format, $time);

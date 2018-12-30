@@ -207,7 +207,7 @@ function mso_admin_pagination($r)
 	
 	// используем плагин pagination
 	if (!function_exists('pagination_go'))
-		require_once(getinfo('plugins_dir') . 'plugins\pagination\index.php');
+		require_once(getinfo('plugins_dir') . 'plugins/pagination/index.php');
 	
 	// только со своими настройками, не зависимо от опций плагина 
 	$r['format'] = array();

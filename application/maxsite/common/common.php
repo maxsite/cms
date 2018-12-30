@@ -187,7 +187,7 @@ function getinfo($info = '')
 				break;
 
 		case 'time_zone' :
-				$out = (string) mso_get_option('time_zone', 'general');
+				$out = (string) mso_get_option('time_zone', 'general', '0');
 				break;
 
 		case 'plugins_url' :

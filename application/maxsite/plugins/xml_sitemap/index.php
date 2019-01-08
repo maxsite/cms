@@ -83,7 +83,13 @@ function xml_sitemap_custom($args = array())
 
 	if(!isset($options['custom_urls'])) $options['custom_urls'] = '';
 	$options['custom_urls'] = array_map('trim', explode(NR, trim($options['custom_urls'])));
-		
+
+	if(!isset($options['sitemap-mode'])) $options['sitemap-mode'] = 'simple';
+	if(!isset($options['sitemap-index-links']) or $options['sitemap-index-links'] == '') $options['sitemap-index-links'] = 1000;
+	if($options['sitemap-index-links'] > 50000 ) $options['sitemap-index-links'] = 5000; # Лимит описан в протоколе на sitemas.org
+
+	$sitemap = array(); # Массив для предварительного накопления ссылок
+
 	$CI = & get_instance();
 	$CI->load->helper('file'); // хелпер для работы с файлами
 		
@@ -102,25 +108,26 @@ function xml_sitemap_custom($args = array())
 		
 	$url = getinfo('siteurl');
 
-	if ($options['url_protocol'])
+	if($options['url_protocol'])
 	{
 		$url = str_replace('http://', '', $url);
 		$url = str_replace('https://', '', $url);
 		$url = $options['url_protocol'] . $url;
 	}
-	
-	// формирование sitemap.xml
-	$out = '<'
-	. '?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>' . $url . '</loc>
-<lastmod>' . date('Y-m-d') . 'T' . date('H:i:s') . $time_zone . '</lastmod>
-<changefreq>' . $options['freq_priority']['home']['changefreq'] . '</changefreq>
-<priority>' . $options['freq_priority']['home']['priority'] . '</priority>
-</url>
-';
 
+	#
+	# Добавляем главную страницу (home)
+	#
+	$sitemap[] = array(
+			'loc' 		=> $url,
+			'lastmod'	=> date('Y-m-d').'T'.date('H:i:s').$time_zone,
+			'changefreq'	=> $options['freq_priority']['home']['changefreq'],
+			'priority'	=> $options['freq_priority']['home']['priority'],
+			);
+	
+	#
+	# Добавляем записи
+	#
 	// временная зона для запросов с page_date_publish
 	$tz = getinfo('time_zone');
 	if ($tz < 10 and $tz > 0) $tz = '0' . $tz;
@@ -163,12 +170,12 @@ function xml_sitemap_custom($args = array())
 		{
 			$date = str_replace(' ', 'T', $row['page_date_publish']) . $time_zone;
 			
-			$out .= '<url>' . NR;
-			$out .= '<loc>' . $url . 'page/' . $row['page_slug'] . '</loc>' . NR;
-			$out .= '<lastmod>' . $date . '</lastmod>' . NR;
-			$out .= '<changefreq>'.$options['freq_priority']['notblog']['changefreq'].'</changefreq>' . NR;
-			$out .= '<priority>'.$options['freq_priority']['notblog']['priority'].'</priority>' . NR;
-			$out .= '</url>' . NR;
+			$sitemap[] = array(
+						'loc' 		=> $url.'page/'.$row['page_slug'],
+						'lastmod'	=> $date,
+						'changefreq'	=> $options['freq_priority']['notblog']['changefreq'],
+						'priority'	=> $options['freq_priority']['notblog']['priority'],
+					);
 		}
 	}
 		
@@ -199,20 +206,22 @@ function xml_sitemap_custom($args = array())
 		foreach ($query->result_array() as $row)
 		{
 			$date = str_replace(' ', 'T', $row['page_date_publish']) . $time_zone;
-			
-			$out .= '<url>' . NR;
-			$out .= '<loc>' . $url . 'page/' . $row['page_slug'] . '</loc>' . NR;
-			$out .= '<lastmod>' . $date . '</lastmod>' . NR;
-			$out .= '<changefreq>' . $options['freq_priority']['blog']['changefreq'] . '</changefreq>' . NR;
-			$out .= '<priority>' . $options['freq_priority']['blog']['priority'] . '</priority>' . NR;
-			$out .= '</url>' . NR;
+
+			$sitemap[] = array(
+						'loc' 		=> $url.'page/'.$row['page_slug'],
+						'lastmod'	=> $date,
+						'changefreq'	=> $options['freq_priority']['blog']['changefreq'],
+						'priority'	=> $options['freq_priority']['blog']['priority'],
+					);
 		}
 	}
 
 	// единая дата-время обновления урла
 	$date = date('Y-m-d').'T'.date('H:i:s').$time_zone; 
-		
-	// рубрики
+
+	#
+	# Добавляем рубрики
+	#
 	if(count($options['categories_show']) > 0) $CI->db->or_where_in('category_id', $options['categories_show']);
 	$CI->db->where('category_type', 'page');
 	
@@ -223,17 +232,19 @@ function xml_sitemap_custom($args = array())
 		foreach ($query->result_array() as $row)
 		{
 			// $date = str_replace(' ', 'T', date('Y-m-d')) . $time_zone;
-			
-			$out .= '<url>' . NR;
-			$out .= '<loc>' . $url . 'category/' . $row['category_slug'] . '</loc>' . NR;
-			$out .= '<lastmod>' . $date . '</lastmod>' . NR;
-			$out .= '<changefreq>' . $options['freq_priority']['category']['changefreq'] . '</changefreq>' . NR;
-			$out .= '<priority>'.$options['freq_priority']['category']['priority'] . '</priority>' . NR;
-			$out .= '</url>' . NR;
+
+			$sitemap[] = array(
+						'loc' 		=> $url.'category/'.$row['category_slug'],
+						'lastmod'	=> $date,
+						'changefreq'	=> $options['freq_priority']['category']['changefreq'],
+						'priority'	=> $options['freq_priority']['category']['priority'],
+					);
 		}
 	}		
 	
-	// все метки
+	#
+	# Добавляем метки
+	#
 	if($options['tags_show'])
 	{
 		require_once( getinfo('common_dir') . 'meta.php' );
@@ -242,16 +253,18 @@ function xml_sitemap_custom($args = array())
 		
 		foreach ($alltags as $tag => $count) 
 		{
-			$out .= '<url>' . NR;
-			$out .= '<loc>' . $url . 'tag/' . htmlentities(urlencode($tag)) . '</loc>' . NR;
-			$out .= '<lastmod>' . $date . '</lastmod>' . NR;
-			$out .= '<changefreq>' . $options['freq_priority']['tag']['changefreq'] . '</changefreq>' . NR;
-			$out .= '<priority>' . $options['freq_priority']['tag']['priority'] . '</priority>' . NR;
-			$out .= '</url>' . NR;
+			$sitemap[] = array(
+						'loc' 		=> $url.'tag/'.htmlentities(urlencode($tag)),
+						'lastmod'	=> $date,
+						'changefreq'	=> $options['freq_priority']['tag']['changefreq'],
+						'priority'	=> $options['freq_priority']['tag']['priority'],
+					);
 		}
 	}
-		
-	// все комюзеры
+	
+	#
+	# Добаляем комюзеров
+	#	
 	if($options['comusers_show'])
 	{
 		$CI->db->select('comusers_id');
@@ -262,17 +275,19 @@ function xml_sitemap_custom($args = array())
 		{	
 			foreach ($query->result_array() as $row)
 			{
-				$out .= '<url>' . NR;
-				$out .= '<loc>' . $url . 'users/' . $row['comusers_id'] . '</loc>' . NR;
-				$out .= '<lastmod>' . $date . '</lastmod>' . NR;
-				$out .= '<changefreq>'.$options['freq_priority']['comuser']['changefreq'] . '</changefreq>' . NR;
-				$out .= '<priority>'.$options['freq_priority']['comuser']['priority'] . '</priority>' . NR;
-				$out .= '</url>' . NR;
+				$sitemap[] = array(
+							'loc' 		=> $url.'users/'.$row['comusers_id'],
+							'lastmod'	=> $date,
+							'changefreq'	=> $options['freq_priority']['comuser']['changefreq'],
+							'priority'	=> $options['freq_priority']['comuser']['priority'],
+						);
 			}
 		}
 	}
 		
-	// все юзеры
+        #
+	# Добавялем юзеров (авторов)
+	#
 	if($options['users_show'])
 	{
 		$CI->db->select('users_id');
@@ -283,18 +298,20 @@ function xml_sitemap_custom($args = array())
 		{	
 			foreach ($query->result_array() as $row)
 			{
-				$out .= '<url>' . NR;
-				$out .= '<loc>' . $url . 'author/' . $row['users_id'] . '</loc>' . NR;
-				$out .= '<lastmod>' . $date . '</lastmod>' . NR;
-				$out .= '<changefreq>' . $options['freq_priority']['user']['changefreq'] . '</changefreq>' . NR;
-				$out .= '<priority>' . $options['freq_priority']['user']['priority'] . '</priority>' . NR;
-				$out .= '</url>' . NR;
+				$sitemap[] = array(
+							'loc' 		=> $url.'author/'.$row['users_id'],
+							'lastmod'	=> $date,
+							'changefreq'	=> $options['freq_priority']['user']['changefreq'],
+							'priority'	=> $options['freq_priority']['user']['priority'],
+						);
 			}
 		}
 	}
 		
-	// кастомные урлы
-	if( $options['custom_urls'] )
+	#
+	# Добавляем кастомные урлы
+	#
+	if($options['custom_urls'])
 	{
 		if( !isset($options['freq_priority']['notblog']['changefreq']) ) $options['freq_priority']['notblog']['changefreq'] = 'monthly';
 		if( !isset($options['freq_priority']['notblog']['priority']) ) $options['freq_priority']['notblog']['priority'] = '0.7';
@@ -307,24 +324,99 @@ function xml_sitemap_custom($args = array())
 				$url = substr($url, 0, 1) == '/' ? substr($url, 1) : $url;
 				$url = getinfo('site_url').$url;
 				
-				$out .= '<url>' . NR;
-				$out .= '<loc>' . $url . '</loc>' . NR;
-				$out .= '<lastmod>' . $date . '</lastmod>' . NR;
-				$out .= '<changefreq>' . $options['freq_priority']['notblog']['changefreq'] . '</changefreq>' . NR;
-				$out .= '<priority>' . $options['freq_priority']['notblog']['priority'] . '</priority>' . NR;
-				$out .= '</url>' . NR;
+				$sitemap[] = array(
+							'loc' 		=> $url,
+							'lastmod'	=> $date,
+							'changefreq'	=> $options['freq_priority']['notblog']['changefreq'],
+							'priority'	=> $options['freq_priority']['notblog']['priority'],
+						);
 			}
 		}
 	}
-		
-	$out .= mso_hook('xml_sitemap'); # хук, если нужно добавить свои данные
 	
-	$out .= '</urlset>' . NR;
-		
-	$out = mso_hook('xml_sitemap_conv', $out); # хук, если нужно как-то обработать результирующий файл. Например, разбить на части
-		
-	$fn = getinfo('FCPATH') . 'sitemap.xml';
-	write_file($fn, $out);
+	// формирование sitemap.xml
+	$out = '';
+
+	if($sitemap)
+	{
+		if($options['sitemap-mode'] == 'simple' or ($options['sitemap-index-links'] and $options['sitemap-index-links'] > count($sitemap))) # простой вариант или если общее количество ссылок меньше 
+		{
+			$out .= '<?xml version="1.0" encoding="UTF-8"?>'.NR.'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'.NR;
+
+			foreach($sitemap as $url)
+			{
+				$out .= '<url>'.NR;
+				$out .= '<loc>'.$url['loc'].'</loc>'.NR;
+				$out .= '<lastmod>'.$url['lastmod'].'</lastmod>'.NR;
+				$out .= '<changefreq>'.$url['changefreq'].'</changefreq>'.NR;
+				$out .= '<priority>'.$url['priority'].'</priority>'.NR;
+				$out .= '</url>'.NR;
+			}
+
+			$out .= mso_hook('xml_sitemap'); # хук, если нужно добавить свои данные
+
+			$out .= '</urlset>'.NR;
+
+			file_put_contents(getinfo('FCPATH').'sitemap.xml', $out); # Сохраняем полный файл
+		}
+		else # вариант с разбиением sitemap.xml на части
+		{
+			$i = 1; 	# счётчик частей
+			$indx = '';     # контент индексного файла
+			$part = array();# массив ссылок для одной части sitemap
+			
+			do {
+				$part = array_splice( $sitemap, 0, $options['sitemap-index-links'] ); # вырезаем из массива часть
+
+				if($part) # Если массив ссылок не пуст, то записываем очередную часть sitemap.xml
+				{
+					# формируем содержимое "частичного" sitemap.xml
+					$content = '<?xml version="1.0" encoding="UTF-8"?>'.NR.'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'.NR;
+					foreach( $part as $k => $url )
+					{
+						$link = '';
+
+						$link .= '<url>'.NR;
+						$link .= '<loc>'.$url['loc'].'</loc>'.NR;
+						$link .= '<lastmod>'.$url['lastmod'].'</lastmod>'.NR;
+						$link .= '<changefreq>'.$url['changefreq'].'</changefreq>'.NR;
+						$link .= '<priority>'.$url['priority'].'</priority>'.NR;
+						$link .= '</url>'.NR;
+
+						$content .= $link;
+						$out .= $link;
+					}
+				
+					$content .= '</urlset>'.NR;
+	
+					file_put_contents(getinfo('FCPATH').'sitemap-'.$i.'.xml', $content);
+
+					# Формируем содержимое индексного sitemap-файла
+					$indx .= '<sitemap>'.NR.'<loc>'.getinfo('siteurl').'sitemap-'.$i.'.xml</loc>'.NR.'<lastmod>'.date('Y-m-d').'T'.date('H:i:s').$time_zone.'</lastmod>'.NR.'</sitemap>'.NR;
+
+					if($sitemap) $i++;
+				}
+
+			} while($part);
+
+			# Сохраняем индексный sitemap-файл
+			if($indx)
+			{
+				$content = '<?xml version="1.0" encoding="UTF-8"?>'.NR.'<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'.NR.$indx.'</sitemapindex>'.NR;
+				file_put_contents(getinfo('FCPATH').'sitemap.xml', $content); # Сохраняем индексный файл
+			}
+
+			if($options['sitemap-full'] == 'yes')
+			{
+				$out = mso_hook('xml_sitemap_conv', $out); # хук, если нужно как-то обработать результирующий файл. Например, разбить на части
+
+				$out = '<?xml version="1.0" encoding="UTF-8"?>'.NR.'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'.NR.$out.'</urlset>'.NR;
+			
+				file_put_contents(getinfo('FCPATH').'sitemap-full.xml', $out); # Сохраняем полный файл
+			}
+
+		}
+	}
 		
 	return $args; // для обеспечения цепочки хуков
 }
@@ -399,20 +491,42 @@ function xml_sitemap_mso_options()
                         ),
 						
 			'custom_urls' => array(
-							'type' => 'textarea', 
-							'name' => 'Кастомные адреса для добавления', 
-							'description' => t('Укажите (по одному в каждой строке) абсолютные или относительные адреса нестандартных страниц или файлов (например, DOCX-файл из папки UPLOADS) сайта, которые необходимо добавить в sitemap.xml. Для этих адресов будет использованы настройки приоритета и частоты от <b>notblog</b>.'),
-							'default' =>	'',
-						),
+                            'type' => 'textarea', 
+                            'name' => 'Кастомные адреса для добавления', 
+                            'description' => t('Укажите (по одному в каждой строке) абсолютные или относительные адреса нестандартных страниц или файлов (например, DOCX-файл из папки UPLOADS) сайта, которые необходимо добавить в sitemap.xml. Для этих адресов будет использованы настройки приоритета и частоты от <b>notblog</b>.'),
+                            'default' => '',
+			),
 						
 			'url_protocol' => array(
                             'type' => 'select', 
                             'name' => t('HTTP протокол сайта'), 
-							'values' => '||Не менять # http://||http # https://||https',
+                            'values' => '||Не менять # http://||http # https://||https',
                             'description' => t('Можно явно задать протокол сайт.'), 
                             'default' => ''
                         ),
+				
+			'sitemap-mode' => array(
+                            'type' => 'select', 
+                            'name' => t('Режим формирования sitemap.xml'), 
+                            'values' => 'simple||Формировать единый файл#complex||Разбивать на части',
+                            'description' => t('Выберите режим, который будет задавать принцип формирования файла sitemap.xml. Разбиение на части реализовано согласно <a href="https://www.sitemaps.org/ru/protocol.html#index" target=_blank>описанному протоколу</a>.'), 
+                            'default' => 'simple'
+                        ),
+
+			'sitemap-index-links' => array(
+				'type' => 'text',
+				'name' => 'Количество ссылок в каждой части индексного sitemap.xml',
+				'description' => 'Если sitemap.xml разбивается на части, то в данном поле можно задать количество ссылок, которые попадут в кажду часть. Максимум для одной части - 50000 ссылок.',
+				'default' => '1000'
+			),
 						
+			'sitemap-full' => array(
+                            'type' => 'select', 
+                            'name' => t('Сохранять единый файл при режиме разбиения sitemap.xml на части?'), 
+                            'values' => 'yes||Да#no||Нет',
+                            'description' => t('Для отладки и других работ может потребоваться версия sitemap.xml без разбиения на части. Если выбрать вариант "ДА", то будет сохраняться единый файл с именем sitemap-full.xml.'), 
+                            'default' => 'no'
+                        ),
 
             ),
 		t('Настройки XML Sitemap'), # Заголовок страницы с настройками плагина

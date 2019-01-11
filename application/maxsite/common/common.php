@@ -4699,7 +4699,6 @@ function mso_text_find_key($text, $find = false, $delim = "=")
 }
 
 
-
 # лог в файл mso_log('текст', 'заголовок', '_log.txt');
 # Для сброса mso_log() или mso_log(0)
 function mso_log($var = 0, $name = 'LOG', $f = '_log.txt')
@@ -4780,6 +4779,21 @@ function mso_de_code($data, $encode = 'encode', $ekey = false)
 }
 
 
+/**
+ * Склонение числительных
+ *
+ * @param $n Число
+ * @param $f1 string 1 комментарИЙ
+ * @param $f2 string 2 комментарИЯ
+ * @param $f5 string 5 комментарИЕВ
+ * @return string
+ */
+function mso_plur($n = 0, $f1 = 'комментарий', $f2 = 'комментария', $f5 = 'комментариев') {
+	$n = (int) $n;
+	$word = array($f1, $f2, $f5);
+	$ar = array(2, 0, 1, 1, 1, 2);
+	return $word[($n % 100 > 4 and $n % 100 < 20) ? 2 : $ar[min($n % 10, 5)]];
+}
 
 
 # end of file

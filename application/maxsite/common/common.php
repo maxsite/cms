@@ -4501,7 +4501,7 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 	
 	// подключаем каждый указанный unit 
 	// _rules — php-условие, при котором юнит выводится
-	// параметр file где указывается файл юнита в каталоге $path_file (type/home/units/)
+	// параметр file где указывается файл юнита в каталоге $path_file (type/home/units/) или относительно шаблона
 	// если file нет, то проверяются другие параметры если есть:
 	// html — выводится как есть текстом/ Можно использовать php-шаблонизатор {{ }} и {% %}
 	// require — подключается файл в шаблоне (пусть относительно каталога шаблона)
@@ -4558,7 +4558,15 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 			if (trim($UNIT['file']))
 			{
 				// в подключаемом файле доступна переменная $UNIT — массив параметров
-				if ($fn = mso_find_ts_file($path_file . trim($UNIT['file']))) require($fn);
+				if ($fn = mso_find_ts_file($path_file . trim($UNIT['file']))) 
+				{
+					require($fn);
+				}
+				else
+				{
+					// аналогично, только файл относительно каталога шаблона
+					if ($fn = mso_fe(trim($UNIT['file']))) require($fn);
+				}
 			}
 			elseif (isset($UNIT['html']) and trim($UNIT['html']))
 			{
@@ -4571,6 +4579,11 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 					ob_start();
 					require($fn);
 					$t1 = ob_get_contents();
+					
+					// в файле могут быть свои замены
+					$t1 = str_replace('[siteurl]', getinfo('siteurl'), $t1);
+					$t1 = str_replace('[templateurl]', getinfo('template_url'), $t1);
+					
 					ob_end_clean();
 					
 					// парсер текста
@@ -4709,7 +4722,7 @@ function mso_log($var = 0, $name = 'LOG', $f = '_log.txt')
 *	
 *	$data - входные данные 
 *	$encode - 'encode' - закодировать, 'decode' - раскодировать
-*	$ekey - ключ шифра, если false, то используется скретная фраза сайта
+*	$ekey - ключ шифра, если false, то используется секретная фраза сайта
 * 
 *	// кодирование
 *	$a = mso_de_code('текст', 'encode');
@@ -4765,6 +4778,8 @@ function mso_de_code($data, $encode = 'encode', $ekey = false)
 		}
 	}
 }
+
+
 
 
 # end of file

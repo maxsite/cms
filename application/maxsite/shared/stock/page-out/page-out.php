@@ -496,13 +496,15 @@ class Page_out
 			$out = preg_replace_callback('!(\[val@)(.*?)(\])!is', array('self', '_line_val_set'), $out);
 		}
 		
-		/*
-		// [var@cat] — произвольное значение поля из UNIT
-		if (strpos($out, '[var@') !== false)
+		// Склонение числительных 
+		// [plur@VAL|фраза1|фраза2|фраза5]
+		// [plur@page_view_count|комментарий|комментария|комментариев]
+		// [plur@page_count_comments|комментарий|комментария|комментариев]
+		// VAL — ключ из $this->page
+		if (strpos($out, '[plur@') !== false)
 		{
-			$out = preg_replace_callback('!(\[var@)(.*?)(\])!is', array('self', '_line_var_set'), $out);
+			$out = preg_replace_callback('!(\[plur@)(.*?)(\])!is', array('self', '_line_plur_set'), $out);
 		}
-		*/
 		
 		if (strpos($out, '[content]') !== false)
 		{
@@ -595,18 +597,21 @@ class Page_out
 		$m = $this->val($m);
 		return $m;
 	}
-/*
-	// колбак для поиска [var@UNIT]
-	protected function _line_var_set($matches)
+	
+	
+	// колбак для поиска [plur@] 
+	// нужно указывать все данные
+	// [plur@page_view_count|комментарий|комментария|комментариев]
+	// [plur@page_count_comments|комментарий|комментария|комментариев]
+	protected function _line_plur_set($matches)
 	{
-		$m = 'var@' . $matches[2];
-
-		if (isset($this->page['UNIT'][$m]))
-			return $this->page['UNIT'][$m];
-		else 
-			return '';
+		$k = explode('|', $matches[2]);		
+		
+		if (count($k) != 4) return;
+		
+		return mso_plur($this->val(trim($k[0])), $k[1], $k[2], $k[3]);
 	}
-*/	
+
 	// колбак для поиска [content_chars@КОЛВО]
 	protected function _line_content_chars($matches)
 	{

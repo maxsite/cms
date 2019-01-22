@@ -13,11 +13,11 @@ if ( $post = mso_check_post(array('file_path', 'content')) )
 	{
 		file_put_contents($file, $post['content']);
 	
-		echo '<span class="i-check mar10-l t-green t130"></span>Сохранено';
+		echo '<div class="update pos-fixed w200px pad10 pos20-r pos0-t t-center">' . t('Сохранено!') . '</div>';
 	}
 	else
 	{
-		echo '<span class="i-check mar10-l t-red t130"></span>Файл не найден';
+		echo '<div class="error pos-fixed w200px pad10 pos20-r pos0-t t-center">' . t('Файл не найден!') . '</div>';
 	}
 }
 

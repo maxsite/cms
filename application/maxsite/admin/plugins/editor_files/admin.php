@@ -1,5 +1,140 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 
+$content_file = '';
+$file_path = '';
+$curfile = '';
+
+$AJAX1 = getinfo('ajax') . base64_encode('admin/plugins/editor_files/load-file-ajax.php');
+$AJAX2 = getinfo('ajax') . base64_encode('admin/plugins/editor_files/save-file-ajax.php');
+$A_LINK = getinfo('site_admin_url') .'editor_files/';
+
+$t1 = t('Файл загружен!');
+$t2 = t('Текущий файл: ');
+
+
+$directory = getinfo('template_dir');
+$directory = str_replace('\\', '/', $directory);
+
+$r = new RecursiveDirectoryIterator($directory);
+
+$files = _getFiles($r, 0, $directory);
+
+// в третьем сегменте можно указать адрес файла в base64
+if (mso_segment(3)) 
+{
+	$f = htmlentities(base64_decode(mso_segment(3)));
+	
+	if ($f)
+	{
+		$f = str_replace('~', '-', $f);
+		$f = str_replace('\\', '-', $f);
+		
+		$ff = getinfo('template_dir') . $f;
+		
+		// есть такой файл
+		if (file_exists($ff)) 
+		{
+			$curfile = $t2 . '<b>' . $f . '</b>';
+			$content_file = file_get_contents($ff);
+			$file_path = mso_segment(3);
+		}
+	}
+}
+
+
+$select = '<option value="" selected>-</option>';
+
+foreach ($files as $file)
+{
+	if (strpos($file, 'optgroup') === false)
+	{
+		$opt_selected = (mso_segment(3) and base64_encode($file) === mso_segment(3)) ? ' selected' : '';
+		
+		$select .= '<option value="' . base64_encode($file) . '"' . $opt_selected . '>' . $file . '</option>';
+	}
+	else
+	{
+		$select .= $file;
+	}
+}
+
+?>
+
+<h1><?= t('Файлы шаблона') . ' «' . getinfo('template') . '»' ?></h1>
+
+<div class="flex flex-vcenter">
+	<div class="flex-grow0 pad5-r"><?= t('Файл:') ?></div>
+	<div class="flex-grow3"> <select id="select_file" class="w100"><?= $select ?></select></div>
+	
+	<?php
+		// если есть custom/my-editor-files.php (в нём только <option>), то подключаем его
+		if ($f1 = mso_fe('custom/my-editor-files.php')) 
+		{
+			echo '<div class="flex-grow0 pad5-rl">' . t('или') . '</div><div class="flex-grow3"><select id="select_file1" class="w100">';
+			require($f1);
+			echo '</select></div>';
+		}
+	?>
+</div>
+
+<div class="t90 mar10-t"><span id="curfile"><?= $curfile ?></span></div>
+<div id="success"></div>
+
+<?php
+
+echo '<form class="mar10-t" method="post" id="edit_form"><textarea name="content" id="content" class="w100 h500px bg-gray50">' . $content_file . '</textarea><input type="hidden" id="file_path" name="file_path" value="' . $file_path . '"><p><button id="b-save" class="button i-save" type="submit">Сохранить</button></p></form>';
+
+echo <<<EOF
+<script>
+$(document).ready(function() {
+	
+	$('#b-save').fadeOut(0);
+	
+	$('#select_file, #select_file1').change(function(){
+		
+		var f = $("option:selected", this).val();
+		
+		if (f)
+		{			
+			$('#success').hide();
+			
+			$.post("{$AJAX1}", {file:f},  function(response) {
+				$('#file_path').val(f);
+				
+				// $('#content').html(response);
+				$('#content').val(response);
+				
+				$('#success').html('<div class="update pos-fixed w200px pad10 pos20-r pos0-t t-center">{$t1}</div>');
+				$('#success').show();
+				$('#success').fadeOut(5000);
+
+				$('#b-save').fadeOut(1000);
+			});
+			
+			$('#curfile').html('{$t2} <a class="bold" href="{$A_LINK}' + f + '">' + $("option:selected", this).text() + '</a>');
+		}
+	})
+	
+	$('#edit_form').submit(function(){
+		$.post("{$AJAX2}", $("#edit_form").serialize(),  function(response) {
+			$('#success').html(response);
+			$('#success').show();
+			$('#success').fadeOut(5000);
+			$('#b-save').fadeOut(1000);
+		});
+		
+		return false;
+	})
+	
+	$('#content').keypress(function(){
+		$('#b-save').fadeIn(1000);
+	})
+	
+});
+</script>
+EOF;
+
+
 
 function _getFiles($rdi, $depth=0, $dir) 
 {
@@ -35,10 +170,7 @@ function _getFiles($rdi, $depth=0, $dir)
 				if (in_array($file_ext, array('php', 'txt', 'css', 'js', 'html', 'htm', 'ini'))) 
 				{
 					$pn = $rdi->getPathname();
-					// $pn = str_replace('\\', '/', $pn); // замена из-за windows
-					
 					if (is_writable($pn)) $out[] = $cur;
-					
 				}
 			}
 			
@@ -69,113 +201,5 @@ function _is_exclude($str)
 	
 	return false;
 }
-
-$directory = getinfo('template_dir');
-$directory = str_replace('\\', '/', $directory);
-
-$r = new RecursiveDirectoryIterator($directory);
-
-$files = _getFiles($r, 0, $directory);
-
-// в третьем сегменте можно указать адрес файла в base64
-$content_file = '';
-$file_path = '';
-
-if (mso_segment(3)) 
-{
-	$f = base64_decode(mso_segment(3));
-	$f = str_replace('~', '-', $f);
-	$f = str_replace('\\', '-', $f);
-	$f = getinfo('template_dir') . $f;
-	
-	// есть такой файл
-	if (file_exists($f)) 
-	{
-		$content_file = file_get_contents($f);
-		$file_path = mso_segment(3);
-	}
-}
-
-
-// pr(getinfo('template'));
-// pr($directory);
-// pr($files);
-
-$select = '<option value="" selected>-</option>';
-
-foreach ($files as $file)
-{
-	if (strpos($file, 'optgroup') === false)
-	{
-		$opt_selected = (mso_segment(3) and base64_encode($file) === mso_segment(3)) ? ' selected' : '';
-		
-		$select .= '<option value="' . base64_encode($file) . '"' . $opt_selected . '>' . $file . '</option>';
-	}
-	else
-		$select .= $file;
-}
-
-?>
-
-<h1><?= t('Файлы для редактирования шаблона') . ' «' . getinfo('template') . '»' ?></h1>
-
-<p class="mar30-t"><?= t('Выберите файл:') ?> <select id="select_file" class="w-auto"><?= $select ?></select> <span id="success"></span></p>
-
-
-<?php
-
-echo '<form method="post" id="edit_form" action=""><textarea name="content" id="content" class="w100 h500px bg-gray50">' . $content_file . '</textarea><input type="hidden" id="file_path" name="file_path" value="' . $file_path . '"><p><button id="b-save" class="button i-save" type="submit">Сохранить</button></p></form>';
-		
-$AJAX1 = getinfo('ajax') . base64_encode('admin/plugins/editor_files/load-file-ajax.php');
-$AJAX2 = getinfo('ajax') . base64_encode('admin/plugins/editor_files/save-file-ajax.php');
-
-echo <<<EOF
-<script>
-jQuery(function($) {
-	
-	$('#b-save').fadeOut(0);
-	
-	$('#select_file').change(function(){
-		
-		var f = $("#select_file :selected").val();
-		
-		if (f)
-		{
-			$.post("{$AJAX1}", {file:f},  function(response) {
-				$('#file_path').val(f);
-				
-				// $('#content').html(response);
-				$('#content').val(response);
-				
-				// это для отладки
-				$('#success').html('<span class="i-check mar10-l t-green t130"></span>Файл загружен');
-				$('#success').show();
-				$('#success').fadeOut(5000);
-				
-				$('#b-save').fadeOut(1000);
-			});
-		}
-	})
-	
-	$('#edit_form').submit(function(){
-		$.post("{$AJAX2}", $("#edit_form").serialize(),  function(response) {
-			$('#success').html(response);
-			$('#success').show();
-			$('#success').fadeOut(5000);
-			
-			$('#b-save').fadeOut(1000);
-		});
-		
-		return false;
-	})
-	
-	$('#content').keypress(function(){
-		$('#b-save').fadeIn(1000);
-	})
-	
-});
-</script>
-
-EOF;
 
 # end of file

@@ -99,14 +99,33 @@ if ($pages)
 				// у page в записи может быть метаполе info-top-custom
 				// где указываетеся свой файл вывода
 				// файл указывается в type_foreach/info-top/файл.php
+				// или info-top/page/файл.php
+				
 				$info_top_custom = $p->meta_val('info-top-custom');
-
-				if ($info_top_custom and $f = mso_fe('type_foreach/info-top/' . $info_top_custom) )
+				
+				$f = false;
+				
+				if ($info_top_custom)
+				{
+					if ($f = mso_fe('type_foreach/info-top/page/' . $info_top_custom));
+					elseif ($f = mso_fe('type_foreach/info-top/' . $info_top_custom));
+				}
+				
+				if ($f)
 				{
 					require($f);
 				}
 				else // нет метаполя - типовой вывод
 				{
+					// возможно есть дефолтная опция
+					if ($info = mso_get_option('info-top_page', getinfo('template'), ''))
+					{
+						if ($f = mso_fe('type_foreach/info-top/page/' . $info));
+						elseif ($f = mso_fe('type_foreach/info-top/' . $info));
+					
+						$info = $f ? $f : false;
+					}
+					
 					// для разных page может быть свой info-top
 					if ($f = mso_page_foreach('info-top-page-status-' . $p->val('page_status'))) 
 					{
@@ -116,9 +135,9 @@ if ($pages)
 					{
 						require($f);
 					}
-					elseif ($info = mso_get_option('info-top_page', getinfo('template'), '') and $f = mso_fe('type_foreach/info-top/' . $info))
+					elseif ($info)
 					{
-						require($f);
+						require($info);
 					}
 					elseif ($f = mso_page_foreach('info-top-page')) 
 					{
@@ -130,7 +149,7 @@ if ($pages)
 					}
 					else
 					{
-						$p->html(NR . '<header>');
+						$p->html('<header>');
 							$p->line('[title]');
 							
 							$p->div_start('mso-info mso-info-top');
@@ -289,4 +308,4 @@ if (!mso_get_val('page_content_only', false)) echo NR . '</div><!-- /div.mso-typ
 
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	
-# end file
+# end of file

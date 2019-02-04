@@ -421,12 +421,14 @@ function mso_view_ini($all = false)
                     
 			$CI->table->set_template($tmpl); // шаблон таблицы
 		
-		
+			$section_css_style = isset($row['section_css_style']) ? $row['section_css_style'] : '';
+			
 			if (isset($row['section_description']))
 			{
 				$CI->table->add_row(
 					
 					array('class'=>'section', 'colspan' => 2, 
+						'style' => $section_css_style,
 						'data' => '<a id="a-' . mso_slug($row['section']) . '"></a><h2 class="section">' . t($row['section']) . '</h2><p>' . t($row['section_description']) . '</p>')
 					);
 			}
@@ -434,7 +436,7 @@ function mso_view_ini($all = false)
 			{
 				$CI->table->add_row(
 					array('class'=>'section', 'colspan' => 2,
-					
+					'style' => $section_css_style,
 					'data' => '<a id="a-' . mso_slug($row['section']) . '"></a><div class="section"><h2>' . t($row['section']) . '</h2></div>') 
 					);
 			}
@@ -482,7 +484,7 @@ function mso_view_ini($all = false)
 			$('table.page').hide();
 
 			$(this).addClass('current').siblings().removeClass(); // добавляем класс на кликнутый пункт, а у всех соседних удаляем
-			$('table.section_'+id).show();
+			$('table.section_'+id).fadeIn(400);
 			$.cookie(NameCookie, id, {expires: 30, path: '/'});
 			return false;
 		});

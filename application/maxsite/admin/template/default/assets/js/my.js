@@ -8,41 +8,52 @@ $(function(){
 	$.cookie.json = true;
 	
 	$("li.admin-menu-top").showHide({
-	cookieName: "admin-menu",
-	time: 400, 
-	useID: false, 
-	clickElem: "a.admin-menu-section", 
-	foldElem: "ul.admin-submenu", 
-	visible: true
+		cookieName: "admin-menu",
+		time: 400, 
+		useID: false, 
+		clickElem: "a.admin-menu-section", 
+		foldElem: "ul.admin-submenu", 
+		visible: true
 	});
 	
 	$("div.update").fadeOut(15000);
 	$("div.error").fadeOut(15000);
 	
-	if ($.cookie('sh-my-nav-panel-off') == 1)
-	{
-		$(".my-nav-panel").addClass("b-hide");
-		$("#sh-my-nav-panel").css("left", 0);
-	}
-	
 	$("#sh-my-nav-panel").click(function() 
 	{
-		$("#sh-my-nav-panel").hide();
-		$(".my-nav-panel").toggleClass("b-hide-imp");
+		var panel = $(".my-nav-panel");
+		var sh = $("#sh-my-nav-panel");
 		
-		if ($(".my-nav-panel").outerWidth() < 200)
+		if (panel.hasClass("js-nav-panel-hide"))
 		{
-			$("#sh-my-nav-panel").css("left", 0);
-			$.cookie('sh-my-nav-panel-off', 1);
+			panel.animate( {
+					width: "show",
+					opacity: "show",
+			}, 600);
+			
+			panel.css("min-width", "200px");
+			
+			sh.animate( {
+					left: panel.outerWidth() + "px",
+			}, 200);
+		
+			panel.removeClass("js-nav-panel-hide");
 		}
 		else
 		{
-			$("#sh-my-nav-panel").css("left", $(".my-nav-panel").outerWidth() );
-			$.cookie('sh-my-nav-panel-off', 0);
+			sh.animate( {
+					left: "0",
+			}, 200);
+			
+			panel.css("min-width", 0);
+			panel.animate( {
+					width: "hide",
+					opacity: "hide",
+			}, 400);
+			
+			panel.addClass("js-nav-panel-hide");
 		}
-		
-		$("#sh-my-nav-panel").show();
-		
+
 		return false;
 	});
 

@@ -48,7 +48,6 @@ else
 		'thumb_link' => true,
 		'thumb_add_start' => '',
 		'thumb_add_end' => '',
-		'thumb_add_end' => '',
 		'thumb_type_resize' => 'resize_full_crop_center',
 		
 		'content' => true,

@@ -37,6 +37,10 @@ function template_options_admin_page($args = array())
 	mso_hook_add_dinamic( 'mso_admin_header', ' return $args . "' . t('Настройка шаблона') . '"; ' );
 	mso_hook_add_dinamic( 'admin_title', ' return "' . t('Настройка шаблона') . ' - " . $args; ' );
 	
+	# custom/options.php — самый высокий приоритет
+	# если он есть, то можно удалить каталог /options/ шаблона 
+	$fn0 = $MSO->config['templates_dir'] . $MSO->config['template'] . '/custom/options.php';
+	
 	# options/options.php
 	$fn1 = $MSO->config['templates_dir'] . $MSO->config['template'] . '/options/options.php';
 	
@@ -47,11 +51,12 @@ function template_options_admin_page($args = array())
 	# template_options/options.php
 	$fn3 = $MSO->config['admin_plugins_dir'] . 'template_options/options.php';
 
-	if (file_exists($fn1)) require_once($fn1);
+	if (file_exists($fn0)) require_once($fn0);
+	elseif (file_exists($fn1)) require_once($fn1);
 	elseif (file_exists($fn2)) require_once($fn2);
 	else require_once($fn3);
-
+	
 }
 
 
-# end file
+# end of file

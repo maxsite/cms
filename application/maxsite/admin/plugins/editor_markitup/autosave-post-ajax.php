@@ -1,15 +1,24 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 
-	mso_checkreferer(); // защищаем реферер
+mso_checkreferer(); // защищаем реферер
+
+if ( $post = mso_check_post(array('text', 'id')) )
+{
+	$text = $post['text'];
+	$id = $post['id']; // номер записи
 	
-	if ( $post = mso_check_post(array('text', 'id')) )
-	{
-		$text = $post['text'];
-		$id = $post['id']; // номер записи
-		
-		$fn = mso_add_float_option('autosave-' . $id . '-' . mso_md5($id), $text, '', false, '.txt', false); // и в float-опции без серилизации
-		
-		echo getinfo('uploads_url') . $fn;
-	}
+	// файл сохраняем в каталоге записи в подкаталоге /save/	
+	$path = getinfo('uploads_dir') . '_pages/' . $id . '/save';
 	
-# end file
+	if (!is_dir($path)) @mkdir($path, 0777);
+	if (!is_dir($path) or !is_writable($path)) return 'ERROR PATH'; 
+	
+	// добавим временную метку — так получается что-то вроде истории сохранения 
+	$fn = date('Y-m-d_H-i-s') . '_' . mso_md5($id) . '.txt';
+	
+	file_put_contents($path . '/' . $fn,  $text);
+	
+	echo getinfo('uploads_url') . '_pages/' . $id . '/save/' . $fn;
+}
+	
+# end of file

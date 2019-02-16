@@ -4698,20 +4698,31 @@ function mso_text_find_key($text, $find = false, $delim = "=")
 	return $out;
 }
 
-
-# лог в файл mso_log('текст', 'заголовок', '_log.txt');
-# Для сброса mso_log() или mso_log(0)
-function mso_log($var = 0, $name = 'LOG', $f = '_log.txt')
+/**
+*	Функция для записи лога в файл
+*
+*	mso_log('текст', 'заголовок', '_log.txt');
+*	Для сброса: mso_log() или mso_log(0, '', 'файл') 
+*
+*	Вместо текста можно передать любые данные — будет использован вывод через print_r()
+*	Файл указывается относительно корня сайта
+*	если $framing = true, то добавляется рамка, иначе все в одну строчку как есть и без $name
+*
+*/
+function mso_log($var = 0, $name = 'LOG', $f = '_log.txt', $framing = true)
 {
 	if ($var === 0)
 	{
-		file_put_contents(FCPATH . $f,  "");
+		file_put_contents(FCPATH . $f,  '');
 		return;
 	}
 		
-	if ( !is_scalar($var) ) $var = print_r($var, true);
+	if (!is_scalar($var)) $var = print_r($var, true);
 	
-	file_put_contents(FCPATH . $f, "\n================= " . $name . " =================\n" . $var . "\n================= /" . $name . " =================\n", FILE_APPEND);
+	if ($framing)
+		file_put_contents(FCPATH . $f, "\n================= " . $name . " =================\n" . $var . "\n================= /" . $name . " =================\n", FILE_APPEND);
+	else
+		file_put_contents(FCPATH . $f, $var, FILE_APPEND);
 }
 
 

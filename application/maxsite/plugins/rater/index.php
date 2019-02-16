@@ -11,7 +11,6 @@ function rater_autoload($args = array())
 {
 	if ( is_type('page') )
 	{
-		mso_hook_add( 'head', 'rater_head');
 		mso_hook_add( 'body_end', 'rater_body_end');
 		mso_hook_add( 'content_end', 'rater_content_end');
 	}
@@ -19,14 +18,10 @@ function rater_autoload($args = array())
 	mso_register_widget('rater_widget', t('Рейтинг страниц')); # регистрируем виджет
 }
 
-function rater_head($args = array())
-{
-	echo '<link rel="stylesheet" href="' . getinfo('plugins_url') . 'rater/' . 'rater.css">';
-}
-
 function rater_body_end($args = array())
 {
-	echo '<script src="' . getinfo('plugins_url') . 'rater/' . 'jquery.rater.js"></script>' . NR;
+	echo mso_load_style(getinfo('plugins_url') . 'rater/rater.css');
+	echo mso_load_script(getinfo('plugins_url') . 'rater/jquery.rater.js');
 }
 
 function rater_content_end($arg = array())
@@ -95,11 +90,7 @@ function rater_widget_form($num = 1)
 	$CI = & get_instance();
 	$CI->load->helper('form');
 	
-	
-	
-	
 	$form = mso_widget_create_form(t('Заголовок'), form_input( array( 'name'=>$widget . 'header', 'value'=>$options['header'] ) ), '');
-	
 	
 	$form .= mso_widget_create_form(t('Количество'), form_input( array( 'name'=>$widget . 'count', 'value'=>$options['count'] ) ), '');
 	
@@ -186,4 +177,4 @@ function rater_widget_custom($options = array(), $num = 1)
 	return $out;	
 }
 
-# end file
+# end of file

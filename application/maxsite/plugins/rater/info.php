@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Рейтинг записей'),
 	'description' => t('Оценка статей посетителями'),
-	'version' => '1.3',
+	'version' => '2',
 	'author' => 'Максим',
 	'plugin_url' => '',
 	'author_url' => '//maxsite.org/',

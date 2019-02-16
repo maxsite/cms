@@ -10,35 +10,28 @@
 # функция автоподключения плагина
 function spoiler_autoload($args = array())
 {
-	mso_hook_add( 'head', 'spoiler_head');
-	mso_hook_add( 'content', 'spoiler_custom'); # хук на вывод контента
+	mso_hook_add('body_end', 'spoiler_body_end');
+	mso_hook_add('content', 'spoiler_custom'); # хук на вывод контента
 
-	$options_key = 'plugin_spoiler';
-	$options = mso_get_option($options_key, 'plugins', array());
+	$options = mso_get_option('plugin_spoiler', 'plugins', array());
 	if ( isset($options['comments']) and ( $options['comments'] == 1) )
 	{
-		mso_hook_add( 'comments_content_out', 'spoiler_custom');
+		mso_hook_add('comments_content_out', 'spoiler_custom');
 	}
 }
 
 # функция выполняется при деинсталяции плагина
 function spoiler_uninstall($args = array())
 {
-	// константа
-	$options_key = 'plugin_spoiler';
-
-	mso_delete_option($options_key,'plugins');
+	mso_delete_option('plugin_spoiler','plugins');
 	return $args;
 }
 
 # функции плагина
 function spoiler_custom($text)
 {
-	// константа
-	$options_key = 'plugin_spoiler';
-
 	/* Настройки*/
-	$options = mso_get_option($options_key, 'plugins', array());
+	$options = mso_get_option('plugin_spoiler', 'plugins', array());
 	if ( !isset($options['hide']) ) $options['hide'] = t('Скрыть');
 	if ( !isset($options['show']) ) $options['show'] = t('Показать...');
 	if ( !isset($options['comments']) ) $options['comments'] = 0;
@@ -103,19 +96,24 @@ function spoiler_custom($text)
     return $text;
 }
 
-# JavaScript & css text добавляем в head
-function spoiler_head($args = array())
+# JavaScript & css text добавляем в конце BODY
+function spoiler_body_end($args = array())
 {
-	$options_key = 'plugin_spoiler';
-	$options = mso_get_option($options_key, 'plugins', array());
+	$options = mso_get_option('plugin_spoiler', 'plugins', array());
 	
-	if ( !isset($options['style'])  ) $options['style'] = '';
-	if ($options['style'] != '')
+	if (!isset($options['style'])) $options['style'] = '';
+	
+	if ($options['style'])
 	{
 		echo '<link rel="stylesheet" href="' . getinfo('plugins_url') . 'spoiler/style/' . $options['style'] . '">';
 	}	
 	
-	echo '<script>
+	echo '<script>function SpoilerToggle(id,link,showtext,hidetext){var spoiler=document.getElementById(id);if(spoiler.style.display!="none"){spoiler.style.display="none";link.innerHTML=showtext;link.className="spoiler_link_show";}else{spoiler.style.display="block";link.innerHTML=hidetext;link.className="spoiler_link_hide";}}</script>';
+
+/*
+// переписать на нормальный jQuery + добавить анимацию
+
+<script>
 function SpoilerToggle(id, link, showtext, hidetext)
 {
 	var spoiler = document.getElementById(id);
@@ -132,13 +130,15 @@ function SpoilerToggle(id, link, showtext, hidetext)
 		link.className = "spoiler_link_hide";
 	}
 }
-</script>';
+</script>
+
+*/
+
 }
 
 # функция отрабатывающая миниопции плагина (function плагин_mso_options)
 function spoiler_mso_options() 
 {
-
 	//// Взято из wp-converter
 	$CI = & get_instance();
 	// найдем все файлы по маске *.css
@@ -160,7 +160,7 @@ function spoiler_mso_options()
 			$option_select .= '#'. $file . '||' . $file;
 		}
 	}
-////	
+
     # ключ, тип, ключи массива
     mso_admin_plugin_options('plugin_spoiler', 'plugins', 
         array(
@@ -195,4 +195,4 @@ function spoiler_mso_options()
     );
 }
 
-# end file
+# end of file

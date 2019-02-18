@@ -11,14 +11,15 @@ function autotag_default($pee)
 	// $pee = mso_hook('content_auto_tag_do', $pee);
 
 	if ( // отдавать как есть - слово в начале текста
-		( strpos($pee, '[volkman]') !== false and strpos(trim($pee), '[volkman]') == 0 ) 
-		or ( strpos($pee, '[source]') !== false and strpos(trim($pee), '[source]') == 0 ) 
+		// ( strpos($pee, '[volkman]') !== false and strpos(trim($pee), '[volkman]') == 0 ) 
+		// or 
+		( strpos($pee, '[source]') !== false and strpos(trim($pee), '[source]') == 0 ) 
 	)
 	{
-		$pee = str_replace('[volkman]', '', $pee);
-		$pee = str_replace('[source]', '', $pee);
+		// $pee = str_replace('[volkman]', '', $pee);
 		// $pee = mso_clean_html( array('1'=>$pee) );
-		$pee = str_replace('MSO_N', "\n", $pee);
+		// $pee = str_replace('MSO_N', "\n", $pee);
+		$pee = str_replace('[source]', '', $pee);
 		return $pee;
 	}
 	

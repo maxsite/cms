@@ -70,7 +70,7 @@ pjustify		[p(t-justify)]текст[/p]
 div=			[div style="стили"]текст[/div]
 span=			[span style="стили"]текст[/div]
 </pre>',
-							'default' => '1'
+							'default' => '0'
 						),
 			),
 		t('Настройки плагина bbcode'),

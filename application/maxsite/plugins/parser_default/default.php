@@ -17,7 +17,7 @@ function autotag_default($pee)
 	{
 		$pee = str_replace('[volkman]', '', $pee);
 		$pee = str_replace('[source]', '', $pee);
-		$pee = mso_clean_html( array('1'=>$pee) );
+		// $pee = mso_clean_html( array('1'=>$pee) );
 		$pee = str_replace('MSO_N', "\n", $pee);
 		return $pee;
 	}

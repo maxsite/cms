@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Стандарный парсер текста'),
 	'description' => t('Обрабатывает текст в HTML'),
-	'version' => '1.0',
+	'version' => '1.1',
 	'author' => 'Максим',
 	'plugin_url' => '',
 	'author_url' => 'http://maxsite.org/',

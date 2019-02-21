@@ -166,6 +166,53 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 	}
 	
 	
+	// комментарии
+	$CI = & get_instance();
+	
+	$CI->db->select('SQL_CALC_FOUND_ROWS comments_id, comments_users_id, comments_comusers_id, comments_author_name, comments_date, comments_content, comments_approved, users.users_nik, comusers.comusers_nik, page.page_title', false);
+	$CI->db->from('comments');
+	$CI->db->join('users', 'users.users_id = comments.comments_users_id', 'left');
+	$CI->db->join('comusers', 'comusers.comusers_id = comments.comments_comusers_id', 'left');
+	$CI->db->join('page', 'page.page_id = comments.comments_page_id', 'left');
+	
+	$CI->db->where('comments_approved', 0);
+	$CI->db->order_by('comments_date', 'desc');
+	$CI->db->limit(10);
+	
+	$query = $CI->db->get();
+	
+	$p_count = mso_sql_found_rows(1);
+	
+	if ($query->num_rows() > 0)
+	{
+		$comments_url =  getinfo('site_admin_url') . 'comments';
+		
+		echo '<h4 class="mar50-t i-eye-slash">' . t('Комментарии') . '</h4>';
+		
+		echo '<p class="mar10-t"><a href="' . $comments_url . '">' . t('Модерировать все комментарии') . ': '. $p_count['found_rows'] . '</a></p>';
+				
+		echo '<ul>';
+		
+		foreach ($query->result_array() as $row)
+		{
+			$autor = mso_clean_str($row['comments_author_name'] . $row['users_nik'] . $row['comusers_nik'], 'base');
+
+			$content = mso_clean_str($row['comments_content'], 'base');
+			$content = mb_substr(strip_tags($content), 0, 300, 'UTF-8');
+			
+			echo '<li class="mar10-b"><a href="' . $comments_url . '/edit/' . $row['comments_id'] . '">' 
+				. $row['comments_date'] 
+				. ' / ' . $autor  
+				. ' / ' . $row['page_title']
+				. '</a>'
+				. '<div class="t90">'
+				. $content
+				. '</div></li>';
+		}
+		
+		echo '</ul>';
+	}
+
 	
 	// рубрики
 	

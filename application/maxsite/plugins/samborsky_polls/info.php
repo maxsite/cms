@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Голосования'),
 	'description' => t('Голосования от Евгения Самборского'),
-	'version' => '2.3',
+	'version' => '3',
 	'author' => t('Евгений Самборский'),
 	'plugin_url' => 'http://www.samborsky.com/samborsky_polls/',
 	'author_url' => 'http://www.samborsky.com/',

@@ -113,7 +113,7 @@ function polls_check_postData()
 					'a_answer' => add_protect($ans['ans']),
 					'a_votes' => (int)$ans['votes'],
 					'a_id' => $ans['id']);
-			$data['qu']['q_totalvotes'] += $ans['votes'];
+			$data['qu']['q_totalvotes'] += (int) $ans['votes'];
 		}
 	}
 	unset($ans);
@@ -184,7 +184,8 @@ if($post = mso_check_post(array('f_session_id', 'f_submit')))
 		else
 		{
 			$CI->db->insert('sp_questions',$data['qu']);
-			$id = mysql_insert_id();
+			//$id = mysql_insert_id();
+			$id = $CI->db->insert_id();
 		}
 		
 		foreach($data['ans'] as $ans)

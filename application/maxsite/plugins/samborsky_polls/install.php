@@ -45,6 +45,7 @@ function sp_install(){
 				'type' => 'INT',
 				'constraint' => '10',
 				'NULL' => FALSE,
+				'default' => '0'
 			),
 
 			'q_totalvotes' => array(
@@ -158,7 +159,8 @@ function sp_install(){
 			
 			'l_ip' => array(
 				'type' => 'INT',
-				'NULL' => FALSE
+				'NULL' => FALSE,
+				'default' => '0'
 			),
 			
 			'l_host' => array(
@@ -175,9 +177,9 @@ function sp_install(){
 			
 			'l_user' => array(
 				'type' => 'VARCHAR',
-				'constraint' => '64',
+				'constraint' => '255',
 				'NULL' => FALSE,
-				'default' => '0'
+				'default' => ''
 			),
 			
 			'l_userid' => array(

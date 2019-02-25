@@ -3,14 +3,14 @@
 <div class="flex flex-wrap-tablet">
 <ul class="flex-grow3">
 <li><a href="http://max-3000.com/"><?= t('Официальный сайт MaxSite CMS') ?></a> &bull; <a href="http://max-3000.com/page/donation"><?= t('Помочь проекту') ?></a></li>
-<li><a href="//github.com/maxsite/cms"><?= t('Исходный код на GitHub') ?></a> &bull; <a href="//github.com/maxsite/cms/tree/dev"><?= t('Dev-версия') ?></a> &bull; <a href="//github.com/maxsite/cms/commits/dev"><?= t('История изменений') ?></a></li>
-<li><a href="//github.com/maxsite/cms/issues"><?= t('Сообщить о проблеме. Форум') ?></a></li>
+<li><a href="https://github.com/maxsite/cms"><?= t('Исходный код на GitHub') ?></a> &bull; <a href="https://github.com/maxsite/cms/commits/master"><?= t('История изменений') ?></a></li>
+<li><a href="https://github.com/maxsite/cms/issues"><?= t('Сообщить о проблеме. Форум') ?></a></li>
 <li><a href="http://max-3000.com/doc"><?= t('Документация') ?></a> &bull; <a href="http://max-3000.com/book"><?= t('Основы работы с MaxSite CMS') ?></a></li>
-<li><a href="//maxhub.ru/"><?= t('MaxHub - сообщество MaxSite CMS') ?></a> &bull; <a href="//maxhub.ru/category/templates"><?= t('Шаблоны') ?></a> &bull; <a href="//maxhub.ru/category/plugins"><?= t('Плагины') ?></a></li>
+<li><a href="http://maxhub.ru/"><?= t('MaxHub - сообщество MaxSite CMS') ?></a> &bull; <a href="http://maxhub.ru/category/templates"><?= t('Шаблоны') ?></a> &bull; <a href="http://maxhub.ru/category/plugins"><?= t('Плагины') ?></a></li>
 <li><a href="http://maxsite.org/demo-templates"><?= t('Демо-каталог шаблонов') ?></a> &bull; <a href="http://maxsite.org/page/templates"><?= t('Готовые шаблоны') ?></a></li>
 </ul>
 <div class="flex-grow1">
-	<iframe src="http://maxsite.github.io/version.html?version=<?= getinfo('version') ?>" scrolling="no" frameborder="no" style="width: 100%; height: 60px; "></iframe>
+	<iframe src="https://maxsite.github.io/version.html?version=<?= getinfo('version') ?>" scrolling="no" frameborder="no" style="width: 100%; height: 60px; "></iframe>
 <?php
 
 if (mso_check_allow('admin_home')) // если есть разрешение на доступ
@@ -56,6 +56,9 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 
 ?>
 </div></div>
+
+<div class="mar10-tb t-center pad20 bg-red500 t-white">Вы используете dev-версию системы, которая не поддерживается начиная с MaxSite CMS 103. <br>Если вы используете установщик dev-версии, то <a class="t-yellow300 hover-t-white" href="http://max-3000.com/page/autoinstall">обновите его</a>.</div>
+
 <?php
 
 if (mso_check_allow('admin_home')) // если есть разрешение на доступ к консоли

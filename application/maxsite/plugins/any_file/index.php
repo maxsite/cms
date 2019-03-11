@@ -48,6 +48,7 @@ function any_file_widget_form($num = 1)
 	
 	if (!isset($options['header'])) $options['header'] = '';
 	if (!isset($options['file'])) $options['file'] = '';
+	if (!isset($options['parser'])) $options['parser'] = '';
 	
 	$class = '';
 	
@@ -62,6 +63,8 @@ function any_file_widget_form($num = 1)
 		$class = file_exists($file) ? 't-green' : 't-red';
 	}
 
+	$hint_parser = !function_exists('autotag_simple') ? '<span class="t-red">' . t('Для ипользования Simple, активируйте плагин <b>parser_simple</b>!') . '</span>' : '';
+		
 	// вывод самой формы
 	$CI = & get_instance();
 	$CI->load->helper('form');
@@ -70,6 +73,10 @@ function any_file_widget_form($num = 1)
 
 	$form .= mso_widget_create_form(t('Подключаемый файл'), form_input( array( 'name'=>$widget . 'file', 'value'=>$options['file'], 'class'=>$class ) ), t('Путь следует указывать полный. Можно использовать замены: <code>TEMPLATE/</code> — каталог текущего шаблона; <code>PLUGINS/</code> — каталог плагинов; <code>UPLOADS/</code> — каталог uploads; <code>FCPATH/</code> — корень сайта; <code>SHARED/</code> — каталог shared;'));
 	
+	$form .= mso_widget_create_form(t('Парсер HTML'), form_dropdown($widget . 'parser', 
+							array('0' => t('Нет'), 'simple' => 'Simple'), 
+							$options['parser'] ), $hint_parser);
+							
 	return $form;
 }
 
@@ -86,6 +93,7 @@ function any_file_widget_update($num = 1)
 	// обрабатываем POST
 	$newoptions['header'] = mso_widget_get_post($widget . 'header');
 	$newoptions['file'] = mso_widget_get_post($widget . 'file');
+	$newoptions['parser'] = mso_widget_get_post($widget . 'parser');
 	
 	if ($options != $newoptions) mso_add_option($widget, $newoptions, 'plugins');
 }
@@ -96,6 +104,7 @@ function any_file_widget_custom($options = array(), $num = 1)
 	if (!isset($options['file']) or !$options['file']) return;
 	
 	if (!isset($options['header'])) $options['header'] = '';
+	if (!isset($options['parser'])) $options['parser'] = '';
 	
 	$file = str_replace('TEMPLATE/', getinfo('template_dir'), $options['file']);
 	$file = str_replace('PLUGINS/', getinfo('plugins_dir'), $file);
@@ -109,6 +118,9 @@ function any_file_widget_custom($options = array(), $num = 1)
 		require($file);
 		$text = ob_get_contents();
 		ob_end_clean();
+		
+		if ($options['parser'] == 'simple' and function_exists('autotag_simple')) 
+			$text = autotag_simple($text);
 		
 		return $options['header'] . $text;
 	}

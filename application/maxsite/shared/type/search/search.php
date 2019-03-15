@@ -141,6 +141,9 @@ if ($pages) // есть страницы
 		// разобъем текст в массив по словам
 		$arr = explode(' ', trim($page_content));
 		
+		// делаем срез до 500 элементов, чтобы не нагружать сервер
+		$arr = array_slice($arr, 0, 500);
+		
 		// получим ключи всех вхождений
 		$all_key = array(); 
 		foreach ($arr as $key => $val)
@@ -174,10 +177,14 @@ if ($pages) // есть страницы
 		$page_content = $out;
 		$cou = count($all_key) + substr_count(mb_strtolower($page_title, 'UTF8'), $searh_to_text);
 		
-		// кол-во совпадений
-		echo  '<p><em>' . tf('Совпадений') . ': ' . $cou . '</em></p>';
-		echo '<p>' . $page_content . '</p>';
-
+		// кол-во совпадений — поскольку это срез части текста, то совпадений может не быть
+		// просто ничего не выводим
+		if ($cou > 0)
+		{
+			echo  '<p><em>' . tf('Совпадений') . ': ' . $cou . '</em></p>';
+			echo '<p>' . $page_content . '</p>';
+		}
+		
 		echo '</li>';
 	
 	} // end foreach
@@ -210,4 +217,4 @@ echo NR . '</div><!-- class="mso-type-search" -->' . NR;
 # конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 	
-# end file
+# end of file

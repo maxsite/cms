@@ -738,8 +738,24 @@ function mso_head_meta($info = 'title', $args = '', $format = '%page_title%', $s
 			$users_nik = '';
 			$title = getinfo($info);
 
-			// if ( !$info ) $format = '%title%';
+			
+			if (isset($args[0]['page_categories_detail']))
+			{
+				$slug = is_type('category') ? mso_segment(2) : '';
 
+				foreach ($args[0]['page_categories_detail'] as $id => $val)
+				{
+					if ($slug == $val['category_slug'])
+					{
+						$category_name = $val['category_name'];
+						$category_desc = $val['category_desc'];
+						break;
+					}
+				}
+			}
+			
+			/*
+			// старый вариант, где было поле category_name — сейчас нет
 			// название рубрики
 			if ( isset($args[0]['category_name']) ) 
 			{
@@ -761,6 +777,7 @@ function mso_head_meta($info = 'title', $args = '', $format = '%page_title%', $s
 				
 				if (!$category_desc) $category_desc = $category_name; // если нет описания, то берем название
 			}
+			*/
 			
 			if ( isset($args[0]['page_title']) ) $page_title = $args[0]['page_title'];
 			if ( isset($args[0]['users_nik']) ) $users_nik = $args[0]['users_nik'];
@@ -781,12 +798,9 @@ function mso_head_meta($info = 'title', $args = '', $format = '%page_title%', $s
 					$page_title = implode(', ', $args[0]['page_meta']['tags']); // разбиваем массив меток в строку
 				}
 				
-				
 				// для страниц, если не указан description вытягиваем его из самого текста
 				if ($info == 'description' and is_type('page') and $w = mso_get_option('description_of_page', 'general', 50) ) 
 				{
-					
-					
 					// вообще нет поля
 					if (!isset($args[0]['page_meta']['description'][0])) $d = 333;
 					
@@ -807,11 +821,10 @@ function mso_head_meta($info = 'title', $args = '', $format = '%page_title%', $s
 				}
 			}
 			
-			// pr($page_title);
 			$arr_key = array( '%title%', '%page_title%',  '%category_name%', '%category_desc%', '%users_nik%', '||' );
-			$arr_val = array( htmlspecialchars($title), htmlspecialchars($page_title), htmlspecialchars($category_name), htmlspecialchars($category_desc), htmlspecialchars($users_nik), $sep );
-			//$arr_val = array( $title ,  $page_title, $category_name, $category_desc, $users_nik, $sep );
 			
+			$arr_val = array( htmlspecialchars($title), htmlspecialchars($page_title), htmlspecialchars($category_name), htmlspecialchars($category_desc), htmlspecialchars($users_nik), $sep );
+						
 			$out = str_replace($arr_key, $arr_val, $format);
 		}
 	}

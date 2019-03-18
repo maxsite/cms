@@ -124,9 +124,9 @@ function bbcode_custom($text = '')
 		'~\[list\](.*?)\[\/list\]~si'			=> "<ul>$1</li></ul>",
 		
 		# [li]
-		'~\[li\]~si'   							=> '<li>',
-		'~\[li (.*?)\]~si' 						=> '<li $1>',
-		'~\[\/li\]~si'	 						=> '</li>',
+		// '~\[li\]~si'   							=> '<li>',
+		// '~\[li (.*?)\]~si' 						=> '<li $1>',
+		// '~\[\/li\]~si'	 						=> '</li>',
 		
 		# table
 		'~\[table\]~si'	  						=> '<table>',
@@ -211,29 +211,29 @@ function bbcode_custom($text = '')
 		
 		# [span#recipeIngredient]текст[/span]
 		# <span itemprop="recipeIngredient">текст</span>
-		'~\[(span|div|p|ul|ol|h1|h2|h3|h4|h5|h6|code|del|u|s|sub|sup|small|q|cite|address|dfn|dl|dt|dd|ins|blockquote)#(.*?)\](.*?)\[\/\1\]~si' => '<$1 itemprop="$2">$3</$1>',
+		'~\[(span|div|p|ul|ol|li|h1|h2|h3|h4|h5|h6|code|del|u|s|sub|sup|small|q|cite|address|dfn|dl|dt|dd|ins|blockquote)#(.*?)\](.*?)\[\/\1\]~si' => '<$1 itemprop="$2">$3</$1>',
 
 		
 		# [span(класс)#recipeIngredient]текст[/span]
 		# <span class="класс" itemprop="recipeIngredient">текст</span>
-		'~\[(span|div|p|ul|ol|h1|h2|h3|h4|h5|h6|code|del|u|s|sub|sup|small|q|cite|address|dfn|dl|dt|dd|ins|blockquote)\((.*?)\)#(.*?)\](.*?)\[\/\1\]~si' => '<$1 class="$2" itemprop="$3">$4</$1>',
+		'~\[(span|div|p|ul|ol|li|h1|h2|h3|h4|h5|h6|code|del|u|s|sub|sup|small|q|cite|address|dfn|dl|dt|dd|ins|blockquote)\((.*?)\)#(.*?)\](.*?)\[\/\1\]~si' => '<$1 class="$2" itemprop="$3">$4</$1>',
 		
 		
 		# [span(класс)]текст[/span]
 		# <span class="класс">текст</span>
-		'~\[(span|div|p|ul|ol|h1|h2|h3|h4|h5|h6|code|del|u|s|sub|sup|small|q|cite|address|dfn|dl|dt|dd|ins|blockquote)\((.*?)\)\](.*?)\[\/\1\]~si' => '<$1 class="$2">$3</$1>',
+		'~\[(span|div|p|ul|ol|li|h1|h2|h3|h4|h5|h6|code|del|u|s|sub|sup|small|q|cite|address|dfn|dl|dt|dd|ins|blockquote)\((.*?)\)\](.*?)\[\/\1\]~si' => '<$1 class="$2">$3</$1>',
 	
 		# [span любые_атрибуты]текст[/span]
 		# <span любые_атрибуты>текст</span>
-		'~\[(span|div|p|ul|ol|h1|h2|h3|h4|h5|h6|code|del|u|s|sub|sup|small|q|cite|address|dfn|dl|dt|dd|ins|blockquote) (.*?)\](.*?)\[\/\1\]~si' => '<$1 $2>$3</$1>',
+		'~\[(span|div|p|ul|ol|li|h1|h2|h3|h4|h5|h6|code|del|u|s|sub|sup|small|q|cite|address|dfn|dl|dt|dd|ins|blockquote) (.*?)\](.*?)\[\/\1\]~si' => '<$1 $2>$3</$1>',
 		
 		# [span(класс) любые_атрибуты]текст[/span]
 		# <span  class="класс" любые_атрибуты>текст</span>
-		'~\[(span|div|p|ul|ol|h1|h2|h3|h4|h5|h6|code|del|u|s|sub|sup|small|q|cite|address|dfn|dl|dt|dd|ins|blockquote)\((.*?)\) (.*?)\](.*?)\[\/\1\]~si' => '<$1 class="$2" $3>$4</$1>',
+		'~\[(span|div|p|ul|ol|li|h1|h2|h3|h4|h5|h6|code|del|u|s|sub|sup|small|q|cite|address|dfn|dl|dt|dd|ins|blockquote)\((.*?)\) (.*?)\](.*?)\[\/\1\]~si' => '<$1 class="$2" $3>$4</$1>',
 		
 		# [span]текст[/span]
 		# <span>текст</span>
-		'~\[(span|div|p|ul|ol|h1|h2|h3|h4|h5|h6|code|del|u|s|sub|sup|small|q|cite|address|dfn|dl|dt|dd|ins|blockquote)\](.*?)\[\/\1\]~si' => '<$1>$2</$1>',
+		'~\[(span|div|p|ul|ol|li|h1|h2|h3|h4|h5|h6|code|del|u|s|sub|sup|small|q|cite|address|dfn|dl|dt|dd|ins|blockquote)\](.*?)\[\/\1\]~si' => '<$1>$2</$1>',
 	);
 
 	

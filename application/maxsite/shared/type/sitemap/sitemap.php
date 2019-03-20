@@ -9,7 +9,7 @@ if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
 	echo '<div class="mso-type-sitemap"><div class="mso-page-only">';
 	
-	echo '<h3>' . tf('Карта сайта (архив)') . '</h1>';
+	echo '<h3>' . tf('Карта сайта (архив)') . '</h3>';
 	echo '<div class="mso-page-content mso-type-sitemap-content">';
 	
 	if ($f = mso_page_foreach('sitemap')) 

@@ -4489,6 +4489,9 @@ function mso_shortcode($shortcode, $func, $content)
 # файл относительно шаблона. Не зависит от вложенности в [unit]
 function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $path_file = 'type/home/units/')
 {
+	// подключаем файл как текст @fromfile
+	$text_units = preg_replace_callback('!@fromfile (.*?)\n!is', '_mso_units_out_fromfile', $text_units);
+
 	// если в тексте юнита есть вхождение @USE_PHP@
 	// то разрешим в файле исполнять PHP, включая php-шаблонизатор
 	if (strpos($text_units, '@USE_PHP@'))
@@ -4499,10 +4502,7 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 		$text_units = ob_get_contents();
 		ob_end_clean();
 	}
-	
-	// подключаем файл как текст @fromfile
-	$text_units = preg_replace_callback('!@fromfile (.*?)\n!is', '_mso_units_out_fromfile', $text_units);
-	
+		
 	// замены по всему тексту юнитов
 	$text_units = str_replace('[siteurl]', getinfo('siteurl'), $text_units);
 	$text_units = str_replace('[templateurl]', getinfo('template_url'), $text_units);

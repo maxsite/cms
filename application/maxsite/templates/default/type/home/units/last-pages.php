@@ -3,7 +3,7 @@
 /**
  * MaxSite CMS
  * (c) http://max-3000.com/
- * 26-08-2017
+ * 27-03-2019
 
 Универсальный юнит для вывода записей по множеству критериев
 
@@ -27,6 +27,7 @@ else
 		
 		'limit' => 3,
 		'cat_id' => "0",
+		'exclude_cat_id' => "0",
 		'page_id' => "0",
 		'pagination' => false,
 		'type' => 'blog',
@@ -135,6 +136,7 @@ else
 		$b = new Block_pages( array (
 				'limit' 		=> $UNIT['limit'],
 				'cat_id' 		=> $UNIT['cat_id'],
+				'exclude_cat_id' 		=> $UNIT['exclude_cat_id'],
 				'page_id' 		=> $UNIT['page_id'],
 				'pagination'	=> $UNIT['pagination'],
 				'type' 			=> $UNIT['type'],

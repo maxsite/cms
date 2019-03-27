@@ -1033,6 +1033,7 @@ class Block_pages
 			'cut' => '»»»', // ссылка cut
 			'pagination' => false, // выводить пагинацию
 			'cat_id' => 0, // можно указать рубрики через запятую
+			'exclude_cat_id' => 0, // исключенные рубрики через запятую
 			'page_id' => 0, // можно указать записи через запятую
 			'page_id_autor' => false, // записи автора
 			'type' => 'blog', // можно указать тип записей
@@ -1055,6 +1056,7 @@ class Block_pages
 			'cut' => $this->param['cut'],
 			'pagination' => $this->param['pagination'],
 			'cat_id' => $this->param['cat_id'],
+			'exclude_cat_id' => $this->param['exclude_cat_id'],
 			'page_id' => $this->param['page_id'],
 			'page_id_autor' => $this->param['page_id_autor'],
 			'type' => $this->param['type'],

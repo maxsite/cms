@@ -8,12 +8,14 @@
 
 $title_contact = mso_get_option('title_contact', 'templates', tf('Обратная связь'));
 
-mso_head_meta('title', $title_contact); //  meta title страницы
+if ($f = mso_page_foreach('contact-head-meta')) 
+	require($f);
+else
+	mso_head_meta('title', $title_contact); //  meta title страницы
 
 if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
 
 echo NR . '<div class="mso-type-contact"><div class="mso-page-only">' . NR;
-
 
 echo '<h3>' . $title_contact . '</h3>';
 
@@ -98,4 +100,4 @@ echo NR . '</div></div><!-- class="mso-type-contact" -->' . NR;
 
 if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
 
-# end file
+# end of file

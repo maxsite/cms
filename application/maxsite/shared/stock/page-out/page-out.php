@@ -528,6 +528,17 @@ class Page_out
 		{
 			$out = preg_replace_callback('!(\[cat_pages_count@)(.*?)(\])!is', array('self', '_cat_pages_count'), $out);
 		}
+		
+		/**
+		 * произвольная php-функция [func@my_f]
+		 * до 3-х аргументов [func@my_f|аргумент] или [func@my_f|аргумент1|аргумент2]
+		 * в функцию передаём текущую page и аргументы. Функция должна быть уже объявлена
+		 * function my_f($p, $a1 = 0, $a2 = 10, $a3 = 0) {...}
+		 */
+		if (strpos($out, '[func@') !== false) 
+		{
+			$out = preg_replace_callback('!(\[func@)(.*?)(\])!is', array('self', '_line_func'), $out);
+		}
 
 		$out = str_replace('[title]', $title, $out);
 		$out = str_replace('[page_url]', $page_url, $out);
@@ -631,14 +642,38 @@ class Page_out
 		$content = $this->content_do_cut($this->get_content());
 		
 		$m = mso_str_word(strip_tags($content), $m);
+		
 		return $m;
 	}			
 	
-	// колбак для поиска [cat_pages_count@7]
+	// колбак для [cat_pages_count@7]
 	protected function _cat_pages_count($matches)
 	{
 		return mso_get_cat_pages_count($matches[2]);
 	}		
+	
+	// колбак для [func@my_f] или [func@my_f|аргумент] или [func@my_f|a1|a2|a3]
+	// в функцию передаём текущую page и аргументы. Функция должна быть уже объявлена
+	// function my_f($p, $a1 = 0, $a2 = 10, $a3 = 0) {...}
+	protected function _line_func($matches)
+	{
+		$m = $f = $matches[2];
+		$a1 = $a2 = $a3 = '';
+		
+		if (strpos($m, '|') !== false) // есть аргумент
+		{
+			$k = explode('|', $m);		
+			if (isset($k[0])) $f = $k[0]; // функция
+			if (isset($k[1])) $a1 = $k[1]; // аргумент 1
+			if (isset($k[2])) $a2 = $k[2]; // аргумент 2
+			if (isset($k[3])) $a3 = $k[3]; // аргумент 3
+		}
+		
+		if ($f and function_exists($f)) return $f($this->page, $a1, $a2, $a3);
+		
+		return '';
+	}
+	
 	
 	// только получаем контент через mso_page_content()
 	function get_content()

@@ -101,65 +101,69 @@ if ($pages)
 				// файл указывается в type_foreach/info-top/файл.php
 				// или info-top/page/файл.php
 				
-				$info_top_custom = $p->meta_val('info-top-custom');
-				
-				$f = false;
-				
-				if ($info_top_custom)
+				if (mso_get_val('show-info-top', true)) // если нужно отключить info-top
 				{
-					if ($f = mso_fe('type_foreach/info-top/page/' . $info_top_custom));
-					elseif ($f = mso_fe('type_foreach/info-top/' . $info_top_custom));
-				}
-				
-				if ($f)
-				{
-					require($f);
-				}
-				else // нет метаполя - типовой вывод
-				{
-					// возможно есть дефолтная опция
-					if ($info = mso_get_option('info-top_page', getinfo('template'), ''))
-					{
-						if ($f = mso_fe('type_foreach/info-top/page/' . $info));
-						elseif ($f = mso_fe('type_foreach/info-top/' . $info));
+					$info_top_custom = $p->meta_val('info-top-custom');
 					
-						$info = $f ? $f : false;
+					$f = false;
+					
+					if ($info_top_custom)
+					{
+						if ($f = mso_fe('type_foreach/info-top/page/' . $info_top_custom));
+						elseif ($f = mso_fe('type_foreach/info-top/' . $info_top_custom));
 					}
 					
-					// для разных page может быть свой info-top
-					if ($f = mso_page_foreach('info-top-page-status-' . $p->val('page_status'))) 
+					if ($f)
 					{
 						require($f);
 					}
-					elseif ($f = mso_page_foreach('info-top-page-type-' . $p->val('page_type_name'))) 
+					else // нет метаполя - типовой вывод
 					{
-						require($f);
+						// возможно есть дефолтная опция
+						if ($info = mso_get_option('info-top_page', getinfo('template'), ''))
+						{
+							if ($f = mso_fe('type_foreach/info-top/page/' . $info));
+							elseif ($f = mso_fe('type_foreach/info-top/' . $info));
+						
+							$info = $f ? $f : false;
+						}
+						
+						// для разных page может быть свой info-top
+						if ($f = mso_page_foreach('info-top-page-status-' . $p->val('page_status'))) 
+						{
+							require($f);
+						}
+						elseif ($f = mso_page_foreach('info-top-page-type-' . $p->val('page_type_name'))) 
+						{
+							require($f);
+						}
+						elseif ($info)
+						{
+							require($info);
+						}
+						elseif ($f = mso_page_foreach('info-top-page')) 
+						{
+							require($f);
+						}
+						elseif ($f = mso_page_foreach('info-top'))
+						{
+							require($f);
+						}
+						else
+						{
+							$p->html('<header>');
+								$p->line('[title]');
+								
+								$p->div_start('mso-info mso-info-top');
+									$p->line('[date][edit][cat][tag][view_count]');
+								$p->div_end('mso-info mso-info-top');
+							$p->html('</header>');
+						}
+						
 					}
-					elseif ($info)
-					{
-						require($info);
-					}
-					elseif ($f = mso_page_foreach('info-top-page')) 
-					{
-						require($f);
-					}
-					elseif ($f = mso_page_foreach('info-top'))
-					{
-						require($f);
-					}
-					else
-					{
-						$p->html('<header>');
-							$p->line('[title]');
-							
-							$p->div_start('mso-info mso-info-top');
-								$p->line('[date][edit][cat][tag][view_count]');
-							$p->div_end('mso-info mso-info-top');
-						$p->html('</header>');
-					}
-					
-				}
-				
+				} // show-info-top-page
+		
+		
 				if ($f = mso_page_foreach('page-content-' . getinfo('type'))) 
 				{
 					require($f);

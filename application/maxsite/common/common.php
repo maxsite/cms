@@ -4588,30 +4588,12 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 			elseif (isset($UNIT['require']) and trim($UNIT['require']))
 			{
 				if ($fn = mso_fe(trim($UNIT['require']))) 
-				{	
-					ob_start();
-					require($fn);
-					$t1 = ob_get_contents();
+				{
+					$parser = (isset($UNIT['parser']) and trim($UNIT['parser'])) ? trim($UNIT['parser']) : false;
 					
-					// в файле могут быть свои замены
-					$t1 = str_replace('[siteurl]', getinfo('siteurl'), $t1);
-					$t1 = str_replace('[templateurl]', getinfo('template_url'), $t1);
+					$tmpl = (isset($UNIT['tmpl']) and trim($UNIT['tmpl'])) ? trim($UNIT['tmpl']) : false;
 					
-					ob_end_clean();
-					
-					// парсер текста
-					if (isset($UNIT['parser']) and trim($UNIT['parser']))
-					{
-						$f= trim($UNIT['parser']);
-						if (function_exists($f)) $t1 = $f($t1);
-					}
-					
-					// php-шаблонизатор
-					if (isset($UNIT['tmpl']) and trim($UNIT['tmpl']))
-						eval(mso_tmpl_prepare($t1, false));
-					else
-						echo $t1;
-					
+					mso_parse_file($fn, $parser, $tmpl, true);
 				}
 			}
 			elseif (isset($UNIT['ushka']) and trim($UNIT['ushka']) and function_exists('ushka'))
@@ -4662,6 +4644,57 @@ function _mso_units_out_fromfile($matches)
 	}
 }
 
+/*
+* Функция подключает файл как текст и пропускает его через html-парсер и php-шаблонизатор
+* Результат выводится в браузер
+* В тексте могут быть замены: [siteurl] [templateurl]
+* $fn — файл указывается относительно каталога шаблона
+* $parser — имя функции парсера
+* $tmpl == true — использовать php-шаблонизатор
+* $echo == true — сразу вывод в браузер
+*/
+function mso_parse_file($fn, $parser = 'autotag_simple', $tmpl = false, $echo = true)
+{
+	if ($fn = mso_fe($fn)) 
+	{
+		ob_start();
+		require($fn);
+		$t1 = ob_get_contents();
+		ob_end_clean();
+		
+		// в файле могут быть свои замены
+		$t1 = str_replace('[siteurl]', getinfo('siteurl'), $t1);
+		$t1 = str_replace('[templateurl]', getinfo('template_url'), $t1);
+		
+		// парсер текста
+		if ($parser and function_exists($parser)) $t1 = $parser($t1);
+		
+		if ($echo)
+		{
+			// php-шаблонизатор
+			if ($tmpl)
+				eval(mso_tmpl_prepare($t1, false));
+			else
+				echo $t1;
+		}
+		else
+		{
+			ob_start();
+			
+			if ($tmpl)
+				eval(mso_tmpl_prepare($t1, false));
+			else
+				echo $t1;
+			
+			$t2 = ob_get_contents();
+			ob_end_clean();
+			
+			return $t2;
+		}
+	}
+	
+	return '';
+}
 
 # Поиск/получение из многострочного текста ключ=значение. Ключи регистрозависимы
 # Примеры. На входе текст $text:

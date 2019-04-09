@@ -19,6 +19,9 @@ $r = new RecursiveDirectoryIterator($directory);
 
 $files = _getFiles($r, 0, $directory);
 
+// кнопка Сохранить должна быть только если загружен файл, в остальнйх случаях скрываем
+$button_show = "$('#b-save').fadeOut(0);";
+
 // в третьем сегменте можно указать адрес файла в base64
 if (mso_segment(3)) 
 {
@@ -37,6 +40,7 @@ if (mso_segment(3))
 			$curfile = $t2 . '<b>' . $f . '</b>';
 			$content_file = file_get_contents($ff);
 			$file_path = mso_segment(3);
+			$button_show = '';
 		}
 	}
 }
@@ -88,7 +92,7 @@ echo <<<EOF
 <script>
 $(document).ready(function() {
 	
-	$('#b-save').fadeOut(0);
+	{$button_show}
 	
 	$('#select_file, #select_file1').change(function(){
 		
@@ -100,18 +104,14 @@ $(document).ready(function() {
 			
 			$.post("{$AJAX1}", {file:f},  function(response) {
 				$('#file_path').val(f);
-				
-				// $('#content').html(response);
 				$('#content').val(response);
-				
 				$('#success').html('<div class="update pos-fixed w200px pad10 pos20-r pos0-t t-center">{$t1}</div>');
 				$('#success').show();
 				$('#success').fadeOut(5000);
-
-				$('#b-save').fadeOut(1000);
 			});
 			
 			$('#curfile').html('{$t2} <a class="bold" href="{$A_LINK}' + f + '">' + $("option:selected", this).text() + '</a>');
+			$('#b-save').fadeIn(500);
 		}
 	})
 	
@@ -120,16 +120,11 @@ $(document).ready(function() {
 			$('#success').html(response);
 			$('#success').show();
 			$('#success').fadeOut(5000);
-			$('#b-save').fadeOut(1000);
+			$('#b-save').fadeIn(500);
 		});
 		
 		return false;
 	})
-	
-	$('#content').keypress(function(){
-		$('#b-save').fadeIn(1000);
-	})
-	
 });
 </script>
 EOF;

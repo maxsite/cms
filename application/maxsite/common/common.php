@@ -4587,14 +4587,11 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 			}
 			elseif (isset($UNIT['require']) and trim($UNIT['require']))
 			{
-				if ($fn = mso_fe(trim($UNIT['require']))) 
-				{
-					$parser = (isset($UNIT['parser']) and trim($UNIT['parser'])) ? trim($UNIT['parser']) : false;
-					
-					$tmpl = (isset($UNIT['tmpl']) and trim($UNIT['tmpl'])) ? trim($UNIT['tmpl']) : false;
-					
-					mso_parse_file($fn, $parser, $tmpl, true);
-				}
+				$parser = (isset($UNIT['parser']) and trim($UNIT['parser'])) ? trim($UNIT['parser']) : false;
+				
+				$tmpl = (isset($UNIT['tmpl']) and trim($UNIT['tmpl'])) ? trim($UNIT['tmpl']) : false;
+				
+				mso_parse_file(trim($UNIT['require']), $parser, $tmpl, true);
 			}
 			elseif (isset($UNIT['ushka']) and trim($UNIT['ushka']) and function_exists('ushka'))
 			{
@@ -4653,9 +4650,9 @@ function _mso_units_out_fromfile($matches)
 * $tmpl == true — использовать php-шаблонизатор
 * $echo == true — сразу вывод в браузер
 */
-function mso_parse_file($fn, $parser = 'autotag_simple', $tmpl = false, $echo = true)
+function mso_parse_file($file, $parser = 'autotag_simple', $tmpl = false, $echo = true)
 {
-	if ($fn = mso_fe($fn)) 
+	if ($fn = mso_fe($file)) 
 	{
 		ob_start();
 		require($fn);
@@ -4668,7 +4665,6 @@ function mso_parse_file($fn, $parser = 'autotag_simple', $tmpl = false, $echo = 
 		
 		// парсер текста
 		if ($parser and function_exists($parser)) $t1 = $parser($t1);
-		
 		if ($echo)
 		{
 			// php-шаблонизатор

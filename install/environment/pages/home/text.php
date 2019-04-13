@@ -7,8 +7,8 @@ h1 {{ t('Установка MaxSite CMS') }}
 hr(dotted)
 
 
-{% if ( version_compare(PHP_VERSION, '5.3' , '<') ) : %}
-	_(t-red) {{ t('Слишком старая версия PHP: ') }} <var>{{ PHP_VERSION }}</var> {{ t('Требуется: ') }} 5.3
+{% if ( version_compare(PHP_VERSION, '5.4' , '<') ) : %}
+	_(t-red) {{ t('Слишком старая версия PHP: ') }} <var>{{ PHP_VERSION }}</var> {{ t('Требуется: ') }} 5.4 (но лучше 7.x)
 	</div>
 	{% return %}
 {% endif %}

@@ -3242,13 +3242,21 @@ function mso_page_foreach($type_foreach_file = false)
 	{	
 		if ($files === false)
 		{
-			$CI = & get_instance();
-			$CI->load->helper('directory');
-			$files = directory_map(getinfo('template_dir') . 'type_foreach/', true); // только в type_foreach
-			if (!$files) $files = array();
+			// старый вариант с helper('directory')
+			// $CI = & get_instance();
+			// $CI->load->helper('directory');
+			// $files = directory_map(getinfo('template_dir') . 'type_foreach/', true); // только в type_foreach
+			// $files_alt = directory_map(getinfo('template_dir') . $alt, true);
 			
-			$files_alt = directory_map(getinfo('template_dir') . $alt, true);
-			if (!$files_alt) $files_alt = array();			
+			$files = glob(getinfo('template_dir') . 'type_foreach/' . '*.php');
+			$files = array_map(function($a){return pathinfo($a, PATHINFO_BASENAME);}, $files);
+			
+			$files_alt = glob(getinfo('template_dir') .  $alt . '*.php');
+			$files_alt = array_map(function($a){return pathinfo($a, PATHINFO_BASENAME);}, $files_alt);
+			
+			if (!$files) $files = array();
+			if (!$files_alt) $files_alt = array();
+			
 		}
 		
 		$find_file = $type_foreach_file . '.php'; // какой файл ищем
@@ -4214,7 +4222,7 @@ $array_default - стартовый массив опций на случай, �
 например 
 array('link'=>'', 'title'=>'', 'img'=>'', 'text'=>'', 'p_line1'=>'', 'p_line2'=>'')
 
-Если $simple = true, то вхродящий паттерн используется как слово из которого
+Если $simple = true, то входящий паттерн используется как слово из которого
 будет автоматом сформирован корректный паттерн по шаблону [слово]...[/слово]
 
 Если опция содержит html-код или несколько строк, то её следует обрамить между _START_ и _END_

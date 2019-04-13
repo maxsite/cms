@@ -2,7 +2,7 @@
 
 <div class="mso-page-only">
 		
-	<h1>{{ tf('404. Ничего не найдено...') }} </h1>
+	<h1 class="mso-type-search">{{ tf('404. Ничего не найдено...') }} </h1>
 		
 	<div class="mso-page-content">
 		{% if ($search_len) : %} 

@@ -28,7 +28,7 @@ if ($comusers)
 {
 	if ($f = mso_page_foreach('users-all-do')) require($f); // подключаем кастомный вывод
 	else 
-		echo '<h1>'. tf('Комментаторы'). '</h1><p>' . tf('Забыли кто вы?') . ' <a href="' . getinfo('siteurl') . 'password-recovery">'. tf('Можно восстановить пароль.'). '</a></p><ul class="mso-users-all">';
+		echo '<h1 class="mso-type-users-all">'. tf('Комментаторы'). '</h1><p>' . tf('Забыли кто вы?') . ' <a href="' . getinfo('siteurl') . 'password-recovery">'. tf('Можно восстановить пароль.'). '</a></p><ul class="mso-users-all">';
 	
 	// pr($comusers);
 	foreach ($comusers as $comuser)

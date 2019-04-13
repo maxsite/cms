@@ -82,7 +82,7 @@ else
 	if ($pages or $categories or $tags) // есть страницы рубрики или метки
 	{
 		echo '<div class="mso-page-only"><div class="mso-page-content mso-type-search-content">'
-			. '<h1>' . tf('Поиск') . '</h1>'
+			. '<h1 class="mso-type-search">' . tf('Поиск') . '</h1>'
 			. '<div class="mso-page-content">'
 			. '<p>' . tf('Результаты поиска по запросу') 
 			. ' <strong>«' . $search . '»</strong></p>';

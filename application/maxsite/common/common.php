@@ -2949,13 +2949,13 @@ function mso_cur_dir_lang($dir = false)
 # перевод только для frontend - фраз сайта.
 function tf($w = '', $file = false)
 {
-	return _t($w, $file);
+	return _t($w, $file, 'tf');
 }
 
 # перевод только для админки
 function t($w = '', $file = false)
 {
-	return _t($w, $file);
+	return _t($w, $file, 't');
 }
 
 
@@ -2972,13 +2972,12 @@ function t($w = '', $file = false)
 #  откуда была вызвана функция t() или tf().
 #  Если второй параметр это mytemplate, то подключается language текущего шаблона
 #  Если второй параметр это install, то подключается /common/language/install/ЯЗЫК.php
-function _t($w = '', $file = false)
+function _t($w = '', $file = false, $label = 't')
 {
 	global $MSO;
 	
 	static $langs = array(); // общий массив перевода
 	static $file_langs = array(); // список уже подключенных файлов
-	
 	
 	// только для получения переводимых фраз и отладки!
 	// ОПИСАНИЕ см. в common/language/readme.txt
@@ -2993,9 +2992,12 @@ function _t($w = '', $file = false)
 		if ($w) $all_w[] = $w;
 	}
 	
+	// отслеживание всех переводимых фраз — РЕСУРСОЁМКО, ТОЛЬКО ДЛЯ ОТЛАДКИ
+	if (defined('MSO__PLEASE__ADD__FILE_LANG')) require MSO__PLEASE__ADD__FILE_LANG;
+
 	if (!isset($MSO->language)) return $w; // язык вообще не существует, выходим
 	if (!($current_language = $MSO->language)) return $w; // есть, но не указан язык, выходим
-
+	
 	// проверим перевод, возможно он уже есть
 	if (isset($langs[$w]) and $langs[$w]) return $langs[$w]; // проверка перевода
 	
@@ -3075,11 +3077,8 @@ function _t($w = '', $file = false)
 	
 	if (isset($langs[$w]) and $langs[$w]) return $langs[$w]; // проверка перевода	
 
-	
-	// перевода нет :-(
-
+	// перевода нет :-(	
 	return $w;
-
 }
 
 # служебная функция для _t()

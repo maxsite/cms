@@ -94,6 +94,8 @@ if ($info_top_fn)
 }
 
 if ($f = mso_page_foreach('do-full')) require($f);
+if ($f = mso_page_foreach('do-full-' . getinfo('type'))) require($f);
+	
 
 $p->div_start(trim(mso_get_val('container_class' , '') . ' ' . $info_top_class));
 
@@ -157,6 +159,9 @@ foreach ($pages as $page)
 	$exclude_page_id[] = $p->val('page_id');
 	
 } // end foreach
+
+if ($f = mso_page_foreach('end-full')) require($f);
+if ($f = mso_page_foreach('end-full-' . getinfo('type'))) require($f);
 
 $p->div_end(mso_get_val('container_class', ''));
 

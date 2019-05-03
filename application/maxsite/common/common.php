@@ -4002,11 +4002,8 @@ function mso_add_file_body_end($a)
 	global $MSO;
 	
 	if (!isset($MSO->data['add_file_to_body_end']) or !$MSO->data['add_file_to_body_end']) return $a;
-	
-	
-	pr($MSO);
-	
-	echo implode('', $MSO->data['add_file_to_body_end']);
+		
+	echo implode($MSO->data['add_file_to_body_end']);
 	
 	return $a;
 }

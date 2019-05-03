@@ -216,21 +216,6 @@ function getinfo($info = '')
 					{
 						$out = $ajax = '//' . str_replace(array('http://', 'https://'), '' , $MSO->config['site_url']) . 'ajax/';
 					}
-					
-					/* // старый вариант — автоопределение
-					// проверка IDN-домена для аякса
-					if (stripos($MSO->config['site_url'], 'xn--') !== false)
-					{
-						require_once($MSO->config['base_dir'] . 'common/idna.php');
-						
-						$host = parse_url($MSO->config['site_url'] );
-						$out = $ajax = '//' . mso_DecodePunycodeIDN($host['host']) . '/ajax/';
-					}
-					else
-					{
-						$out = $ajax = '//' . str_replace(array('http://', 'https://'), '' , $MSO->config['site_url']) . 'ajax/';
-					}
-					*/
 				}
 				
 				break;
@@ -288,54 +273,78 @@ function getinfo($info = '')
 				break;
 				
 		
-
 		endswitch;
 
 	return $out;
 }
 
 
-#  функция для отладки
-function pr($var, $html = false, $echo = true)
+/**
+ * функция для отладки кода pr($любая_переменная)
+ * $html == true - преобразование спецсимволов в HTML, иначе отдается как есть
+ * $echo == true - сразу вывод в браузер, иначе возврат по return
+ *
+*/
+function pr($var, $html = true, $echo = true)
 {
-	if (!$echo) ob_start();
-		else echo '<pre>';
+	if (!$echo) 
+		ob_start();
+	else 
+		echo '<pre>';
+	
 	if (is_bool($var))
 	{
-		if ($var) echo 'TRUE';
-			else echo 'FALSE';
+		if ($var) 
+			echo 'TRUE';
+		else 
+			echo 'FALSE';
 	}
 	else
 	{
-		if ( is_scalar($var) )
+		if (is_scalar($var))
 		{
-			if (!$html) echo $var;
-				else
-				{
-					$var = str_replace('<br />', "<br>", $var);
-					$var = str_replace('<br>', "<br>\n", $var);
-					$var = str_replace('</p>', "</p>\n", $var);
-					$var = str_replace('<ul>', "\n<ul>", $var);
-					$var = str_replace('<li>', "\n<li>", $var);
-					$var = htmlspecialchars($var);
-					$var = wordwrap($var, 300);
-					echo $var;
-				}
+			if (!$html) 
+			{
+				echo $var;
+			}
+			else
+			{
+				$var = str_replace('<br />', "<br>", $var);
+				$var = str_replace('<br>', "<br>\n", $var);
+				$var = str_replace('</p>', "</p>\n", $var);
+				$var = str_replace('<ul>', "\n<ul>", $var);
+				$var = str_replace('<li>', "\n<li>", $var);
+				$var = htmlspecialchars($var);
+				$var = wordwrap($var, 300);
+				
+				echo $var;
+			}
 		}
-			else print_r ($var);
+		else 
+		{
+			if (!$html) 
+				print_r($var);
+			else
+				echo htmlspecialchars(print_r($var, true));
+		}
 	}
+	
 	if (!$echo)
 	{
 		$out = ob_get_contents();
 		ob_end_clean();
 		return $out;
 	}
-	else echo '</pre>';
+	else 
+	{
+		echo '</pre>';
+	}
 }
 
-
-# функция, аналогичная pr, только завершающаяся die() 
-# используется для отладки с помощью прерывания
+/**
+ * Аналогична pr, только завершающаяся die() 
+ * используется для отладки с помощью прерывания
+*/
 function _pr($var, $html = false, $echo = true)
 {
 	pr($var, $html, $echo);
@@ -3993,6 +4002,9 @@ function mso_add_file_body_end($a)
 	global $MSO;
 	
 	if (!isset($MSO->data['add_file_to_body_end']) or !$MSO->data['add_file_to_body_end']) return $a;
+	
+	
+	pr($MSO);
 	
 	echo implode('', $MSO->data['add_file_to_body_end']);
 	

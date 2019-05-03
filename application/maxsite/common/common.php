@@ -570,9 +570,10 @@ function mso_initalizing()
 
 	# дефолтные хуки
 	mso_hook_add('init', '_mso_require_functions_file'); // подключение functions.php текущего шаблона
-	// mso_hook_add('content_auto_tag', 'mso_auto_tag'); // авторасстановка тэгов
-	// mso_hook_add('content_balance_tags', 'mso_balance_tags'); // автозакрытие тэгов - их баланс
+
 	mso_hook_add('content_content', 'mso_shortcode_content', 1); // хук контента на шорткоды
+	
+	mso_hook_add('body_end', 'mso_add_file_body_end', 1); // хук на вывод подключенных файлов в конце BODY
 }
 
 
@@ -3951,22 +3952,51 @@ function mso_load_script($url = '', $nodouble = true, $attr = '')
 
 
 # формирование <script> с внешним js-файлом или
-# формирование <link rel="stylesheet> с внешним css-файлом/less-файлом
+# формирование <link rel="stylesheet> с внешним css-файлом
 # имя файла указывается относительно каталога шаблона
 # если файла нет, то ничего не происходит
-function mso_add_file($fn)
+# если $lazy == true, то подключение файла будет в конце BODY по хуку mso_hook('body_end')
+function mso_add_file($fn, $lazy = false)
 {
+	global $MSO;
+	
 	if (file_exists(getinfo('template_dir') . $fn)) 
 	{
 		$ext = strtolower(substr(strrchr($fn, '.'), 1)); // расширение файла
 
-		if ($ext == 'js') 
-			echo mso_load_script(getinfo('template_url') . $fn);
+		$out = '';
+		
+		if ($ext == 'js')
+			$out = mso_load_script(getinfo('template_url') . $fn);
 		elseif ($ext == 'css') 
-			echo mso_load_style(getinfo('template_url') . $fn);
-		elseif ($ext == 'less') 
-			echo NR . '<link rel="stylesheet/less" href="' . getinfo('template_url') . $fn . '" type="text/css">';
+			$out = mso_load_style(getinfo('template_url') . $fn);
+		
+		if (!$lazy) 
+		{
+			echo $out;
+		}
+		elseif($out)
+		{
+			// вывод через хук body_end — mso_add_file_body_end()
+			if (!isset($MSO->data['add_file_to_body_end'])) $MSO->data['add_file_to_body_end'] = array();
+			$MSO->data['add_file_to_body_end'][] = $out;
+		}
 	}
+}
+
+/**
+ * Функция к хуку body_end по которой выводятся все подключенные файлы через mso_add_file(файл, true)
+ * Lazy-загрузка в конце BODY
+ */
+function mso_add_file_body_end($a)
+{
+	global $MSO;
+	
+	if (!isset($MSO->data['add_file_to_body_end']) or !$MSO->data['add_file_to_body_end']) return $a;
+	
+	echo implode('', $MSO->data['add_file_to_body_end']);
+	
+	return $a;
 }
 
 

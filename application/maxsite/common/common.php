@@ -712,30 +712,51 @@ function is_feed()
 }
 
 
-# вывод html meta титла дескриптон или keywords страницы
-function mso_head_meta($info = 'title', $args = '', $format = '%page_title%', $sep = '', $only_meta = false )
+/**
+ * формирование TITLE, meta: description, keywords
+ * $info: только один из вариантов: title, description, keywords
+ * $args: входящий аргумент данных, например $pages (записи)
+ * $format: формат вывода. Замены для: 
+ *          %title%, %page_title%, %category_name%, %category_desc%, %users_nik%, || (разделитель) 
+ * $sep: разделитель
+ * $only_meta == true — вывод только meta-данных
+ * $add_pag == true — добавка пагинации (из опции title_pagination)
+ * 
+*/
+function mso_head_meta($info = 'title', $args = '', $format = '%page_title%', $sep = '', $only_meta = false, $add_pag = true)
 {
-	// ошибочный info
+	global $MSO;
+	
+	// выявляем ошибочный info
 	if ( $info != 'title' and $info != 'description' and $info != 'keywords') return '';
-
 
 	if (mso_hook_present('head_meta')) // если есть хуки, то управление передаем им
 	{
 		return mso_hook('head_meta', array('info'=>$info, 'args'=>$args, 'format'=>$format, 'sep'=>$sep, 'only_meta'=>$only_meta));
 	}
 
-	global $MSO;
+	// добавка пагинации на основе опции title_pagination и только для TITLE
+	$pag = '';
+	
+	if ($add_pag and $info == 'title' and ($cur = mso_current_paged()) > 1 and $onum = mso_get_option('title_pagination', 'general', t(' - страница [NUM]')) )
+	{
+		$pag = htmlspecialchars(str_replace('[NUM]', $cur, $onum));
+	}
 
 	// измененный для вывода титле хранится в $MSO->title description или keywords
-
 	if (!$args) // нет аргумента - выводим что есть
 	{
-		if ( !$MSO->$info )	$out = $MSO->$info = getinfo($info);
-		else $out = $MSO->$info;
+		if (!$MSO->$info)
+			$out = $MSO->$info = getinfo($info) . $pag;
+		else
+			$out = $MSO->$info;
 	}
-	else // есть аргументы
+	else // есть аргументы/записи
 	{
-		if (is_scalar($args)) $out = $args; // какая-то явная строка - отдаем её как есть
+		if (is_scalar($args)) 
+		{
+			$out = $args . $pag; // какая-то явная строка - отдаем её как есть
+		}
 		else // входной массив - скорее всего это страница
 		{
 			// %page_title% %title% %category_name%
@@ -748,7 +769,6 @@ function mso_head_meta($info = 'title', $args = '', $format = '%page_title%', $s
 			$users_nik = '';
 			$title = getinfo($info);
 
-			
 			if (isset($args[0]['page_categories_detail']))
 			{
 				$slug = is_type('category') ? mso_segment(2) : '';
@@ -764,38 +784,15 @@ function mso_head_meta($info = 'title', $args = '', $format = '%page_title%', $s
 				}
 			}
 			
-			/*
-			// старый вариант, где было поле category_name — сейчас нет
-			// название рубрики
-			if ( isset($args[0]['category_name']) ) 
-			{
-				//$category_name = htmlspecialchars($args[0]['category_name']);
-				$category_name = $args[0]['category_name'];
-				
-				// по названию рубрики ищем её описание в $args[0]['page_categories_detail'][$id]['category_desc']
-				if (isset($args[0]['page_categories_detail']))
-				{
-					foreach ($args[0]['page_categories_detail'] as $id => $val)
-					{
-						if ($args[0]['category_name'] === $val['category_name'] )
-						{
-							$category_desc = $val['category_desc'];
-							break;
-						}
-					}
-				}
-				
-				if (!$category_desc) $category_desc = $category_name; // если нет описания, то берем название
-			}
-			*/
-			
 			if ( isset($args[0]['page_title']) ) $page_title = $args[0]['page_title'];
-			if ( isset($args[0]['users_nik']) ) $users_nik = $args[0]['users_nik'];
+			if ( isset($args[0]['users_nik']) )  $users_nik = $args[0]['users_nik'];
 
 			// если есть мета, то берем её
 			if ( isset($args[0]['page_meta'][$info][0]) and $args[0]['page_meta'][$info][0] )
 			{
-				if ( $only_meta ) $category_name = $category_desc = $title = $sep = '';
+				if ( $only_meta ) 
+					$category_name = $category_desc = $title = $sep = '';
+				
 				$page_title = $args[0]['page_meta'][$info][0];
 
 				if ( $info!='title') $title = $page_title;
@@ -835,11 +832,9 @@ function mso_head_meta($info = 'title', $args = '', $format = '%page_title%', $s
 			
 			$arr_val = array( htmlspecialchars($title), htmlspecialchars($page_title), htmlspecialchars($category_name), htmlspecialchars($category_desc), htmlspecialchars($users_nik), $sep );
 						
-			$out = str_replace($arr_key, $arr_val, $format);
+			$out = str_replace($arr_key, $arr_val, $format) . $pag;
 		}
 	}
-	
-	// pr($out);
 
 	// отдаем результат, сразу же указывая измененный $info в $MSO
 	$out = $MSO->$info = trim($out);

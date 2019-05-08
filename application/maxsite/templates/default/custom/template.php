@@ -5,7 +5,7 @@
  * http://max-3000.com/
  *
  * Функции для работы с шаблоном
- * версия 2018-11-09
+ * версия 2019-05-08
  */
 
 /**
@@ -30,7 +30,6 @@ function my_default_head_section()
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="MaxSite CMS">
 <meta name="description" content="' . mso_head_meta('description') . '">
-<meta name="keywords" content="' . mso_head_meta('keywords') . '">
 <link rel="shortcut icon" href="' . getinfo('uploads_url') . 'favicons/' . mso_get_option('default_favicon', 'templates', 'favicon1.png') . '" type="image/x-icon">
 ';
 	

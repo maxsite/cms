@@ -3955,14 +3955,28 @@ function mso_load_script($url = '', $nodouble = true, $attr = '')
 }
 
 
-# формирование <script> с внешним js-файлом или
-# формирование <link rel="stylesheet> с внешним css-файлом
-# имя файла указывается относительно каталога шаблона
-# если файла нет, то ничего не происходит
-# если $lazy == true, то подключение файла будет в конце BODY по хуку mso_hook('body_end')
-function mso_add_file($fn, $lazy = false)
+/**
+ * формирование <script> с внешним js-файлом или
+ * формирование <link rel="stylesheet> с внешним css-файлом
+ * имя файла указывается относительно каталога шаблона
+ * если файла нет, то ничего не происходит
+ * если $lazy == true, то подключение файла будет в конце BODY по хуку mso_hook('body_end')
+ * если $auto_dir = __DIR__ то путь будет определен относительно каталога исполняемого php-файла
+ *   например: component/header/header.php:
+ *	 с $auto_dir
+ *     mso_add_file('js/my.js', false, __DIR__);
+ *
+ *   или нужно указывать путь к файлу:
+ *      mso_add_file('component/header/js/my.js');
+ */
+function mso_add_file($fn, $lazy = false, $auto_dir = false)
 {
 	global $MSO;
+	
+	if ($auto_dir)
+	{
+		$fn = str_replace(str_replace('\\', '/', getinfo('template_dir')), '', str_replace('\\', '/', $auto_dir)) . '/' . $fn;
+	}
 	
 	if (file_exists(getinfo('template_dir') . $fn)) 
 	{

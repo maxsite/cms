@@ -3964,12 +3964,15 @@ function mso_load_script($url = '', $nodouble = true, $attr = '')
  * если $auto_dir = __DIR__ то путь будет определен относительно каталога исполняемого php-файла
  *   например: component/header/header.php:
  *	 с $auto_dir
- *     mso_add_file('js/my.js', false, __DIR__);
+ *     mso_add_file('js/my.js', false, __DIR__); // component/header/js/my.js
  *
  *   или нужно указывать путь к файлу:
  *      mso_add_file('component/header/js/my.js');
+ *
+ * $js_attr — атрибут для js-скрипта, например 'async'
+ * 
  */
-function mso_add_file($fn, $lazy = false, $auto_dir = false)
+function mso_add_file($fn, $lazy = false, $auto_dir = false, $js_attr = '')
 {
 	global $MSO;
 	
@@ -3985,7 +3988,7 @@ function mso_add_file($fn, $lazy = false, $auto_dir = false)
 		$out = '';
 		
 		if ($ext == 'js')
-			$out = mso_load_script(getinfo('template_url') . $fn);
+			$out = mso_load_script(getinfo('template_url') . $fn, true, $js_attr);
 		elseif ($ext == 'css') 
 			$out = mso_load_style(getinfo('template_url') . $fn);
 		

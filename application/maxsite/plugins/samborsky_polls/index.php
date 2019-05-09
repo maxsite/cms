@@ -20,23 +20,22 @@ function samborsky_polls_autoload($args = array())
 	require(getinfo('plugins_dir') . 'samborsky_polls/sp_kernel.php');
 	
 	// Хук в <head></head>
-	mso_hook_add('head', 'samborsky_polls_head');
+	// mso_hook_add('head', 'samborsky_polls_head');
+	
+	mso_hook_add('body_end', 'samborsky_polls_body_end');
+	
 	mso_hook_add('custom_page_404', 'samborsky_polls_archive_404'); # По какому адресу будем показывать архив
 	mso_register_widget('samborsky_polls_widget', t('Голосования')); # регистрируем виджет
 }
 
-function samborsky_polls_head($args = array()){
-	
+function samborsky_polls_body_end($args = array())
+{
 	mso_load_jquery();
 	
-	$path = getinfo('plugins_url') . 'samborsky_polls/';
+	echo mso_load_script(getinfo('plugins_url') . 'samborsky_polls/js/kernel.js');
+	echo mso_load_style(getinfo('plugins_url') . 'samborsky_polls/css/style.css');
 	
-	echo <<<EOFS
-		
-	<script src="{$path}js/kernel.js"></script>
-	<link rel="stylesheet" href="{$path}css/style.css">
-	
-EOFS;
+	return $args;
 }
 
 # функция выполняется при активации (вкл) плагина

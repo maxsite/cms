@@ -16,9 +16,10 @@ function my_cart_body_end($a = array() )
 {
 	$ajax = getinfo('ajax') . base64_encode('templates/' . getinfo('template') .'/custom/cart/cart-ajax.php');
 	
-	echo '<script>window.cart_form_ajax = "' . $ajax .'";</script>'
-		. mso_load_script(getinfo('template_url') . 'custom/cart/js/cart.js')
-		. mso_load_script(getinfo('template_url') . 'custom/cart/js/cart-my.js');
+	echo '<script>window.cart_form_ajax = "' . $ajax .'";</script>';
+	
+	mso_add_file('custom/cart/js/cart.js');
+	mso_add_file('custom/cart/js/cart-my.js');
 	
 	return $a;
 }

@@ -61,6 +61,12 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 if (mso_check_allow('admin_home')) // если есть разрешение на доступ к консоли
 {
 
+	// проверим версию PHP
+	if (version_compare(PHP_VERSION, '7.1' , '<') )
+	{
+		echo '<div class="pad10 bg-red100 t-red">' . t('У вас используется устаревшая версия PHP') . ' (' . PHP_VERSION . '). ' . t('Рекомендуемая версия PHP 7.1 и выше.') . '</div>';
+	}
+	
 	// свой блок
 	if ($admin_block_for_home = mso_get_option('admin_block_for_home', 'general', '')) echo '<div class="admin_block_for_home">' . $admin_block_for_home . '</div>'; 
 

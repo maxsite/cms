@@ -2720,7 +2720,7 @@ function mso_add_to_cookie($name_cookies, $value, $expire, $redirect = false)
 
 
 # получаем куку. Если нет вообще или нет в $allow_vals, то возвращает $def_value
-function mso_get_cookie($name_cookies, $def_value = '', $allow_vals = false)
+function mso_get_cookie($name_cookies, $def_value = '', $allow_vals = array())
 {
 
 	if (!isset($_COOKIE[$name_cookies])) return $def_value; // нет вообще

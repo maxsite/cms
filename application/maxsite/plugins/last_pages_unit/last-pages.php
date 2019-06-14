@@ -3,7 +3,7 @@
 /**
  * MaxSite CMS
  * (c) http://max-3000.com/
- * 27-03-2019
+ * 14-06-2019
 
 Универсальный юнит для вывода записей по множеству критериев
 
@@ -96,7 +96,7 @@
 		'comments_count_end' => '',
 		
 		'placehold' => true,
-		'placehold_path' => 'http://placehold.it/',
+		'placehold_path' => 'http://via.placeholder.com/',
 		'placehold_pattern' => '[W]x[H].png',
 		'placehold_file' => 'data',
 		'placehold_data_bg' => '#EEEEEE',

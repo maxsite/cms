@@ -130,7 +130,7 @@ function _upload($up_dir, $fn, $r = array())
 	if ($rotation)
 	{
 		echo ' ROTATE... ';
-		thumb_rotate($up_dir . $fn, $rotationя, $quality);
+		thumb_rotate($up_dir . $fn, $rotation, $quality);
 	}
 	
 	// текущие размеры

@@ -4539,17 +4539,26 @@ function mso_shortcode($shortcode, $func, $content)
 	return $content;
 }
 
-# вывод текста юнитов
-# $text_units содержит полный текст с юнитами
-# пример использования см. shared/type/home/home.php
-# через $PAGES и $PAGINATION можно передать в юнит заранее подготовленные записи
-# спецкод @fromfile файл — позволяет подключать любой файл в виде текста. 
-# файл относительно шаблона. Не зависит от вложенности в [unit]
+/**
+ * Вывод юнитов
+ * 
+ * $text_units содержит полный текст с юнитами
+ * пример использования см. shared/type/home/home.php
+ * через $PAGES и $PAGINATION можно передать в юнит заранее подготовленные записи
+ * 
+ * спецкод @fromfile файл — позволяет подключать любой файл в виде текста. 
+ * файл относительно шаблона. Не зависит от вложенности в [unit]
+ * 		@fromfile blocks/home/lastp-1.php
+ * 
+ * спецкод @module модуль — позволяет подключать файл в виде текста из каталога шаблона modules.
+ * 		@module ads/ad1 -> подключит файл modules/ads/ad1/index.php как и @fromfile
+ */
 function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $path_file = 'type/home/units/')
 {
-	// подключаем файл как текст @fromfile
+	// подключаем файл как текст @fromfile и @module
 	$text_units = preg_replace_callback('!@fromfile (.*?)\n!is', '_mso_units_out_fromfile', $text_units);
-
+	$text_units = preg_replace_callback('!@module (.*?)\n!is', '_mso_units_out_module', $text_units);
+	
 	// если в тексте юнита есть вхождение @USE_PHP@
 	// то разрешим в файле исполнять PHP, включая php-шаблонизатор
 	if (strpos($text_units, '@USE_PHP@'))
@@ -4575,10 +4584,11 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 	// параметр file где указывается файл юнита в каталоге $path_file (type/home/units/) или относительно шаблона
 	// если file нет, то проверяются другие параметры если есть:
 	// html — выводится как есть текстом/ Можно использовать php-шаблонизатор {{ }} и {% %}
-	// require — подключается файл в шаблоне (пусть относительно каталога шаблона)
+	// require — подключается файл в шаблоне (путь относительно каталога шаблона)
 	//			у require также можно указать 
 	//			парсер parser = autotag_simple — функция, которая через которую прогонится файл
 	//			php-шаблонизатор: tmpl = 1
+	//			каталог модуля в module = ads/ad1 — поиск файла будет относительно каталога модуля
 	// ushka — ушка
 	// component — компонент шаблона
 	// option_key и option_type и option_default — опция
@@ -4618,6 +4628,7 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 			
 			$UNIT = $UNIT1;
 
+			// _rules — устаревший, вместо него нужно использовать rules
 			if (isset($UNIT['_rules']) and trim($UNIT['_rules']))
 			{
 				$rules = 'return ( ' . trim($UNIT['_rules']) . ' ) ? 1 : 0;';
@@ -4625,18 +4636,32 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 				if ($rules_result === false) $rules_result = 1; // возможно произошла ошибка
 				if ($rules_result !== 1) continue;
 			}
+
+			// rules тоже самое что и _rules — код для обратной совместимости
+			if (isset($UNIT['rules']) and trim($UNIT['rules']))
+			{
+				$rules = 'return ( ' . trim($UNIT['rules']) . ' ) ? 1 : 0;';
+				$rules_result = eval($rules); // выполяем
+				if ($rules_result === false) $rules_result = 1; // возможно произошла ошибка
+				if ($rules_result !== 1) continue;
+			}
 			
 			if (trim($UNIT['file']))
 			{
+				$file = trim($UNIT['file']);
+				
+				$module = (isset($UNIT['module']) and trim($UNIT['module'])) ? trim($UNIT['module']) : false;
+				if ($module) $file = 'modules/' . $module . '/' . $file;
+
 				// в подключаемом файле доступна переменная $UNIT — массив параметров
-				if ($fn = mso_find_ts_file($path_file . trim($UNIT['file']))) 
+				if ($fn = mso_find_ts_file($path_file . $file))
 				{
 					require($fn);
 				}
 				else
 				{
 					// аналогично, только файл относительно каталога шаблона
-					if ($fn = mso_fe(trim($UNIT['file']))) require($fn);
+					if ($fn = mso_fe($file)) require($fn);
 				}
 			}
 			elseif (isset($UNIT['html']) and trim($UNIT['html']))
@@ -4648,9 +4673,17 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 				$parser = (isset($UNIT['parser']) and trim($UNIT['parser'])) ? trim($UNIT['parser']) : false;
 				
 				$tmpl = (isset($UNIT['tmpl']) and trim($UNIT['tmpl'])) ? trim($UNIT['tmpl']) : false;
+
+				$file = trim($UNIT['require']);
+
+				// если указан модуль, то файл указан относительно каталога модуля
+				$module = (isset($UNIT['module']) and trim($UNIT['module'])) ? trim($UNIT['module']) : false;
 				
-				mso_parse_file(trim($UNIT['require']), $parser, $tmpl, true);
-			}
+				if ($module) $file = 'modules/' . $module . '/' . $file;
+
+
+				mso_parse_file($file, $parser, $tmpl, true);
+			}			
 			elseif (isset($UNIT['ushka']) and trim($UNIT['ushka']) and function_exists('ushka'))
 			{
 				echo ushka(trim($UNIT['ushka']));
@@ -4686,6 +4719,23 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 function _mso_units_out_fromfile($matches)
 {
 	$fn = trim(str_replace('=', '', $matches[1]));
+
+	if ($fn = mso_fe($fn)) 
+	{
+		$data = file_get_contents($fn);
+		// pr($data, 1);
+		return $data;
+	}
+	else
+	{
+		return '';
+	}
+}
+
+# callback к mso_units_out()
+function _mso_units_out_module($matches)
+{
+	$fn = 'modules/' . trim(str_replace('=', '', $matches[1])) . '/index.php';
 
 	if ($fn = mso_fe($fn)) 
 	{

@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Внутренние ссылки'),
 	'description' => t('Плагин создаёт ссылки для указанных слов'),
-	'version' => '1.1',
+	'version' => '2',
 	'author' => 'Максим',
 	'plugin_url' => '',
 	'author_url' => '//maxsite.org/',

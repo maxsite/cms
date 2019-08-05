@@ -111,7 +111,8 @@ function internal_links_custom($text = '')
 				$a_link[$key]['word'] = trim($l1[0]);
 				$a_link[$key]['link'] = trim($l1[1]);
 				
-				if (strpos($a_link[$key]['link'], 'http://') === false)
+				// if (strpos($a_link[$key]['link'], 'http://') === false)
+				if (strpos($a_link[$key]['link'], getinfo('site_protocol') . '://') === false)
 					$a_link[$key]['link'] = getinfo('siteurl') . $a_link[$key]['link'];
 				
 				if ( isset($l1[2]) and trim($l1[2]) ) // class

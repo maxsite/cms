@@ -296,7 +296,10 @@ function addzakl_content_end($args = array())
 	if ($options['twitter'])
 	{
 		$img_src = 'twitter.png';
-		$link = '<a rel="nofollow" href="//twitter.com/home/?status=' . urlencode (stripslashes(mb_substr($page['page_title'], 0, 139 - mb_strlen($post_link, 'UTF8'), 'UTF8') . ' ' . $post_link)) . '">';
+		// $link = '<a rel="nofollow" href="//twitter.com/home/?status=' . urlencode (stripslashes(mb_substr($page['page_title'], 0, 139 - mb_strlen($post_link, 'UTF8'), 'UTF8') . ' ' . $post_link)) . '">';
+		
+		$link = '<a rel="nofollow" href="https://twitter.com/intent/tweet?text=' . urlencode (stripslashes(mb_substr($page['page_title'], 0, 139 - mb_strlen($post_link, 'UTF8'), 'UTF8') . ' ' . $post_link)) . '">';
+		
 		$out .= $link . '<img title="Добавить в Twitter" alt="twitter.com" src="' . $path . $img_src  . '"' . $width_height . '></a>';	
 	}
 	

@@ -901,14 +901,14 @@ class CI_Image_lib {
 		$this->wm_hor_alignment = strtoupper(substr($this->wm_hor_alignment, 0, 1));
 
 		if ($this->wm_vrt_alignment == 'B')
-			$this->wm_vrt_offset = $this->wm_vrt_offset * -1;
+			$this->wm_vrt_offset = (int)$this->wm_vrt_offset * -1;
 
 		if ($this->wm_hor_alignment == 'R')
-			$this->wm_hor_offset = $this->wm_hor_offset * -1;
+			$this->wm_hor_offset = (int)$this->wm_hor_offset * -1;
 
 		//  Set the base x and y axis values
-		$x_axis = $this->wm_hor_offset + $this->wm_padding;
-		$y_axis = $this->wm_vrt_offset + $this->wm_padding;
+		$x_axis = (int)$this->wm_hor_offset + (int)$this->wm_padding;
+		$y_axis = (int)$this->wm_vrt_offset + (int)$this->wm_padding;
 
 		//  Set the vertical position
 		switch ($this->wm_vrt_alignment)

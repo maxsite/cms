@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Карта сайта'),
 	'description' => t('Вывод карты сайта по датам - архив записей. Используйте функцию sitemap(); или [sitemap] в тексте.'),
-	'version' => '2.2',
+	'version' => '2.3',
 	'author' => 'Максим',
 	'plugin_url' => '',
 	'author_url' => '//maxsite.org/',

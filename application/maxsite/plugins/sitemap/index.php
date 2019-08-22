@@ -35,6 +35,8 @@ function sitemap404($text = '')
 function sitemap($arg = '')
 {
 	global $MSO;
+	
+	mso_head_meta('title', t('Карта сайта') ); // meta title страницы
 
 	if (mso_segment(2) == 'cat') return sitemap_cat($arg);
 	if (mso_segment(2) == 'cat-list') return sitemap_cat_list($arg);

@@ -681,6 +681,11 @@ function thumb_watermark($fn, $fn_watermark, $watermark_type, $quality = 90)
 		'wm_overlay_path' => $fn_watermark,
 		'wm_opacity' => 100,
 		'quality' => $quality,
+		
+		// fix CodeIgniter in PHP 7.2
+		'wm_vrt_offset' => 0,
+		'wm_hor_offset' => 0,
+		'wm_padding' => 0,
 	);
 
 	$CI = &get_instance();

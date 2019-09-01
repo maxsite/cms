@@ -214,7 +214,12 @@ function mso_upload($config_library = array(), $field_userfile = 'f_userfile', $
 						'wm_type' => 'overlay',
 						'wm_vrt_alignment' => $vrt,
 						'wm_hor_alignment' => $hor,
-						'wm_overlay_path' => $r['userfile_water_file'] //Жёстко, а что делать?
+						'wm_overlay_path' => $r['userfile_water_file'], //Жёстко, а что делать?
+						
+						// fix CodeIgniter in PHP 7.2
+						'wm_vrt_offset' => 0,
+						'wm_hor_offset' => 0,
+						'wm_padding' => 0,
 					);
 
 					$CI->image_lib->initialize($r_conf );

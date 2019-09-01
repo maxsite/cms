@@ -4557,6 +4557,10 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 {
 	// подключаем файл как текст @fromfile и @module
 	$text_units = preg_replace_callback('!@fromfile (.*?)\n!is', '_mso_units_out_fromfile', $text_units);
+
+	// каталог для модулей можно переопределить через mso_set_val('mso_units_out_modulesDir', 'каталог/');
+	$modulesDir = mso_get_val('mso_units_out_modulesDir', 'modules/');
+
 	$text_units = preg_replace_callback('!@module (.*?)\n!is', '_mso_units_out_module', $text_units);
 	
 	// если в тексте юнита есть вхождение @USE_PHP@
@@ -4651,7 +4655,7 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 				$file = trim($UNIT['file']);
 				
 				$module = (isset($UNIT['module']) and trim($UNIT['module'])) ? trim($UNIT['module']) : false;
-				if ($module) $file = 'modules/' . $module . '/' . $file;
+				if ($module) $file = $modulesDir . $module . '/' . $file;
 
 				// в подключаемом файле доступна переменная $UNIT — массив параметров
 				if ($fn = mso_find_ts_file($path_file . $file))
@@ -4679,7 +4683,7 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 				// если указан модуль, то файл указан относительно каталога модуля
 				$module = (isset($UNIT['module']) and trim($UNIT['module'])) ? trim($UNIT['module']) : false;
 				
-				if ($module) $file = 'modules/' . $module . '/' . $file;
+				if ($module) $file = $modulesDir . $module . '/' . $file;
 
 
 				mso_parse_file($file, $parser, $tmpl, true);
@@ -4735,7 +4739,9 @@ function _mso_units_out_fromfile($matches)
 # callback к mso_units_out()
 function _mso_units_out_module($matches)
 {
-	$fn = 'modules/' . trim(str_replace('=', '', $matches[1])) . '/index.php';
+	$modulesDir = mso_get_val('mso_units_out_modulesDir', 'modules/');
+	
+	$fn = $modulesDir . trim(str_replace('=', '', $matches[1])) . '/index.php';
 
 	if ($fn = mso_fe($fn)) 
 	{

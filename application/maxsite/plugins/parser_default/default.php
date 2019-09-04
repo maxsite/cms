@@ -85,6 +85,10 @@ function autotag_default($pee)
 	$pee = str_replace("<p>	<div", "<div", $pee); 
 	$pee = str_replace("<p> </div>", "</div>", $pee); 
 	
+	// замена для шорткодов [shortcode][/shortcode]
+	$pee = str_replace("<p>[", "[", $pee);
+	$pee = str_replace("]</p>", "]", $pee); 
+	
 	# блочные тэги
 	$allblocks = '(?:table|thead|tfoot|caption|colgroup|center|tbody|tr|td|th|div|dl|dd|dt|ul|ol|li|pre|code|select|form|map|area|blockquote|address|math|style|input|embed|h1|h2|h3|h4|h5|h6|hr|p|hgroup|section|header|footer|article|aside|nav|main)';
 	

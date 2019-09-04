@@ -4455,7 +4455,7 @@ function mso_shortcode_content($content = '')
 		{
 			if (strpos($content, '[' . $name) !== false) // есть вхождения
 			{
-				$content = preg_replace_callback('~\[' . $name . '[= ](.*?)\](.*?)\[\/' . $name . '\]~si', $func, $content);
+				$content = preg_replace_callback('~\[' . $name . '[= ]?(.*?)\](.*?)\[\/' . $name . '\]~si', $func, $content);
 			}
 		}
 	}

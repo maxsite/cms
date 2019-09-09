@@ -403,7 +403,7 @@
 	}	
 	
 	
-	echo '&nbsp;<button type="submit" name="f_upload_submit" class="mso-upload">' . t('Загрузить') . '</button>
+	echo '<br><br><button type="submit" name="f_upload_submit" class="mso-upload">' . t('Загрузить') . '</button>
 		&nbsp;
 		<button type="reset" class="mso-reset">' . t('Сбросить') . '</button>
 		</p>

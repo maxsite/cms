@@ -6,6 +6,11 @@ AddDefaultCharset UTF-8
 
 <IfModule mod_rewrite.c>
 RewriteEngine on
+
+# for 301-redirect http to https
+# RewriteCond %{HTTPS} !=on
+# RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,QSA,L] 
+
 RewriteBase /
 RewriteCond $1 !^(index\.php|uploads|robots\.txt|favicon\.ico)
 RewriteCond %{REQUEST_FILENAME} !-f

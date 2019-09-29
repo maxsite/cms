@@ -170,6 +170,8 @@ myBbcodeSettings = {
 
 			{name:'<?= t('Заменить адреса на [page_images]') ?>', className:'pi', beforeInsert:function(markItUp) { miu.repl_pi(markItUp) }},
 			
+			{name:'<?= t('Заменить http-адреса сайта на https') ?>', className:'pi', beforeInsert:function(markItUp) { miu.repl_http(markItUp) }},
+			
 			{name:'<?= t('Замена в тексте') ?>', className:'qrepl', beforeInsert:function(markItUp) { miu.repl(markItUp) }},	
 			
 		]},
@@ -269,7 +271,7 @@ miu = {
 		var s_search = prompt('<?= t('Что ищем?') ?>');
 		var s_replace = prompt('<?= t('На что меняем?') ?>');
 		
-		markItUp.textarea.value = str.replace(new RegExp(s_search,'g'), s_replace)
+		markItUp.textarea.value = str.replace(new RegExp(s_search,'g'), s_replace);
 		
 		alert("<?= t('Выполнено!') ?>");
 	},
@@ -287,14 +289,25 @@ miu = {
 	repl_pi: function(markItUp) 
 	{
 		str = markItUp.textarea.value;
-		
+				
 		var s_search = "<?= getinfo('uploads_url') . '_pages/' ?>" + autosaveid + "/";
 		
-		markItUp.textarea.value = str.replace(new RegExp(s_search,'g'), "[page_images]")
+		markItUp.textarea.value = str.replace(new RegExp(s_search,'g'), "[page_images]");
 		
 		alert("<?= t('Выполнено!') ?>");
 	},
 	
+	repl_http: function(markItUp) 
+	{
+		str = markItUp.textarea.value;
+		
+		var s_search = 'http://<?= $_SERVER['HTTP_HOST'] ?>';
+		var s_replace = 'https://<?= $_SERVER['HTTP_HOST'] ?>';
+				
+		markItUp.textarea.value = str.replace(new RegExp(s_search,'g'), s_replace);
+				
+		alert("<?= t('Выполнено!') ?>");
+	},
 	
 }
 

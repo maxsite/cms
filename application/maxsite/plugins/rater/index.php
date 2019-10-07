@@ -157,12 +157,12 @@ function rater_widget_custom($options = array(), $num = 1)
 			$out1 = $options['format'];
 			$out1 = str_replace('[TITLE]', $page['page_title'], $out1);
 			$out1 = str_replace('[COUNT]', $page['page_rating_count'], $out1);
-			$out1 = str_replace('[REALBALL]', (real) $page['page_ball'], $out1);
-			$out1 = str_replace('[BALL]', (round((real) $page['page_ball'])), $out1);
+			$out1 = str_replace('[REALBALL]', (float) $page['page_ball'], $out1);
+			$out1 = str_replace('[BALL]', (round((float) $page['page_ball'])), $out1);
 			
 			$out1 = str_replace('[A]', $link . $page['page_slug'] 
 					. '" title="' . t('Голосов:') . ' ' . $page['page_rating_count'] 
-					. ' ' . t('Общий бал:') . ' ' . (real) $page['page_ball']
+					. ' ' . t('Общий бал:') . ' ' . (float) $page['page_ball']
 					. '">'
 					, $out1);
 			$out1 = str_replace('[/A]', '</a>', $out1);

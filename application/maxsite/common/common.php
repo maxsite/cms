@@ -4034,16 +4034,16 @@ function mso_load_jquery($plugin = '', $path = '')
 		if ($plugin)
 		{
 			if ($path)
-			{
-				return '<script src="' . $path . $plugin . '"></script>' . NR;
-			}
+				return '<script src="' . $path . $plugin . '"></script>';
 			else
-			{
-				return '<script src="'. getinfo('common_url') . 'jquery/' . $plugin . '"></script>' . NR;
-			}
+				return '<script src="'. getinfo('common_url') . 'jquery/' . $plugin . '"></script>';
 		}
 		else
 		{
+			// если есть assets/js/jquery.min.js то подключаем только его
+			if (mso_fe('assets/js/jquery.min.js'))
+				return '<script src="' . getinfo('template_url') . 'assets/js/jquery.min.js"></script>';
+				
 			$jquery_type = mso_get_option('jquery_type', 'general', 'self');
 			
 			$version = '1.8.2';
@@ -4053,7 +4053,7 @@ function mso_load_jquery($plugin = '', $path = '')
 			elseif ($jquery_type == 'jquery') $url = '//code.jquery.com/jquery-' . $version . '.min.js'; //jQuery CDN
 			else $url = getinfo('common_url') . 'jquery/jquery.min.js';
 			
-			return '<script src="' . $url . '"></script>' . NR;
+			return '<script src="' . $url . '"></script>';
 		}
 	}
 }

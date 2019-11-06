@@ -59,15 +59,7 @@ function my_default_head_section()
 	mso_hook('head_css');
 	my_default_out_profiles();
 
-	// своя версия jQuery, если нужно
-	if ($j = mso_get_val('jquery_url', false)) {
-		echo mso_load_script($j);
-	} else {
-		if (mso_fe('assets/js/jquery.min.js'))
-			mso_add_file('assets/js/jquery.min.js');
-		else
-			echo mso_load_jquery();
-	}
+	echo mso_load_jquery();
 
 	mso_hook('head');
 

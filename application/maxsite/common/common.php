@@ -4453,10 +4453,26 @@ function mso_shortcode_content($content = '')
 	{
 		if (function_exists($func))
 		{
+			// [toc][/toc] и [toc]text[/toc]
+			$pattern = '~\[' . $name . '()\](.*?)\[\/' . $name . '\]~si';
+			
+			if (preg_match($pattern, $content) === 1) {
+				$content = preg_replace_callback($pattern, $func, $content);				
+			}
+
+			// [toc param][/toc] и [toc=param]text[/toc]
+			$pattern = '~\[' . $name . '[= ]+(.*?)\](.*?)\[\/' . $name . '\]~si';
+			
+			if (preg_match($pattern, $content) === 1) {
+				$content = preg_replace_callback($pattern, $func, $content);
+			}
+			
+			/* // старый вариант
 			if (strpos($content, '[' . $name) !== false) // есть вхождения
 			{
 				$content = preg_replace_callback('~\[' . $name . '[= ]?(.*?)\](.*?)\[\/' . $name . '\]~si', $func, $content);
 			}
+			*/
 		}
 	}
 	
@@ -4493,7 +4509,7 @@ function mso_shortcode_parse($attr, $def = array(), $sep = ' ')
 	$par = array();
 	
 	$par['content'] = $attr[2];
-
+		
 	// замена атрибутов в кавычках
 	$attr[1] = preg_replace_callback('!\=\"(.*?)\"!', '_mso_shortcode_parse_callback', $attr[1]);
 		
@@ -4530,10 +4546,26 @@ function mso_shortcode($shortcode, $func, $content)
 {
 	if (function_exists($func))
 	{
+		// [toc][/toc] и [toc]text[/toc]
+		$pattern = '~\[' . $shortcode . '()\](.*?)\[\/' . $shortcode . '\]~si';
+		
+		if (preg_match($pattern, $content) === 1) {
+			$content = preg_replace_callback($pattern, $func, $content);				
+		}
+
+		// [toc param][/toc] и [toc=param]text[/toc]
+		$pattern = '~\[' . $shortcode . '[= ]+(.*?)\](.*?)\[\/' . $shortcode . '\]~si';
+		
+		if (preg_match($pattern, $content) === 1) {
+			$content = preg_replace_callback($pattern, $func, $content);
+		}
+			
+		/*
 		if (strpos($content, '[' . $shortcode) !== false) // есть вхождения
 		{
-			$content = preg_replace_callback('~\[' . $shortcode . '[= ](.*?)\](.*?)\[\/' . $shortcode . '\]~si', $func, $content);
+			$content = preg_replace_callback('~\[' . $shortcode . '[= ]?(.*?)\](.*?)\[\/' . $shortcode . '\]~si', $func, $content);
 		}
+		*/
 	}
 	
 	return $content;

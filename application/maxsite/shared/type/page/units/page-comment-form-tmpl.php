@@ -130,7 +130,7 @@
 
 			{% mso_hook('comments_content_end') %}
 			
-			<p><button name="comments_submit" type="submit">{{ tf('Отправить') }}</button></p>
+			<div class="mar10-tb"><button name="comments_submit" type="submit">{{ tf('Отправить') }}</button></div>
 			
 		</div><!-- div class="mso-comments-textarea" -->
 	</form>

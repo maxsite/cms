@@ -2,7 +2,7 @@
 
 <p>{{ tf('Если у вас сохранился код активации, то вы можете сразу заполнить все поля. Если код активации утерян, то вначале введите только email и нажмите кнопку «Готово». На указанный email вы получите код активации. После этого вы можете вернуться на эту страницу и заполнить все поля.') }}</p>
 
-<div class="mso-comusers-form-rp"><form method="post">{{ mso_form_session('f_session_id') }}
+<div class="mso-comusers-form-rp"><form class="mso-form" method="post">{{ mso_form_session('f_session_id') }}
 
 	<p><label><span>{{ tf('Ваш email') }}</span> <input type="email" name="f_comusers_email" value=""></label></p>
 

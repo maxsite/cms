@@ -4,7 +4,7 @@
 
 <p><i>{{ tf('Все указанные данные будут публичными. При смене имени, нужно будет перелогиниться заново.') }}</i></p>
 
-<form method="post">{{ mso_form_session('f_session_id') }}
+<form class="mso-form" method="post">{{ mso_form_session('f_session_id') }}
 	<input type="hidden" value="{{ $comusers_email }}" name="f_comusers_email">
 	<input type="hidden" value="{{ $comusers_password }}" name="f_comusers_password">
 

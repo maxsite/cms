@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<form method="post">{{ $session_id }}
+<form class="mso-form" method="post">{{ $session_id }}
 
 	<p><label>{{ tf('Ваш email') }} <input type="email" name="f_comusers_email"></label></p>
 	<p><label>{{ tf('Введите ключ активации') }} <input type="text" name="f_comusers_activate_key"></label></p>

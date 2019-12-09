@@ -3,7 +3,7 @@
 <div class="mso-registration-form">
 	<h3>{{ tf('Укажите данные для регистрации на сайте') }}</h3>
 
-	<form method="post" action="{{ $action }}" name="freg">
+	<form class="mso-form" method="post" action="{{ $action }}" name="freg">
 		{{ mso_form_session('freg_session_id') }}
 		<input type="hidden" value="0" name="freg_rules_ok">
 		<input type="hidden" value="{{ $redirect_url }}" name="freg_redirect_url">

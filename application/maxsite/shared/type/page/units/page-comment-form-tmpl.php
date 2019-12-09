@@ -3,7 +3,7 @@
 <div class="mso-comment-leave">{{ mso_get_option('leave_a_comment', 'templates',  tf('Оставьте комментарий!')) }}</div>
 
 <div class="mso-comment-form">
-	<form method="post">
+	<form class="mso-form" method="post">
 		<input type="hidden" name="comments_page_id" value="{{ $page['page_id'] }}">
 		{{ mso_form_session('comments_session') }}
 

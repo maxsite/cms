@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-<div class="mso-loginform-common"><form method="post" action="{{ $action }}" name="flogin">
+<div class="mso-loginform-common"><form class="mso-form" method="post" action="{{ $action }}" name="flogin">
 	<input type="hidden" value="{{ $redirect }}" name="flogin_redirect">
 	<input type="hidden" value="{{ $session_id }}" name="flogin_session_id">
 	

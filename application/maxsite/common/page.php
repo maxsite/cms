@@ -1697,14 +1697,25 @@ function mso_page_content($page_content = '', $use_password = true, $message = '
 
 	if ($use_password and $page['page_password']) // есть пароль
 	{
+		$form = '';
+		
+		$_message = tf($message);
+		$_pass = tf('Пароль:');
+		$_id = $page['page_id'];
+		$_sess = mso_form_session('f_session_id');
 
-		$form ='<p><strong>' . tf($message) . '</strong></p>';
-		$form .= '<form action="' . getinfo('siteurl') . 'page/' . $page['page_slug'] . '" method="post">' . mso_form_session('f_session_id');
-		$form .= '<input type="hidden" name="f_page_id" value="' . $page['page_id'] . '">';
-		$form .= '<p>' . tf('Пароль:') . ' <input type="text" name="f_password" value=""> ';
-		$form .= '<input type="submit" name="f_submit" value="ОК"></p>';
-		$form .= '</form>';
-
+		// можно переписать форму - файл должен вернуть переменную $form 
+		if ($fn = mso_find_ts_file('type/page/units/page-password-content-form.php')) {
+			require($fn);
+		} else {
+			$form ='<h5>' . $_message . '</h5>';
+			$form .= '<form class="mso-form" method="post">' . $_sess;
+			$form .= '<input type="hidden" name="f_page_id" value="' . $_id . '">';
+			$form .= '<div>' . $_pass . ' <input type="text" name="f_password" value="" required> ';
+			$form .= '<button type="submit" name="f_submit">OK</button></div>';
+			$form .= '</form>';
+		}
+		
 		// возможно пароль уже был отправлен
 		if ( $post = mso_check_post(array('f_session_id', 'f_submit', 'f_page_id', 'f_password')) )
 		{
@@ -1720,7 +1731,7 @@ function mso_page_content($page_content = '', $use_password = true, $message = '
 			}
 			else // ошибка в пароле
 			{
-				echo '<p style="color: red;">' . tf('<strong>Ошибочный пароль!</strong> Повторите ввод.') . '</p>'. $form;
+				echo '<p class="mso-message-alert">' . tf('<strong>Ошибочный пароль!</strong> Повторите ввод.') . '</p>'. $form;
 			}
 		}
 		else // нет post, выводим форму

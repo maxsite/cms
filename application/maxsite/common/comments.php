@@ -1937,6 +1937,15 @@ function mso_avatar($comment, $img_add = 'class="mso-gravatar"', $echo = false, 
 			}
 		}
 		
+		$avatar_url = "https://www.gravatar.com/avatar/?gravatar_id="
+				. md5($grav_email)
+				. "&amp;s=" . $avatar_size
+				. $d;
+
+		// http://ru.gravatar.com/site/implement/images/php/
+		// $grav_url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $email ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+
+		/*
 		if (!empty($_SERVER['HTTPS'])) 
 		{
 			$avatar_url = "https://secure.gravatar.com/avatar.php?gravatar_id="
@@ -1951,6 +1960,7 @@ function mso_avatar($comment, $img_add = 'class="mso-gravatar"', $echo = false, 
 				. "&amp;size=" . $avatar_size
 				. $d;
 		}
+		*/
 	}
 	
 	if (!$url_only)

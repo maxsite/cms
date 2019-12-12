@@ -269,7 +269,7 @@ function getinfo($info = '')
 				break;
 				
 		case 'site_protocol' : // по какому протоколу работает сайт
-				$out = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http";
+				$out = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http";
 				break;
 				
 		
@@ -1581,7 +1581,7 @@ function mso_current_url($absolute = false, $explode = false, $delete_request = 
 {
 	global $MSO;
 
-	$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https://" : "http://";
+	$url = getinfo('site_protocol');
 	$url .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	
 	if ($delete_request) // отделим по «?»
@@ -2533,7 +2533,7 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 	}
 
 	# определим текущий url
-	$http = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https://" : "http://";
+	$http = getinfo('site_protocol');
 	$current_url = $http . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 	$out = '';
@@ -3147,7 +3147,7 @@ function mso_segment_array()
 	if ( isset($_SERVER['REQUEST_URI']) and $_SERVER['REQUEST_URI'] )
 	{
 		// http://localhost/page/privet?get=dsfsdklfjkldsjflsdf
-		$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https://" : "http://";
+		$url = getinfo('site_protocol');
 		$url .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 		$url = str_replace($CI->config->config['base_url'], '', $url); // page/privet?get=dsfsdklfjkldsjflsdf
 
@@ -3183,7 +3183,7 @@ function mso_url_get()
 	$CI = & get_instance();
 	if ( isset($_SERVER['REQUEST_URI']) and $_SERVER['REQUEST_URI'] and (strpos($_SERVER['REQUEST_URI'], '?') !== FALSE) )
 	{
-		$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https://" : "http://";
+		$url = getinfo('site_protocol');
 		$url .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 		$url = str_replace($CI->config->config['base_url'], "", $url);
 		$url = explode('?', $url);

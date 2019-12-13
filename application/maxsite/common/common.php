@@ -268,11 +268,10 @@ function getinfo($info = '')
 				$out = $MSO->config['base_dir'];
 				break;
 				
-		case 'site_protocol' : // по какому протоколу работает сайт
-				$out = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https" : "http";
+		case 'site_protocol' : // по какому протоколу работает сайт http://
+				$out = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https://" : "http://";
 				break;
 				
-		
 		endswitch;
 
 	return $out;

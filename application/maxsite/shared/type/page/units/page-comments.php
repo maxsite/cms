@@ -60,7 +60,10 @@ if ($page_text_ok and $comments) // есть страницы
 	
 	if ($fn = mso_find_ts_file('type/page/units/page-comments-article-tmpl.php')) 
 		$tmpl = mso_tmpl($fn);
-		
+	
+	// опция, разрешающая вывод аватарок
+	$show_avatar = mso_get_option('show_avatar', 'general', 1);
+
 	foreach ($comments as $comment)  // выводим в цикле
 	{
 		$comment_num++;
@@ -80,7 +83,10 @@ if ($page_text_ok and $comments) // есть страницы
 		elseif ($comusers_id) $a_class .= ' mso-comment-comusers';
 		else $a_class .= ' mso-comment-anonim';
 		
-		$avatar = mso_avatar($comment, '', false,  false, true); // только адрес граватарки
+		if ($show_avatar)
+			$avatar = mso_avatar($comment, '', false,  false, true); // только адрес граватарки
+		else
+			$avatar = '';
 
 		// $comments_content = mso_comments_content($comments_content);
 		

@@ -2,8 +2,10 @@
 
 <article class="mso-comment-article {{ $a_class }} clearfix">
 	
-	<img src="{{ $avatar }}" alt="" class="mso-gravatar">
-	
+	{% if ($avatar) : %}
+		<img src="{{ $avatar }}" alt="" class="mso-gravatar">
+	{% endif %}
+
 	<p class="mso-comment-info">
 		<span class="mso-comment-num">{{ $comment_num }}</span>
 		

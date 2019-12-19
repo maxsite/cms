@@ -37,7 +37,7 @@ class Thumb
 			// если есть вхождение http в начале адреса, то «выравниваем» протоколы
 			if (strpos($url, 'http') === 0)
 			{
-				$url = getinfo('site_protocol') . '://' . str_replace(array('http://', 'https://'), '' , $url);
+				$url = getinfo('site_protocol') . str_replace(array('http://', 'https://'), '' , $url);
 			}
 			else
 			{

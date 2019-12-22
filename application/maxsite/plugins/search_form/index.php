@@ -33,7 +33,6 @@ function search_form_widget($num = 1)
 	return search_form_widget_custom($options, $num);
 }
 
-
 # форма настройки виджета 
 # имя функции = виджет_form
 function search_form_widget_form($num = 1) 
@@ -49,6 +48,7 @@ function search_form_widget_form($num = 1)
 	if ( !isset($options['style_text']) ) $options['style_text'] = '';
 	if ( !isset($options['style_submit']) ) $options['style_submit'] = '';
 	if ( !isset($options['text_posle']) ) $options['text_posle'] = '';
+	if ( !isset($options['form_class']) ) $options['form_class'] = 'mso-form flex flex-vcenter';
 	
 	// вывод самой формы
 	$CI = & get_instance();
@@ -65,6 +65,8 @@ function search_form_widget_form($num = 1)
 	$form .= mso_widget_create_form(t('CSS-стиль кнопки'), form_input( array( 'name'=>$widget . 'style_submit', 'value'=>$options['style_submit'])));
 	
 	$form .= mso_widget_create_form(t('Текст внизу'), form_textarea( array( 'name'=>$widget . 'text_posle', 'value'=>$options['text_posle'], 'rows' => '3')));
+	
+	$form .= mso_widget_create_form(t('CSS-классы формы'), form_input( array( 'name'=>$widget . 'form_class', 'value'=>$options['form_class'])));
 	
 	
 	return $form;
@@ -87,6 +89,7 @@ function search_form_widget_update($num = 1)
 	$newoptions['style_text'] = mso_widget_get_post($widget . 'style_text');
 	$newoptions['style_submit'] = mso_widget_get_post($widget . 'style_submit');
 	$newoptions['text_posle'] = mso_widget_get_post($widget . 'text_posle');
+	$newoptions['form_class'] = mso_widget_get_post($widget . 'form_class');
 
 	
 	if ( $options != $newoptions ) 
@@ -103,18 +106,18 @@ function search_form_widget_custom($options = array(), $num = 1)
 	if ( !isset($options['style_text']) ) $options['style_text'] = '';
 	if ( !isset($options['style_submit']) ) $options['style_submit'] = '';
 	if ( !isset($options['text_posle']) ) $options['text_posle'] = '';
+	if ( !isset($options['form_class']) ) $options['form_class'] = 'mso-form flex flex-vcenter';
 	
 	if ($options['text_posle'])
 	{
-		// d тексте можно указать [SITEURL], который заменится на адрес сайта
+		// в тексте можно указать [SITEURL], который заменится на адрес сайта
 		$options['text_posle'] = str_replace('[SITEURL]', getinfo('site_url'), $options['text_posle']);
 	}
 	
 	if ($options['style_text']) $options['style_text'] = ' style ="' . $options['style_text'] . '"';
 	
-	
 	$out .= '
-<form name="f_search" method="get" onsubmit="location.href=\'' . getinfo('siteurl') . 'search/\' + encodeURIComponent(this.s.value).replace(/%20/g, \'+\'); return false;">
+<form class="' . $options['form_class'] . '" name="f_search" method="get" onsubmit="location.href=\'' . getinfo('siteurl') . 'search/\' + encodeURIComponent(this.s.value).replace(/%20/g, \'+\'); return false;">
 <input type="search" name="s"' . $options['style_text'] . ' placeholder="' . htmlspecialchars($options['text']) . '"><button type="submit"' . $options['style_submit'] . '>' . $options['submit'] . '</button>' . $options['text_posle'] . '
 </form>
 ';
@@ -124,4 +127,4 @@ function search_form_widget_custom($options = array(), $num = 1)
 	return $out;
 }
 
-# end file
+# end of file

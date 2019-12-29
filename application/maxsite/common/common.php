@@ -4592,11 +4592,14 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 {
 	// подключаем файл как текст @fromfile и @module
 	$text_units = preg_replace_callback('!@fromfile (.*?)\n!is', '_mso_units_out_fromfile', $text_units);
-
+	
 	// каталог для модулей можно переопределить через mso_set_val('mso_units_out_modulesDir', 'каталог/');
 	$modulesDir = mso_get_val('mso_units_out_modulesDir', 'modules/');
-
+	
 	$text_units = preg_replace_callback('!@module (.*?)\n!is', '_mso_units_out_module', $text_units);
+	
+	// еще раз @fromfile, поскольку он может быть в подключенном @module
+	$text_units = preg_replace_callback('!@fromfile (.*?)\n!is', '_mso_units_out_fromfile', $text_units);
 	
 	// если в тексте юнита есть вхождение @USE_PHP@
 	// то разрешим в файле исполнять PHP, включая php-шаблонизатор

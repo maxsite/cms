@@ -271,7 +271,11 @@ function getinfo($info = '')
 		case 'site_protocol' : // по какому протоколу работает сайт http://
 				$out = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != "off") ? "https://" : "http://";
 				break;
-				
+
+		case 'session_id' : // текущая сессия
+				$out = $MSO->data['session']['session_id'];
+				break;		
+
 		endswitch;
 
 	return $out;

@@ -442,7 +442,7 @@ function forms_content_post($options, $files, $fields, $format)
 		
 		// если были ошибки, то уже вышли из функции
 		
-		$prefs = ''; // дополнительные опции для mso_mail
+		$prefs = []; // дополнительные опции для mso_mail
 		
 		// если есть вложения
 		if ($file_attaches = forms_files_post($files))

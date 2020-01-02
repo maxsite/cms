@@ -4590,6 +4590,8 @@ function mso_shortcode($shortcode, $func, $content)
  */
 function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $path_file = 'type/home/units/')
 {
+    $text_units .= "\n";
+    
 	// подключаем файл как текст @fromfile и @module
 	$text_units = preg_replace_callback('!@fromfile (.*?)\n!is', '_mso_units_out_fromfile', $text_units);
 	
@@ -4732,7 +4734,10 @@ function mso_units_out($text_units, $PAGES = array(), $PAGINATION = array(), $pa
 			}
 			elseif (isset($UNIT['component']) and trim($UNIT['component']))
 			{
-				if ($_fn = mso_fe( 'components/' . trim($UNIT['component']) . '/' . trim($UNIT['component']) . '.php' )) require($_fn);
+				if ($_fn = mso_fe( 'components/' . trim($UNIT['component']) . '/index.php' )) 
+                    require($_fn);
+				elseif ($_fn = mso_fe( 'components/' . trim($UNIT['component']) . '/' . trim($UNIT['component']) . '.php' ))
+                    require($_fn);
 			}
 			elseif (isset($UNIT['option_key']) and trim($UNIT['option_key']))
 			{

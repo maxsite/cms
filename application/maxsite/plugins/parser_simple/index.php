@@ -2,20 +2,11 @@
 /*
 	(с) Landing Page Framework (LPF)
 	(c) MAX — http://lpf.maxsite.com.ua/
-	
-	См. http://lpf.maxsite.com.ua/simple
-	
-	Версия: 2018-08-25
-	
-	Простой autotag. Можно комбинировать с обычным HTML.
 
-	Подключение в variables.php:
-		$VAR['simple'] = true;
-		
-	или в index.php
-		VAR:
-			simple: true
-
+	См. https://max-3000.com/book/simple
+	
+	Версия: 2020-01-02
+	
 	Возможности
 	-----------
 	
@@ -24,7 +15,7 @@
 	__ блок DIV в одной строке
 	
 	Тэги в одну строку:
-	h1|h2|h3|h4|h5|h6|li|dt|dd
+	h1|h2|h3|h4|h5|h6|li|dt|dd|bqq
 	
 	h1 заголовок H1
 	h2 заголовок H2
@@ -32,8 +23,8 @@
 	h4 заголовок H4
 	h5 заголовок H5
 	h6 заголовок H6
-	
-	
+	bqq цитата blockquote в одной строке
+    
 	Тэги с обязательным закрывающим тэгом:	
 	div|section|article|main|footer|hgroup|header|aside|nav|form|fieldset|label|select|
 	pre|blockquote|ol|ul|bq|table|tr|td|th|caption|tbody|thead|tfoot|dl
@@ -67,7 +58,7 @@
 	bq 
 		цитата blockquote
 	/bq
-
+    
 	
 	Строчные тэги (впереди должен быть пробел): 
 	
@@ -177,7 +168,7 @@ function autotag_simple($text)
 	$text = preg_replace('!^\s*[^<]hr\((.*?)\)\((.*?)\)\s*\n!m', "\n<hr class=\"$1\" style=\"$2\">\n", $text);
 	
 	// тэги одной строкой
-	$tags1 = '(h1|h2|h3|h4|h5|h6|dt|dd|li)';
+	$tags1 = '(h1|h2|h3|h4|h5|h6|dt|dd|li|bqq)';
 	
 	# h1(bold)(color: red) Заголовок
 	$text = preg_replace('!^\s*' . $tags1 . '\((.*?)\)\((.*?)\)\s+(.*?)\n!m', "\n<$1 class=\"$2\" style=\"$3\">$4</$1>\n", $text);
@@ -209,8 +200,8 @@ function autotag_simple($text)
 	$text = preg_replace('!^\s*' . $tags2 . '\s*(\n|\|\|)!m', "\n<$1>\n", $text);
 	
 	# замена несуществующего тэга
-	$text = str_replace('<bq', '<blockquote', $text);
-	$text = str_replace('</bq>', '</blockquote>', $text);
+	$text = str_replace(['<bqq', '<bq'], '<blockquote', $text);
+	$text = str_replace(['</bqq>', '</bq>'], '</blockquote>', $text);
 	
 	
 	# [br]
@@ -222,4 +213,4 @@ function autotag_simple($text)
 	return trim($text);
 }
 
-# end file
+# end of file

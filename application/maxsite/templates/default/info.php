@@ -2,17 +2,17 @@
 
 /**
  * MaxSite CMS
- * (c) http://max-3000.com/
+ * (c) https://max-3000.com/
  */
 
 $info = array(
 	'name' => 'Default',
 	'description' => t('Шаблон для MaxSite CMS'),
-	'version' => '2019.11',
+	'version' => '2020.1',
 	'author' => 'MAX',
-	'template_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
-	'maxsite-min-version' => '103'
+	'template_url' => 'https://max-3000.com/',
+	'author_url' => 'https://maxsite.org/',
+	'maxsite-min-version' => '104'
 );
 
 # end of file

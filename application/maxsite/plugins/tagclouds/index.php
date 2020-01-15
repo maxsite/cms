@@ -157,7 +157,6 @@ function tagclouds_widget_custom($options = array(), $num = 1)
 	if ( !isset($options['sort']) ) $sort = 0;
 		else $sort = (int) $options['sort'];
 		
-	require_once( getinfo('common_dir') . 'meta.php' ); // функции мета
 	$tagcloud = mso_get_all_tags_page();
 	
 	asort($tagcloud);

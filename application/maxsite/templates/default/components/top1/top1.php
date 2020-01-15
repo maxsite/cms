@@ -24,7 +24,7 @@ $logo_attr = $logo_attr ? ' ' . $logo_attr : '';
 // задан размер по ширине и высоте, значит пробуем кропнуть указанное изображение и получить новое
 if ($logo_width or $logo_height)
 {
-	require_once(getinfo('shared_dir') . 'stock/thumb/thumb.php');
+	// require_once(getinfo('shared_dir') . 'stock/thumb/thumb.php');
 	
 	if ($new_image = thumb_generate($logo, $logo_width, $logo_height, false, $logo_type_resize, false, 'mini', '-' . $logo_width . '-' . $logo_height . '-' . $logo_type_resize))
 	{

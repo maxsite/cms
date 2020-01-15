@@ -1,29 +1,24 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 /**
  * MaxSite CMS
- * (c) http://max-3000.com/
+ * (c) https://max-3000.com/
  */
-
 
 $title_contact = mso_get_option('title_contact', 'templates', tf('Обратная связь'));
 
-if ($f = mso_page_foreach('contact-head-meta')) 
-	require($f);
+if ($fn = mso_page_foreach('contact-head-meta'))
+	require $fn;
 else
 	mso_head_meta('title', $title_contact); //  meta title страницы
 
-if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
+if ($fn = mso_find_ts_file('main/main-start.php')) require $fn;
 
-echo NR . '<div class="mso-type-contact"><div class="mso-page-only">' . NR;
-
+echo '<div class="mso-type-contact"><div class="mso-page-only">';
 echo '<h3>' . $title_contact . '</h3>';
-
 echo '<div class="mso-page-content">';
-
 echo mso_get_option('prew_contact', 'templates', '');
 
-if ($f = mso_page_foreach('contact-do')) require($f); // подключаем кастомный вывод
+if ($fn = mso_page_foreach('contact-do')) require $fn; // подключаем кастомный вывод
 
 $form_def = '[form]
 
@@ -72,32 +67,26 @@ placeholder = О чем вы хотите написать?
 [/field]
 
 [/form]';
-	
+
 $form_def = str_replace("\r", "", $form_def);
 $form_def = str_replace("\n", "_NR_", $form_def);
 
 $form = mso_get_option('form_contact', 'templates', $form_def);
 
-// pr($form);
-
 if (!$form) $form = $form_def;
 
 // используем плагин Forms
-if (!function_exists('forms_content'))
-{
-	require_once(getinfo('plugins_dir') . 'forms/index.php');
+if (!function_exists('forms_content')) {
+	require_once getinfo('plugins_dir') . 'forms/index.php';
 }
-	
-echo forms_content(str_replace("_NR_", "\n", $form));
 
+echo forms_content(str_replace("_NR_", "\n", $form));
 echo mso_get_option('post_contact', 'templates', '');
 
-if ($f = mso_page_foreach('contact-posle')) require($f); // подключаем кастомный вывод
+if ($fn = mso_page_foreach('contact-posle')) require $fn; // подключаем кастомный вывод
 
-echo '</div>'; //  class="page_content"
+echo '</div></div></div><!-- class="mso-type-contact" -->';
 
-echo NR . '</div></div><!-- class="mso-type-contact" -->' . NR;
-
-if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
+if ($fn = mso_find_ts_file('main/main-end.php')) require $fn;
 
 # end of file

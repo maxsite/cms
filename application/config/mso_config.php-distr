@@ -17,9 +17,6 @@
 # $config['mso_permalink_no_slug'] = "yes"; // разрешить синонимы 
 # $config['mso_permalink_slug_cat'] = "yes"; // разрешить также синонимы рубрик
 
-
-# $config['encryption_key'] = 'свой ключ шифрования сессии';
-
 // язык сообщений CodeIgniter (application/language/)
 # $config['language']	= 'english';
 # $config['language']	= 'de';

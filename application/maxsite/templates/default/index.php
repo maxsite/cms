@@ -15,8 +15,8 @@ if (mso_hook('global_cache_start', false)) return;
 # $MSO->language = 'en'; // можно изменить язык шаблона
 
 # подключаем нужные библиотеки
-require_once(getinfo('common_dir') . 'page.php'); // функции страниц 
-require_once(getinfo('common_dir') . 'category.php'); // функции рубрик
+// require_once(getinfo('common_dir') . 'page.php'); // функции страниц 
+// require_once(getinfo('common_dir') . 'category.php'); // функции рубрик
 
 # подключаем нужный type-файл
 if ($fn = mso_dispatcher()) require($fn);

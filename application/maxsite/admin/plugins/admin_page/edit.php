@@ -53,9 +53,6 @@ if ( !mso_check_allow('admin_page_edit_other') )
 	}
 }
 
-require_once( getinfo('common_dir') . 'category.php' ); // функции рубрик
-require_once( getinfo('common_dir') . 'meta.php' ); // функции meta - для меток
-
 // этот код почти полностью повторяет код из new.php
 // разница только в том, что указан id
 if ( $post = mso_check_post(array('f_session_id', 'f_submit', 'f_content')) )

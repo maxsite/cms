@@ -85,7 +85,7 @@ function popup_head($args = array())
 	
 	$popup_allways_view =  $options['popup-allways-view'] ? 'false' : 'true';
 	
-	echo mso_load_jquery() . mso_load_jquery('jquery.cookie.js') . '
+	echo mso_load_jquery('jquery.cookie.js') . '
 <script>
 if (document.querySelector)
 { 

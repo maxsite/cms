@@ -30,7 +30,7 @@ function samborsky_polls_autoload($args = array())
 
 function samborsky_polls_body_end($args = array())
 {
-	mso_load_jquery();
+	// mso_load_jquery();
 	
 	echo mso_load_script(getinfo('plugins_url') . 'samborsky_polls/js/kernel.js');
 	echo mso_load_style(getinfo('plugins_url') . 'samborsky_polls/css/style.css');

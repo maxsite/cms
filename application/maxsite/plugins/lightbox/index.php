@@ -19,7 +19,7 @@ function lightbox_autoload($args = array())
 
 function lightbox_head($args = array()) 
 {
-	echo mso_load_jquery();
+	// echo mso_load_jquery();
 	
 	$url = getinfo('plugins_url') . 'lightbox/';
 	

@@ -1,63 +1,52 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 /**
  * MaxSite CMS
- * (c) http://max-3000.com/
+ * (c) https://max-3000.com/
  */
 
-if ($f = mso_page_foreach('comments-head-meta')) 
-	require($f);
+if ($fn = mso_page_foreach('comments-head-meta'))
+	require $fn;
 else
-	mso_head_meta('title', tf('Последние комментарии') . '. ' . getinfo('title') ); //  meta title страницы
+	mso_head_meta('title', tf('Последние комментарии') . '. ' . getinfo('title')); //  meta title страницы
 
-if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
+if ($fn = mso_find_ts_file('main/main-start.php')) require $fn;
 
-echo NR . '<div class="mso-type-comments"><div class="mso-page-only"><div class="mso-page-content mso-type-comments-content">';
+echo '<div class="mso-type-comments"><div class="mso-page-only"><div class="mso-page-content mso-type-comments-content">';
 
-if ($f = mso_page_foreach('comments-do'))
-{
-	require($f); // подключаем кастомный вывод
-}
-else 
-{
-	echo '<h1 class="comments">' . tf('Последние комментарии'). '</h1>';
-	echo '<p class="info"><a href="' . getinfo('siteurl') . 'comments/feed">'. tf('Подписаться по RSS'). '</a>';
-	echo '<br><a href="' . getinfo('siteurl') . 'users">'. tf('Список комментаторов'). '</a></p>';
+if ($fn = mso_page_foreach('comments-do')) {
+	require $fn; // подключаем кастомный вывод
+} else {
+	echo '<h1 class="comments">' . tf('Последние комментарии') . '</h1>';
+	echo '<p class="info"><a href="' . getinfo('siteurl') . 'comments/feed">' . tf('Подписаться по RSS') . '</a>';
+	echo '<br><a href="' . getinfo('siteurl') . 'users">' . tf('Список комментаторов') . '</a></p>';
 }
 
-if (function_exists('last_comments_widget_custom'))
-{
-	if ($f = mso_page_foreach('comments-do-last-comments-widget')) 
-	{
-		require($f); // подключаем кастомный вывод
-	}
-	else
-	{
+if (function_exists('last_comments_widget_custom')) {
+	if ($fn = mso_page_foreach('comments-do-last-comments-widget')) {
+		require $fn; // подключаем кастомный вывод
+	} else {
 		echo '<div class="comments">';
-		echo last_comments_widget_custom(array('count'=> 40), '999');
+		echo last_comments_widget_custom(array('count' => 40), '999');
 		echo '</div>';
 	}
-}
-else
-{
+} else {
 	// нет функции last_comments_widget_custom - выводим комменты как обычно
-	
-	require_once( getinfo('common_dir') . 'comments.php' ); // функции комментариев
+
+	require_once getinfo('common_dir') . 'comments.php'; // функции комментариев
 
 	// получаем список комментариев текущей страницы
-	$comments = mso_get_comments(false, array('limit' => mso_get_option('comments_count', 'templates', '10'), 'order'=>'desc'));
-	
+	$comments = mso_get_comments(false, array('limit' => mso_get_option('comments_count', 'templates', '10'), 'order' => 'desc'));
+
 	echo '<div class="comments">';
-	
+
 	if ($comments) // есть страницы
-	{ 	
+	{
 		echo '<ul>';
-		
+
 		foreach ($comments as $comment)  // выводим в цикле
 		{
-			if ($f = mso_page_foreach('comments')) 
-			{
-				require($f); // подключаем кастомный вывод
+			if ($fn = mso_page_foreach('comments')) {
+				require $fn; // подключаем кастомный вывод
 				continue; // следующая итерация
 			}
 
@@ -69,7 +58,7 @@ else
 			echo '</span><br>' . $comments_content;
 			echo '</li>';
 		}
-		
+
 		echo '</ul>';
 	}
 
@@ -77,10 +66,8 @@ else
 }
 
 
-echo NR . '</div></div></div><!-- class="mso-type-comments" -->' . NR;
+echo '</div></div></div><!-- class="mso-type-comments" -->';
 
-if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
+if ($fn = mso_find_ts_file('main/main-end.php')) require $fn;
 
-
- 
 # end of file

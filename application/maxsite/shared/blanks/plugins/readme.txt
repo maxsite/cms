@@ -1,6 +1,6 @@
 Заготовки для новых плагинов.
 
-См. http://maxsite.org/page/plaginy-v-maxsite-cms
+См. https://maxsite.org/page/plaginy-v-maxsite-cms
 
 Группы:
 

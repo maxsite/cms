@@ -62,10 +62,7 @@
 			// $post = array_map('_array_stripcslashes', $post);
 			
 			// в $post все переданные поля формы
-			
-			require_once( getinfo('common_dir') . 'category.php' ); // функции рубрик
-			require_once( getinfo('common_dir') . 'meta.php' ); // функции meta - для меток
-			
+						
 			// номер записи хратится как ключ массива f_submit - переделываем
 			$post['f_submit'] = array($id => '');
 			$post['is_bsave'] = true; // признак, что это быстрое сохранение

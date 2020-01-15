@@ -1,100 +1,105 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
-
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * MaxSite CMS
- * (c) http://max-3000.com/
+ * (c) https://max-3000.com/
  */
 
-%%% - замените на имя плагина-виджета
+// MY - замените на имя плагина
 
-
-# функция автоподключения плагина
-function %%%_autoload()
+// функция автоподключения плагина
+function MY_autoload()
 {
 	// регистрируем виджет
-	mso_register_widget('%%%_widget', t('%%%') ); 
+	mso_register_widget('MY_widget', t('MY'));
 }
 
-# функция выполняется при деинсталяции плагина
-function %%%_uninstall($args = array())
-{	
+// функция выполняется при деинсталяции плагина
+function MY_uninstall()
+{
 	// удалим созданные опции
-	mso_delete_option_mask('%%%_widget_', 'plugins' ); 
-	return $args;
+	mso_delete_option_mask('MY_widget_', 'plugins');
 }
 
-# функция, которая берет настройки из опций виджетов
-function %%%_widget($num = 1) 
+// функция, которая берет настройки из опций виджетов
+function MY_widget($num = 1)
 {
-	$widget = '%%%_widget_' . $num; // имя для опций = виджет + номер
-	$options = mso_get_option($widget, 'plugins', array() ); // получаем опции
-	
+	$widget = 'MY_widget_' . $num; // имя для опций = виджет + номер
+	$options = mso_get_option($widget, 'plugins', []); // получаем опции
+
 	// заменим заголовок, чтобы был в .mso-widget-header
-	if ( isset($options['header']) and $options['header'] ) 
+	if (isset($options['header']) and $options['header']) {
 		$options['header'] = mso_get_val('widget_header_start', '<div class="mso-widget-header"><span>') . $options['header'] . mso_get_val('widget_header_end', '</span></div>');
-	else $options['header'] = '';
-	
-	return %%%_widget_custom($options, $num);
+	} else {
+		$options['header'] = '';
+	}
+
+	return MY_widget_custom($options, $num);
 }
 
-
-# форма настройки виджета 
-# имя функции = виджет_form
-function %%%_widget_form($num = 1) 
+// форма настройки виджета 
+// имя функции = виджет_form
+function MY_widget_form($num = 1)
 {
-	$widget = '%%%_widget_' . $num; // имя для формы и опций = виджет + номер
-	
+	$widget = 'MY_widget_' . $num; // имя для формы и опций = виджет + номер
+
 	// получаем опции 
-	$options = mso_get_option($widget, 'plugins', array());
-	
-	if ( !isset($options['header']) ) $options['header'] = '';
-	
+	$options = mso_get_option($widget, 'plugins', []);
+
+	if (!isset($options['header'])) $options['header'] = '';
+
 	// вывод самой формы
-	$CI = & get_instance();
+	$CI = &get_instance();
 	$CI->load->helper('form');
-	
-	$form = mso_widget_create_form(t('Заголовок'), form_input( array( 'name'=>$widget . 'header', 'value'=>$options['header'])), t('Подсказка'));
+
+	$form = mso_widget_create_form(t('Заголовок'), form_input(
+		[
+			'name' => $widget . 'header',
+			'value' => $options['header']
+		],
+		t('Подсказка')
+	));
 
 	// $form .= mso_widget_create_form(t(''), , t(''));
 
-	
+
 	return $form;
 }
 
-
-# сюда приходят POST из формы настройки виджета
-# имя функции = виджет_update
-function %%%_widget_update($num = 1) 
+// сюда приходят POST из формы настройки виджета
+// имя функции = виджет_update
+function MY_widget_update($num = 1)
 {
-	$widget = '%%%_widget_' . $num; // имя для опций = виджет + номер
-	
+	$widget = 'MY_widget_' . $num; // имя для опций = виджет + номер
+
 	// получаем опции
-	$options = $newoptions = mso_get_option($widget, 'plugins', array());
-	
+	$options = $newoptions = mso_get_option($widget, 'plugins', []);
+
 	// обрабатываем POST
 	$newoptions['header'] = mso_widget_get_post($widget . 'header');
-	
-	if ( $options != $newoptions ) 
-		mso_add_option($widget, $newoptions, 'plugins' );
+
+	if ($options != $newoptions)
+		mso_add_option($widget, $newoptions, 'plugins');
 }
 
-# функции плагина
-function %%%_widget_custom($options = array(), $num = 1)
+// функции плагина
+function MY_widget_custom($options = [], $num = 1)
 {
 	// кэш 
-	$cache_key = '%%%_widget_custom' . serialize($options) . $num;
+	$cache_key = 'MY_widget_custom' . serialize($options) . $num;
 	$k = mso_get_cache($cache_key);
+
 	if ($k) return $k; // да есть в кэше
-	
+
 	$out = '';
-	if ( !isset($options['header']) ) $options['header'] = '';
-	
+
+	if (!isset($options['header'])) $options['header'] = '';
+
+	// ... код виджета ...
 
 
-	
 	mso_add_cache($cache_key, $out); // сразу в кэш добавим
-	
-	return $out;	
+
+	return $out;
 }
 
 # end of file

@@ -52,9 +52,7 @@ if ( $post = mso_check_post(array('do', 'session_id', 'category_id')) )
 			
 			// теперь обновим мета
 			if (isset($post['cat'][$cat_id]['category_meta']))
-			{
-				require_once(getinfo('common_dir') . 'meta.php');
-				
+			{				
 				foreach($post['cat'][$cat_id]['category_meta'] as $meta_key => $meta_value)
 				{
 					mso_add_meta($meta_key, $cat_id, $meta_table = 'category', $meta_value);

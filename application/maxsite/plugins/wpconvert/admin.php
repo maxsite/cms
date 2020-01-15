@@ -8,10 +8,9 @@
 	global $MSO;
 	$CI = & get_instance();
 	
-	if (!defined('MAGPIE_CACHE_AGE'))	define('MAGPIE_CACHE_AGE', 1000); // время кэширования MAGPIE
-	require_once(getinfo('common_dir') . 'magpierss/rss_fetch.inc');
+	if (!defined('MAGPIE_CACHE_AGE')) define('MAGPIE_CACHE_AGE', 1000); // время кэширования MAGPIE
 	
-	
+	require_once(getinfo('plugins_dir') . 'wpconvert/magpierss/rss_fetch.inc');
 	
 	// проверка 
 	if ( $post = mso_check_post(array('f_session_id', 'f_submit_chek', 'f_xml_file')) )

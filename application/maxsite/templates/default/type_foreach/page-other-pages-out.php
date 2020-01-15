@@ -4,7 +4,7 @@
 */
 
 // библиотека для создания миниатюр
-require_once(getinfo('shared_dir') . 'stock/thumb/thumb.php');
+// require_once(getinfo('shared_dir') . 'stock/thumb/thumb.php');
 
 echo '<div class="hide-print mso-page-other-pages clearfix"><h4><span>' . mso_get_option('page_other_pages', 'templates', tf('Еще записи по теме')) . '</span></h4>';
 echo '<div class="flex flex-wrap">';

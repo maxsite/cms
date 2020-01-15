@@ -117,7 +117,7 @@ function _upload($up_dir, $fn, $r = array())
 		$use_watermark_mini = false;
 	}
 	
-	require(getinfo('shared_dir') . 'stock/thumb/thumb.php');
+	// require(getinfo('shared_dir') . 'stock/thumb/thumb.php');
 
 	// У нас есть uploads_dir, а нужен url
 	$url = str_replace(getinfo('uploads_dir'), getinfo('uploads_url'), $up_dir);

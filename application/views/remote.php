@@ -1,8 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 /**
  * MaxSite CMS
- * (c) http://max-3000.com/
+ * (c) https://max-3000.com/
  */
  
 /*
@@ -791,8 +790,6 @@ function mso_remote_f_deletecategory($post)
 # getTags : все метки
 function mso_remote_f_gettags($post)
 {
-	require_once(getinfo('common_dir') . 'meta.php');
-
 	$out = '';
 	
 	if ($post['remote_format_out'] == 'xml') $out .= '<' . '?xml version="1.0" encoding="UTF-8"?' . '>';
@@ -925,3 +922,4 @@ function _mso_implode($ar = array())
 
 mso_remote_post();
 
+# end of file

@@ -92,8 +92,7 @@ function tabs_head($args = array())
 		Переделка, адаптация (с) MAX (http://maxsite.org/), Cuprum (http://cuprum.name/)
 	*/
 
-	echo mso_load_jquery() 
-		. mso_load_jquery('jquery.cookie.js')
+	echo  mso_load_jquery('jquery.cookie.js')
 		. mso_load_script(getinfo('plugins_url'). 'tabs/tabs.js');
 
 	return $args;

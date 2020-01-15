@@ -246,9 +246,7 @@ function xml_sitemap_custom($args = array())
 	# Добавляем метки
 	#
 	if($options['tags_show'])
-	{
-		require_once( getinfo('common_dir') . 'meta.php' );
-		
+	{		
 		$alltags = mso_get_all_tags_page();
 		
 		foreach ($alltags as $tag => $count) 

@@ -1,8 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
 /**
  * MaxSite CMS
- * (c) http://max-3000.com/
+ * (c) https://max-3000.com/
  */
 
 global $CONTENT_OUT, $MAIN_FILE;
@@ -12,4 +11,4 @@ ob_end_clean();
 
 require($MAIN_FILE);
 
-# end file
+# end of file

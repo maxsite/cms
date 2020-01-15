@@ -7,8 +7,8 @@ h1 {{ t('Установка MaxSite CMS') }}
 hr(dotted)
 
 
-{% if ( version_compare(PHP_VERSION, '5.4' , '<') ) : %}
-	_(t-red) {{ t('Слишком старая версия PHP: ') }} <var>{{ PHP_VERSION }}</var> {{ t('Требуется: ') }} 5.4 (но лучше 7.x)
+{% if ( version_compare(PHP_VERSION, '7.1' , '<') ) : %}
+	_(t-red) {{ t('Слишком старая версия PHP: ') }} <var>{{ PHP_VERSION }}</var> {{ t('Требуется как минимум') }} 7.1
 	</div>
 	{% return %}
 {% endif %}
@@ -270,7 +270,7 @@ if ($_POST)
 						. t('Для входа воспользуйтесь данными:') . "\r\n"
 						. t('Логин: ') . $PV['username'] . "\r\n"
 						. t('Пароль: ') . $PV['password'] . "\r\n" . "\r\n" . "\r\n"
-						. t('Сайт поддержки: http://max-3000.com/');
+						. t('Сайт поддержки: https://max-3000.com/');
 						
 				v_email($PV['email'], t('Новый сайт на MaxSite CMS'), $message);
 			}
@@ -296,7 +296,7 @@ h4 Укажите данные для установки
 
 	<p><label>Логин админа <input type="text" class="w100" name="username" value="{{ $PV['username'] }}" placeholder="логин..." required></label></p>
 	
-	<p><label>Пароль (более 8 символов)<input type="password" class="w100" name="password" value="{{ $PV['password'] }}" placeholder="пароль..." required></label></p>
+	<p><label>Пароль (более 8 символов)<input type="text" class="w100" name="password" value="{{ $PV['password'] }}" placeholder="пароль..." required></label></p>
 	
 	<p><label>Email <input type="email" class="w100" name="email" value="{{ $PV['email'] }}" placeholder="email..." required></label></p>
 	

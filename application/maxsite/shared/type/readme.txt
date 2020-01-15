@@ -3,4 +3,3 @@
 	home/home.php
 	category/category.php
 	и т.п.
-

@@ -53,9 +53,7 @@ else
 // pr($category_meta);
 
 if ($category_meta)
-{
-	require_once( getinfo('common_dir') . 'meta.php' ); 
-	
+{	
 	// нужно получить все заданные мета по данной рубрике
 	// заполним их реальным значениями
 	$all_keys_meta = array_keys($category_meta); // все ключи в массиве

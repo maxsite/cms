@@ -50,7 +50,7 @@ if (!$pages and mso_get_option('page_404_http_not_found', 'templates', 1))
 	header('HTTP/1.0 404 Not Found');
 
 // начальная часть шаблона
-if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
+if ($fn = mso_find_ts_file('main/main-start.php')) require $fn;
 
 echo '<div class="mso-type-category"><section>';
 
@@ -104,7 +104,7 @@ if ($fn = mso_page_foreach('category-posle')) require $fn; // подключае
 
 echo '</section></div><!-- /div.mso-type-category -->';
 
-# конечная часть шаблона
+// конечная часть шаблона
 if ($fn = mso_find_ts_file('main/main-end.php')) require $fn;
 
 # end of file

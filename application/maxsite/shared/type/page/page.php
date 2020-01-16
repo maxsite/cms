@@ -85,8 +85,8 @@ if ($pages) {
 			// файл указывается в type_foreach/info-top/файл.php
 			// или info-top/page/файл.php
 
-			if (mso_get_val('show-info-top', true)) // если нужно отключить info-top
-			{
+			if (mso_get_val('show-info-top', true)) {
+				// если нужно отключить info-top
 				$info_top_custom = $p->meta_val('info-top-custom');
 
 				$f = false;
@@ -97,7 +97,7 @@ if ($pages) {
 				}
 
 				if ($f) {
-					require($f);
+					require $f;
 				} else {
 					// нет метаполя - типовой вывод
 					// возможно есть дефолтная опция

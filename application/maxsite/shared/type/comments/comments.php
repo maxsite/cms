@@ -35,16 +35,14 @@ if (function_exists('last_comments_widget_custom')) {
 	require_once getinfo('common_dir') . 'comments.php'; // функции комментариев
 
 	// получаем список комментариев текущей страницы
-	$comments = mso_get_comments(false, array('limit' => mso_get_option('comments_count', 'templates', '10'), 'order' => 'desc'));
+	$comments = mso_get_comments(false, ['limit' => mso_get_option('comments_count', 'templates', '10'), 'order' => 'desc']);
 
 	echo '<div class="comments">';
 
-	if ($comments) // есть страницы
-	{
+	if ($comments) {
 		echo '<ul>';
 
-		foreach ($comments as $comment)  // выводим в цикле
-		{
+		foreach ($comments as $comment) {
 			if ($fn = mso_page_foreach('comments')) {
 				require $fn; // подключаем кастомный вывод
 				continue; // следующая итерация

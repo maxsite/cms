@@ -36,11 +36,10 @@ if ($fn = mso_find_ts_file('type/home/my_home.php')) {
 	// разрешены юниты в этом шаблоне?
 	if (mso_get_option('home_units_enable', getinfo('template'), 1)) {
 		// если отмечена опция использовать units.php и файл есть
-		if (mso_get_option('home_units_file_enable', getinfo('template'), true) and $fn = mso_find_ts_file('type/home/units.php')) {
+		if (mso_get_option('home_units_file_enable', getinfo('template'), true) and $fn = mso_find_ts_file('type/home/units.php'))
 			$home_units = file_get_contents($fn);
-		} else {
+		else
 			$home_units = mso_get_option('home_units', getinfo('template'), ''); // тогда из опции
-		}
 	}
 
 	if ($home_units) {
@@ -58,12 +57,11 @@ if ($fn = mso_find_ts_file('type/home/my_home.php')) {
 			}
 		} else {
 			// последние записи
-			// обычный вывод
+			
 			if (mso_get_option('home_full_text', 'templates', '1')) {
-				if ($fn = mso_find_ts_file('type/home/units/home-full.php')) require $fn;
+				if ($fn = mso_find_ts_file('type/home/units/home-full.php')) require $fn; // обычный вывод
 			} else {
-				// списком
-				if ($fn = mso_find_ts_file('type/home/units/home-list.php')) require $fn;
+				if ($fn = mso_find_ts_file('type/home/units/home-list.php')) require $fn; // списком
 			}
 		}
 	}

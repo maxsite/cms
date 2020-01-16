@@ -370,11 +370,13 @@ function mso_upload_mini($up_data, $r = [])
 					$r_conf['source_image'] = $r_conf['new_image'];
 
 					$CI->image_lib->initialize($r_conf);
+
 					if (!$CI->image_lib->crop())
 						echo '<div class="error">' . t('Создание миниатюры:') . ' ' . $CI->image_lib->display_errors() . '</div>';
 				} else {
 					// Равны
 					$CI->image_lib->initialize($r_conf);
+
 					if (!$CI->image_lib->resize())
 						echo '<div class="error">' . t('Создание миниатюры:') . ' ' . $CI->image_lib->display_errors() . '</div>';
 				}
@@ -397,7 +399,7 @@ function mso_upload_mini($up_data, $r = [])
 // $r - параметры из mso_upload()
 function mso_upload_prev($up_data, $r = [])
 {
-	# получим размеры файла
+	// получим размеры файла
 	$image_info = GetImageSize($up_data['full_path']);
 
 	if (!$image_info) return; // это не изображение
@@ -426,7 +428,6 @@ function mso_upload_prev($up_data, $r = [])
 			'width' => $size,
 			'height' => $size,
 		];
-
 
 		$mini_type = $r['mini_type']; // тип миниатюры
 		/*

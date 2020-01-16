@@ -6,13 +6,10 @@
 
 echo '<header>';
 
-if ($fn = mso_page_foreach('category-header')) {
+if ($fn = mso_page_foreach('category-header'))
 	require $fn;
-} else {
-	echo '<h1 class="mso-category">'
-		. htmlspecialchars(mso_get_cat_key('category_name'))
-		. '</h1>';
-}
+else
+	echo '<h1 class="mso-category">' . htmlspecialchars(mso_get_cat_key('category_name')) . '</h1>';
 
 if (mso_get_option('category_show_rss_text', 'templates', 1)) {
 	if ($fn = mso_page_foreach('category-show-rss-text')) {

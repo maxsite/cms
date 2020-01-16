@@ -18,12 +18,10 @@ if ($fn = mso_find_ts_file('type/tag/units/tag-out.php')) {
 	if (function_exists('ushka')) echo ushka('tag-do-pages');
 
 	// цикл вывода в отдельных юнитах
-	if ($full_posts) // полные записи
-	{
-		if ($fn = mso_find_ts_file('type/tag/units/tag-full.php')) require $fn;
+	if ($full_posts) {
+		if ($fn = mso_find_ts_file('type/tag/units/tag-full.php')) require $fn; // полные записи
 	} else {
-		// вывод в виде списка
-		if ($fn = mso_find_ts_file('type/tag/units/tag-list.php')) require $fn;
+		if ($fn = mso_find_ts_file('type/tag/units/tag-list.php')) require $fn; // вывод в виде списка
 	}
 
 	if ($fn = mso_page_foreach('tag-posle-pages')) require $fn; // подключаем кастомный вывод

@@ -8,8 +8,9 @@
 
 $p->div_start('mso-page-content mso-type-' . getinfo('type') . '-content');
 
-if ($f = mso_page_foreach('content')) require($f);
-else {
+if ($f = mso_page_foreach('content')) {
+	require $f;
+} else {
 	// есть отметка не выводить миниатюру
 	if ($p->meta_val('image_for_page_out') === 'no-page' or $p->meta_val('image_for_page_out') === '') {
 		// если show_thumb_type_ТИП вернул false, то картинку не ставим
@@ -44,9 +45,8 @@ else {
 }
 
 // для page возможен свой info-bottom
-if ($f = mso_page_foreach('info-bottom-' . getinfo('type'))) {
-	require $f;
-} elseif ($f = mso_page_foreach('info-bottom')) require $f;
+if ($f = mso_page_foreach('info-bottom-' . getinfo('type'))) require $f;
+elseif ($f = mso_page_foreach('info-bottom')) require $f;
 
 $p->html('<aside>');
 

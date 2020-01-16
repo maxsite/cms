@@ -35,7 +35,6 @@ foreach ($pages as $page) {
 	}
 
 	$p->load($page);
-
 	$p->line($line_format, '<li>', '</li>');
 
 	$exclude_page_id[] = $p->val('page_id');

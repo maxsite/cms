@@ -50,18 +50,18 @@ else {
 if (!$pages and mso_get_option('page_404_http_not_found', 'templates', 1))
 	header('HTTP/1.0 404 Not Found');
 
-if ($fn = mso_find_ts_file('main/main-start.php')) require($fn);
+if ($fn = mso_find_ts_file('main/main-start.php')) require $fn;
 
 echo '<div class="mso-type-author"><section>';
 
-if ($f = mso_page_foreach('author-do')) require($f);
+if ($f = mso_page_foreach('author-do')) require $f;
 
 if ($pages) {
 	// есть страницы
 	if ($f = mso_find_ts_file('type/author/units/author-default.php')) require($f);
 } else {
 	if ($f = mso_page_foreach('pages-not-found')) {
-		require($f);
+		require $f;
 	} else {
 		// стандартный вывод
 		echo '<div class="mso-page-only"><div class="mso-page-content mso-type-page_404">';

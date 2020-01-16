@@ -36,7 +36,7 @@ if ($fn = mso_find_ts_file('main/main-start.php')) require $fn;
 echo '<div class="mso-type-archive">';
 
 if ($f = mso_page_foreach('archive-header'))
-	require($f);
+	require $f;
 else
 	echo '<h1 class="mso-archive">' . tf('Архивы') . '</h1>';
 
@@ -61,7 +61,7 @@ if ($pages) {
 	mso_hook('pagination', $pagination);
 } else {
 	if ($f = mso_page_foreach('pages-not-found')) {
-		require($f);
+		require $f;
 	} else {
 		// стандартный вывод
 		echo '<div class="mso-page-only"><div class="mso-page-content mso-type-page_404">';

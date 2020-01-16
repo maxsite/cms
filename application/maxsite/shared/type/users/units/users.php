@@ -17,17 +17,16 @@ else
 if (!$comuser_info and mso_get_option('page_404_http_not_found', 'templates', 1))
 	header('HTTP/1.0 404 Not Found');
 
-
 // начальная часть шаблона
 if ($fn = mso_find_ts_file('main/main-start.php')) require $fn;
 
-echo NR . '<div class="mso-type-users"><div class="mso-page-only"><div class="mso-page-content mso-type-users-content">';
+echo '<div class="mso-type-users"><div class="mso-page-only"><div class="mso-page-content mso-type-users-content">';
 
 if ($comuser_info) {
 	extract($comuser_info[0]);
 
 	if ($f = mso_page_foreach('users')) {
-		require($f);
+		require $f;
 	} else {
 		$avatar_info = $comuser_info[0];
 		$avatar_info['users_avatar_url'] = $avatar_info['users_email'] = '';

@@ -506,8 +506,7 @@ function mso_find_options_key($metas = [], $key = '')
     $out = [];
 
     foreach ($metas as $k => $meta) {
-        if (isset($meta['options_key']) and $meta['options_key'] == $key) // нашли
-        {
+        if (isset($meta['options_key']) and $meta['options_key'] == $key) {
             $out[$key] = $meta;
             $out[$key]['options_name'] = $k;
             break;

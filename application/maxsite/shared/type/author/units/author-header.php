@@ -9,7 +9,7 @@ echo '<header>';
 $title_page = isset($pages[0]['users_nik']) ? $pages[0]['users_nik'] : '';
 
 if ($f = mso_page_foreach('author-header'))
-	require($f);
+	require $f;
 else
 	echo '<h1 class="mso-author">' . $title_page . '</h1>';
 

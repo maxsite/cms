@@ -47,9 +47,8 @@ if ($info_top_slug = mso_get_option('info-top_slug', getinfo('template'), '')) {
 	}
 
 	if ($i = mso_text_find_key($info_top_slug, $cur_url)) {
-		if ($fn = mso_fe('type_foreach/info-top/' . $i)) {
+		if ($fn = mso_fe('type_foreach/info-top/' . $i))
 			$info_top_fn = $fn; // выставляем путь к файлу
-		}
 	}
 }
 

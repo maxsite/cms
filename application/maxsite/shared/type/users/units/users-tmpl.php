@@ -8,11 +8,9 @@
 	<p><span style="color: red;">{{ tf('Активация не завершена.') }}</span> <a href="{{ $no_activation_link }}">{{ tf('Завершить') }}</a></p>
 {% endif %}
 
-
 {% if ($comusers_date_registr) : %}
 	<p><b>{{ tf('Дата регистрации') }}:</b> {{ $comusers_date_registr }}</p>
 {% endif %}
-
 
 {% if ($comusers_nik) : %}
 	<p><b>{{ tf('Ник') }}:</b> {{ $comusers_nik }}</p>
@@ -31,7 +29,7 @@
 {% endif %}
 
 {% if ($comusers_msn) : %} 
-	<p><b>{{ tf('Twitter') }}:</b> <a rel="nofollow" href="http://twitter.com/{{ $comusers_msn }}">@{{ $comusers_msn }}</a></p>
+	<p><b>{{ tf('Twitter') }}:</b> <a rel="nofollow" href="https://twitter.com/{{ $comusers_msn }}">@{{ $comusers_msn }}</a></p>
 {% endif %}
 
 {% if ($comusers_jaber) : %}

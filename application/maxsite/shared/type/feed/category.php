@@ -8,6 +8,7 @@ header('Content-Type: application/rss+xml; charset=utf-8');
 
 $cache_key = mso_md5('feed_' . mso_current_url());
 $k = mso_get_cache($cache_key);
+
 if ($k) return print($k); // да есть в кэше
 
 ob_start();

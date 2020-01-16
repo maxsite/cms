@@ -7,6 +7,7 @@
 global $CONTENT_OUT, $MAIN_FILE;
 
 $CONTENT_OUT = ob_get_contents();
+
 ob_end_clean();
 
 require($MAIN_FILE);

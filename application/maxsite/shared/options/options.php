@@ -59,7 +59,7 @@ $all_component =  mso_get_dirs(getinfo('template_dir') . 'components/', [], fals
 foreach ($all_component as $dir) {
 	$file = getinfo('template_dir') . 'components/' . $dir . '/options.php';
 
-	// php-файл опций. в нём доступна $options, к которой добавляютс свои опции
+	// php-файл опций. в нём доступна $options, к которой добавляются свои опции
 	if (file_exists($file)) require $file;
 }
 

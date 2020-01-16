@@ -8,6 +8,7 @@ header('Content-Type: application/rss+xml; charset=utf-8');
 
 $cache_key = mso_md5('feed_' . mso_current_url());
 $k = mso_get_cache($cache_key);
+
 if ($k) return print($k); // да есть в кэше
 
 ob_start();
@@ -44,12 +45,11 @@ $par = ['limit' => 1, 'cut' => tf('Читать полностью') . ' »', 't
 $pages = mso_get_pages($par, $pagination);
 
 if ($pages) {
-
 	$pubdate = date('D, d M Y H:i:s ' . $time_zone, strtotime(mso_date_convert('Y-m-d H:i:s', $pages[0]['page_date_publish'])));
 
 	echo '<' . '?xml version="1.0" encoding="utf-8"?' . '>';
 
-	# получаем комментарии к странице
+	// получаем комментарии к странице
 	$page = $pages[0];
 	extract($page);
 

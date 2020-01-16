@@ -41,8 +41,8 @@ if ($fn = mso_fe('custom/main-template.php')) {
 			{
 				mso_set_val('main_file', $fn); // выставляем путь к файлу
 			} else {
-				if ($page_template = mso_get_option('main_template_page', getinfo('template'), '')) // опция
-				{
+				if ($page_template = mso_get_option('main_template_page', getinfo('template'), '')) {
+					// опция
 					if ($fn = mso_fe('main/' . $page_template . '/main.php')) {
 						mso_set_val('main_file', $fn); // выставляем путь к файлу
 					}
@@ -51,7 +51,7 @@ if ($fn = mso_fe('custom/main-template.php')) {
 		} else {
 			// если есть type/ТИП/main_set_val.php, то подключаем его
 			// где и выставляется нужный файл через mso_set_val('main_file', 'ФАЙЛ');
-			if ($fn = mso_fe('type/' . getinfo('type') . '/main_set_val.php')) require($fn);
+			if ($fn = mso_fe('type/' . getinfo('type') . '/main_set_val.php')) require $fn;
 
 			// если main-файл не выставлен, то проверяем другие варианты 
 			if (!mso_get_val('main_file')) {
@@ -106,7 +106,7 @@ mso_set_val('main_class', $main_name);
 // дополнительный файл там же — main-function.php если есть, то подключаем сразу
 $main_file_function = str_replace('.php', '-function.php', $MAIN_FILE);
 
-if (file_exists($main_file_function)) require($main_file_function);
+if (file_exists($main_file_function)) require $main_file_function;
 
 ob_start();
 

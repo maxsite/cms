@@ -4,7 +4,6 @@
  * (c) https://max-3000.com/
  */
 
-
 echo '<div class="mso-type-home-cat-block">';
 
 if ($fn = mso_page_foreach('home-cat-block-text-do')) require $fn;

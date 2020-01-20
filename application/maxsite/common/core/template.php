@@ -8,7 +8,7 @@
 // Функция возвращает полный путь к файлу
 // если файла нет, то возвращается false
 // если второй параметр == false, используется каталог текущего шаблона
-// if ($fn = mso_fe('stock/page_out/page-out.php')) require($fn);
+// if ($fn = mso_fe('stock/page_out/page-out.php')) require $fn;
 function mso_fe($file, $dir = false)
 {
 	if ($dir === false) $dir = getinfo('template_dir');
@@ -25,8 +25,8 @@ function mso_fe($file, $dir = false)
 // файл указывается относительно каталога шаблона/shared-каталога
 // приоритет имеет файл в шаблоне, после в shared
 // если файл не найден, то возвращается $default
-// иначе полный путь, годный для require()
-// if ($fn = mso_find_ts_file('type/page_404/page_404.php')) require($fn);
+// иначе полный путь, годный для require
+// if ($fn = mso_find_ts_file('type/page_404/page_404.php')) require $fn;
 function mso_find_ts_file($fn, $default = false)
 {
 	$fn1 = getinfo('template_dir') . $fn; // путь в шаблоне
@@ -42,7 +42,7 @@ function mso_find_ts_file($fn, $default = false)
 
 // Функция возвращает полный путь к файлу, который следует подключить в index.php шаблона
 // использовать вместо старого варианта выбора type-файла
-// 	if ($fn = mso_dispatcher()) require($fn);
+// 	if ($fn = mso_dispatcher()) require $fn;
 function mso_dispatcher()
 {
 	global $MSO;
@@ -87,37 +87,29 @@ function mso_dispatcher()
 		return mso_find_ts_file('type/page_404/page_404.php');
 }
 
-// TODO: убрать все cdn
-// возвращает script с jquery или +url
+// возвращает jquery-script
 // в $path можно указать http-путь к файлу
 function mso_load_jquery($plugin = '', $path = '')
 {
 	global $MSO;
 
 	if (!isset($MSO->js['jquery'][$plugin])) {
-		// еще нет включения этого плагина
+		// еще нет включения этого файла
 		$MSO->js['jquery'][$plugin] = '1';
 
 		if ($plugin) {
+			// это какой-то плагин
 			if ($path)
 				return '<script src="' . $path . $plugin . '"></script>';
 			else
 				return '<script src="' . getinfo('common_url') . 'jquery/' . $plugin . '"></script>';
 		} else {
-			// если есть assets/js/jquery.min.js то подключаем только его
+			// это основная библиотека
+			// если есть в шаблоне assets/js/jquery.min.js то подключаем только его
 			if (mso_fe('assets/js/jquery.min.js'))
 				return '<script src="' . getinfo('template_url') . 'assets/js/jquery.min.js"></script>';
 
-			$jquery_type = mso_get_option('jquery_type', 'general', 'self');
-
-			$version = '1.8.2';
-
-			if ($jquery_type == 'google') $url = '//ajax.googleapis.com/ajax/libs/jquery/' . $version . '/jquery.min.js'; // Google Ajax API CDN 
-			elseif ($jquery_type == 'microsoft') $url = '//ajax.aspnetcdn.com/ajax/jQuery/jquery-' . $version . '.min.js'; // Microsoft CDN
-			elseif ($jquery_type == 'jquery') $url = '//code.jquery.com/jquery-' . $version . '.min.js'; //jQuery CDN
-			else $url = getinfo('common_url') . 'jquery/jquery.min.js';
-
-			return '<script src="' . $url . '"></script>';
+			return '<script src="' . getinfo('common_url') . 'jquery/jquery.min.js"></script>';
 		}
 	}
 }
@@ -195,6 +187,30 @@ function mso_page_foreach($type_foreach_file = false)
 	}
 
 	return false;
+}
+
+/**
+ * Вывод содержимого опции из текстового файла
+ *
+ * @param  string $component - компонент
+ * @param  string $file - текстовый файл 
+ * @param  boolean $quot - выполнять замены для ini-файла
+ *
+ * @return string
+ */
+function mso_get_component_option($component, $file = '_default.txt', $quot = true)
+{
+	$fn = getinfo('template_dir') . 'components/' . $component . '/' . $file;
+
+	if (file_exists($fn)) {
+		$text = file_get_contents($fn);
+
+		if ($quot) $text = str_replace('"', '_QUOT_', $text);
+
+		return $text;
+	}
+
+	return '';
 }
 
 # end of file

@@ -37,7 +37,7 @@
 	<p class="row"><label><span>{{ tf('О себе') }} ({{ tf('HTML удаляется') }})</span>
 		<textarea name="f_comusers_description">{{ $comusers_description }}</textarea></label></p>
 
-	{%  if ($f = mso_page_foreach('users-form-edit-tmpl1')) require($f); %}
+	{%  if ($f = mso_page_foreach('users-form-edit-tmpl1')) require $f; %}
 	
 	<input type="hidden" value="0" name="f_comusers_meta[subscribe_my_comments]">
 	<input type="hidden" value="0" name="f_comusers_meta[subscribe_other_comments]">
@@ -52,7 +52,7 @@
 	
 	<p><label><input type="checkbox" name="f_comusers_meta[subscribe_admin]" value="1" {{ $check_subscribe_admin }}> {{ tf('Уведомления на рассылку администратора') }}</label></p>
 	
-	{%  if ($f = mso_page_foreach('users-form-edit-tmpl2')) require($f); %}
+	{%  if ($f = mso_page_foreach('users-form-edit-tmpl2')) require $f; %}
 	
 	<p><button type="submit" name="f_submit[{{  $comusers_id }}]">{{ tf('Сохранить') }}</button></p>
 			

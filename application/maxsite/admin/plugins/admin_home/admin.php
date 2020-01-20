@@ -2,12 +2,12 @@
 <h1 class="mar20-t"><?= t('Добро пожаловать в MaxSite CMS!') ?></h1>
 <div class="flex flex-wrap-tablet">
 <ul class="flex-grow3">
-<li><a href="http://max-3000.com/"><?= t('Официальный сайт MaxSite CMS') ?></a> &bull; <a href="http://max-3000.com/page/donation"><?= t('Помочь проекту') ?></a></li>
+<li><a href="https://max-3000.com/"><?= t('Официальный сайт MaxSite CMS') ?></a> &bull; <a href="https://max-3000.com/page/donation"><?= t('Помочь проекту') ?></a></li>
 <li><a href="https://github.com/maxsite/cms"><?= t('Исходный код на GitHub') ?></a> &bull; <a href="https://github.com/maxsite/cms/commits/master"><?= t('История изменений') ?></a></li>
 <li><a href="https://github.com/maxsite/cms/issues"><?= t('Сообщить о проблеме. Форум') ?></a></li>
-<li><a href="http://max-3000.com/doc"><?= t('Документация') ?></a> &bull; <a href="http://max-3000.com/book"><?= t('Основы работы с MaxSite CMS') ?></a></li>
+<li><a href="https://max-3000.com/doc"><?= t('Документация') ?></a> &bull; <a href="https://max-3000.com/book"><?= t('Основы работы с MaxSite CMS') ?></a></li>
 <li><a href="http://maxhub.ru/"><?= t('MaxHub - сообщество MaxSite CMS') ?></a> &bull; <a href="http://maxhub.ru/category/templates"><?= t('Шаблоны') ?></a> &bull; <a href="http://maxhub.ru/category/plugins"><?= t('Плагины') ?></a></li>
-<li><a href="http://maxsite.org/demo-templates"><?= t('Демо-каталог шаблонов') ?></a> &bull; <a href="http://maxsite.org/page/templates"><?= t('Готовые шаблоны') ?></a></li>
+<li><a href="https://maxsite.org/demo-templates"><?= t('Демо-каталог шаблонов') ?></a> &bull; <a href="https://maxsite.org/page/templates"><?= t('Готовые шаблоны') ?></a></li>
 </ul>
 <div class="flex-grow1">
 	<iframe src="https://maxsite.github.io/version.html?version=<?= getinfo('version') ?>" scrolling="no" frameborder="no" style="width: 100%; height: 60px; "></iframe>
@@ -60,11 +60,10 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 
 if (mso_check_allow('admin_home')) // если есть разрешение на доступ к консоли
 {
-
 	// проверим версию PHP
 	if (version_compare(PHP_VERSION, '7.1' , '<') )
 	{
-		echo '<div class="pad10 bg-red100 t-red">' . t('У вас используется устаревшая версия PHP') . ' (' . PHP_VERSION . '). ' . t('Рекомендуемая версия PHP 7.1 и выше.') . '</div>';
+		echo '<div class="pad10 bg-red100 t-red">' . t('У вас используется устаревшая версия PHP') . ' (' . PHP_VERSION . '). ' . t('Требуется версия PHP 7.1 и выше.') . '</div>';
 	}
 	
 	// свой блок
@@ -300,7 +299,7 @@ if (mso_check_allow('admin_home')) // если есть разрешение н�
 			require_once(getinfo('plugins_dir') . 'rss_get/index.php');
 		
 		$rss = rss_get_go(array(
-			'url' => 'http://max-3000.com/feed', 
+			'url' => 'https://max-3000.com/feed', 
 			'format' => '<li><a target="_blank" href="[link]">[title] ([category])</a> &bull; <span class="t90">[pubDate]</span></li>', 
 			'fields' => 'title link description pubDate category',
 			'count' => 7, 

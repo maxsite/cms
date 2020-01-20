@@ -1180,6 +1180,7 @@ function mso_comuser_edit($args = [])
             'comusers_email' => $f_comusers_email,
             'comusers_password' => $f_comusers_password
         ]);
+        
         $CI->db->limit(1);
         $query = $CI->db->get();
 
@@ -1550,6 +1551,13 @@ function mso_email_message_new_comment_subscribe($data)
         $subscribe_other_comments = (isset($comuser['meta']['subscribe_other_comments'])
             and $comuser['meta']['subscribe_other_comments']) ? true : false;
 
+        // отключить subscribe_other_comments, если включена subscribe_other_comments_ban
+        if (
+            isset($comuser['meta']['subscribe_other_comments_ban'])
+            and $comuser['meta']['subscribe_other_comments_ban']
+        )
+            $subscribe_other_comments = false;
+
         //  только на свой			
         $subscribe_my_comments = (isset($comuser['meta']['subscribe_my_comments'])
             and $comuser['meta']['subscribe_my_comments']) ? true : false;
@@ -1770,7 +1778,6 @@ function mso_last_activity_comment()
 
     return ($delta < 15) ? false : true;
 }
-
 
 // вывод аватарки комментатора
 // на входе массив комментария из page-comments.php

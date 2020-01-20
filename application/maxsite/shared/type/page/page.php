@@ -229,7 +229,7 @@ if ($pages) {
 
 				// + стандартное комментирование
 				if (mso_get_option('comment_other_system_standart', 'general', false)) {
-					if ($fn = mso_find_ts_file('type/page/units/page-comments.php')) require($fn);
+					if ($fn = mso_find_ts_file('type/page/units/page-comments.php')) require $fn;
 				}
 			} elseif (mso_hook_present('page-comment-unit-file') and $fn = mso_fe(mso_hook('page-comment-unit-file'), '')) {
 				require $fn;

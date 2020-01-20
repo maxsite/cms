@@ -176,7 +176,7 @@ function _mso_login()
 		$template_file = $MSO->config['templates_dir'] . $MSO->config['template'] . '/index.php';
 
 		if (file_exists($template_file))
-			require($template_file);
+			require $template_file;
 		else
 			show_error('Ошибка - отсутствует файл шаблона index.php');
 	}

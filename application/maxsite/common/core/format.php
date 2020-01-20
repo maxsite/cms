@@ -852,4 +852,45 @@ function _mso_protect_script($matches)
 	return $text;
 }
 
+/**
+ * получает css из указанного файла
+ * в css-файле можно использовать php
+ * осуществляется сжатие css
+ * автозамена [TEMPLATE_URL] на url-шаблона
+ * функция возвращает только стили, без обрамляющего <style>
+ * Если <style> нужны, то $tag_style = true
+ * Если нужен сразу вывод в браузер, то $echo = true
+ * 
+ * @param string $fn имя файла
+ * @param type $tag_style флаг для обрамления в STYLE
+ * @param type $echo флаг вывода результата по echo
+ * @return string
+ */
+function mso_out_css_file($fn, $tag_style = true, $echo = true)
+{
+	$fn = getinfo('template_dir') . $fn;
+
+	$out = '';
+
+	if (file_exists($fn)) {
+		if ($r = @file_get_contents($fn)) $out .= $r . NR; // получаем содержимое
+
+		if ($out) {
+			ob_start();
+			eval('?>' . stripslashes($out) . '<?php ');
+			$out = ob_get_contents();
+			ob_end_clean();
+
+			$out = str_replace('[TEMPLATE_URL]', getinfo('template_url'), $out);
+			$out = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $out);
+			$out = str_replace(array('; ', ' {', ': ', ', '), array(';', '{', ':', ','), $out);
+		}
+
+		if ($tag_style) $out = '<style>' . $out . '</style>';
+		if ($echo) echo $out;
+	}
+
+	return $out;
+}
+
 # end of file

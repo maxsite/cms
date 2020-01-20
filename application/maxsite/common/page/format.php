@@ -190,7 +190,7 @@ function mso_page_content($page_content = '', $use_password = true, $message = '
 
 		// можно переписать форму - файл должен вернуть переменную $form 
 		if ($fn = mso_find_ts_file('type/page/units/page-password-content-form.php')) {
-			require($fn);
+			require $fn;
 		} else {
 			$form = '<h5>' . $_message . '</h5>';
 			$form .= '<form class="mso-form" method="post">' . $_sess;

@@ -58,7 +58,7 @@
 <link rel="shortcut icon" href="<?= $default_favicon_admin ?>" type="image/x-icon">
 <link rel="stylesheet" href="<?= $admin_css ?>">
 <?= $admin_css_profile ?>
-<?= mso_load_jquery() ?>
+<script src="<?= getinfo('common_url') ?>jquery/jquery.min.js"></script>
 <?php mso_hook('admin_head') ?>
 <?php mso_hook('admin_head_css') ?>
 </head>
@@ -67,7 +67,7 @@
 <div class="visible-tablet-phone">
 	<div class="flex flex-wrap-phone flex-vcenter pad10-rl my-nav-panel-tablet">
 		<div class="flex-grow0 pad5-t">
-			<a href="http://max-3000.com/"><img src="<?= $admin_template_url . 'assets/images/maxsitelogo.fw.png' ?>" alt="" title="MaxSite CMS" class="mar10-b mar10-r"></a>
+			<a href="https://max-3000.com/"><img src="<?= $admin_template_url . 'assets/images/maxsitelogo.fw.png' ?>" alt="" title="MaxSite CMS" class="mar10-b mar10-r"></a>
 			<a href="<?= getinfo('site_url') ?>" class="my-q-site" title="<?= t('Переход к сайту') ?>"></a>
 			<a href="<?= getinfo('site_admin_url') ?>home" class="my-q-dashboard" title="<?= t('Консоль') ?>"></a>
 			<a href="<?= getinfo('site_admin_url') ?>users_my_profile" class="my-q-my_profile" title="<?= t('Мой профиль') ?>"></a>
@@ -85,7 +85,7 @@
 		<div class="mar10-rl mar10-t mar15-b">
 			<div class="flex flex-vcenter mar10-b">
 				<div class="flex-grow0">
-					<a href="http://max-3000.com/" class="my-q-maxsite"><img src="<?= $admin_template_url . 'assets/images/maxsitelogo.fw.png' ?>" alt="" title="MaxSite CMS"></a>
+					<a href="https://max-3000.com/" class="my-q-maxsite"><img src="<?= $admin_template_url . 'assets/images/maxsitelogo.fw.png' ?>" alt="" title="MaxSite CMS"></a>
 				</div>
 				
 				<div class="flex-grow3 pad10-l">

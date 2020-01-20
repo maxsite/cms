@@ -119,10 +119,10 @@ function mso_units_out($text_units, $PAGES = [], $PAGINATION = [], $path_file = 
 
 				// в подключаемом файле доступна переменная $UNIT — массив параметров
 				if ($fn = mso_find_ts_file($path_file . $file)) {
-					require($fn);
+					require $fn;
 				} else {
 					// аналогично, только файл относительно каталога шаблона
-					if ($fn = mso_fe($file)) require($fn);
+					if ($fn = mso_fe($file)) require $fn;
 				}
 			} elseif (isset($UNIT['html']) and trim($UNIT['html'])) {
 				eval(mso_tmpl_prepare(trim($UNIT['html']), false));
@@ -143,9 +143,9 @@ function mso_units_out($text_units, $PAGES = [], $PAGINATION = [], $path_file = 
 				echo ushka(trim($UNIT['ushka']));
 			} elseif (isset($UNIT['component']) and trim($UNIT['component'])) {
 				if ($_fn = mso_fe('components/' . trim($UNIT['component']) . '/index.php'))
-					require($_fn);
+					require $_fn;
 				elseif ($_fn = mso_fe('components/' . trim($UNIT['component']) . '/' . trim($UNIT['component']) . '.php'))
-					require($_fn);
+					require $_fn;
 			} elseif (isset($UNIT['option_key']) and trim($UNIT['option_key'])) {
 				// если option_type не указан, то это текущий шаблон
 				if (!isset($UNIT['option_type']))

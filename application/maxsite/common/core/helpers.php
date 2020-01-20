@@ -555,20 +555,42 @@ function mso_sql_found_rows($limit = 20, $pagination_next_url = 'next')
     return $out;
 }
 
-/*
-
-// функция нигде не используется
-// посыл в хидере no-cache
-function mso_nocache_headers()
+/**
+ *  функция возвращает текст Lorem Ipsum 
+ *  из http://lpf.maxsite.com.ua/
+ *  
+ *  @param $count количество слов
+ *  @param $color если указан $color, то текст обрамляется в <span> с color: $color
+ *  @param $dot : если false, то удаляются все знаки препинания
+ *  @param $LoremText : можно задать свой текст
+ *  
+ *  @return string
+ */
+function mso_lorem($count = 50, $color = false, $dot = true, $LoremText = true)
 {
-    // см. http://www.nomagic.ru/all.php?aid=58
-    @header("Cache-Control: no-store, no-cache, must-revalidate");
-    @header("Expires: " . date("r"));
+    if ($LoremText === true)
+        $LoremText = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vivamus vitae risus vitae lorem iaculis placerat. Aliquam sit amet felis. Etiam congue. Donec risus risus, pretium ac, tincidunt eu, tempor eu quam. Morbi blandit mollis magna. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus. Ut a pede ac neque mattis facilisis. Nulla nunc ipsum, sodales vitae, hendrerit non, imperdiet ac ante. Morbi sit amet mi. Ut magna. Curabitur id est. Nulla velit. Sed consectetuer sodales justo. Aliquam dictum gravida libero. Sed eu turpis. Nunc id lorem. Aenean consequat tempor mi. Phasellus in neque. Nunc fermentum convallis ligula. Suspendisse in nulla. Nunc eu ipsum tincidunt risus pellentesque fringilla. Integer iaculis pharetra eros. Nam ut sapien quis arcu ullamcorper cursus. Vestibulum tempor nisi rhoncus eros. Sed iaculis ultricies tellus. Cras pellentesque erat eu urna. Cras malesuada. Quisque congue ultricies neque. Nullam a nisl. Sed convallis turpis a ante. Morbi eu justo sed tortor euismod porttitor. Aenean ut lacus. Maecenas nibh eros, dapibus at, pellentesque in, auctor a enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam congue pede a ipsum. Sed libero quam, sodales eget, venenatis non, cursus vel velit. In vulputate. In vehicula. Aenean quam mauris, vehicula non, suscipit at, venenatis sed arcu. Etiam ornare fermentum felis. Donec ligula metus, placerat quis, blandit at, congue molestie ante. Donec viverra nibh et dolor.";
 
-    // @header('Expires: Wed, 11 Jan 1984 05:00:00 GMT');
-    // @header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-    // @header('Cache-Control: no-cache, must-revalidate, max-age=0');
-    // @header('Pragma: no-cache');
+    // перетусуем предложения
+    $ar = explode('.', $LoremText);
+    shuffle($ar);
+    $LoremText = implode('.', $ar);
+    $words = explode(' ', $LoremText);
+
+    if (count($words) > $count)
+        $text = implode(' ', array_slice($words, 0, $count));
+    else
+        $text = $LoremText;
+
+    $text = trim($text) . '.';
+    $text = str_replace(',.', '.', $text);
+    $text = str_replace('..', '.', $text);
+
+    if (!$dot) $text = trim(str_replace(array('.', ','), '', $text));
+    if (strpos($text, '.') === 0) $text = mb_substr($text, 1);
+    if ($color) $text = '<span style="color: ' . $color . '">' . $text . '</span>';
+
+    return $text;
 }
-*/
+
 # end of file

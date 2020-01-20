@@ -58,7 +58,7 @@ if ($f = mso_page_foreach('author-do')) require $f;
 
 if ($pages) {
 	// есть страницы
-	if ($f = mso_find_ts_file('type/author/units/author-default.php')) require($f);
+	if ($f = mso_find_ts_file('type/author/units/author-default.php')) require $f;
 } else {
 	if ($f = mso_page_foreach('pages-not-found')) {
 		require $f;
@@ -72,11 +72,11 @@ if ($pages) {
 	}
 }
 
-if ($f = mso_page_foreach('author-posle')) require($f);
+if ($f = mso_page_foreach('author-posle')) require $f;
 
 echo '<section></div><!-- class="mso-type-author" -->';
 
 // конечная часть шаблона
-if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
+if ($fn = mso_find_ts_file('main/main-end.php')) require $fn;
 	
 # end of file

@@ -72,11 +72,11 @@ if ($pages) {
 	}
 }
 
-if ($f = mso_page_foreach('archive-posle')) require($f);
+if ($f = mso_page_foreach('archive-posle')) require $f;
 
 echo '</div><!-- mso-type-archive -->';
 
 // конечная часть шаблона
-if ($fn = mso_find_ts_file('main/main-end.php')) require($fn);
+if ($fn = mso_find_ts_file('main/main-end.php')) require $fn;
 
 # end of file

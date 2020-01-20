@@ -49,7 +49,12 @@ function mso_page_other_pages($page_id = 0, $page_categories = [])
 		// своя функция sql-запроса для function_add_custom_sql
 		// задается через mso_set_val()
 		$fasc = mso_get_val('page_other_pages_function_add_custom_sql', false);
-
+		
+		// если отмечена опция Только с изображениями записи и нет своей sql-функции
+		// подключаем функцию для поиска изображений записи
+		if (!$fasc and mso_get_option('page_other_pages_is_image', 'templates', ''))
+			$fasc = '_mso_page_other_pages_is_image';
+		
 		$bl_pages = mso_get_pages(
 			[
 				'type' => $type_page,
@@ -81,6 +86,15 @@ function mso_page_other_pages($page_id = 0, $page_categories = [])
 			}
 		}
 	}
+}
+
+function _mso_page_other_pages_is_image()
+{
+	// добавляем выборку по метаплю превьюшки
+	$CI = &get_instance();
+	$CI->db->where('meta.meta_table', 'page');
+	$CI->db->where('meta.meta_key', 'image_for_page');
+	$CI->db->join('meta', 'meta.meta_id_obj = page.page_id', 'left');
 }
 
 # end of file

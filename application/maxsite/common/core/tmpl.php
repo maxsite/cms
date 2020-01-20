@@ -52,7 +52,7 @@ function mso_parse_file($file, $parser = 'autotag_simple', $tmpl = false, $echo 
 {
 	if ($fn = mso_fe($file)) {
 		ob_start();
-		require($fn);
+		require $fn;
 		$t1 = ob_get_contents();
 		ob_end_clean();
 

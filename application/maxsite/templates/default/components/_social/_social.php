@@ -18,23 +18,21 @@
 	
 */
 
-$social = '[social]' . NR . mso_get_option('social', 'templates', '') . '[/social]';
-$social = mso_section_to_array($social, 'social', array(), true);
+$social = '[social]' . NR . mso_get_option('social', getinfo('template'), '') . '[/social]';
+$social = mso_section_to_array($social, 'social', [], true);
 
-if ($social and isset($social[0]))
-{
+if ($social and isset($social[0])) {
 	$socials = $social[0];
-	
-	foreach ($socials as $icon => $data)
-	{
+
+	foreach ($socials as $icon => $data) {
 		$data = explode('|', $data);
 		$data = array_map('trim', $data);
 
 		$url = (isset($data[0])) ? $data[0] : '';
 		$title = (isset($data[1])) ? htmlspecialchars($data[1]) : '';
 		$add_class = (isset($data[2])) ? ' ' . $data[2] : '';
-		
-		echo '<a class="my-social ' . strtolower($icon) . $add_class . '" rel="nofollow" title="' . $title . '" href="' . $url .'"></a>';
+
+		echo '<a class="my-social ' . strtolower($icon) . $add_class . '" rel="nofollow" title="' . $title . '" href="' . $url . '"></a>';
 	}
 }
 

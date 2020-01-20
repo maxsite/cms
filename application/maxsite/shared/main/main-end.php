@@ -8,8 +8,8 @@ global $CONTENT_OUT, $MAIN_FILE;
 
 $CONTENT_OUT = ob_get_contents();
 
-ob_end_clean();
+if (ob_get_length()) ob_end_clean();
 
-require($MAIN_FILE);
+require $MAIN_FILE;
 
 # end of file

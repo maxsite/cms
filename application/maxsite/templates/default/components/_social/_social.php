@@ -18,13 +18,17 @@
 	
 */
 
-$social = '[social]' . NR . mso_get_option('social', getinfo('template'), '') . '[/social]';
-$social = mso_section_to_array($social, 'social', [], true);
+$icons = trim(mso_get_option('social', getinfo('template'), '')); // вначале опция шаблона
 
-if ($social and isset($social[0])) {
-	$socials = $social[0];
+if (!$icons) $icons = mso_get_option('social', 'templates', ''); // дефолтная опция
 
-	foreach ($socials as $icon => $data) {
+$icons = '[icons]' . NR . $icons . '[/icons]';
+$icons = mso_section_to_array($icons, 'icons', [], true);
+
+if ($icons and isset($icons[0])) {
+	$icons = $icons[0];
+
+	foreach ($icons as $icon => $data) {
 		$data = explode('|', $data);
 		$data = array_map('trim', $data);
 

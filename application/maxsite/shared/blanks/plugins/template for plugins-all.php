@@ -54,6 +54,7 @@ function MY_admin_page($args = [])
 {
 	if (!mso_check_allow('MY_edit')) {
 		echo t('Доступ запрещен');
+		
 		return $args;
 	}
 
@@ -80,7 +81,6 @@ function MY_widget($num = 1)
 
 	return MY_widget_custom($options, $num);
 }
-
 
 // форма настройки виджета 
 // имя функции = виджет_form
@@ -109,7 +109,6 @@ function MY_widget_form($num = 1)
 
 	return $form;
 }
-
 
 // сюда приходят POST из формы настройки виджета
 // имя функции = виджет_update

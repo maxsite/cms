@@ -27,7 +27,6 @@ function mso_prepare_files($field_userfile = 'f_userfile')
 	return $new_files;
 }
 
-
 // функция загрузки
 // автоматом загружает, меняет размеры, делает миниатюры, описания и т.д.
 function mso_upload($config_library = [], $field_userfile = 'f_userfile', $r = [])

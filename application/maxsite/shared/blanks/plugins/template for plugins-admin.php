@@ -57,6 +57,7 @@ function MY_admin_page($args = [])
 
 	if (!mso_check_allow('MY_edit')) {
 		echo t('Доступ запрещен');
+
 		return $args;
 	}
 
@@ -65,7 +66,6 @@ function MY_admin_page($args = [])
 
 	require(getinfo('plugins_dir') . 'MY/admin.php');
 }
-
 
 // функции плагина
 function MY_custom($arg = [], $num = 1)

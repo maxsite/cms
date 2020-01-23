@@ -1,48 +1,62 @@
 <?php
-#	Landing Page Framework (LPF) | (c) MAX — http://lpf.maxsite.com.ua/
-#	Putin Huilo! Crimea this Ukraine!
+/**
+ * MaxSite CMS
+ * (c) https://max-3000.com/
+ * 
+ */
 
-	define('BASEPATH', dirname(realpath(__FILE__)) . '/');
-	
-	if (file_exists(BASEPATH . 'environment/environment.php')) 
-		require(BASEPATH . 'environment/environment.php');
-	else 
-		define('ENGINE_DIR',  BASEPATH . 'engine/');
-	
-	require_once(ENGINE_DIR . 'engine.php');
-	
-	if ($fn = mso_fe(BASEPATH . 'environment/config.php')) require($fn);
-	init();
-	if ($fn = mso_fe(BASEPATH . 'environment/my.php')) require($fn);
-	if ($fn = mso_fe(CURRENT_PAGE_DIR . 'variables.php')) require($fn);
-	if ($fn = mso_fe(CURRENT_PAGE_DIR . 'functions.php')) require($fn);
-	
-	if ($VAR['no_output_only_file'] and $fn = mso_fe(CURRENT_PAGE_DIR . $VAR['no_output_only_file'])) 
-	{ 
-		require($fn);
-		exit;
-	}
-	
-	if ($VAR['generate_static_page']) ob_start();
-	if ($VAR['before_file'] and $fn = mso_fe($VAR['before_file'])) require($fn);
+if (version_compare(PHP_VERSION, '7.1', '<'))
+	die('<p>Required version PHP 7.1 and higher. You version <b>' . PHP_VERSION . '</b></p>');
+
+define('INSTALLER', dirname(realpath(__FILE__)) . '/installer/');
+define('MSODIR', realpath(INSTALLER . '../../') . '/');
+
+$url = ((isset($_SERVER['HTTPS']) and $_SERVER['HTTPS'] != "off") ? "https" : "http");
+$url .= "://" . $_SERVER['HTTP_HOST'];
+$url .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+
+define('URL', $url . 'installer/');
+unset($url);
+
+require INSTALLER . 'functions.php';
+
+$lang = detectLang(['ru', 'en', 'uk'], 'ru');
+
+if (file_exists(INSTALLER . 'langs/' . $lang . '.php'))
+	$words = require INSTALLER . 'langs/' . $lang . '.php';
+else
+	$words = require INSTALLER . 'langs/ru.php';
+
+t($words); // init language
+
+$showForm = true;
 
 ?><!DOCTYPE HTML>
-<html<?= ($VAR['html_attr']) ? ' ' . $VAR['html_attr'] : '' ?>><head>
-<meta charset="UTF-8">
-<title><?= $TITLE ?></title>
-<?php 
-	mso_meta();
-	mso_head();
-	if ($fn = mso_fe($VAR['head_file'])) require($fn);
-?>
+<html lang="<?= $lang ?>">
+<head>
+	<title><?= t('title'); ?></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="MaxSite CMS">
+	<meta name="robots" content="noindex, nofollow">
+	<link rel="shortcut icon" href="<?= URL ?>images/favicon.png" type="image/x-icon">
+	<link rel="stylesheet" href="<?= URL ?>css/berry-normalize.min.css">
+	<link rel="stylesheet" href="<?= URL ?>css/berry-colors-lite.min.css">
+	<link rel="stylesheet" href="<?= URL ?>css/style.css">
 </head>
-<body<?= ($VAR['body_attr']) ? ' ' . $VAR['body_attr'] : '' ?>>
-<?php
-	if ($fn = mso_fe($VAR['start_file'])) require($fn);
-	mso_output_text();
-	if ($fn = mso_fe($VAR['end_file'])) require($fn);
-	if ($VAR['after_file'] and $fn = mso_fe($VAR['after_file'])) require($fn);
-	mso_stat_out();
-	if ($fn = $VAR['generate_static_page']) file_put_contents($fn, str_replace(BASE_URL, $VAR['generate_static_page_base_url'], ob_get_flush()));
-
-# end of file
+<body class="bg-gray100">
+<div class="layout-center-wrap-tablet"><div class="layout-wrap bg-white pad30-rl mar20-tb pad20-tb bordered rounded">
+	<div class="flex flex-vcenter">
+		<figure class="flex-grow0 b-flex mar0"><img src="<?= URL ?>images/favicon.png" alt=""></figure>
+		<h1 class="flex-grow5 t-red700 mar0 mar20-l t230"><?= t('title') ?></h1>
+		<div class="t-right t90"><a href="https://max-3000.com/book" target="_blank"><?= t('help'); ?></a></div>
+	</div>
+	<hr class="bor-dotted mar20-tb bor1">
+	<?php
+	require INSTALLER . 'first.php';
+	require INSTALLER . 'post.php';
+	if ($showForm) require INSTALLER . 'form.php';
+	?>
+</div></div>
+</body>
+</html>

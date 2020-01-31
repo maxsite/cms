@@ -1,0 +1,27 @@
+// https://google-webfonts-helper.herokuapp.com/fonts/roboto-slab?subsets=latin,cyrillic
+
+/* roboto-slab-regular - cyrillic_latin */
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Roboto Slab Regular'), local('RobotoSlab-Regular'),
+       url('../../fonts/robotoslab/roboto-slab-v8-cyrillic_latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('../../fonts/robotoslab/roboto-slab-v8-cyrillic_latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+/* roboto-slab-700 - cyrillic_latin */
+@font-face {
+  font-family: 'Roboto Slab';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Roboto Slab Bold'), local('RobotoSlab-Bold'),
+       url('../../fonts/robotoslab/roboto-slab-v8-cyrillic_latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('../../fonts/robotoslab/roboto-slab-v8-cyrillic_latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+.t-robotoslab {
+	font-family: "Roboto Slab", sans;
+}

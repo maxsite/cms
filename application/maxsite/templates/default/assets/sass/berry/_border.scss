@@ -1,0 +1,70 @@
+// (c) Berry - CSS Utilities, http://maxsite.org/berry
+
+.#{$pf}bordered {
+    border: $bordered;
+}
+
+// default = 1px
+[class*="#{$pf}bor-"] {
+    border-width: 1px;
+}
+
+.#{$pf}bor-none {
+    border-style: none !important;
+}
+
+.#{$pf}bor-none-t {
+    border-top-style: none !important;
+}
+
+.#{$pf}bor-none-r {
+    border-right-style: none !important;
+}
+
+.#{$pf}bor-none-b {
+    border-bottom-style: none !important;
+}
+
+.#{$pf}bor-none-l {
+    border-left-style: none !important;
+}
+
+// style line
+@each $var in $border_type_list {
+    .#{$pf}bor-#{$var} {
+        border-style: $var;
+    }
+
+    .#{$pf}bor-#{$var}-t {
+        border-top-style: $var;
+    }
+
+    .#{$pf}bor-#{$var}-r {
+        border-right-style: $var;
+    }
+
+    .#{$pf}bor-#{$var}-b {
+        border-bottom-style: $var;
+    }
+
+    .#{$pf}bor-#{$var}-l {
+        border-left-style: $var;
+    }
+
+    .#{$pf}bor-#{$var}-tb {
+        border-top-style   : $var;
+        border-bottom-style: $var;
+    }
+
+    .#{$pf}bor-#{$var}-rl {
+        border-right-style: $var;
+        border-left-style : $var;
+    }
+}
+
+// width
+@each $var in $border_list {
+    .#{$pf}bor#{$var} {
+        border-width: #{$var}px;
+    }
+}

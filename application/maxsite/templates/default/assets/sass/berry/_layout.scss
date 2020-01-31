@@ -1,0 +1,32 @@
+// (c) Berry - CSS Utilities, http://maxsite.org/berry
+
+// layout
+
+.#{$pf}layout-center-wrap {
+    width: 100%;
+}
+
+.#{$pf}layout-center,
+.#{$pf}layout-center-wrap>.#{$pf}layout-wrap {
+    width       : 100%;
+    margin-right: auto;
+    margin-left : auto;
+    max-width   : $layout_max_width;
+
+    @if $layout_wrap_padding {
+        padding-right: $layout_wrap_padding;
+        padding-left: $layout_wrap_padding;
+    }
+}
+
+// for layout_max_width_list
+@each $postfix, $m in $layout_max_width_list {
+
+    .#{$pf}layout-center-#{$postfix},
+    .#{$pf}layout-center-wrap-#{$postfix}>.#{$pf}layout-wrap {
+        width       : 100%;
+        margin-right: auto;
+        margin-left : auto;
+        max-width   : $m;
+    }
+}

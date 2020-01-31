@@ -1,0 +1,25 @@
+[options]
+block_start = <div class="layout-center-wrap gr-cyan1"><div class="layout-wrap pad10-tb">
+block_end = </div></div>
+[/options]
+
+[js]
+item: 1,
+auto: true,
+loop: true,
+speed: 1000,
+pause: 4000,
+mode: "slide",
+[/js]
+
+[slide]
+<div class="ls-fullwidth h400px h200px-phone bor1 bor-solid bor-gray600" style="background-image: url(https://picsum.photos/1000/400?image=1015);"><div class="ls-text t-white">Free <a href="#">text</a></div></div>
+[/slide]
+
+[slide]
+<div class="ls-fullwidth h400px h200px-phone bor1 bor-solid bor-gray600" style="background-image: url(https://picsum.photos/1000/400?image=1045);"><div class="ls-text t-white">Free <a href="#">text</a></div></div>
+[/slide]
+
+[slide]
+<div class="ls-fullwidth h400px h200px-phone bor1 bor-solid bor-gray600" style="background-image: url(https://picsum.photos/1000/400?image=1036);"><div class="ls-text t-white">Free <a href="#">text</a></div></div>
+[/slide]

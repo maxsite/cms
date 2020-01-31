@@ -1,0 +1,205 @@
+// (c) Berry - CSS Utilities, http://maxsite.org/berry
+
+// Text
+
+// reset text to normal
+.#{$pf}t-reset {
+    font-weight    : normal;
+    font-style     : normal;
+    text-decoration: none;
+}
+
+.#{$pf}bold {
+    font-weight: bold;
+}
+
+.#{$pf}bold-normal {
+    font-weight: normal;
+}
+
+.#{$pf}bold-bolder {
+    font-weight: bolder;
+}
+
+.#{$pf}bold-light {
+    font-weight: light;
+}
+
+.#{$pf}italic {
+    font-style: italic;
+}
+
+.#{$pf}underline {
+    text-decoration: underline;
+}
+
+.#{$pf}t-decoration-none {
+    text-decoration: none;
+}
+
+.#{$pf}strike {
+    text-decoration: line-through;
+}
+
+.#{$pf}small-caps {
+    font-variant: small-caps;
+}
+
+.#{$pf}capitalize {
+    text-transform: capitalize;
+}
+
+.#{$pf}upper {
+    text-transform: uppercase;
+}
+
+.#{$pf}lower {
+    text-transform: lowercase;
+}
+
+.#{$pf}cursor-pointer {
+    cursor: pointer;
+}
+
+.#{$pf}t-right {
+    text-align: right;
+}
+
+.#{$pf}t-left {
+    text-align: left;
+}
+
+.#{$pf}t-center {
+    text-align: center;
+}
+
+.#{$pf}t-justify {
+    text-align: justify;
+}
+
+.#{$pf}t-nowrap {
+    white-space: nowrap;
+}
+
+.#{$pf}t-wrap {
+    white-space: normal;
+}
+
+.#{$pf}t-pre-wrap {
+    white-space: pre-wrap;
+}
+
+.#{$pf}t-break,
+.#{$pf}t-break-word {
+    word-wrap: break-word;
+}
+
+.#{$pf}t-georgia {
+    font-family: Georgia, Times New Roman, serif;
+}
+
+.#{$pf}t-times {
+    font-family: Times New Roman, serif;
+}
+
+.#{$pf}t-arial {
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+}
+
+.#{$pf}t-verdana {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.#{$pf}t-mono {
+    font-family: Consolas, PT Mono, Monaco, Menlo, Courier New, monospace;
+}
+
+.#{$pf}t-hyphens {
+    hyphens: auto;
+}
+
+.#{$pf}t-clip {
+    white-space  : nowrap;
+    overflow     : hidden;
+    text-overflow: ellipsis;
+}
+
+@each $var in $text_lh {
+    $var1: round($var * 100);
+
+    .#{$pf}lh#{$var1} {
+        line-height: #{$var};
+    }
+}
+
+@each $var in $text_lh_em {
+    $var1: round($var * 100);
+
+    .#{$pf}lh#{$var1}em {
+        line-height: #{$var}em;
+    }
+}
+
+@each $var in $text_rem {
+    $var1: round($var * 100);
+
+    .#{$pf}t#{$var1} {
+        font-size: #{$var}rem;
+    }
+}
+
+@each $var in $text_em {
+    $var1: round($var * 100);
+
+    .#{$pf}t#{$var1}em {
+        font-size: #{$var}em;
+    }
+}
+
+@each $var in $text_px {
+    .#{$pf}t#{$var}px {
+        font-size: #{$var}px;
+    }
+}
+
+// for @media text-align white-space
+@each $postfix, $m in $screen_media_text_list {
+    @media #{$m} {
+        .#{$pf}t-right-#{$postfix} {
+            text-align: right;
+        }
+
+        .#{$pf}t-left-#{$postfix} {
+            text-align: left;
+        }
+
+        .#{$pf}t-center-#{$postfix} {
+            text-align: center;
+        }
+
+        .#{$pf}t-justify-#{$postfix} {
+            text-align: justify;
+        }
+
+        .#{$pf}t-nowrap-#{$postfix} {
+            white-space: nowrap;
+        }
+
+        .#{$pf}t-wrap-#{$postfix} {
+            white-space: normal;
+        }
+    }
+}
+
+// for @media rem font-size
+@each $postfix, $m in $screen_media_text_list {
+    @media #{$m} {
+        @each $var in $text_rem_screen {
+            $var1: round($var * 100);
+
+            .#{$pf}t#{$var1}-#{$postfix} {
+                font-size: #{$var}rem;
+            }
+        }
+    }
+}

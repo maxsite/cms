@@ -1,60 +1,32 @@
-// (c) UniCSS, http://unicss.maxsite.com.ua/
+/*! 
+ * (c) Berry 2.0 - CSS Utilities, https://maxsite.org/berry 
+ */
+@import 'berry/variables/variables';
+@import 'berry/variables/all-colors';
+@import 'berry/block';
+@import 'berry/border';
+@import 'berry/flex';
+@import 'berry/height';
+@import 'berry/layout';
+@import 'berry/opacity';
+@import 'berry/padding-margin';
+@import 'berry/position';
+@import 'berry/rounded';
+@import 'berry/text';
+@import 'berry/visible';
+@import 'berry/width';
+@import 'berry/links';
+@import 'berry/other';
 
-// google colors
-@import 'main/colors-gmd';
+// bootstrap4
+@import "bootstrap4/functions";
+@import "bootstrap4/my_variables"; // my variables
+@import "bootstrap4/variables";
+@import "bootstrap4/mixins";
+@import "bootstrap4/root";
+@import "bootstrap4/reboot";
+@import "bootstrap4/type"; 
 
-// main variables
-@import 'main/variables';
-@import 'main/fontawesome_variables';
-@import 'main/fonts';
-
-// UniCSS
-// @import 'unicss/0-version_unicss';
-@import 'unicss/normalize';
-@import 'unicss/resets';
-@import 'unicss/block';
-@import 'unicss/border';
-@import 'unicss/flex';
-@import 'unicss/gradients';
-@import 'unicss/height';
-@import 'unicss/layout';
-@import 'unicss/links';
-@import 'unicss/padding-margin';
-@import 'unicss/position';
-@import 'unicss/rounded';
-@import 'unicss/shadow';
-@import 'unicss/text';
-@import 'unicss/visible';
-@import 'unicss/width';
-@import 'unicss/other';
-
-@import 'main/extension-unicss';
-@import 'main/base';
-@import 'main/blocks';
-@import 'main/forms';
-@import 'main/icons';
-@import 'main/images';
-@import 'main/lines';
-@import 'main/lists';
-@import 'main/table';
-@import 'unicss/colors';
-@import 'main/my-template';
-@import 'main/print';
-
-@import 'component/menu';
-
-// @import 'template/*';
-@import 'template/template';
-@import 'template/widgets';
-@import 'template/plugins';
-@import 'template/comments';
-@import 'template/print';
-@import 'template/social';
-@import 'template/forms';
-@import 'template/message';
-@import 'template/page-other-pages';
-@import 'template/lightslider';
-@import 'template/search';
-@import 'template/footer';
-@import 'template/menu-simple';
-@import 'template/hover-img';
+// my typography
+@import 'typography/base';
+@import 'typography/forms';

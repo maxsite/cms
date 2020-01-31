@@ -1,0 +1,26 @@
+// стили для компонентов
+
+// заголовок виджета в подвале
+div.footer div.mso-widget-header {
+	font-size: 1.3em; 
+	font-weight: normal;
+	padding: 0 0 5px 0;
+	margin: 20px 0 20px 0;
+	color: #ffffff;
+	background: none;
+	border: none;
+	border-bottom: 2px $red solid;
+}
+
+// отключаем menuToFixed/scrollToFixed для малого экрана
+@media #{$SCREEN_TABLET}  {	
+	.no-scrollToFixed-tablet {
+		position: relative !important;
+	} 
+}
+
+@media #{$SCREEN_PHONE}  {
+	.no-scrollToFixed-phone {
+		position: relative !important;
+	} 
+}

@@ -1,13 +1,10 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
-/*
- * (c) MaxSite CMS
- * http://max-3000.com/
- *
+/**
+ * MaxSite CMS
+ * (c) https://max-3000.com/ 
  * Корзина — AJAX
- *
  */
  
-
 if ($_POST and isset($_POST['cart']) and isset($_POST['cart']['items']) and isset($_POST['cart']['total'])) 
 {
 	$out = '';

@@ -1,0 +1,20 @@
+// Other
+
+.drop-cap { 
+	&:first-letter {
+		float: left;
+		font-size: 3em;
+		font-weight: bold;
+		margin-right: 0.75rem;
+		text-transform: uppercase;
+		line-height: 1;
+	}
+}
+
+.t-label {
+	color: white;
+	background: $blue;
+	font-size: .75rem;
+	padding: 1px 10px;
+	border-radius: 3px;
+}

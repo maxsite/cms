@@ -4,8 +4,22 @@
 	color: $red;
 }
 
-.mso-message-ok {
-	color: $green;
+.mso-message-ok,
+.comment-ok
+{
+	color: #fff;
+	padding: 10px;
+	margin: 0 0 20px 0;
+	background: $green;
+	
+	&:after {
+		font-family: FASolid;
+		display: inline-block;
+		margin-right: 7px;
+		content: unquote("\"#{ $fa-var-exclamation-triangle }\""); 
+		float: right;
+		margin-top: 5px;
+	}
 }
 
 .mso-message-error,
@@ -17,8 +31,10 @@
 	background: $red;
 	
 	&:after {
-		@extend .icon-fa-normal;
-		content: $fa-var-exclamation-triangle;
+		font-family: FASolid;
+		display: inline-block;
+		margin-right: 7px;
+		content: unquote("\"#{ $fa-var-exclamation-triangle }\""); 
 		float: right;
 		margin-top: 5px;
 	}

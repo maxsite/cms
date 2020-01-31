@@ -4,14 +4,14 @@
  * (c) https://max-3000.com/
  */
 
-$info = array(
-	'name' => 'Default (2019)',
+$info = [
+	'name' => 'Default',
 	'description' => t('Шаблон для MaxSite CMS'),
-	'version' => '2020.1',
+	'version' => '2020.01',
 	'author' => 'MAX',
 	'template_url' => 'https://max-3000.com/',
 	'author_url' => 'https://maxsite.org/',
-	'maxsite-min-version' => '105'
-);
+	'maxsite-min-version' => '106'
+];
 
 # end of file

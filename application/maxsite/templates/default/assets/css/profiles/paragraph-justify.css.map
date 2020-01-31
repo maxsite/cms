@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,aAAc,CACb,UAAU,CAAE,OAAO,CACnB,OAAO,CAAE,IAAI",
+"sources": ["../../sass/profiles/paragraph-justify.scss"],
+"names": [],
+"file": "paragraph-justify.css"
+}

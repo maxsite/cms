@@ -1,0 +1,39 @@
+// (c) Berry - CSS Utilities, http://maxsite.org/berry
+
+// position and z-index
+
+.#{$pf}pos-fixed {
+    position: fixed;
+}
+
+.#{$pf}pos-absolute {
+    position: absolute;
+}
+
+.#{$pf}pos-relative {
+    position: relative;
+}
+
+@each $var in $position_list {
+    .#{$pf}pos#{$var}-t {
+        top: #{$var}px;
+    }
+
+    .#{$pf}pos#{$var}-r {
+        right: #{$var}px;
+    }
+
+    .#{$pf}pos#{$var}-b {
+        bottom: #{$var}px;
+    }
+
+    .#{$pf}pos#{$var}-l {
+        left: #{$var}px;
+    }
+}
+
+@each $var in $zindex_list {
+    .#{$pf}z-index#{$var} {
+        z-index: $var;
+    }
+}

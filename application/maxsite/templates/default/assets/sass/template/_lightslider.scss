@@ -2,30 +2,67 @@
 
 // <div class="ls-fullwidth h500px-large h400px h300px-tablet h200px-phone" style="background-image: url(АДРЕС);"><div class="ls-text bold t120 t-white">Текст <a href="#">ссылка</a></div></div>
 
-
 // контейнер для одного слайда
 .ls-fullwidth {
-	@extend .pos-relative;
-	
-	// режим растягивания изображения
+	position: relative;
 	background-size: cover;
-	//background-size: contain;
-	
 	background-repeat: no-repeat;
 	background-position: center center;
 		
 	// текст внутри блока
 	.ls-text {
-		@extend .pos0-b;
-		@extend .pos-absolute;
-		@extend .w100;
-		// @extend .t-center;
-		@extend .bor1;
-		@extend .bor-solid-t;
-		@extend .bor-gray900;
-		@extend .links-no-color;
-		@extend .bg-op40;
+		position: absolute;
+		width: 100%;
+		bottom: 0;
+		border: 1px solid #444;
+		background-color: rgba(0, 0, 0, .4);
 		padding: 10px;
+		
+		a {
+			color: inherit;
+		}
 	}
 }
 
+// специфика шаблона
+
+// нужно учесть верхний отрицательный отступ и скрыть на phone
+.ls-fix {
+	margin-top: -120px;
+	
+	@media #{$SCREEN_PHONE}  {
+		display: none;
+		margin-top: 0;
+	}
+}
+
+// контейнер для текста на слайдере
+.ls-container {
+	position: absolute; 
+	top: 50px; 
+	padding: 120px 0; 
+	margin-left: 130px; 
+	line-height: 1;
+	overflow: hidden;
+}
+
+.ls-text1 {
+	font-size: 1.5rem; 
+	color: #c1f5eb; 
+	text-shadow: 0 0 10px #000;
+}
+
+.ls-text2 {
+	font-size: 4.3rem; 
+	font-weight: bold; 
+	margin-top: 30px; 
+	text-shadow: 0 0 10px #000; 
+	color: #e9eda6;
+}
+
+.ls-text3 {
+	color: #fff; 
+	font-size: 1.3rem; 
+	margin-top: 25px; 
+	text-shadow: 0 0 10px #000;
+}

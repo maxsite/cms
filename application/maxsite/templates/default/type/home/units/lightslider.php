@@ -1,15 +1,14 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-/*
-	(c) MaxSite CMS, http://max-3000.com/
-	
-	Слайдер lightslider
-	
-	v. 23-02-217
-	
-	(c) http://sachinchoolur.github.io/lightslider/
-		http://sachinchoolur.github.io/lightslider/settings.html
-		
+/**
+ * MaxSite CMS
+ * (c) https://max-3000.com/ 
+ * Слайдер lightslider
+ * v. 17-01-2020
+ * (c) http://sachinchoolur.github.io/lightslider/
+ * http://sachinchoolur.github.io/lightslider/settings.html
+ */
 
+/*
 Юнит подключает lightslider.min.js (опционно) путь относительно каталога шаблона
 И прописывает js-код слайдера с нужными опциями
 
@@ -35,7 +34,7 @@ slideMargin = 10
 */
 
 // здесь задаём true/false, числа и строки как положено 
-$def = array(
+$def = [
 	'load_js' => true,
 	'element' => '.lightslider',
 	'js_file' => 'components/lightslider/lightslider.js',
@@ -53,7 +52,7 @@ $def = array(
 	'verticalHeight' => 300,
 	'adaptiveHeight' => false,	
 	'addClass' => '',	
-);
+];
 
 $options = mso_merge_array($UNIT, $def);
 

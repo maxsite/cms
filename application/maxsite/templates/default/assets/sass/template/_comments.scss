@@ -1,40 +1,39 @@
 // Комментарии
 
 .mso-comments,
-.mso-comment-form
-{
-	padding: 30px 10px;
-}
-
-div.mso-type-page-comments {
-	padding-bottom: 30px;
+.mso-comment-form {
 }
 
 .mso-comments-count {
-	@extend .t100;
-	@extend .upper;
-	@extend .t-gray700;
-	border-bottom: 3px solid $gray300;
+	font-size: 1.1rem;
+	text-transform: uppercase;
+	color: $gray700;
+	border-bottom: 2px solid $gray200;
+	padding-bottom: 10px;
+	margin-top: 30px;
 	
-	&:before {
-		@extend .icon-fa-normal;
-		content: $fa-var-comments-o;
+	&::before {
+		font-family: FASolid;
+		display: inline-block;
+		margin-right: 7px;
+		content: unquote("\"#{ $fa-var-comments }\""); 
 	}
 	
 	.mso-comments-rss {
-		@extend .b-inline;
-		@extend .b-right;
-		@extend .t90;
+		display: block;
+		float: right;
+		font-size: .9rem;
 		
-		&:before {
-			@extend .icon-fa-normal;
-			content: $fa-var-rss;
+		&::before {
+			font-family: FASolid;
+			display: inline-block;
+			margin-right: 7px;
+			content: unquote("\"#{ $fa-var-rss }\""); 
 		}
 	}
 }
 
 .mso-comments-textarea {
-	
 	textarea {
 		width: 100%;
 	}
@@ -45,8 +44,8 @@ div.mso-type-page-comments {
 }
 
 .mso-comment-article {
-	@extend .mar20-t;
-	@extend .pad20-b;
+	margin-top: 10px;
+	padding-bottom: 20px;
 	border-bottom: 1px dotted $gray600;
 	
 	&:last-of-type {
@@ -57,65 +56,74 @@ div.mso-type-page-comments {
 // оставьте комментарий
 .mso-comment-leave {
 	margin: 20px 0;
-	@extend .bold;
-	@extend .t120;
+	font-weight: bold;
+	font-size: 1.2rem;
 }
 
 .mso-comment-info {
-	@extend .t90;
-	@extend .t-gray700;
+	font-size: .9rem;
+	color: $gray700;
+	
 	
 	.mso-comment-num {
-		@extend .bg-gray200;
-		@extend .t-gray600;
-		@extend .pad5-rl;
-		@extend .rounded5;
+		background-color: $gray200;
+		color: $gray600;
+		padding: 0 5px;
+		border-radius: 5px;
 	}
 	
 	a {
-		@extend .t-gray700;
+		color: $gray700;
 	}
 	
 	.mso-comment-author {
-		@extend .mar10-l;
+		margin-left: 10px;
 		
-		&:before {
-			@extend .icon-fa-normal;
-			content: $fa-var-user;
+		&::before {
+			font-family: FASolid;
+			display: inline-block;
+			margin-right: 7px;
+			content: unquote("\"#{ $fa-var-user }\"");
 		}
 	}
 	
 	.mso-comuser-url {
-		@extend .mar10-l;
+		margin-left: 10px;
 		
-		&:before {
-			@extend .icon-fa-normal;
-			content: $fa-var-link;
+		&::before {
+			font-family: FASolid;
+			display: inline-block;
+			margin-right: 7px;
+			content: unquote("\"#{ $fa-var-link }\"");
 		}
 	}
 	
 	.mso-comment-date {
-		@extend .mar10-l;
+		margin-left: 10px;
 		
-		&:before {
-			@extend .icon-fa-normal;
-			content: $fa-var-calendar-o;
+		&::before {
+			font-family: FASolid;
+			display: inline-block;
+			margin-right: 7px;
+			content: unquote("\"#{ $fa-var-calendar }\"");
 		}
 	}
 	
 	.mso-comment-edit {
-		@extend .mar10-l;
+		margin-left: 10px;
 		
-		&:before {
-			@extend .icon-fa-normal;
-			content: $fa-var-edit;
+		&::before {
+			font-family: FASolid;
+			display: inline-block;
+			margin-right: 7px;
+			content: unquote("\"#{ $fa-var-edit }\"");
 		}
 	}
 }
 
 // аватарка
 img.mso-gravatar {
-	@extend .b-right;
+	float: right;
 	margin: 10px 0 15px 15px;
 }
 
@@ -149,7 +157,7 @@ img.mso-gravatar {
 	padding-bottom: 20px;
 	
 	button[name="comments_submit"] {
-		@extend .button;
+		// @extend .button;
 	}
 	
 	.mso-comments-auth {
@@ -170,15 +178,20 @@ img.mso-gravatar {
 
 .mso-comments-user {
 	margin: 0 0 20px 0;
-	@extend .t120;
+	font-size: 1.2rem;
 	
 	a[href*="/logout"] {
-		@extend .b-inline;
-		@extend .b-right;
+		display: inline-block;
+		float: right;
+		font-size: 1rem;
 		
-		&:before {
-			@extend .icon-fa-normal;
-			content: $fa-var-unlock;
+		color: $gray600;
+		
+		&::before {
+			font-family: FASolid;
+			display: inline-block;
+			margin-right: 7px;
+			content: unquote("\"#{ $fa-var-unlock }\"");
 		}
 	}
 }
@@ -187,3 +200,7 @@ div.mso-type-comments-content {
 	padding-bottom: 20px;
 }
 
+.mso-comment-approved {
+	color: $red;
+	margin-left: 10px;
+}

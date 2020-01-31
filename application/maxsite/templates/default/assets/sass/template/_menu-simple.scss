@@ -15,17 +15,17 @@ ul.menu-simple {
 	a {
 		transition: all 0.2s;
 		display: inline-block;
-		height: 35px;
-		line-height: 35px;
-		padding: 0 10px;
+		margin: 0 15px 0 0;
 		
 		&:hover {
 			text-decoration: none;
-			background: rgba(0,0,0, .6);
+		}
+		
+		span {
 		}
 	}
 	
 	li.selected a {
-		background: rgba(0,0,0, .6);
+		font-weight: bold;
 	}
 }

@@ -2,39 +2,49 @@
 
 // плагин пагинации
 div.pagination {
-	
-	$pag_color1: $color1; // основной цвет
-	$pag_color2: darken($pag_color1, 20%);
-	$pag_color3: #ffffff; // текст на фоне
 
+	$pag_bg1: #222B3D; // основной цвет активного элемента (strong)
+	$pag_bg1_text: #ffffff; // текст
+	
+	// неактивные ссылки
+	$pag_bg2: #c9d1e1; // фона 
+	$pag_bg2_text: #7B8996; // текст
+	$pag_bg2_hover: $pag_bg1; // фона для hover
+	$pag_bg2_text_hover: $pag_bg1_text; // текст для hover
+	
+	// next-prev
+	$pag_np_bg: $pag_bg2; // фон
+	$pag_np_text: $pag_bg2_text; // текст
+	$pag_np_bg_hover: $pag_bg2_hover; // hover фон
+	$pag_np_text_hover: $pag_bg2_text_hover; // hover текст
+	
 	width: 100%;
-	@extend .t-center;
-	color: $pag_color1;
+	text-align: center;
+	color: $pag_bg1_text;
+	
+	margin: 20px 0;
 	
 	a, strong, span {
-		@extend .b-inline;
-		@extend .pad7;
+		display: inline-block;
+		padding: 7px;
 		min-width: 40px;
 		margin: 5px 2px;
-		transition: color 0.2s, background-color 0.2s;
-		// border-radius: 4px;
-		color: $pag_color1;
-		border: 1px $pag_color1 solid;
+		transition: all 0.2s;
+		border-radius: 3px;
+		background: $pag_bg2;
+		color: $pag_bg2_text;
 	}
 
 	a:hover {
 		text-decoration: none;
-		background: $pag_color2;
-		border: 1px $pag_color2 solid;
-		color: $pag_color3;
+		background: $pag_bg2_hover;
+		color: $pag_bg2_text_hover;
 	}
 	
-	strong,
-	.pagination-prev,
-	.pagination-next
+	strong
 	{
-		background: $pag_color1;
-		color: $pag_color3;
+		background: $pag_bg1;
+		color: $pag_bg1_text;
 	}
 	
 	.pagination-first,
@@ -43,19 +53,31 @@ div.pagination {
 		display: none;
 	}
 	
+	.pagination-prev,
+	.pagination-next
+	{
+		background: $pag_np_bg;
+		color: $pag_np_text;
+		
+		&:before {
+			font-family: 'FASolid';
+			margin: 0;
+			vertical-align: middle;
+		}
+		
+		&:hover {
+			background: $pag_np_bg_hover;
+			color: $pag_np_text_hover;
+		}	
+	}
+	
 	.pagination-prev
 	{
 		float: left;
 		margin-right: 5px;
 		
-		background: $pag_color3;
-		color: $pag_color1;
-		border-color: $pag_color3;
-		
 		&:before {
-			@extend .icon-fa-normal;
-			content: $fa-var-chevron-left;
-			margin: 0;
+			content: unquote("\"#{ $fa-var-chevron-left }\""); 
 		}
 	}
 	
@@ -64,24 +86,11 @@ div.pagination {
 		float: right;
 		margin-left: 5px;
 		
-		background: $pag_color3;
-		color: $pag_color1;
-		border-color: $pag_color3;
-		
 		&:before {
-			@extend .icon-fa-normal;
-			content: $fa-var-chevron-right;
-			margin: 0;
+			content: unquote("\"#{ $fa-var-chevron-right }\""); 
 		}
 	}
-	
-	a.pagination-prev:hover,
-	a.pagination-next:hover
-	{
-		background: $pag_color2;
-		border: 1px $pag_color2 solid;
-	}
-	
+
 	span.pagination-prev,
 	span.pagination-next
 	{
@@ -100,13 +109,10 @@ div.pagination {
 	}
 }
 
-
 // плагин paginator
 .paginator {
-	@extend .mar40-t;
-	@extend .mar10-b;
+	margin: 40px 0 10px 0;
 }
-
 
 // соцзакладки
 div.addzakl {
@@ -137,64 +143,30 @@ ul.mso-tabs-nav li.mso-tabs-elem {
 	padding: 0 10px; 
 	cursor: pointer; 
 	color: #fff; 
-	background: $gray600; 
+	background: #888; 
 	// font-size: .9em;
 	
 	border-radius: 5px 5px 0 0;
 	
 	&:hover{
-		// color: white; 
-		// background: $gray600;
 	}
 }
 
 ul.mso-tabs-nav li.mso-tabs-current {
 	color: white; 
-	background: $color4;
+	background: #DC3545;
 }
 
 div.mso-tabs-box {
 	display: none; 
-	border-top: 3px solid $color4; 
-	background: $gray200; 
+	border-top: 3px solid #DC3545; 
+	background: #eee; 
 	padding: 20px 10px; 
-}
-
-// галерея lightbox и lightgallery
-div.gallery, 
-div.lightgallery
-{
-	@extend .flex;
-	@extend .flex-wrap;
-	// .grid_flex > .justify_content(flex-start);
-	
-	p {
-		margin: 0;
-	}
-	
-	img {
-		transition: all .4s ease;
-		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 3px 4px -3px rgba(0, 0, 0, 0.3);
-		background-color: $gray100;
-		padding: 5px;
-		margin: 0 15px 20px 0;
-		
-		&:hover {
-			background-color: $gray200;
-			transform: scale3d(1.05, 1.05, 1.05);
-		}
-	}
-}
-
-// правка кнопки гугла в addzakl - у них неверное выравнивание
-#___plusone_0 {
-	vertical-align: middle !important;
 }
 
 div.mso-type-sitemap .mso-page-only {
 	padding-bottom: 20px;
 }
-
 
 // верхняя панель theme-switch с картинками
 div.theme-switch-panel-screenshot {
@@ -227,7 +199,11 @@ div.theme-switch-panel-combo {
 	padding: 5px 0;
 	
 	.wrap {
-		@extend .layout-center;
+		width       : 100%;
+		margin-right: auto;
+		margin-left : auto;
+		max-width   : $layout_max_width;
+		
 	}
 	
 	select {
@@ -248,4 +224,25 @@ p.comment_button button {
 
 div#rater {
 	margin-top: 20px;
+}
+
+// голосование
+.mso-samborsky_polls_widget  {
+	table caption {
+		background: none;
+		padding: 0;
+		font-size: 1.1rem;
+		margin: 10px 0;
+		font-style: normal;
+	}
+	
+	input[type="button"] {
+		@extend button;
+		margin: 10px 0;
+	}
+	
+	a.sp_polls_ajax_link:hover {
+		text-decoration: none;
+		color: red;
+	}
 }

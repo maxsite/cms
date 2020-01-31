@@ -1,10 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
-/*
- * (c) MaxSite CMS
- * http://max-3000.com/
- *
+/**
+ * MaxSite CMS
+ * (c) https://max-3000.com/ 
  * Корзина — подключение к шаблону
- *
  */
  
 // хук на подключение js-файлов в конце BODY

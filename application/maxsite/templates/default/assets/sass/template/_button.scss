@@ -1,0 +1,73 @@
+// default button .buttton and  form.mso-form <button>
+
+$button_bg_color           : $blue600; // rgba(0, 115, 150, .8);
+$button_text_color         : #fff;
+$button_hover_bg_color     : darken($button_bg_color, 10%);
+$button_hover_text_color   : #ffffff;
+$button_disabled_bg_color  : $gray300;
+$button_disabled_text_color: $gray500;
+$button_padding            : 6px 20px;
+$button_padding_invert     : 6px 20px;
+$button_radius             : 5px;
+
+// стандартные MaxSite CMS формы 
+// кнопка плагина Forms
+// .button | form.mso-form <BUTTON> | .button-invert | .button-invert@dark
+.mso-form button,
+.mso-forms button,
+.button {
+	display       : inline-block;
+	text-align    : center;
+	vertical-align: middle;
+	cursor        : pointer;
+	white-space   : nowrap;
+	border        : none; // for <button> 
+	border-radius : $button_radius;
+
+	background-color: $button_bg_color;
+	color           : $button_text_color;
+	padding         : $button_padding;
+
+	transition: all ease .2s;
+
+	&:hover {
+		text-decoration : none;
+		background-color: $button_hover_bg_color;
+		color           : $button_hover_text_color;
+		box-shadow      : 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+	}
+
+	&:active,
+	&:focus {
+		outline: none;
+	}
+
+	&.disabled,
+	&:disabled {
+		background-color: $button_disabled_bg_color;
+		color           : $button_disabled_text_color;
+		cursor          : not-allowed;
+	}
+
+	// таже кнопка только инвертирована по цветам с бордюром
+	&.button-invert,
+	&.button-invert\@dark {
+		background-color: $button_text_color;
+		color           : $button_bg_color;
+		border          : 1px solid $button_bg_color;
+		padding         : $button_padding_invert;
+
+		&:hover {
+			background-color: $button_bg_color;
+			color           : $button_text_color;
+			box-shadow      : none;
+		}
+	}
+
+	// аналогично, только для темного фона
+	&.button-invert\@dark {
+		&:hover {
+			background-color: lighten($button_bg_color, 10%);
+		}
+	}
+}

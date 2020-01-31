@@ -4,9 +4,7 @@ a.my-social {
 	transition: all 0.2s;
 	display: inline-block;
 	margin: 0;
-	padding: 0 10px;
-	height: 35px;
-	line-height: 35px;
+	padding: 0 5px;
 	
 	&:before {
 		margin: 0;
@@ -18,7 +16,5 @@ a.my-social {
 	
 	&:hover {
 		text-decoration: none;
-		background: rgba(0,0,0, .6);
 	}
-	
 }

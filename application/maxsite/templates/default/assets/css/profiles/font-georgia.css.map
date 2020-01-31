@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,IAAK,CAAC,WAAW,CAAE,iCAAiC",
+"sources": ["../../sass/profiles/font-georgia.scss"],
+"names": [],
+"file": "font-georgia.css"
+}

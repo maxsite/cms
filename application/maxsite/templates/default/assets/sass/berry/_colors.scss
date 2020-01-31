@@ -1,0 +1,51 @@
+// (c) Berry - CSS Utilities, http://maxsite.org/berry
+
+// mixin for .t- .bg- .hover-t- .hover-bg 
+@mixin colors_state($name, $color) {
+
+    .#{$pf}t-#{$name} {
+        color: $color;
+    }
+
+    .#{$pf}bg-#{$name} {
+        background: $color;
+    }
+
+    .#{$pf}hover-t-#{$name}:hover {
+        color: $color !important;
+    }
+
+    .#{$pf}hover-bg-#{$name}:hover {
+        background: $color !important;
+    }
+}
+
+// base colors .t- .bg- .hover-t- .hover-bg 
+@each $name, $color in $color_base_list {
+    @include colors_state($name, $color);
+}
+
+@mixin colors_state_links_hover($name, $color) {
+
+    .#{$pf}links-hover-t-#{$name} a:not([class^="#{$pf}hover-t-"]):not([class*=" #{$pf}hover-t-"]):hover {
+        color: $color !important;
+    }
+
+    .#{$pf}links-hover-bg-#{$name} a:not([class^="#{$pf}hover-bg-"]):not([class*=" #{$pf}hover-bg-"]):hover {
+        background: $color !important;
+    }
+}
+
+@each $name, $color in $color_links_hover_list {
+    @include colors_state_links_hover($name, $color);
+}
+
+// color border
+@each $name,
+$color in $border_list_color {
+
+    .#{$pf}bor-#{$name},
+    .#{$pf}hover-bor-#{$name}:hover {
+        border-color: $color;
+    }
+}

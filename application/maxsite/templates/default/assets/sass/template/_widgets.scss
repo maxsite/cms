@@ -2,42 +2,38 @@
 
 // виджеты
 div.mso-widget {
-	font-size: .9rem;
-	margin-bottom: 40px;
+	font-size: 0.95rem;
+	margin-bottom: 60px;
+	margin-top: 30px;
 }
 
 // ссылки в виджетах
 div.mso-widget a {
-	@extend .t-gray700;
+	color: $gray700;
 }
 
 // заголовок сайдбара
 div.mso-widget-header {
-	background: #dddddd;
-	color: #000000;
-	font-size: 1rem;
-	padding: 10px;
-	border-right: $colorA5 solid 4px;
-	text-transform: uppercase;
+	color: $gray700;
+	font-size: 1.1rem;
+	margin-bottom: 20px;
+	font-weight: bold;
+	padding-bottom: 15px;
+	background: url("../../images/elements/hr1.png") repeat-x bottom left;
 }
 
-div.mso-widget button {
-	@extend .button;
-	height: 35px;
-	line-height: 35px;
-	padding: 0 7px;
+div.mso-widget button {	
 }
 
 // список в виджете
-ul.mso-widget-list
-{
+ul.mso-widget-list {
 	padding-left: 15px;
 }
 
 // виджет ссылки
 .mso-links_widget {
 	li div {
-		@extend .t90;
+		font-size: .9rem;
 		color: $gray500;
 		margin-bottom: 5px;
 	}
@@ -45,9 +41,9 @@ ul.mso-widget-list
 
 .mso-login_form_widget {
 	span.registration {
-		@extend .b-inline;
-		@extend .b-right;
-		@extend .t90;
+		display: inline-block;
+		float: right;
+		font-size: .9rem;
 	}
 }
 

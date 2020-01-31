@@ -33,7 +33,7 @@ function mso_find_ts_file($fn, $default = false)
 	$fn2 = getinfo('shared_dir') . $fn; // путь в shared
 
 	// если указан хук custom_ts_file, то вначале его обрабатываем
-	// хук должен вернуть иполное имя файла 
+	// хук должен вернуть полное имя файла 
 	if (mso_hook_present('custom_ts_file') and $fn3 = mso_hook('custom_ts_file', $fn) and file_exists($fn3)) return $fn3;
 	elseif (file_exists($fn1)) return $fn1; // если шаблонный
 	elseif (file_exists($fn2)) return $fn2; // нет, значит shared

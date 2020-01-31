@@ -1,0 +1,41 @@
+[site]
+name = Название сайта
+name-class = t-robotoslab t180 t-gray800
+description = <div class="t90 t-gray600 pad40-l pad0-phone">Описание сайта</div>
+icon = fab fa-google-wallet t200
+effect = 1
+[/site]
+
+[block]
+class = t-center-phone
+html = <div><a class="fas fa-phone t-green bold hover-t-green600 t120" href="tel:+123123123">+00 (012) 345-67-89</a></div><div>Время работы: 9:00 - 17:00</div>
+[/block]
+
+[block]
+class = t-center-phone mar20-rl
+html = <div><a class="t-nowrap fas fa-envelope t-violet hover-t-violet600" href="[siteurl]contact">my@site.com</a></div><div><address>Франция, г. Париж</address></div>
+[/block]
+
+[social]
+class = fab fa-skype t200 t-gray400 hover-t-cyan700
+href = skype://123123123
+title = Позвонить по Skype
+[/social]
+
+[social]
+class = fab fa-whatsapp t200 t-gray400 hover-t-green700
+href = https://wa.me/123123123
+title = Позвонить по Whatsapp
+[/social]
+
+[social]
+class = fab fa-telegram t200 t-gray400 hover-t-blue700
+href = https://t.me/USER
+title = Связаться через Telegam
+[/social]
+
+[social]
+class = fab fa-viber t200 t-gray400 hover-t-purple700
+href = viber://chat?number=123123123
+title = Связаться через Viber
+[/social]

@@ -1,0 +1,398 @@
+// (c) Berry - CSS Utilities, http://maxsite.org/berry
+
+// All colors
+
+$color1:    #007BFF;
+$color2:    #6C757D;
+$color3:    #28A745;
+$color4:    #DC3545;
+$color5:    #FFC107;
+
+// from the Bootstrap 4
+// $color_primary:  #007BFF;
+// $color_secondary:  #6C757D;
+// $color_success:  #28A745;
+// $color_danger:  #DC3545;
+// $color_warning:  #FFC107;
+// $color_info:  #17A2B8;
+// $color_light:  #F8F9FA;
+// $color_dark:  #343A40;
+
+$white:     #FFFFFF;
+$black:     #000000;
+
+// ***************** Gray *****************
+$gray50:    hsl(210, 1%, 97%);
+$gray100:   hsl(210, 2%, 94%);
+$gray150:   hsl(210, 2%, 91%);
+$gray200:   hsl(210, 3%, 88%);
+$gray250:   hsl(210, 3%, 83%);
+$gray300:   hsl(210, 4%, 78%);
+$gray350:   hsl(210, 4%, 73%);
+$gray400:   hsl(210, 5%, 69%);
+$gray450:   hsl(210, 5%, 65%);
+$gray500:   hsl(210, 6%, 60%);
+$gray550:   hsl(210, 6%, 55%);
+$gray600:   hsl(210, 7%, 49%);
+$gray650:   hsl(210, 7%, 44%);
+$gray700:   hsl(210, 8%, 38%);
+$gray750:   hsl(210, 8%, 33%);
+$gray800:   hsl(210, 9%, 28%);
+$gray850:   hsl(210, 9%, 22%);
+$gray900:   hsl(210, 10%, 16%);
+$gray950:   hsl(210, 10%, 10%);
+
+$gray: $gray500;
+
+
+// Colors scheme
+// basics of: https://yeun.github.io/open-color and https://material.io/resources/color
+
+// ***************** Red *****************
+$red50:  hsl(12, 100%, 96%);
+$red100: hsl(11, 100%, 92%);
+$red200: hsl(11, 100%, 85%);
+$red300: hsl(10, 100%, 75%);
+$red400: hsl(9, 100%, 65%);
+$red500: hsl(8, 94%, 50%);
+$red600: hsl(7, 94%, 42%);
+$red700: hsl(6, 86%, 33%);
+$red800: hsl(5, 74%, 24%);
+$red900: hsl(4, 65%, 19%);
+
+$red: $red500;
+
+$red150: darken($red100, 4%);
+$red250: darken($red200, 4%);
+$red350: darken($red300, 4%);
+$red450: darken($red400, 4%);
+$red550: darken($red500, 4%);
+$red650: darken($red600, 4%);
+$red750: darken($red700, 4%);
+$red850: darken($red800, 4%);
+$red950: darken($red900, 4%);
+
+
+// ***************** Brown *****************
+$brown50:  hsl(20, 17%, 93%);
+$brown100: hsl(15, 16%, 81%);
+$brown200: hsl(16, 14%, 69%);
+$brown300: hsl(16, 15%, 56%);
+$brown400: hsl(15, 18%, 47%);
+$brown500: hsl(16, 25%, 38%);
+$brown600: hsl(14, 25%, 34%);
+$brown700: hsl(14, 27%, 29%);
+$brown800: hsl(11, 26%, 24%);
+$brown900: hsl(9, 29%, 19%);
+
+$brown: $brown500;
+
+$brown150: darken($brown100, 5%);
+$brown250: darken($brown200, 5%);
+$brown350: darken($brown300, 5%);
+$brown450: darken($brown400, 5%);
+$brown550: darken($brown500, 3%);
+$brown650: darken($brown600, 3%);
+$brown750: darken($brown700, 3%);
+$brown850: darken($brown800, 3%);
+$brown950: darken($brown900, 3%);
+
+
+// ***************** Orange *****************
+$orange50:  hsl(34, 100%, 95%);
+$orange100: hsl(33, 100%, 90%);
+$orange200: hsl(33, 100%, 83%);
+$orange300: hsl(32, 100%, 74%);
+$orange400: hsl(31, 100%, 65%);
+$orange500: hsl(29, 100%, 58%);
+$orange600: hsl(27, 98%, 50%);
+$orange700: hsl(24, 94%, 45%);
+$orange800: hsl(21, 90%, 39%);
+$orange900: hsl(17, 87%, 28%);
+
+$orange: $orange500;
+
+$orange150: darken($orange100, 4%);
+$orange250: darken($orange200, 4%);
+$orange350: darken($orange300, 4%);
+$orange450: darken($orange400, 4%);
+$orange550: darken($orange500, 4%);
+$orange650: darken($orange600, 4%);
+$orange750: darken($orange700, 4%);
+$orange850: darken($orange800, 4%);
+$orange950: darken($orange900, 4%);
+
+
+// ***************** Yellow *****************
+$yellow50:  hsl(50, 100%, 93%);
+$yellow100: hsl(49, 100%, 87%);
+$yellow200: hsl(49, 100%, 80%);
+$yellow300: hsl(48, 100%, 70%);
+$yellow400: hsl(47, 100%, 62%);
+$yellow500: hsl(45, 97%, 54%);
+$yellow600: hsl(42, 96%, 50%);
+$yellow700: hsl(39, 100%, 45%);
+$yellow800: hsl(35, 100%, 38%);
+$yellow900: hsl(31, 100%, 30%);
+
+$yellow: $yellow500;
+
+$yellow150: darken($yellow100, 4%);
+$yellow250: darken($yellow200, 4%);
+$yellow350: darken($yellow300, 4%);
+$yellow450: darken($yellow400, 6%);
+$yellow550: darken($yellow500, 4%);
+$yellow650: darken($yellow600, 4%);
+$yellow750: darken($yellow700, 4%);
+$yellow850: darken($yellow800, 4%);
+$yellow950: darken($yellow900, 4%);
+
+
+// ***************** Olive *****************
+$olive50:  hsl(66, 71%, 95%);
+$olive100: hsl(65, 69%, 90%);
+$olive200: hsl(66, 71%, 80%);
+$olive300: hsl(66, 70%, 70%);
+$olive400: hsl(66, 70%, 60%);
+$olive500: hsl(66, 70%, 50%);
+$olive600: hsl(64, 60%, 41%);
+$olive700: hsl(62, 61%, 32%);
+$olive800: hsl(60, 63%, 23%);
+$olive900: hsl(54, 70%, 16%);
+
+$olive: $olive500;
+
+$olive150: darken($olive100, 4%);
+$olive250: darken($olive200, 4%);
+$olive350: darken($olive300, 4%);
+$olive450: darken($olive400, 4%);
+$olive550: darken($olive500, 4%);
+$olive650: darken($olive600, 4%);
+$olive750: darken($olive700, 4%);
+$olive850: darken($olive800, 4%);
+$olive950: darken($olive900, 4%);
+
+
+// ***************** Lime *****************
+$lime50:  hsl(79, 81%, 95%);
+$lime100: hsl(80, 83%, 90%);
+$lime200: hsl(81, 81%, 80%);
+$lime300: hsl(82, 75%, 70%);
+$lime400: hsl(83, 73%, 60%);
+$lime500: hsl(84, 69%, 50%);
+$lime600: hsl(85, 74%, 41%);
+$lime700: hsl(85, 79%, 32%);
+$lime800: hsl(86, 84%, 23%);
+$lime900: hsl(85, 84%, 16%);
+
+$lime: $lime500;
+
+$lime150: darken($lime100, 4%);
+$lime250: darken($lime200, 4%);
+$lime350: darken($lime300, 4%);
+$lime450: darken($lime400, 4%);
+$lime550: darken($lime500, 4%);
+$lime650: darken($lime600, 4%);
+$lime750: darken($lime700, 4%);
+$lime850: darken($lime800, 4%);
+$lime950: darken($lime900, 4%);
+
+
+// ***************** Green *****************
+$green50:  hsl(131, 67%, 95%);
+$green100: hsl(128, 76%, 90%);
+$green200: hsl(128, 71%, 80%);
+$green300: hsl(129, 68%, 70%);
+$green400: hsl(130, 61%, 60%);
+$green500: hsl(130, 57%, 50%);
+$green600: hsl(131, 50%, 41%);
+$green700: hsl(131, 53%, 32%);
+$green800: hsl(131, 54%, 23%);
+$green900: hsl(132, 52%, 16%);
+
+$green: $green500;
+
+$green150: darken($green100, 4%);
+$green250: darken($green200, 4%);
+$green350: darken($green300, 4%);
+$green450: darken($green400, 4%);
+$green550: darken($green500, 4%);
+$green650: darken($green600, 4%);
+$green750: darken($green700, 4%);
+$green850: darken($green800, 4%);
+$green950: darken($green900, 4%);
+
+
+// ***************** Teal *****************
+$teal50:  hsl(161, 79%, 95%);
+$teal100: hsl(160, 85%, 90%);
+$teal200: hsl(162, 78%, 80%);
+$teal300: hsl(162, 72%, 70%);
+$teal400: hsl(162, 68%, 60%);
+$teal500: hsl(162, 73%, 50%);
+$teal600: hsl(162, 82%, 41%);
+$teal700: hsl(162, 87%, 32%);
+$teal800: hsl(162, 88%, 23%);
+$teal900: hsl(162, 88%, 16%);
+
+$teal: $teal500;
+
+$teal150: darken($teal100, 5%);
+$teal250: darken($teal200, 5%);
+$teal350: darken($teal300, 5%);
+$teal450: darken($teal400, 3%);
+$teal550: darken($teal500, 5%);
+$teal650: darken($teal600, 5%);
+$teal750: darken($teal700, 5%);
+$teal850: darken($teal800, 5%);
+$teal950: darken($teal900, 5%);
+
+
+// ***************** Cyan *****************
+$cyan50:  hsl(185, 81%, 95%);
+$cyan100: hsl(185, 84%, 90%);
+$cyan200: hsl(186, 77%, 80%);
+$cyan300: hsl(187, 74%, 70%);
+$cyan400: hsl(187, 69%, 60%);
+$cyan500: hsl(188, 72%, 50%);
+$cyan600: hsl(187, 80%, 41%);
+$cyan700: hsl(188, 83%, 32%);
+$cyan800: hsl(189, 85%, 23%);
+$cyan900: hsl(189, 85%, 16%);
+
+$cyan: $cyan500;
+
+$cyan150: darken($cyan100, 4%);
+$cyan250: darken($cyan200, 4%);
+$cyan350: darken($cyan300, 4%);
+$cyan450: darken($cyan400, 4%);
+$cyan550: darken($cyan500, 4%);
+$cyan650: darken($cyan600, 4%);
+$cyan750: darken($cyan700, 4%);
+$cyan850: darken($cyan800, 4%);
+$cyan950: darken($cyan900, 4%);
+
+
+// ***************** Blue *****************
+$blue50:  hsl(205, 100%, 95%);
+$blue100: hsl(206, 100%, 90%);
+$blue200: hsl(206, 100%, 80%);
+$blue300: hsl(206, 96%, 70%);
+$blue400: hsl(207, 91%, 60%);
+$blue500: hsl(207, 86%, 50%);
+$blue600: hsl(208, 80%, 41%);
+$blue700: hsl(208, 77%, 32%);
+$blue800: hsl(209, 77%, 23%);
+$blue900: hsl(210, 75%, 16%);
+
+$blue: $blue500;
+
+$blue150: darken($blue100, 4%);
+$blue250: darken($blue200, 4%);
+$blue350: darken($blue300, 4%);
+$blue450: darken($blue400, 6%);
+$blue550: darken($blue500, 4%);
+$blue650: darken($blue600, 4%);
+$blue750: darken($blue700, 4%);
+$blue850: darken($blue800, 4%);
+$blue950: darken($blue900, 4%);
+
+
+// ***************** Indigo *****************
+$indigo50:  hsl(223, 100%, 95%);
+$indigo100: hsl(225, 100%, 90%);
+$indigo200: hsl(228, 100%, 80%);
+$indigo300: hsl(228, 100%, 70%);
+$indigo400: hsl(228, 96%, 60%);
+$indigo500: hsl(228, 94%, 50%);
+$indigo600: hsl(228, 89%, 41%);
+$indigo700: hsl(228, 81%, 32%);
+$indigo800: hsl(228, 69%, 23%);
+$indigo900: hsl(230, 57%, 16%);
+
+$indigo: $indigo500;
+
+$indigo150: darken($indigo100, 4%);
+$indigo250: darken($indigo200, 4%);
+$indigo350: darken($indigo300, 4%);
+$indigo450: darken($indigo400, 4%);
+$indigo550: darken($indigo500, 4%);
+$indigo650: darken($indigo600, 4%);
+$indigo750: darken($indigo700, 4%);
+$indigo850: darken($indigo800, 4%);
+$indigo950: darken($indigo900, 4%);
+
+
+// ***************** Violet *****************
+$violet50:  hsl(252, 100%, 95%);
+$violet100: hsl(257, 100%, 90%);
+$violet200: hsl(256, 100%, 80%);
+$violet300: hsl(255, 94%, 70%);
+$violet400: hsl(255, 93%, 60%);
+$violet500: hsl(255, 91%, 50%);
+$violet600: hsl(255, 86%, 41%);
+$violet700: hsl(255, 78%, 32%);
+$violet800: hsl(255, 67%, 23%);
+$violet900: hsl(255, 53%, 16%);
+
+$violet: $violet500;
+
+$violet150: darken($violet100, 4%);
+$violet250: darken($violet200, 4%);
+$violet350: darken($violet300, 4%);
+$violet450: darken($violet400, 4%);
+$violet550: darken($violet500, 4%);
+$violet650: darken($violet600, 4%);
+$violet750: darken($violet700, 4%);
+$violet850: darken($violet800, 4%);
+$violet950: darken($violet900, 4%);
+
+
+// ***************** Purple *****************
+$purple50:  hsl(280, 67%, 95%);
+$purple100: hsl(287, 77%, 90%);
+$purple200: hsl(288, 86%, 80%);
+$purple300: hsl(289, 85%, 70%);
+$purple400: hsl(288, 83%, 60%);
+$purple500: hsl(288, 75%, 50%);
+$purple600: hsl(288, 67%, 41%);
+$purple700: hsl(288, 56%, 32%);
+$purple800: hsl(288, 54%, 23%);
+$purple900: hsl(288, 54%, 16%);
+
+$purple: $purple500;
+
+$purple150: darken($purple100, 4%);
+$purple250: darken($purple200, 4%);
+$purple350: darken($purple300, 4%);
+$purple450: darken($purple400, 4%);
+$purple550: darken($purple500, 4%);
+$purple650: darken($purple600, 4%);
+$purple750: darken($purple700, 4%);
+$purple850: darken($purple800, 4%);
+$purple950: darken($purple900, 4%);
+
+
+// ***************** Pink *****************
+$pink50:  hsl(336, 100%, 95%);
+$pink100: hsl(336, 100%, 90%);
+$pink200: hsl(338, 91%, 80%);
+$pink300: hsl(339, 90%, 70%);
+$pink400: hsl(339, 88%, 60%);
+$pink500: hsl(339, 82%, 50%);
+$pink600: hsl(339, 76%, 41%);
+$pink700: hsl(339, 67%, 32%);
+$pink800: hsl(339, 68%, 23%);
+$pink900: hsl(339, 69%, 16%);
+
+$pink: $pink500;
+
+$pink150: darken($pink100, 4%);
+$pink250: darken($pink200, 4%);
+$pink350: darken($pink300, 4%);
+$pink450: darken($pink400, 4%);
+$pink550: darken($pink500, 4%);
+$pink650: darken($pink600, 4%);
+$pink750: darken($pink700, 4%);
+$pink850: darken($pink800, 4%);
+$pink950: darken($pink900, 4%);

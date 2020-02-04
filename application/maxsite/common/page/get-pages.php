@@ -363,6 +363,8 @@ function mso_get_pages($r = [], &$pag)
 			$pages[$key]['page_categories_detail'] = [];
 			$pages[$key]['page_tags'] = [];
 			$pages[$key]['page_meta'] = [];
+			
+			$mso_page_current = $pages[$key];
 		}
 
 		if ($r['get_page_categories']) {
@@ -492,6 +494,8 @@ function mso_get_pages($r = [], &$pag)
 			$output = mso_hook('content_complete', $output);
 			$pages[$key]['page_content'] = $output;
 			$pages[$key] = mso_hook('page_complete', $pages[$key]);
+			
+			$mso_page_current = $pages[$key];
 		}
 	} else {
 		$pages = [];

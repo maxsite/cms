@@ -22,6 +22,8 @@ if ($fn = mso_page_foreach('archive-mso-get-pages')) require $fn;
 
 $pages = mso_get_pages($par, $pagination);
 
+mso_set_val('mso_pages', $pages); // сохраняем массив для глобального доступа
+
 if ($f = mso_page_foreach('archive-head-meta')) {
 	require $fn;
 } else {

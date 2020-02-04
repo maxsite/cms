@@ -22,6 +22,8 @@ if ($fn = mso_page_foreach('tag-mso-get-pages')) require $fn;
 
 $pages = mso_get_pages($par, $pagination);
 
+mso_set_val('mso_pages', $pages); // сохраняем массив для глобального доступа
+
 // meta title страницы
 if ($fn = mso_find_ts_file('type/tag/units/tag-head-meta.php'))
 	require $fn;

@@ -23,6 +23,8 @@ if ($fn = mso_page_foreach('home-mso-get-pages')) require $fn;
 
 $pages = mso_get_pages($par, $pagination);
 
+mso_set_val('mso_pages', $pages); // сохраняем массив для глобального доступа
+
 mso_set_val('container_class', 'mso-type_home home_full');
 mso_set_val('full_format_title_start', '<h1>');
 mso_set_val('full_format_title_end', '</h1>');

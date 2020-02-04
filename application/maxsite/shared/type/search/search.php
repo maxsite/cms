@@ -33,7 +33,9 @@ if (!$search or ($search_len = (strlen(mso_slug($search)) < $min_search_chars)))
 	if ($fn = mso_page_foreach('search-mso-get-pages')) require $fn;
 
 	$pages = mso_get_pages($par, $pagination); // получим все - второй параметр нужен для сформированной пагинации
-
+	
+	mso_set_val('mso_pages', $pages); // сохраняем массив для глобального доступа
+	
 	// рубрики
 	$categories = [];
 

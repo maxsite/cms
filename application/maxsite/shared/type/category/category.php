@@ -38,6 +38,8 @@ if ($fn = mso_page_foreach('category-mso-get-pages')) require $fn;
 
 $pages = mso_get_pages($par, $pagination);
 
+mso_set_val('mso_pages', $pages); // сохраняем массив для глобального доступа
+
 if ($fn = mso_find_ts_file('type/category/units/category-head-meta.php')) require $fn;
 elseif ($fn = mso_page_foreach('category-head-meta')) require $fn;
 else {

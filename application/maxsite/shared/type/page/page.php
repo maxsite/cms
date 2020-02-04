@@ -17,6 +17,8 @@ if ($fn = mso_page_foreach('page-mso-get-pages')) require $fn;
 
 $pages = mso_get_pages($par, $pagination); // получим все
 
+mso_set_val('mso_pages', $pages); // сохраняем массив для глобального доступа
+
 if ($fn = mso_page_foreach('page-head-meta')) {
 	require $fn;
 } else {

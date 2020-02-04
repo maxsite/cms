@@ -5,7 +5,7 @@
 
 	См. https://max-3000.com/book/simple
 	
-	Версия: 2020-01-02
+	Версия: 2020-02-04
 	
 	Возможности
 	-----------
@@ -23,6 +23,7 @@
 	h4 заголовок H4
 	h5 заголовок H5
 	h6 заголовок H6
+	
 	bqq цитата blockquote в одной строке
     
 	Тэги с обязательным закрывающим тэгом:	
@@ -89,7 +90,8 @@
 		текст
 	/div || /div
 	
-
+	<!-- nosimple --> текст без обработки <!-- /nosimple -->
+	
 */
 
 
@@ -133,7 +135,9 @@ function autotag_simple($text)
 	$text = "\n" . $text . "\n";
 	
 	// <!-- nosimple --> текст без обработки <!-- /nosimple -->
-	// $text = preg_replace_callback('!(<\!-- nosimple -->)(.*?)(<\!-- \/nosimple -->)!is', 'autotag_simple_no', $text);
+	$text = preg_replace_callback('!(<\!-- nosimple -->)(.*?)(<\!-- \/nosimple -->)!is', function ($m) {
+		return '[simple_base64]' . base64_encode($m[2]) . '[/simple_base64]';
+	}, $text);
 	
 	
 	# _ P
@@ -209,6 +213,10 @@ function autotag_simple($text)
 	$text = str_replace('[br none]', '<br>', $text);
 	$text = str_replace('[br left]', '<br style="clear:left">', $text);
 	$text = str_replace('[br right]', '<br style="clear:right">', $text);
+	
+	$text = preg_replace_callback('!\[simple_base64\](.*?)\[\/simple_base64\]!is', function ($m) {
+		return base64_decode($m[1]);
+	}, $text);
 	
 	return trim($text);
 }

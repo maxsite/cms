@@ -209,9 +209,7 @@
 		
 				// echo '<div class="update">Пошел процесс... Ждите...</div>';
 				
-				require_once( getinfo('common_dir') . 'category.php' );
 				require_once( getinfo('common_dir') . 'functions-edit.php' );
-
 
 				$all = fetch_rss($url);
 				$out = '';

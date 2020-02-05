@@ -14,10 +14,9 @@ function tweetmeme_com_autoload()
 
 
 # функция выполняется при деинсталяции плагина
-function tweetmeme_com_uninstall($args = array())
+function tweetmeme_com_uninstall()
 {	
 	mso_delete_option('plugin_tweetmeme_com', 'plugins' ); // удалим созданные опции
-	return $args;
 }
 
 # функция отрабатывающая миниопции плагина (function плагин_mso_options)
@@ -82,13 +81,12 @@ function tweetmeme_com_mso_options()
 # функции плагина
 function tweetmeme_com_content($text = '')
 {
-	global $page;
-	
-	
 	if (!is_type('page') and !is_type('home')) return '. ' . $text;
 	
+	$pageData = mso_get_val('mso_pages', 0, true);
+
 	// если запись не опубликована, не отображаем блок
-	if (is_type('page') and isset($page['page_status']) and $page['page_status'] != 'publish') return $text;
+	if (is_type('page') and isset($pageData['page_status']) and $pageData['page_status'] != 'publish') return $text;
 	
 	$options = mso_get_option('plugin_tweetmeme_com', 'plugins', array() ); // получаем опции
 	
@@ -101,7 +99,7 @@ function tweetmeme_com_content($text = '')
 		$p_type_name = mso_explode($options['page_type'], false);
 		
 		// нет у указанных типах страниц
-		if (!in_array($page['page_type_name'], $p_type_name)) return $text;
+		if (!in_array($pageData['page_type_name'], $p_type_name)) return $text;
 	}
 	
 	// стиль выравнивания
@@ -116,14 +114,11 @@ function tweetmeme_com_content($text = '')
 			else $style = '';
 		}
 	
-	
-	
-	
 	// блок выводится с оригинального twitter.com
 	
 	if (is_type('home')) 
 	{
-		$url = getinfo('site_url') . 'page/' . $page['page_slug'];
+		$url = getinfo('site_url') . 'page/' . $pageData['page_slug'];
 	}
 	else
 	{
@@ -135,15 +130,14 @@ function tweetmeme_com_content($text = '')
 	
 	if (!isset($options['twitter_data-via'])) $options['twitter_data-via'] = '';
 	if ($options['twitter_data-via']) $options['twitter_data-via'] = ' data-via="' . $options['twitter_data-via'] . '" ';
-	
-	
+		
 	$text = '<div class="tweetmeme_com"' . $style . '>' 
-	. '<a rel="nofollow" href="http://twitter.com/share" class="twitter-share-button" data-url="' . $url . '"' 
+	. '<a rel="nofollow" href="https://twitter.com/share" class="twitter-share-button" data-url="' . $url . '"' 
 	. $options['twitter_data-count'] 
-	. ' data-text="' . $page['page_title'] . '" '
+	. ' data-text="' . $pageData['page_title'] . '" '
 	. $options['twitter_data-via']
 	. '>Tweet</a>
-	<script src="http://platform.twitter.com/widgets.js"></script>' 
+	<script src="https://platform.twitter.com/widgets.js"></script>' 
 	. '</div>' . $text;
 
 	return $text;

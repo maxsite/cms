@@ -12,7 +12,7 @@
  */
 function my_default_head_section()
 {
-	global $page;
+	// global $page;
 
 	// атирибуты <HTML>
 	$html_attr = mso_get_val('head_section_html_add');
@@ -84,12 +84,10 @@ function my_default_head_section()
  */
 function my_default_out_profiles($path = 'assets/css/profiles/')
 {
-	global $page;
-
 	if ($default_profiles = mso_get_option('default_profiles', getinfo('template'), [])) {
 
 		$css_out = '';
-		
+
 		// theme и lazy профили подключаются как link rel="stylesheet
 		foreach ($default_profiles as $css_file) {
 			$fn = $path . $css_file;
@@ -111,21 +109,23 @@ function my_default_out_profiles($path = 'assets/css/profiles/')
 
 	// здесь же выводим css-профиль записи
 	// он задан через метаполе
-	if (is_type('page') and isset($page) and $page) {
-		if ($page_css_profiles = mso_page_meta_value('page_css_profiles', $page['page_meta'])) {
+	if (is_type('page')) {
+		if ($pageData = mso_get_val('mso_pages', 0, true)) {
+			if ($page_css_profiles = mso_page_meta_value('page_css_profiles', $pageData['page_meta'])) {
 
-			$fn = $path . $page_css_profiles;
+				$fn = $path . $page_css_profiles;
 
-			$theme = (strpos($page_css_profiles, 'theme-') === 0);
-			$lazy = (strpos($page_css_profiles, '-lazy') !== false);
+				$theme = (strpos($page_css_profiles, 'theme-') === 0);
+				$lazy = (strpos($page_css_profiles, '-lazy') !== false);
 
-			if ($theme)
-				mso_add_file($fn); // подключаем внешими стилями в HEAD
-			elseif ($lazy)
-				mso_add_file($fn, true); // подключаем внешими стилями в BODY
-			else {
-				if ($css_out = mso_out_css_file($fn, false, false))
-					echo '<style>' . $css_out . '</style>';
+				if ($theme)
+					mso_add_file($fn); // подключаем внешими стилями в HEAD
+				elseif ($lazy)
+					mso_add_file($fn, true); // подключаем внешими стилями в BODY
+				else {
+					if ($css_out = mso_out_css_file($fn, false, false))
+						echo '<style>' . $css_out . '</style>';
+				}
 			}
 		}
 	}

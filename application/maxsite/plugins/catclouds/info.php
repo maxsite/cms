@@ -3,10 +3,10 @@
 $info = array(
 	'name' => t('Облако рубрик'),
 	'description' => t('Виджет облака рубрик'),
-	'version' => '2.0',
+	'version' => '3.0',
 	'author' => 'Максим',
 	'plugin_url' => '',
-	'author_url' => '//maxsite.org/',
+	'author_url' => 'https://maxsite.org/',
 	'group' => 'widget'
 );
 

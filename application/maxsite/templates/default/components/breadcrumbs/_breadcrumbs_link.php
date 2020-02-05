@@ -12,26 +12,29 @@
 $breadcrumbs = [];
 
 if (is_type('page')) {
-	if (isset($page) and $page) {
+	if ($pageData = mso_get_val('mso_pages', 0, true)) {
 		// есть запись
-		$breadcrumbs[$page['page_title']] = '';
+		$breadcrumbs[$pageData['page_title']] = '';
 
-		if (isset($page['page_categories_detail']) and $page['page_categories_detail']) {
-			foreach ($page['page_categories_detail'] as $c) {
+		if (isset($pageData['page_categories_detail']) and $pageData['page_categories_detail']) {
+			foreach ($pageData['page_categories_detail'] as $c) {
 				$breadcrumbs[$c['category_name']] = getinfo('siteurl') . 'category/' . $c['category_slug'];
 			}
 		}
 	} else {
 		$breadcrumbs['404. Ничего не найдено'] = '';
 	}
+	
 } elseif (is_type('category')) {
 	$c = mso_get_cat_from_slug('', true);
 	$breadcrumbs[$c['category_name']] = '';
 } elseif (is_type('tag')) {
 	$breadcrumbs[mso_segment(2)] = '';
 } elseif (is_type('author')) {
-	$_a = isset($pages[0]['users_nik']) ? $pages[0]['users_nik'] : 'Автор';
-	$breadcrumbs[$_a] = '';
+	if ($pageData = mso_get_val('mso_pages', 0, true)) {
+		$_a = $pageData['users_nik'] ?? 'Автор';
+		$breadcrumbs[$_a] = '';
+	}
 } elseif (is_type('users')) {
 	if (isset($comuser_info[0]) and $comuser_info[0]) $breadcrumbs[$comuser_info[0]['comusers_nik']] = '';
 	$breadcrumbs['Пользователи'] = getinfo('siteurl') . 'users';

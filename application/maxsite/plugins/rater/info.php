@@ -3,10 +3,10 @@
 $info = array(
 	'name' => t('Рейтинг записей'),
 	'description' => t('Оценка статей посетителями'),
-	'version' => '2.1',
+	'version' => '2.2',
 	'author' => 'Максим',
 	'plugin_url' => '',
-	'author_url' => '//maxsite.org/',
+	'author_url' => 'https://maxsite.org/',
 	'group' => 'template'
 );
 

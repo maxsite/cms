@@ -135,11 +135,9 @@ function open_graph_head($arg = '')
 	_meta_content('twitter:creator', $twitter_site);
 
 	if (is_type('page')) {
-
-		// получаем текущие записи — они задаются в type-файле
-		if ($pages = mso_get_val('mso_pages', false)) {
-
-			if (isset($pages[0]['page_meta']['image_for_page'][0]) and $pages[0]['page_meta']['image_for_page'][0]) {
+		// получаем текущую запись — они задаются в type-файле
+		if ($pageData = mso_get_val('mso_pages', 0, true)) {
+			if (isset($pageData['page_meta']['image_for_page'][0]) and $pageData['page_meta']['image_for_page'][0]) {
 				$image_width = isset($o['image_width']) ? $o['image_width'] : 900;
 				$image_height = isset($o['image_height']) ? $o['image_height'] : 600;
 
@@ -152,7 +150,7 @@ function open_graph_head($arg = '')
 				}
 
 				if ($image_url = thumb_generate(
-					$pages[0]['page_meta']['image_for_page'][0], // адрес
+					$pageData['page_meta']['image_for_page'][0], // адрес
 					$image_width, //ширина
 					$image_height, //высота
 					false,

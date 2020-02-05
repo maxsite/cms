@@ -219,20 +219,24 @@ function mso_delete_float_option($key, $type = 'general', $dir = '', $ext = '', 
 // Функция использует глобальный одномерный массив
 // который используется для получения значения указанного ключа $key
 // Если в массиве ключ не определён, то используется значение $default
-// если $array = true, то возвращаем значение ключа массива $key[$default]
+// если $array = true, то возвращаем значение ключа массива $key[$default] или $array_default
 // см. примеры к mso_set_val()
-function mso_get_val($key = '', $default = '', $array = false)
+function mso_get_val($key = '', $default = '', $array = false, $array_default = false)
 {
 	global $MSO;
 
 	// нет такого массива, создаём
 	if (!isset($MSO->key_options)) {
 		$MSO->key_options = [];
+
 		return $default;
 	}
 
-	if ($array !== false and $default and isset($MSO->key_options[$key][$default])) {
-		return $MSO->key_options[$key][$default];
+	if ($array !== false) {
+		if (isset($MSO->key_options[$key][$default]))
+			return $MSO->key_options[$key][$default];
+		else
+			return $array_default;
 	} else {
 		// возвращаем значение или дефаулт
 		return (isset($MSO->key_options[$key])) ? $MSO->key_options[$key] : $default;

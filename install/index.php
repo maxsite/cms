@@ -6,7 +6,7 @@
  */
 
 if (version_compare(PHP_VERSION, '7.1', '<'))
-	die('<p>Required version PHP 7.1 and higher. You version <b>' . PHP_VERSION . '</b></p>');
+	die('<p>Required version PHP 7.1 and higher. Your version <b>' . PHP_VERSION . '</b></p>');
 
 define('INSTALLER', dirname(realpath(__FILE__)) . '/installer/');
 define('MSODIR', realpath(INSTALLER . '../../') . '/');

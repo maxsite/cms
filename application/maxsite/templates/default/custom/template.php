@@ -7,13 +7,9 @@
 
 /**
  * Вывод секции HEAD
- *
- * @global $page нужна для всех подключаемых type_foreach-файлов (может ими использоваться)
  */
 function my_default_head_section()
 {
-	// global $page;
-
 	// атирибуты <HTML>
 	$html_attr = mso_get_val('head_section_html_add');
 	$html_attr = mso_hook('html_attr', $html_attr);
@@ -27,8 +23,7 @@ function my_default_head_section()
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="MaxSite CMS">
 <meta name="description" content="' . mso_head_meta('description') . '">
-<link rel="shortcut icon" href="' . getinfo('uploads_url') . 'favicons/' . mso_get_option('default_favicon', 'templates', 'favicon1.png') . '" type="image/x-icon">
-';
+<link rel="shortcut icon" href="' . getinfo('uploads_url') . 'favicons/' . mso_get_option('default_favicon', 'templates', 'favicon1.png') . '" type="image/x-icon">';
 
 	if (mso_get_option('default_canonical', 'templates', 0)) echo mso_link_rel('canonical');
 
@@ -58,8 +53,7 @@ function my_default_head_section()
 		}
 	}
 
-	// компоненты и файл _head.php
-	my_out_component_js();
+	my_out_component_js(); // компоненты и файл _head.php
 
 	if ($fn = mso_fe('custom/head.php')) require $fn;
 	if ($fn = mso_page_foreach('head')) require $fn;
@@ -79,7 +73,6 @@ function my_default_head_section()
 
 /**
  * вывод подключенных css-профилей
- * @global type $page
  * @param type $path
  */
 function my_default_out_profiles($path = 'assets/css/profiles/')
@@ -132,58 +125,114 @@ function my_default_out_profiles($path = 'assets/css/profiles/')
 }
 
 /**
- * функция возвращает полный путь к файлу компонента для указанной опции
- * 
- * @example if ($fn = my_get_component_fn('header_component2', 'menu')) require $fn;
- * @param type $option опция
- * @param type $def_component Компонент по умолчанию
- * @return boolean|string
+ * получить список компонентов шапки или подвала
+ * $type = header или footer
+ * на выходе массив: компонент => файл для подключения
  */
-function my_get_component_fn($option = '', $def_component = '')
-{
-	// получение опции
-	if ($dir = mso_get_option($option, getinfo('template'), $def_component)) {
-		if ($fn = mso_fe('components/' . $dir . '/' . $dir . '.php')) return $fn;
-		elseif ($fn = mso_fe('components/' . $dir . '/index.php')) return $fn;
+function my_get_components($type) {
+	
+	static $r = []; // кэш результатов
+	
+	$out = [];
+	
+	// где-то явно указаны компоненты: mso_set_val('my_header_components', 'header1');
+	if ($my = mso_get_val('my_' . $type . '_components')) {
+		
+		if (isset($r['my_' . $type . '_components'])) return $r['my_' . $type . '_components'];
+		
+		$my_components = mso_explode($my, false, true, false, false);
+		
+		foreach($my_components as $dir) {
+			if ($fn = mso_fe('components/' . $dir . '/' . $dir . '.php')) $out[$dir] = $fn;
+			elseif ($fn = mso_fe('components/' . $dir . '/index.php')) $out[$dir] = $fn;
+		}
+		
+		$r['my_' . $type . '_components'] = $out;
+				
+		return $out;
 	}
+	
+	if (isset($r[$type])) return $r[$type];
+	
+	$flag = true; // признак, чтобы использовать общие компоненты
 
-	return false; // ничего нет
-}
+	// для адреса может быть заданы свои компоненты
+	// они в опции custom_header_components
+	if ($custom_components = mso_get_option('custom_' . $type . '_components', getinfo('template'), false)) {		
+		if ($ar = mso_text_find_key($custom_components)) {
+			
+			$current_url = mso_current_url();
+			
+			if (isset($ar[$current_url])) {
+		
+				$flag = false; // да есть свои компоненты
+				
+				$my_components = mso_explode($ar[$current_url], false, true, false, false);
+				
+				foreach($my_components as $dir) {
+					if ($fn = mso_fe('components/' . $dir . '/' . $dir . '.php')) $out[$dir] = $fn;
+					elseif ($fn = mso_fe('components/' . $dir . '/index.php')) $out[$dir] = $fn;
+				}
+			}
+		}		
+	}
+		
+	if ($flag) {
+		// общие компоненты
+		$my_components = [
+			$type . '_component1' => 'default_' . $type . '_component1',
+			$type . '_component2' => 'default_' . $type . '_component2',
+			$type . '_component3' => 'default_' . $type . '_component3',
+			$type . '_component4' => 'default_' . $type . '_component4',
+			$type . '_component5' => 'default_' . $type . '_component5',
+		];
 
-/**
- * функция подключает файлы style.css установленных компонентов
- * 
- * @param array $component_options - названия опций, которыми определяются компоненты в шаблоне
- */
-function my_out_component_css($component_options = ['header_component1', 'header_component2', 'header_component3', 'header_component4', 'header_component5', 'footer_component1', 'footer_component2', 'footer_component3', 'footer_component4', 'footer_component5'])
-{
-	// проходимся по всем заданным опциям
-	foreach ($component_options as $option) {
-		// и если они определены
-		if ($dir = mso_get_option($option, getinfo('template'), false)) {
-			mso_add_file('components/' . $dir . '/style.css'); // подключаем внешими стилями
+		foreach ($my_components as $option => $def_component) {
+			if ($dir = mso_get_option($option, getinfo('template'), $def_component)) {
+				if ($fn = mso_fe('components/' . $dir . '/' . $dir . '.php')) $out[$dir] = $fn;
+				elseif ($fn = mso_fe('components/' . $dir . '/index.php')) $out[$dir] = $fn;
+			}
+			
 		}
 	}
+	
+	$r[$type] = $out;
+	
+	return $out;
 }
 
 /**
  * функция подключает файлы js-файлы компонентов
  * Имя js-файла совпадает и каталогом компонента
  * Также подключается файл _head.php, если есть
- * 
- * @see my_out_component_css()
- * @param type $component_options - названия опций, которыми определяются компоненты в шаблоне 
  */
-function my_out_component_js($component_options = ['header_component1', 'header_component2', 'header_component3', 'header_component4', 'header_component5', 'footer_component1', 'footer_component2', 'footer_component3', 'footer_component4', 'footer_component5'])
+function my_out_component_js()
 {
-	// проходимся по всем заданным опциям
-	foreach ($component_options as $option) {
-		if ($dir = mso_get_option($option, getinfo('template'), false)) {
-			mso_add_file('components/' . $dir . '/' . $dir . '.js');
+	$components1 = my_get_components('header');
+	$components2 = my_get_components('footer');
+	
+	$components = array_merge($components1, $components2);
+	
+	foreach($components as $dir => $fn) {
+		mso_add_file('components/' . $dir . '/' . $dir . '.js');
+		
+		if ($fn = mso_fe('components/' . $dir . '/_head.php')) require $fn;
+	}	
+}
 
-			// подключаем файл _head.php если есть
-			if ($fn = mso_fe('components/' . $dir . '/_head.php')) require $fn;
-		}
+/**
+ * функция подключает файлы style.css установленных компонентов
+ * 
+ */
+function my_out_component_css()
+{
+	$components1 = my_get_components('header');
+	$components2 = my_get_components('footer');
+	
+	$components = array_merge($components1, $components2);
+	
+	foreach($components as $dir => $fn) {
+		mso_add_file('components/' . $dir . '/style.css'); // подключаем внешими стилями
 	}
 }
 
@@ -191,13 +240,15 @@ function my_out_component_js($component_options = ['header_component1', 'header_
  * Раняя инициализация компонентов в момент загрузки шаблона
  * Если в подключенном компоненте есть файл _init.php, то он подключается
  */
-function my_init_components($component_options = ['header_component1', 'header_component2', 'header_component3', 'header_component4', 'header_component5', 'footer_component1', 'footer_component2', 'footer_component3', 'footer_component4', 'footer_component5'])
+function my_init_components()
 {
-	foreach ($component_options as $option) {
-		if ($dir = mso_get_option($option, getinfo('template'), false)) {
-			// подключаем файл _init.php если есть
-			if ($fn = mso_fe('components/' . $dir . '/_init.php')) require $fn;
-		}
+	$components1 = my_get_components('header');
+	$components2 = my_get_components('footer');
+	
+	$components = array_merge($components1, $components2);
+	
+	foreach($components as $dir => $fn) {
+		if ($fn = mso_fe('components/' . $dir . '/_init.php')) require $fn;
 	}
 }
 

@@ -1,5 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+// файл выполняется в контексте type-файла category.php, поэтому здесь доступна $pages
+
 $current_cat_id = mso_get_cat_from_slug();
 
 if ($mytitle = mso_get_meta('mytitle', 'category', $current_cat_id, 'meta_value'))

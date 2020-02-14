@@ -26,6 +26,7 @@ function mso_login_form($conf = [], $redirect = '', $echo = true)
 	$form_end = $conf['form_end'] ?? '';
 	$login_add = $conf['login_add'] ?? '';
 	$password_add = $conf['password_add'] ?? '';
+	$tmpl_file = $conf['tmpl_file'] ?? 'type/loginform/units/loginform-common-tmpl.php';
 	$action = getinfo('site_url') . 'login';
 	$session_id = getinfo('session_id');
 
@@ -39,10 +40,10 @@ function mso_login_form($conf = [], $redirect = '', $echo = true)
 	}
 
 	if ($echo) {
-		eval(mso_tmpl_ts('type/loginform/units/loginform-common-tmpl.php'));
+		eval(mso_tmpl_ts($tmpl_file));
 	} else {
 		ob_start();
-		eval(mso_tmpl_ts('type/loginform/units/loginform-common-tmpl.php'));
+		eval(mso_tmpl_ts($tmpl_file));
 		$out = ob_get_contents();
 		ob_end_clean();
 		return $out;

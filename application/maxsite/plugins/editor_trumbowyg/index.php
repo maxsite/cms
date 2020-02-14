@@ -4,14 +4,14 @@
  * (c) http://max-3000.com/
  */
 
-function editor_trumbowyg_autoload($args = array())
+function editor_trumbowyg_autoload()
 {	
 	mso_hook_add('editor_custom', 'editor_trumbowyg'); // хук на подключение своего редактора
 }
 
-function editor_trumbowyg($args = array()) 
+function editor_trumbowyg($args = []) 
 {
-	$options = mso_get_option('editor_options', 'admin', array() ); // получаем опции
+	$options = mso_get_option('editor_options', 'admin', []); // получаем опции
 	
 	$editor_config['url'] = getinfo('plugins_url') . 'editor_trumbowyg/';
 	$editor_config['dir'] = getinfo('plugins_dir') . 'editor_trumbowyg/';

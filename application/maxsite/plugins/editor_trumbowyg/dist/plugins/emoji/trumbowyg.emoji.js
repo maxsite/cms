@@ -1292,7 +1292,10 @@
             },
             tr: {
                 emoji: 'Emoji ekle'
-            }
+            },
+            ko: {
+                emoji: '이모지 넣기'
+            },
         },
         // jshint camelcase:true
         plugins: {
@@ -1334,7 +1337,7 @@
                     defaultEmojiBtnDef = {
                         text: emoji,
                         fn: function () {
-                            var encodedEmoji = String.fromCodePoint(emoji.replace("&#", "0"));
+                            var encodedEmoji = String.fromCodePoint(emoji.replace('&#', '0'));
                             trumbowyg.execCmd('insertText', encodedEmoji);
                             return true;
                         }

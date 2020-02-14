@@ -3,11 +3,9 @@
 // стили
 echo mso_load_style($editor_config['url'] . 'dist/ui/trumbowyg.min.css');
 
-
 // скрипты
 echo mso_load_script(getinfo('plugins_url') . 'tabs/tabs.js', false); // чтобы работали табы
 echo mso_load_script($editor_config['url'] . 'dist/trumbowyg.min.js');
-
 
 // автосохранение реализуется на уровне самого редактора, где нужно перехватить например Ctrl+S
 // необходимо передать в ajax-адрес и id-записи. 

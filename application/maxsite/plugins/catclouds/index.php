@@ -225,9 +225,11 @@ function catclouds_widget_custom($options = [], $num = 1)
 	if (is_type('page')) {
 		$pageData = mso_get_val('mso_pages', 0, true);
 
-		// нас интересует только slug
-		foreach ($pageData['page_categories_detail'] as $i => $d) {
-			if ($d['category_slug']) $current_cat_slug[] = $d['category_slug'];
+		if ($pageData) {
+			// нас интересует только slug
+			foreach ($pageData['page_categories_detail'] as $i => $d) {
+				if ($d['category_slug']) $current_cat_slug[] = $d['category_slug'];
+			}
 		}
 	} elseif (is_type('category')) // это рубрика, просто смотрим сегмент
 	{

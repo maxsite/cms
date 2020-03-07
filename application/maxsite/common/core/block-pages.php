@@ -189,6 +189,11 @@ class Block_pages
             'pagination_in_block' => true, // пагинации внутри block_start и block_end
 
             'exclude_page_add' => true, // разрешить добавлять полученные страницы в исключенные
+
+            // триггеры, которые срабатывают в начале указанного номера записи
+            // trigger@3 = привет1
+            // trigger@5 = привет2
+
         ];
 
         $r = array_merge($default, $r); // объединяем
@@ -210,6 +215,10 @@ class Block_pages
 
         foreach ($this->pages as $page) {
             $p->load($page); // загружаем данные записи
+
+            if (isset($r['UNIT']['trigger@' . $p->num])) {
+                eval(mso_tmpl_prepare($r['UNIT']['trigger@' . $p->num], false));
+            }
 
             if ($r['thumb']) {
                 // миниатюра

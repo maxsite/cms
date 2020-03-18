@@ -630,7 +630,7 @@ function mso_get_new_comment($args = [])
                         // если сразу отправлен адрес ссайта
                         if (isset($post['comments_comusers_url']) and $post['comments_comusers_url']) {
                             $comusers_url = htmlspecialchars(mso_xss_clean(strip_tags($post['comments_comusers_url'])));
-                            if (strpos($comusers_url, 'http://') === false) $comusers_url = 'http://' . $comusers_url;
+                            // if (strpos($comusers_url, 'http://') === false) $comusers_url = 'http://' . $comusers_url;
 
                             if ($comusers_url) $ins_data['comusers_url'] = $comusers_url;
                         }
@@ -959,8 +959,8 @@ function mso_get_comuser($id = 0, $args = [])
         // от вских гадостей
         $comuser[0]['comusers_url'] =  mso_xss_clean($comuser[0]['comusers_url']);
 
-        if ($comuser[0]['comusers_url'] and strpos($comuser[0]['comusers_url'], 'http://') === false)
-            $comuser[0]['comusers_url'] = 'http://' . $comuser[0]['comusers_url'];
+        // if ($comuser[0]['comusers_url'] and strpos($comuser[0]['comusers_url'], 'http://') === false)
+        //    $comuser[0]['comusers_url'] = 'http://' . $comuser[0]['comusers_url'];
 
         $comuser[0]['comusers_msn'] =  mso_xss_clean($comuser[0]['comusers_msn']); // twitter
         $comuser[0]['comusers_msn'] = mso_slug(str_replace('@', '', $comuser[0]['comusers_msn']));

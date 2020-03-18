@@ -704,7 +704,8 @@ function _mso_sql_build_page($r, &$pag)
 	}
 
 	if ($r['page_id_autor']) $CI->db->where('page.page_id_autor', $r['page_id_autor']);
-
+	if ($r['page_status']) $CI->db->where('page_status', $r['page_status']);
+	
 	$CI->db->where(array('page_slug' => $slug));
 	$CI->db->join('users', 'users.users_id = page.page_id_autor');
 	$CI->db->join('page_type', 'page_type.page_type_id = page.page_type_id');

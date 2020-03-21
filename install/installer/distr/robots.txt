@@ -1,0 +1,18 @@
+User-agent: *
+Disallow: /ajax
+Disallow: /ajax/*
+Disallow: /admin
+Disallow: /login
+Disallow: /logout
+Disallow: /search
+Disallow: /system
+Disallow: /install
+Disallow: /install/*
+Disallow: /registration
+Disallow: /users/*/edit
+Disallow: /users/*/lost
+Disallow: /require-maxsite
+Disallow: /require-maxsite/*
+Disallow: /password-recovery
+
+Host: 

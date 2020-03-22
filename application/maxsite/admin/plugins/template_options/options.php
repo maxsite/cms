@@ -17,7 +17,7 @@
 	// проверка на обновление POST
 	if (mso_check_post_ini()) echo '<div class="update">' . t('Обновлено!', 'templates') . '</div>';
 	
-	$all = array();
+	$all = $all_add = [];
 	
 	/*
 	// получим ini-файл
@@ -30,17 +30,17 @@
 	{
 	}
 	*/
-	
+		
 	if (file_exists(getinfo('template_dir') . 'options.ini'))
 	{
 		$all_add = mso_get_ini_file( getinfo('template_dir') . 'options.ini'); // и свой
-		$all = array_merge($all, $all_add);
+		if ($all_add) $all = array_merge($all, $all_add);
 	}
 	
 	if (file_exists(getinfo('template_dir') . 'options-template.ini'))
 	{
 		$all_add = mso_get_ini_file( getinfo('template_dir') . 'options-template.ini'); // и свой
-		$all = array_merge($all, $all_add);
+		if ($all_add) $all = array_merge($all, $all_add);
 	}
 	
 	if (file_exists(getinfo('template_dir') . 'custom/my_options.php')) 
@@ -51,7 +51,7 @@
 	if (file_exists(getinfo('template_dir') . 'custom/my_options.ini'))
 	{
 		$all_add = mso_get_ini_file( getinfo('template_dir') . 'custom/my_options.ini'); // и свой
-		$all = array_merge($all, $all_add);
+		if ($all_add) $all = array_merge($all, $all_add);
 	}
 	
 	
@@ -80,7 +80,7 @@
 		if (file_exists($file))
 		{
 			$all_add = mso_get_ini_file($file); // css-файлы
-			$all = array_merge($all, $all_add);
+			if ($all_add) $all = array_merge($all, $all_add);
 		}
 	}
 

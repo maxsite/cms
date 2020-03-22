@@ -236,7 +236,10 @@ if ($home_cache_time > 0 and $k = mso_get_cache($home_cache_key)) {
         ));
     }
 
-    mso_add_cache($home_cache_key, ob_get_flush(), $home_cache_time * 60);
+	if (ob_get_length()) 
+		mso_add_cache($home_cache_key, ob_get_flush(), $home_cache_time * 60);
+	else
+		mso_add_cache($home_cache_key, '', $home_cache_time * 60);
 }
 
 # end of file

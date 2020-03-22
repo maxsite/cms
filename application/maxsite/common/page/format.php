@@ -178,7 +178,9 @@ function mso_page_content($page_content = '', $use_password = true, $message = '
 
 	mso_hook('content_start'); // хук на начало блока
 
-	if ($use_password and $page['page_password']) // есть пароль
+	$page_password = $page['page_password'] ?? '';
+	
+	if ($use_password and $page_password) // есть пароль
 	{
 		$form = '';
 

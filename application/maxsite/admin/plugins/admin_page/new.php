@@ -97,7 +97,7 @@ $all_post_types = $post_all_post_types['all_post_types'];
 $page_type_js_obj = $post_all_post_types['page_type_js_obj'];
 
 // получаем все рубрики чекбоксами
-require_once($MSO->config['common_dir'] . 'category.php');
+// require_once($MSO->config['common_dir'] . 'category.php');
 
 $all_cat = mso_cat_ul('<label><input name="f_cat[]" type="checkbox" %CHECKED% value="%ID%" title="id = %ID%"> %NAME%</label>', true, $f_cat, $f_cat);
 

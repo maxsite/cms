@@ -87,7 +87,7 @@ function admin_options_favicon()
 {
 	$all = mso_get_path_files(getinfo('uploads_dir') . 'favicons/', getinfo('template_url') . 'uploads/favicons/', false);
 	
-	return implode($all, '#');
+	return implode('#', $all);
 }
 
 

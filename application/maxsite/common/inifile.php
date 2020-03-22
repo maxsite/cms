@@ -5,19 +5,23 @@
  * Функции для ini-файлов
  */
 
-// загружаем ini-файл
+// загружаем ini-файл и запускаем его как php
 function mso_get_ini_file($file = '')
 {
     if (!file_exists($file)) return false;
 
     $out = file_get_contents($file);
-
-    ob_start();
-    eval('?>' . stripslashes($out) . '<?php ');
-    $out = ob_get_contents();
-    ob_end_clean();
-
-    return parse_ini_string($out, true);
+	
+	if ($out) {
+		ob_start();
+		eval('?>' . $out . '<?php ');
+		$out = ob_get_contents();
+		ob_end_clean();
+		
+		return parse_ini_string($out, true);
+	}
+	
+	return false;
 }
 
 // проверяем есть ли POST

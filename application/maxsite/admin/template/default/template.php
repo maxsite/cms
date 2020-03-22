@@ -14,17 +14,17 @@
 	ob_start();
 		$admin_content_hook = mso_hook('mso_admin_content', mso_admin_content());
 		$admin_content = ob_get_contents() . $admin_content_hook;
-	ob_end_clean();
+	if (ob_get_length()) ob_end_clean();
 	
 	ob_start();
 		$admin_menu_hook = mso_hook('mso_admin_menu', mso_admin_menu());
 		$admin_menu = ob_get_contents() . $admin_menu_hook;
-	ob_end_clean();
+	if (ob_get_length()) ob_end_clean();
 	
 	ob_start();
 		$admin_footer_hook = mso_hook('mso_admin_footer', mso_admin_footer());
 		$admin_footer = ob_get_contents() . $admin_footer_hook;
-	ob_end_clean();
+	if (ob_get_length()) ob_end_clean();
 	
 	// url каталог текущего шаблона
 	$admin_template_url = getinfo('admin_url') . 'template/' . mso_get_option('admin_template', 'general', 'default') . '/';

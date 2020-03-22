@@ -76,7 +76,7 @@ function create_captha_img($char)
 		$x = rand(0, 5) + $i * $width / rand(4, 5);
 		$y = rand(8, 12);
 		
-		imagechar ($im, 5, $x, $y,	$char{$i}, $text_color);
+		imagechar ($im, 5, $x, $y,	$char[$i], $text_color);
 	}
 
 	ob_start();

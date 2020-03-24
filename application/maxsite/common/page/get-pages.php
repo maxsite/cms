@@ -143,8 +143,13 @@ function mso_get_pages($r = [], &$pag)
 	if (!isset($r['only_feed'])) $r['only_feed'] = false;
 
 	// стутус страниц - если false, то не учитывается
-	if (!isset($r['page_status'])) $r['page_status'] = 'publish';
-
+	if (!isset($r['page_status'])) {
+		$r['page_status'] = 'publish';
+		$r['page_status0'] = ''; // флаг что статус страницы не указан в исходном виде
+	} else {
+		$r['page_status0'] = $r['page_status'];
+	}
+	
 	// можно указать номер автора - получим только его записи
 	if (!isset($r['page_id_autor'])) $r['page_id_autor'] = false;
 
@@ -228,18 +233,19 @@ function mso_get_pages($r = [], &$pag)
 
 	$query = $CI->db->query($query_sql);
 	$CI->db->_reset_select();
-
+	
 	// восстанавливать после запроса???
 	// $r = mso_hook('mso_get_pages_restore', $r_restore);
-
+	
 	if ($query and $query->num_rows() > 0) {
 		$pages = $query->result_array();
-
+				
 		if ($r['pages_reverse']) $pages = array_reverse($pages);
 
 		$MSO->data['pages_is'] = true; // ставим признак, что записи получены
 
-		if (is_type('page')) {
+		// если явно указано какое-то условие статуса, то отдаем как есть
+		if (is_type('page') and !$r['page_status0']) {
 			// проверяем статус публикации - если page_status <> publish то смотрим автора и сравниваем с текущим юзером
 			$page_status = $pages[0]['page_status']; // в page - всегда одна запись
 
@@ -247,8 +253,6 @@ function mso_get_pages($r = [], &$pag)
 				// не опубликовано
 				if (isset($MSO->data['session']['users_id'])) {
 					// залогинен
-					// if ( $pages[0]['page_id_autor'] <> $MSO->data['session']['users_id'] ) return [];
-
 					if ($pages[0]['page_id_autor'] <> $MSO->data['session']['users_id'] && !mso_check_allow('admin_page_edit_other')) return [];
 					else {
 						if ($page_status == 'draft') $pages[0]['page_title'] .= ' ' . tf('(черновик)');
@@ -257,7 +261,7 @@ function mso_get_pages($r = [], &$pag)
 				} else {
 					return []; // не залогинен
 				}
-			}
+			}			
 		}
 
 		// массив всех page_id
@@ -700,12 +704,11 @@ function _mso_sql_build_page($r, &$pag)
 	if (!is_login()) {
 		if ($r['date_now'] and $r['page_id_date_now']) $CI->db->where_not_in('page.page_id', $r['page_id_date_now']);
 		// if ($r['date_now']) $CI->db->where('page_date_publish < ', 'DATE_ADD(NOW(), INTERVAL "' . $r['time_zone'] . '" HOUR_MINUTE)', false);
-
 	}
 
 	if ($r['page_id_autor']) $CI->db->where('page.page_id_autor', $r['page_id_autor']);
-	if ($r['page_status']) $CI->db->where('page_status', $r['page_status']);
-	
+	if ($r['page_status0']) $CI->db->where('page_status', $r['page_status0']);
+		
 	$CI->db->where(array('page_slug' => $slug));
 	$CI->db->join('users', 'users.users_id = page.page_id_autor');
 	$CI->db->join('page_type', 'page_type.page_type_id = page.page_type_id');

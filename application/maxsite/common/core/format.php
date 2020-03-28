@@ -517,7 +517,7 @@ function mso_link_rel($rel = 'canonical', $add = '', $url_only = false)
 				if (is_type('home')) {
 					$url .= 'home/next/' . $cur;
 				} else {
-					$url .= '/next/' . $cur;
+					if ($url) $url .= '/next/' . $cur;
 				}
 			}
 

@@ -593,4 +593,25 @@ function mso_lorem($count = 50, $color = false, $dot = true, $LoremText = true)
     return $text;
 }
 
+/**
+ * Получить url-адрес php-обработчика по правилам MaxSite CMS для ajax-запроса
+ * на основе полного имени файла __FILE__
+ * На выходе будет ссылка вида: //сайт/ajax/dG4tcGx43dGVz...
+ * Файл-обработчик будет находиться там же, где и исходный (обычно это форма)
+ * 
+ * Файл form.php -> form-ajax.php
+ * $ajaxForm = mso_receive_ajax(__FILE__);
+ * 
+ * Файл form.php -> form-state-ajax.php
+ * $ajaxForm = mso_receive_ajax(__FILE__, '-state');
+ * 
+ *  @param $file: файл 
+ *  @param $p: дополнительный префикс
+ *  
+ *  @return string
+ */
+function mso_receive_ajax($file, $p = '') {
+    return getinfo('ajax') . base64_encode(str_replace('.php', $p . '-ajax.php', str_replace(str_replace('\\', '/', getinfo('base_dir')), '', str_replace('\\', '/', $file))));
+}
+
 # end of file

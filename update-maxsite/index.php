@@ -14,10 +14,10 @@ if (!$key) die('Invalid key'); // неверный или отсутствующ
 if (!isset($_GET[$key])) die('Access is denied'); // ключ не совпадает с указанным в URL
 
 ?><!DOCTYPE HTML>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Автоустановщик MaxSite CMS</title>
+    <title>Update MaxSite CMS</title>
     <style>
         body {
             font-family: "Open Sans", Arial, sans-serif;
@@ -40,17 +40,17 @@ if (!isset($_GET[$key])) die('Access is denied'); // ключ не совпад�
 
     $v_last_version = v_get_version(BASEPATH . 'last-version.txt');
 
-    echo 'Последняя версия <a href="https://max-3000.com/">MaxSite CMS</a>: ' . $v_last_version . '<br>';
+    echo 'The latest version <a href="https://max-3000.com/">MaxSite CMS</a>: ' . $v_last_version . '<br>';
 
     $v_site = v_get_version(BASEPATH_MSO . 'application/libraries/maxsite_lib.php');
 
     if ($v_site)
-        echo 'Ваша версия MaxSite CMS: ' . $v_site . '<br>';
+        echo 'Your version MaxSite CMS: ' . $v_site . '<br>';
     else
-        echo 'MaxSite CMS на вашем сервере не найдена<br>';
+        echo 'MaxSite CMS on your server not found<br>';
 
     if ($v_site >= $v_last_version) {
-        echo '<br>Обновление не требуется<br>';
+        echo '<br>No updates required<br>';
         echo '</body></html>';
         die();
     }
@@ -64,9 +64,9 @@ if (!isset($_GET[$key])) die('Access is denied'); // ключ не совпад�
         BASEPATH . 'master.zip'
     );
 
-    if (!file_exists('master.zip')) die('Не удалось загрузить master.zip');
+    if (!file_exists('master.zip')) die('Error loading file master.zip');
 
-    echo 'Обновление...<br>';
+    echo 'Update...<br>';
 
     // выполняем распаковку
     require_once BASEPATH . 'pclzip.lib.php';
@@ -96,18 +96,18 @@ if (!isset($_GET[$key])) die('Access is denied'); // ключ не совпад�
     $res = smartCopy(BASEPATH . 'cms-master/uploads', BASEPATH_MSO . 'uploads');
     $res = smartCopy(BASEPATH . 'cms-master/index.php', BASEPATH_MSO . 'index.php');
 
-    if (!file_exists(BASEPATH_MSO . 'index.php')) die('Ошибка копирования (index.php)');
-    if (!file_exists(BASEPATH_MSO . 'application/libraries/maxsite_lib.php')) die('Ошибка копирования (maxsite_lib.php)');
+    if (!file_exists(BASEPATH_MSO . 'index.php')) die('Error copying (index.php)');
+    if (!file_exists(BASEPATH_MSO . 'application/libraries/maxsite_lib.php')) die('Error copying (maxsite_lib.php)');
 
     if (!file_exists(BASEPATH_MSO . 'application/config/database.php'))
-        echo '<a href="../install">Перейти к инсталяции MaxSite CMS</a><br>';
+        echo '<a href="../install">Go to the installation MaxSite CMS</a><br>';
     else
-        echo '<a href="../">Перейти к сайту</a><br>';
+        echo '<a href="../">Go to website</a><br>';
 
     $v_site = v_get_version(BASEPATH_MSO . 'application/libraries/maxsite_lib.php');
 
-    echo 'Новая версия MaxSite CMS: ' . $v_site . '<br>';
-    echo '<br>Готово!';
+    echo 'The new version MaxSite CMS: ' . $v_site . '<br>';
+    echo '<br>Done!';
     echo '</body></html>';
 
     // функции
@@ -237,9 +237,7 @@ if (!isset($_GET[$key])) die('Access is denied'); // ключ не совпад�
         // Trim the trailing slash
         $path = rtrim($path, DIRECTORY_SEPARATOR);
 
-        if (!$current_dir = @opendir($path)) {
-            return FALSE;
-        }
+        if (!$current_dir = @opendir($path)) return FALSE;
 
         while (FALSE !== ($filename = @readdir($current_dir))) {
             if ($filename != "." and $filename != "..") {
@@ -253,11 +251,10 @@ if (!isset($_GET[$key])) die('Access is denied'); // ключ не совпад�
                 }
             }
         }
+        
         @closedir($current_dir);
 
-        if ($del_dir == TRUE and $level > 0) {
-            return @rmdir($path);
-        }
+        if ($del_dir == TRUE and $level > 0) return @rmdir($path);
 
         return TRUE;
     }

@@ -118,7 +118,8 @@ function open_graph_head($arg = '')
 
 	$description = mso_head_meta('description');
 	$title = mso_head_meta('title');
-	$url = mso_link_rel('canonical', '', true);
+	// $url = mso_link_rel('canonical', '', true);
+	$url = mso_current_url(true);
 
 	_meta_content('og:title', $title);
 	_meta_content('og:description', $description);

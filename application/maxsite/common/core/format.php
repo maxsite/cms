@@ -479,12 +479,21 @@ function mso_link_rel($rel = 'canonical', $add = '', $url_only = false)
 	if (!$rel) return; // пустой тип
 
 	if ($rel == 'canonical') {
+		
+		// свой обработчик
+		// если хук вернул false или '', то обработка продолжается дальше
+		// иначе хук возвращает url и происходит его вывод
+		if (mso_hook_present('canonicalUrl')) { 
+			$rh = mso_hook('canonicalUrl');
+			
+			if ($rh) return '<link rel="canonical" href="' . $rh . '">';
+		}
+		
 		if ($add) {
 			return '<link rel="canonical" ' . $add . '>';
 		} else {
 			// для разных типов данных формируем разный канонический адрес
 			// он напрямую зависит от типа
-
 			$url = '';
 
 			// если есть хук canonical, то выполняем его

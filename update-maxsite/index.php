@@ -1,7 +1,12 @@
 <?php
-/*
-  Описание см. _key.php
-*/
+/**
+ * MaxSite CMS
+ * (c) https://max-3000.com/
+ * 
+ * Автоустановщик MaxSite CMS
+ * Описание: см. файл _key.php
+ *
+ */
 
 ini_set('max_execution_time', 180); // даём на всё про всё 3 минуты
 
@@ -90,11 +95,12 @@ if (!isset($_GET[$key])) die('Access is denied'); // ключ не совпад�
     }
 
     // копирование
-    $res = smartCopy(BASEPATH . 'cms-master/application', BASEPATH_MSO . 'application');
-    $res = smartCopy(BASEPATH . 'cms-master/install', BASEPATH_MSO . 'install');
-    $res = smartCopy(BASEPATH . 'cms-master/system', BASEPATH_MSO . 'system');
-    $res = smartCopy(BASEPATH . 'cms-master/uploads', BASEPATH_MSO . 'uploads');
-    $res = smartCopy(BASEPATH . 'cms-master/index.php', BASEPATH_MSO . 'index.php');
+    smartCopy(BASEPATH . 'cms-master/application', BASEPATH_MSO . 'application');
+    smartCopy(BASEPATH . 'cms-master/install', BASEPATH_MSO . 'install');
+    smartCopy(BASEPATH . 'cms-master/system', BASEPATH_MSO . 'system');
+    smartCopy(BASEPATH . 'cms-master/uploads', BASEPATH_MSO . 'uploads');
+    smartCopy(BASEPATH . 'cms-master/update-maxsite', BASEPATH_MSO . 'update-maxsite');
+    smartCopy(BASEPATH . 'cms-master/index.php', BASEPATH_MSO . 'index.php');
 
     if (!file_exists(BASEPATH_MSO . 'index.php')) die('Error copying (index.php)');
     if (!file_exists(BASEPATH_MSO . 'application/libraries/maxsite_lib.php')) die('Error copying (maxsite_lib.php)');

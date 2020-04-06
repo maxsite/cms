@@ -26,7 +26,7 @@ if ($_POST and isset($_POST['myform']))
 	
 	// адрес получателя	
 	// $email = 'admin@site.com'; 
-	$email = mso_get_option('admin_email_server', 'general', '');
+	$email = mso_get_option('admin_email', 'general', '');
 	
 	$subject = 'Обратная связь ' . $cod_z; // тема письма
 	

@@ -55,6 +55,7 @@ if (!isset($_GET[$key])) die('Access is denied'); // ключ не совпад�
         echo 'MaxSite CMS on your server not found<br>';
 
     if ($v_site >= $v_last_version) {
+		delete_files(BASEPATH . 'cms-master', true, 10);
         echo '<br>No updates required<br>';
         echo '</body></html>';
         die();

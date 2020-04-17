@@ -115,7 +115,7 @@ function tweetmeme_com_content($text = '')
 		}
 	
 	// блок выводится с оригинального twitter.com
-	
+	/*
 	if (is_type('home')) 
 	{
 		$url = getinfo('site_url') . 'page/' . $pageData['page_slug'];
@@ -124,6 +124,8 @@ function tweetmeme_com_content($text = '')
 	{
 		$url = mso_current_url(true);
 	}
+	*/
+	$url = mso_current_url(true);
 	
 	if (!isset($options['twitter_data-count'])) $options['twitter_data-count'] = 'vertical';
 	$options['twitter_data-count'] = ' data-count="' . $options['twitter_data-count'] . '" ';
@@ -131,15 +133,17 @@ function tweetmeme_com_content($text = '')
 	if (!isset($options['twitter_data-via'])) $options['twitter_data-via'] = '';
 	if ($options['twitter_data-via']) $options['twitter_data-via'] = ' data-via="' . $options['twitter_data-via'] . '" ';
 		
-	$text = '<div class="tweetmeme_com"' . $style . '>' 
-	. '<a rel="nofollow" href="https://twitter.com/share" class="twitter-share-button" data-url="' . $url . '"' 
-	. $options['twitter_data-count'] 
-	. ' data-text="' . $pageData['page_title'] . '" '
-	. $options['twitter_data-via']
-	. '>Tweet</a>
-	<script src="https://platform.twitter.com/widgets.js"></script>' 
-	. '</div>' . $text;
-
+	if ($pageData) {
+		$text = '<div class="tweetmeme_com"' . $style . '>' 
+		. '<a rel="nofollow" href="https://twitter.com/share" class="twitter-share-button" data-url="' . $url . '"' 
+		. $options['twitter_data-count'] 
+		. ' data-text="' . $pageData['page_title'] . '" '
+		. $options['twitter_data-via']
+		. '>Tweet</a>
+		<script src="https://platform.twitter.com/widgets.js"></script>' 
+		. '</div>' . $text;
+	}
+	
 	return $text;
 }
 

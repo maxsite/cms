@@ -58,7 +58,7 @@ function pr($var, $html = true, $echo = true)
  * Аналогична pr, только завершающаяся die() 
  * используется для отладки с помощью прерывания
  */
-function _pr($var, $html = false, $echo = true)
+function _pr($var, $html = true, $echo = true)
 {
 	pr($var, $html, $echo);
 	die();
@@ -71,6 +71,7 @@ function _sql()
 {
 	$CI = &get_instance();
 	$sql = $CI->db->_compile_select();
+	
 	return $sql;
 }
 

@@ -10,7 +10,7 @@ MaxSite CMS
 * База данных MySQL/MariaDB: 5.6 и выше. База должна быть уже создана.
 * Минимальня версия PHP: 7.1. (Для PHP 5 используйте MaxSite CMS 104, скачать которую можно на [странице релизов](https://github.com/maxsite/cms/releases).)
 
-Дополнительная информация по установке MaxSite CMS: https://max-3000.com/book/install
+Дополнительная информация по установке MaxSite CMS: https://max-3000.com/doc/install
 
 Примечание. После установки системы вы можете добавить [демо-данные](https://github.com/maxsite/demo_for_maxsite_cms).
 

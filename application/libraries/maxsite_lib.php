@@ -12,7 +12,7 @@ require_once $MSO->config['common_dir'] . 'common.php';
 
 class Maxsite_lib
 {
-    public $version = '106.7';
+    public $version = '106.8';
     public $config = [];
     public $data = [];
     public $hooks = [];

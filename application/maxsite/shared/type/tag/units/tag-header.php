@@ -9,7 +9,7 @@ echo '<header>';
 if ($fn = mso_page_foreach('tag-header'))
 	require $fn;
 else
-	echo '<h1 class="mso-tag">' . htmlspecialchars(mso_segment(2)) . '</h1>';
+	echo '<h1 class="mso-tag">' . htmlspecialchars(html_entity_decode(mso_segment(2))) . '</h1>';
 
 if (mso_get_option('category_show_rss_text', 'templates', 1)) {
 	if ($fn = mso_page_foreach('tag-show-rss-text')) {

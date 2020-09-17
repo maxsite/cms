@@ -213,4 +213,51 @@ function mso_get_component_option($component, $file = '_default.txt', $quot = tr
 	return '';
 }
 
+/**
+ * Получить их ini-файла все секции и преобразовать их в массив [type][key]=default
+ * подходящий для mso_get_option(... $default_values)
+ * 
+ * используется для того, чтобы передать в mso_get_option дефолтные значения ключей прямо из ini-файла
+ * 
+ * $optionsINI = mso_get_defoptions_from_ini(dirname(__DIR__) . '/options.ini');
+ * $b1 = mso_get_option($component . '-home_block1', getinfo('template'), '', $optionsINI);
+ */
+function mso_get_defoptions_from_ini($file)
+{
+	if (!file_exists($file)) return false;
+	
+	$arrayIni = file_get_contents($file);
+
+	if ($arrayIni) {
+		ob_start();
+		eval('?>' . $arrayIni . '<?php ');
+		$arrayIni = ob_get_contents();
+		ob_end_clean();
+
+		$arrayIni = parse_ini_string($arrayIni, true);
+	}
+
+	if (!$arrayIni) return false;
+
+	$arrayOut = [];
+
+	// формируем массив из options_type[ options_key ] = default
+	foreach ($arrayIni as $val) {
+
+		$type = $val['options_type'] ?? 'general';
+
+		if ($type == '%TEMPLATE%') $type = getinfo('template');
+
+		$default = $val['default'] ?? '';
+		$default = str_replace('_QUOT_', '"', $default);
+		$default = str_replace('`', '"', $default);
+		$default = str_replace('_NBSP_', ' ', $default);
+		$default = str_replace('_NR_', "\n", $default);
+
+		$arrayOut[$type][$val['options_key']] = $default;
+	}
+
+	return $arrayOut;
+}
+
 # end of file

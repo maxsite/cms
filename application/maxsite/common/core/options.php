@@ -100,15 +100,29 @@ function mso_delete_option_mask($mask, $type = 'general')
 	return true;
 }
 
-// получение опции из кэша опций
-function mso_get_option($key, $type = 'general', $return_value = false)
+/**
+ * получение опции из кэша опций
+ * 
+ * если $type === '', то он равен getinfo('template')
+ * массив $default_values используется, если нужно получить из него дефолтное значение
+ * $default_values = [ type1 => [key], type2 => [key] ] см. mso_get_defoptions_from_ini()
+ * 
+ */
+function mso_get_option($key, $type = 'general', $return_value = false, $default_values = [])
 {
 	global $MSO_CACHE_OPTIONS;
 
+	if ($type === '') $type = getinfo('template');
+
 	if (isset($MSO_CACHE_OPTIONS[$type][$key]))
 		$result = $MSO_CACHE_OPTIONS[$type][$key];
-	else
-		$result = $return_value;
+	else {
+		if ($default_values) {
+			$result = $default_values[$type][$key] ?? $return_value;
+		} else {
+			$result = $return_value;
+		}
+	}
 
 	// проверяем на сериализацию
 	if (@preg_match('|_serialize_|A', $result)) {

@@ -110,7 +110,7 @@ function mso_view_ini($all = false)
     if (!$all) return '';
     //pr($all);
 
-    $CI = &get_instance();
+    $CI = & get_instance();
     $CI->load->library('table');
 
     $tmpl = [
@@ -177,8 +177,15 @@ function mso_view_ini($all = false)
 
         if (!isset($row['description']))
             $description = '';
-        else
-            $description = _mso_ini_check_php(stripslashes(trim(t($row['description']))));
+        else {
+            // $description = _mso_ini_check_php(stripslashes(trim(t($row['description']))));
+            $description = _mso_ini_check_php(trim(t($row['description'])));
+            
+            $description = str_replace('_NR_', "\n", $description);
+            $description = str_replace('_QUOT_', '"', $description);
+            $description = str_replace('`', '"', $description); 
+            $description = str_replace('_NBSP_', ' ', $description);
+        }
 
         if (!isset($row['delimer']))
             $delimer = '<br>';
@@ -225,6 +232,7 @@ function mso_view_ini($all = false)
 
         if ($type == 'textfield') {
             $value = str_replace('_QUOT_', '&quot;', $value);
+            $value = str_replace('`', '&quot;', $value); 
             $value = str_replace('_NBSP_', ' ', $value);
 
             // в этом типе может быть свой type для input
@@ -240,6 +248,7 @@ function mso_view_ini($all = false)
         } elseif ($type == 'textarea') {
             $value = str_replace('_NR_', "\n", $value);
             $value = str_replace('_QUOT_', '&quot;', $value);
+            $value = str_replace('`', '&quot;', $value); 
             $value = str_replace('_NBSP_', ' ', $value);
 
             if (!isset($row['rows']) or $row['rows'] == 'auto') {
@@ -519,5 +528,6 @@ function mso_find_options_key($metas = [], $key = '')
 
     return $out;
 }
+
 
 # end of file

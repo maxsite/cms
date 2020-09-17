@@ -130,7 +130,7 @@ function parser_simple_post_edit($text = '')
 
 function autotag_simple($text)
 {
-	$text = str_replace(array("\r\n", "\r"), "\n", $text); // win-dos
+	$text = str_replace("\r", "", $text); // win-dos
 	
 	$text = "\n" . $text . "\n";
 	
@@ -139,18 +139,18 @@ function autotag_simple($text)
 		return '[simple_base64]' . base64_encode($m[2]) . '[/simple_base64]';
 	}, $text);
 	
-	
 	# _ P
-	$text = preg_replace('!^\s*_\s(.*?)\n!m', "\n\n<p>$1</p>\n", $text);
-	$text = preg_replace('!^\s*_\s(.*?)\n!m', "\n\n<p>$1</p>\n", $text);
-	$text = preg_replace('!^\s*_\((.*?)\)\((.*?)\)\s(.*?)\n!m', "\n\n<p class=\"$1\" style=\"$2\">$3</p>\n", $text);
-	$text = preg_replace('!^\s*_\((.*?)\)\s(.*?)\n!m', "\n\n<p class=\"$1\">$2</p>\n", $text);
+	$text = preg_replace('!(^\s*)_\s(.*?)\n!m', "$1<p>$2</p>\n", $text);
+	$text = preg_replace('!(^\s*)_\s(.*?)\n!m', "$1<p>$2</p>\n", $text);
+	$text = preg_replace('!(^\s*)_\((.*?)\)\((.*?)\)\s(.*?)\n!m', "$1<p class=\"$2\" style=\"$3\">$4</p>\n", $text);
+	$text = preg_replace('!(^\s*)_\((.*?)\)\s(.*?)\n!m', "$1<p class=\"$2\">$3</p>\n", $text);
 	
 	# __ DIV в одной строке
-	$text = preg_replace('!^\s*__\s(.*?)\n!m', "\n\n<div>$1</div>\n", $text);
-	$text = preg_replace('!^\s*__\s(.*?)\n!m', "\n\n<div>$1</div>\n", $text);
-	$text = preg_replace('!^\s*__\((.*?)\)\((.*?)\)\s(.*?)\n!m', "\n\n<div class=\"$1\" style=\"$2\">$3</div>\n", $text);
-	$text = preg_replace('!^\s*__\((.*?)\)\s(.*?)\n!m', "\n\n<div class=\"$1\">$2</div>\n", $text);
+	$text = preg_replace('!(^\s*)__\s(.*?)\n!m', "$1<div>$2</div>\n", $text);
+	$text = preg_replace('!(^\s*)__\s(.*?)\n!m', "$1<div>$2</div>\n", $text);
+	$text = preg_replace('!(^\s*)__\((.*?)\)\((.*?)\)\s(.*?)\n!m', "$1<div class=\"$2\" style=\"$3\">$4</div>\n", $text);
+	// $text = preg_replace('!^\s*__\((.*?)\)\s(.*?)\n!m', "\n\n<div class=\"$1\">$2</div>\n", $text);
+	$text = preg_replace('!(^\s*)__\((.*?)\)\s(.*?)\n!m', "$1<div class=\"$2\">$3</div>\n", $text);
 	
 	# __  I __      _ EM _
 	$text = preg_replace('! __(.*?)__!', " <i>$1</i>", $text);
@@ -164,24 +164,25 @@ function autotag_simple($text)
 	$text = preg_replace('! \@(.*?)\@!', " <code>$1</code>", $text);
 	
 	# * LI
-	$text = preg_replace('!^\s*\*\s(.*?)\n!m', "\n<li>$1</li>\n", $text);
+	$text = preg_replace('!(^\s*)\*\s(.*?)\n!m', "$1<li>$2</li>\n", $text);
 	
 	# hr
-	$text = preg_replace('!^\s*[^<]hr\s*\n!m', "\n<hr>\n", $text);
-	$text = preg_replace('!^\s*[^<]hr\((.*?)\)\s*\n!m', "\n<hr class=\"$1\">\n", $text);
-	$text = preg_replace('!^\s*[^<]hr\((.*?)\)\((.*?)\)\s*\n!m', "\n<hr class=\"$1\" style=\"$2\">\n", $text);
+    $text = preg_replace('!(^\s*)hr\((.*?)\)\((.*?)\)(\s*)\n!m', "$1<hr class=\"$2\" style=\"$3\">$4\n", $text);
+	$text = preg_replace('!(^\s*)hr\((.*?)\)(\s*)\n!m', "$1<hr class=\"$2\">$3\n", $text);
+	$text = preg_replace('!(^\s*)hr(\s*)\n!m', "$1<hr>$2\n", $text);
 	
+    
 	// тэги одной строкой
 	$tags1 = '(h1|h2|h3|h4|h5|h6|dt|dd|li|bqq)';
 	
 	# h1(bold)(color: red) Заголовок
-	$text = preg_replace('!^\s*' . $tags1 . '\((.*?)\)\((.*?)\)\s+(.*?)\n!m', "\n<$1 class=\"$2\" style=\"$3\">$4</$1>\n", $text);
+	$text = preg_replace('!(^\s*)' . $tags1 . '\((.*?)\)\((.*?)\)\s+(.*?)\n!m', "$1<$2 class=\"$3\" style=\"$4\">$5</$2>\n", $text);
 	
 	# h1(bold) Заголовок
-	$text = preg_replace('!^\s*' . $tags1 . '\((.*?)\)\s+(.*?)\n!m', "\n<$1 class=\"$2\">$3</$1>\n", $text);
+	$text = preg_replace('!(^\s*)' . $tags1 . '\((.*?)\)\s+(.*?)\n!m', "$1<$2 class=\"$3\">$4</$2>\n", $text);
 	
 	# h1 Заголовок
-	$text = preg_replace('!^\s*' . $tags1 . '\s+(.*?)\n!m', "\n<$1>$2</$1>\n", $text);
+	$text = preg_replace('!(^\s*)' . $tags1 . '\s+(.*?)\n!m', "$1<$2>$3</$2>\n", $text);
 		
 	
 	// открывающие и отдельно закрывающие тэги  div ...  /div
@@ -189,24 +190,23 @@ function autotag_simple($text)
 
 	# /div
 	$text = preg_replace('!\|\|\s*\/' . $tags2 . '\s*(\n|\|\|)!m', "\n</$1>\n", $text);
-	$text = preg_replace('!\s*\/' . $tags2 . '\s*(\n|\|\|)!m', "\n</$1>\n", $text);
+	$text = preg_replace('!(\s*)\/' . $tags2 . '(\s*)(\n|\|\|)!m', "$1</$2>$3\n", $text);
 	
 	# div(t-red)(font-weight: bold)
 	$text = preg_replace('!\|\|\s*' . $tags2 . '\((.*?)\)\((.*?)\)\s*(\n|\|\|)!m', "\n<$1 class=\"$2\" style=\"$3\">\n", $text);
-	$text = preg_replace('!\s*' . $tags2 . '\((.*?)\)\((.*?)\)\s*(\n|\|\|)!m', "\n<$1 class=\"$2\" style=\"$3\">\n", $text);
+	$text = preg_replace('!(\s*)' . $tags2 . '\((.*?)\)\((.*?)\)\s*(\n|\|\|)!m', "$1<$2 class=\"$3\" style=\"$4\">\n", $text);
 	
 	# div(t-red)
 	$text = preg_replace('!\|\|\s*' . $tags2 . '\((.*?)\)\s*(\n|\|\|)!m', "\n<$1 class=\"$2\">\n", $text);	
-	$text = preg_replace('!\s*' . $tags2 . '\((.*?)\)\s*(\n|\|\|)!m', "\n<$1 class=\"$2\">\n", $text);	
+	$text = preg_replace('!(\s*)' . $tags2 . '\((.*?)\)\s*(\n|\|\|)!m', "$1<$2 class=\"$3\">\n", $text);	
 		
 	# div
 	$text = preg_replace('!\|\|\s*' . $tags2 . '\s*(\n|\|\|)!m', "\n<$1>\n", $text);
-	$text = preg_replace('!^\s*' . $tags2 . '\s*(\n|\|\|)!m', "\n<$1>\n", $text);
+	$text = preg_replace('!(^\s*)' . $tags2 . '\s*(\n|\|\|)!m', "$1<$2>\n", $text);
 	
 	# замена несуществующего тэга
 	$text = str_replace(['<bqq', '<bq'], '<blockquote', $text);
 	$text = str_replace(['</bqq>', '</bq>'], '</blockquote>', $text);
-	
 	
 	# [br]
 	$text = str_replace('[br]', '<br style="clear:both">', $text);

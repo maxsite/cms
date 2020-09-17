@@ -81,11 +81,11 @@ function my_default_out_profiles($path = 'assets/css/profiles/')
 
 		$css_out = '';
 
-		// theme и lazy профили подключаются как link rel="stylesheet
+		// theme- и -lazy и -head профили подключаются как link rel="stylesheet
 		foreach ($default_profiles as $css_file) {
 			$fn = $path . $css_file;
 
-			$theme = (strpos($css_file, 'theme-') === 0);
+			$theme = (strpos($css_file, 'theme-') === 0  or strpos($css_file, '-head') !== false);
 			$lazy = (strpos($css_file, '-lazy') !== false);
 
 			if ($theme)

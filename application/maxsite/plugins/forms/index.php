@@ -315,7 +315,7 @@ function forms_show_form($options, $files, $fields, $format)
 		$antispam = $options['antispam'];
 		$antispam_ok = $options['antispam_ok'];
 		$require_title = ' ' . $options['require_title'];
-		$input = '<input type="text" name="forms_fields[antispam]" required>';
+		$input = '<input class="mso-forms-antispam" type="text" name="forms_fields[antispam]" required>';
 		
 		$out .= str_replace(array('[antispam]', '[antispam_ok]', '[input]', '[require_title]'), array($antispam, $antispam_ok, $input, $require_title), $format['antispam']);
 	}

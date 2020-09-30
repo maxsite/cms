@@ -46,8 +46,10 @@ function mso_units_out($text_units, $PAGES = [], $PAGINATION = [], $path_file = 
 
 	// замены по всему тексту юнитов
 	$text_units = str_replace('[siteurl]', getinfo('siteurl'), $text_units);
+	$text_units = str_replace('[site_url]', getinfo('siteurl'), $text_units);
 	$text_units = str_replace('[templateurl]', getinfo('template_url'), $text_units);
-
+	$text_units = str_replace('[template_url]', getinfo('template_url'), $text_units);
+	
 	// ищем вхождение [unit] ... [/unit]
 	$units = mso_section_to_array($text_units, '!\[unit\](.*?)\[\/unit\]!is', ['file' => '']);
 
@@ -95,6 +97,9 @@ function mso_units_out($text_units, $PAGES = [], $PAGINATION = [], $path_file = 
 
 			$UNIT = $UNIT1;
 
+			// храним текущий юнит в глобальном доступе
+			mso_set_val('current_unit', $UNIT);
+
 			// _rules — устаревший, вместо него нужно использовать rules
 			if (isset($UNIT['_rules']) and trim($UNIT['_rules'])) {
 				$rules = 'return ( ' . trim($UNIT['_rules']) . ' ) ? 1 : 0;';
@@ -138,6 +143,7 @@ function mso_units_out($text_units, $PAGES = [], $PAGINATION = [], $path_file = 
 
 				if ($module) $file = $modulesDir . $module . '/' . $file;
 
+				// pr($UNIT);
 				mso_parse_file($file, $parser, $tmpl, true);
 			} elseif (isset($UNIT['ushka']) and trim($UNIT['ushka']) and function_exists('ushka')) {
 				echo ushka(trim($UNIT['ushka']));
@@ -162,6 +168,8 @@ function mso_units_out($text_units, $PAGES = [], $PAGINATION = [], $path_file = 
 			} elseif (isset($UNIT['sidebar']) and trim($UNIT['sidebar'])) {
 				mso_show_sidebar($UNIT['sidebar']);
 			}
+
+			mso_unset_val('current_unit'); // удалим текущий юнит, чтобы он больше не влиял
 		}
 	}
 }

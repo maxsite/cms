@@ -58,7 +58,9 @@ function mso_parse_file($file, $parser = 'autotag_simple', $tmpl = false, $echo 
 
 		// в файле могут быть свои замены
 		$t1 = str_replace('[siteurl]', getinfo('siteurl'), $t1);
+		$t1 = str_replace('[site_url]', getinfo('siteurl'), $t1);
 		$t1 = str_replace('[templateurl]', getinfo('template_url'), $t1);
+		$t1 = str_replace('[template_url]', getinfo('template_url'), $t1);
 
 		// парсер текста
 		if ($parser and function_exists($parser)) $t1 = $parser($t1);

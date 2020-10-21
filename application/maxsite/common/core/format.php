@@ -80,7 +80,8 @@ function mso_menu_build($menu = '', $select_css = 'selected', $add_link_admin = 
 	}
 
 	// определим текущий url
-	$current_url = getinfo('site_protocol') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+	$current_url = mso_current_url(true);
+	// $current_url = getinfo('site_protocol') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 	$out = '';
 

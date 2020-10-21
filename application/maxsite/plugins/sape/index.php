@@ -78,7 +78,7 @@ function sape_init($args = array())
 			// таким образом обнаружить продажную ссылку будет невозможно
 			if (isset($_SERVER['argv']) and $_SERVER['argv']) // есть какие-то параметры - делаем редирект
 			{
-				$url = $_SERVER['REQUEST_URI']; // /?nono  /about/?momo
+				$url =  mso_clean_str($_SERVER['REQUEST_URI']); // $_SERVER['REQUEST_URI']; // /?nono  /about/?momo
 				
 				$url = explode('?', $url);
 				if (isset($url[0])) $url = $url[0];

@@ -65,7 +65,7 @@ function global_cache_uninstall($args = array())
 # если $dir = true, то добавляем каталог html
 function global_cache_key($dir = true)
 {
-	$cache_key = $_SERVER['REQUEST_URI'];
+	$cache_key =  mso_clean_str($_SERVER['REQUEST_URI']); //$_SERVER['REQUEST_URI'];
 	$cache_key = str_replace('/', '-', $cache_key);
 	$cache_key = mso_slug(' ' . $cache_key);
 	

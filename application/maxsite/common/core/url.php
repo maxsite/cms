@@ -44,7 +44,7 @@ function mso_segment_array()
 	if (isset($_SERVER['REQUEST_URI']) and $_SERVER['REQUEST_URI']) {
 		// http://localhost/page/privet?get=hello
 		$url = getinfo('site_protocol');
-		$url .= $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		$url .= $_SERVER['HTTP_HOST'] . mso_clean_str($_SERVER['REQUEST_URI']);
 		$url = str_replace($CI->config->config['base_url'], '', $url); // page/privet?get=hello
 
 		if (strpos($url, '?') !== FALSE) {
@@ -78,7 +78,7 @@ function mso_url_get()
 {
 	$CI = &get_instance();
 	if (isset($_SERVER['REQUEST_URI']) and $_SERVER['REQUEST_URI'] and (strpos($_SERVER['REQUEST_URI'], '?') !== FALSE)) {
-		$url = getinfo('site_protocol') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		$url = getinfo('site_protocol') . $_SERVER['HTTP_HOST'] . mso_clean_str($_SERVER['REQUEST_URI']);
 		$url = str_replace($CI->config->config['base_url'], "", $url);
 		$url = explode('?', $url);
 
@@ -221,7 +221,9 @@ function mso_get_permalink_page($id = 0, $prefix = 'page/')
 // если $absolute = true, то возвращается текущий урл как есть
 function mso_current_url($absolute = false, $explode = false, $delete_request = false)
 {
-	$url = getinfo('site_protocol') . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+	$url = getinfo('site_protocol') . $_SERVER['HTTP_HOST'] . mso_clean_str($_SERVER['REQUEST_URI']);
+	
+	//pr($url);
 
 	if ($delete_request) {
 		// отделим по «?»

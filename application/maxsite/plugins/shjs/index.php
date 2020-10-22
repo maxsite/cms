@@ -52,7 +52,7 @@ function shjs_scan_files($cat = 'css')
 	sort($all_files);
 	
 	// преобразуем массив в строчку с разделителем #
-	return implode($all_files, '#');
+	return implode('#', $all_files);
 }
 
 

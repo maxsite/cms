@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Подсветка кода'),
 	'description' => t('Подсветка кодов (JS, PHP, CSS, HTML, LESS). Подробное описание см. в опциях плагина.'),
-	'version' => '3',
+	'version' => '3.1',
 	'author' => 'Максим',
 	'plugin_url' => '',
 	'author_url' => '//shjs.sourceforge.net/',

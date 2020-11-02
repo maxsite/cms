@@ -2,7 +2,7 @@
 /**
  * MaxSite CMS
  * (c) https://max-3000.com/ 
- * 6-06-2020
+ * 2-11-2020
  */
 
 /**
@@ -18,9 +18,9 @@ limit = 3
  */
 
 $home_cache_time = (int) mso_get_option('home_cache_time', 'templates', 0);
-$home_cache_key = getinfo('template') . '-' .  __FILE__ . '-' . mso_current_paged() . '-' . $UNIT_NUM;
+// $cache_key = getinfo('template') . '-' .  __FILE__ . '-' . mso_current_paged() . '-' . $UNIT_NUM;
 
-if ($home_cache_time > 0 and $k = mso_get_cache($home_cache_key)) {
+if ($home_cache_time > 0 and $k = mso_get_cache($UNIT_UID)) {
     echo $k;
 } else {
     $def = [
@@ -86,14 +86,14 @@ if ($home_cache_time > 0 and $k = mso_get_cache($home_cache_key)) {
         'page_end' => '</div>',
 
         'date' => 'j F Y, H:i',
-        'date_start' => '<p class="italic t90 fas fa-calendar"><time datetime="[page_date_publish_iso]">',
+        'date_start' => '<p class="italic t90 im-calendar"><time datetime="[page_date_publish_iso]">',
         'date_end' => '</time></p>',
 
-        'cat_start' => '<p class="fas fa-folder t90">',
+        'cat_start' => '<p class="im-folder t90">',
         'cat_end' => '',
         'cat_sep' => ',&NBSP;',
 
-        'tag_start' => '<p class="fas fa-tag t90">',
+        'tag_start' => '<p class="im-tag t90">',
         'tag_end' => '</p>',
         'tag_sep' => ',&NBSP;',
         'tag_class' => '',
@@ -237,9 +237,9 @@ if ($home_cache_time > 0 and $k = mso_get_cache($home_cache_key)) {
     $out = ob_get_flush();
     
     if ($out)
-        mso_add_cache($home_cache_key, $out, $home_cache_time * 60);
+        mso_add_cache($UNIT_UID, $out, $home_cache_time * 60);
     else
-        mso_add_cache($home_cache_key, '', $home_cache_time * 60);
+        mso_add_cache($UNIT_UID, '', $home_cache_time * 60);
 }
 
 # end of file

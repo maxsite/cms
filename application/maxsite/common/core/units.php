@@ -78,6 +78,9 @@ function mso_units_out($text_units, $PAGES = [], $PAGINATION = [], $path_file = 
 
         foreach ($units as $UNIT) {
             $UNIT_NUM++;
+            
+            // уникальный id-хэш юнита — можно использовать при кэшировании
+            $UNIT_UID = abs(crc32(json_encode($UNIT) . $UNIT_NUM)); 
 
             // в юните в произвольном поле может быть вхождение [var@ПЕРЕМЕННАЯ]
             // нужно их обработать и заменить

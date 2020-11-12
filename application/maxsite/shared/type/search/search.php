@@ -108,7 +108,7 @@ if ($pages) {
 	$max_word_count_do = 3; // колво слов до
 	$max_word_count_posle = 7; // колво слов после
 
-	echo '<h2>' . tf('Записи:') . '</h2>';
+	echo '<h2>' . tf('Записи:') . ' ' . $pagination['rows'] . '</h2>';
 	echo '<ul class="mso-search-res">';
 
 	foreach ($pages as $page) // выводим в цикле
@@ -117,9 +117,16 @@ if ($pages) {
 			require $fn; // подключаем кастомный вывод
 			continue; // следующая итерация
 		}
+        
 		extract($page);
-
-		mso_page_title($page_slug, $page_title, '<li><h3>', '</h3>', true);
+       
+        $ptitle = htmlspecialchars(str_replace(mb_strtoupper($searh_to_text), '_START_' . mb_strtoupper($searh_to_text) . '_END_', mb_strtoupper($page_title)));
+        
+        $ptitle = str_replace(['_START_', '_END_'], ['<span style="color: Teal; background: Aquamarine;">', '</span>'], $ptitle);
+        
+        echo '<li><h3><a href="' . getinfo('site_url') . 'page/' . $page_slug . '">' . $ptitle . '</a></h3>';
+        
+		// mso_page_title($page_slug, $ptitle, '<li><h3>', '</h3>', true);
 
 		$page_content = strip_tags($page_content);
 
@@ -148,7 +155,7 @@ if ($pages) {
 		// пройдемся по всем найденным
 		// нужно сделать строки до вхождения и после на $max_word_count
 		foreach ($all_key as $key) {
-			$arr[$key] = '<span style="color: red; background: yellow;">'
+			$arr[$key] = '<span style="color: Tomato; background: Khaki;">'
 				. str_replace($searh_to_text, '<strong>' . $searh_to_text . '</strong>', $arr[$key])
 				. '</span>';
 

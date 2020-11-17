@@ -238,7 +238,8 @@ function post_date_time($date = false)
 	$k_s = mso_date_convert('s', $date, false, false);
 	
 	$date_all_y = array();
-	for ($i=2005; $i<2021; $i++) $date_all_y[$i] = $i;
+	$maxYear = date('Y') + 10;
+	for ($i = 2005; $i < $maxYear; $i++) $date_all_y[$i] = $i;
 	
 	$date_all_m = array();
 	for ($i=1; $i<13; $i++) $date_all_m[$i] = $i;

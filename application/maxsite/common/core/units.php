@@ -80,7 +80,8 @@ function mso_units_out($text_units, $PAGES = [], $PAGINATION = [], $path_file = 
             $UNIT_NUM++;
             
             // уникальный id-хэш юнита — можно использовать при кэшировании
-            $UNIT_UID = abs(crc32(json_encode($UNIT) . $UNIT_NUM)); 
+            // с учтом адреса страницы
+            $UNIT_UID = abs(crc32(json_encode($UNIT) . $UNIT_NUM . mso_current_url())); 
 
             // в юните в произвольном поле может быть вхождение [var@ПЕРЕМЕННАЯ]
             // нужно их обработать и заменить

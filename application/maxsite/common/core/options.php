@@ -125,7 +125,7 @@ function mso_get_option($key, $type = 'general', $return_value = false, $default
 	}
 
 	// проверяем на сериализацию
-	if (@preg_match('|_serialize_|A', $result)) {
+	if (@preg_match('|_serialize_|A', (string) $result)) {
 		$result = preg_replace('|_serialize_|A', '', $result, 1);
 		$result = @unserialize($result);
 	}

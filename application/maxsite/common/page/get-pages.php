@@ -6,7 +6,7 @@
  */
 
 // функция получения выборки страниц
-function mso_get_pages($r = [], &$pag)
+function mso_get_pages($r = [], &$pag = [])
 {
 	global $MSO, $mso_page_current;
 

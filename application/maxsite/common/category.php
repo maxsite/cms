@@ -177,30 +177,30 @@ function _get_child2($childs, $li_format = '', $checked_id = [], $list = '')
 
 // получение всех рубрик в массиве - сразу всё с учетом вложенности
 // используются рекурсивные функции с sql-запросами - РЕСУРСОЕМКАЯ!
-
-#[15] => Array
-#        (
-#            [category_id] => 15
-#            [category_id_parent] => 0
-#            [category_type] => page
-#            [category_name] => Тестовая рубрика
-#            [category_desc] => 
-#            [category_slug] => test
-#            [category_menu_order] => 0
-#            [pages_count] => 2
-#            [childs] => Array
-#                (
-#                    [16] => Array
-#                        (
-#                            [category_id] => 16
-#                            ...
-#                          )
-#                    [17] => Array
-#                        (
-#                            [category_id] => 17
-#                            ...
-#                          )
-
+/*
+ [15] => Array
+        (
+            [category_id] => 15
+            [category_id_parent] => 0
+            [category_type] => page
+            [category_name] => Тестовая рубрика
+            [category_desc] => 
+            [category_slug] => test
+            [category_menu_order] => 0
+            [pages_count] => 2
+            [childs] => Array
+                (
+                    [16] => Array
+                        (
+                            [category_id] => 16
+                            ...
+                          )
+                    [17] => Array
+                        (
+                            [category_id] => 17
+                            ...
+                          )
+*/
 function mso_cat_array($type = 'page', $parent_id = 0, $order = 'category_menu_order', $asc = 'asc', $child_order = 'category_menu_order', $child_asc = 'asc', $in = false, $ex = false, $in_child = false, $hide_empty = false, $only_page_publish = false, $date_now = true, $get_pages = true)
 {
 	// если неверный тип, то возвратим пустой массив

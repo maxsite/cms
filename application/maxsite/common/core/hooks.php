@@ -15,7 +15,7 @@ function mso_hook_add($hook, $func, $priory = 10)
 	global $MSO;
 
 	$priory = (int) $priory;
-
+    
 	if ($priory > 0)
 		$MSO->hooks[$hook][$func] = $priory;
 	else
@@ -60,7 +60,16 @@ function mso_hook($hook = '', $result = '', $result_if_no_hook = '_mso_result_if
 	foreach ($MSO->hooks[$hook] as $func => $val) {
 		//_mso_profiler_start('-- ' . $hook . ' - ' . $func . $i);
 
-		if (function_exists($func)) $result = $func($result);
+		if (function_exists($func)) {
+            $result = $func($result);
+        } else {
+            // признак /**msofunc**/ , что это динамическая функция
+            // делаем из неё анонимную и выполняем
+            if (strpos($func, '/**msofunc**/') !== false) {
+                $lambda = function($args) use ($func) { return eval($func); };
+                $result = $lambda($result);
+            }
+        }
 
 		//_mso_profiler_end('-- ' . $hook . ' - ' . $func . $i);
 		// $i++;
@@ -117,9 +126,12 @@ function mso_hook_add_dinamic($hook = '', $func = '', $priory = 10)
 	if ($hook == '') return false;
 	if ($func == '') return false;
 
-	$func_name = @create_function('$args', $func);
-
-	return mso_hook_add($hook, $func_name, $priory);
+    // PHP8
+	// $func_name = @create_function('$args', $func);
+	// return mso_hook_add($hook, $func_name, $priory);
+    
+    // добавляем в тело функции php-комментарий, который будет меткой для выполнения в mso_hook()
+	return mso_hook_add($hook, '/**msofunc**/' . $func, $priory);
 }
 
 # end of file

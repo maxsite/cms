@@ -385,7 +385,8 @@ class CI_Input {
 					$flag = FILTER_FLAG_IPV6;
 					break;
 				default:
-					$flag = '';
+					// PHP8 $flag = '';
+					$flag = 0;
 					break;
 			}
 

@@ -63,7 +63,7 @@ function mso_merge_array($a, $def)
 // функция преобразования MySql-даты (ГГГГ-ММ-ДД ЧЧ:ММ:СС) в указанный формат date
 // идея - http://dimoning.ru/archives/31
 // $days и $month - массивы или строка (через пробел) названия дней недели и месяцев
-function mso_date_convert($format = 'Y-m-d H:i:s', $data, $timezone = true, $days = false, $month = false)
+function mso_date_convert($format = 'Y-m-d H:i:s', $data = '', $timezone = true, $days = false, $month = false)
 {
     $part = explode(' ', $data);
 

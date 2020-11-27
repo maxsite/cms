@@ -131,7 +131,7 @@ EOF;
 
 
 
-function _getFiles($rdi, $depth=0, $dir) 
+function _getFiles($rdi, $depth = 0, $dir = '') 
 {
 	$out = array();
 	

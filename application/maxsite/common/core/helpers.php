@@ -610,8 +610,23 @@ function mso_lorem($count = 50, $color = false, $dot = true, $LoremText = true)
  *  
  *  @return string
  */
-function mso_receive_ajax($file, $p = '') {
+function mso_receive_ajax($file, $p = '')
+{
     return getinfo('ajax') . base64_encode(str_replace('.php', $p . '-ajax.php', str_replace(str_replace('\\', '/', getinfo('base_dir')), '', str_replace('\\', '/', $file))));
+}
+
+/**
+ * Получить полный URL-адрес указанного каталога
+ * 
+ * Файл: /application/maxsite/templates/my/parts/m1/content.php
+ * Результат: http://site/application/maxsite/templates/my/parts/m1/
+ * $urlThisDir = mso_urldir(__DIR__); 
+ * 
+ * @param string $dir — каталог
+ */
+function mso_urldir($dir)
+{
+    return getinfo('siteurl') . str_replace(str_replace('\\', '/', getinfo('FCPATH')), '', str_replace('\\', '/', $dir)) . '/';
 }
 
 # end of file

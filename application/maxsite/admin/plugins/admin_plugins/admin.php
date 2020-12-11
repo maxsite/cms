@@ -113,7 +113,7 @@
 
 
 // формирование таблиц
-function _create_table($active_plugins = true, &$opt_url)
+function _create_table($active_plugins = true, &$opt_url = [])
 {
 	global $MSO;
 	

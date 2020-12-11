@@ -1,8 +1,8 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
  * MaxSite CMS
- * (c) http://max-3000.com/
+ * (c) https://max-3000.com/
  */
 
 
@@ -13,13 +13,13 @@ function shjs_autoload()
 	// mso_hook_add( 'head_css', 'shjs_head_css');
 	mso_hook_add( 'body_end', 'shjs_head_css');
 	$options = mso_get_option('plugin_shjs', 'plugins', array());
-	if (isset($options['default_lang']) and $options['default_lang']) mso_hook_add('content', 'shjs_content');
+	// if (isset($options['default_lang']) and $options['default_lang'])
+	mso_hook_add('content', 'shjs_content');
 }
-
 
 # функция выполняется при деинсталяции плагина
 function shjs_uninstall($args = array())
-{	
+{
 	mso_delete_option('plugin_shjs', 'plugins' ); // удалим созданные опции
 	return $args;
 }
@@ -29,15 +29,15 @@ function shjs_uninstall($args = array())
 function shjs_scan_files($cat = 'css')
 {
 	$CI = & get_instance();
-	$CI->load->helper('directory'); 
+	$CI->load->helper('directory');
 
 	$path = getinfo('plugins_dir') . '/shjs/' . $cat;
 	$files = directory_map($path, true);
-	
+
 	if (!$files) return '';
-	
+
 	$all_files = array();
-	
+
 	// функция directory_map возвращает не только файлы, но и подкаталоги
 	// нам нужно оставить только файлы. Делаем это в цикле
 	foreach ($files as $file)
@@ -47,42 +47,41 @@ function shjs_scan_files($cat = 'css')
 		$file = str_replace('.min.css', '', $file);
 		$all_files[] = $file;
 	}
-	
+
 	// отсортируем список для красоты
 	sort($all_files);
-	
+
 	// преобразуем массив в строчку с разделителем #
 	return implode('#', $all_files);
 }
 
-
 # функция отрабатывающая мини-опции плагина (function плагин_mso_options)
 # если не нужна, удалите целиком
-function shjs_mso_options() 
+function shjs_mso_options()
 {
 
 	$all_css = shjs_scan_files('css');
 	$all_lang = '||Нет #' . shjs_scan_files('lang') ;
 
 	# ключ, тип, ключи массива
-	mso_admin_plugin_options('plugin_shjs', 'plugins', 
+	mso_admin_plugin_options('plugin_shjs', 'plugins',
 		array(
 			'css' => array(
-							'type' => 'select', 
-							'name' => t('Стиль оформления'), 
-							'description' => t('Выберите схему подсветки кода'), 
+							'type' => 'select',
+							'name' => t('Стиль оформления'),
+							'description' => t('Выберите схему подсветки кода'),
 							'values' => $all_css,
 							'default' => 'sh_maxsite'
 						),
-			
+
 			'default_lang' => array(
-							'type' => 'select', 
-							'name' => t('Язык подсветки по-умолчанию'), 
-							'description' => t('Выберите язык, который будет применяться к &lt;pre&gt; и [pre] без указанного class.'), 
+							'type' => 'select',
+							'name' => t('Язык подсветки по-умолчанию'),
+							'description' => t('Выберите язык, который будет применяться к &lt;pre&gt; и [pre] без указанного class.'),
 							'values' => $all_lang,
 							'default' => 'sh_php'
-						),			
-						
+						),
+
 			),
 		'Настройки плагина SHJS - Syntax Highlighting', // титул
 		'
@@ -112,7 +111,7 @@ function shjs_mso_options()
 	);
 
 	echo '<p class="info">Если вам требуется добавить другие темы оформления и языки, то их можно скачать со страницы <a href="http://shjs.sourceforge.net/doc/download.html" target="_blank">SHJS - Syntax Highlighting</a>. По ссылке <strong>«download a binary distribution»</strong> загрузите полный архив скрипта. В нём будут присутствовать каталоги <strong>«css»</strong> (оформление) и <strong>«lang»</strong> (языки). Загрузите нужные файлы (min-версии) в аналогичные каталоги плагина MaxSite CMS (<strong>application/maxsite/plugins/shjs</strong>).';
-	
+
 }
 
 # подключение плагина в head
@@ -124,19 +123,18 @@ $(document).ready(function() {
 sh_highlightDocument("' . getinfo('plugins_url') . 'shjs/lang/", ".min.js");
 });
 </script>';
-	
+
 	return $arg;
 }
-
 
 function shjs_head_css($arg = array())
 {
 	$options = mso_get_option('plugin_shjs', 'plugins', array());
-	
-	if (!isset($options['css']) or !$options['css']) $options['css'] = 'sh_maxsite'; 
+
+	if (!isset($options['css']) or !$options['css']) $options['css'] = 'sh_maxsite';
 
 	echo '<link rel="stylesheet" href="' . getinfo('plugins_url') . 'shjs/css/' . $options['css'] . '.min.css">';
-	
+
 	return $arg;
 }
 
@@ -144,7 +142,20 @@ function shjs_head_css($arg = array())
 function shjs_content($text = '')
 {
 	$options = mso_get_option('plugin_shjs', 'plugins', array());
-	if (!isset($options['default_lang']) or !$options['default_lang']) 
+
+	$text = str_replace('<pre>', '<pre class="' . $options['default_lang'] . '">', $text);
+	$text = str_replace('[pre]', '[pre class="' . $options['default_lang'] . '"]', $text);
+
+	// замены для совместимости с syntaxhighlighter
+	$text = preg_replace('~([<\[])pre lang=js([>\]])~', '$1pre class="sh_javascript"$2', $text);
+	$text = preg_replace('~([<\[])pre lang=([a-z]*)([>\]])~', '$1pre class="sh_$2"$3', $text);
+
+	$text = preg_replace_callback('~<pre(.*?)>(.*?)<\/pre>~si', 'shjs_pre_callback', $text);
+
+	return $text;
+
+	/*
+	if (!isset($options['default_lang']) or !$options['default_lang'])
 	{
 		return $text;
 	}
@@ -152,25 +163,24 @@ function shjs_content($text = '')
 	{
 		$text = str_replace('<pre>', '<pre class="' . $options['default_lang'] . '">', $text);
 		$text = str_replace('[pre]', '[pre class="' . $options['default_lang'] . '"]', $text);
-		
+
 		// замены для совместимости с syntaxhighlighter
 		$text = preg_replace('~([<\[])pre lang=js([>\]])~', '$1pre class="sh_javascript"$2', $text);
 		$text = preg_replace('~([<\[])pre lang=([a-z]*)([>\]])~', '$1pre class="sh_$2"$3', $text);
-		
+
 		$text = preg_replace_callback('~<pre(.*?)>(.*?)<\/pre>~si', 'shjs_pre_callback', $text);
-		
+
 		return $text;
 	}
-
+	*/
 }
 
 function shjs_pre_callback($matches)
 {
-	$m = str_replace("\t", '    ', $matches[2]);
+	$m = str_replace("\t", '	', $matches[2]);
 	$m = '<pre' . $matches[1] . '>' . $m . '</pre>';
 
 	return $m;
 }
-
 
 # end of file

@@ -148,18 +148,18 @@ myBbcodeSettings = {
 
 		{separator:'---------------'},
 
-		{name:'<?= t('Подсветка синтаксиса') ?>', openBlockWith:'[pre]', closeBlockWith:'[/pre]', className:"code", dropMenu: [
-			{name:'<?= t('Обычный текст') ?>', openBlockWith:'[pre]', closeBlockWith:'[/pre]', className:"text" },
-			{name:'<?= t('PHP-код') ?>', openBlockWith:'[pre lang=php]', closeBlockWith:'[/pre]', className:"php" },
-			{name:'<?= t('HTML-код') ?>', openBlockWith:'[pre lang=html]', closeBlockWith:'[/pre]', className:"html-pre" },
-			{name:'<?= t('LESS/CSS-код') ?>', openBlockWith:'[pre lang=less]', closeBlockWith:'[/pre]', className:"css" },
-			{name:'<?= t('CSS-код') ?>', openBlockWith:'[pre lang=css]', closeBlockWith:'[/pre]', className:"css" },
-			{name:'<?= t('JavaScript-код') ?>', openBlockWith:'[pre lang=js]', closeBlockWith:'[/pre]', className:"js" },
-			{name:'<?= t('Delphi/Pascal-код') ?>', openBlockWith:'[pre lang=pascal]', closeBlockWith:'[/pre]', className:"pascal" },
-			{name:'<?= t('SQL-код') ?>', openBlockWith:'[pre lang=sql]', closeBlockWith:'[/pre]', className:"sql" },
-			{name:'<?= t('C#-код') ?>', openBlockWith:'[pre lang=csharp]', closeBlockWith:'[/pre]', className:"csharp" },
-			{name:'<?= t('XML-код') ?>', openBlockWith:'[pre lang=xml]', closeBlockWith:'[/pre]', className:"xml" },
-			{name:'<?= t('Java-код') ?>', openBlockWith:'[pre lang=java]', closeBlockWith:'[/pre]', className:"java" }
+		{name:'<?= t('Подсветка синтаксиса') ?>', openBlockWith:'[pre]\n', closeBlockWith:'\n[/pre]', className:"code", dropMenu: [
+			{name:'<?= t('Обычный текст') ?>', openBlockWith:'[pre]\n', closeBlockWith:'\n[/pre]', className:"text" },
+			{name:'<?= t('PHP-код') ?>', openBlockWith:'[pre lang=php]\n', closeBlockWith:'\n[/pre]', className:"php" },
+			{name:'<?= t('HTML-код') ?>', openBlockWith:'[pre lang=html]\n', closeBlockWith:'\n[/pre]', className:"html-pre" },
+			{name:'<?= t('LESS/CSS-код') ?>', openBlockWith:'[pre lang=less]\n', closeBlockWith:'\n[/pre]', className:"css" },
+			{name:'<?= t('CSS-код') ?>', openBlockWith:'[pre lang=css]\n', closeBlockWith:'\n[/pre]', className:"css" },
+			{name:'<?= t('JavaScript-код') ?>', openBlockWith:'[pre lang=js]\n', closeBlockWith:'\n[/pre]', className:"js" },
+			{name:'<?= t('Delphi/Pascal-код') ?>', openBlockWith:'[pre lang=pascal]\n', closeBlockWith:'\n[/pre]', className:"pascal" },
+			{name:'<?= t('SQL-код') ?>', openBlockWith:'[pre lang=sql]\n', closeBlockWith:'\n[/pre]', className:"sql" },
+			{name:'<?= t('C#-код') ?>', openBlockWith:'[pre lang=csharp]\n', closeBlockWith:'\n[/pre]', className:"csharp" },
+			{name:'<?= t('XML-код') ?>', openBlockWith:'[pre lang=xml]\n', closeBlockWith:'\n[/pre]', className:"xml" },
+			{name:'<?= t('Java-код') ?>', openBlockWith:'[pre lang=java]\n', closeBlockWith:'\n[/pre]', className:"java" }
 		]},
 
 		{name:'<?= t('Очистить текст от BB-кодов') ?>', className:"clean", replaceWith:function(h) { return h.selection.replace(/\[(.*?)\]/g, "") }, dropMenu: [

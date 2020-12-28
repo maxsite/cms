@@ -480,16 +480,16 @@ function mso_link_rel($rel = 'canonical', $add = '', $url_only = false)
 	if (!$rel) return; // пустой тип
 
 	if ($rel == 'canonical') {
-		
+
 		// свой обработчик
 		// если хук вернул false или '', то обработка продолжается дальше
 		// иначе хук возвращает url и происходит его вывод
-		if (mso_hook_present('canonicalUrl')) { 
+		if (mso_hook_present('canonicalUrl')) {
 			$rh = mso_hook('canonicalUrl');
-			
+
 			if ($rh) return '<link rel="canonical" href="' . $rh . '">';
 		}
-		
+
 		if ($add) {
 			return '<link rel="canonical" ' . $add . '>';
 		} else {
@@ -733,7 +733,7 @@ function mso_add_file($fn, $lazy = false, $auto_dir = false, $js_attr = '')
 		} elseif ($out) {
 			// вывод через хук body_end — mso_add_file_body_end()
 			if (!isset($MSO->data['add_file_to_body_end'])) $MSO->data['add_file_to_body_end'] = [];
-			
+
 			$MSO->data['add_file_to_body_end'][] = $out;
 		}
 	}
@@ -902,6 +902,69 @@ function mso_out_css_file($fn, $tag_style = true, $echo = true)
 	}
 
 	return $out;
+}
+
+/**
+ * Функция позволяет добавлять в секцию HEAD link rel="preload"
+ * Можно использовать совместно с mso_add_file() с опцией $lazy = true
+ * 
+ *  mso_add_preload('assets/js/tabs.js');
+ * 	mso_add_file('assets/js/tabs.js', true);
+ * 
+ * @param $fn — имя файла относительно каталога шаблона
+ * @param $auto_dir — путь будет определен относительно каталога исполняемого php-файла см. mso_add_file()
+ * 
+ * Файл может иметь расширение: js, css, woff, woff2, mp4
+ * 
+ */
+function mso_add_preload($fn, $auto_dir = '')
+{
+	global $MSO;
+
+	if ($auto_dir) {
+		$fn = str_replace(str_replace('\\', '/', getinfo('template_dir')), '', str_replace('\\', '/', $auto_dir)) . '/' . $fn;
+	}
+
+	if (file_exists(getinfo('template_dir') . $fn)) {
+		$ext = strtolower(substr(strrchr($fn, '.'), 1)); // расширение файла
+
+		$out = '';
+
+		if ($ext == 'js')
+			$out = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="script">';
+		elseif ($ext == 'css')
+			$out = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="style">';
+		elseif ($ext == 'woff2')
+			$out = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="font" type="font/woff2" crossorigin="anonymous">';
+		elseif ($ext == 'woff')
+			$out = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="font" type="font/woff" crossorigin="anonymous">';
+		elseif ($ext == 'mp4')
+			$out = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="video" type="video/mp4">';
+
+		if ($out) {
+			// вывод через хук head —см. mso_add_preload_hook()
+			if (!isset($MSO->data['preload_url'])) $MSO->data['preload_url'] = [];
+
+			$MSO->data['preload_url'][] = $out;
+		}
+	}
+}
+
+/**
+ * Функция к хуку head по которой выводятся preload
+ */
+function mso_add_preload_hook($a)
+{
+	global $MSO;
+
+	if (!isset($MSO->data['preload_url']) or !$MSO->data['preload_url'])
+		return $a;
+
+	$MSO->data['preload_url'] = array_unique($MSO->data['preload_url']);
+	
+	echo implode($MSO->data['preload_url']);
+
+	return $a;
 }
 
 # end of file

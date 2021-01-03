@@ -145,7 +145,7 @@ function mso_initalizing()
 	mso_hook_add('init', '_mso_require_functions_file'); // подключение functions.php текущего шаблона
 	mso_hook_add('content_content', 'mso_shortcode_content', 1); // хук контента на шорткоды
 	mso_hook_add('body_end', 'mso_add_file_body_end', 1); // хук на вывод подключенных файлов в конце BODY
-	mso_hook_add('head', 'mso_add_preload_hook', 1); // хук на вывод preload в HEAD
+	mso_hook_add('head_end', 'mso_add_preload_hook', 1); // хук на вывод preload в HEAD
 }
 
 /**

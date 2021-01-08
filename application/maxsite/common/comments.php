@@ -1804,7 +1804,7 @@ function mso_avatar($comment, $img_add = 'class="mso-gravatar"', $echo = false, 
         // аватарки нет, попробуем получить из gravatara
         if ($users_email) $grav_email = $users_email;
         elseif ($comusers_email) $grav_email = $comusers_email;
-        else $grav_email = $comments_author_name; // имя комментатора
+        else $grav_email = $comments_author_name ?? ''; // имя комментатора
 
 
         if ($gravatar_type = mso_get_option('gravatar_type', 'templates', '')) {

@@ -630,7 +630,7 @@ class Page_out
 		mso_page_content($this->val('page_content'));
 		$page_content = ob_get_contents();
 		ob_end_clean();
-
+        
 		return $page_content;
 	}
 

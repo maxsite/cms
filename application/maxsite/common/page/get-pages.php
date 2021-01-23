@@ -300,7 +300,7 @@ function mso_get_pages($r = [], &$pag = [])
 
 				if (count($content) > 1) {
 					// ссылка на «далее...»
-					if ($r['cut']) {
+					if ($r['cut'] !== false) {
 						if ($cut) {
 							if (isset($content[1])) {
 								if (strpos($cut, '%wordcount%') !== false)

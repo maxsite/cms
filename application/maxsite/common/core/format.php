@@ -747,6 +747,18 @@ function mso_add_file_body_end($a)
 {
 	global $MSO;
 
+	// jQuery имеет приоритет
+	$mode = mso_get_option('jquery_load', 'general', 'head');
+
+	if ($mode == 'body') {
+		if (mso_fe('assets/js/jquery.min.js'))
+			$fj = getinfo('template_url') . 'assets/js/jquery.min.js';
+		else
+			$fj = getinfo('common_url') . 'jquery/jquery.min.js';
+
+		echo '<script src="' . $fj . '"></script>';
+	}
+
 	if (!isset($MSO->data['add_file_to_body_end']) or !$MSO->data['add_file_to_body_end'])
 		return $a;
 
@@ -961,7 +973,7 @@ function mso_add_preload_hook($a)
 		return $a;
 
 	$MSO->data['preload_url'] = array_unique($MSO->data['preload_url']);
-	
+
 	echo implode($MSO->data['preload_url']);
 
 	return $a;

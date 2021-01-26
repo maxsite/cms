@@ -104,12 +104,24 @@ function mso_load_jquery($plugin = '', $path = '')
 			else
 				return '<script src="' . getinfo('common_url') . 'jquery/' . $plugin . '"></script>';
 		} else {
-			// это основная библиотека
+			// это основная библиотека, которая вызывается в секции HEAD
 			// если есть в шаблоне assets/js/jquery.min.js то подключаем только его
-			if (mso_fe('assets/js/jquery.min.js'))
-				return '<script src="' . getinfo('template_url') . 'assets/js/jquery.min.js"></script>';
 
-			return '<script src="' . getinfo('common_url') . 'jquery/jquery.min.js"></script>';
+			if (mso_fe('assets/js/jquery.min.js'))
+				$fj = getinfo('template_url') . 'assets/js/jquery.min.js';
+			else
+				$fj = getinfo('common_url') . 'jquery/jquery.min.js';
+
+			// режим загрузки jQuery
+			// если head, то грузим как есть
+			// если это BODY, то прописываем только preload
+			$mode = mso_get_option('jquery_load', 'general', 'head');
+
+			if ($mode == 'head') {
+				return '<script src="' . $fj . '"></script>';
+			} elseif ($mode == 'body') {
+				return '<link rel="preload" href="' . $fj . '" as="script">';
+			}
 		}
 	}
 }
@@ -225,7 +237,7 @@ function mso_get_component_option($component, $file = '_default.txt', $quot = tr
 function mso_get_defoptions_from_ini($file)
 {
 	if (!file_exists($file)) return false;
-	
+
 	$arrayIni = file_get_contents($file);
 
 	if ($arrayIni) {

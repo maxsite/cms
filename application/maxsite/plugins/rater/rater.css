@@ -5,7 +5,7 @@
 .star-rating a:active,
 .star-rating a:focus,
 .star-rating .current-rating{
-background: url(star.gif) left -1000px repeat-x;
+background: url(star.png) left -1000px repeat-x;
 }
 .star-rating{
 position:relative;

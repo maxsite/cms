@@ -7,7 +7,12 @@
 
 if (!$showForm) return;
 
+$PV = array_map(function ($val) {
+	return htmlspecialchars($val, ENT_QUOTES);
+}, $PV);
+
 ?>
+
 <h2 class="mar40-t t-gray700 mar5-b"><?= t('f1') ?></h2>
 <p class="mar0-t italic t-gray500"><?= t('f2') ?></p>
 
@@ -18,8 +23,8 @@ if (!$showForm) return;
 		<div class="flex-grow1 mar10-l"><?= t('f4') ?></div>
 	</label>
 
-	<label class="flex flex-vcenter mar20-b">
-		<div class="flex-grow5 w400px-max"><input type="text" class="w100" name="password" value="<?= $PV['password'] ?>" placeholder="<?= t('f5') ?>" required></div>
+	<label class="flex flex-vcen6ter mar20-b">
+		<div class="flex-grow5 w400px-max"><input type="text" class="w100" name="password" value="<?= $PV['password'] ?>" placeholder="<?= t('f5') ?>" pattern="[A-Za-z0-9*!?#$+().\-_]{8,}" required><div class="t80 mar5"><?= t('f24') ?></div></div>
 		<div class="flex-grow1 mar10-l"><?= t('f6') ?></div>
 	</label>
 

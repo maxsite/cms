@@ -59,6 +59,7 @@ return [
 	'f21' => 'table prefix...',
 	'f22' => 'Table prefix MaxSite CMS',
 	'f23' => 'Done',
+	'f24' => 'English letters, numbers and symbols <code>*!?#$-+()._</code>',
 ];
 
 # end of file

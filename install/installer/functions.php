@@ -10,7 +10,7 @@
  *
  * @param  mixed $message
  *
- * @return void
+ * @return string or boolean
  */
 function checkSecretKey($message = true)
 {
@@ -153,7 +153,7 @@ function randomPassword($len = 15): string
 	$p0 = substr(str_shuffle('ABCDEFGHJKLMNPQRSTUVWXYZ'), 0, 1);
 	$p1 = str_repeat('ABCDEFGHJKLMNPQRSTUVWXYZ', 1);
 	$p2 = str_repeat('abcdefghijkmnpqrstuvwxyz', 7);
-	$p3 = str_repeat('*!?#$-+().', 2);
+	$p3 = str_repeat('*!?#$-+()._', 2);
 	$p4 = str_repeat('123456789', 3);
 
 	$p = str_shuffle($p1 . $p2 . $p3 . $p4);
@@ -212,7 +212,7 @@ function detectLang(array $langs, string $default): string
 /**
  * Site host
  *
- * @return void
+ * @return string
  */
 function getHostSite()
 {
@@ -226,7 +226,7 @@ function getHostSite()
  *
  * @param  mixed $PV
  *
- * @return void
+ * @return boolean
  */
 function newDatabase($PV)
 {
@@ -258,7 +258,7 @@ function newDatabase($PV)
  * @param  mixed $tables
  * @param  mixed $prefix
  *
- * @return void
+ * @return array
  */
 function checkTableExists($mysqli, $tables, $prefix)
 {

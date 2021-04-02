@@ -47,7 +47,7 @@ if ($_POST) {
 		$mysqli = @new mysqli($PV['db_hostname'], $PV['db_username'], $PV['db_password'], $PV['db_database']);
 
 		if ($mysqli->connect_error) {
-			echo '<p class="t-red">⚠ ' . t('incorrect db') . ' ' . $mysqli->connect_error . ' (' . $mysqli->connect_errno . ')' . '</p>';
+			echo '<p class="t-red">⚠ ' . t('incorrect db') . ' ' . htmlspecialchars($mysqli->connect_error) . ' (' . htmlspecialchars($mysqli->connect_errno) . ')' . '</p>';
 		} else {
 			echo '<p class="t-green">✔ ' . t('ok db') . '</p>';
 

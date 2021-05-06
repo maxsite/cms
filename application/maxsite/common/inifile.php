@@ -6,6 +6,8 @@
  */
 
 // загружаем ini-файл и запускаем его как php
+// в ini-файле можно использовать замену %CURRENTDIR% на текущий каталог этого ini-файла
+// а также аналогичную php-переменную $COMPONENT
 function mso_get_ini_file($file = '')
 {
     if (!file_exists($file)) return false;
@@ -13,6 +15,9 @@ function mso_get_ini_file($file = '')
     $out = file_get_contents($file);
 	
 	if ($out) {
+		$COMPONENT = basename(dirname($file));
+		$out = str_replace('%CURRENTDIR%', $COMPONENT, $out);
+		
 		ob_start();
 		eval('?>' . $out . '<?php ');
 		$out = ob_get_contents();

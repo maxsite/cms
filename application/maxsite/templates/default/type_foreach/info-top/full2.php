@@ -10,18 +10,17 @@ if (is_type('page')) {
     return;
 }
 
-$_width = 735;
-$_height = 300;
+$_width = mso_get_val('thumb-width2', 800); //ширина
+$_height = mso_get_val('thumb-height2', 600); //высота
 
 if ($thumb = thumb_generate($p->meta_val('image_for_page'), $_width, $_height)) {
-    $p->thumb = '<img class="w100" src="' . $thumb . '" alt="' . htmlspecialchars($p->val('page_title')) . '">';
-    $p->thumb = '<a class="my-hover-img" href="' . $p->page_url() . '">' . $p->thumb . '<div></div></a>';
+    $p->thumb = '<a class="my-hover-img" href="' . $p->page_url() . '"><img class="w100" src="' . $thumb . '" alt="' . htmlspecialchars($p->val('page_title')) . '"><div></div></a>';
 }
 
-$p->format('title', '<h1 class="t180 t-gray700 links-no-color mar15-tb small-caps">', '</h1>', true);
-$p->format('cat', ' / ', '<span class="far fa-bookmark t-gray700 t90" title="' . tf('Рубрика записи') . '">', '</span>');
+$p->format('title', '<h1 class="t180 mar15-tb">', '</h1>', true);
+$p->format('cat', ' / ', '<span class="im-bookmark t-gray700 t90" title="' . tf('Рубрика записи') . '">', '</span>');
 $p->format('date', 'j F Y г.', '<time datetime="[page_date_publish_iso]" class="b-inline b-right  t90">', '</time>');
-$p->format('edit', '<i class="fas fa-edit" title="">Edit page</i>', '<div>', '</div>');
+$p->format('edit', '<i class="im-edit" title="">Edit page</i>', '<div>', '</div>');
 
 $p->div_start('bor4 bor-dotted-b bor-gray300 pad30-b mar30-t mar20-b');
 $p->line('[thumb]');

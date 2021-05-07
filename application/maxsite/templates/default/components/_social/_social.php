@@ -28,6 +28,9 @@ $icons = mso_section_to_array($icons, 'icons', [], true);
 if ($icons and isset($icons[0])) {
 	$icons = $icons[0];
 
+	// через эту переменную можно передавать дополнительные классы для ссылок	
+	$my_social_class = mso_get_val('my_social_class', 'my-social');
+	
 	foreach ($icons as $icon => $data) {
 		$data = explode('|', $data);
 		$data = array_map('trim', $data);
@@ -36,8 +39,10 @@ if ($icons and isset($icons[0])) {
 		$title = (isset($data[1])) ? htmlspecialchars($data[1]) : '';
 		$add_class = (isset($data[2])) ? ' ' . $data[2] : '';
 
-		echo '<a class="my-social ' . strtolower($icon) . $add_class . '" rel="nofollow" title="' . $title . '" href="' . $url . '"></a>';
+		echo '<a class="' . strtolower($icon) . $add_class . ' ' . $my_social_class . '" rel="nofollow" title="' . $title . '" href="' . $url . '"></a>';
 	}
+	
+	mso_unset_val('my_social_class'); // удаляем значение, чтобы оно не влияло на повторный вызов
 }
 
 # end of file

@@ -22,9 +22,16 @@ function my_default_head_section()
 <title>' . mso_head_meta('title') . '</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="MaxSite CMS">
-<meta name="description" content="' . mso_head_meta('description') . '">
-<link rel="shortcut icon" href="' . getinfo('uploads_url') . 'favicons/' . mso_get_option('default_favicon', 'templates', 'favicon1.png') . '" type="image/x-icon">';
+<meta name="description" content="' . mso_head_meta('description') . '">';
 
+	// для html-кода favicon можно использовать отдельный type_foreach-файл. 
+	// Создать код можно здесь: https://realfavicongenerator.net/
+	if ($fn = mso_page_foreach('favicon')) {
+		require $fn;
+	} else {
+		echo '<link rel="icon" href="' . getinfo('uploads_url') . 'favicons/' . mso_get_option('default_favicon', 'templates', 'favicon1.png') . '" type="image/png">';
+	}
+	
 	if (mso_get_option('default_canonical', 'templates', 0)) echo mso_link_rel('canonical');
 
 	echo mso_rss();
@@ -81,7 +88,7 @@ function my_default_out_profiles($path = 'assets/css/profiles/')
 
 		$css_out = '';
 
-		// theme- и -lazy и -head профили подключаются как link rel="stylesheet
+		// theme и lazy профили подключаются как link rel="stylesheet
 		foreach ($default_profiles as $css_file) {
 			$fn = $path . $css_file;
 

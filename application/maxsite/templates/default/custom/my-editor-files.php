@@ -7,7 +7,7 @@ $select = '<option value="" selected>-</option>';
 if (mso_fe('type/home/units.php'))
 	$select .= '<option value="' . base64_encode('type/home/units.php') . '">type/home/units.php</option>';
 
-$filesModules = glob(getinfo('template_dir') . 'modules/*/*/*');
+$filesModules = glob(getinfo('template_dir') . 'modules/*/*/*.php');
 
 $select .= '<optgroup class="bg-gray100" label="Modules"></optgroup>';
 

@@ -1,47 +1,33 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-// https://saney.ru/tools/symbols.html
-// ① ② ③ ④ ⑤ ⑥ ⑦ ⑧ ⑨ ⑩ ⑪ ⑫ ⑬ ⑭ ⑮ ⑯ ⑰ ⑱ ⑲ ⑳
-?>
+div(layout-center-wrap mar50-t) || div(flex flex-wrap flex-vcenter bg-primary500 t-white)
 
-div(layout-center-wrap mar50-t) || div(layout-wrap)
-
-h2(t-robotoslab t-center mar30-b) Схема нашей работы
-
-<div class="mar20-b flex flex-vcenter">
-	<div class="w10 w0-phone"></div>
-	<div class="w10 t180 t-right t-indigo">①</div>
-	<div class="w70 w90-phone pad20-rl">Cras malesuada. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus. Suspendisse in nulla. Aliquam sit amet felis.</div>
-	<div class="w10 w0-phone"></div>
-</div>
-
-<div class="mar20-b flex flex-vcenter">
-	<div class="w10 w0-phone"></div>
-	<div class="w10 t180 t-right t-indigo">②</div>
-	<div class="w70 w90-phone pad20-rl">Cras malesuada. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus. Suspendisse in nulla. Aliquam sit amet felis.</div>
-	<div class="w10 w0-phone"></div>
-</div>
-
-<div class="mar20-b flex flex-vcenter">
-	<div class="w10 w0-phone"></div>
-	<div class="w10 t180 t-right t-indigo">③</div>
-	<div class="w70 w90-phone pad20-rl">Cras malesuada. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus. Suspendisse in nulla. Aliquam sit amet felis.</div>
-	<div class="w10 w0-phone"></div>
-</div>
-
-<div class="mar20-b flex flex-vcenter">
-	<div class="w10 w0-phone"></div>
-	<div class="w10 t180 t-right t-indigo">④</div>
-	<div class="w70 w90-phone pad20-rl">Cras malesuada. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus. Suspendisse in nulla. Aliquam sit amet felis.</div>
-	<div class="w10 w0-phone"></div>
-</div>
-
-<div class="mar20-b flex flex-vcenter">
-	<div class="w10 w0-phone"></div>
-	<div class="w10 t180 t-right t-indigo">⑤</div>
-	<div class="w70 w90-phone pad20-rl">Cras malesuada. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus. Suspendisse in nulla. Aliquam sit amet felis.</div>
-	<div class="w10 w0-phone"></div>
-</div>
-
-
+	<div class="w3col w50-tablet w100-phone flex-as-stretch t-center bg-primary700 t-white t160 pad10-rl pad20-tb flex flex-vcenter flex-hcenter">
+		__ Почему мы?
+	</div>
+	
+	<div class="w3col w50-tablet w100-phone pad50-tb pad10-rl b-flex flex-jc-center">
+		<i class="im-globe t180 pad10-r t-primary100 lh100"></i> 
+		<div>
+			__ 1000+ КЛИЕНТОВ
+			__(t-gray200 t90) 15 лет на рынке
+		</div>
+	</div>
+	
+	<div class="w3col w50-tablet w100-phone pad50-tb pad10-rl b-flex flex-jc-center">
+		<i class="im-donate t180 pad10-r t-primary100 lh100"></i>
+		<div>
+			__ БЕЗОПАСНАЯ ОПЛАТА
+			__(t-gray200 t90) Гарантия качества
+		</div>
+	</div>
+	
+	<div class="w3col w50-tablet w100-phone pad50-tb pad10-rl b-flex flex-jc-center">
+		<i class="im-comments t180 pad10-r t-primary100 lh100"></i> 
+		<div>
+			__ ПОДДЕРЖКА
+			__(t-gray200 t90) В течение всей поездки
+		</div>
+	</div>
+		
 /div || /div

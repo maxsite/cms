@@ -1,13 +1,13 @@
 /*
  * (c) MaxSite CMS
- * http://max-3000.com/
+ * https://max-3000.com/
  *
  * Корзина — настраиваемая часть
  * Файл должен быть загружен после cart.js
  *
  */
 	
-$(function(){
+document.addEventListener("DOMContentLoaded", () => {
 
 	// селекторы/css-классы блоков вывода 
 	var cartS = {};
@@ -28,7 +28,7 @@ $(function(){
 		+ '<div class="flex-grow5">{name}{desc}</div>'
 		+ '<div class="w10"><input class="w100 cart-item-count-change" type="number" min="0" max="{maxcount}" value="{count}" data-id="{key}"></div>'
 		+ '<div class="w10 t-right">{price}</div>'
-		+ '<div class="w10 mar10-l pad5-rl bold t-right bg-gray100">{sum}</div>'
+		+ '<div class="w10 mar10-l pad5-rl t-bold t-right bg-gray100">{sum}</div>'
 		+ '</div>';
 	
 	// тоже самое, только без возможности редактирования
@@ -36,7 +36,7 @@ $(function(){
 		+ '<div class="flex-grow5">{name}{desc}</div>'
 		+ '<div class="w10">{count} шт.</div>'
 		+ '<div class="w10 t-right">{price}</div>'
-		+ '<div class="w10 mar10-l pad5-rl bold t-right bg-gray100">{sum}</div>'
+		+ '<div class="w10 mar10-l pad5-rl t-bold t-right bg-gray100">{sum}</div>'
 		+ '</div>';
 		
 	// класс для input, где можно менять колво товаров. Указывается в format

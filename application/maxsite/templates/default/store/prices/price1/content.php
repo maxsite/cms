@@ -1,123 +1,55 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-div(layout-center-wrap mar50-tb) || div(layout-wrap)
+div(layout-center-wrap mar50-tb) || div(layout-wrap t-center)
 
-	<div class="flex flex-wrap">
-	
-		<div class="w31 w48-tablet w100-phone bg-white mar20-b pad40-b t-gray">
-		
-			<div class="bg-blue700 t-center t-white mar30-b pad30-b">
-			
-				__(t170 pad30-t)  *FREE PLAN*
-				
-				__ <sup class="t100" style="top: -20px;">$</sup> <b class="t400 mar10-rl">0</b> <sub class="t100">/MO.</sub>
-				
-				__(mar20-t t-center) <a class="t110 pad20-rl pad10-tb bor1 bor-white bor-solid rounded5  hover-no-underline t-gray200 hover-t-white" href="#">And Get Free Month</a>
-			
-			</div>
-			
-			<div class="flex">
-				__(w10)
+	<div class="flex flex-wrap-tablet t-gray600">
 
-				<div>
-					__ <i class="fas fa-envelope"></i> 1,000 messages
-					
-					hr(mar15-tb bor-gray200)
-					
-					__ <i class="fas fa-signal"></i> <span class="t-gray700">limited</span> data
-					
-					hr(mar15-tb bor-gray200)
-					
-					__ <i class="fas fa-user"></i> <span class="t-gray700">limited</span> users
-					
-					hr(mar15-tb bor-gray200)
-					
-					__ <i class="fas fa-smile"></i> first 10 day free
-					
-				</div>
-
-				__(w10)
-			</div>
-			
-		</div>
+		div(w23 w48-tablet w100-phone mar20-b bg-gray200 pad10 t-center hover-bg-gray300 rounded transition-var)
+			__ <i class="im-rocket t500 t-primary bordered icon-circle bg-white"></i>
+			__(t150 mar10-t) Starter
+			__(t90 mar10-tb) 19$/month
+			__(t90 mar30-t) 1000 messages
+			__(t90 mar10-tb) 10 database
+			__(t90 mar10-tb) 5 users
+			__(t90 mar10-tb) 1 sites
+			__(mar20-tb) <a class="button button1 im-check bg-gray600 hover-bg-primary600" href="#">Order now</a>
+		/div
 		
+		div(w23 w48-tablet w100-phone mar20-b bg-gray200 pad10 t-center hover-bg-gray300 rounded transition-var)
+			__ <i class="im-house-user t500 t-primary bordered icon-circle bg-white"></i>
+			__(t150 mar10-t) Business
+			__(t90 mar10-tb) 39$/month
+			__(t90 mar30-t) 5000 messages
+			__(t90 mar10-tb) 50 database
+			__(t90 mar10-tb) 20 users
+			__(t90 mar10-tb) 10 sites
+			__(mar20-tb) <a class="button button1 im-check bg-gray600 hover-bg-primary600" href="#">Order now</a>
+		/div
 		
+		div(w23 w48-tablet w100-phone mar20-b t-center t-white bg-primary700 hover-bg-primary600 hover-t-white rounded transition-var animation-zoom)
+			
+			__(t150 bg-primary400 t-white pad20-t pad50-b bor10 bor-solid-b bor-primary) Developer
+			
+			__()(margin-top:-50px) <i class="im-globe t300 t-primary icon-circle bg-white bordered bor-primary"></i>
+			
+			__(t90 mar30-t) 59$/month
+			__(t90 mar10-t) 100 000 messages
+			__(t90 mar10-tb) 500 database
+			__(t90 mar10-tb) 100 users
+			__(t90 mar10-tb) 50 sites
+			__(mar50-tb) <a class="button button-outline1 im-check rounded20 pad20-rl animation-bottom" href="#">Order now</a>
+		/div
 		
-		<div class="w31 w48-tablet w100-phone bg-white mar20-b pad40-b t-gray">
-		
-			<div class="bg-blue700 t-center t-white mar30-b pad30-b">
-			
-				__(t170 pad30-t)  *BUSINESS PLAN*
-				
-				__ <sup class="t100" style="top: -20px;">$</sup> <b class="t400 mar10-rl">20</b> <sub class="t100">/MO.</sub>
-				
-				__(mar20-t t-center) <a class="t110 pad20-rl pad10-tb bor1 bor-white bor-solid rounded5  hover-no-underline t-gray200 hover-t-white" href="#">And Get Free Month</a>
-			
-			</div>
-			
-			<div class="flex">
-				__(w10)
-
-				<div>
-					__ <i class="fas fa-envelope"></i> 10,000 messages
-					
-					hr(mar15-tb bor-gray200)
-					
-					__ <i class="fas fa-signal"></i> <span class="t-gray700">unlimited</span> data
-					
-					hr(mar15-tb bor-gray200)
-					
-					__ <i class="fas fa-user"></i> <span class="t-gray700">unlimited</span> users
-					
-					hr(mar15-tb bor-gray200)
-					
-					__ <i class="fas fa-smile"></i> first 10 day free
-					
-				</div>
-
-				__(w10)
-			</div>
-			
-		</div>
-		
-		
-		<div class="w31 w48-tablet w100-phone bg-white mar20-b pad40-b t-gray hover-animation" _data-animation="fade">
-		
-			<div class="bg-blue700 t-center t-white mar30-b pad30-b">
-			
-				__(t170 pad30-t)  *EXTENDED PLAN*
-				
-				__ <sup class="t100" style="top: -20px;">$</sup> <b class="t400 mar10-rl">80</b> <sub class="t100">/MO.</sub>
-				
-				__(mar20-t t-center) <a class="t110 pad20-rl pad10-tb bor1 bor-white bor-solid rounded5  hover-no-underline t-gray200 hover-t-white" href="#">And Get Free Month</a>
-			
-			</div>
-			
-			<div class="flex">
-				__(w10)
-
-				<div>
-					__ <i class="fas fa-envelope"></i> 100,000 messages
-					
-					hr(mar15-tb bor-gray200)
-					
-					__ <i class="fas fa-signal"></i> <span class="t-gray700">unlimited</span> data
-					
-					hr(mar15-tb bor-gray200)
-					
-					__ <i class="fas fa-user"></i> <span class="t-gray700">unlimited</span> users
-					
-					hr(mar15-tb bor-gray200)
-					
-					__ <i class="fas fa-smile"></i> first 10 day free
-					
-				</div>
-
-				__(w10)
-			</div>
-			
-		</div>
-		
+		div(w23 w48-tablet w100-phone mar20-b bg-gray200 pad10 t-center hover-bg-gray300 rounded transition-var)
+			__ <i class="im-sun t500 t-primary bordered icon-circle bg-white"></i>
+			__(t150 mar10-t) Extended
+			__(t90 mar10-tb) 299$/month
+			__(t90 mar30-t) &infin; messages
+			__(t90 mar10-tb) &infin; database
+			__(t90 mar10-tb) &infin; users
+			__(t90 mar10-tb) &infin; sites
+			__(mar20-tb) <a class="button button1 im-check bg-gray600 hover-bg-primary600" href="#">Order now</a>
+		/div
 		
 	</div>
 	

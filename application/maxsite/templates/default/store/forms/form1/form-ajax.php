@@ -33,7 +33,7 @@ if ($_POST and isset($_POST['myform']))
 	mso_mail($email, $subject, $out);
 	
 	// сообщение на странице
-	echo '<div class="t-green mar30-tb">Спасибо! Ваше сообщение отправлено! Код: <b>' . $cod_z . '</b></div>';
+	echo '<div class="mar30-tb">Спасибо! Ваше сообщение отправлено! Код: <b>' . $cod_z . '</b></div>';
 
 }
 

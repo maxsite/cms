@@ -4,7 +4,7 @@
  * (c) https://max-3000.com/
  */
 
-echo '<div class="mar30-t mar20-b"><a class="fas fa-rss" href="' . getinfo('siteurl') . 'comments/feed">Подписаться по RSS</a> <a class="b-inline b-right fas fa-users" href="' . getinfo('siteurl') . 'users">' . tf('Список комментаторов') . '</a></div>';
+echo '<div class="mar30-t mar20-b"><a class="im-rss" href="' . getinfo('siteurl') . 'comments/feed">Подписаться по RSS</a> <a class="b-inline b-right im-user" href="' . getinfo('siteurl') . 'users">' . tf('Список комментаторов') . '</a></div>';
 
 echo '<h3 class="mar20-b">' . tf('Последние комментарии') . '</h3>';
 

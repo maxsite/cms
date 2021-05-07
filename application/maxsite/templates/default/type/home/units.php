@@ -1,9 +1,10 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
 ................................................
 module — подключается как модуль из каталога modules
 !! для подключения модуля, необходимо скопировать его из каталога «store» в каталог «modules»
 !! если файл не найден, то его подключение будет проигнорировано.
 ................................................
 
-@module default/pages2
-@module default/pages1
+@module pages/pages2
+@module pages/pages-2col3

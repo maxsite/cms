@@ -1,29 +1,29 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); ?>
 
-div(layout-center-wrap mar50-t) || div(layout-wrap)
-	
-	h2(t-robotoslab t-center) Работать с нами выгодно
-	
-	<div class="flex flex-wrap t-center t-gray600">
-	
-		<div class="w30 w45-tablet w100-phone pad10 mar20-b">
-			<i class="fas fa-university t300 t-indigo400"></i>
-			__(t110 mar10-tb t-gray700 bold) Donec viverra nibh et
-			__ Cras malesuada. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus. Suspendisse in nulla. Aliquam sit amet felis.
-		</div>
-	
-		<div class="w30 w45-tablet w100-phone pad10 mar20-b">
-			<i class="fab fa-btc t300 t-indigo400"></i>
-			__(t110 mar10-tb t-gray700 bold) Donec viverra nibh et
-			__ Cras malesuada. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus. Suspendisse in nulla. Aliquam sit amet felis.
-		</div>
-	
-		<div class="w30 w45-tablet w100-phone pad10 mar20-b">
-			<i class="fas fa-link t300 t-indigo400"></i>
-			__(t110 mar10-tb t-gray700 bold) Donec viverra nibh et
-			__ Cras malesuada. Suspendisse eu tortor. Donec vitae felis nec ligula blandit rhoncus. Suspendisse in nulla. Aliquam sit amet felis.
-		</div>	
-	
-	</div>
-	
+div(layout-center-wrap mar50-t) || div(layout-wrap flex flex-wrap)
+
+	div(w3col w48-tablet w100-phone t-center pad10)
+		__ <i class="im-lightbulb icon0 t250 t-primary700"></i>
+		__(t-bold mar10-tb) 100+ направлений
+		__(t-gray) Более 100 туров на лучшие курорты мира.
+	/div
+
+	div(w3col w48-tablet w100-phone t-center pad10)
+		__ <i class="im-lightbulb icon0 t250 t-primary700"></i>
+		__(t-bold mar10-tb) Лучшие цены
+		__(t-gray) Наши цены такие же, как и у туроператоров.
+	/div
+
+	div(w3col w48-tablet w100-phone t-center pad10)
+		__ <i class="im-lightbulb icon0 t250 t-primary700"></i>
+		__(t-bold mar10-tb) Поддержка клиентов
+		__(t-gray) Поддержка менеджера во время путешествия.
+	/div
+
+	div(w3col w48-tablet w100-phone t-center pad10)
+		__ <i class="im-lightbulb icon0 t250 t-primary700"></i>
+		__(t-bold mar10-tb) Бронирование
+		__(t-gray) Бронируйте тур по самой низкой цене.
+	/div
+
 /div || /div

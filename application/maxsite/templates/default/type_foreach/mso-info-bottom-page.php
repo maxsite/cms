@@ -9,7 +9,7 @@ if ($p->val('page_type_name') !== 'blog') return;
 
 /*
 // метки внизу
-$p->format('tag', ' | ', '<span class="fas fa-tag" title="' . tf('Метка записи') . '">', '</span>');
+$p->format('tag', ' | ', '<span class="im-tag" title="' . tf('Метка записи') . '">', '</span>');
 $p->line('<div class="t-gray600 t90 mar20-tb">[tag]</div>');
 
 

@@ -24,11 +24,11 @@ if (is_type('page') and $p->val('page_type_name') == 'blog') {
 	);
 
 	if ($np['next']) {
-		$np_out .= '<div class="b-left mar5-b">' . $p->link(mso_page_url($np['next']['page_slug']), '<i class="fas fa-caret-left icon0 mar7-r"></i> ' . $np['next']['page_title'], tf('Следующая запись'), 't-blue600 hover-t-blue700') . '</div>';
+		$np_out .= '<div class="b-left mar5-b">' . $p->link(mso_page_url($np['next']['page_slug']), '<i class="im-long-arrow-alt-left icon0 mar7-r"></i> ' . $np['next']['page_title'], tf('Следующая запись'), '') . '</div>';
 	}
 
 	if ($np['prev']) {
-		$np_out .= '<div class="b-right mar5-b">' . $p->link(mso_page_url($np['prev']['page_slug']), $np['prev']['page_title'] . ' <i class="fas fa-caret-right icon0 mar7-l"></i>', tf('Предыдущая запись'), 't-blue600 hover-t-blue700') . '</div>';
+		$np_out .= '<div class="b-right mar5-b">' . $p->link(mso_page_url($np['prev']['page_slug']), $np['prev']['page_title'] . ' <i class="im-long-arrow-alt-right icon0 mar7-l"></i>', tf('Предыдущая запись'), '') . '</div>';
 	}
 
 	$p->block($np_out, '<div class="next-prev-page mso-clearfix t90 mar30-t hover-no-underline">', '</div>');

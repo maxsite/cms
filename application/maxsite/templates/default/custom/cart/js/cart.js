@@ -1,6 +1,6 @@
 /*
  * (c) MaxSite CMS
- * http://max-3000.com/
+ * https://max-3000.com/
  *
  * Корзина — основой объект
  * Используется jQuery

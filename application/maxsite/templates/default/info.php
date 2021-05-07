@@ -7,11 +7,11 @@
 $info = [
 	'name' => 'Default',
 	'description' => t('Шаблон для MaxSite CMS'),
-	'version' => '2020.11',
+	'version' => 'MF12',
 	'author' => 'MAX',
 	'template_url' => 'https://max-3000.com/',
 	'author_url' => 'https://maxsite.org/',
-	'maxsite-min-version' => '107.2'
+	'maxsite-min-version' => '108'
 ];
 
 # end of file

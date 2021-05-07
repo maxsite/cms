@@ -38,7 +38,7 @@ if (is_type('page')) {
 } elseif (is_type('users')) {
 	if (isset($comuser_info[0]) and $comuser_info[0]) $breadcrumbs[$comuser_info[0]['comusers_nik']] = '';
 	$breadcrumbs['Пользователи'] = getinfo('siteurl') . 'users';
-} 
+} elseif (is_type('page_404'))                 $breadcrumbs['404. Ничего не найдено'] = '';
 elseif (mso_segment(1) == 'sitemap')           $breadcrumbs['Карта сайта'] = '';
 elseif (mso_segment(1) == 'contact')           $breadcrumbs['Контактная форма'] = '';
 elseif (mso_segment(1) == 'registration')      $breadcrumbs['Регистрация на сайте'] = '';
@@ -56,8 +56,6 @@ elseif (mso_segment(1) == 'password-recovery') $breadcrumbs['Восстанов�
 if ($add = mso_get_val('comp_breadcrumbs_add', false))
 	$breadcrumbs = array_merge($breadcrumbs, $add);
 
-if (!$breadcrumbs) $breadcrumbs['404. Ничего не найдено'] = '';
-
 // всегда добавляем главную
 $breadcrumbs['Главная'] = getinfo('siteurl');
 
@@ -73,7 +71,7 @@ foreach ($breadcrumbs as $name => $link) {
 		$out .= $name . '    ';
 }
 
-$out = str_replace('    ', '<i class="fas fa-angle-right icon0 mar10-rl"></i>', trim($out));
+$out = str_replace('    ', '<i class="im-angle-right icon0 mar10-rl"></i>', trim($out));
 
 echo $out;
 

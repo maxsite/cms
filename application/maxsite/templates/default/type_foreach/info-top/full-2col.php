@@ -12,21 +12,24 @@ if (is_type('page')) {
     return;
 }
 
-$_width = 680; // ширина из расчета ширины phone
-$_height = round($_width / 1.7); // пропорця, но можно и явно задать
+$_width = mso_get_val('thumb-width1', 640); //ширина
+$_height = mso_get_val('thumb-height1', 480); //высота
 
 if ($thumb = thumb_generate($p->meta_val('image_for_page'), $_width, $_height)) {
     $img = '<img class="w100" src="' . $thumb . '" alt="' . htmlspecialchars($p->val('page_title')) . '">';
 } else {
-    $img = '<img class="w100" src="' . mso_holder($_width, $_height, '', '#dddddd', '#444444') . '" alt="' . htmlspecialchars($p->val('page_title')) . '">';
+    if ($thumb_placehold = mso_get_val('thumb-placehold', false))
+        $img = '<img class="w100" src="' . $thumb_placehold . '" alt="' . htmlspecialchars($p->val('page_title')) . '">';
+    else
+        $img = '<img class="w100" src="' . mso_holder($_width, $_height, '', '#eeeeee', '#444444') . '" alt="' . htmlspecialchars($p->val('page_title')) . '">';
 }
 
 $p->thumb = '<a class="my-hover-img" href="' . $p->page_url() . '">' . $img . '<div></div></a>';
 
-$p->format('title', '<h2 class="t130 t-gray800 hover-t-blue mar20-t links-no-color b-inline">', '</h2>', true);
-$p->format('cat', ', ', '<span class="far fa-bookmark" title="' . tf('Рубрика записи') . '">', '</span>');
+$p->format('title', '<h2 class="t130 mar20-t b-inline">', '</h2>', true);
+$p->format('cat', ', ', '<span class="im-bookmark" title="' . tf('Рубрика записи') . '">', '</span>');
 $p->format('date', 'j F Y г.', '<time datetime="[page_date_publish_iso]" class="b-inline b-right">', '</time>');
-$p->format('read', '<span class="t90 bg-gray600 pad10-rl pad5-tb t-white hover-bg-blue700 trans05-all">' . tf('Читать') . ' <i class="fas fa-angle-right mar5-l icon0"></i></span>', '', '');
+$p->format('read', '<span class="t90 bg-primary600 pad10-rl pad5-tb t-primary50 hover-bg-primary700 trans05-all">' . tf('Читать') . ' <i class="im-angle-right mar5-l icon0"></i></span>', '', '');
 
 $p->div_start('mar30-t');
 $p->line('[thumb]');

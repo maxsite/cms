@@ -4,13 +4,13 @@
  * (c) https://max-3000.com/
  */
 
-$p->format('edit', 'Edit page', '<span class="fas fa-edit mar20-l t-gray600 t90 link-no-color">', '</span>');
+$p->format('edit', 'Edit page', '<span class="im-edit mar20-l t-gray600 t90 link-no-color">', '</span>');
 $p->format('title', '<h1 class="t-gray700 mar20-t mar10-b t220">', '</h1>', false);
-$p->format('cat', ', ', '<span class="far fa-bookmark t-gray600 link-no-color t90" title="' . tf('Рубрика записи') . '">', '</span>');
-$p->format('tag', ' / ', '<span class="fas fa-tag mar20-l t-gray600 link-no-color t90" title="' . tf('Метка записи') . '">', '</span>');
-$p->format('author', '<span class="fas fa-user t-gray600 link-no-color t90" title="' . tf('Автор') . '">', '</span>');
-$p->format('comments_count', '<span class="fas fa-comments mar20-l t-gray600 link-no-color t90">' . tf('Комментарии') . ': ', '</span>');
-$p->format('view_count', '<span class="fas fa-chart-bar mar20-l t-gray600 link-no-color t90">' . tf('Просмотров') . ': ', '</span>');
+$p->format('cat', ', ', '<span class="im-bookmark t-gray600 link-no-color t90" title="' . tf('Рубрика записи') . '">', '</span>');
+$p->format('tag', ' / ', '<span class="im-tag mar20-l t-gray600 link-no-color t90" title="' . tf('Метка записи') . '">', '</span>');
+$p->format('author', '<span class="im-user t-gray600 link-no-color t90" title="' . tf('Автор') . '">', '</span>');
+$p->format('comments_count', '<span class="im-comments mar20-l t-gray600 link-no-color t90">' . tf('Комментарии') . ': ', '</span>');
+$p->format('view_count', '<span class="im-chart-bar mar20-l t-gray600 link-no-color t90">' . tf('Просмотров') . ': ', '</span>');
 
 $date_d = mso_date_convert('j', $p->val('page_date_publish'));
 $date_m = mso_date_convert('F', $p->val('page_date_publish'), true, false, 'января февраля марта апреля мая июня июля августа сентября октября ноября декабря');

@@ -1,0 +1,104 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// border
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'border') {
+
+    .#{$pf}bordered {
+        border: var(--bordered, $bordered);
+    }
+
+    // default = 1px
+    // [class*="#{$pf}bor-"] {
+    //     border-width: 1px;
+    // }
+
+    .#{$pf}bor-var {
+        border-style: var(--style, solid);
+        border-width: var(--width, 1px);
+        border-color: var(--color, #D4D7DD);
+    }
+
+    .#{$pf}bor-none {
+        border-style: none !important;
+    }
+
+    .#{$pf}bor-none-tb,
+    .#{$pf}bor-none-t {
+        border-top-style: none !important;
+    }
+
+    .#{$pf}bor-none-rl,
+    .#{$pf}bor-none-r {
+        border-right-style: none !important;
+    }
+
+    .#{$pf}bor-none-tb,
+    .#{$pf}bor-none-b {
+        border-bottom-style: none !important;
+    }
+
+    .#{$pf}bor-none-rl,
+    .#{$pf}bor-none-l {
+        border-left-style: none !important;
+    }
+
+    .#{$pf}bor-currentColor {
+        border-color: currentColor;
+    }
+
+    // style line
+    @each $var in $border_type_list {
+        .#{$pf}bor-#{$var} {
+            border-style: $var;
+        }
+
+        .#{$pf}bor-#{$var}-t {
+            border-top-style: $var;
+        }
+
+        .#{$pf}bor-#{$var}-r {
+            border-right-style: $var;
+        }
+
+        .#{$pf}bor-#{$var}-b {
+            border-bottom-style: $var;
+        }
+
+        .#{$pf}bor-#{$var}-l {
+            border-left-style: $var;
+        }
+
+        .#{$pf}bor-#{$var}-tb {
+            border-top-style   : $var;
+            border-bottom-style: $var;
+        }
+
+        .#{$pf}bor-#{$var}-rl {
+            border-right-style: $var;
+            border-left-style : $var;
+        }
+    }
+
+    // width
+    @each $var in $border_list {
+        .#{$pf}bor#{$var} {
+            border-width: #{$var}px;
+        }
+    }
+
+    // for @media
+    @each $postfix,
+    $m in $screen_media_border_list {
+        @media #{$m} {
+            .#{$pf}bor-none-#{$postfix} {
+                border-style: none !important;
+            }
+        }
+    }
+
+}

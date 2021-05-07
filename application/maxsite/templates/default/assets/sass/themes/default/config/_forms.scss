@@ -1,0 +1,21 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// настройки модуля design/forms
+
+// подключение colors, если используются $переменные цветов
+@forward '../config/colors1';
+@use '../modules/colors/default1' as *;
+
+@use '../modules/design/default-forms' with (
+	$modules: (
+		'forms': true,
+	),
+	
+	$placeholder-color: $gray500,
+	
+	$form-input-border: 1px solid $primary200,
+	$form-input-focus-color: $gray800,
+	// $form-input-focus-background: $primary50,
+	$form-input-focus-border-color: $primary300,
+	$form-input-focus-shadow: (0 0 0 .2rem hsla(hue($primary700), 100%, 50%, 0.25)),
+);

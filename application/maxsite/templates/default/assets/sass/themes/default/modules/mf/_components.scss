@@ -1,0 +1,64 @@
+// стили для компонентов
+
+@forward '../../config/mf';
+@use 'default' as mf;
+
+@forward '../../config/colors1';
+@use '../../modules/colors/default1' as color;
+
+@forward '../../config/utilities';
+@use '../../modules/utilities/default' as utilities;
+
+@use '../../mfont/variables' as *;
+
+// заголовок виджета в подвале
+div.footer div.mso-widget-header {
+	font-size: 1.3em; 
+	font-weight: normal;
+	padding: 0 0 5px 0;
+	margin: 20px 0 20px 0;
+	color: #ffffff;
+	background: none;
+	border: none;
+	border-bottom: 2px color.$red solid;
+}
+
+// отключаем menuToFixed/scrollToFixed для малого экрана
+@media #{utilities.$SCREEN_TABLET}  {	
+	.no-scrollToFixed-tablet {
+		position: relative !important;
+	} 
+}
+
+@media #{utilities.$SCREEN_PHONE}  {
+	.no-scrollToFixed-phone {
+		position: relative !important;
+	} 
+}
+
+// компоненты header-menu
+// header-menu1/2
+$comp-header-menu1-height: 120px !default; // компонент header-menu1
+
+// ! CSS hsla нужно использовать как HSLA — конфликт синтаксиса в Sass
+
+// прозрачный фон верхнего меню
+.bg-topmenu1 { background-color: HSLA(hue(color.$primary), 30%, 12%, 0.6); }
+.bg-topmenu1-1 { background-color: HSLA(hue(color.$primary), 30%, 12%, 0.6); }
+.bg-topmenu2 { background-color: HSLA(hue(color.$primary), 30%, 12%, 0.8); }
+
+// отключаем прозрачность на телефонах
+@media #{utilities.$SCREEN_PHONE}  {
+    // .bg-topmenu1 { background-color: HSLA(hue($primary), 30%, 12%, 1); }
+    // .bg-topmenu1-1 { background-color: HSLA(hue($primary), 30%, 12%, 1); }
+    // .bg-topmenu2 { background-color: HSLA(hue($primary), 30%, 12%, 1); }
+}
+
+// фикс высоты по ситуации
+.comp-header-menu1-height {
+	height: $comp-header-menu1-height;
+
+	@media #{utilities.$SCREEN_PHONE}  {
+		// display: none;
+	}
+}

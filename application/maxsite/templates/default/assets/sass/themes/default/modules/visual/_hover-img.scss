@@ -1,0 +1,152 @@
+// разные эффекты для изображений
+
+// убрать все преобразования при hover
+.hover-no-filter {
+
+	transition: all .5s ease;
+    
+	&::after,
+    &::before {    
+        transition: all .5s ease;
+    }
+    
+	&:hover,
+    &:hover::after,
+    &:hover::before {
+		filter: none;
+		background: none;
+		opacity: 1;
+	}
+}
+
+// эффект при наведении (увеличение и осветление)
+//	<a class="my-hover-img" href="1"><img 1><div></div></a> 
+//	<a class="my-hover-img" href="2"><img 2><div></div></a>
+.my-hover-img {
+	
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+
+	img {
+		transition: all .5s ease;
+	}
+	
+	&:hover {
+		> img {
+			transform: scale3d(1.1,1.1,1.1);
+		}
+		
+		> div {
+			position: absolute;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0,0,0,.2);
+			transition: background-color .3s linear .1s;
+		}
+	}
+}
+
+// эффект увеличение и осветление
+.my-hover-img2 {
+	display: inline-block;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+
+	img {
+		transition: all .5s ease;
+	}
+	
+	&:hover {
+		> img {
+			background-color: rgba(0,0,0,.2);
+			opacity: .8;
+			transform: scale3d(1.1,1.1,1.1);
+		}
+	}
+}
+
+// увеличение размера
+.my-hover-img3 {
+	transition: all .5s ease;
+	
+	&:hover {
+		transform: scale3d(1.05,1.05,1.05);
+	}
+}
+
+.my-hover-img4 {
+	transition: all .2s ease;
+
+	&:hover {
+		box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.8);
+	}
+}
+
+// эффект осветление img.my-hover-img5
+.my-hover-img5 {
+	
+	transition: all .5s ease;
+	
+	&:hover {
+		background-color: rgba(0,0,0,.2);
+		opacity: .8;
+	}
+}
+
+// осветленые картинки, при наведения до нормального img.my-hover-img6
+.my-hover-img6 {
+	
+	transition: all .5s ease;
+	opacity: .8;
+		
+	&:hover {
+		opacity: 1;
+	}
+}
+
+// картинка grayscale, при наведении появляется цвет и увеличение
+.my-hover-img7 {
+	
+	transition: all .5s ease;
+	
+	-webkit-filter: grayscale(90%); /* Safari 6.0 - 9.0 */
+	filter: grayscale(90%);
+  
+	&:hover {
+		-webkit-filter: grayscale(0); /* Safari 6.0 - 9.0 */
+		filter: grayscale(0);
+		transform: scale3d(1.05,1.05,1.05);
+	}
+}
+
+// картинка grayscale, при наведении появляется цвет
+.my-hover-img8 {
+	
+	transition: all .5s ease;
+	
+	-webkit-filter: grayscale(90%); /* Safari 6.0 - 9.0 */
+	filter: grayscale(90%);
+  
+	&:hover {
+		-webkit-filter: grayscale(0); /* Safari 6.0 - 9.0 */
+		filter: grayscale(0);
+	}
+}
+
+// серпия
+.my-hover-img9 {
+	transition: all .5s ease;	
+	filter: sepia(0.5);
+  
+	&:hover {
+		filter: none;
+	}
+}
+

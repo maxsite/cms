@@ -1,0 +1,103 @@
+// Сайдбары и виджеты
+
+@forward '../../config/mf';
+@use 'default' as mf;
+
+@forward '../../config/colors1';
+@use '../../modules/colors/default1' as color;
+
+@forward '../../config/utilities';
+@use '../../modules/utilities/default' as utilities;
+
+@use '../../mfont/variables' as *;
+
+// виджеты
+div.mso-widget {
+	font-size: 0.95rem;
+	margin-bottom: 60px;
+	margin-top: 30px;
+	// color: $gray700;
+}
+
+// ссылки в виджетах
+div.mso-widget a {
+	color: color.$gray700;
+}
+
+// заголовок сайдбара
+div.mso-widget-header {
+	// background: $gray300;
+	color: color.$gray700;
+	font-size: 1.1rem;
+	margin-bottom: 20px;
+	font-weight: bold;
+	padding-bottom: 15px;
+	// border-right: $colorA5 solid 4px;
+	// text-transform: uppercase;
+	background: url("../../../images/elements/hr1.png") repeat-x bottom left;
+}
+
+div.mso-widget button {
+	
+	// @extend .button;
+	// 
+	// height: 35px;
+	// line-height: 35px;
+	// padding: 0 7px;
+}
+
+// список в виджете
+ul.mso-widget-list
+{
+	padding-left: 15px;
+}
+
+// виджет ссылки
+.mso-links_widget {
+	li div {
+		font-size: .9rem;
+		color: color.$gray500;
+		margin-bottom: 5px;
+	}
+}
+
+.mso-login_form_widget {
+	span.registration {
+		display: inline-block;
+		float: right;
+		font-size: .9rem;
+	}
+}
+
+.mso-search_form_widget {
+
+	form {
+		margin: 10px 0 20px 0;
+	}
+	
+	input {
+		width: 69%;
+		margin-right: 1%;
+	}
+	
+	button {
+		width: 30%;
+	}
+}
+
+.mso-calendar_widget {
+	
+	th {
+		text-align: center;
+		padding: 3px;
+	}
+	
+	td a {
+		display: inline-block;
+		text-decoration: underline;
+		
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}

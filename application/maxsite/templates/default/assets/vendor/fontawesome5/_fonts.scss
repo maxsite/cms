@@ -1,0 +1,54 @@
+// my file
+
+@font-face {
+  font-family: 'FASolid';
+  font-style: normal;
+  font-weight: 400;
+  font-display: $fa-font-display;
+  src: url('#{$fa-font-path}/fa-solid-900.woff2?v514') format('woff2'),
+  url('#{$fa-font-path}/fa-solid-900.woff?v514') format('woff');
+}
+
+@font-face {
+  font-family: 'FARegular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: $fa-font-display;
+  src: url('#{$fa-font-path}/fa-regular-400.woff2?v514') format('woff2'),
+  url('#{$fa-font-path}/fa-regular-400.woff?v514') format('woff');
+}
+
+@font-face {
+  font-family: 'FABrands';
+  font-style: normal;
+  font-weight: 400;
+  font-display: $fa-font-display;
+  src: url('#{$fa-font-path}/fa-brands-400.woff2?v514') format('woff2'),
+  url('#{$fa-font-path}/fa-brands-400.woff?v514') format('woff');
+}
+
+.fa::before,
+.fas::before {
+  font-family: 'FASolid';
+}
+
+.far::before {
+  font-family: 'FARegular';
+}
+
+.fab::before {
+  font-family: 'FABrands';
+}
+
+.fa::before,
+.fas::before,
+.far::before,
+.fab::before {
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  
+  margin-right: $fa-margin-right;
+} 

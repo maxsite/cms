@@ -1,0 +1,41 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// ***********************************************************************
+// ***********************************************************************
+// *****************           do not edit               *****************
+// ***********************************************************************
+// ***********************************************************************
+
+@use 'default1' as *;
+@use 'default2' as *;
+
+// генерация цветов
+// $generation1 — с css-переменными
+// $generation2 — без css-переменных
+
+// указание своей группы для генерации css-переменных и css-классов
+// можно добавить другие группы цветов
+$generation1: (
+    $colors-group-my,
+) !default;
+
+// остальные группы без создания css-переменных (только css-классы)
+$generation2: (
+    $colors-group-primary,
+    $colors-group-secondary,
+    $colors-group-tertiary,
+    $colors-group-gray,
+    $colors-group-red,
+    $colors-group-pink,
+    $colors-group-purple,
+    $colors-group-violet,
+    $colors-group-indigo,
+    $colors-group-blue,
+    $colors-group-cyan,
+    $colors-group-teal,
+    $colors-group-green,
+    $colors-group-lime,
+    $colors-group-yellow,
+    $colors-group-orange,
+    $colors-group-brown,
+) !default;

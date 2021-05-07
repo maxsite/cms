@@ -1,0 +1,44 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// CSS Grid
+
+// экспериментальная возможность
+// часть свойств пересекается с flex
+
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'grid') {
+
+    .#{$pf}grid-var {
+        display              : grid;
+        grid-gap             : var(--gap, 0);
+        grid-template-columns: var(--columns, none);
+        grid-template-rows   : var(--rows, none);
+    }
+
+    .#{$pf}grid-item-var {
+        grid-column: var(--column, auto / auto);
+        grid-row   : var(--row, auto / auto);
+    }
+
+    // .grid for @media
+    @each $postfix,
+    $m in $screen_media_grid_list {
+        @media #{$m} {
+            .#{$pf}grid-var-#{$postfix} {
+                display              : grid;
+                grid-gap             : var(--gap-#{$postfix}, var(--gap, 0));
+                grid-template-columns: var(--columns-#{$postfix}, none);
+                grid-template-rows   : var(--rows-#{$postfix}, none);
+            }
+
+            .#{$pf}grid-item-var-#{$postfix} {
+                grid-column: var(--column-#{$postfix}, auto / auto);
+                grid-row   : var(--row-#{$postfix}, auto / auto);
+            }
+        }
+    }
+}

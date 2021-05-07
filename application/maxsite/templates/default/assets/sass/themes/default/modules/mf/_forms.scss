@@ -1,0 +1,38 @@
+
+@use '../design/forms' as *;
+
+.mso-form,
+div.mso-forms // плагин forms
+{
+		select,
+	textarea,
+	input:not([type]),
+	input[type="text"],
+	input[type="password"],
+	input[type="datetime"],
+	input[type="datetime-local"],
+	input[type="date"],
+	input[type="month"],
+	input[type="time"],
+	input[type="week"],
+	input[type="number"],
+	input[type="email"],
+	input[type="url"],
+	input[type="search"],
+	input[type="tel"],
+	input[type="color"] 
+    {
+		@extend .form-input;
+		width: 100%;
+	}
+}
+
+// форма поиска
+form.mso-form input[name="s"] {
+	width: 80%;
+}
+
+#comments_captha,
+input.mso-forms-antispam {
+	width: auto !important;
+}

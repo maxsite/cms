@@ -1,0 +1,61 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// height
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'height') {
+
+    .#{$pf}h100 {
+        height: 100%;
+    }
+
+    .#{$pf}h-auto {
+        height: auto;
+    }
+
+    // height in px
+    @each $var in $height_list_px {
+        .#{$pf}h#{$var}px {
+            height: #{$var}px;
+        }
+
+        .#{$pf}h#{$var}px-min {
+            min-height: #{$var}px !important;
+        }
+
+        .#{$pf}h#{$var}px-max {
+            max-height: #{$var}px !important;
+        }
+    }
+
+    // height in vh
+    @each $var in $height_list_vh {
+        .#{$pf}h#{$var}vh {
+            height: #{$var}vh;
+        }
+
+        .#{$pf}h#{$var}vh-min {
+            min-height: #{$var}vh;
+        }
+
+        .#{$pf}h#{$var}vh-max {
+            max-height: #{$var}vh;
+        }
+    }
+
+    // for @media
+    @each $postfix,
+    $m in $screen_media_height_list {
+        @media #{$m} {
+            .#{$pf}h-auto-#{$postfix} {
+                height    : auto;
+                min-height: 0;
+                max-height: none;
+            }
+        }
+    }
+
+}

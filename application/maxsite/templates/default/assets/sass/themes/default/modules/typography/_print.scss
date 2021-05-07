@@ -1,0 +1,36 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// print
+
+@forward '../../config/typography';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'print') {
+
+    @media print {
+        body {
+            color     : #000;
+            background: white;
+        }
+
+        ul,
+        img {
+            page-break-inside: avoid;
+        }
+
+        .hide-print {
+            display: none !important;
+        }
+
+        .flex {
+            display: block !important;
+        }
+
+        .flex>div {
+            width  : 100% !important;
+            padding: 0 !important;
+        }
+    }
+
+}

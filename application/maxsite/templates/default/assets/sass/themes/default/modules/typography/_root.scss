@@ -1,0 +1,19 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// global css-variables in :root
+
+@forward '../../config/typography';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'root') {
+
+  :root {
+
+    @each $key,
+    $val in $root_list {
+      --#{$key}: #{$val};
+    }
+  }
+
+}

@@ -1,0 +1,68 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// column
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'column') {
+
+    .#{$pf}column-count1 {
+        column-count: 1;
+    }
+
+    .#{$pf}column-count2 {
+        column-count: 2;
+    }
+
+    .#{$pf}column-count3 {
+        column-count: 3;
+    }
+
+    .#{$pf}column-count4 {
+        column-count: 4;
+    }
+
+    .#{$pf}column-count5 {
+        column-count: 5;
+    }
+
+    .#{$pf}column-count6 {
+        column-count: 6;
+    }
+
+    .#{$pf}column-count7 {
+        column-count: 7;
+    }
+
+    .#{$pf}column-gap10 {
+        column-gap: 10px;
+    }
+
+    .#{$pf}column-gap20 {
+        column-gap: 20px;
+    }
+
+    .#{$pf}column-gap30 {
+        column-gap: 30px;
+    }
+
+    .#{$pf}column-gap40 {
+        column-gap: 40px;
+    }
+
+    .#{$pf}column-gap50 {
+        column-gap: 50px;
+    }
+
+    .#{$pf}column-rule-var {
+        column-rule: var(--width, 1px) var(--style, solid) var(--color, #aaa);
+    }
+
+    .#{$pf}column-var {
+        column-count: var(--count, 3);
+        column-gap  : var(--gap, 30px);
+        column-rule : var(--rule, 1px solid #aaa);
+    }
+}

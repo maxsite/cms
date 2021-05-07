@@ -1,0 +1,44 @@
+нужно добавить этот код в tiny-slider.min.js в конец файла
+
+if (typeof tnsChange === "undefined") {
+
+function tnsChange(info) {
+	let t1 = info.slideItems[info.index].getElementsByClassName('tns-change');
+
+	if (t1) {
+		for (let i = 0; i < t1.length; i++) {
+			let t = t1[i];
+			let anim = t.getAttribute('data-change');
+			if (anim) {
+				let arr = anim.split(' ');
+
+				for (let i = 0, length = arr.length; i < length; i++) {
+					t.classList.add(arr[i]);
+				}
+			}
+		}
+	}
+
+	if (info.indexCached === info.index) return;
+
+	let t2 = info.slideItems[info.indexCached].getElementsByClassName('tns-change');
+
+	if (t2) {
+		for (let i = 0; i < t2.length; i++) {
+			let t = t2[i];
+			let anim = t.getAttribute('data-change');
+			if (anim) {
+				let arr = anim.split(' ');
+				for (let i = 0, length = arr.length; i < length; i++) {
+					t.classList.remove(arr[i]);
+				}
+			}
+		}
+	}
+}
+
+var tnsCustomizedFunction = function(info, eventName) {
+	tnsChange(info);
+}
+
+}

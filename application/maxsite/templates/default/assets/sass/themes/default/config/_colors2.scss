@@ -1,0 +1,93 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// только группы из одиночных цветов (default2)
+
+@use '../modules/colors/default1' as *;
+@use '../modules/colors/default2' with (
+	
+	// основная группа фиксированных цветов (используется в $generation1)
+	$colors-group-my: (
+		"color1": $color1,
+		"color2": $color2,
+		"color3": $color3,
+		"color4": $color4,
+		"color5": $color5,
+		"color6": $color6,
+		"color7": $color7,
+
+		"primary": $primary,
+		"secondary": $secondary,
+		"tertiary": $tertiary,
+
+		"white": $white,
+		"black": $black,
+		"gray": $gray,
+		"red": $red,
+		"pink": $pink,
+		"purple": $purple,
+		"violet": $violet,
+		"indigo": $indigo,
+		"blue": $blue,
+		"cyan": $cyan,
+		"teal": $teal,
+		"green": $green,
+		"lime": $lime,
+		"yellow": $yellow,
+		"orange": $orange,
+		"brown": $brown,
+	),
+	
+	$color_border_list: (
+		"color1": $color1,
+		"color2": $color2,
+		"color3": $color3,
+		"color4": $color4,
+		"color5": $color5,
+		"color6": $color6,
+		"color7": $color7,
+		
+		"primary": $primary,
+		"secondary": $secondary,
+		"tertiary": $tertiary,
+
+		"white": $white,
+		"black": $black,
+
+		"primary100": $primary100,
+		"primary200": $primary200,
+		"primary300": $primary300,
+		"primary400": $primary400,
+		"primary500": $primary500,
+		"primary600": $primary600,
+		"primary700": $primary700,
+		"primary800": $primary800,
+		"primary900": $primary900,
+
+		"gray": $gray,
+		"gray50": $gray50,
+		"gray100": $gray100,
+		"gray200": $gray200,
+		"gray300": $gray300,
+		"gray400": $gray400,
+		"gray500": $gray500,
+		"gray600": $gray600,
+		"gray700": $gray700,
+		"gray800": $gray800,
+		"gray900": $gray900,
+
+		'red': $red,
+		'brown': $brown,
+		'orange': $orange,
+		'yellow': $yellow,
+		'lime': $lime,
+		'green': $green,
+		'teal': $teal,
+		'cyan': $cyan,
+		'blue': $blue,
+		'indigo': $indigo,
+		'violet': $violet,
+		'purple': $purple,
+		'pink': $pink,
+	),
+
+);

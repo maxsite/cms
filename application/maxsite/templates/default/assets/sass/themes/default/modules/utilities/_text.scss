@@ -1,0 +1,290 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// Text
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'text') {
+
+    // reset text to normal
+    .#{$pf}t-normal {
+        font-weight    : normal;
+        font-style     : normal;
+        text-decoration: none;
+    }
+
+    // bold's
+    // .#{$pf}bold, // deprecated
+    .#{$pf}t-bold700,
+    .#{$pf}t-bold {
+        font-weight: bold; // 700
+    }
+
+    // .#{$pf}bold-normal, // deprecated
+    .#{$pf}t-bold-normal,
+    .#{$pf}t-bold400 {
+        font-weight: normal; // 400
+    }
+
+    // .#{$pf}bold-bolder, // deprecated
+    .#{$pf}t-bold-bolder {
+        font-weight: bolder;
+    }
+
+    // .#{$pf}bold-light, // deprecated
+    .#{$pf}t-bold-light {
+        font-weight: lighter;
+    }
+
+    .#{$pf}t-bold100 {
+        font-weight: 100;
+    }
+
+    .#{$pf}t-bold200 {
+        font-weight: 200;
+    }
+
+    .#{$pf}t-bold300 {
+        font-weight: 300;
+    }
+
+    .#{$pf}t-bold500 {
+        font-weight: 500;
+    }
+
+    .#{$pf}t-bold600 {
+        font-weight: 600;
+    }
+
+    .#{$pf}t-bold800 {
+        font-weight: 800;
+    }
+
+    .#{$pf}t-bold900 {
+        font-weight: 900;
+    }
+
+    // decoration
+    // .#{$pf}italic, // deprecated
+    .#{$pf}t-italic {
+        font-style: italic;
+    }
+
+    // .#{$pf}underline, // deprecated
+    .#{$pf}t-underline {
+        text-decoration: underline;
+    }
+
+    .#{$pf}t-decoration-none {
+        text-decoration: none;
+    }
+
+    // .#{$pf}strike, // deprecated
+    .#{$pf}t-strike {
+        text-decoration: line-through;
+    }
+
+    // capitalization
+    // .#{$pf}small-caps, // deprecated
+    .#{$pf}t-small-caps {
+        font-variant: small-caps;
+    }
+
+    // .#{$pf}capitalize, // deprecated
+    .#{$pf}t-capitalize {
+        text-transform: capitalize;
+    }
+
+    // .#{$pf}upper, // deprecated
+    .#{$pf}t-upper {
+        text-transform: uppercase;
+    }
+
+    // .#{$pf}lower, // deprecated
+    .#{$pf}t-lower {
+        text-transform: lowercase;
+    }
+
+    // aligns
+    .#{$pf}t-right {
+        text-align: right;
+    }
+
+    .#{$pf}t-left {
+        text-align: left;
+    }
+
+    .#{$pf}t-center {
+        text-align: center;
+    }
+
+    .#{$pf}t-justify {
+        text-align: justify;
+    }
+
+    // wrap's
+    .#{$pf}t-nowrap {
+        white-space: nowrap;
+    }
+
+    .#{$pf}t-wrap {
+        white-space: normal;
+    }
+
+    .#{$pf}t-pre-wrap {
+        white-space: pre-wrap;
+    }
+
+    // .#{$pf}t-break, — deprecated
+    .#{$pf}t-break-word {
+        word-wrap: break-word;
+    }
+
+    .#{$pf}t-break-all {
+        word-break: break-all;
+    }
+
+    .#{$pf}t-break-keep {
+        word-break: keep-all;
+    }
+
+
+    // safe fonts -> https://www.cssfontstack.com/
+    .#{$pf}t-georgia {
+        font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .#{$pf}t-palatino {
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    }
+
+    .#{$pf}t-times {
+        font-family: "Times New Roman", serif;
+    }
+
+    .#{$pf}t-arial {
+        font-family: Arial, Helvetica, Verdana, sans-serif;
+    }
+
+    .#{$pf}t-arial-black {
+        font-family: "Arial Black", Gadget, sans-serif;
+    }
+
+    .#{$pf}t-comic {
+        font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+
+    .#{$pf}t-impact {
+        font-family: Impact, Charcoal, sans-serif;
+    }
+
+    .#{$pf}t-tahoma {
+        font-family: Tahoma, Geneva, sans-serif;
+    }
+
+    .#{$pf}t-trebuchet {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+    }
+
+    .#{$pf}t-verdana {
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+    }
+
+    .#{$pf}t-mono {
+        font-family: $text_monospace;
+    }
+
+    // hyphens
+    .#{$pf}t-hyphens {
+        -webkit-hyphens: auto;
+        -moz-hyphens   : auto;
+        -ms-hyphens    : auto;
+        hyphens        : auto;
+    }
+
+    // text clipping
+    .#{$pf}t-ellipsis {
+        white-space  : nowrap;
+        overflow     : hidden;
+        text-overflow: ellipsis;
+    }
+
+    .#{$pf}t-line-clamp {
+        overflow          : hidden;
+        display           : -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: var(--line, 3);
+    }
+
+    // text rem-size .t180
+    @each $var in $text_rem {
+        $var1: round($var * 100);
+
+        .#{$pf}t#{$var1} {
+            font-size: #{$var}rem;
+        }
+    }
+
+    // text em-size .t190em
+    @each $var in $text_em {
+        $var1: round($var * 100);
+
+        .#{$pf}t#{$var1}em {
+            font-size: #{$var}em;
+        }
+    }
+
+    // text px-size .t24px
+    @each $var in $text_px {
+        .#{$pf}t#{$var}px {
+            font-size: #{$var}px;
+        }
+    }
+
+    // for @media text-align white-space
+    @each $postfix,
+    $m in $screen_media_text_list {
+        @media #{$m} {
+            .#{$pf}t-right-#{$postfix} {
+                text-align: right;
+            }
+
+            .#{$pf}t-left-#{$postfix} {
+                text-align: left;
+            }
+
+            .#{$pf}t-center-#{$postfix} {
+                text-align: center;
+            }
+
+            .#{$pf}t-justify-#{$postfix} {
+                text-align: justify;
+            }
+
+            .#{$pf}t-nowrap-#{$postfix} {
+                white-space: nowrap;
+            }
+
+            .#{$pf}t-wrap-#{$postfix} {
+                white-space: normal;
+            }
+        }
+    }
+
+    // for @media rem font-size
+    @each $postfix,
+    $m in $screen_media_text_list {
+        @media #{$m} {
+            @each $var in $text_rem_screen {
+                $var1: round($var * 100);
+
+                .#{$pf}t#{$var1}-#{$postfix} {
+                    font-size: #{$var}rem;
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,59 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// layout
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'layout') {
+
+    .#{$pf}layout-center-wrap {
+        width: 100%;
+    }
+
+    .#{$pf}layout-center,
+    .#{$pf}layout-center-wrap>.#{$pf}layout-wrap {
+        width       : 100%;
+        margin-right: auto;
+        margin-left : auto;
+        max-width   : var(--layout-max-width, $layout_max_width);
+
+        @if $layout_wrap_padding {
+            padding-right: var(--layout-wrap-padding, $layout_wrap_padding);
+            padding-left : var(--layout-wrap-padding, $layout_wrap_padding);
+        }
+    }
+
+    // for layout_max_width_list
+    @each $postfix,
+    $m in $layout_max_width_list {
+
+        .#{$pf}layout-center-#{$postfix},
+        .#{$pf}layout-center-wrap-#{$postfix}>.#{$pf}layout-wrap {
+            width       : 100%;
+            margin-right: auto;
+            margin-left : auto;
+            max-width   : $m;
+
+            @if $layout_wrap_padding {
+                padding-right: var(--layout-wrap-padding, $layout_wrap_padding);
+                padding-left : var(--layout-wrap-padding, $layout_wrap_padding);
+            }
+        }
+
+        // .w-phone, .w-phone-max, .w-phone-min
+        .#{$pf}w-#{$postfix} {
+            width: $m;
+        }
+
+        .#{$pf}w-#{$postfix}-max {
+            max-width: $m;
+        }
+
+        .#{$pf}w-#{$postfix}-min {
+            min-width: $m;
+        }
+    }
+
+}

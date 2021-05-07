@@ -1,0 +1,16 @@
+// меню 
+@forward '../config/colors1';
+@use '../modules/colors/default1' as *;
+
+@use 'core/dark';
+
+// @use 'core/dark' with (
+//   $menu_top_text: $color1,
+// );
+// 
+// @use 'core/light' with (
+//   $menu_top_text: $color1,
+// );
+// @use 'core/light-gray' with (
+//   $menu_top_text: $color1,
+// );

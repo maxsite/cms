@@ -1,0 +1,79 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// настройки модуля design/buttons
+
+// подключение colors, если используются $переменные цветов
+@forward '../config/colors1';
+@use '../modules/colors/default1' as *;
+
+@use '../modules/design/default-buttons' with (
+	$modules: (
+		'buttons': true,
+	),
+	
+	$button1: (
+		"radius": 10px,
+		"bg": $primary600,
+		"text": #fff,
+		"hover-bg": $primary750,
+		"hover-text": #fff,
+		"focus-bg": $primary500,
+		"focus-text": #fff,
+		"focus-border": solid 1px $primary200,
+		"focus-shadow": 0 0 0 3px $primary200,
+	),
+
+	$button2: (
+		"radius": 10px,
+		"bg": $secondary600,
+		"text": #fff,
+		"hover-bg": $secondary750,
+		"hover-text": #fff,
+		"focus-bg": $secondary500,
+		"focus-text": #fff,
+		"focus-border": solid 1px $secondary200,
+		"focus-shadow": 0 0 0 3px $secondary200,
+	),
+
+	$button3: (
+		"radius": 10px,
+		"bg": $tertiary600,
+		"text": #fff,
+		"hover-bg": $tertiary750,
+		"hover-text": #fff,
+		"focus-bg": $tertiary500,
+		"focus-text": #fff,
+		"focus-border": solid 1px $tertiary200,
+		"focus-shadow": 0 0 0 3px $tertiary200,
+	),
+
+	$button-outline1: ( 
+		"radius": 10px,
+		"bg": #fff,
+		"text": $primary600,
+		"border": solid 1px $primary600,
+		"hover-bg": $primary700,
+		"hover-text": #fff,
+		"focus-bg": #fff,
+		"focus-text": $primary600,
+		"focus-border": solid 1px $primary600,
+		"focus-shadow": 0 0 0 2px $primary500,
+		"focus-hover-bg": $primary600,
+		"focus-hover-text": #fff,
+	),
+
+	$button-outline2: ( 
+		"radius": 10px,
+		"bg": transparent,
+		"text": $primary400,
+		"border": solid 1px $primary300,
+		"hover-bg": rgba(255, 255, 255, .3),
+		"hover-text": $primary100,
+		"focus-bg": #fff,
+		"focus-text": $primary600,
+		"focus-border": solid 1px $primary600,
+		"focus-shadow": 0 0 0 2px $primary500,
+		"focus-hover-bg": $primary600,
+		"focus-hover-text": #fff,
+	),
+);

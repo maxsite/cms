@@ -1,0 +1,63 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// lists
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'lists') {
+
+    ul {
+        &.#{$pf}list-unstyled {
+            list-style  : none;
+            margin      : 0;
+            padding-left: 0;
+        }
+
+        &.#{$pf}list-inline {
+            list-style  : none;
+            margin      : 0;
+            padding-left: 0;
+
+            >li {
+                display: inline-block;
+
+                // ??? нужен ли такой отступ ??
+                // &:not(:last-child) {
+                //    margin-right: .5rem;
+                // }
+            }
+        }
+
+        &.#{$pf}list-inside {
+            list-style-position: inside;
+        }
+
+        &.#{$pf}list-outside {
+            list-style-position: outside;
+        }
+
+        &.#{$pf}no-margin {
+            padding-left       : 0;
+            list-style-position: inside;
+        }
+
+        &.#{$pf}no-bullet {
+            list-style: none;
+        }
+
+        &.#{$pf}square {
+            list-style-type: square;
+        }
+
+        &.#{$pf}disc {
+            list-style-type: disc;
+        }
+
+        &.#{$pf}circle {
+            list-style-type: circle;
+        }
+    }
+
+}

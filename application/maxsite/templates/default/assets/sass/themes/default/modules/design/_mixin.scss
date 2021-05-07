@@ -1,0 +1,30 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+@mixin button_set($properties) {
+    background-color: map-get($properties, "bg");
+    color           : map-get($properties, "text");
+    border          : map-get($properties, "border");
+    border-radius   : map-get($properties, "radius");
+    text-align      : map-get($properties, "align");
+
+    &:hover {
+        background-color: map-get($properties, "hover-bg");
+        color           : map-get($properties, "hover-text");
+    }
+
+    &:active,
+    &:focus {
+        background-color: map-get($properties, "focus-bg");
+        color           : map-get($properties, "focus-text");
+        border          : map-get($properties, "focus-border");
+        box-shadow      : map-get($properties, "focus-shadow");
+
+        &:hover {
+            background-color: map-get($properties, "focus-hover-bg");
+            color           : map-get($properties, "focus-hover-text");
+            border          : map-get($properties, "focus-hover-border");
+            box-shadow      : map-get($properties, "focus-hover-shadow");
+        }
+    }
+}
+

@@ -1,0 +1,38 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// настройки модуля typography
+
+// подключение colors
+@forward '../config/colors1';
+@use '../modules/colors/default1' as *;
+
+@use '../modules/typography/default' with (
+	
+	$modules: (
+		'animate': true,
+		'badge': true,
+		'base': true,
+		'blocks': true,
+		'buttons': true,
+		'details': true,
+		'drop-cap': true,
+		'forms': true,
+		'icons': true,
+		'images': true,
+		'lines': true,
+		'links': true,
+		'print': true,
+		'root': true,
+		'table': true,
+	),
+	
+	// $font-family-monospace: (SFMono-Regular, Menlo, Monaco, Consolas, "PT Mono", "Liberation Mono", "Courier New", monospace),
+	
+	$headings-margin: 1em 0 .6em 0,
+
+	$link-color: $primary600,
+	$link-hover-color: $secondary500,
+	
+	$blockquote-border-left: 4px solid $primary400,
+
+);

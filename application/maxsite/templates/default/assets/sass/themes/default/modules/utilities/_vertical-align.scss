@@ -1,0 +1,51 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// vertical-align
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'vertical-align') {
+
+    .#{$pf}va-baseline,
+    .#{$pf}va-baseline\:before:before {
+        vertical-align: baseline;
+    }
+
+    .#{$pf}va-top,
+    .#{$pf}va-top\:before:before {
+        vertical-align: top;
+    }
+
+    .#{$pf}va-middle,
+    .#{$pf}va-middle\:before:before {
+        vertical-align: middle;
+    }
+
+    .#{$pf}va-bottom,
+    .#{$pf}va-bottom\:before:before {
+        vertical-align: bottom;
+    }
+
+    .#{$pf}va-text-top,
+    .#{$pf}va-text-top\:before:before {
+        vertical-align: text-top;
+    }
+
+    .#{$pf}va-text-bottom,
+    .#{$pf}va-text-bottom\:before:before {
+        vertical-align: text-bottom;
+    }
+
+    .#{$pf}va-sub,
+    .#{$pf}va-sub\:before:before {
+        vertical-align: sub;
+    }
+
+    .#{$pf}va-super,
+    .#{$pf}va-super\:before:before {
+        vertical-align: super;
+    }
+
+}

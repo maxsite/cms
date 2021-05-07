@@ -1,0 +1,53 @@
+: Секция [site] обязательная
+: Секции [block] — вывод произвольного блока
+:     design - номер дизайна (будет зависеть какие опции используются)
+:     class — класс контейнера
+:     html — основной html-код вывода
+:     block1 — дополнительный блок
+: Секции [icon] — блоки иконок
+
+[site]
+class = bg-white bor3 bor-solid-b bor-gray100
+icon = im-rocket t200 t-primary800
+name = <div class="t-robotoslab t160 t-primary700">[name_site]</div>
+description = <div class="t-gray600">[description_site]</div>
+menu = bg-primary200
+effect = 1
+[/site]
+
+[block]
+class = t-center-phone
+html = <div><a class="im-phone t-bold t120 t-primary700 hover-t-primary600" href="tel:+123123123">+00 (012) 345-67-89</a></div><div>Время работы: 9:00 - 17:00</div>
+design = 1
+[/block]
+
+[block]
+class = mar20-rl
+html = <div><a class="t-primary700 hover-t-primary600" href="[siteurl]contact">my@site.com</a></div><div class="t-nowrap"><address>Франция, г. Париж</address></div>
+block1 = <i class="im-envelope t180 t-primary700"></i>
+design = 2
+[/block]
+
+[icon]
+class = im-skype t200 t-gray400 hover-t-cyan700
+href = skype://123123123
+title = Позвонить по Skype
+[/icon]
+
+[icon]
+class = im-whatsapp t200 t-gray400 hover-t-green700
+href = https://wa.me/123123123
+title = Позвонить по Whatsapp
+[/icon]
+
+[icon]
+class = im-telegram t200 t-gray400 hover-t-blue700
+href = https://t.me/USER
+title = Связаться через Telegam
+[/icon]
+
+[icon]
+class = im-viber t200 t-gray400 hover-t-purple700
+href = viber://chat?number=123123123
+title = Связаться через Viber
+[/icon]

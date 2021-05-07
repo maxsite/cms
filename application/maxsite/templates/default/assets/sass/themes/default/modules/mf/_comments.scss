@@ -1,0 +1,220 @@
+// Комментарии
+
+@forward '../../config/mf';
+@use 'default' as mf;
+
+@forward '../../config/colors1';
+@use '../../modules/colors/default1' as color;
+
+@forward '../../config/utilities';
+@use '../../modules/utilities/default' as utilities;
+
+@use '../../mfont/variables' as *;
+
+.mso-comments,
+.mso-comment-form
+{
+	// padding: 30px 0;
+}
+
+.mso-comments-count {
+	font-size: 1.1rem;
+	text-transform: uppercase;
+	color: color.$gray700;
+	border-bottom: 2px solid color.$gray200;
+	padding-bottom: 10px;
+	margin-top: 30px;
+	
+	&::before {
+		font-family: mfont;
+		display: inline-block;
+		margin-right: 7px;
+		content: unquote("\"#{ $im-comment }\""); 
+	}
+	
+	.mso-comments-rss {
+		display: block;
+		float: right;
+		font-size: .9rem;
+		
+		&::before {
+			font-family: mfont;
+			display: inline-block;
+			margin-right: 7px;
+			content: unquote("\"#{ $im-rss }\""); 
+		}
+	}
+}
+
+.mso-comments-textarea {
+	textarea {
+		width: 100%;
+	}
+}
+
+.mso-comments-input-author {
+	width: 100%;
+}
+
+.mso-comment-article {
+	margin-top: 10px;
+	padding-bottom: 20px;
+	
+	border-bottom: 1px dotted color.$gray600;
+	
+	&:last-of-type {
+		border-bottom: none;
+	}
+}
+
+// оставьте комментарий
+.mso-comment-leave {
+	margin: 20px 0;
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+.mso-comment-info {
+	font-size: .9rem;
+	color: color.$gray700;
+	
+	
+	.mso-comment-num {
+		background-color: color.$gray200;
+		color: color.$gray600;
+		padding: 0 5px;
+		border-radius: 5px;
+	}
+	
+	a {
+		color: color.$gray700;
+	}
+	
+	.mso-comment-author {
+		margin-left: 10px;
+		
+		&::before {
+			font-family: mfont;
+			display: inline-block;
+			margin-right: 7px;
+			content: unquote("\"#{ $im-user }\"");
+		}
+	}
+	
+	.mso-comuser-url {
+		margin-left: 10px;
+		
+		&::before {
+			font-family: mfont;
+			display: inline-block;
+			margin-right: 7px;
+			content: unquote("\"#{ $im-link }\"");
+		}
+	}
+	
+	.mso-comment-date {
+		margin-left: 10px;
+		
+		&::before {
+			font-family: mfont;
+			display: inline-block;
+			margin-right: 7px;
+			content: unquote("\"#{ $im-calendar }\"");
+		}
+	}
+	
+	.mso-comment-edit {
+		margin-left: 10px;
+		
+		&::before {
+			font-family: mfont;
+			display: inline-block;
+			margin-right: 7px;
+			content: unquote("\"#{ $im-edit }\"");
+		}
+	}
+}
+
+// аватарка
+img.mso-gravatar {
+	float: right;
+	margin: 10px 0 15px 15px;
+}
+
+// раскраска юзеров 
+.mso-comment-users .mso-comment-author,
+.mso-comment-users .mso-comment-author a 
+{
+	color: color.$green;
+}
+		
+.mso-comment-comusers .mso-comment-author,
+.mso-comment-comusers .mso-comment-author a 
+{
+	color: color.$green;
+}
+	
+.mso-comment-anonim .mso-comment-author {
+	color: color.$gray700;
+}
+
+// принудительный перенос для длинных строк в комментариях
+.mso-comment-content {
+	word-wrap: break-word;
+	
+	pre {
+		white-space: pre-wrap;
+	}
+}
+
+.mso-comment-form {
+	padding-bottom: 20px;
+	
+	button[name="comments_submit"] {
+		// @extend .button;
+	}
+	
+	.mso-comments-auth {
+		margin-top: 20px;
+	}
+	
+	textarea,
+	input[type="text"]
+	{
+		background: #f6f6f6;
+		
+		&:focus {
+			background: #ffffff;
+		}
+	}
+	
+}
+
+.mso-comments-user {
+	margin: 0 0 20px 0;
+	font-size: 1.2rem;
+	
+	a[href*="/logout"] {
+		display: inline-block;
+		float: right;
+		font-size: 1rem;
+		
+		color: color.$gray600;
+		
+		&::before {
+			font-family: mfont;
+			display: inline-block;
+			margin-right: 7px;
+			content: unquote("\"#{ $im-sign-out-alt }\"");
+		}
+	}
+}
+
+div.mso-type-comments-content {
+	padding-bottom: 20px;
+}
+
+.mso-comment-approved {
+	color: color.$red;
+	margin-left: 10px;
+}

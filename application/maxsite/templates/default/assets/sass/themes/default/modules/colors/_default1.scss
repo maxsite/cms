@@ -1,0 +1,475 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// ***********************************************************************
+// ***********************************************************************
+// *****************           do not edit               *****************
+// ***********************************************************************
+// ***********************************************************************
+
+// инверсия градации яркости - если false, то 100 светлее 200
+$colorHS-inverse-light: false !default;
+
+// prefix for all css-classes
+// for example: "my_" -> .my_t-red700
+$pf-colors: "" !default;
+
+// префикс для css-переменных цветов для $group-primary
+$pf-cssvar: "" !default;
+
+// фиксированные цвета
+$white: #FFFFFF !default;
+$black: #000000 !default;
+
+$color1: #0D6EFD !default;
+$color2: #6C757D !default;
+$color3: #28A745 !default;
+$color4: #DC3545 !default;
+$color5: #FFC107 !default;
+$color6: #17A2B8 !default;
+$color7: #A300D9 !default;
+
+// цвета с градацией яркости — задаётся только Hue и Saturation
+$colorHS-gray:   210,  5% !default; // Hue, Saturation
+$colorHS-red:      4, 95% !default;
+$colorHS-brown:   15, 47% !default;
+$colorHS-orange:  35, 99% !default;
+$colorHS-yellow:  53, 99% !default;
+$colorHS-lime:    64, 85% !default;
+$colorHS-green:  122, 68% !default;
+$colorHS-teal:   175, 58% !default;
+$colorHS-cyan:   186, 82% !default;
+$colorHS-blue:   206, 86% !default;
+$colorHS-indigo: 231, 70% !default;
+$colorHS-violet: 270, 91% !default;
+$colorHS-purple: 290, 68% !default;
+$colorHS-pink:   335, 82% !default;
+
+// цвета для Material Design
+$colorHS-primary: $colorHS-blue !default;
+$colorHS-secondary: $colorHS-indigo !default;
+$colorHS-tertiary: $colorHS-cyan !default;
+
+// Значения Lightness для ступеней яркости: 50, 100, 900 и 950
+$color-L50:  97% !default; // Lightness for color50
+$color-L100: 93% !default; // Lightness for color100
+$color-L900: 18% !default; // Lightness for color900
+$color-L950: 14% !default; // Lightness for color950
+
+
+// функции и миксины нужны для дальнешей генерации переменных
+@function berry-color-step($hs, $step) {
+
+    // если указана инверсия яркости, то 
+    @if $colorHS-inverse-light {
+        @return berry-color-step-inverse($hs, $step);
+    }
+
+    $hue: nth($hs, 1);
+    $sat: nth($hs, 2);
+
+    @if $step==50 {
+        @return hsl($hue, $sat, $color-L50);
+    }
+
+    @if $step==100 {
+        @return hsl($hue, $sat, $color-L100);
+    }
+
+    @if $step==900 {
+        @return hsl($hue, $sat, $color-L900);
+    }
+
+    @if $step==950 {
+        @return hsl($hue, $sat, $color-L950);
+    }
+
+    $color-step: ($color-L100 - $color-L900) / 16; // step gradations
+
+    @return hsl($hue, $sat, $color-L900 + $color-step * $step);
+
+}
+
+// инверсные цвета
+@function berry-color-step-inverse($hs, $step) {
+    $hue: nth($hs, 1);
+    $sat: nth($hs, 2);
+
+    @if $step==950 {
+        @return hsl($hue, $sat, $color-L50);
+    }
+
+    @if $step==900 {
+        @return hsl($hue, $sat, $color-L100);
+    }
+
+    @if $step==100 {
+        @return hsl($hue, $sat, $color-L900);
+    }
+
+    @if $step==50 {
+        @return hsl($hue, $sat, $color-L950);
+    }
+
+    $color-step: ($color-L900 - $color-L100) / 16; // step gradations
+
+    @return hsl($hue, $sat, $color-L100 + $color-step * $step);
+}
+
+// Colors scheme
+// здесь автоматически задаются переменные для всех цветов
+$gray50 : berry-color-step($colorHS-gray, 50) !default;
+$gray100: berry-color-step($colorHS-gray, 100) !default;
+$gray150: berry-color-step($colorHS-gray, 15) !default;
+$gray200: berry-color-step($colorHS-gray, 14) !default;
+$gray250: berry-color-step($colorHS-gray, 13) !default;
+$gray300: berry-color-step($colorHS-gray, 12) !default;
+$gray350: berry-color-step($colorHS-gray, 11) !default;
+$gray400: berry-color-step($colorHS-gray, 10) !default;
+$gray450: berry-color-step($colorHS-gray, 9) !default;
+$gray500: berry-color-step($colorHS-gray, 8) !default;
+$gray550: berry-color-step($colorHS-gray, 7) !default;
+$gray600: berry-color-step($colorHS-gray, 6) !default;
+$gray650: berry-color-step($colorHS-gray, 5) !default;
+$gray700: berry-color-step($colorHS-gray, 4) !default;
+$gray750: berry-color-step($colorHS-gray, 3) !default;
+$gray800: berry-color-step($colorHS-gray, 2) !default;
+$gray850: berry-color-step($colorHS-gray, 1) !default;
+$gray900: berry-color-step($colorHS-gray, 900) !default;
+$gray950: berry-color-step($colorHS-gray, 950) !default;
+$gray   : $gray500;
+
+$red50 : berry-color-step($colorHS-red, 50) !default;
+$red100: berry-color-step($colorHS-red, 100) !default;
+$red150: berry-color-step($colorHS-red, 15) !default;
+$red200: berry-color-step($colorHS-red, 14) !default;
+$red250: berry-color-step($colorHS-red, 13) !default;
+$red300: berry-color-step($colorHS-red, 12) !default;
+$red350: berry-color-step($colorHS-red, 11) !default;
+$red400: berry-color-step($colorHS-red, 10) !default;
+$red450: berry-color-step($colorHS-red, 9) !default;
+$red500: berry-color-step($colorHS-red, 8) !default;
+$red550: berry-color-step($colorHS-red, 7) !default;
+$red600: berry-color-step($colorHS-red, 6) !default;
+$red650: berry-color-step($colorHS-red, 5) !default;
+$red700: berry-color-step($colorHS-red, 4) !default;
+$red750: berry-color-step($colorHS-red, 3) !default;
+$red800: berry-color-step($colorHS-red, 2) !default;
+$red850: berry-color-step($colorHS-red, 1) !default;
+$red900: berry-color-step($colorHS-red, 900) !default;
+$red950: berry-color-step($colorHS-red, 950) !default;
+$red   : $red500;
+
+$brown50 : berry-color-step($colorHS-brown, 50) !default;
+$brown100: berry-color-step($colorHS-brown, 100) !default;
+$brown150: berry-color-step($colorHS-brown, 15) !default;
+$brown200: berry-color-step($colorHS-brown, 14) !default;
+$brown250: berry-color-step($colorHS-brown, 13) !default;
+$brown300: berry-color-step($colorHS-brown, 12) !default;
+$brown350: berry-color-step($colorHS-brown, 11) !default;
+$brown400: berry-color-step($colorHS-brown, 10) !default;
+$brown450: berry-color-step($colorHS-brown, 9) !default;
+$brown500: berry-color-step($colorHS-brown, 8) !default;
+$brown550: berry-color-step($colorHS-brown, 7) !default;
+$brown600: berry-color-step($colorHS-brown, 6) !default;
+$brown650: berry-color-step($colorHS-brown, 5) !default;
+$brown700: berry-color-step($colorHS-brown, 4) !default;
+$brown750: berry-color-step($colorHS-brown, 3) !default;
+$brown800: berry-color-step($colorHS-brown, 2) !default;
+$brown850: berry-color-step($colorHS-brown, 1) !default;
+$brown900: berry-color-step($colorHS-brown, 900) !default;
+$brown950: berry-color-step($colorHS-brown, 950) !default;
+$brown   : $brown500;
+
+$orange50 : berry-color-step($colorHS-orange, 50) !default;
+$orange100: berry-color-step($colorHS-orange, 100) !default;
+$orange150: berry-color-step($colorHS-orange, 15) !default;
+$orange200: berry-color-step($colorHS-orange, 14) !default;
+$orange250: berry-color-step($colorHS-orange, 13) !default;
+$orange300: berry-color-step($colorHS-orange, 12) !default;
+$orange350: berry-color-step($colorHS-orange, 11) !default;
+$orange400: berry-color-step($colorHS-orange, 10) !default;
+$orange450: berry-color-step($colorHS-orange, 9) !default;
+$orange500: berry-color-step($colorHS-orange, 8) !default;
+$orange550: berry-color-step($colorHS-orange, 7) !default;
+$orange600: berry-color-step($colorHS-orange, 6) !default;
+$orange650: berry-color-step($colorHS-orange, 5) !default;
+$orange700: berry-color-step($colorHS-orange, 4) !default;
+$orange750: berry-color-step($colorHS-orange, 3) !default;
+$orange800: berry-color-step($colorHS-orange, 2) !default;
+$orange850: berry-color-step($colorHS-orange, 1) !default;
+$orange900: berry-color-step($colorHS-orange, 900) !default;
+$orange950: berry-color-step($colorHS-orange, 950) !default;
+$orange   : $orange500;
+
+$yellow50 : berry-color-step($colorHS-yellow, 50) !default;
+$yellow100: berry-color-step($colorHS-yellow, 100) !default;
+$yellow150: berry-color-step($colorHS-yellow, 15) !default;
+$yellow200: berry-color-step($colorHS-yellow, 14) !default;
+$yellow250: berry-color-step($colorHS-yellow, 13) !default;
+$yellow300: berry-color-step($colorHS-yellow, 12) !default;
+$yellow350: berry-color-step($colorHS-yellow, 11) !default;
+$yellow400: berry-color-step($colorHS-yellow, 10) !default;
+$yellow450: berry-color-step($colorHS-yellow, 9) !default;
+$yellow500: berry-color-step($colorHS-yellow, 8) !default;
+$yellow550: berry-color-step($colorHS-yellow, 7) !default;
+$yellow600: berry-color-step($colorHS-yellow, 6) !default;
+$yellow650: berry-color-step($colorHS-yellow, 5) !default;
+$yellow700: berry-color-step($colorHS-yellow, 4) !default;
+$yellow750: berry-color-step($colorHS-yellow, 3) !default;
+$yellow800: berry-color-step($colorHS-yellow, 2) !default;
+$yellow850: berry-color-step($colorHS-yellow, 1) !default;
+$yellow900: berry-color-step($colorHS-yellow, 900) !default;
+$yellow950: berry-color-step($colorHS-yellow, 950) !default;
+$yellow   : $yellow500;
+
+$lime50 : berry-color-step($colorHS-lime, 50) !default;
+$lime100: berry-color-step($colorHS-lime, 100) !default;
+$lime150: berry-color-step($colorHS-lime, 15) !default;
+$lime200: berry-color-step($colorHS-lime, 14) !default;
+$lime250: berry-color-step($colorHS-lime, 13) !default;
+$lime300: berry-color-step($colorHS-lime, 12) !default;
+$lime350: berry-color-step($colorHS-lime, 11) !default;
+$lime400: berry-color-step($colorHS-lime, 10) !default;
+$lime450: berry-color-step($colorHS-lime, 9) !default;
+$lime500: berry-color-step($colorHS-lime, 8) !default;
+$lime550: berry-color-step($colorHS-lime, 7) !default;
+$lime600: berry-color-step($colorHS-lime, 6) !default;
+$lime650: berry-color-step($colorHS-lime, 5) !default;
+$lime700: berry-color-step($colorHS-lime, 4) !default;
+$lime750: berry-color-step($colorHS-lime, 3) !default;
+$lime800: berry-color-step($colorHS-lime, 2) !default;
+$lime850: berry-color-step($colorHS-lime, 1) !default;
+$lime900: berry-color-step($colorHS-lime, 900) !default;
+$lime950: berry-color-step($colorHS-lime, 950) !default;
+$lime   : $lime500;
+
+$green50 : berry-color-step($colorHS-green, 50) !default;
+$green100: berry-color-step($colorHS-green, 100) !default;
+$green150: berry-color-step($colorHS-green, 15) !default;
+$green200: berry-color-step($colorHS-green, 14) !default;
+$green250: berry-color-step($colorHS-green, 13) !default;
+$green300: berry-color-step($colorHS-green, 12) !default;
+$green350: berry-color-step($colorHS-green, 11) !default;
+$green400: berry-color-step($colorHS-green, 10) !default;
+$green450: berry-color-step($colorHS-green, 9) !default;
+$green500: berry-color-step($colorHS-green, 8) !default;
+$green550: berry-color-step($colorHS-green, 7) !default;
+$green600: berry-color-step($colorHS-green, 6) !default;
+$green650: berry-color-step($colorHS-green, 5) !default;
+$green700: berry-color-step($colorHS-green, 4) !default;
+$green750: berry-color-step($colorHS-green, 3) !default;
+$green800: berry-color-step($colorHS-green, 2) !default;
+$green850: berry-color-step($colorHS-green, 1) !default;
+$green900: berry-color-step($colorHS-green, 900) !default;
+$green950: berry-color-step($colorHS-green, 950) !default;
+$green   : $green500;
+
+$teal50 : berry-color-step($colorHS-teal, 50) !default;
+$teal100: berry-color-step($colorHS-teal, 100) !default;
+$teal150: berry-color-step($colorHS-teal, 15) !default;
+$teal200: berry-color-step($colorHS-teal, 14) !default;
+$teal250: berry-color-step($colorHS-teal, 13) !default;
+$teal300: berry-color-step($colorHS-teal, 12) !default;
+$teal350: berry-color-step($colorHS-teal, 11) !default;
+$teal400: berry-color-step($colorHS-teal, 10) !default;
+$teal450: berry-color-step($colorHS-teal, 9) !default;
+$teal500: berry-color-step($colorHS-teal, 8) !default;
+$teal550: berry-color-step($colorHS-teal, 7) !default;
+$teal600: berry-color-step($colorHS-teal, 6) !default;
+$teal650: berry-color-step($colorHS-teal, 5) !default;
+$teal700: berry-color-step($colorHS-teal, 4) !default;
+$teal750: berry-color-step($colorHS-teal, 3) !default;
+$teal800: berry-color-step($colorHS-teal, 2) !default;
+$teal850: berry-color-step($colorHS-teal, 1) !default;
+$teal900: berry-color-step($colorHS-teal, 900) !default;
+$teal950: berry-color-step($colorHS-teal, 950) !default;
+$teal   : $teal500;
+
+$cyan50 : berry-color-step($colorHS-cyan, 50) !default;
+$cyan100: berry-color-step($colorHS-cyan, 100) !default;
+$cyan150: berry-color-step($colorHS-cyan, 15) !default;
+$cyan200: berry-color-step($colorHS-cyan, 14) !default;
+$cyan250: berry-color-step($colorHS-cyan, 13) !default;
+$cyan300: berry-color-step($colorHS-cyan, 12) !default;
+$cyan350: berry-color-step($colorHS-cyan, 11) !default;
+$cyan400: berry-color-step($colorHS-cyan, 10) !default;
+$cyan450: berry-color-step($colorHS-cyan, 9) !default;
+$cyan500: berry-color-step($colorHS-cyan, 8) !default;
+$cyan550: berry-color-step($colorHS-cyan, 7) !default;
+$cyan600: berry-color-step($colorHS-cyan, 6) !default;
+$cyan650: berry-color-step($colorHS-cyan, 5) !default;
+$cyan700: berry-color-step($colorHS-cyan, 4) !default;
+$cyan750: berry-color-step($colorHS-cyan, 3) !default;
+$cyan800: berry-color-step($colorHS-cyan, 2) !default;
+$cyan850: berry-color-step($colorHS-cyan, 1) !default;
+$cyan900: berry-color-step($colorHS-cyan, 900) !default;
+$cyan950: berry-color-step($colorHS-cyan, 950) !default;
+$cyan   : $cyan500;
+
+$blue50 : berry-color-step($colorHS-blue, 50) !default;
+$blue100: berry-color-step($colorHS-blue, 100) !default;
+$blue150: berry-color-step($colorHS-blue, 15) !default;
+$blue200: berry-color-step($colorHS-blue, 14) !default;
+$blue250: berry-color-step($colorHS-blue, 13) !default;
+$blue300: berry-color-step($colorHS-blue, 12) !default;
+$blue350: berry-color-step($colorHS-blue, 11) !default;
+$blue400: berry-color-step($colorHS-blue, 10) !default;
+$blue450: berry-color-step($colorHS-blue, 9) !default;
+$blue500: berry-color-step($colorHS-blue, 8) !default;
+$blue550: berry-color-step($colorHS-blue, 7) !default;
+$blue600: berry-color-step($colorHS-blue, 6) !default;
+$blue650: berry-color-step($colorHS-blue, 5) !default;
+$blue700: berry-color-step($colorHS-blue, 4) !default;
+$blue750: berry-color-step($colorHS-blue, 3) !default;
+$blue800: berry-color-step($colorHS-blue, 2) !default;
+$blue850: berry-color-step($colorHS-blue, 1) !default;
+$blue900: berry-color-step($colorHS-blue, 900) !default;
+$blue950: berry-color-step($colorHS-blue, 950) !default;
+$blue   : $blue500;
+
+$indigo50 : berry-color-step($colorHS-indigo, 50) !default;
+$indigo100: berry-color-step($colorHS-indigo, 100) !default;
+$indigo150: berry-color-step($colorHS-indigo, 15) !default;
+$indigo200: berry-color-step($colorHS-indigo, 14) !default;
+$indigo250: berry-color-step($colorHS-indigo, 13) !default;
+$indigo300: berry-color-step($colorHS-indigo, 12) !default;
+$indigo350: berry-color-step($colorHS-indigo, 11) !default;
+$indigo400: berry-color-step($colorHS-indigo, 10) !default;
+$indigo450: berry-color-step($colorHS-indigo, 9) !default;
+$indigo500: berry-color-step($colorHS-indigo, 8) !default;
+$indigo550: berry-color-step($colorHS-indigo, 7) !default;
+$indigo600: berry-color-step($colorHS-indigo, 6) !default;
+$indigo650: berry-color-step($colorHS-indigo, 5) !default;
+$indigo700: berry-color-step($colorHS-indigo, 4) !default;
+$indigo750: berry-color-step($colorHS-indigo, 3) !default;
+$indigo800: berry-color-step($colorHS-indigo, 2) !default;
+$indigo850: berry-color-step($colorHS-indigo, 1) !default;
+$indigo900: berry-color-step($colorHS-indigo, 900) !default;
+$indigo950: berry-color-step($colorHS-indigo, 950) !default;
+$indigo   : $indigo500;
+
+$violet50 : berry-color-step($colorHS-violet, 50) !default;
+$violet100: berry-color-step($colorHS-violet, 100) !default;
+$violet150: berry-color-step($colorHS-violet, 15) !default;
+$violet200: berry-color-step($colorHS-violet, 14) !default;
+$violet250: berry-color-step($colorHS-violet, 13) !default;
+$violet300: berry-color-step($colorHS-violet, 12) !default;
+$violet350: berry-color-step($colorHS-violet, 11) !default;
+$violet400: berry-color-step($colorHS-violet, 10) !default;
+$violet450: berry-color-step($colorHS-violet, 9) !default;
+$violet500: berry-color-step($colorHS-violet, 8) !default;
+$violet550: berry-color-step($colorHS-violet, 7) !default;
+$violet600: berry-color-step($colorHS-violet, 6) !default;
+$violet650: berry-color-step($colorHS-violet, 5) !default;
+$violet700: berry-color-step($colorHS-violet, 4) !default;
+$violet750: berry-color-step($colorHS-violet, 3) !default;
+$violet800: berry-color-step($colorHS-violet, 2) !default;
+$violet850: berry-color-step($colorHS-violet, 1) !default;
+$violet900: berry-color-step($colorHS-violet, 900) !default;
+$violet950: berry-color-step($colorHS-violet, 950) !default;
+$violet   : $violet500;
+
+$purple50 : berry-color-step($colorHS-purple, 50) !default;
+$purple100: berry-color-step($colorHS-purple, 100) !default;
+$purple150: berry-color-step($colorHS-purple, 15) !default;
+$purple200: berry-color-step($colorHS-purple, 14) !default;
+$purple250: berry-color-step($colorHS-purple, 13) !default;
+$purple300: berry-color-step($colorHS-purple, 12) !default;
+$purple350: berry-color-step($colorHS-purple, 11) !default;
+$purple400: berry-color-step($colorHS-purple, 10) !default;
+$purple450: berry-color-step($colorHS-purple, 9) !default;
+$purple500: berry-color-step($colorHS-purple, 8) !default;
+$purple550: berry-color-step($colorHS-purple, 7) !default;
+$purple600: berry-color-step($colorHS-purple, 6) !default;
+$purple650: berry-color-step($colorHS-purple, 5) !default;
+$purple700: berry-color-step($colorHS-purple, 4) !default;
+$purple750: berry-color-step($colorHS-purple, 3) !default;
+$purple800: berry-color-step($colorHS-purple, 2) !default;
+$purple850: berry-color-step($colorHS-purple, 1) !default;
+$purple900: berry-color-step($colorHS-purple, 900) !default;
+$purple950: berry-color-step($colorHS-purple, 950) !default;
+$purple   : $purple500;
+
+$pink50 : berry-color-step($colorHS-pink, 50) !default;
+$pink100: berry-color-step($colorHS-pink, 100) !default;
+$pink150: berry-color-step($colorHS-pink, 15) !default;
+$pink200: berry-color-step($colorHS-pink, 14) !default;
+$pink250: berry-color-step($colorHS-pink, 13) !default;
+$pink300: berry-color-step($colorHS-pink, 12) !default;
+$pink350: berry-color-step($colorHS-pink, 11) !default;
+$pink400: berry-color-step($colorHS-pink, 10) !default;
+$pink450: berry-color-step($colorHS-pink, 9) !default;
+$pink500: berry-color-step($colorHS-pink, 8) !default;
+$pink550: berry-color-step($colorHS-pink, 7) !default;
+$pink600: berry-color-step($colorHS-pink, 6) !default;
+$pink650: berry-color-step($colorHS-pink, 5) !default;
+$pink700: berry-color-step($colorHS-pink, 4) !default;
+$pink750: berry-color-step($colorHS-pink, 3) !default;
+$pink800: berry-color-step($colorHS-pink, 2) !default;
+$pink850: berry-color-step($colorHS-pink, 1) !default;
+$pink900: berry-color-step($colorHS-pink, 900) !default;
+$pink950: berry-color-step($colorHS-pink, 950) !default;
+$pink   : $pink500;
+
+$primary50 : berry-color-step($colorHS-primary, 50) !default;
+$primary100: berry-color-step($colorHS-primary, 100) !default;
+$primary150: berry-color-step($colorHS-primary, 15) !default;
+$primary200: berry-color-step($colorHS-primary, 14) !default;
+$primary250: berry-color-step($colorHS-primary, 13) !default;
+$primary300: berry-color-step($colorHS-primary, 12) !default;
+$primary350: berry-color-step($colorHS-primary, 11) !default;
+$primary400: berry-color-step($colorHS-primary, 10) !default;
+$primary450: berry-color-step($colorHS-primary, 9) !default;
+$primary500: berry-color-step($colorHS-primary, 8) !default;
+$primary550: berry-color-step($colorHS-primary, 7) !default;
+$primary600: berry-color-step($colorHS-primary, 6) !default;
+$primary650: berry-color-step($colorHS-primary, 5) !default;
+$primary700: berry-color-step($colorHS-primary, 4) !default;
+$primary750: berry-color-step($colorHS-primary, 3) !default;
+$primary800: berry-color-step($colorHS-primary, 2) !default;
+$primary850: berry-color-step($colorHS-primary, 1) !default;
+$primary900: berry-color-step($colorHS-primary, 900) !default;
+$primary950: berry-color-step($colorHS-primary, 950) !default;
+$primary   : $primary500;
+
+$secondary50 : berry-color-step($colorHS-secondary, 50) !default;
+$secondary100: berry-color-step($colorHS-secondary, 100) !default;
+$secondary150: berry-color-step($colorHS-secondary, 15) !default;
+$secondary200: berry-color-step($colorHS-secondary, 14) !default;
+$secondary250: berry-color-step($colorHS-secondary, 13) !default;
+$secondary300: berry-color-step($colorHS-secondary, 12) !default;
+$secondary350: berry-color-step($colorHS-secondary, 11) !default;
+$secondary400: berry-color-step($colorHS-secondary, 10) !default;
+$secondary450: berry-color-step($colorHS-secondary, 9) !default;
+$secondary500: berry-color-step($colorHS-secondary, 8) !default;
+$secondary550: berry-color-step($colorHS-secondary, 7) !default;
+$secondary600: berry-color-step($colorHS-secondary, 6) !default;
+$secondary650: berry-color-step($colorHS-secondary, 5) !default;
+$secondary700: berry-color-step($colorHS-secondary, 4) !default;
+$secondary750: berry-color-step($colorHS-secondary, 3) !default;
+$secondary800: berry-color-step($colorHS-secondary, 2) !default;
+$secondary850: berry-color-step($colorHS-secondary, 1) !default;
+$secondary900: berry-color-step($colorHS-secondary, 900) !default;
+$secondary950: berry-color-step($colorHS-secondary, 950) !default;
+$secondary   : $secondary500;
+
+$tertiary50 : berry-color-step($colorHS-tertiary, 50) !default;
+$tertiary100: berry-color-step($colorHS-tertiary, 100) !default;
+$tertiary150: berry-color-step($colorHS-tertiary, 15) !default;
+$tertiary200: berry-color-step($colorHS-tertiary, 14) !default;
+$tertiary250: berry-color-step($colorHS-tertiary, 13) !default;
+$tertiary300: berry-color-step($colorHS-tertiary, 12) !default;
+$tertiary350: berry-color-step($colorHS-tertiary, 11) !default;
+$tertiary400: berry-color-step($colorHS-tertiary, 10) !default;
+$tertiary450: berry-color-step($colorHS-tertiary, 9) !default;
+$tertiary500: berry-color-step($colorHS-tertiary, 8) !default;
+$tertiary550: berry-color-step($colorHS-tertiary, 7) !default;
+$tertiary600: berry-color-step($colorHS-tertiary, 6) !default;
+$tertiary650: berry-color-step($colorHS-tertiary, 5) !default;
+$tertiary700: berry-color-step($colorHS-tertiary, 4) !default;
+$tertiary750: berry-color-step($colorHS-tertiary, 3) !default;
+$tertiary800: berry-color-step($colorHS-tertiary, 2) !default;
+$tertiary850: berry-color-step($colorHS-tertiary, 1) !default;
+$tertiary900: berry-color-step($colorHS-tertiary, 900) !default;
+$tertiary950: berry-color-step($colorHS-tertiary, 950) !default;
+$tertiary   : $tertiary500;

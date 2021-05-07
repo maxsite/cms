@@ -1,0 +1,80 @@
+// базовый вариант для темного текста на светлом фоне
+
+@use '../../modules/colors/default1' as *;
+@use '../../mfont/variables' as *;
+
+@forward 'generation' with (
+	$menu-media-tablet: "(max-width: 768px)" !default,
+
+	$menu_bg: transparent !default, // основной цвет меню
+	$menu_color2: transparent !default, // фон при наведении
+
+	$menu_height: 40px !default, // высота меню
+	$menu_height_submenu: 35px !default, // высота подменю горизонтального
+
+	$menu_menu1_padding_hor: 0 !default, // padding-rl для tablet 
+	$menu_min_width: 200px !default, // минимальная ширина подменю
+	$menu-margin: null !default, // общее смещение
+	$menu_selected_bold: bold !default, // выделение текущего пункта
+
+	// top
+	$menu_top_text: $gray700 !default, // текст
+	$menu_top_bg: false !default, // фон
+	$menu_top_hover_text: $gray600 !default, // текст при наведении
+
+	$menu_top_hover_bg: $gray100 !default, // фон при наведении
+
+	$menu_top_padding: 0 15px 0 15px !default, // отступы
+
+	// top selected
+	$menu_selected_text: $gray600 !default, // текст
+	$menu_selected_bg: transparent !default, // фон
+	$menu_selected_hover_text: $gray600 !default, // текст при наведении
+	$menu_selected_hover_bg: transparent !default, // фон при наведении
+
+	// group верхний пункт при наведении
+	$menu_top_group_hover_text: $gray600 !default, // текст при наведении
+	$menu_top_group_hover_bg: $gray100 !default, // фон при наведении
+
+	// group_open открытое подменю
+	$menu_top_group_open_hover_text: $gray100 !default, // текст при наведении
+	$menu_top_group_open_hover_bg: transparent !default, // фон при наведении
+
+	// подменю
+	$menu_submenu_text: $gray700 !default, // текст
+	$menu_submenu_bg: $gray100 !default, // фон
+	$menu_submenu_hover_text: $gray100 !default, // текст при наведении
+	$menu_submenu_hover_bg: $gray800 !default, // фон при наведении
+	$menu_submenu_selected_text: $gray500 !default, // текст selected в подменю
+	$menu_divider: lighten($gray100, 7%) !default, // цвет разделителя
+	$menu_submenu_padding: 0 40px 0 10px !default, // отступы
+	$menu_submenu_shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.4) !default, // тень для подменю
+
+	// - tablet -
+	// кнопка menu
+	$menu_tablet_control_text: $gray700 !default, // текст кнопки
+	$menu_tablet_control_bg: rgba(0, 0, 0, .2) !default, // фон кнопки
+	$menu_tablet_control_bold: bold !default,
+	$menu_tablet_control_width: auto !default,
+	$menu_tablet_control_padding: 0 10px !default,
+	$menu_tablet_control_icon: $im-times !default, // IM-иконка при открытом меню — шрифт mfont
+
+	$menu_tablet_icon_group: $im-angle-down !default,
+	$menu_tablet_icon_group_open: $im-angle-right !default,
+
+	$menu_tablet_shadow: (0 10px 5px -5px rgba(0, 0, 0, 0.5), -1px 0 2px -2px rgba(0, 0, 0, 0.5), 1px 0 2px -2px rgba(0, 0, 0, 0.5)) !default, // общая тень
+
+	// верхние пункты
+	$menu_tablet_base_bg: $gray100 !default, // общий фон меню
+	$menu_tablet_hover_text: $gray100 !default, // текст при наведении
+	$menu_tablet_hover_bg: $gray600 !default, // фон при наведении
+	$menu_tablet_submenu_selected_text: $gray400 !default, // текущий пункт в подменю
+
+	// подменю tablet
+	$menu_tablet_submenu_text: $gray700 !default, // текст
+	$menu_tablet_submenu_bg: $gray150 !default, // фон
+	$menu_tablet_submenu_hover_text: $gray100 !default, // текст
+	$menu_tablet_submenu_hover_bg: $gray600 !default, // фон
+	$menu_tablet_submenu_padding: 0 20px 0 40px !default, // отступы
+	$menu_tablet_divider: $gray400 !default, // разделитель
+);

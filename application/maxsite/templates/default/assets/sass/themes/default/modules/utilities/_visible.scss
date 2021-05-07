@@ -1,0 +1,58 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// visible
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'visible') {
+
+    .#{$pf}visibility-hidden {
+        visibility: hidden;
+    }
+
+    .#{$pf}visibility-visible {
+        visibility: visible;
+    }
+
+    .#{$pf}overflow-hidden {
+        overflow: hidden;
+    }
+
+    .#{$pf}overflow-auto {
+        overflow: auto;
+    }
+
+    .#{$pf}overflow-x-auto {
+        overflow-x: auto;
+    }
+
+    .#{$pf}overflow-y-auto {
+        overflow-y: auto;
+    }
+
+    .#{$pf}overscroll-behavior-contain {
+        overscroll-behavior: contain;
+    }
+
+    .#{$pf}overscroll-behavior-none {
+        overscroll-behavior: none;
+    }
+
+    // .hide-XXX
+    // .show-XXX
+    @each $postfix,
+    $m in $hide_media_list {
+        @media #{$m} {
+            .#{$pf}hide-#{$postfix} {
+                display: none !important;
+            }
+
+            .#{$pf}show-#{$postfix} {
+                display: block !important;
+            }
+        }
+    }
+
+}

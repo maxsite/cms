@@ -1,0 +1,67 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// table
+
+@forward '../../config/typography';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'table') {
+
+    table {
+        width          : 100%;
+        border-collapse: collapse;
+
+        tr {
+            border-bottom: var(--table-tr-border-bottom, $table-tr-border-bottom);
+        }
+
+        thead tr {
+            background   : var(--table-th-background, $table-th-background);
+            border-bottom: var(--table-th-border-bottom, $table-th-border-bottom);
+            border-top   : var(--table-th-border-top, $table-th-border-top);
+        }
+
+        th {
+            text-align: left;
+            padding   : var(--table-th-padding, $table-th-padding);
+        }
+
+        td {
+            vertical-align: top;
+            padding       : var(--table-td-padding, $table-td-padding);
+        }
+
+        &.table-striped tbody {
+            tr:nth-of-type(odd) {
+                background: var(--table-striped-odd-bg, $table-striped-odd-bg);
+            }
+
+            tr:nth-of-type(even) {
+                background: var(--table-striped-even-bg, $table-striped-even-bg);
+            }
+        }
+
+        &.table-border-none tr {
+            border: none;
+        }
+
+        &.table-border {
+            td:not(:last-child) {
+                border-right: var(--table-td-border-right, $table-td-border-right);
+            }
+
+            th:not(:last-child) {
+                border-right: var(--table-th-border-right, $table-th-border-right);
+            }
+        }
+
+        &.table-hover tbody {
+            tr:hover {
+                background: var(--table-tr-hover-bg, $table-tr-hover-bg);
+                cursor    : pointer;
+            }
+        }
+    }
+
+}

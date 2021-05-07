@@ -1,0 +1,7 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// модуль demo
+
+@use '../modules/demo/default' with (
+    $a: red,
+);

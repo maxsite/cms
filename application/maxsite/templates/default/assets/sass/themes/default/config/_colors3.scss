@@ -1,0 +1,34 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// группы для генерации классов (default3)
+
+@use '../modules/colors/default2' as *;
+@use '../modules/colors/default3' with (
+
+	// $generation1 — классы с css-переменными
+	$generation1: (
+		$colors-group-my,
+	),
+	
+	// $generation2 — классы без css-переменных
+	$generation2: (
+		$colors-group-primary,
+		$colors-group-secondary,
+		$colors-group-tertiary,
+		$colors-group-gray,
+		$colors-group-red,
+		$colors-group-pink,
+		$colors-group-purple,
+		$colors-group-violet,
+		$colors-group-indigo,
+		$colors-group-blue,
+		$colors-group-cyan,
+		$colors-group-teal,
+		$colors-group-green,
+		$colors-group-lime,
+		$colors-group-yellow,
+		$colors-group-orange,
+		$colors-group-brown,
+	),
+	
+);

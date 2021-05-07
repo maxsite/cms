@@ -1,0 +1,49 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// Lines
+
+@forward '../../config/typography';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'lines') {
+
+    hr {
+        display   : block;
+        padding   : 0;
+        border    : none;
+        border-top: var(--hr-border, $hr-border);
+        margin    : var(--hr-margin, $hr-margin);
+
+        &.dashed {
+            border-top-style: dashed;
+        }
+
+        &.dotted {
+            border-top-style: dotted;
+        }
+
+        &.double {
+            border-top-style   : double;
+        }
+
+    
+		// &.inset {
+		// 	border-top-style: inset;
+		// }
+		// 
+		// &.outset {
+		// 	border-top-style: outset;
+		// }
+		// 
+		// &.ridge {
+		// 	border-top-style: ridge;
+		// }
+		// 
+		// &.groove {
+		// 	border-top-style: groove;
+		// }
+    
+    }
+
+}

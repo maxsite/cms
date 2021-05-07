@@ -1,0 +1,39 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// details
+
+@forward '../../config/typography';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'details') {
+
+    details summary {
+        display: block; // fix FireFox
+    }
+
+    details summary:hover {
+        cursor: pointer;
+    }
+
+    details summary:focus {
+        outline: none;
+    }
+
+    details summary::-webkit-details-marker {
+        display: none;
+    }
+
+    details summary::before {
+        content     : var(--summary-marker, "▶");
+        color       : var(--summary-marker-color);
+        margin-right: .4em;
+        display     : inline-block;
+        transition  : transform var(--summary-marker-time, 0.2s);
+    }
+
+    details[open] summary:before {
+        transform: rotate(var(--summary-marker-rotate, 90deg));
+    }
+
+}

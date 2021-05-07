@@ -1,0 +1,21 @@
+// разные фильры к изображениями
+
+.my-img-sepia5 {
+	filter: sepia(50%);
+}
+
+.my-img-gray5 {
+	filter: grayscale(50%);
+}
+
+.my-img-1977 {
+	filter: contrast(110%) brightness(110%) saturate(130%);
+}
+
+.my-img-sepia2 {
+	filter: contrast(90%) sepia(20%);
+	
+	&:hover {
+		filter: none;
+	}
+}

@@ -1,0 +1,23 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// Table
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'table') {
+
+    .#{$pf}table-layout-fixed {
+        table-layout: fixed;
+    }
+
+    .#{$pf}table-layout-auto {
+        table-layout: auto;
+    }
+
+    .#{$pf}table-caption-bottom {
+        caption-side: bottom;
+    }
+
+}

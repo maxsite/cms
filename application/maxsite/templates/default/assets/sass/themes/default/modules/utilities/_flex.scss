@@ -1,0 +1,210 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// flex
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'flex') {
+
+    // base — «fluid grid»
+    .#{$pf}flex {
+        display        : flex;
+        justify-content: space-between;
+        align-items    : stretch;
+    }
+
+    .#{$pf}flex-row {
+        flex-direction: row;
+    }
+
+    .#{$pf}flex-row-reverse {
+        flex-direction: row-reverse;
+    }
+
+    .#{$pf}flex-column {
+        flex-direction: column;
+    }
+
+    .#{$pf}flex-column-reverse {
+        flex-direction: column-reverse;
+    }
+
+    .#{$pf}flex-wrap {
+        flex-wrap: wrap;
+    }
+
+    .#{$pf}flex-wrap-reverse {
+        flex-wrap: wrap-reverse;
+    }
+
+    .#{$pf}flex-nowrap {
+        flex-wrap: nowrap;
+    }
+
+    // justify-content
+    .#{$pf}flex-jc-start {
+        justify-content: flex-start;
+    }
+
+    .#{$pf}flex-jc-end {
+        justify-content: flex-end;
+    }
+
+    .#{$pf}flex-jc-between {
+        justify-content: space-between;
+    }
+
+    .#{$pf}flex-jc-around {
+        justify-content: space-around;
+    }
+
+    .#{$pf}flex-jc-center,
+    .#{$pf}flex-hcenter {
+        justify-content: center;
+    }
+
+    // align-items
+    .#{$pf}flex-ai-start {
+        align-items: flex-start;
+    }
+
+    .#{$pf}flex-ai-end {
+        align-items: flex-end;
+    }
+
+    .#{$pf}flex-ai-baseline {
+        align-items: baseline;
+    }
+
+    .#{$pf}flex-ai-stretch {
+        align-items: stretch;
+    }
+
+    .#{$pf}flex-ai-center,
+    .#{$pf}flex-vcenter {
+        align-items: center;
+    }
+
+    // align-content
+    .#{$pf}flex-ac-start {
+        align-content: flex-start;
+    }
+
+    .#{$pf}flex-ac-end {
+        align-content: flex-end;
+    }
+
+    .#{$pf}flex-ac-center {
+        align-content: center;
+    }
+
+    .#{$pf}flex-ac-between {
+        align-content: space-between;
+    }
+
+    .#{$pf}flex-ac-around {
+        align-content: space-around;
+    }
+
+    .#{$pf}flex-ac-stretch {
+        align-content: stretch;
+    }
+
+    // align-self
+    .#{$pf}flex-as-auto {
+        align-self: auto;
+    }
+
+    .#{$pf}flex-as-start {
+        align-self: flex-start;
+    }
+
+    .#{$pf}flex-as-end {
+        align-self: flex-end;
+    }
+
+    .#{$pf}flex-as-center {
+        align-self: center;
+    }
+
+    .#{$pf}flex-as-baseline {
+        align-self: baseline;
+    }
+
+    .#{$pf}flex-as-stretch {
+        align-self: stretch;
+    }
+
+    // ??? нужно ли ???
+    .#{$pf}flex-basis-var {
+        flex-basis: var(--basis, 150px);
+    }
+
+    // .flex-basisXXX
+    @each $class,
+    $value in $flex_basis_list {
+        .#{$pf}#{$class} {
+            flex-basis: $value;
+        }
+    }
+
+    // .flex-orderXXX
+    @each $var in $flex_order_list {
+        .#{$pf}flex-order#{$var} {
+            order: $var;
+        }
+    }
+
+    // .flex-growXXX
+    @each $var in $flex_grow_list {
+        .#{$pf}flex-grow#{$var} {
+            flex-grow: $var;
+        }
+    }
+
+    // .flex-shrinkXXX
+    @each $var in $flex_shrink_list {
+        .#{$pf}flex-shrink#{$var} {
+            flex-shrink: $var;
+        }
+    }
+
+    // .flex for @media
+    @each $postfix,
+    $m in $screen_media_flex_list {
+        @media #{$m} {
+
+            .#{$pf}flex-#{$postfix} {
+                display        : flex;
+                justify-content: space-between;
+                align-items    : stretch;
+            }
+
+            .#{$pf}flex-wrap-#{$postfix} {
+                flex-wrap: wrap;
+            }
+
+            .#{$pf}flex-reverse-#{$postfix} {
+                flex-direction: row-reverse;
+            }
+
+
+            .#{$pf}flex-vcenter-#{$postfix} {
+                align-items: center;
+            }
+
+            .#{$pf}flex-hcenter-#{$postfix} {
+                justify-content: center;
+            }
+
+            @each $var in $flex_order_list {
+                .#{$pf}flex-order#{$var}-#{$postfix} {
+                    order: $var;
+                }
+            }
+        }
+    }
+
+}

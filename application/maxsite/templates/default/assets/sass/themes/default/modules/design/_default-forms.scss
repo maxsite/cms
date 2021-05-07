@@ -1,0 +1,30 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// Variables
+
+// included files
+$modules: (
+	'forms': true,
+) !default;
+
+// ::::: _forms.scss :::::
+$placeholder-color: #828282 !default;
+
+$form-input-padding      : 4px 6px !default;
+$form-input-border       : 1px solid #CED4DA !default;
+$form-input-border-radius: 3px !default;
+
+$form-input-focus-color       : #495057 !default;
+$form-input-focus-background  : #fff !default;
+$form-input-focus-border-color: #80bdff !default;
+$form-input-focus-shadow      : 0 0 0 .2rem hsla(210, 100%, 50%, 0.25) !default;
+
+$form-input-disabled-color       : #999 !default;
+$form-input-disabled-background  : #f5f5f5 !default;
+$form-input-disabled-border-color: #ddd !default;
+
+$form-invalid-shadow: 0 0 0 .2rem hsla(4, 100%, 50%, 0.3) !default;
+$form-invalid-border: 1px solid #FFB7B2 !default;
+
+$form-input-background: null !default;
+$form-input-color: null !default;

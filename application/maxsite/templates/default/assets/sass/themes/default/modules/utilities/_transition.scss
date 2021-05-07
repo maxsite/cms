@@ -1,0 +1,30 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// Transition
+
+/*
+
+<div class="transition-var"></div>
+
+<div class="transition-var" style="--duration: .7s"></div>
+
+<div class="transition-child-var" style="--duration: .7s">
+    <a href="#">link</a>
+    <a href="#">link</a>
+    <a href="#">link</a>
+</div>
+
+*/
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'transition') {
+
+    .#{$pf}transition-var,
+    .#{$pf}transition-child-var * {
+        transition: all var(--duration, .5s);
+    }
+
+}

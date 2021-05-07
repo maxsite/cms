@@ -1,0 +1,57 @@
+// специфичные замены под разные шаблоны вывода type_foreach-файлов
+
+@forward '../../config/mf';
+@use 'default' as mf;
+
+@forward '../../config/colors1';
+@use '../../modules/colors/default1' as color;
+
+@forward '../../config/utilities';
+@use '../../modules/utilities/default' as utilities;
+
+@use '../../mfont/variables' as *;
+
+// две колонки
+.mso-tf-full-2col,
+.mso-tf-full-3col {
+	display        : flex;
+    justify-content: space-between;
+    align-items    : stretch;
+	flex-wrap: wrap;
+	
+	div.mso-page-only {
+		width: 47%;
+		margin: 5px 0 40px 0;
+		
+		// это нужно, чтобы прижать нижний блок READ к низу
+		article {
+		 	position: relative; 
+		 	height: 100%;
+		}
+	}
+
+	@media #{utilities.$SCREEN_PHONE}  {
+		div.mso-page-only {
+			width: 100%;
+		}
+	}
+}
+
+// три колонки
+.mso-tf-full-3col {
+	div.mso-page-only {
+		width: 31%;
+	}
+	
+	@media #{utilities.$SCREEN_TABLET}  {
+		div.mso-page-only {
+			width: 47%;
+		}
+	}
+	
+	@media #{utilities.$SCREEN_PHONE}  {
+		div.mso-page-only {
+			width: 100%;
+		}
+	}
+}

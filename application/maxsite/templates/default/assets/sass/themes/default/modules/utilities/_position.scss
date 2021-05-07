@@ -1,0 +1,51 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// position and z-index
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'position') {
+
+    .#{$pf}pos-fixed {
+        position: fixed;
+    }
+
+    .#{$pf}pos-absolute {
+        position: absolute;
+    }
+
+    .#{$pf}pos-relative {
+        position: relative;
+    }
+
+    .#{$pf}pos-sticky {
+        position: sticky;
+    }
+
+    @each $var in $position_list {
+        .#{$pf}pos#{$var}-t {
+            top: #{$var}px;
+        }
+
+        .#{$pf}pos#{$var}-r {
+            right: #{$var}px;
+        }
+
+        .#{$pf}pos#{$var}-b {
+            bottom: #{$var}px;
+        }
+
+        .#{$pf}pos#{$var}-l {
+            left: #{$var}px;
+        }
+    }
+
+    @each $var in $zindex_list {
+        .#{$pf}z-index#{$var} {
+            z-index: $var;
+        }
+    }
+
+}

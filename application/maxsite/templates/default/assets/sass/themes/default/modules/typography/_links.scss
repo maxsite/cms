@@ -1,0 +1,23 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// Links
+
+@forward '../../config/typography';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'links') {
+
+    a {
+        color          : var(--link-color, $link-color);
+        text-decoration: var(--link-decoration, $link-decoration);
+
+        // text-decoration-skip-ink: none;
+
+        &:hover {
+            color          : var(--link-hover-color, $link-hover-color);
+            text-decoration: var(--link-hover-decoration, $link-hover-decoration);
+        }
+    }
+
+}

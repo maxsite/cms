@@ -1,0 +1,95 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// pre, code, blockquote ...
+
+@forward '../../config/typography';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'blocks') {
+
+    blockquote {
+        margin       : var(--blockquote-margin, $blockquote-margin);
+        padding      : var(--blockquote-padding, $blockquote-padding);
+        border-left  : var(--blockquote-bor-l, $blockquote-border-left);
+        color        : var(--blockquote-color, $blockquote-color);
+        border-radius: var(--blockquote-border-radius, $blockquote-border-radius);
+        background   : var(--blockquote-background, $blockquote-background);
+    }
+
+    pre {
+        padding      : var(--pre-padding, $pre-padding);
+        background   : var(--pre-bg-color, $pre-bg-color);
+        color        : var(--pre-text-color, $pre-text-color);
+        border-top   : var(--pre-border-top, $pre-border-top);
+        border-right : var(--pre-border-right, $pre-border-right);
+        border-bottom: var(--pre-border-bottom, $pre-border-bottom);
+        border-left  : var(--pre-border-left, $pre-border-left);
+        font-family  : var(--font-family-monospace, $font-family-monospace);
+        line-height  : var(--pre-line-height, $pre-line-height);
+        border-radius: var(--pre-border-radius, $pre-border-radius);
+        white-space  : pre-wrap;
+        -moz-tab-size: 4;
+        tab-size     : 4;
+
+        & code {
+            color      : inherit;
+            white-space: pre-wrap;
+        }
+
+        @if $pre-max-height>0 {
+            overflow-y: auto;
+            max-height: $pre-max-height;
+        }
+    }
+
+    code {
+        font-family  : $font-family-monospace;
+        background   : var(--code-background, $code-background);
+        padding      : var(--code-padding, $code-padding);
+        border-radius: var(--code-border-radius, $code-border-radius);
+        font-size    : var(--code-font-size, $code-font-size);
+        color        : var(--code-color, $code-color);
+        white-space  : nowrap;
+        display      : inline-block;
+    }
+
+    var {
+        font-family     : $font-family-monospace;
+        font-style      : normal;
+        padding         : 5px;
+        background-color: var(--var-background-color, $var-background-color);
+        color           : var(--var-text-color, $var-text-color);
+        font-size       : var(--var-font-size, $var-font-size);
+        border-radius   : var(--var-border-radius, $var-border-radius);
+    }
+
+    kbd {
+        font-family     : $font-family-monospace;
+        font-style      : normal;
+        padding         : 5px;
+        background-color: var(--kbd-background-color, $kbd-background-color);
+        color           : var(--kbd-text-color, $kbd-text-color);
+        font-size       : var(--kbd-font-size, $kbd-font-size);
+        border-radius   : var(--kbd-border-radius, $kbd-border-radius);
+    }
+
+    samp {
+        font-family     : $font-family-monospace;
+        font-style      : normal;
+        padding         : 5px;
+        background-color: var(--samp-background-color, $samp-background-color);
+        color           : var(--samp-text-color, $samp-text-color);
+        font-size       : var(--samp-font-size, $samp-font-size);
+        border-radius   : var(--samp-border-radius, $samp-border-radius);
+    }
+
+
+    mark {
+        padding         : var(--mark-padding, $mark-padding);
+        background-color: var(--mark-background-color, $mark-background-color);
+        border-radius   : var(--mark-border-radius, $mark-border-radius);
+        font-size       : var(--mark-font-size, $mark-font-size);
+    }
+
+}

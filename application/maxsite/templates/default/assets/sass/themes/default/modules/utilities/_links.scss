@@ -1,0 +1,54 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// links
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'links') {
+
+    a {
+        // reset color for :hover
+        &.#{$pf}hover-no-color {
+            &:hover {
+                color: inherit;
+            }
+        }
+
+        // reset underline for :hover
+        &.#{$pf}hover-no-underline {
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    // for child
+    .#{$pf}hover-no-color {
+        a:hover {
+            color: inherit;
+        }
+    }
+
+    .#{$pf}hover-no-underline {
+        a:hover {
+            text-decoration: none;
+        }
+    }
+
+    // .#{$pf}link-no-color, // deprecated
+    .#{$pf}links-no-color {
+        a:not([class^="#{$pf}t-"]):not([class*=" #{$pf}t-"]) {
+            color: inherit;
+        }
+    }
+
+    // .#{$pf}link-no-color-imp, // deprecated
+    .#{$pf}links-no-color-imp {
+        a {
+            color: inherit !important;
+        }
+    }
+
+}

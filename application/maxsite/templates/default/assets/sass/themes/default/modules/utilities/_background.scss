@@ -1,0 +1,39 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// background
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'background') {
+
+    // .#{$pf}bg-size-auto {
+    //     background-size: auto;
+    // }
+
+    .#{$pf}bg-size-cover {
+        background-size: cover;
+    }
+
+    .#{$pf}bg-size-contain {
+        background-size: contain;
+    }
+
+    .#{$pf}bg-no-repeat {
+        background-repeat: no-repeat;
+    }
+
+    .#{$pf}bg-position-center {
+        background-position: center;
+    }
+
+    .#{$pf}bg-position-var {
+        background-position: var(--position, 50% 50%);
+    }
+
+    .#{$pf}bg-fixed {
+        background-attachment: fixed;
+    }
+
+}

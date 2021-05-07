@@ -1,0 +1,242 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// animation
+
+@forward '../../config/typography';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'animate') {
+
+    .animation-fade,
+    .animation-fadeout,
+    .animation-left,
+    .animation-top,
+    .animation-right,
+    .animation-bottom,
+    .animation-zoom,
+    .animation-zoomout,
+    .animation-bounce,
+    .animation-rotatein,
+    .animation-rotateout {
+        animation-duration : .6s;
+        animation-fill-mode: both;
+    }
+
+    .animation-fast {
+        animation-duration: .4s;
+    }
+
+    .animation-slow {
+        animation-duration: 1.5s;
+    }
+
+    .animation-infinite {
+        animation-iteration-count: infinite;
+    }
+
+    .animation-delay1s {
+        animation-delay: 1s;
+    }
+
+    .animation-delay2s {
+        animation-delay: 2s;
+    }
+
+    .animation-delay3s {
+        animation-delay: 3s;
+    }
+
+    .animation-delay4s {
+        animation-delay: 4s;
+    }
+
+    .animation-delay5s {
+        animation-delay: 5s;
+    }
+
+    .animation-fade {
+        animation-name: animationfade;
+    }
+
+    @keyframes animationfade {
+        from {
+            opacity: 0
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    .animation-fadeout {
+        animation-name: animationfadeout;
+    }
+
+    @keyframes animationfadeout {
+        from {
+            opacity: 1
+        }
+
+        to {
+            opacity: 0
+        }
+    }
+
+    .animation-zoom {
+        animation-name: animationzoom;
+    }
+
+    @keyframes animationzoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    .animation-zoomout {
+        animation-name: animationzoomout;
+    }
+
+    @keyframes animationzoomout {
+        from {
+            transform: scale(1)
+        }
+
+        to {
+            transform: scale(0)
+        }
+    }
+
+    .animation-top {
+        animation-name: animationtop;
+        position      : relative;
+    }
+
+    @keyframes animationtop {
+        from {
+            top    : -300px;
+            opacity: 0
+        }
+
+        to {
+            top    : 0;
+            opacity: 1
+        }
+    }
+
+    .animation-left {
+        animation-name: animationleft;
+        position      : relative;
+    }
+
+    @keyframes animationleft {
+        from {
+            left   : -300px;
+            opacity: 0
+        }
+
+        to {
+            left   : 0;
+            opacity: 1
+        }
+    }
+
+    .animation-right {
+        animation-name: animationright;
+        position      : relative;
+    }
+
+    @keyframes animationright {
+        from {
+            right  : -300px;
+            opacity: 0
+        }
+
+        to {
+            right  : 0;
+            opacity: 1
+        }
+    }
+
+    .animation-bottom {
+        animation-name: animationbottom;
+        position      : relative;
+    }
+
+    @keyframes animationbottom {
+        from {
+            bottom : -300px;
+            opacity: 0
+        }
+
+        to {
+            bottom : 0;
+            opacity: 1
+        }
+    }
+
+    .animation-bounce {
+        animation-name: animationbounce;
+        position      : relative;
+    }
+
+    @keyframes animationbounce {
+
+        0%,
+        100%,
+        20%,
+        50%,
+        80% {
+            transform: translateY(0);
+        }
+
+        40% {
+            transform: translateY(-10px);
+        }
+
+        60% {
+            transform: translateY(-5px);
+        }
+    }
+
+    // from animate.css -https://daneden.github.io/animate.css/
+    @keyframes animationrotateIn {
+        from {
+            transform-origin: center;
+            transform       : rotate3d(0, 0, 1, -200deg);
+            opacity         : 0;
+        }
+
+        to {
+            transform-origin: center;
+            transform       : translate3d(0, 0, 0);
+            opacity         : 1;
+        }
+    }
+
+    .animation-rotatein {
+        animation-name: animationrotateIn;
+    }
+
+    @keyframes animationrotateout {
+        from {
+            transform-origin: center;
+            opacity         : 1;
+        }
+
+        to {
+            transform-origin: center;
+            transform       : rotate3d(0, 0, 1, 200deg);
+            opacity         : 0;
+        }
+    }
+
+    .animation-rotateout {
+        animation-name: animationrotateout;
+    }
+
+}

@@ -1,0 +1,136 @@
+// стили для разных type: home, page и т.д.
+
+
+@forward '../../config/mf';
+@use 'default' as mf;
+
+@forward '../../config/colors1';
+@use '../../modules/colors/default1' as color;
+
+@forward '../../config/utilities';
+@use '../../modules/utilities/default' as utilities;
+
+@use '../../mfont/variables' as *;
+
+
+// *** FULL ***
+
+.mso-type-contact,
+.mso-type-loginform,
+.mso-type-password-recovery {
+	h3 {
+		// margin-bottom: 20px;
+	}
+    
+}
+
+
+// *** ГЛАВНАЯ ***
+
+// вывод записей блоками на главной
+.mso-header-home-cat {
+	font-size    : 2.1rem;
+	margin       : 0 0 20px 0;
+	padding      : 0 0 10px 0;
+	border-bottom: color.$gray300 solid 2px;
+
+	// background : $gray100;
+	// border-left: $gray400 solid 4px;
+}
+
+// описание рубрики на главной
+.mso-description-cat {
+	margin    : 10px 0 30px 0;
+	font-style: italic;
+}
+
+
+
+// *** TYPE/PAGE ***
+
+// связанные страницы по родителям
+div.mso-page-parents {
+
+	margin-top: 20px;
+
+	ul {
+		margin      : 0;
+		padding-left: 20px;
+	}
+}
+
+// блок комментариев
+div.mso-type-page-comments {
+	padding-bottom: 30px;
+}
+
+// *** TYPE/CATEGORY ***
+
+// описание рубрики на странице рубрики
+.mso-category-desc {
+	margin: 10px 0 30px 0;
+}
+
+// заголовок рубрики
+.mso-category {
+	margin: 30px 0 20px 0;
+}
+
+// *** TYPE/TAG ***
+
+// заголовок метки 
+.mso-tag {
+	margin: 30px 0 20px 0;
+}
+
+// *** TYPE/USERS ***
+
+// Комментаторы, страница users
+.mso-type-users-all {
+	h1 {
+		// border-bottom: #777777 solid 1px;
+	}
+}
+
+// ник на странице users/1
+.mso-type-users {
+	h1 {
+		// border-bottom: #777777 solid 1px;
+	}
+}
+
+// *** TYPE/ARCHIVE ***
+
+.mso-type-archive {
+	h1.mso-archive {
+		// border-bottom: #777777 solid 1px;
+	}
+}
+
+
+// *** TYPE/password-recovery ***
+
+div.mso-type-password-recovery {
+	.mso-recovery-form button {
+		// @extend .button;
+		// margin-top: 15px;
+	}
+}
+
+
+
+// *** TYPE/loginform ***
+
+.mso-loginform,
+.mso-registration-form {
+	padding: 30px 0;
+
+	h3 {
+		margin: 0 0 30px 0; 
+	}
+
+	button {
+		// @extend .button;
+		// margin-top: 20px;
+	}
+}

@@ -1,0 +1,314 @@
+// Плагины
+
+@forward '../../config/mf';
+@use 'default' as mf;
+
+@forward '../../config/colors1';
+@use '../../modules/colors/default1' as color;
+
+@forward '../../config/utilities';
+@use '../../modules/utilities/default' as utilities;
+
+@use '../../mfont/variables' as *;
+
+@forward '../../config/buttons';
+@use '../../modules/design/mixin' as *;
+@use '../../modules/design/buttons' as *;
+@use '../../modules/design/default-buttons' as *;
+
+// плагин пагинации
+div.pagination {
+	
+	$pag_bg1: color.$primary700; // основной цвет активного элемента (strong)
+	$pag_bg1_text: color.$primary100; // текст
+	
+	// неактивные ссылки
+	$pag_bg2: color.$primary100; // фона 
+	$pag_bg2_text: color.$primary700; // текст
+	$pag_bg2_hover: $pag_bg1; // фона для hover
+	$pag_bg2_text_hover: $pag_bg1_text; // текст для hover
+	
+	// next-prev
+	$pag_np_bg: $pag_bg2; // фон
+	$pag_np_text: $pag_bg2_text; // текст
+	$pag_np_bg_hover: $pag_bg2_hover; // hover фон
+	$pag_np_text_hover: $pag_bg2_text_hover; // hover текст
+	
+	width: 100%;
+	text-align: center;
+	color: $pag_bg1_text;
+	
+	margin: 20px 0;
+	
+	a, strong, span {
+		display: inline-block;
+		padding: 7px;
+		min-width: 40px;
+		margin: 5px 2px;
+		transition: all 0.2s;
+		border-radius: 3px;
+		background: $pag_bg2;
+		color: $pag_bg2_text;
+		// border: 1px $pag_bg2 solid;
+	}
+
+	a:hover {
+		text-decoration: none;
+		background: $pag_bg2_hover;
+		color: $pag_bg2_text_hover;
+		// border: 1px $pag_bg2 solid;
+	}
+	
+	strong
+	{
+		background: $pag_bg1;
+		color: $pag_bg1_text;
+	}
+	
+	.pagination-first,
+	.pagination-last
+	{
+		display: none;
+	}
+	
+	.pagination-prev,
+	.pagination-next
+	{
+		background: $pag_np_bg;
+		color: $pag_np_text;
+		// border-color: $pag_color3;
+		
+		&:before {
+			// @include fa_normal();
+			font-family: 'mfont';
+			margin: 0;
+			vertical-align: middle;
+			line-height: 1;
+		}
+		
+		&:hover {
+			background: $pag_np_bg_hover;
+			color: $pag_np_text_hover;
+			// border: 1px $pag_np_bg_hover solid;
+		}	
+	}
+	
+	.pagination-prev
+	{
+		float: left;
+		margin-right: 5px;
+		
+		&:before {
+			content: $im-arrow-left; // $ic-var-left: \f177;
+		}
+	}
+	
+	.pagination-next
+	{
+		float: right;
+		margin-left: 5px;
+		
+		&:before {
+			content: $im-arrow-right; // $ic-var-right: \f178;
+		}
+	}
+
+	span.pagination-prev,
+	span.pagination-next
+	{
+		display: none;
+	}
+}
+
+@media #{utilities.$SCREEN_PHONE}  {
+	div.pagination {
+	
+		.pagination-prev,
+		.pagination-next
+		{
+			float: none;
+		}
+	}
+}
+
+// плагин paginator
+.paginator {
+	margin: 40px 0 10px 0;
+}
+
+// соцзакладки
+div.addzakl {
+	margin: 20px 0;
+
+}
+
+// plugin tabs
+div.mso-tabs-box.mso-tabs-visible { 
+	display: block; 
+}
+
+ul.mso-tabs-nav { 
+	margin: 0; 
+	padding: 0; 
+	height: 30px; 
+	width: 100%; 
+	list-style: none;
+}
+
+ul.mso-tabs-nav li.mso-tabs-elem {
+	float: left; 
+	display: inline; 
+	position: relative; 
+	line-height: 30px; 
+	height: 30px; 
+	margin: 0 1px 0 0; 
+	padding: 0 10px; 
+	cursor: pointer; 
+	color: color.$primary50; 
+	background: color.$primary400; 
+	// font-size: .9em;
+	
+	border-radius: 5px 5px 0 0;
+	
+	&:hover{
+		// color: white; 
+		// background: $gray600;
+	}
+}
+
+ul.mso-tabs-nav li.mso-tabs-current {
+	color: color.$primary50; 
+	background: color.$primary600;
+}
+
+div.mso-tabs-box {
+	display: none; 
+	border-top: 3px solid color.$primary600; 
+	background: color.$primary100; 
+	padding: 20px 10px;
+	color: color.$primary700;
+}
+
+// галерея lightbox и lightgallery
+/*
+div.gallery, 
+div.lightgallery
+{
+	@extend .flex;
+	@extend .flex-wrap;
+	// .grid_flex > .justify_content(flex-start);
+	
+	p {
+		margin: 0;
+	}
+	
+	img {
+		transition: all .4s ease;
+		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 3px 4px -3px rgba(0, 0, 0, 0.3);
+		background-color: $gray100;
+		padding: 5px;
+		margin: 0 15px 20px 0;
+		
+		&:hover {
+			background-color: $gray200;
+			transform: scale3d(1.05, 1.05, 1.05);
+		}
+	}
+}
+*/
+
+div.mso-type-sitemap .mso-page-only {
+	padding-bottom: 20px;
+}
+
+// верхняя панель theme-switch с картинками
+div.theme-switch-panel-screenshot {
+	height: 100px;
+	overflow: auto; 
+	white-space: nowrap;
+	
+	img {
+		height: 80px;
+		width: auto;
+		margin: 0 5px 0 0;
+		opacity: .5; 
+		
+		&:hover {
+		 	opacity: 1; 
+		}
+	}
+	
+	a.current img {
+		border: 3px solid #d90000;
+		opacity: 1;
+	}
+}
+
+// верхняя панель theme-switch выпадающий список
+div.theme-switch-panel-combo {
+	
+	background: #222;
+	font-size: .9rem;
+	padding: 5px 0;
+	
+	.wrap {
+		width       : 100%;
+		margin-right: auto;
+		margin-left : auto;
+		max-width   : utilities.$layout_max_width;
+		
+	}
+	
+	select {
+		width: 100%;
+		background: #dddddd;
+		
+		[selected] { 
+			background: #b30000;
+			color: #fff;
+		}
+	}
+}
+
+
+.mso-theme_switch button {
+	// @extend .button;
+	
+	// @extend .mso-button;
+	
+	@extend .button;
+
+    @include button_set(
+        $button1
+    );
+}
+
+p.comment_button button {
+	padding: 5px 20px;
+	margin-right: 5px;
+}
+
+div#rater {
+	margin-top: 20px;
+}
+
+// голосование
+.mso-samborsky_polls_widget  {
+	table caption {
+		background: none;
+		padding: 0;
+		font-size: 1.1rem;
+		margin: 10px 0;
+		font-style: normal;
+	}
+	
+	input[type="button"] {
+		// @extend button;
+		margin: 10px 0;
+	}
+	
+	a.sp_polls_ajax_link:hover {
+		text-decoration: none;
+		color: red;
+	}
+}

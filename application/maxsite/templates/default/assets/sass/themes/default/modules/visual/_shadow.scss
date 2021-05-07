@@ -1,0 +1,18 @@
+.shadow {
+	box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+// тени для текстов
+.tshadow-gray5 {
+	text-shadow: 0 0 1px #777, 0 0 5px #000;
+}
+
+.tshadow-gray10 {
+	text-shadow: 0 0 10px #000;
+}
+
+// тень снизу
+.shadow1 {
+	box-shadow: 0 2px 0 #D9E1E7;
+}
+

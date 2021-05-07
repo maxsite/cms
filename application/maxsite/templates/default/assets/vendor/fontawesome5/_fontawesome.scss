@@ -1,0 +1,17 @@
+// my file
+
+// https://fontawesome.com/cheatsheet
+// <i class="fas fa-anchor"></i> - SOLID = fas
+// <i class="fab fa-whatsapp"></i> - BRAND = fab
+
+/*!
+ * Font Awesome Free 5.14.0 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+ 
+$fa-font-path: "../../fonts/fontawesome5";
+$fa-margin-right: 7px;
+ 
+@import 'variables'; // from fa
+@import 'fonts'; // my file
+@import 'icons'; // from fa

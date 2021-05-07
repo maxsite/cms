@@ -1,0 +1,96 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// ***********************************************************************
+// ***********************************************************************
+// *****************           do not edit               *****************
+// ***********************************************************************
+// ***********************************************************************
+// ***  Не нужно пытаться понимать как это всё работает... Это же sass...
+// ***  Просто используйте конфигурацию в config:
+// ***     config/_colors1.scss переписывает _default1.scss
+// ***     config/_colors2.scss переписывает _default2.scss
+// ***     config/_colors3.scss переписывает _default3.scss
+// ***********************************************************************
+
+@forward '../../config/colors1';
+@use 'default1' as *;
+
+@forward '../../config/colors2';
+@use 'default2' as *;
+
+@forward '../../config/colors3';
+@use 'default3' as *;
+
+
+// mixin for .t- .bg- .hover-t- .hover-bg-
+@mixin colors_state($name, $color, $cssvar) {
+
+    .#{$pf-colors}t-#{$name} {
+        @if $cssvar {
+            color: var(--#{$pf-cssvar}#{$name}, $color);
+        }
+        @else {
+            color: $color;
+        }
+    }
+
+    .#{$pf-colors}bg-#{$name} {
+        @if $cssvar {
+            background-color: var(--#{$pf-cssvar}#{$name}, $color);
+        }
+        @else {
+            background-color: $color;
+        }
+    }
+
+    .#{$pf-colors}hover-t-#{$name}:hover {
+        @if $cssvar {
+            color: var(--#{$pf-cssvar}#{$name}, $color) !important;
+        }
+        @else {
+            color: $color !important;
+        }
+    }
+
+    .#{$pf-colors}hover-bg-#{$name}:hover {
+        @if $cssvar {
+            background-color: var(--#{$pf-cssvar}#{$name}, $color) !important;
+        }
+        @else {
+            background-color: $color !important;
+        }
+    }
+}
+
+@mixin colors_state_links_hover($name, $color) {
+    .#{$pf-colors}links-hover-t-#{$name} a:not([class^="#{$pf-colors}hover-t-"]):not([class*=" #{$pf-colors}hover-t-"]):hover {
+        color: var(--#{$pf-cssvar}#{$name}, $color) !important;
+    }
+
+    .#{$pf-colors}links-hover-bg-#{$name} a:not([class^="#{$pf-colors}hover-bg-"]):not([class*=" #{$pf-colors}hover-bg-"]):hover {
+        background-color: var(--#{$pf-cssvar}#{$name}, $color) !important;
+    }
+}
+
+@each $gr in $generation1 {
+    @each $name, $color in $gr {
+        @include colors_state($name, $color, true);
+    }
+}
+
+@each $gr in $generation2 {
+    @each $name, $color in $gr {
+        @include colors_state($name, $color, false);
+    }
+}
+
+@each $name, $color in $color_links_list {
+    @include colors_state_links_hover($name, $color);
+}
+
+@each $name, $color in $color_border_list {
+    .#{$pf-colors}bor-#{$name},
+    .#{$pf-colors}hover-bor-#{$name}:hover {
+        border-color: var(--#{$pf-cssvar}#{$name}, $color);
+    }
+}

@@ -1,0 +1,37 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// только одиночные цвета (default1)
+
+@use '../modules/colors/default1' with (
+	
+	$color1: #0D6EFD,
+	$color2: #6C757D,
+	$color3: #28A745,
+	$color4: #DC3545,
+	$color5: #FFC107,
+	$color6: #17A2B8,
+	$color7: #A300D9,
+
+	// цвета с градацией яркости — задаётся только Hue и Saturation
+	
+	$colorHS-primary:   (210, 57%),
+	$colorHS-secondary: (160, 57%),
+	$colorHS-tertiary:  (30, 57%),
+
+	$colorHS-gray:      (210,  8%), // hue берём из $colorHS-primary
+
+	$colorHS-red:    (  4, 95%),
+	$colorHS-brown:  ( 15, 47%),
+	$colorHS-orange: ( 35, 99%),
+	$colorHS-yellow: ( 53, 99%),
+	$colorHS-lime:   ( 64, 85%),
+	$colorHS-green:  (122, 68%),
+	$colorHS-teal:   (175, 58%),
+	$colorHS-cyan:   (186, 82%),
+	$colorHS-blue:   (206, 86%),
+	$colorHS-indigo: (231, 70%),
+	$colorHS-violet: (270, 91%),
+	$colorHS-purple: (290, 68%),
+	$colorHS-pink:   (335, 82%),
+	
+);

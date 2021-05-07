@@ -1,0 +1,19 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// cursor
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'cursor') {
+
+    .#{$pf}cursor-pointer {
+        cursor: pointer;
+    }
+
+    .#{$pf}cursor-not-allowed {
+        cursor: not-allowed;
+    }
+
+}

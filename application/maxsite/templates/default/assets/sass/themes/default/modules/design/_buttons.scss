@@ -1,0 +1,107 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// button
+
+@forward '../../config/buttons';
+@use 'default-buttons' as *;
+@use 'mixin' as *;
+
+@use "sass:map";
+@if map.get($modules, 'buttons') {
+
+/*
+<button class="button" type="button">Press</button>
+
+<button class="button button1" type="button">Press</button>
+<button class="button button2" type="button">Press</button>
+
+<button class="button button-outline1" type="button">Press</button>
+<button class="button button-outline2" type="button">Press</button>
+
+<button class="button button-var" type="button" style="--bg: #238c00; --hover-bg: #00b359; --radius: 9px; --focus-shadow: #26ff5c; --text-align: left">Press</button>
+*/
+
+    .button {
+        display       : inline-block;
+        text-align    : center;
+        vertical-align: middle;
+        cursor        : pointer;
+        white-space   : nowrap;
+        padding       : var(--button-padding, $button-padding);
+        line-height   : var(--button-line-height, $button-line-height);
+        transition    : all ease .2s;
+        border        : 1px solid transparent;
+
+        // for icons ???
+		// i {
+		// 	vertical-align: middle;
+		// }
+		
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &:active,
+        &:focus {
+            outline: none;
+        }
+
+        &.disabled,
+        &:disabled {
+            background-color: var(--button-disabled-bg-color, $button-disabled-bg-color);
+            color           : var(--button-disabled-text-color, $button-disabled-text-color);
+            cursor          : not-allowed;
+        }
+    }
+
+    .button-var {
+        border-radius   : var(--radius, $button-radius);
+        background-color: var(--bg, $button-bg-color);
+        color           : var(--color, $button-text-color);
+        text-align      : var(--text-align, center);
+
+        &:hover {
+            background-color: var(--hover-bg, $button-hover-bg-color);
+            color           : var(--hover-color, $button-hover-text-color);
+        }
+
+        &:active,
+        &:focus {
+            background-color: var(--hover-bg, $button-hover-bg-color);
+            color           : var(--hover-color, $button-hover-text-color);
+            box-shadow      : 0 0 0 $button-focus-shadow-size var(--focus-shadow, $button-focus-shadow);
+        }
+    }
+
+/*
+.my-button {
+    @include button_set(
+        (
+            "radius": 5px,
+            "align": left,
+            "bg": #fff,
+            "text": #6c757d,
+            "border": solid 1px #6c757d,
+            "hover-bg": #6c757d,
+            "hover-text": #fff,
+            "focus-bg": #fff,
+            "focus-text": #6c757d,
+            "focus-border": solid 1px #6c757d,
+            "focus-shadow": 0 0 0 2px #C0C4C8,
+            "focus-hover-bg": #6c757d,
+            "focus-hover-text": #fff,
+        )
+    );
+}
+*/
+
+    // generate from $buttons
+    @each $class,
+    $b in $buttons {
+        .#{$class} {
+            @include button_set($b);
+        }
+    }
+
+}

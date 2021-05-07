@@ -1,0 +1,20 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// shadow
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'shadow') {
+
+	// box-shadow
+	.b-shadow-var {
+		box-shadow: var(--shadow-b, $shadow-b);
+	}
+
+	// text-shadow
+	.t-shadow-var {
+		text-shadow: var(--shadow-t, $shadow-t);
+	}
+}

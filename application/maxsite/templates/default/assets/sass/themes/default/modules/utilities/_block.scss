@@ -1,0 +1,117 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// block
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'block') {
+
+    // clearfix
+    .#{$pf}b-clearfix {
+        // old version
+        // &::after {
+        //     display: block;
+        //     content: "";
+        //     clear  : both;
+        // }
+
+        // new version
+        display: flow-root;
+    }
+
+    // clear
+    .#{$pf}b-clear {
+        clear: both;
+    }
+
+    // float
+    .#{$pf}b-right {
+        float: right;
+    }
+
+    .#{$pf}b-left {
+        float: left;
+    }
+
+    // block center
+    .#{$pf}b-center {
+        margin-left : auto;
+        margin-right: auto;
+    }
+
+    // display
+    .#{$pf}b-hide {
+        display: none;
+    }
+
+    .#{$pf}b-hide-imp {
+        display: none !important;
+    }
+
+    .#{$pf}b-inline,
+    .#{$pf}b-inline-block {
+        display: inline-block;
+    }
+
+    .#{$pf}b-block {
+        display: block;
+    }
+
+    .#{$pf}b-block-imp {
+        display: block !important;
+    }
+
+    .#{$pf}b-flex {
+        display: flex;
+    }
+
+    .#{$pf}b-inline-flex {
+        display: inline-flex;
+    }
+
+    .#{$pf}b-grid {
+        display: grid;
+    }
+
+    .#{$pf}b-inline-grid {
+        display: inline-grid;
+    }
+
+    /*
+<div class="b-overlay">
+    <img class="w100 h100" src="img.png">
+    <div class="b-overlay-text">
+        <div class="pos0-b">text</div>
+    </div>
+</div>
+*/
+
+    .#{$pf}b-overlay {
+        position: relative;
+
+        &:hover .#{$pf}b-overlay-text {
+            opacity: 1;
+        }
+
+        .#{$pf}b-overlay-text {
+            position  : absolute;
+            top       : 0;
+            bottom    : 0;
+            left      : 0;
+            right     : 0;
+            height    : 100%;
+            width     : 100%;
+            overflow  : hidden;
+            opacity   : 0;
+            transition: var(--trans, .5s ease);
+
+            >div {
+                position: absolute;
+                width   : 100%;
+            }
+        }
+    }
+
+}

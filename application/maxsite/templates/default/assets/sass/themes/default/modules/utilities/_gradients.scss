@@ -1,0 +1,29 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// gradients
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'gradients') {
+
+    // <div class="gr-linear-var" style="--start: yellow; --end: orange; --direct: to bottom"></div> 
+
+    .#{$pf}gr-linear-var {
+        background: linear-gradient(var(--direct, to bottom), var(--start, #fff) 0%, var(--end, #444) 100%);
+    }
+
+    .#{$pf}gr-linear-vertical-var {
+        background: linear-gradient(to bottom, var(--start, #fff) 0%, var(--end, #444) 100%);
+    }
+
+    .#{$pf}gr-linear-horizontal-var {
+        background: linear-gradient(to right, var(--start, #fff) 0%, var(--end, #444) 100%);
+    }
+
+    .#{$pf}gr-radial-var {
+        background: radial-gradient(ellipse at center, var(--start, #fff) 0%, var(--end, #444) 100%);
+    }
+
+}

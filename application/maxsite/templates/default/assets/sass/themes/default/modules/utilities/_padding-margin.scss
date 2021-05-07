@@ -1,0 +1,74 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// margins
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+// базовый миксин 
+@mixin set_pm($type, $val, $prefix, $postfix: "") {
+
+    $px: px;
+
+    @if $val==0 {
+        $px: '';
+    }
+
+    $important: if($padding_margin_important, '!important', '');
+
+    .#{$pf}#{$prefix}#{$val}#{$postfix} {
+        #{$type}: #{$val}#{$px}#{$important};
+    }
+
+    .#{$pf}#{$prefix}#{$val}-t#{$postfix} {
+        #{$type}-top: #{$val}#{$px}#{$important};
+    }
+
+    .#{$pf}#{$prefix}#{$val}-r#{$postfix} {
+        #{$type}-right: #{$val}#{$px}#{$important};
+    }
+
+    .#{$pf}#{$prefix}#{$val}-b#{$postfix} {
+        #{$type}-bottom: #{$val}#{$px}#{$important};
+    }
+
+    .#{$pf}#{$prefix}#{$val}-l#{$postfix} {
+        #{$type}-left: #{$val}#{$px}#{$important};
+    }
+
+    .#{$pf}#{$prefix}#{$val}-tb#{$postfix} {
+        #{$type}-top   : #{$val}#{$px}#{$important};
+        #{$type}-bottom: #{$val}#{$px}#{$important};
+    }
+
+    .#{$pf}#{$prefix}#{$val}-rl#{$postfix} {
+        #{$type}-right: #{$val}#{$px}#{$important};
+        #{$type}-left : #{$val}#{$px}#{$important};
+    }
+}
+
+@if map.get($modules, 'padding-margin') {
+
+    @each $var in $padding_list {
+        @include set_pm(padding, $var, $padding_prefix);
+    }
+
+    @each $var in $margin_list {
+        @include set_pm(margin, $var, $margin_prefix);
+    }
+
+    // for @media
+    @each $postfix,
+    $m in $screen_media_mar_pad_list {
+        @media #{$m} {
+            @each $var in $margin_list_media {
+                @include set_pm(margin, $var, $margin_prefix, -#{$postfix});
+            }
+
+            @each $var in $padding_list_media {
+                @include set_pm(padding, $var, $padding_prefix, -#{$postfix});
+            }
+        }
+    }
+
+}

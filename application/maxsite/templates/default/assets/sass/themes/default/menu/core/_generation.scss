@@ -1,0 +1,531 @@
+// меню строится на разметке как в MaxSite CMS
+
+@use '../../mfont/variables' as *;
+
+// классы .group .divider предопределены
+ 
+$menu-media-tablet: "(max-width: 768px)" !default;
+
+$menu_bg: transparent !default; // основной цвет меню
+$menu_color2: transparent !default; // фон при наведении
+
+$menu_height: 40px !default; // высота меню
+$menu_height_submenu: 35px !default; // высота подменю горизонтального
+
+$menu_menu1_padding_hor: 0 !default; // padding-rl для tablet 
+$menu_min_width: 200px !default; // минимальная ширина подменю
+$menu-margin: null !default; // общее смещение
+$menu_selected_bold: bold !default; // выделение текущего пункта
+
+// top
+$menu_top_text: $gray100 !default; // текст
+$menu_top_bg: false !default; // фон
+$menu_top_hover_text: $primary100 !default; // текст при наведении
+$menu_top_hover_bg: rgba(0, 0, 0, .3) !default; // фон при наведении
+$menu_top_padding: 0 15px 0 15px !default; // отступы
+
+// top selected
+$menu_selected_text: $primary400 !default; // текст
+$menu_selected_bg: transparent !default; // фон
+$menu_selected_hover_text: $menu_selected_text !default; // текст при наведении
+$menu_selected_hover_bg: $menu_selected_bg !default; // фон при наведении
+
+// group верхний пункт при наведении
+$menu_top_group_hover_text: $menu_top_hover_text !default; // текст при наведении
+$menu_top_group_hover_bg: $menu_top_hover_bg !default; // фон при наведении
+
+// group_open открытое подменю
+$menu_top_group_open_hover_text: $gray100 !default; // текст при наведении
+$menu_top_group_open_hover_bg: $menu_color2 !default; // фон при наведении
+
+// подменю
+$menu_submenu_text: $gray200 !default; // текст
+$menu_submenu_bg: $gray900 !default; // фон
+$menu_submenu_hover_text: $gray100 !default; // текст при наведении
+$menu_submenu_hover_bg: $gray800 !default; // фон при наведении
+$menu_submenu_selected_text: $primary500 !default; // текст selected в подменю
+$menu_divider: lighten($menu_submenu_bg, 7%) !default; // цвет разделителя
+$menu_submenu_padding: 0 40px 0 10px !default; // отступы
+$menu_submenu_shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.4) !default; // тень для подменю
+
+// - tablet -
+// кнопка menu
+$menu_tablet_control_text: $gray100 !default; // текст кнопки
+$menu_tablet_control_bg: rgba(0, 0, 0, .2) !default; // фон кнопки
+$menu_tablet_control_bold: bold !default;
+$menu_tablet_control_width: auto !default;
+$menu_tablet_control_padding: 0 10px !default;
+
+$menu_tablet_control_icon: $im-times !default; // IM-иконка при открытом меню — шрифт mfont
+
+$menu_tablet_icon_group: $im-angle-down !default;
+$menu_tablet_icon_group_open: $im-angle-right !default;
+
+$menu_tablet_shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.5), -1px 0 2px -2px rgba(0, 0, 0, 0.5), 1px 0 2px -2px rgba(0, 0, 0, 0.5) !default; // общая тень
+
+// верхние пункты
+$menu_tablet_base_bg: $gray800 !default; // общий фон меню
+$menu_tablet_hover_text: $gray300 !default; // текст при наведении
+$menu_tablet_hover_bg: $gray600 !default; // фон при наведении
+$menu_tablet_submenu_selected_text: $primary400 !default; // текущий пункт в подменю
+
+// подменю tablet
+$menu_tablet_submenu_text: $gray100 !default; // текст
+$menu_tablet_submenu_bg: $gray700 !default; // фон
+$menu_tablet_submenu_hover_text: $gray300 !default; // текст
+$menu_tablet_submenu_hover_bg: $gray600 !default; // фон
+$menu_tablet_submenu_padding: 0 20px 0 40px !default; // отступы
+$menu_tablet_divider: $gray750 !default; // разделитель 
+
+
+// минимальные стили для выпадающего меню
+@mixin menu-base($zindex: 10) {
+	position: relative; 
+	list-style: none; 
+	margin: 0; 
+	padding: 0;
+	z-index: $zindex; 
+	
+	li {
+		position: relative;
+	}
+	
+	a {
+		display: block;
+	
+		&:hover {
+			text-decoration: none;
+		}
+        
+        &:focus {
+			outline: none;
+		}
+	}
+	
+	// верхние пункты
+	> li {
+		float: left; 
+		// vertical-align: middle;
+		display: block;
+	}
+	
+	// подменю
+	ul {
+		display: none;
+		position: absolute; 
+		list-style: none; 
+		margin: 0; 
+		padding: 0;
+		top: 100%; 
+		left: 0; 
+		z-index: $zindex + 1; 
+		line-height: 1em;
+		min-width: 150px;
+		background: #EEEEEE; 
+		
+		// под-подменю
+		ul {
+			top: 0; 
+			left: 100%;
+		}
+		
+		li {
+			display: block;
+		}
+	}
+	
+	// класс по-умолчанию — работает hover
+	&.menu-no-load {
+		li:hover > ul {
+			display: block;
+		}
+	}
+	
+	// класс по которому работает hover по-умолчанию
+	&.menu-hover {
+		li:hover > ul {
+			display: block;// !important;
+		}
+	}
+}
+
+// вспомогательный микс
+@mixin _menu-cbb($color, $bg, $bold) {
+	@if $color 	{ color: $color; }
+	@if $bg 	{ background-color: $bg; }
+	@if $bold 	{ font-weight: $bold; }
+}
+
+// верхние пункты
+@mixin menu-top-color($color: false, $bg: false, $bold: false) {
+	> li a {
+		@include _menu-cbb($color, $bg, $bold);
+	}
+}
+
+// верхние пункты при наведении
+@mixin menu-top-hover($color: false, $bg: false, $bold: false) {
+	> li a:hover {
+		@include _menu-cbb($color, $bg, $bold);
+	}
+}
+
+// высота
+@mixin menu-top-height($height: auto, $l_height: auto, $padding: 0, $margin: 0) {
+	> li > a { 
+		height: $height;
+		line-height: $l_height;
+		padding: $padding;
+		margin: $margin;
+	}
+}
+
+// группа
+@mixin menu-top-group-color($color: false, $bg: false, $bold: false) {
+	> li.group > a {
+		@include _menu-cbb($color, $bg, $bold);
+	}
+}
+
+// група при наведении
+@mixin menu-top-group-hover($color: false, $bg: false, $bold: false) {
+	> li.group > a:hover {
+		@include _menu-cbb($color, $bg, $bold);
+	}
+}
+
+// подменю
+@mixin menu-submenu-color($color: false, $bg: false, $bold: false) {
+	li.group ul li a {
+		@include _menu-cbb($color, $bg, $bold);
+	}
+}
+
+@mixin menu-submenu-hover($color: false, $bg: false, $bold: false) {
+	li.group ul li a:hover {
+		@include _menu-cbb($color, $bg, $bold);
+	}
+}
+
+@mixin menu-submenu-height($height: auto, $l_height: auto, $padding: 0, $margin: 0) {
+	li.group ul li a { 
+		height: $height;
+		line-height: $l_height;
+		padding: $padding;
+		margin: $margin;
+	}
+}
+
+@mixin menu-submenu-nowrap() {
+	li.group ul li a { 
+		white-space: nowrap;
+	}
+}		
+
+// разделитель
+@mixin menu-divider($border: #ccc 1px solid, $margin: 0, $bg: transparent) {
+	li.divider {
+		display: block !important;
+		height: 1px !important;
+		padding: 0 !important;
+		background-color: $bg;
+		
+		> span {
+			display: block;
+			padding: 0;
+			height: 1px;
+			border: $border;
+			margin: $margin;
+		}
+	}
+}
+
+// иконки стрелок групп на основе шрифта $fa-var-angle-down, $fa-var-angle-right
+@mixin menu-set-arrows($ff: mfont, $c1: $im-angle-down, $c2: $im-angle-right, $color: inherit) {
+	> li.group > a:after,
+	li.group ul li.group > a:after
+	{
+		font-family: $ff;
+		color: $color;
+		display: inline-block;
+		font-weight: normal;
+		font-style: normal;
+		text-decoration: none;
+	}
+	
+	// верх
+	> li.group > a:after {
+		content: $c1;
+		margin: 0 0 0 10px;
+		float: right;
+	}
+	
+	// подменю
+	li.group ul li.group > a:after {
+		content: $c2;
+		position: absolute;
+		right: 5px;
+	}
+}
+
+@mixin menu-selected-color($color: false, $bg: false, $bold: false) {
+	@include _menu-cbb($color, $bg, $bold);
+}
+
+@mixin menu-selected-hover($color: false, $bg: false, $bold: false) {
+	&:hover {
+		@include _menu-cbb($color, $bg, $bold);
+	}
+}
+
+// специфичный z-index для меню
+@mixin menu-zindex($index: 10) {
+	z-index: $index;
+	
+	ul {
+		z-index: $index + 1; 
+	}
+}
+
+// основные стили под планшет
+@mixin menu-tablet-base($icon_group: $im-angle-down, $icon_group_open: $im-angle-right) {
+	display: none;
+	position: absolute;
+	left: 0;
+	right: 0;
+	//top: 100%;
+	// margin: 0 30px;
+
+	// верхние пункты
+	> li {
+		float: none; 
+	}
+	
+	// подменю
+	ul {
+		display: none;
+		position: relative; 
+		min-width: 100%;
+		
+		li {
+			display: block;
+		}
+	}
+	
+	li.group ul {
+		box-shadow: none;
+	}
+	
+	// отступ всех подменю без иконки
+	> li > a {
+		padding-left: 25px;
+	}
+	
+	// группа — название
+	> li.group > a {
+		padding-left: 10px; // от края блока меню
+		
+		// иконка группы
+		&::before {
+			font-family: mfont;
+			display: inline-block;
+			content: $icon_group;
+			padding-right: 10px; // иконка от текста
+			width: 20px; // фиксируем, чтобы не прыгало при смене
+		}
+	}
+	
+	// иконка открытой группы
+	li.group-open > a::before {
+		font-family: mfont;
+		display: inline-block;
+		content: $icon_group_open;
+		padding-right: 10px; // иконка от текста открытого меню
+	}
+	
+	// уберем иконку группы справа
+	li.group > a:after {
+		display: none;
+	}
+}
+
+// база кнопки Меню
+// @mixin menu-tablet-control($icon: $im-times) {
+@mixin menu-tablet-control() {
+	// прячем input
+	input.menu-control {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	label.menu-control {
+		// position: absolute;
+		// right: 0;
+		// bottom: 0;
+	}
+
+	// label.menu-control i {
+	// 	display: inline-block;
+	// 	width: 20px; // чтобы иконка не прыгала
+	// 	min-width: 20px; // чтобы иконка не прыгала
+	// }
+	
+	// по click/checked 
+	input.menu-control:checked {
+		// показываем меню
+		~ ul.menu-tablet {
+			display: block;
+		}
+		
+		// меняем иконку для <i>, если есть в разметке
+		// ~ label.menu-control i::before {
+		// 	font-family: mfont;
+		// 	content: $icon;
+		// 	display: inline-block;
+		// }
+	}
+}
+
+
+// -----------------
+@mixin generation {
+
+	.menu-control {
+		display: none;
+	}
+
+	div.menu1 {
+		background: $menu_bg;
+		position: relative;
+	}
+
+	// верхние пункты // если нужно кастомизировать
+	ul.menu > li > a {
+		// font-weight: bold;
+		// text-transform: uppercase;
+		// letter-spacing: .03em;
+		// font-size: 1.1rem;
+	}
+
+	ul.menu {
+
+		@include menu-base(15);
+		
+		@include menu-top-height($menu_height, $menu_height, $menu_top_padding, 0);
+		@include menu-top-color($menu_top_text, $menu_top_bg); 
+		@include menu-top-hover($menu_top_hover_text, $menu_top_hover_bg);
+		@include menu-submenu-height($menu_height_submenu, $menu_height_submenu, $menu_submenu_padding);
+		@include menu-submenu-color($menu_submenu_text, $menu_submenu_bg);
+		@include menu-submenu-hover($menu_submenu_hover_text, $menu_submenu_hover_bg);
+		@include menu-submenu-nowrap;
+		@include menu-divider($menu_divider 1px solid);
+		@include menu-set-arrows();
+		
+		margin: $menu-margin;
+
+		li.selected a 
+		{
+			@include menu-selected-color($menu_selected_text, $menu_selected_bg);
+			@include menu-selected-hover($menu_selected_hover_text, $menu_selected_hover_bg);
+		}
+		
+		a {
+			transition: color 0.2s, background-color 0.1s;
+		}
+		
+		ul {
+			min-width: $menu_min_width;
+		}
+
+		// верхние пункты (без группы) при наведении
+		// > li:not([class^="group"]):hover > a {	}
+		
+		li.group ul {
+			font-size: .9rem;
+			box-shadow: $menu_submenu_shadow;
+		}
+		
+		li.group ul li.selected a {
+			font-weight: $menu_selected_bold;
+			color: $menu_submenu_selected_text;
+		}
+		
+		li.group-open > a {
+			color: $menu_top_group_open_hover_text;
+			background-color: $menu_top_group_open_hover_bg;
+		}
+		
+		> li.group:hover > a {
+			color: $menu_top_group_hover_text;
+			background-color: $menu_top_group_hover_bg;
+		}
+	}
+
+	@media #{$menu-media-tablet} {
+		
+		div.menu1-tablet {
+			background: transparent;
+		}
+		
+		// @include menu-tablet-control($menu_tablet_control_icon);
+		@include menu-tablet-control();
+		
+		label.menu-control {
+			// display: inline-block;
+			display: block;
+
+			// padding: $menu_tablet_control_padding;
+			// width: $menu_tablet_control_width;
+			// font-weight: $menu_tablet_control_bold;
+			// height: $menu_height;
+			// line-height: $menu_height;
+			// background: $menu_tablet_control_bg;
+			// color: $menu_tablet_control_text;
+
+			// TODO: подумать, как можно разместить кнопку и меню произвольно
+			// position: absolute;
+			// top: 0;
+			// right: 5px;
+		}
+		
+		ul.menu-tablet {
+			@include menu-tablet-base($menu_tablet_icon_group, $menu_tablet_icon_group_open);
+
+			background-color: $menu_tablet_base_bg;		
+			box-shadow: $menu_tablet_shadow;
+		
+			@include menu-top-hover($menu_tablet_hover_text, $menu_tablet_hover_bg);
+			@include menu-submenu-height($menu_height, $menu_height, $menu_tablet_submenu_padding);
+			@include menu-submenu-color($menu_tablet_submenu_text, $menu_tablet_submenu_bg);
+		
+			@include menu-divider($menu_tablet_divider 1px dotted, 0 35px, $menu_tablet_submenu_bg);
+			
+			li.group-open > a {
+				color: $menu_tablet_submenu_text;
+				background-color: $menu_tablet_submenu_bg;
+			}
+			
+			// верхние пункты при наведении
+			> li:not([class^="group"]):hover > a {
+				border: none;
+			}
+		
+			li.group ul {
+				border: none;
+			}
+			
+			> li.group:hover > a {
+				color: $menu_tablet_submenu_hover_text;
+				background-color: $menu_tablet_submenu_hover_bg;
+			}
+
+			li.group ul li.selected a {
+				font-weight: $menu_selected_bold;
+				color: $menu_tablet_submenu_selected_text;
+			}
+		}
+	}
+}
+
+@include generation;

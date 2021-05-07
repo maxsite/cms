@@ -1,0 +1,41 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// Images
+
+@forward '../../config/typography';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'images') {
+
+    img {
+        max-width     : 100%;
+        height        : auto;
+        vertical-align: middle;
+
+        &.circle {
+            border-radius: 50%;
+        }
+
+        &.thumbnail {
+            border : var(--images-thumbnail-border, $images-thumbnail-border);
+            padding: var(--images-thumbnail-padding, $images-thumbnail-padding);
+        }
+
+        &.left {
+            float : left;
+            margin: var(--images-left-margin, $images-left-margin);
+        }
+
+        &.right {
+            float : right;
+            margin: var(--images-right-margin, $images-right-margin);
+        }
+
+        &.center {
+            margin : 0 auto;
+            display: block;
+        }
+    }
+
+}

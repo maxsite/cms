@@ -1,0 +1,52 @@
+// системные сообщения
+
+@forward '../../config/mf';
+@use 'default' as mf;
+
+@forward '../../config/colors1';
+@use '../../modules/colors/default1' as color;
+
+@forward '../../config/utilities';
+@use '../../modules/utilities/default' as utilities;
+
+@use '../../mfont/variables' as *;
+
+.mso-message-alert {
+	color: color.$red;
+}
+
+.mso-message-ok,
+.comment-ok
+{
+	color: #fff;
+	padding: 10px;
+	margin: 0 0 20px 0;
+	background: color.$green;
+	
+	&:after {
+		font-family: mfont;
+		display: inline-block;
+		margin-right: 7px;
+		content: unquote("\"#{ $im-exclamation-triangle }\""); 
+		float: right;
+		margin-top: 5px;
+	}
+}
+
+.mso-message-error,
+.comment-error 
+{
+	color: #fff;
+	padding: 10px;
+	margin: 0 0 20px 0;
+	background: color.$red;
+	
+	&:after {
+		font-family: mfont;
+		display: inline-block;
+		margin-right: 7px;
+		content: unquote("\"#{ $im-exclamation-triangle }\""); 
+		float: right;
+		margin-top: 5px;
+	}
+}

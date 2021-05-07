@@ -1,0 +1,22 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// drop-cap
+
+@forward '../../config/typography';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'drop-cap') {
+
+    .drop-cap {
+        &:first-letter {
+            float         : left;
+            font-size     : 3em;
+            font-weight   : bold;
+            margin-right  : 0.75rem;
+            text-transform: uppercase;
+            line-height   : 1;
+        }
+    }
+
+}

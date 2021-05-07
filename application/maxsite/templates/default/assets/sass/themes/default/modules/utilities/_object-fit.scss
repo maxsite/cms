@@ -1,0 +1,31 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// object-fit
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'object-fit') {
+
+    .#{$pf}object-fit-fill {
+        object-fit: fill;
+    }
+
+    .#{$pf}object-fit-contain {
+        object-fit: contain;
+    }
+
+    .#{$pf}object-fit-cover {
+        object-fit: cover;
+    }
+
+    .#{$pf}object-fit-scale-down {
+        object-fit: scale-down;
+    }
+
+    .#{$pf}object-fit-none {
+        object-fit: none;
+    }
+
+}

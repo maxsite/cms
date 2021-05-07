@@ -1,0 +1,110 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// width
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'width') {
+
+    // max size layout
+    .#{$pf}w-layout-max {
+        width    : 100%;
+        max-width: $layout_max_width;
+    }
+
+    .#{$pf}w100-max {
+        max-width: 100%;
+    }
+
+    .#{$pf}w-auto {
+        width: auto;
+    }
+
+    .#{$pf}w-max-none {
+        max-width: none;
+    }
+
+    // 12-колоночная сетка .w3col .w6col-tablet .w12col-phone
+    @for $i from 1 through 12 {
+        .#{$pf}w#{$i}col {
+            width: percentage($i/12);
+        }
+    }
+
+    @each $var in $width_list_px {
+        .#{$pf}w#{$var}px {
+            width: #{$var}px;
+        }
+
+        .#{$pf}w#{$var}px-min {
+            min-width: #{$var}px;
+        }
+
+        .#{$pf}w#{$var}px-max {
+            max-width: #{$var}px;
+        }
+    }
+
+    @each $var in $width_list_percent {
+        .#{$pf}w#{$var} {
+            width: unquote($var + "%");
+        }
+
+        .#{$pf}w#{$var}-min {
+            min-width: unquote($var + "%");
+        }
+
+        .#{$pf}w#{$var}-max {
+            max-width: unquote($var + "%");
+        }
+    }
+
+    // for @media
+    @each $postfix,
+    $m in $screen_media_width_list {
+        @media #{$m} {
+
+            // .#{$pf}w-hide-#{$postfix} { display: none; }
+            .#{$pf}w-auto-#{$postfix} {
+                width: auto;
+            }
+
+            .#{$pf}w100-max-#{$postfix} {
+                max-width: 100%;
+            }
+
+            .#{$pf}w0-min-#{$postfix} {
+                min-width: 0;
+            }
+
+            @each $var in $width_list_percent {
+                .#{$pf}w#{$var}-#{$postfix} {
+                    width: unquote($var + "%");
+                }
+            }
+
+            @for $i from 1 through 12 {
+                .#{$pf}w#{$i}col-#{$postfix} {
+                    width: percentage($i/12);
+                }
+            }
+
+            @each $var in $width_list_px {
+                .#{$pf}w#{$var}px-#{$postfix} {
+                    width: #{$var}px;
+                }
+
+                .#{$pf}w#{$var}px-min-#{$postfix} {
+                    min-width: #{$var}px;
+                }
+
+                .#{$pf}w#{$var}px-max-#{$postfix} {
+                    max-width: #{$var}px;
+                }
+            }
+        }
+    }
+
+}

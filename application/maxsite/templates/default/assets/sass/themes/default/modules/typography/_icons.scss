@@ -1,0 +1,38 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// Icons
+
+@forward '../../config/typography';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'icons') {
+
+    .icon0:before {
+        margin-right: 0 !important;
+    }
+
+    .icon-circle,
+    .icon-square,
+    .icon-rounded {
+        line-height: 2 !important; // fix .fa from FA5
+        width      : 2em;
+        height     : 2em;
+        display    : inline-block;
+        text-align : center;
+
+        &:before {
+            margin        : 0 !important;
+            vertical-align: baseline;
+        }
+    }
+
+    .icon-circle {
+        border-radius: 50%;
+    }
+
+    .icon-rounded {
+        border-radius: var(--icon-rounded-radius, $icon-rounded-radius);
+    }
+
+}

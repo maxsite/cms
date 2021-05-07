@@ -1,0 +1,42 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// opacity
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'opacity') {
+
+    .#{$pf}bg-transparent {
+        background-color: transparent !important;
+    }
+
+    .#{$pf}t-transparent {
+        color: transparent !important;
+    }
+
+    .#{$pf}bg-op-var {
+        background-color: rgba(var(--op-red, 0), var(--op-green, 0), var(--op-blue, 0), var(--op, .7));
+    }
+
+    .#{$pf}bg-op-white-var {
+        background-color: rgba(var(--op-red, 255), var(--op-green, 255), var(--op-blue, 255), var(--op, .7));
+    }
+
+    // .opacityXXX  .hover-opacityXXX  .bg-opXXX  .hover-bg-opXXX
+    @each $op in $opacity_list {
+        $op1: round($op * 100);
+
+        .#{$pf}opacity#{$op1},
+        .#{$pf}hover-opacity#{$op1}:hover {
+            opacity: $op;
+        }
+
+        .#{$pf}bg-op#{$op1},
+        .#{$pf}hover-bg-op#{$op1}:hover {
+            background-color: rgba(0, 0, 0, $op);
+        }
+    }
+
+}

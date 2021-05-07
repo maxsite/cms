@@ -1,0 +1,105 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// Variables
+
+// included files
+$modules: (
+	'buttons': true,
+) !default;
+
+
+// ::::: _buttons.scss :::::
+// .button — base class
+$button-padding            : .4rem .8rem !default;
+$button-line-height        : 1.5 !default;
+$button-disabled-bg-color  : #C5C7C9 !default;
+$button-disabled-text-color: #93999F !default;
+
+// .button-var — for css-variables
+$button-bg-color         : #0d6efd !default;
+$button-text-color       : #fff !default;
+$button-hover-bg-color   : #025CE2 !default;
+$button-hover-text-color : #fff !default;
+$button-radius           : 5px !default;
+$button-focus-shadow     : rgba(13, 110, 253, .3) !default;
+$button-focus-shadow-size: 2px !default;
+
+// Sets of .button1, .button2, etc...
+$button1: (
+    "radius": 5px,
+    "bg": #0d6efd,
+    "text": #fff,
+    "hover-bg": #025CE2,
+    "hover-text": #fff,
+    "focus-bg": #025CE2,
+    "focus-text": #fff,
+    "focus-border": solid 1px #97C1FE,
+    "focus-shadow": 0 0 0 3px #97C1FE,
+    // "align": center,
+) !default;
+
+$button2: (
+    "radius": 5px,
+    "bg": #6c757d,
+    "text": #fff,
+    "hover-bg": #60686f,
+    "hover-text": #fff,
+    "focus-bg": #60686f,
+    "focus-text": #fff,
+    "focus-border": solid 1px #C0C4C8,
+    "focus-shadow": 0 0 0 2px #C0C4C8,
+) !default;
+
+$button3: (
+    "radius": 5px,
+    "bg": #EB307E,
+    "text": #fff,
+    "hover-bg": #D61566,
+    "hover-text": #fff,
+    "focus-bg": #D61566,
+    "focus-text": #fff,
+    "focus-border": solid 1px #F7B3D0,
+    "focus-shadow": 0 0 0 3px #F7B3D0,
+) !default;
+
+// invert
+$button-outline1: ( 
+    "radius"    : 5px,
+    "bg": #fff,
+    "text": #0D6EFD,
+    "border": solid 1px #0D6EFD,
+    "hover-bg": #0D6EFD,
+    "hover-text": #fff,
+    "focus-bg": #fff,
+    "focus-text": #0D6EFD,
+    "focus-border": solid 1px #0D6EFD,
+    "focus-shadow": 0 0 0 2px #72abfe,
+    "focus-hover-bg": #0D6EFD,
+    "focus-hover-text": #fff,
+    // "focus-hover-border": solid 1px #0D6EFD,
+    // "focus-hover-shadow": 0 0 0 2px #72abfe,
+) !default;
+
+$button-outline2: (
+    "radius"    : 5px,
+    "bg": #fff,
+    "text": #6c757d,
+    "border": solid 1px #6c757d,
+    "hover-bg": #6c757d,
+    "hover-text": #fff,
+    "focus-bg": #fff,
+    "focus-text": #6c757d,
+    "focus-border": solid 1px #6c757d,
+    "focus-shadow": 0 0 0 2px #C0C4C8,
+    "focus-hover-bg": #6c757d,
+    "focus-hover-text": #fff,
+) !default;
+
+$buttons: (
+    "button1": $button1, // class: var
+    "button2": $button2, 
+    "button3": $button3, 
+    "button-outline1": $button-outline1, 
+    "button-outline2": $button-outline2,
+) !default;
+

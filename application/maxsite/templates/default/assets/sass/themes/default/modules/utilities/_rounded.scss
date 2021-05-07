@@ -1,0 +1,46 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// border-radius
+
+@forward '../../config/utilities';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'rounded') {
+
+    .#{$pf}rounded-circle {
+        border-radius: 50%;
+    }
+
+    .#{$pf}rounded {
+        border-radius: var(--rounded-radius, $rounded);
+    }
+
+    // border-radius
+    @each $var in $rounded_list {
+        .#{$pf}rounded#{$var} {
+            border-radius: #{$var}px !important;
+        }
+
+        .#{$pf}rounded#{$var}-r {
+            border-top-right-radius   : #{$var}px !important;
+            border-bottom-right-radius: #{$var}px !important;
+        }
+
+        .#{$pf}rounded#{$var}-l {
+            border-top-left-radius   : #{$var}px !important;
+            border-bottom-left-radius: #{$var}px !important;
+        }
+        
+        .#{$pf}rounded#{$var}-t {
+			border-top-left-radius: #{$var}px !important;
+			border-top-right-radius: #{$var}px !important;
+		}
+		
+		.#{$pf}rounded#{$var}-b {
+			border-bottom-left-radius: #{$var}px !important;
+			border-bottom-right-radius: #{$var}px !important;
+		}
+    }
+
+}

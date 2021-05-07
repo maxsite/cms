@@ -1,0 +1,30 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// badge
+
+@forward '../../config/typography';
+@use 'default' as *;
+@use "sass:map";
+
+@if map.get($modules, 'badge') {
+
+    .badge,
+    .badge-button {
+        display      : inline-block;
+        text-align   : center;
+        line-height  : 1;
+        transform    : translate(0%, var(--badge-top, -50%));
+        padding      : var(--badge-padding, 5px);
+        border-width : var(--badge-bor-width, 1px);
+        border-style : var(--badge-bor-style, solid);
+        border-radius: var(--badge-radius, 40%);
+    }
+
+    .badge-button {
+        transform: translate(50%, -50%);
+        position : absolute;
+        top      : 0;
+        right    : 0;
+    }
+
+}

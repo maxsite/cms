@@ -1,0 +1,323 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// Default variables
+// MODULES
+// PREFIX
+// SCREENS
+// LAYOUT/CONTAINER
+// FLEX
+// GRID
+// HIDE
+// WIDTH
+// HEIGHT
+// PADDING/ MARGIN
+// TEXT
+// BORDER
+// POSITION
+// OPACITY
+// SHADOW
+
+
+// Load files
+$modules: (
+    'background': true,
+    'block': true,
+    'border': true,
+    'column': true,
+    'cursor': true,
+    'filters': true,
+    'flex': true,
+    'gradients': true,
+    'grid': true,
+    'height': true,
+    'layout': true,
+    'line-height': true,
+    'links': true,
+    'lists': true,
+    'object-fit': true,
+    'opacity': true,
+    'padding-margin': true,
+    'position': true,
+    'rounded': true,
+    'shadow': true,
+    'table': true,
+    'text': true,
+    'transition': true,
+    'vertical-align': true,
+    'visible': true,
+    'width': true,
+) !default;
+
+
+
+
+// ***************** PREFIX *****************
+
+// global prefix for all css-classes
+// my- => .my-w50-tablet, .my-t-red700, .my-flex
+// util- => .util-w50-tablet, .util-t-red700, .util-flex
+// _ => ._w50-tablet, ._t-red700, ._flex
+$pf: "" !default;
+
+
+// ***************** SCREENS *****************
+
+// Use any variables for @media rules
+
+//      360     667      768      1024       1200
+// SMALL   PHONE   TABLET   MEDIUM    DESKTOP    LARGE
+$SCREEN_LARGE:   "(min-width: 1201px)" !default;
+$SCREEN_DESKTOP: "(max-width: 1200px)" !default;
+$SCREEN_MEDIUM:  "(max-width: 1024px)" !default;
+$SCREEN_TABLET:  "(max-width: 768px)" !default;
+$SCREEN_PHONE:   "(max-width: 667px)" !default;
+$SCREEN_SMALL:   "(max-width: 360px)" !default;
+
+// another variant
+//   576  768  992  1200
+// SM   MD   LG   XL
+// $SCREEN_XL: "(min-width: 1201px)"; // Extra large
+// $SCREEN_LG: "(max-width: 992px)";  // Large
+// $SCREEN_MD: "(max-width: 768px)";  // Medium
+// $SCREEN_SM: "(max-width: 576px)";  // Small
+
+// statistics screen resolution:
+// DESKTOP 1366    - http://gs.statcounter.com/screen-resolution-stats/desktop/worldwide
+// TABLET  768     - http://gs.statcounter.com/screen-resolution-stats/tablet/worldwide
+// PHONE   360 640 667 - http://gs.statcounter.com/screen-resolution-stats/mobile/worldwide
+
+
+// ***************** LAYOUT/CONTAINER *****************
+// classes .layoutXX
+
+// maximum container layout width for .layout-center-wrap
+$layout_max_width: 1200px !default;
+
+// maximum width layout for other size
+// .layout-center-tablet, .layout-center-wrap-phone, .layout-center-myphone
+// .w-phone, .w-phone-max, .w-phone-min
+$layout_max_width_list: (
+    "tablet": 768px,
+    "phone": 667px,
+    // "myphone": 800px, // this sample: .layout-center-myphone .layout-center-wrap-myphone
+) !default;
+
+// padding (right and left) for .layout-wrap and .layout-center
+// false for missing padding
+$layout_wrap_padding: 15px !default;
+
+
+// ***************** FLEX *****************
+
+// @media for flex classes
+// postfix: $screen
+// Point from large to small !!!
+// .flex-wrap-tablet, .flex-wrap-phone
+$screen_media_flex_list: (
+    "tablet": $SCREEN_TABLET, 
+    "phone": $SCREEN_PHONE,
+    "small": $SCREEN_SMALL,
+) !default;
+
+// flex order, grow and shrink
+// .flex-order2, .flex-grow5, .flex-shrink4 
+$flex_order_list: 1, 2, 3, 4, 5 !default;
+$flex_grow_list: 1, 2, 3, 4, 5 !default;
+$flex_shrink_list: 1, 2, 3, 4, 5 !default;
+
+// flex-basis: XXX
+$flex_basis_list: (
+    "flex-basis50px": 50px,
+    "flex-basis100px": 100px,
+    "flex-basis150px": 150px,
+) !default;
+
+
+// ***************** GRID *****************
+// .grid-var, .grid-var-tablet, .grid-var-phone, .grid-var-small,
+// .grid-item-var, .grid-item-var-tablet, .grid-item-var-phone, .grid-item-var-small
+// css-variables: --gap, --columns, --rows, --column, --row
+// --column-tablet, --columns-phone, --rows-small, --row-tablet, --gap-phone ...
+$screen_media_grid_list: (
+    "tablet": $SCREEN_TABLET, 
+    "phone": $SCREEN_PHONE,
+    "small": $SCREEN_SMALL,
+) !default;
+
+
+// ***************** HIDE *****************
+
+// @media for .hide classes
+// .hide-tablet .hide-phone
+$hide_media_list: (
+    "tablet": $SCREEN_TABLET, 
+    "phone": $SCREEN_PHONE,
+    "small": $SCREEN_SMALL,
+) !default;
+
+
+// ***************** WIDTH *****************
+
+// % width 
+// .w50, .w30-tablet
+$width_list_percent: 0, 1, 2, 3, 4, 5, 10, 15, 20, 23, 24, 25, 30, 31, 32, 33, 34, 35, 40, 45, 46, 47, 48, 49, 50, 55, 60, 65, 66, 67, 68, 69, 70, 75, 80, 85, 90, 100 !default;
+
+// PX width, max-width and min-width
+// .w70px, .w300px-max, .w50px-min
+$width_list_px: 5, 10, 15, 20, 25, 30, 35, 40, 50, 60, 100, 150, 200, 250, 300, 400, 500, 600, 700, 800 !default;
+
+// @media for width(%) classes
+// Point from large to small !!!
+// postfix: $screen
+// .w70-tablet, .w50-phone
+$screen_media_width_list: (
+    "tablet": $SCREEN_TABLET, 
+    "phone": $SCREEN_PHONE,
+    "small": $SCREEN_SMALL,
+) !default;
+
+
+// ***************** HEIGHT *****************
+
+// PX height and min-height
+// .h20px, .h100px-min, .h30px-max
+$height_list_px: 10, 15, 20, 30, 40, 50, 60, 70, 100, 200, 300, 400, 500 !default;
+
+// VH height
+// .h50vh, .h100wh
+$height_list_vh: 50, 100 !default;
+
+// @media for height classes
+$screen_media_height_list: (
+    "tablet": $SCREEN_TABLET, 
+    "phone": $SCREEN_PHONE,
+    "small": $SCREEN_SMALL,
+) !default;
+
+
+// ***************** PADDING/ MARGIN *****************
+
+// prefix for padding/margin classes 
+// pad => .pad30 | p => .p30 | pd => .pd30
+// mar => .mar30 | m => .m30 | mg => .mg30
+$padding_prefix: pad !default;
+$margin_prefix: mar !default;
+
+// set padding and margin as !important (true or false)
+$padding_margin_important: true !default;
+
+// PX padding 
+// .pad5, .pad50-t, .pad10-rl, .pad20-tb
+$padding_list: 0, 3, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 100 !default;
+
+// PX margin
+// .mar5, mar50-t, .mar10-rl, .mar20-tb
+$margin_list: 0, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 100 !default;
+
+// list values PX for $screen_media_mar_pad_step_list
+$margin_list_media: 0, 5, 10, 20, 30, 50 !default;
+$padding_list_media: 0, 5, 10, 20, 30, 50  !default;
+
+// @media for margin/padding(px)
+// Point from large to small !!!
+// postfix: $screen
+// .mar10-phone, .pad0-tablet
+$screen_media_mar_pad_list: (
+    "tablet": $SCREEN_TABLET, 
+    "phone": $SCREEN_PHONE,
+    "small": $SCREEN_SMALL,
+) !default;
+
+
+// ***************** TEXT *****************
+
+// text size REM (1rem = 100)
+// .t80, .t200
+$text_rem: .8, .9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4, 4.5, 5 !default;
+
+// text REM for @media in $screen_media_text_list
+// .t80-tablet, .t200-phone
+$text_rem_screen: .8, .9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 3, 4, 5 !default;
+
+// text size EM (1em = 100)
+// .t80em, .t200em
+$text_em: .8, .9, 1, 2 !default;
+
+// text size in PX
+// .t8px, .t20px
+$text_px: 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 25, 30, 40, 50 !default;
+
+// line-height
+// .lh120 {line-height: 1.2;}
+$text_lh: 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2 !default;
+
+// line-height in EM
+// .lh150em {line-height: 1.5em;}
+$text_lh_em: 1, 1.1, 1.2, 1.3, 1.5, 1.8, 2 !default;
+
+// text-classes for @media
+// Point from large to small !!!
+// postfix: $screen
+// .t130-tablet, .t-right-phone, .t-wrap-phone, .t-nowrap-tablet
+$screen_media_text_list: (
+    "tablet": $SCREEN_TABLET, 
+    "phone": $SCREEN_PHONE,
+    "small": $SCREEN_SMALL,
+) !default;
+
+// use in .t-mono
+$text_monospace: SFMono-Regular, Menlo, Monaco, Consolas, "PT Mono", "Liberation Mono", "Courier New", monospace !default;
+
+
+// ***************** BORDER *****************
+// see also $border_list_color below
+
+// border-width
+// .bor1, .bor2
+$border_list: 1, 2, 3, 4, 5 !default;
+
+// borders type line
+// solid, dotted, dashed, double
+// .bor-solid  .bor-dotted-rl
+$border_type_list: solid, dotted, dashed, double !default;
+
+// class .bordered
+$bordered: #D4D7DD 1px solid !default;
+
+// border-radius PX
+// .rounded10 {border-radius: 10px;}
+$rounded_list: 0, 3, 5, 7, 10, 20 !default;
+
+// for class .rounded
+$rounded: 7px !default;
+
+// .bor-none-tablet, .bor-none-phone, .bor-none-small
+$screen_media_border_list: (
+    "tablet": $SCREEN_TABLET, 
+    "phone": $SCREEN_PHONE,
+    "small": $SCREEN_SMALL,
+) !default;
+
+// ***************** POSITION *****************
+
+// position PX
+// .pos0-t, .pos10-r, .pos10-b, .pos10-l
+$position_list: 0, 10, 20, 60, 80 !default;
+
+// z-index 
+// .z-index99
+$zindex_list: 1, 2, 9, 99, 999, 9999 !default;
+
+
+// ***************** OPACITY *****************
+
+// classes for opacity: XXX and background-color: rgba(0, 0, 0, XXX)
+// .bg-op30, .hover-bg-op30, .opacity10, .hover-opacity10
+$opacity_list: .1, .2, .3, .4, .5, .6, .7, .8, .9, 1 !default;
+
+
+// ***************** SHADOW *****************
+
+//.b-shadow-var, .t-shadow-var
+$shadow-b: 0 2px 7px 0 rgba(138, 108, 108, 0.3) !default;
+$shadow-t: 1px 1px 5px #999 !default;

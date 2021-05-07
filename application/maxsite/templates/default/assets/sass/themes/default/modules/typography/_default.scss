@@ -1,0 +1,143 @@
+// (c) Berry CSS, https://maxsite.org/berry
+
+// Variables
+
+// included files
+$modules: (
+	'animate': true,
+	'badge': true,
+	'base': true,
+	'blocks': true,
+	'buttons': true,
+	'details': true,
+	'drop-cap': true,
+	'forms': true,
+	'icons': true,
+	'images': true,
+	'lines': true,
+	'links': true,
+	'print': true,
+	'root': true,
+	'table': true,
+) !default;
+
+// from BS5
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "PT Mono", "Liberation Mono", "Courier New", monospace !default;
+
+$font-family-sans-serif: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+// "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+
+// _base.scss
+$body-size-base  : 16px !default;
+$body-font-family: $font-family-sans-serif !default;
+$body-line-height: 1.6 !default;
+$body-color      : #333 !default;
+$body-bg         : #fff !default;
+$body-text-align : null !default;
+
+$h1-font-size: 2.5rem !default;
+$h2-font-size: 2rem !default;
+$h3-font-size: 1.75rem !default;
+$h4-font-size: 1.5rem !default;
+$h5-font-size: 1.2rem !default;
+$h6-font-size: 1rem !default;
+
+$headings-font-weight: normal !default;
+$headings-margin     : 0 0 .6em 0 !default;
+$headings-line-height: 1.2 !default;
+
+$paragraph-margin: 0 0 1rem 0 !default;
+
+// ::::: _links.scss :::::
+$link-color           : #4881e6 !default;
+$link-decoration      : none !default;
+$link-hover-color     : #D90000 !default;
+$link-hover-decoration: underline !default;
+
+// ::::: _blocks.scss :::::
+// <pre>
+$pre-text-color   : #333 !default;
+$pre-bg-color     : #FAFAFA !default;
+$pre-padding      : 10px 15px 10px 25px !default;
+$pre-border-top   : #DFDFDF solid 1px !default;
+$pre-border-right : #DFDFDF solid 3px !default;
+$pre-border-bottom: #DFDFDF solid 1px !default;
+$pre-border-left  : #DFDFDF solid 3px !default;
+$pre-line-height  : 1.5 !default;
+$pre-border-radius: 3px !default;
+$pre-max-height   : 0 !default; // 500px or 0 for disable scrollbar
+
+// <code>
+$code-background   : #E5F5F9 !default;
+$code-padding      : 0 5px !default;
+$code-border-radius: 3px !default;
+$code-font-size    : .9em !default;
+$code-color        : inherit !default;
+
+// <kbd> <samp> 
+$kbd-text-color      : #333 !default;
+$kbd-background-color: #e1f4df !default;
+$kbd-font-size       : .9em !default;
+$kbd-border-radius   : 0 !default;
+
+// <var>
+$var-text-color      : #333 !default;
+$var-background-color: #f4efdf !default;
+$var-font-size       : .9rem !default;
+$var-border-radius   : 3px !default;
+
+// <samp>
+$samp-text-color      : #333 !default;
+$samp-background-color: #d0ecb9 !default;
+$samp-font-size       : .9rem !default;
+$samp-border-radius   : 3px !default;
+
+// <mark>
+$mark-padding         : 0 4px !default;
+$mark-background-color: #F7F2C6 !default;
+$mark-border-radius   : 3px !default;
+$mark-font-size       : .95em !default;
+
+// <blockquote>
+$blockquote-border-left  : 5px solid #578CB4 !default;
+$blockquote-color        : #777777 !default;
+$blockquote-margin       : 20px 0 !default;
+$blockquote-padding      : 10px 0 10px 25px !default;
+$blockquote-border-radius: 7px !default;
+$blockquote-background   : null !default;
+
+// ::::: _images.scss :::::
+$images-thumbnail-border : #DDDDDD 1px solid !default;
+$images-thumbnail-padding: 4px !default;
+$images-left-margin      : 5px 20px 5px 0 !default;
+$images-right-margin     : 5px 0 5px 20px !default;
+
+// ::::: _icons.scss :::::
+$icon-rounded-radius: 5px !default;
+
+// ::::: _lines.scss :::::
+$hr-border: 1px solid #AAAAAA !default;
+$hr-margin: 30px 0 !default;
+
+// ::::: _table.scss :::::
+$table-tr-border-bottom: #d7dfe1 1px solid !default;
+
+$table-th-background   : #eff2f3 !default;
+$table-th-border-top   : #c8d3d6 1px solid !default;
+$table-th-border-bottom: #ced8da 1px solid !default;
+$table-th-padding      : .6rem .5rem !default;
+$table-th-border-right : #ced8da 1px solid !default; // .table-border
+
+$table-td-padding     : .5rem !default;
+$table-td-border-right: #d7dfe1 1px solid !default; // .table-border
+
+$table-striped-odd-bg : #ffffff !default; // .table-striped
+$table-striped-even-bg: #f1f5f5 !default;
+
+$table-tr-hover-bg: #d6e2e2 !default; // .table-hover
+
+// ::::: _root.scss :::::
+$root_list: (
+    "font-family-monospace": $font-family-monospace,
+) !default;

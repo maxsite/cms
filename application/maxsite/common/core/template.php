@@ -252,7 +252,10 @@ function mso_get_defoptions_from_ini($file)
 	if (!$arrayIni) return false;
 
 	$arrayOut = [];
-
+	
+	// для замены %CURRENTDIR% в options_key
+	$CURRENTDIR = basename(dirname($file));
+	
 	// формируем массив из options_type[ options_key ] = default
 	foreach ($arrayIni as $val) {
 
@@ -266,6 +269,8 @@ function mso_get_defoptions_from_ini($file)
 		$default = str_replace('_NBSP_', ' ', $default);
 		$default = str_replace('_NR_', "\n", $default);
 
+		$val['options_key'] = str_replace('%CURRENTDIR%', $CURRENTDIR, $val['options_key']);
+		
 		$arrayOut[$type][$val['options_key']] = $default;
 	}
 

@@ -932,7 +932,7 @@ function mso_out_css_file($fn, $tag_style = true, $echo = true)
 function mso_add_preload($fn, $auto_dir = '')
 {
 	global $MSO;
-
+    
 	if ($auto_dir) {
 		$fn = str_replace(str_replace('\\', '/', getinfo('template_dir')), '', str_replace('\\', '/', $auto_dir)) . '/' . $fn;
 	}
@@ -940,25 +940,20 @@ function mso_add_preload($fn, $auto_dir = '')
 	if (file_exists(getinfo('template_dir') . $fn)) {
 		$ext = strtolower(substr(strrchr($fn, '.'), 1)); // расширение файла
 
-		$out = '';
+		$html = '';
 
 		if ($ext == 'js')
-			$out = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="script">';
+			$html = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="script">';
 		elseif ($ext == 'css')
-			$out = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="style">';
+			$html = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="style">';
 		elseif ($ext == 'woff2')
-			$out = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="font" type="font/woff2" crossorigin="anonymous">';
+			$html = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="font" type="font/woff2" crossorigin="anonymous">';
 		elseif ($ext == 'woff')
-			$out = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="font" type="font/woff" crossorigin="anonymous">';
+			$html = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="font" type="font/woff" crossorigin="anonymous">';
 		elseif ($ext == 'mp4')
-			$out = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="video" type="video/mp4">';
+			$html = '<link rel="preload" href="' . getinfo('template_url') . $fn . '" as="video" type="video/mp4">';
 
-		if ($out) {
-			// вывод через хук head —см. mso_add_preload_hook()
-			if (!isset($MSO->data['preload_url'])) $MSO->data['preload_url'] = [];
-
-			$MSO->data['preload_url'][] = $out;
-		}
+		if ($html) mso_add_preload_html($html);
 	}
 }
 
@@ -977,6 +972,34 @@ function mso_add_preload_hook($a)
 	echo implode($MSO->data['preload_url']);
 
 	return $a;
+}
+
+/**
+ * Добавить любой html-код в конец BODY
+ * выводится как есть
+ */
+function mso_add_lazy($html)
+{
+	global $MSO;
+
+    // вывод через хук body_end — mso_add_file_body_end()
+    if (!isset($MSO->data['add_file_to_body_end'])) $MSO->data['add_file_to_body_end'] = [];
+
+    $MSO->data['add_file_to_body_end'][] = $html;
+}
+
+/**
+ * Добавить любой html-код в секцию HEAD как preload
+ * выводится как есть
+ */
+function mso_add_preload_html($html)
+{
+	global $MSO;
+
+    // вывод через хук head —см. mso_add_preload_hook()
+    if (!isset($MSO->data['preload_url'])) $MSO->data['preload_url'] = [];
+
+    $MSO->data['preload_url'][] = $html;
 }
 
 # end of file

@@ -8,7 +8,7 @@
 			h3(im-envelope mar20-b) Обратная связь
 
 			<div x-data="{result: '', agreement: true}">
-				<form x-show.transition="!result" x-ref="form" @submit.prevent="fetch('<?= mso_receive_ajax(__FILE__) ?>', {method: 'POST', headers: {'X-Requested-With': 'XMLHttpRequest',},body: new FormData($refs.form)}).then(r => r.text()).then(r => result = r);">
+				<form x-show="!result" x-transition x-ref="form" @submit.prevent="fetch('<?= mso_receive_ajax(__FILE__) ?>', {method: 'POST', headers: {'X-Requested-With': 'XMLHttpRequest',},body: new FormData($refs.form)}).then(r => r.text()).then(r => result = r);">
 					<input type="hidden" name="myform[form][source]" value="Форма 1">
 
 					_ Вы можете связаться с нами через эту форму.

@@ -8,8 +8,14 @@ if (mso_get_option('enable_sidebar2', getinfo('template'), 0))
     mso_register_sidebar('2', tf('Второй сайдбар'));
 
 // загружаем alpine — она используется в шаблоне
-mso_add_file('assets/js/alpine.min.js', true);
-mso_add_preload('assets/js/alpine.min.js');
+// mso_add_file('assets/js/alpine.min.js', true);
+// mso_add_preload('assets/js/alpine.min.js');
+
+// либо из дистрибутива
+// <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+mso_add_lazy('<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>');
+mso_add_preload_html('<link rel="preload" href="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" as="script">');
 
 // Инициализация опций шаблона. 
 if ($fn = mso_fe('custom/set-options.php')) require_once $fn;

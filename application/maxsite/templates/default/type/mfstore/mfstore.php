@@ -98,9 +98,9 @@ EOF;
         echo '<section class="my-modules mar30-tb">';
 
         foreach ($arModules as $nameBlock => $arBlocks) {
-            echo '<div class="t150 t-primary800 t-capitalize mar20-b">◈ ' . $nameBlock . '</div>';
+            echo '<div class="t250 t-primary800 t-capitalize mar20-b">◈ ' . $nameBlock . '</div>';
 
-            echo '<div class="b-flex flex-wrap mar50-b">';
+            echo '<div class="flex x-flex flex-wrap mar50-b">';
             foreach ($arBlocks as $elem) {
                 $img = getinfo('template_dir') . 'store/' . $elem . '/screenshot.png';
 
@@ -109,7 +109,7 @@ EOF;
                 else
                     $img = mso_holder(300, 50, $elem);
 
-                echo '<a class="w4col w6col-tablet w100-phone pad20-b pad20-r" href="' . $currentUrl . base64_encode($elem) . '"><img src="' . $img . '" width="w100" alt="' . $elem . '" title="' . $elem . '"></a>';
+                echo '<a class="w30 flex-as-center w50-tablet w100-phone pad10 mar20-b mar10-r bg-gray100 hover-bg-primary200" href="' . $currentUrl . base64_encode($elem) . '"><img src="' . $img . '" width="w100" alt="' . $elem . '" title="' . $elem . '"></a>';
             }
 
             echo '</div>';
@@ -124,6 +124,11 @@ echo '</div></div>';
 // для удобства отмечаем просмотренные ссылки
 echo '<style>
 .my-modules a:visited {color: #a187a9}
+.x-flex::after {
+  content: " ";
+  flex: 0 0 30%;
+}
+
 </style>';
 
 // конечная часть шаблона

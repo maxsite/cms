@@ -141,7 +141,9 @@ function shjs_head_css($arg = array())
 # замены pre в тексте
 function shjs_content($text = '')
 {
-	$options = mso_get_option('plugin_shjs', 'plugins', array());
+	$options = mso_get_option('plugin_shjs', 'plugins', []);
+    
+    $options['default_lang'] = $options['default_lang'] ?? 'sh_php';
 
 	$text = str_replace('<pre>', '<pre class="' . $options['default_lang'] . '">', $text);
 	$text = str_replace('[pre]', '[pre class="' . $options['default_lang'] . '"]', $text);

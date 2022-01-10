@@ -778,9 +778,10 @@ function mso_compress_text($text)
 	// защищенный текст
 	$text = preg_replace_callback('!(<pre.*?>)(.*?)(</pre>)!is', '_mso_protect_pre', $text);
 	$text = preg_replace_callback('!(<code.*?>)(.*?)(</code>)!is', '_mso_protect_pre', $text);
-	$text = preg_replace_callback('!(<script.*?>)(.*?)(</script>)!is', '_mso_protect_script', $text);
-	$text = preg_replace_callback('!(<style.*?>)(.*?)(</style>)!is', '_mso_protect_script', $text);
-
+	$text = preg_replace_callback('!(<script.*?>)(.*?)(</script>)!is', '_mso_protect_pre', $text); // _mso_protect_script
+	$text = preg_replace_callback('!(<style.*?>)(.*?)(</style>)!is', '_mso_protect_pre', $text);
+    $text = preg_replace_callback('!(<textarea.*?>)(.*?)(</textarea>)!is', '_mso_protect_pre', $text);
+    
 	// сжатие
 	$text = str_replace("\r", "", $text);
 	$text = str_replace("\t", ' ', $text);
@@ -815,9 +816,9 @@ function mso_remove_protocol($text)
 	// защищенный текст
 	$text = preg_replace_callback('!(<pre.*?>)(.*?)(</pre>)!is', '_mso_protect_pre', $text);
 	$text = preg_replace_callback('!(<code.*?>)(.*?)(</code>)!is', '_mso_protect_pre', $text);
-	$text = preg_replace_callback('!(<script.*?>)(.*?)(</script>)!is', '_mso_protect_script', $text);
-	$text = preg_replace_callback('!(<style.*?>)(.*?)(</style>)!is', '_mso_protect_script', $text);
-	$text = preg_replace_callback('!(<textarea.*?>)(.*?)(</textarea>)!is', '_mso_protect_script', $text);
+	$text = preg_replace_callback('!(<script.*?>)(.*?)(</script>)!is', '_mso_protect_pre', $text); // _mso_protect_script
+	$text = preg_replace_callback('!(<style.*?>)(.*?)(</style>)!is', '_mso_protect_pre', $text);
+	$text = preg_replace_callback('!(<textarea.*?>)(.*?)(</textarea>)!is', '_mso_protect_pre', $text);
 
 	$text = str_replace('https://', '//', $text);
 	$text = str_replace('http://', '//', $text);
@@ -838,8 +839,9 @@ function mso_remove_protocol($text)
  */
 function _mso_protect_pre($matches)
 {
-	$text = trim($matches[2]);
-
+    return '[html_base64]' . base64_encode($matches[1] . $matches[2] . $matches[3]) . '[/html_base64]';
+    
+    /*
 	$text = str_replace('<p>', '', $text);
 	$text = str_replace('</p>', '', $text);
 	$text = str_replace('[', '&#91;', $text);
@@ -856,9 +858,8 @@ function _mso_protect_pre($matches)
 	$text = str_replace('pre&gt;', 'pre>', $text);
 
 	$text = $matches[1] . "\n" . '[html_base64]' . base64_encode($text) . '[/html_base64]' . $matches[3];
-
-	return $text;
-}
+    */
+ }
 
 /**
  *  script и style, которые загоняются в [html_base64]
@@ -867,13 +868,13 @@ function _mso_protect_pre($matches)
  *  @param $matches matches
  *  @return string
  */
-function _mso_protect_script($matches)
-{
-	$text = trim($matches[2]);
-	$text = $matches[1] . '[html_base64]' . base64_encode($text) . '[/html_base64]' . $matches[3];
-
-	return $text;
-}
+# function _mso_protect_script($matches)
+# {
+# 	$text = trim($matches[2]);
+# 	$text = $matches[1] . '[html_base64]' . base64_encode($text) . '[/html_base64]' . $matches[3];
+# 
+# 	return $text;
+# }
 
 /**
  * получает css из указанного файла

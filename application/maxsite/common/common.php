@@ -37,4 +37,6 @@ require_once 'core/thumb.php';
 require_once 'page.php';
 require_once 'category.php';
 
+require_once 'psr4/autoload.php';
+
 # end of file

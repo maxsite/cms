@@ -237,6 +237,10 @@ function getinfo($info = '')
 		case 'version':
 			$out = $MSO->version;
 			break;
+            
+        case 'storage_dir':
+			$out = $MSO->config['application_dir'] . 'storage/';
+			break;
 
 	endswitch;
 

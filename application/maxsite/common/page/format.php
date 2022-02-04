@@ -16,13 +16,16 @@ function mso_page_edit_link($id = 0, $title = 'Редактировать', $do 
 	$id = (int) $id;
 
 	if (!$id) return '';
+	
+	$out = '';
 
-	if (is_login()) {
-		if ($echo)
-			echo $do . '<a href="' . getinfo('site_admin_url') . 'page_edit/' . $id . '">' . tf($title) . '</a>' . $posle;
-		else
-			return $do . '<a href="' . getinfo('site_admin_url') . 'page_edit/' . $id . '">' . tf($title) . '</a>' . $posle;
-	}
+	if (is_login()) 
+		$out = $do . '<a href="' . getinfo('site_admin_url') . 'page_edit/' . $id . '">' . tf($title) . '</a>' . $posle;
+	
+	if ($echo) 
+		echo $out;
+	else
+		return $out;
 }
 
 // получить ссылки на рубрики указанной страницы

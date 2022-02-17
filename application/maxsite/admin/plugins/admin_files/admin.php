@@ -525,7 +525,7 @@ $.cookie.json = true; $("div.upload_file").showHide({time: 200, useID: false, cl
 		
 		if (isset($mso_descritions[$file]))
 		{
-			$title = $mso_descritions[$file];
+			$title = htmlspecialchars($mso_descritions[$file]);
 			if ($title) $title_f = '<em>' . htmlspecialchars($title) . '</em>';
 		}
 		

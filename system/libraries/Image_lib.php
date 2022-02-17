@@ -448,6 +448,11 @@ class CI_Image_lib {
 	function image_process_gd($action = 'resize')
 	{
 		$v2_override = FALSE;
+		
+		### MAX 
+		
+		$this->width = (int) $this->width;
+		$this->height = (int) $this->height;
 
 		// If the target width/height match the source, AND if the new file name is not equal to the old file name
 		// we'll simply make a copy of the original with the new name... assuming dynamic rendering is off.

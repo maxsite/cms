@@ -79,7 +79,7 @@ function mso_page_tag_link($tags = [], $sep = ', ', $do = '', $posle = '', $echo
 				. $type
 				. urlencode($tag)
 				. '" rel="tag">'
-				. $tag
+				. htmlspecialchars($tag)
 				. '</a>   ';
 		} else
 			$out .=  $tag . '   ';

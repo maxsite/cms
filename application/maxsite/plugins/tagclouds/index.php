@@ -183,7 +183,7 @@ function tagclouds_widget_custom($options = array(), $num = 1)
 		$font_size = round( (($count - $min)/($max - $min)) * ($max_size - $min_size) + $min_size );
 			
 		$af = str_replace(array('[SIZE]', '[URL]', '[TAG]', '[COUNT]'), 
-							array($font_size, $url . urlencode($tag), $tag, $count), $options['format']);
+							array($font_size, $url . urlencode($tag), htmlspecialchars($tag), $count), $options['format']);
 
 		$out .= $af . ' ';
 		$i++;

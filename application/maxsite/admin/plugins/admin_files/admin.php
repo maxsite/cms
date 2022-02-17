@@ -188,11 +188,11 @@
 	if ( $post = mso_check_post(array('f_session_id', 'f_file_name', 'f_file_description', 'f_edit_submit')) )
 	{
 		mso_checkreferer();
-
-			// удалим описание из _mso_i/_mso_descriptions.dat
-			unset($mso_descritions[$post['f_file_name']]);
-			$mso_descritions[$post['f_file_name']]=$post['f_file_description'];
-			write_file($fn_mso_descritions, serialize($mso_descritions) ); // сохраняем файл
+		
+		// удалим описание из _mso_i/_mso_descriptions.dat
+		unset($mso_descritions[$post['f_file_name']]);
+		$mso_descritions[$post['f_file_name']]=$post['f_file_description'];
+		write_file($fn_mso_descritions, serialize($mso_descritions) ); // сохраняем файл
 
 		echo '<div class="update">' . t('Описание обновлено!') . '</div>';
 	}
@@ -205,9 +205,13 @@
 
 		foreach ($post['f_check_files'] as $file)
 		{
-			@unlink(getinfo('uploads_dir') . $current_dir . $file);
-			@unlink(getinfo('uploads_dir') . $current_dir . '_mso_i/' . $file);
-			@unlink(getinfo('uploads_dir') . $current_dir . 'mini/' . $file);
+			$file1 = mso_check_dir_file(getinfo('uploads_dir') . $current_dir, $file);
+			$file2 = mso_check_dir_file(getinfo('uploads_dir') . $current_dir . '_mso_i/', $file);
+			$file3 = mso_check_dir_file(getinfo('uploads_dir') . $current_dir . 'mini/', $file);
+			
+			if ($file1) @unlink($file1);
+			if ($file2) @unlink($file2);
+			if ($file3) @unlink($file3);
 
 			// удалим описание из _mso_i/_mso_descriptions.dat
 			unset($mso_descritions[$file]);

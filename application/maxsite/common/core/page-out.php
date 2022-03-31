@@ -451,8 +451,8 @@ class Page_out
 			}
 		}
 
-		// [meta@price]
-		// [meta@priceа|<b>|</b>]
+		// [meta@price]             [meta@@price] — если нужно преобразовать в html
+		// [meta@price|<b>|</b>]    [meta@@price|<b>|</b>]
 		if (strpos($out, '[meta@') !== false) {
 			//pr($out);
 			$out = preg_replace_callback('!(\[meta@)(.*?)(\])!is', array('self', '_line_meta_set'), $out);
@@ -532,7 +532,8 @@ class Page_out
 		}
 	}
 
-	// колбак для поиска [meta@мета]
+	// колбак для поиска [meta@мета] или [meta@@мета]
+	// если используется два @@ [meta@@мета], то нужно обрамить meta в htmlspecialchars
 	// можно указать обрамление: [meta@мета|<b>|</b>]
 	// если мета пустое, то обрамление не выводится
 	protected function _line_meta_set($matches)
@@ -541,8 +542,14 @@ class Page_out
 
 		if (strpos($m, '|') !== false) {
 			$k = explode('|', $m);
-			$m = $this->meta_val($k[0]);
-
+            
+            if (strpos($k[0], '@') === 0) {
+                $k[0] = substr($k[0], 1);
+                $m = htmlspecialchars($this->meta_val($k[0]));
+            } else {
+                $m = $this->meta_val($k[0]);
+            }
+			
 			if ($m) {
 				if (isset($k[1])) $m = $k[1] . $m;
 				if (isset($k[2])) $m .= $k[2];

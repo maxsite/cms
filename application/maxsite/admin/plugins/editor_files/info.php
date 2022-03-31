@@ -5,8 +5,8 @@ $info = array(
 	'description' => 'Файлы для редактирования',
 	'version' => '1.0',
 	'author' => 'Максим',
-	'plugin_url' => 'http://max-3000.com/',
-	'author_url' => 'http://maxsite.org/',
+	'plugin_url' => 'https://max-3000.com/',
+	'author_url' => 'https://maxsite.org/',
 	'group' => 'admin'
 );
 

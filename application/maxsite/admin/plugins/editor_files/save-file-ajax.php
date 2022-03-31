@@ -5,11 +5,14 @@ if ( $post = mso_check_post(array('file_path', 'content')) )
 	$file = base64_decode($post['file_path']);
 	$file = str_replace('~', '-', $file);
 	$file = str_replace('\\', '-', $file);
-	$file = getinfo('template_dir') . $file;
+    
+    $file = mso_check_dir_file(getinfo('template_dir'), $file);
+    
+	// $file = getinfo('template_dir') . $file;
 	
 	// бэкап делать нужно???
 	
-	if (file_exists($file)) 
+	if ($file and file_exists($file)) 
 	{
 		file_put_contents($file, $post['content']);
 	

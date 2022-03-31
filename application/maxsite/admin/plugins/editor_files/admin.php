@@ -32,10 +32,11 @@ if (mso_segment(3))
 		$f = str_replace('~', '-', $f);
 		$f = str_replace('\\', '-', $f);
 		
-		$ff = getinfo('template_dir') . $f;
-		
+		// $ff = getinfo('template_dir') . $f;
+		$ff = mso_check_dir_file(getinfo('template_dir'), $f);
+        
 		// есть такой файл
-		if (file_exists($ff)) 
+		if ($ff and file_exists($ff)) 
 		{
 			$curfile = $t2 . '<b>' . $f . '</b>';
 			$content_file = file_get_contents($ff);

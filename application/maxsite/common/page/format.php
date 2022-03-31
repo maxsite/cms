@@ -82,7 +82,7 @@ function mso_page_tag_link($tags = [], $sep = ', ', $do = '', $posle = '', $echo
 				. htmlspecialchars($tag)
 				. '</a>   ';
 		} else
-			$out .=  $tag . '   ';
+			$out .=  htmlspecialchars($tag) . '   ';
 	}
 
 	$out = trim($out);

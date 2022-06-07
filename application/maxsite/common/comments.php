@@ -776,6 +776,7 @@ function mso_get_new_comment($args = [])
 
                                 $name_cookies = 'maxsite_comuser';
                                 $value = serialize($comuser_info);
+                                $value = mso_de_code($value, 'encode'); // кодируем данные
 
                                 // ставим куку и редиректимся автоматом
                                 mso_add_to_cookie(
@@ -1639,6 +1640,7 @@ function mso_comuser_auth($data)
 
                 $name_cookies = 'maxsite_comuser';
                 $value = serialize($comuser_info);
+                $value = mso_de_code($value, 'encode'); // кодируем данные
 
                 mso_add_to_cookie($name_cookies, $value, $expire, $redirect); // в куку для всего сайта
             } else {
@@ -1658,6 +1660,7 @@ function mso_comuser_auth($data)
             $expire  = time() + 60 * 60 * 24 * 365; // 365 дней
             $name_cookies = 'maxsite_comuser';
             $value = serialize($comuser_info);
+            $value = mso_de_code($value, 'encode'); // кодируем данные
 
             mso_add_to_cookie($name_cookies, $value, $expire, $redirect); // в куку для всего сайта
         }
@@ -1741,9 +1744,10 @@ function mso_comuser_auth($data)
                 'comusers_last_visit' => '',
             ];
 
-            $value = serialize($comuser_info);
-            $expire  = time() + 60 * 60 * 24 * 365; // 365 дней
             $name_cookies = 'maxsite_comuser';
+            $expire  = time() + 60 * 60 * 24 * 365; // 365 дней
+            $value = serialize($comuser_info);
+            $value = mso_de_code($value, 'encode'); // кодируем данные
 
             mso_add_to_cookie($name_cookies, $value, $expire, $redirect); // в куку для всего сайта
 

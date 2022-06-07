@@ -109,34 +109,39 @@ function mso_initalizing()
 
 	// аналогично проверяем и комюзера, только данные из куки
 	// но при этом сразу сохраняем все данные комюзера, чтобы потом не обращаться к БД
-
 	$comuser = mso_get_cookie('maxsite_comuser', false);
-
+     
 	if ($comuser) {
-		$comuser = unserialize($comuser);
-		/*
-		[comusers_id] => 1
-		[comusers_password] => 037035235237852
-		[comusers_email] => max-3000@list.ru
-		[comusers_nik] => Максим
-		[comusers_url] => http://maxsite.org/
-		[comusers_avatar_url] => http://maxsite.org/avatar.jpg
-		*/
-		// нужно сверить с тем, что есть
+        $comuser = mso_de_code($comuser, 'decode'); // данные закодированы
+		$comuser = @unserialize($comuser);
+        
+        if ($comuser) {
+            /*
+            [comusers_id] => 1
+            [comusers_password] => 037035235237852
+            [comusers_email] => max-3000@yyy.com
+            [comusers_nik] => Максим
+            [comusers_url] => https://maxsite.org/
+            [comusers_avatar_url] => https://maxsite.org/avatar.jpg
+            */
 
-		$CI->db->select('comusers_id, comusers_password, comusers_email');
-		$CI->db->where('comusers_id', $comuser['comusers_id']);
-		$CI->db->where('comusers_password', mso_de_code($comuser['comusers_password'], 'decode'));
-		$CI->db->where('comusers_email', $comuser['comusers_email']);
+            // нужно сверить с тем, что есть
+            $CI->db->select('comusers_id, comusers_password, comusers_email');
+            $CI->db->where('comusers_id', $comuser['comusers_id']);
+            $CI->db->where('comusers_password', mso_de_code($comuser['comusers_password'], 'decode'));
+            $CI->db->where('comusers_email', $comuser['comusers_email']);
 
-		$query = $CI->db->get('comusers');
-		if ($query->num_rows()) {
-			// есть такой комюзер
-			$CI->session->userdata['comuser'] = $comuser;
-		} else {
-			// неверные данные
-			$CI->session->userdata['comuser'] = 0;
-		}
+            $query = $CI->db->get('comusers');
+            
+            if ($query->num_rows()) {
+                $CI->session->userdata['comuser'] = $comuser; // есть такой комюзер
+            } else {
+                
+                $CI->session->userdata['comuser'] = 0; // неверные данные
+            }
+        } else {
+            $CI->session->userdata['comuser'] = 0; // неверные данные
+        }
 	} else {
 		$CI->session->userdata['comuser'] = 0;
 	}

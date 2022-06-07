@@ -115,6 +115,7 @@ function _mso_login()
 
 					$name_cookies = 'maxsite_comuser';
 					$value = serialize($comuser_info);
+                    $value = mso_de_code($value, 'encode'); // кодируем данные
 
 					mso_add_to_cookie($name_cookies, $value, $expire, $flogin_redirect); // в куку для всего сайта
 
@@ -198,17 +199,8 @@ function _mso_logout()
 	$comuser = mso_get_cookie('maxsite_comuser', false);
 
 	if ($comuser) {
-		$name_cookies = 'maxsite_comuser';
-		$expire  = time() - 31500000;
-		$value = '';
-
 		if (isset($ci->session->userdata['comuser'])) unset($ci->session->userdata['comuser']);
-
-		//_pr($url);
-		// mso_add_to_cookie('mso_edit_form_comuser', '', $expire); 
-		//mso_add_to_cookie($name_cookies, $value, $expire, getinfo('siteurl') . mso_current_url()); // в куку для всего сайта
-		mso_add_to_cookie($name_cookies, $value, $expire, $url); // в куку для всего сайта
-
+		mso_add_to_cookie('maxsite_comuser', '', time() - 31500000, $url); // в куку для всего сайта - сбрасывваем
 	} elseif ($url) {
 		mso_redirect($url, true);
 	} else {

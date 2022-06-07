@@ -11,20 +11,32 @@ global $MAIN_FILE;
 if ($fn = mso_fe('custom/main-template.php')) {
 	$MAIN_FILE = $fn;
 } else {
-	// main_template_slug main-шаблон по адресам — это самый высокий приоритет
-	// category/news = no-sidebar
-	// page/about = left-sidebar
-	if ($main_template_slug = mso_get_option('main_template_slug', getinfo('template'), '')) {
-		// ищем вхождение текущего адреса в списке опции
-		// сразу убираем пагинацию из адреса 
-		$current_url = str_replace('/next/' . mso_current_paged(), '', mso_current_url());
+    // если main_file ещё не определён в файлах шаблона, то смотрим настройки их админки
+    if (!mso_get_val('main_file')) {
+        // main_template_slug main-шаблон по адресам — это самый высокий приоритет
+        // category/news = no-sidebar
+        // page/about = left-sidebar
+        if ($main_template_slug = mso_get_option('main_template_slug', getinfo('template'), '')) {
+            // ищем вхождение текущего адреса в списке опции
+            // сразу убираем пагинацию из адреса 
+            $current_url = str_replace('/next/' . mso_current_paged(), '', mso_current_url());
 
-		if ($m = mso_text_find_key($main_template_slug, $current_url)) {
-			if ($fn = mso_fe('main/' . $m . '/main.php')) {
-				mso_set_val('main_file', $fn); // выставляем путь к файлу
-			}
-		}
-	}
+            if ($m = mso_text_find_key($main_template_slug, $current_url)) {
+                if ($fn = mso_fe('main/' . $m . '/main.php')) {
+                    mso_set_val('main_file', $fn); // выставляем путь к файлу
+                }
+            }
+        } else {
+            // проверим, может адрес указан в опции «Шаблоны вывода по типам данных»
+            if ($main_template_type = mso_get_option('main_template_type', getinfo('template'), '')) {
+                if ($m = mso_text_find_key($main_template_type, getinfo('type'))) {
+                    if ($fn = mso_fe('main/' . $m . '/main.php')) {
+                        mso_set_val('main_file', $fn); // выставляем путь к файлу
+                    }
+                }
+            }
+        }
+    }
 
 	// если main-файл не выставлен, то проверяем другие варианты 
 

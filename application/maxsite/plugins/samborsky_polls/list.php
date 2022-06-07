@@ -109,7 +109,9 @@ if( $query->num_rows() ){
 		$cell1 = $id;
 		$cell2 = "<a href='{$url_path}manage/{$id}'>$qu</a>";
 		$cell3 = '<div align="right">' . number_format($row->q_totalvotes,0,' ',' ') . '</div>';
-		$cell4 = strftime("%m-%d-%Y", $row->q_timestamp);
+		
+        # $cell4 = strftime("%m-%d-%Y", $row->q_timestamp); # Function strftime() is deprecated in PHP 8.1
+		$cell4 = date("m-d-Y", $row->q_timestamp);
 
 		if(!$row->q_active)
 		{

@@ -4,10 +4,10 @@
 <ul class="flex-grow3">
 <li><a href="https://max-3000.com/"><?= t('Официальный сайт MaxSite CMS') ?></a> &bull; <a href="https://max-3000.com/page/donation"><?= t('Помочь проекту') ?></a></li>
 <li><a href="https://github.com/maxsite/cms"><?= t('Исходный код на GitHub') ?></a> &bull; <a href="https://github.com/maxsite/cms/commits/master"><?= t('История изменений') ?></a></li>
-<li><a href="https://github.com/maxsite/cms/issues"><?= t('Сообщить о проблеме. Форум') ?></a></li>
+<li><a href="https://github.com/maxsite/cms/issues"><?= t('Сообщить о проблеме. Форум') ?></a> &bull; <a href="https://maxsite.org/tg-chat"><?= t('Чат в Telegram') ?></a></li>
 <li><a href="https://max-3000.com/doc"><?= t('Документация') ?></a> &bull; <a href="https://max-3000.com/book"><?= t('Основы работы с MaxSite CMS') ?></a></li>
-<li><a href="http://maxhub.ru/"><?= t('MaxHub - сообщество MaxSite CMS') ?></a> &bull; <a href="http://maxhub.ru/category/templates"><?= t('Шаблоны') ?></a> &bull; <a href="http://maxhub.ru/category/plugins"><?= t('Плагины') ?></a></li>
-<li><a href="https://maxsite.org/demo-templates"><?= t('Демо-каталог шаблонов') ?></a> &bull; <a href="https://maxsite.org/page/templates"><?= t('Готовые шаблоны') ?></a></li>
+<!-- <li><a href="http://maxhub.ru/"><?= t('MaxHub - сообщество MaxSite CMS') ?></a> &bull; <a href="http://maxhub.ru/category/templates"><?= t('Шаблоны') ?></a> &bull; <a href="http://maxhub.ru/category/plugins"><?= t('Плагины') ?></a></li> -->
+<li><a href="https://maxsite.org/studio"><?= t('Готовые шаблоны') ?></a></li>
 </ul>
 <div class="flex-grow1">
 	<iframe src="https://maxsite.github.io/version.html?version=<?= getinfo('version') ?>" scrolling="no" frameborder="no" style="width: 100%; height: 60px; "></iframe>

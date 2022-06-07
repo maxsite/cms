@@ -234,8 +234,9 @@ function mso_current_url($absolute = false, $explode = false, $delete_request = 
 	if ($absolute) return $url;
 
 	$url = str_replace(getinfo('site_url'), '', $url);
-	$url = trim(str_replace('/', ' ', $url));
-	$url = str_replace(' ', '/', $url);
+	$url = rtrim($url, '/');
+	// $url = trim(str_replace('/', ' ', $url));
+	// $url = str_replace(' ', '/', $url);
 	$url = urldecode($url);
 
 	if ($explode) $url = explode('/', $url);

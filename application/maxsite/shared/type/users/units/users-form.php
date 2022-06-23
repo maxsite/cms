@@ -72,7 +72,8 @@ if ($comuser_info) {
 
 				eval(mso_tmpl_ts('type/users/units/users-loginform-tmpl.php'));
 			} else {
-				$comusers_description = htmlspecialchars(strip_tags($comusers_description));
+                if ($comusers_description)
+                    $comusers_description = htmlspecialchars(strip_tags($comusers_description));
 
 				// чекбоксы
 				$check_subscribe_my_comments = (isset($comusers_meta['subscribe_my_comments']) and $comusers_meta['subscribe_my_comments'] == '1') ? ' checked="checked"' : '';

@@ -3,11 +3,11 @@
 $info = array(
 	'name' => t('Парсер текста Simple'),
 	'description' => t('Обрабатывает текст в HTML'),
-	'version' => '2023-02-25',
+	'version' => '2023-05-02',
 	'author' => 'Максим',
-	'plugin_url' => 'http://lpf.maxsite.com.ua/simple',
+	'plugin_url' => 'https://max-3000.com/book/simple',
 	'help' => 'https://max-3000.com/book/simple', 
-	'author_url' => 'https://max-3000.com/',
+	'author_url' => 'https://maxsite.org/',
 	'group' => 'system',
 );
 

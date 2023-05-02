@@ -2,12 +2,13 @@
 
 /**
  * MaxSite CMS
- * (c) http://max-3000.com/
+ * (c) https://max-3000.com/
  */
 
 function parser_simple_autoload()
 {
 	mso_hook_add('parser_register', 'parser_simple_register');  // парсер Simple
+	require_once(getinfo('plugins_dir') . 'parser_simple/simple.php');
 }
 
 function parser_simple_register($parsers = array())
@@ -20,16 +21,11 @@ function parser_simple_register($parsers = array())
 	return $parsers;
 }
 
-
 function parser_simple_content($text = '')
 {
-    require_once(getinfo('plugins_dir') . 'parser_simple/simple.php');
-    
 	$text = autotag_simple($text);
-	
 	return $text;
 }
-
 
 function parser_simple_post_edit($text = '')
 {

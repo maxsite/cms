@@ -25,6 +25,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/security.html
  */
+#[\AllowDynamicProperties]
 class CI_Security {
 
 	/**

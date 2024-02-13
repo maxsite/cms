@@ -31,6 +31,7 @@ if ( ! function_exists('xml_parser_create'))
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/xmlrpc.html
  */
+#[\AllowDynamicProperties]
 class CI_Xmlrpc {
 
 	var $debug			= FALSE;	// Debugging on or off

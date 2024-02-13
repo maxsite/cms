@@ -170,7 +170,7 @@ function mso_slug($slug)
         $slug = strtr(trim($slug), $repl);
         $slug = htmlentities($slug); // если есть что-то из юникода
         $slug = strtr(trim($slug), $repl);
-        $slug = strtolower($slug);
+        $slug = mb_strtolower($slug);
 
         // разрешим расширение .html
         $slug = str_replace('.htm', '@HTM@', $slug);

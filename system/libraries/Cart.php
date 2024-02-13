@@ -25,6 +25,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/cart.html
  */
+#[\AllowDynamicProperties]
 class CI_Cart {
 
 	// These are the regular expression rules that we use to validate the product ID and product name

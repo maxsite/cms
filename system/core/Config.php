@@ -27,6 +27,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/config.html
  */
+#[\AllowDynamicProperties]
 class CI_Config {
 
 	/**

@@ -23,6 +23,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
+#[\AllowDynamicProperties]
 class CI_DB_Cache {
 
 	var $CI;

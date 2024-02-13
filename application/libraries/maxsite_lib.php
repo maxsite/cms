@@ -27,6 +27,7 @@ class Maxsite_lib
     public $cache = [];
     public $shortcode = [];
     public $js = [];
+    public $key_options = [];
 
     public function __construct()
     {

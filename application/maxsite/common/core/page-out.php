@@ -470,7 +470,8 @@ class Page_out
 		// [plur@page_count_comments|комментарий|комментария|комментариев]
 		// VAL — ключ из $this->page
 		if (strpos($out, '[plur@') !== false) {
-			$out = preg_replace_callback('!(\[plur@)(.*?)(\])!is', array('self', '_line_plur_set'), $out);
+			$out = preg_replace_callback('!(\[plur@)(.*?)(\])!is', array(self::class, '_line_plur_set'), $out);
+			// $out = preg_replace_callback('!(\[plur@)(.*?)(\])!is', array('self', '_line_plur_set'), $out);
 		}
 
 		if (strpos($out, '[content]') !== false) {

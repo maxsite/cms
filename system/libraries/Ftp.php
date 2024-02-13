@@ -25,6 +25,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/ftp.html
  */
+#[\AllowDynamicProperties]
 class CI_FTP {
 
 	var $hostname	= '';

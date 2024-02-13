@@ -25,6 +25,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/javascript.html
  */
+#[\AllowDynamicProperties]
 class CI_Javascript {
 
 	var $_javascript_location = 'js';

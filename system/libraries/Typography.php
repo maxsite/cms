@@ -23,6 +23,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/helpers/
  */
+#[\AllowDynamicProperties]
 class CI_Typography {
 
 	// Block level elements that should not be wrapped inside <p> tags

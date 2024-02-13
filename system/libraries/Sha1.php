@@ -43,6 +43,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/general/encryption.html
  */
+#[\AllowDynamicProperties]
 class CI_SHA1 {
 
 	public function __construct()

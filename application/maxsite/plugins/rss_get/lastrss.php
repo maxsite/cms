@@ -31,7 +31,7 @@
  
 */
 
-
+#[\AllowDynamicProperties]
 class lastRSS {
 	// -------------------------------------------------------------------
 	// Public properties

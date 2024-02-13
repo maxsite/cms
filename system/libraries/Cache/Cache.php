@@ -25,6 +25,7 @@
  * @author		EllisLab Dev Team
  * @link
  */
+#[\AllowDynamicProperties]
 class CI_Cache extends CI_Driver_Library {
 
 	protected $valid_drivers 	= array(

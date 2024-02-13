@@ -27,6 +27,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/encryption.html
  */
+#[\AllowDynamicProperties]
 class CI_Hooks {
 
 	/**

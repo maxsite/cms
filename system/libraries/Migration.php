@@ -28,6 +28,7 @@
  * @author		Reactor Engineers
  * @link
  */
+#[\AllowDynamicProperties]
 class CI_Migration {
 
 	protected $_migration_enabled = FALSE;

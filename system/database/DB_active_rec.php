@@ -27,6 +27,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/database/
  */
+#[\AllowDynamicProperties]
 class CI_DB_active_record extends CI_DB_driver {
 
 	var $ar_select				= array();

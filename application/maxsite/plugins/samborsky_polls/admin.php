@@ -20,7 +20,7 @@
 		echo <<<EOFA
 
 		<!-- admin styles  -->
-		<link rel="stylesheet" href="${path}css/style_admin.css">
+		<link rel="stylesheet" href="{$path}css/style_admin.css">
 
 EOFA;
 
@@ -37,10 +37,10 @@ EOFA;
 		echo <<<EOFL
 
 			<!-- admin JS -->
-		<script src="${path}js/admin.js"></script>
+		<script src="{$path}js/admin.js"></script>
 			<!-- jQuery TableSorter + Pagination -->
 		<script>var nmb_rec = {$nmb_rec};</script>
-		<script src="${path}js/jTPS.js"></script>
+		<script src="{$path}js/jTPS.js"></script>
 		<script>
 			var list_ajax = "{$list_ajax}";
 			$(document).ready(function(){
@@ -57,10 +57,10 @@ EOFL;
 		echo <<<EOFM
 
 			<!-- admin JS -->
-		<script src="${path}js/admin.js"></script>
+		<script src="{$path}js/admin.js"></script>
 			<!-- jQuery UI (DatePicker) -->
-		<script src="${path}js/jquery-ui-1.8.16.custom.min.js"></script>
-		<link rel="stylesheet" href="${path}css/jquery-ui-1.8.16.custom.css">
+		<script src="{$path}js/jquery-ui-1.8.16.custom.min.js"></script>
+		<link rel="stylesheet" href="{$path}css/jquery-ui-1.8.16.custom.css">
 		<script>
 			var text = ["{$text[0]}", "{$text[1]}"];
 			$(function() {

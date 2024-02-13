@@ -27,6 +27,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/email.html
  */
+#[\AllowDynamicProperties]
 class CI_Email {
 
 	var	$useragent		= "CodeIgniter";

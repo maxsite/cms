@@ -25,6 +25,7 @@
  * @author		EllisLab Dev Team
  * @link
  */
+#[\AllowDynamicProperties]
 class CI_Cache_file extends CI_Driver {
 
 	protected $_cache_path;

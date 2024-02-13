@@ -27,6 +27,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/calendar.html
  */
+#[\AllowDynamicProperties]
 class CI_Calendar {
 
 	var $CI;

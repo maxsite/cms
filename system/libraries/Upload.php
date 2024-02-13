@@ -25,6 +25,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/file_uploading.html
  */
+#[\AllowDynamicProperties]
 class CI_Upload {
 
 	public $max_size				= 0;

@@ -25,6 +25,7 @@
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/sessions.html
  */
+#[\AllowDynamicProperties]
 class CI_Session {
 
 	var $sess_encrypt_cookie		= FALSE;

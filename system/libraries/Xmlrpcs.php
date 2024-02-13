@@ -35,6 +35,7 @@ if ( ! class_exists('CI_Xmlrpc'))
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/xmlrpc.html
  */
+#[\AllowDynamicProperties]
 class CI_Xmlrpcs extends CI_Xmlrpc
 {
 	var $methods		= array();	//array of methods mapped to function names and signatures

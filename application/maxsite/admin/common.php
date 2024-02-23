@@ -208,7 +208,8 @@ function mso_admin_pagination($r)
 	if (!function_exists('pagination_go'))
 		require_once(getinfo('plugins_dir') . 'pagination/index.php');
 	
-	// только со своими настройками, не зависимо от опций плагина 
+	// только со своими настройками, не зависимо от опций плагина
+    if ($r === false) $r = []; // php 8
 	$r['format'] = array();
 	$r['format_first'] = '';
 	$r['format_prev']  = '';

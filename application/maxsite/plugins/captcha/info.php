@@ -3,10 +3,10 @@
 $info = array(
 	'name' => t('Антиспам-картинка'),
 	'description' => t('Капча для комментариев'),
-	'version' => '4',
+	'version' => '4.1',
 	'author' => 'Максим',
 	'plugin_url' => '',
-	'author_url' => '//maxsite.org/',
+	'author_url' => 'https://maxsite.org/',
 	'group' => 'security'
 );
 

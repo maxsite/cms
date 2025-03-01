@@ -3,10 +3,10 @@
 $info = array(
 	'name' => t('Гостевая книга'),
 	'description' => t('Гостевая книга на вашем сайте'),
-	'version' => '1.9',
+	'version' => '2.0',
 	'author' => 'Максим',
 	'plugin_url' => '',
-	'author_url' => '//maxsite.org/',
+	'author_url' => 'https://maxsite.org/',
 	'group' => 'template',
 	'options_url' => getinfo('site_admin_url') . 'guestbook',
 );

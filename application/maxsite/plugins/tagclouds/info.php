@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Облако меток'),
 	'description' => t('Виджет облака тэгов (меток)'),
-	'version' => '1.3',
+	'version' => '1.4',
 	'author' => 'Максим',
 	'editors' => 'Avish',
 	'plugin_url' => '',

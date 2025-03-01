@@ -41,7 +41,7 @@ function captcha_go($args = array())
 
 	echo '
 		<div class="captcha"><label for="comments_captha">' . tf('Введите нижние символы') . '</label>
-		<input type="text" name="comments_captha" id="comments_captha" value="" maxlength="4" class="comments_captha" autocomplete="off"> <img src="' 
+		<input type="text" name="comments_captha" id="comments_captha" value="" maxlength="4" class="comments_captha form-input" autocomplete="off"> <img src="' 
 			. create_captha_img(mso_md5($MSO->data['session']['session_id'] . mso_current_url()))
 			. '" alt="" title="' . tf('Защита от спама: введите только нижние символы') . '"> <span>' . t('(обязательно)') . '</span><br><br></div>
 		';

@@ -122,11 +122,11 @@ else
 		
 		if ($key != 'text')
 		{
-			echo '<input name="f_fields_guestbook[' . $key . ']" type="text"></label></p>';
+			echo '<input class="form-input" name="f_fields_guestbook[' . $key . ']" type="text"></label></p>';
 		}
 		else
 		{ 
-			echo '<textarea name="f_fields_guestbook[' . $key . ']" rows="10"></textarea></label></p>';
+			echo '<textarea class="form-input" name="f_fields_guestbook[' . $key . ']" rows="10"></textarea></label></p>';
 		}
 	}
 
@@ -139,9 +139,9 @@ else
 			. '" title="' . t('Защита от спама: введите только нижние символы') . '">';
 			
 	echo '<p><label><span>' . t('Нижние символы:') . $captcha . '</span>
-		<input type="text" name="f_guestbook_captha" value="" maxlength="4" required></label></p>';
+		<input class="form-input" style="width: 30%" type="text" name="f_guestbook_captha" value="" maxlength="4" required></label></p>';
 	
-	echo '<p><button type="submit" class="i submit" name="f_submit_guestbook">' . t('Отправить') . '</button></p>';
+	echo '<p><button type="submit" class="button" name="f_submit_guestbook">' . t('Отправить') . '</button></p>';
 	
 	echo '</form></div>';
 }
@@ -171,15 +171,17 @@ if ($pag_row > 0)
 }
 else
 {
-	$pag = false;
+	$pag = [];
 }
 
 // теперь получаем сами записи
 $CI->db->from('guestbook');
 $CI->db->where('guestbook_approved', '1');
 $CI->db->order_by('guestbook_date', 'desc');
-if ($pag and $offset) $CI->db->limit($pag['limit'], $offset);
-	else $CI->db->limit($pag['limit']);
+if ($pag and $offset) 
+    $CI->db->limit($pag['limit'], $offset);
+// else 
+//     $CI->db->limit($pag['limit']);
 
 $query = $CI->db->get();
 

@@ -158,7 +158,9 @@ function tagclouds_widget_custom($options = array(), $num = 1)
 		else $sort = (int) $options['sort'];
 		
 	$tagcloud = mso_get_all_tags_page();
-	
+    
+	if (!$tagcloud) return '';
+
 	asort($tagcloud);
 	$min = reset($tagcloud);
     $max = end($tagcloud);

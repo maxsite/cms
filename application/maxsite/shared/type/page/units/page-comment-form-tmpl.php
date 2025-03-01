@@ -36,7 +36,7 @@
 		
 			{% mso_hook('comments_content_start') %}
 			
-			<textarea name="comments_content" id="comments_content" rows="10"></textarea>
+			<textarea class="form-input" name="comments_content" id="comments_content" rows="10"></textarea>
 			
 			<!-- нет залогирования -->
 			{% if (!is_login() and (!$comuser = is_login_comuser())) : %}
@@ -51,7 +51,7 @@
 							<p>
 								<label><input {{ $t_hidden }} name="comments_reg" id="comments_reg_1" value="noreg"> {{ tf('Ваше имя') }}</label>
 								
-								<input type="text" name="comments_author" onfocus="document.getElementById('comments_reg_1').checked = 'checked';" placeholder="{{ tf('Ваше имя') }}">
+								<input class="form-input" type="text" name="comments_author" onfocus="document.getElementById('comments_reg_1').checked = 'checked';" placeholder="{{ tf('Ваше имя') }}">
 								<br><i>{{ $to_moderate }}</i>
 							</p>
 						
@@ -67,26 +67,26 @@
 							
 							<p>
 								<label for="comments_email">{{ tf('E-mail') }}</label>
-								<input type="email" name="comments_email" id="comments_email" onfocus="document.getElementById('comments_reg_2').checked = 'checked';"> 
+								<input class="form-input" style="width: 85%" type="email" name="comments_email" id="comments_email" onfocus="document.getElementById('comments_reg_2').checked = 'checked';"> 
 										
 								&nbsp;&nbsp;
 								
-								<button type="button" title="{{ tf('Использовать email как пароль') }}" onclick="document.getElementById('comments_reg_2').checked = 'checked'; document.getElementById('comments_password').value=document.getElementById('comments_email').value; ">&gt;</button>
+								<button class="button" type="button" title="{{ tf('Использовать email как пароль') }}" onclick="document.getElementById('comments_reg_2').checked = 'checked'; document.getElementById('comments_password').value=document.getElementById('comments_email').value; ">&gt;</button>
 								
 								&nbsp;&nbsp;
 								
 								<label for="comments_password">{{ tf('Пароль') }}</label>
-								<input type="password" name="comments_password" id="comments_password" onfocus="document.getElementById('comments_reg_2').checked = 'checked';">
+								<input class="form-input" type="password" name="comments_password" id="comments_password" onfocus="document.getElementById('comments_reg_2').checked = 'checked';">
 							</p>
 							
 							<p>
 								<label for="comments_comusers_nik">{{ tf('Ваше имя') }}</label>
-								<input type="text" name="comments_comusers_nik" id="comments_comusers_nik" onfocus="document.getElementById('comments_reg_2').checked = 'checked';">
+								<input class="form-input" type="text" name="comments_comusers_nik" id="comments_comusers_nik" onfocus="document.getElementById('comments_reg_2').checked = 'checked';">
 								
 								&nbsp;&nbsp;
 								
 								<label for="comments_comusers_url">{{ tf('Сайт') }}</label>
-								<input type="url" name="comments_comusers_url" id="comments_comusers_url" onfocus="document.getElementById('comments_reg_2').checked = 'checked';">
+								<input class="form-input" type="url" name="comments_comusers_url" id="comments_comusers_url" onfocus="document.getElementById('comments_reg_2').checked = 'checked';">
 							</p>
 						
 						{% endif %}
@@ -109,7 +109,7 @@
 						
 							<input type="hidden" name="comments_reg" id="comments_reg_1" value="noreg">
 							
-							<p><input type="text" name="comments_author" placeholder="{{ tf('Ваше имя') }}" class="mso-comments-input-author"></p>
+							<p><input class="form-input" type="text" name="comments_author" placeholder="{{ tf('Ваше имя') }}" class="mso-comments-input-author"></p>
 								
 							<p><i>{{ $to_moderate }}</i></p>
 						
@@ -130,7 +130,7 @@
 
 			{% mso_hook('comments_content_end') %}
 			
-			<div class="mar10-tb"><button name="comments_submit" type="submit">{{ tf('Отправить') }}</button></div>
+			<div class="mar10-tb"><button class="button" name="comments_submit" type="submit">{{ tf('Отправить') }}</button></div>
 			
 		</div><!-- div class="mso-comments-textarea" -->
 	</form>

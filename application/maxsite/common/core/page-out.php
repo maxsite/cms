@@ -455,13 +455,13 @@ class Page_out
 		// [meta@price|<b>|</b>]    [meta@@price|<b>|</b>]
 		if (strpos($out, '[meta@') !== false) {
 			//pr($out);
-			$out = preg_replace_callback('!(\[meta@)(.*?)(\])!is', array('self', '_line_meta_set'), $out);
+			$out = preg_replace_callback('!(\[meta@)(.*?)(\])!is', array(__CLASS__, '_line_meta_set'), $out);
 			//pr($out);
 		}
 
 		// [val@price] — произвольный val из page
 		if (strpos($out, '[val@') !== false) {
-			$out = preg_replace_callback('!(\[val@)(.*?)(\])!is', array('self', '_line_val_set'), $out);
+			$out = preg_replace_callback('!(\[val@)(.*?)(\])!is', array(__CLASS__, '_line_val_set'), $out);
 		}
 
 		// Склонение числительных 
@@ -471,7 +471,7 @@ class Page_out
 		// VAL — ключ из $this->page
 		if (strpos($out, '[plur@') !== false) {
 			$out = preg_replace_callback('!(\[plur@)(.*?)(\])!is', array(self::class, '_line_plur_set'), $out);
-			// $out = preg_replace_callback('!(\[plur@)(.*?)(\])!is', array('self', '_line_plur_set'), $out);
+			// $out = preg_replace_callback('!(\[plur@)(.*?)(\])!is', array(__CLASS__, '_line_plur_set'), $out);
 		}
 
 		if (strpos($out, '[content]') !== false) {
@@ -479,18 +479,18 @@ class Page_out
 		}
 
 		if (strpos($out, '[content_chars@') !== false) {
-			$out = preg_replace_callback('!(\[content_chars@)(.*?)(\])!is', array('self', '_line_content_chars'), $out);
+			$out = preg_replace_callback('!(\[content_chars@)(.*?)(\])!is', array(__CLASS__, '_line_content_chars'), $out);
 		}
 
 		if (strpos($out, '[content_words@') !== false) {
-			$out = preg_replace_callback('!(\[content_words@)(.*?)(\])!is', array('self', '_line_content_words'), $out);
+			$out = preg_replace_callback('!(\[content_words@)(.*?)(\])!is', array(__CLASS__, '_line_content_words'), $out);
 		}
 
 		/**
 		 * количество записей в указанной рубрике [cat_pages_count@7]
 		 */
 		if (strpos($out, '[cat_pages_count@') !== false) {
-			$out = preg_replace_callback('!(\[cat_pages_count@)(.*?)(\])!is', array('self', '_cat_pages_count'), $out);
+			$out = preg_replace_callback('!(\[cat_pages_count@)(.*?)(\])!is', array(__CLASS__, '_cat_pages_count'), $out);
 		}
 
 		/**
@@ -500,7 +500,7 @@ class Page_out
 		 * function my_f($p, $a1 = 0, $a2 = 10, $a3 = 0) {...}
 		 */
 		if (strpos($out, '[func@') !== false) {
-			$out = preg_replace_callback('!(\[func@)(.*?)(\])!is', array('self', '_line_func'), $out);
+			$out = preg_replace_callback('!(\[func@)(.*?)(\])!is', array(__CLASS__, '_line_func'), $out);
 		}
 
 		$out = str_replace('[title]', $title, $out);

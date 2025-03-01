@@ -44,13 +44,16 @@ $CI->table->set_heading('ID', 'Дата, IP, Браузер', 'Имя', 'Тек�
 // нам нужна все поля таблицы
 // вначале определим общее количество записей
 $pag = array(); // пагинация
-$pag['limit'] = $options['limit']; // записей на страницу
+$pag['limit'] = $options['limit'] ?? 10; // записей на страницу
 $pag['type'] = ''; // тип
 
 $CI->db->select('guestbook_id');
 $CI->db->from('guestbook');
 $query = $CI->db->get();
 $pag_row = $query->num_rows();
+
+$offset = 0;
+
 
 if ($pag_row > 0)
 {
@@ -63,14 +66,17 @@ if ($pag_row > 0)
 }
 else
 {
-	$pag = false;
+	$pag = [];
 }
+
 
 // теперь получаем сами записи
 $CI->db->from('guestbook');
 $CI->db->order_by('guestbook_date', 'desc');
-if ($pag and $offset) $CI->db->limit($pag['limit'], $offset);
-	else $CI->db->limit($pag['limit']);
+if ($pag and $offset) 
+    $CI->db->limit($pag['limit'], $offset);
+// else 
+//     $CI->db->limit($pag['limit']);
 			
 $query = $CI->db->get();
 

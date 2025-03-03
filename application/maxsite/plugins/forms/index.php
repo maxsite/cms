@@ -72,10 +72,10 @@ function forms_content_callback($matches)
 	// служебная секция [files] 
 	$def = array(
 		'file_count' => 0, // количество полей - если 0, то полей нет
-		'file_type' => 'jpg|jpeg|png|svg', // загружаемые типы файлов
+		'file_type' => 'jpg|jpeg|png|svg|webp', // загружаемые типы файлов
 		'file_max_size' => 200, // максимальный размер файла в КБ
 		'file_description' => 'Скриншоты', // название поля
-		'file_tip' => tf('Выберите для загрузки файлы (jpg, jpeg, png, svg) размером до 200 Кб'), // подсказка
+		'file_tip' => tf('Выберите для загрузки файлы (jpg, jpeg, png, svg, webp) размером до 200 Кб'), // подсказка
 	);
 
 	$files = mso_section_to_array($text, 'files', $def, true);
@@ -96,7 +96,7 @@ function forms_content_callback($matches)
 		'placeholder' => '', // подсказка в поле
 		'tip' => '', // подсказка после поля
 		'value' => '', // значение по-умолчанию
-		'attr' => '', // прочие атрибуты поля
+		'attr' => 'class="form-input"', // прочие атрибуты поля
 		'clean' => 'base', // фильтрация поля
 		'values' => '', // значение для select через #
 		'default' => '', // дефолтное значение для select

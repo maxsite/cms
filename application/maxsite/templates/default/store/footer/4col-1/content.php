@@ -13,7 +13,7 @@
             <a class="mar20-l" href="#">Блог</a>
         /div
 
-        div(w10 w30-tablet w50-phone pad20-b links-no-color hover-no-color)
+        div(w10 w30-tablet w50-tablet pad20-b links-no-color hover-no-color)
             h5(t-primary100 mar0-t) Разделы
 
             ul(list-unstyled)
@@ -23,7 +23,7 @@
             /ul
         /div
 
-        div(w10 w30-tablet w50-phone pad20-b links-no-color hover-no-color)
+        div(w10 w30-tablet w50-tablet pad20-b links-no-color hover-no-color)
             h5(t-primary100 mar0-t) Ссылки
 
             ul(list-unstyled)
@@ -33,8 +33,8 @@
             /ul
         /div
 
-        div(flex-grow0 w30-tablet w100-phone t-center pad10-tb)
-            <a class="button button1 pad30-rl" href="#">Купить</a>
+        div(flex-grow0 w30-tablet w100-tablet t-center pad10-tb)
+            <a class="button pad30-rl" href="#">Купить</a>
 
             __(mar10-tb) <a class="t80 t-primary100 hover-t-primary300" href="#">Подробнее...</a>
         /div

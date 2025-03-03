@@ -1195,7 +1195,7 @@ function mso_comuser_edit($args = [])
                 ['\\', '|', '?', '%', '*', '`']
             );
 
-            $allowed_ext = array('gif', 'jpg', 'jpeg', 'png'); // разрешенные типы
+            $allowed_ext = array('gif', 'jpg', 'jpeg', 'png', 'webp'); // разрешенные типы
             $ext = strtolower(str_replace('.', '', strrchr($f_comusers_avatar_url, '.'))); // расширение файла
 
             if (!in_array($ext, $allowed_ext)) $f_comusers_avatar_url = ''; // запрещенный тип файла

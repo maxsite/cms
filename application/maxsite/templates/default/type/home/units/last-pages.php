@@ -82,7 +82,7 @@ if ($home_cache_time > 0 and $k = mso_get_cache($UNIT_UID)) {
         'block_start' => '<div class="layout-center flex flex-wrap pad5-rl">',
         'block_end' => '</div>',
 
-        'page_start' => '<div class="w32 w48-tablet w100-phone pad20 mar15-tb bor1px bor-solid bor-gray400 rounded">',
+        'page_start' => '<div class="w32 w48-tablet pad20 mar15-tb bor1px bor-solid bor-gray400 rounded">',
         'page_end' => '</div>',
 
         'date' => 'j F Y, H:i',

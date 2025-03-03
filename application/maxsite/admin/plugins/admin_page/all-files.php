@@ -175,7 +175,7 @@ $all_files .= '
 
 <input type="hidden" id="upload_max_file_size" name="upload_max_file_size" value="20000000">
 <input type="hidden" id="upload_action" name="upload_action" value="' . getinfo('require-maxsite') . base64_encode('admin/plugins/admin_page/uploads-require-maxsite.php') . '">
-<input type="hidden" id="upload_ext" name="upload_ext" value="' . mso_get_option('allowed_types', 'general', 'mp3|gif|jpg|jpeg|png|svg|zip|txt|rar|doc|rtf|pdf|html|htm|css|xml|odt|avi|wmv|flv|swf|wav|xls|7z|gz|bz2|tgz') . '">
+<input type="hidden" id="upload_ext" name="upload_ext" value="' . mso_get_option('allowed_types', 'general', 'mp3|gif|jpg|jpeg|png|svg|zip|txt|rar|doc|rtf|pdf|html|htm|css|xml|odt|avi|wmv|flv|swf|wav|xls|7z|gz|bz2|tgz|webp') . '">
 <input type="hidden" id="upload_dir" name="upload_dir" value="' . $path . '">
 <input type="hidden" id="update_path" name="update_path" value="' . $update_path . '">
 <input type="hidden" id="page_id" name="page_id" value="' . mso_segment(3) . '">

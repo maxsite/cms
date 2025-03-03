@@ -12,6 +12,7 @@ if (mso_get_option('template_set_component_options', getinfo('template'), false)
 	my_set_opt('default_profiles', ['fontawesome5-lazy.css']);
 	my_set_opt('fonts_template', ['opensans.css', 'robotoslab.css']);
 	my_set_opt('menu_template', 'menu1alt.css');
+	my_set_opt('theme_template', 'default.css');
 
 	// определим выбранные компоненты
 	my_set_opt('header_component1', 'header11');

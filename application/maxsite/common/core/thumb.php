@@ -56,7 +56,7 @@ class Thumb
 		// расширение файла
 		$ext = strtolower(substr(strrchr($this->file, '.'), 1));
 
-		if (!in_array($ext, array('jpg', 'jpeg', 'png', 'gif'))) {
+		if (!in_array($ext, array('jpg', 'jpeg', 'png', 'gif', 'webp'))) {
 			$this->init = false; // если это не картинка, то выходим
 			return;
 		}

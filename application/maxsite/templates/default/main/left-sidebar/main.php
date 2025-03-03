@@ -13,7 +13,7 @@ if ($fn = mso_fe('main/blocks/header-out.php')) require $fn;
 	<div class="layout-wrap">
 		<div class="flex flex-wrap-tablet my-container-content-sidebar">
 			<div class="w30 w100-tablet my-left-sidebar flex-order2-tablet mar20-r mar0-r-tablet">
-				<div class="flex-tablet-phone flex-wrap-tablet-phone flex-jc-around-tablet-phone" id="mso_show_sidebar1"><?php mso_show_sidebar('1'); ?></div>
+				<div class="flex-tablet flex-wrap-tablet flex-jc-around-tablet" id="mso_show_sidebar1"><?php mso_show_sidebar('1'); ?></div>
 			</div>
 
 			<div class="w67 w100-tablet flex-order1-tablet">

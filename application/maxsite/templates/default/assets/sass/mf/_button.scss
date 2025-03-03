@@ -1,0 +1,25 @@
+// стандартные MaxSite CMS формы
+// кнопка плагина Forms
+// .button | form.mso-form <BUTTON> | .mso-button
+
+.mso-form button,
+.mso-forms button,
+.mso-button
+{
+    // @extend .button;
+    // 
+    // @include button_set(
+    //     $button1
+    // );
+}
+// (
+//     "radius": 5px,
+//     "bg": $primary600, 
+//     "text": #fff,
+//     "hover-bg": $primary700,
+//     "hover-text": $primary50,
+//     "focus-bg": $primary650,
+//     "focus-text": $primary50,
+//     "focus-border": solid 1px $primary300,
+//     "focus-shadow": 0 0 0 2px $primary300,
+// )

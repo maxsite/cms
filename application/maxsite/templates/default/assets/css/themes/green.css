@@ -1,0 +1,58 @@
+:root {
+    --primary-grad: 102deg;
+    --primary-saturat: 34%;
+    
+    --secondary-grad: 178deg;
+    --secondary-saturat: 23%;
+    
+    --primary950: hsl(var(--primary-grad) var(--primary-saturat) 7%);
+    --primary900: hsl(var(--primary-grad) var(--primary-saturat) 10%);
+    --primary850: hsl(var(--primary-grad) var(--primary-saturat) 15%);
+    --primary800: hsl(var(--primary-grad) var(--primary-saturat) 20%);
+    --primary750: hsl(var(--primary-grad) var(--primary-saturat) 25%);
+    --primary700: hsl(var(--primary-grad) var(--primary-saturat) 30%);
+    --primary650: hsl(var(--primary-grad) var(--primary-saturat) 35%);
+    --primary600: hsl(var(--primary-grad) var(--primary-saturat) 40%);
+    --primary550: hsl(var(--primary-grad) var(--primary-saturat) 45%);
+    --primary500: hsl(var(--primary-grad) var(--primary-saturat) 50%);
+    --primary450: hsl(var(--primary-grad) var(--primary-saturat) 55%);
+    --primary400: hsl(var(--primary-grad) var(--primary-saturat) 60%);
+    --primary350: hsl(var(--primary-grad) var(--primary-saturat) 65%);
+    --primary300: hsl(var(--primary-grad) var(--primary-saturat) 70%);
+    --primary250: hsl(var(--primary-grad) var(--primary-saturat) 75%);
+    --primary200: hsl(var(--primary-grad) var(--primary-saturat) 80%);
+    --primary150: hsl(var(--primary-grad) var(--primary-saturat) 85%);
+    --primary100: hsl(var(--primary-grad) var(--primary-saturat) 90%);
+    --primary50:  hsl(var(--primary-grad) var(--primary-saturat) 94%);
+    
+    --secondary950: hsl(var(--secondary-grad) var(--secondary-saturat) 7%);
+    --secondary900: hsl(var(--secondary-grad) var(--secondary-saturat) 10%);
+    --secondary850: hsl(var(--secondary-grad) var(--secondary-saturat) 15%);
+    --secondary800: hsl(var(--secondary-grad) var(--secondary-saturat) 20%);
+    --secondary750: hsl(var(--secondary-grad) var(--secondary-saturat) 25%);
+    --secondary700: hsl(var(--secondary-grad) var(--secondary-saturat) 30%);
+    --secondary650: hsl(var(--secondary-grad) var(--secondary-saturat) 35%);
+    --secondary600: hsl(var(--secondary-grad) var(--secondary-saturat) 40%);
+    --secondary550: hsl(var(--secondary-grad) var(--secondary-saturat) 45%);
+    --secondary500: hsl(var(--secondary-grad) var(--secondary-saturat) 50%);
+    --secondary450: hsl(var(--secondary-grad) var(--secondary-saturat) 55%);
+    --secondary400: hsl(var(--secondary-grad) var(--secondary-saturat) 60%);
+    --secondary350: hsl(var(--secondary-grad) var(--secondary-saturat) 65%);
+    --secondary300: hsl(var(--secondary-grad) var(--secondary-saturat) 70%);
+    --secondary250: hsl(var(--secondary-grad) var(--secondary-saturat) 75%);
+    --secondary200: hsl(var(--secondary-grad) var(--secondary-saturat) 80%);
+    --secondary150: hsl(var(--secondary-grad) var(--secondary-saturat) 85%);
+    --secondary100: hsl(var(--secondary-grad) var(--secondary-saturat) 90%);
+    --secondary50:  hsl(var(--secondary-grad) var(--secondary-saturat) 94%);
+   
+    --blockquote-bor-l: 4px solid var(--primary400);
+    --blockquote-color: var(--primary400);
+    
+    --link-color: var(--primary500);
+    --link-hover-color: var(--primary600);
+    
+    --form-input-focus-shadow: 0 0 0 .1rem hsla(var(--primary-grad), 100%, 70%, 0.7);
+    --form-input-focus-border-color: var(--primary300);
+}
+
+blockquote a { color: var(--secondary600);}

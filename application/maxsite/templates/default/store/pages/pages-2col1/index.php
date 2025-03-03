@@ -4,7 +4,7 @@
 	
 	- общий контейнер старт + первая колонка
 [unit]
-html = <div class="layout-center-wrap"><div class="layout-wrap"><div class="flex flex-wrap mar50-t"><div class="w46 w100-phone">
+html = <div class="layout-center-wrap"><div class="layout-wrap"><div class="flex flex-wrap mar50-t"><div class="w46 w100-tablet">
 [/unit]
 
 	- название колонки
@@ -114,7 +114,7 @@ date_end = </time></div>
 
 	- вторая колонка 
 [unit]
-html = </div><div class="w46 w100-phone">
+html = </div><div class="w46 w100-tablet">
 [/unit] 
 	
 	- название колонки

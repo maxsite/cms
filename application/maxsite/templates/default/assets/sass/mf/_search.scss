@@ -1,0 +1,37 @@
+// поиск
+
+/*
+.my-search {
+	border: none !important;
+	
+	display: none;
+	
+	border-radius: 0 !important;
+	padding: 5px 6px !important;
+	
+	&:focus {
+		color: #808080 !important;
+		box-shadow: none;
+	}
+}
+*/
+
+.my-search {
+	// border: none !important;
+	border-radius: 0 !important;
+	padding: 10px 20px !important;
+	background: white !important;;
+	
+	&:focus {
+		color: #808080 !important;
+		// box-shadow: none;
+	}
+}
+
+.label-search {
+	// @extend .button;
+	cursor: pointer;
+	height: 100%;
+	border-radius: 0 3px 3px 0;
+	padding: 12px 30px !important;
+}

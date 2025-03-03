@@ -16,7 +16,7 @@ effect = 1
 [/site]
 
 [block]
-class = t-center-phone
+class = t-center-tablet
 html = <div><a class="im-phone t-bold t120 t-primary700 hover-t-primary600" href="tel:+123123123">+00 (012) 345-67-89</a></div><div>Время работы: 9:00 - 17:00</div>
 design = 1
 [/block]

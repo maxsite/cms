@@ -1,0 +1,68 @@
+// карта рубрик
+
+$SCREEN_TABLET:  "(max-width: 768px)" !default;
+$SCREEN_PHONE:   "(max-width: 667px)" !default;
+
+ul.type-map-ul {	
+	margin: 0;
+	padding: 0;
+	
+	a {
+		color: #777777;
+		
+		&:hover {
+			text-decoration: none;
+			color: var(--color2);
+		}
+	}
+	
+	li {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		color: #aaa;
+		font-size: .9rem;
+	}
+
+	> li {
+		flex-grow: 1;
+		width: 31%;
+		max-width: 31%;
+		margin: 0 0 50px 0;
+		font-size: 1rem;
+		
+		// background: #eeeeee;
+		
+		> span.my-title {
+			display: inline-block;
+			width: 100%;
+			border-bottom: 1px #dddddd solid;
+			font-weight: bold;
+			padding: 0 0 7px 0;
+			text-transform: uppercase;
+		}
+		
+		ul {
+			margin: 10px 0 0 0;
+			padding: 0;
+		}
+	}
+}
+
+@media #{$SCREEN_TABLET}  {
+	ul.type-map-ul {
+		> li {
+			width: 48%;
+			max-width: 48%;
+		}
+	}
+}
+
+@media #{$SCREEN_PHONE}  {
+	ul.type-map-ul {
+		> li {
+			width: 100%;
+			max-width: 100%;
+		}
+	}
+}

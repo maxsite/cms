@@ -14,6 +14,8 @@
  * @filesource
  */
 
+// MAX -> add webp
+
 // ------------------------------------------------------------------------
 
 /**
@@ -517,7 +519,7 @@ class CI_Upload {
 		{
 			if (FALSE !== ($D = @getimagesize($path)))
 			{
-				$types = array(1 => 'gif', 2 => 'jpeg', 3 => 'png');
+				$types = array(1 => 'gif', 2 => 'jpeg', 3 => 'png', IMAGETYPE_WEBP => 'webp');
 
 				$this->image_width		= $D['0'];
 				$this->image_height		= $D['1'];
@@ -557,6 +559,8 @@ class CI_Upload {
 
 		$png_mimes  = array('image/x-png');
 		$jpeg_mimes = array('image/jpg', 'image/jpe', 'image/jpeg', 'image/pjpeg');
+        
+		$webp_mimes = array('image/webp');
 
 		if (in_array($this->file_type, $png_mimes))
 		{
@@ -567,11 +571,17 @@ class CI_Upload {
 		{
 			$this->file_type = 'image/jpeg';
 		}
+        
+        if (in_array($this->file_type, $webp_mimes))
+		{
+			$this->file_type = 'image/webp';
+		}
 
 		$img_mimes = array(
 							'image/gif',
 							'image/jpeg',
 							'image/png',
+							'image/webp',
 						);
 
 		return (in_array($this->file_type, $img_mimes, TRUE)) ? TRUE : FALSE;

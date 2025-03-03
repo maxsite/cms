@@ -16,7 +16,7 @@ $p->line('<div class="t-gray600 t90 mar20-tb">[tag]</div>');
 // вывод автора записи
 $p->format('author', '<div class="" title="' . tf('Автор') . '">', '</div>');
 
-echo '<div class="bg-gray200 bor1 bor-solid-tb bor-gray300 t-gray800 t90 mar20-tb pad20 flex flex-wrap-phone">';
+echo '<div class="bg-gray200 bor1 bor-solid-tb bor-gray300 t-gray800 t90 mar20-tb pad20 flex flex-wrap-tablet">';
 
 	if ($users_avatar_url = $p->val('users_avatar_url'))
 	{

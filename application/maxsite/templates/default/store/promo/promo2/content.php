@@ -2,11 +2,11 @@
 
 div(layout-center-wrap mar50-t) || div(flex flex-wrap flex-vcenter bg-primary500 t-white)
 
-	<div class="w3col w50-tablet w100-phone flex-as-stretch t-center bg-primary700 t-white t160 pad10-rl pad20-tb flex flex-vcenter flex-hcenter">
+	<div class="w3col w50-tablet w100-tablet flex-as-stretch t-center bg-primary700 t-white t160 pad10-rl pad20-tb flex flex-vcenter flex-hcenter">
 		__ Почему мы?
 	</div>
 	
-	<div class="w3col w50-tablet w100-phone pad50-tb pad10-rl b-flex flex-jc-center">
+	<div class="w3col w50-tablet w100-tablet pad50-tb pad10-rl b-flex flex-jc-center">
 		<i class="im-globe t180 pad10-r t-primary100 lh100"></i> 
 		<div>
 			__ 1000+ КЛИЕНТОВ
@@ -14,7 +14,7 @@ div(layout-center-wrap mar50-t) || div(flex flex-wrap flex-vcenter bg-primary500
 		</div>
 	</div>
 	
-	<div class="w3col w50-tablet w100-phone pad50-tb pad10-rl b-flex flex-jc-center">
+	<div class="w3col w50-tablet w100-tablet pad50-tb pad10-rl b-flex flex-jc-center">
 		<i class="im-donate t180 pad10-r t-primary100 lh100"></i>
 		<div>
 			__ БЕЗОПАСНАЯ ОПЛАТА
@@ -22,7 +22,7 @@ div(layout-center-wrap mar50-t) || div(flex flex-wrap flex-vcenter bg-primary500
 		</div>
 	</div>
 	
-	<div class="w3col w50-tablet w100-phone pad50-tb pad10-rl b-flex flex-jc-center">
+	<div class="w3col w50-tablet w100-tablet pad50-tb pad10-rl b-flex flex-jc-center">
 		<i class="im-comments t180 pad10-r t-primary100 lh100"></i> 
 		<div>
 			__ ПОДДЕРЖКА

@@ -31,7 +31,7 @@ if ($fn = mso_fe('main/blocks/body-start.php')) require $fn;
 			</div>
 
 			<div class="w3col w100-tablet pad20-rl">
-				<div class="flex-tablet-phone flex-wrap-tablet-phone flex-jc-around-tablet-phone" id="mso_show_sidebar1"><?php mso_show_sidebar('1'); ?></div>
+				<div class="flex-tablet flex-wrap-tablet flex-jc-around-tablet" id="mso_show_sidebar1"><?php mso_show_sidebar('1'); ?></div>
 			</div>
 		</div>
 		<?php

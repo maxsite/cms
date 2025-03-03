@@ -32,15 +32,15 @@ $p->format('date', 'j F Y г.', '<time datetime="[page_date_publish_iso]" class=
 if (is_type('home') and $p->num == 1) echo '<div class="pad20-t"></div>';
 
 if (!$p->last)
-    $p->div_start('flex flex-wrap-phone bor1 bor-dotted-b bor-gray400 pad30-b mar30-t');
+    $p->div_start('flex flex-wrap-tablet bor1 bor-dotted-b bor-gray400 pad30-b mar30-t');
 else
-    $p->div_start('flex flex-wrap-phone pad30-b mar30-t mar50-b');
+    $p->div_start('flex flex-wrap-tablet pad30-b mar30-t mar50-b');
 
-$p->div_start('w30 w200px-min w100-phone pad5-t pad20-b-phone');
+$p->div_start('w30 w200px-min w100-tablet pad5-t pad20-b-tablet');
 $p->line('[thumb]');
 $p->div_end('');
 
-$p->div_start('w70 w100-phone pad30-l pad0-phone');
+$p->div_start('w70 w100-tablet pad30-l pad0-tablet');
 $p->line('[title]');
 $p->line('<div class="mar15-t mso-clearfix">[cat][date]</div>');
 $p->content_chars(220, ' [...]', '<p class="mar15-tb hover-no-underline">', '</p>');

@@ -1,0 +1,45 @@
+// lightgallery
+
+
+div.lightgallery
+{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	
+	p {	margin: 0; }
+	
+	img {
+		transition: all .4s ease;
+		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 3px 4px -3px rgba(0, 0, 0, 0.3);
+		background-color: var(--gray100);
+		padding: 5px;
+		margin: 0 15px 20px 0;
+		
+		&:hover {
+			background-color: var(--color1);
+			// transform: scale3d(1.05, 1.05, 1.05);
+		}
+	}
+}
+
+.gl-right { // основной div-контейнер
+	display: inline-block;
+	float: right;
+	margin: 0 0 5px 20px;
+}
+
+.gl-left { // основной div-контейнер
+	display: inline-block;
+	float: left;
+	margin: 0 20px 5px 0;
+}
+
+.gl-span {
+	padding: 10px;
+	display: block;
+	font-size: .9rem;
+	background: var(--gray600);
+	color: white;
+	max-width: 350px;
+}

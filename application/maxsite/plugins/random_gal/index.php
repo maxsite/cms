@@ -251,7 +251,7 @@ function random_gal_widget_custom($options = array(), $num = 1)
 	else $all_dirs = array($options['gal']);
 	
 	$all_files = array(); // массив для всех нужных файлов
-	$allowed_ext = array('gif', 'jpg', 'jpeg', 'png');	
+	$allowed_ext = array('gif', 'jpg', 'jpeg', 'png', 'webp');	
 	
 	foreach($all_dirs as $one_dir) // проходимся по каждому каталогу
 	{

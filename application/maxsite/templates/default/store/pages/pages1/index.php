@@ -16,7 +16,7 @@ line5 = <div class="w100 t90 t-gray bor1 bor-gray300 bor-solid-t pad20-t"><i cla
 block_start = <div class="layout-center-wrap mar50-tb"><div class="layout-wrap"><div class="flex flex-wrap">
 block_end = </div></div></div>
 
-page_start = <div class="w31 w48-tablet w100-phone bg-white mar50-b pad20-b"><div class="b-flex flex-column h100">
+page_start = <div class="w31 w48-tablet w100-tablet bg-white mar50-b pad20-b"><div class="b-flex flex-column h100">
 page_end = </div></div>
 
 title_start = <h1 class="t120 t-gray800 links-no-color mar0">

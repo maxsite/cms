@@ -74,7 +74,7 @@ if ( $post = mso_check_post(array('dir')) )
         
         $ext = strtolower(str_replace('.', '', strrchr($file, '.'))); // расширение файла
         
-        $this_img = ($ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'png');
+        $this_img = ($ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'png' or $ext == 'webp');
         
         $time_file = date(" | Y-m-d H:i:s", filemtime($uploads_dir . '/' . $file));
         

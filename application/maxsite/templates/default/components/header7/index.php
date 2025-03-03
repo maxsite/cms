@@ -39,14 +39,14 @@ $site = str_replace('[description_site]', getinfo('description_site'), $site);
 <div class="layout-center-wrap">
 	<div class="layout-wrap pad0">
 		<div class="flex flex-wrap-tablet flex-vcenter pad30-t">
-			<div class="w80 w100-phone flex flex-wrap-phone flex-vcenter t-center-phone">
+			<div class="w80 w100-tablet flex flex-wrap-tablet flex-vcenter t-center-tablet">
 				<?= $logo ?>
 				<div class="flex-grow5 pad20-rl">
 					<?= $site ?>
 				</div>
 			</div>
 
-			<div class="flex-grow0 flex-order2-tablet w30-tablet w100-phone mar10-tb pad20-rl t-center-tablet">
+			<div class="flex-grow0 flex-order2-tablet w30-tablet w100-tablet mar10-tb pad20-rl t-center-tablet">
 				<?php
 				mso_set_val('my_social_class', $social_class); // передаём класс в _social.php
 

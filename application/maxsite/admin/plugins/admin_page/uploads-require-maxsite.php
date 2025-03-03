@@ -20,7 +20,7 @@ mso_checkreferer();
 
 $ext = strtolower(substr(strrchr($fn, '.'), 1));
 
-$allowed_ext = explode('|', mso_get_option('allowed_types', 'general', 'mp3|gif|jpg|jpeg|png|zip|txt|rar|doc|rtf|pdf|html|htm|css|xml|odt|avi|wmv|flv|swf|wav|xls|7z|gz|bz2|tgz'));
+$allowed_ext = explode('|', mso_get_option('allowed_types', 'general', 'mp3|gif|jpg|jpeg|png|zip|txt|rar|doc|rtf|pdf|html|htm|css|xml|odt|avi|wmv|flv|swf|wav|xls|7z|gz|bz2|tgz|webp'));
 
 if (!in_array($ext, $allowed_ext)) die('not allowed');
 
@@ -63,7 +63,7 @@ function _upload($up_dir, $fn, $r = array())
 	
 	file_put_contents( $up_dir . $fn, file_get_contents('php://input') );
 
-	if (!in_array($ext, array('jpg', 'jpeg', 'png', 'gif')))
+	if (!in_array($ext, array('jpg', 'jpeg', 'png', 'gif', 'webp')))
 	{
 		// Не картинка, загрузили, больше ничего не надо.
 		echo ' DONE! <b>' . $fn . '</b>';

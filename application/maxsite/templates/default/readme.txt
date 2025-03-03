@@ -1,5 +1,5 @@
 * (c) MaxSite CMS — https://max-3000.com/
-* (c) MAX, 2008-2021 — https://maxsite.org/
+* (c) MAX, 2008-2025 — https://maxsite.org/
 
 Информация для новичков MaxSite CMS: https://max-3000.com/book
 
@@ -13,6 +13,3 @@
 * Используйте последнюю версию MaxSite CMS с гитхаба.
 * Для нормальной работы шаблона нужно хотя бы десяток записей на сайте.
 * Включите плагин parser_simple.
-
-* MF Store: вашсайт/mfstore
-* Дизайн шаблона: вашсайт/mfdesign

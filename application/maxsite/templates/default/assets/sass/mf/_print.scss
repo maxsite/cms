@@ -1,0 +1,18 @@
+@media print {
+
+	.sidebar,
+	.header,
+	.footer,
+	.mso-type-page-comments,
+	.addzakl, 
+	.pagination,
+	#hypercomments_widget { 
+		display: none !important; 
+	}
+	
+	.main { padding: 0 10px; }
+	
+	.my-all-container > .shadow { box-shadow: none; }
+	
+	body {	background: white; }
+}

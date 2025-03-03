@@ -27,7 +27,7 @@ block_end = </div></div>
 page_start = <div class="mar50-b">
 page_end = </div>
 
-title_start = <h1 class="t-gray800 mar0 t250 t180-phone t-center t-robotoslab hover-no-underline">
+title_start = <h1 class="t-gray800 mar0 t250 t180-tablet t-center t-robotoslab hover-no-underline">
 title_end = </h1>
 
 content_chars = 350

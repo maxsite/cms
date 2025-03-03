@@ -45,20 +45,23 @@ $is_link_home = (!is_type('home') or !mso_current_paged() > 1);
 <div class="w100 z-index9999 pos0-l -w-max-layout <?= $class ?>" id="myHeader">
     <div class="layout-center-wrap pad20-tb">
         <div class="layout-wrap flex flex-wrap-tablet flex-vcenter">
-            <div class="flex-grow2 w100-phone mar10-tb flex">
+            <div class="flex-grow2 w100-tablet mar10-tb flex flex-wrap-tablet">
 
-                <div class="flex-grow5 b-hide show-phone"></div>
-
-                <?php if ($site[0]['icon']) : ?>
-                    <i class="flex-basis50px <?= $site[0]['icon'] ?>"></i>
-                <?php endif ?>
-
-                <div class="flex-grow1">
-                    <?= $site[0]['name'] ?>
-                    <?= $site[0]['description'] ?>
+                <div class="flex-grow1 b-hide show-tablet"></div>
+                
+                <div class="flex-grow1 flex flex-hcenter">
+                    <div class="flex-grow1 t-right">
+                        <?php if ($site[0]['icon']) : ?>
+                            <i class="<?= $site[0]['icon'] ?>"></i>
+                        <?php endif ?>
+                    </div>
+                    <div class="flex-grow1">
+                        <?= $site[0]['name'] ?>
+                        <?= $site[0]['description'] ?>
+                    </div>
                 </div>
 
-                <div class="flex-grow5 b-hide show-phone"></div>
+                <div class="flex-grow5 b-hide show-tablet"></div>
             </div>
 
             <?php
@@ -70,7 +73,7 @@ $is_link_home = (!is_type('home') or !mso_current_paged() > 1);
             }
             ?>
 
-            <div class="flex-grow0 w100-phone t-center-phone t-right">
+            <div class="flex-grow0 w100-tablet t-center-tablet t-right">
                 <?php foreach ($socials as $social) : ?><a class="<?= $social['class'] ?>" href="<?= $social['href'] ?>" title="<?= $social['title'] ?>" <?= $social['attr'] ?>></a><?php endforeach ?>
             </div>
         </div>

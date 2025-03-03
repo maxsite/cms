@@ -145,7 +145,7 @@ function mso_upload($config_library = [], $field_userfile = 'f_userfile', $r = [
 			[image_type] => jpeg
 			[image_size_str] => width="450" height="300"
 		*/
-
+        
 		if ($up_data['is_image']) {
 			// это картинка
 			$CI->load->library('image_lib');

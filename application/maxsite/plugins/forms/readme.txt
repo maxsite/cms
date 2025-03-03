@@ -8,10 +8,10 @@ email = admin@site.com
 
 [files]
 file_count = 1
-file_type = jpg|jpeg|png|svg
+file_type = jpg|jpeg|png|svg|webp
 file_max_size = 200
 file_description = Скриншоты
-file_tip = Выберите для загрузки файлы (jpg, jpeg, png, svg) размером до 200 Кб
+file_tip = Выберите для загрузки файлы (jpg, jpeg, png, svg, webp) размером до 200 Кб
 [/files]
 
 [field] 

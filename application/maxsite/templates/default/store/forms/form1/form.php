@@ -3,7 +3,7 @@
 <div class="layout-center-wrap mar50-tb">
 	<div class="layout-wrap flex flex-wrap">
 
-		<div class="w50 w100-phone bg-primary50 pad30">
+		<div class="w50 w100-tablet bg-primary50 pad30">
 
 			h3(im-envelope mar20-b) Обратная связь
 
@@ -48,14 +48,14 @@
 						</label>
 					</div>
 
-					<button class="button button1 mar30-tb" type="submit" :disabled="!agreement">Отправить</button>
+					<button class="button mar30-tb" type="submit" :disabled="!agreement">Отправить</button>
 				</form>
 
 				<div x-html="result"></div>
 			</div>
 		</div>
 
-		<div class="w50 w100-phone pad30">
+		<div class="w50 w100-tablet pad30">
 			_ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit saepe sequi, ducimus expedita quae voluptas tenetur distinctio cumque aliquid libero repellat esse iure aut soluta ex culpa voluptates, accusamus laboriosam accusantium animi ab. Quibusdam, ad. Provident, dolores. Earum incidunt et numquam dignissimos dolorem est doloremque, eos consectetur odio cumque voluptas.
 
 			_ Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit saepe sequi, ducimus expedita quae voluptas tenetur distinctio cumque aliquid libero repellat esse iure aut soluta ex culpa voluptates, accusamus laboriosam accusantium animi ab. Quibusdam, ad. Provident, dolores. Earum incidunt et numquam dignissimos dolorem est doloremque, eos consectetur odio cumque voluptas.

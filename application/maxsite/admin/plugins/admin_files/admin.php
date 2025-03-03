@@ -12,7 +12,7 @@
 	$CI->load->helper('form');
 
 	// разрешенные типы файлов
-	$allowed_types = mso_get_option('allowed_types', 'general', 'mp3|gif|jpg|jpeg|png|svg|zip|txt|rar|doc|rtf|pdf|html|htm|css|xml|odt|avi|wmv|flv|swf|wav|xls|7z|gz|bz2|tgz');
+	$allowed_types = mso_get_option('allowed_types', 'general', 'mp3|gif|jpg|jpeg|png|svg|zip|txt|rar|doc|rtf|pdf|html|htm|css|xml|odt|avi|wmv|flv|swf|wav|xls|7z|gz|bz2|tgz|webp');
 
 	// по сегменту определяем текущий каталог в uploads
 	// если каталога нет, скидываем на дефолтный ''
@@ -243,7 +243,7 @@
 			$ext = strtolower(str_replace('.', '', strrchr($file, '.'))); // расширение файла
 			if (!in_array($ext, $allowed_ext)) continue; // запрещенный тип файла
 			
-			if ($ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'png')
+			if ($ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'png' or $ext == 'webp')
 			{
 				$up_data = array();
 				$up_data['full_path'] = $uploads_dir . $file;
@@ -553,7 +553,7 @@ $.cookie.json = true; $("div.upload_file").showHide({time: 200, useID: false, cl
 		$title_alt = str_replace('\'', '&amp;#039;', $title_alt);
 	
 		//Если картинка - делаем ссылку превьюшкой, иначе титлом или именем файла.
-		if ( $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'png'  ) 
+		if ( $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'png' or  $ext == 'webp') 
 		{
 			$title_alt = str_replace('"', '&amp;quot;', $title);
 			$title_alt = str_replace('<', '&amp;lt;', $title_alt);
@@ -582,7 +582,7 @@ $.cookie.json = true; $("div.upload_file").showHide({time: 200, useID: false, cl
 			onClick = "jAlert(\'<textarea cols=60 rows=5>' . $cod2 . '</textarea>\', \'' . t('HTML-ссылка файла') . '\'); return false;">' . t('HTML') . '</span>';
 
 
-		if ( $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'png'  )
+		if ( $ext == 'jpg' or $ext == 'jpeg' or $ext == 'gif' or $ext == 'png' or  $ext == 'webp')
 		{
 			if (file_exists( $uploads_dir . '_mso_i/' . $file  )) 
 			{
@@ -667,11 +667,10 @@ $.cookie.json = true; $("div.upload_file").showHide({time: 200, useID: false, cl
 			echo '</div>';
 		}
 
-		echo '<div class="sel-files"><button type="submit" name="f_delete_submit" class="i delete-file" onClick="if(confirm(\'' . t('Выделенные файлы будут безвозвратно удалены! Удалять?') . '\')) {return true;} else {return false;}">' . t('Удалить') . '</button> 
-			<button type="button" id="check-all" class="mso-invert">' . t('Инвертировать выделение') . '</button></div>
+		echo '<div class="sel-files"><button type="submit" name="f_delete_submit" class="i delete-file" onClick="if(confirm(\'' . t('Выделенные файлы будут безвозвратно удалены! Удалять?') . '\')) {return true;} else {return false;}">' . t('Удалить') . '</button></div>
 			
 			</form>';
-
+        // <button type="button" id="check-all" class="mso-invert">' . t('Инвертировать выделение') . '</button>
 		$n = '\n';
 		$up = $uploads_url;
 
@@ -708,7 +707,8 @@ $(function()
 			$(this).parent().parent().append(form_code);
 		}
 	})
-
+    
+    /*
 	$('#gallerycodeclick').click(function()
 	{
 		$('#gallerycode').html('');
@@ -747,17 +747,19 @@ $(function()
 			alert('{$mess}');
 		}
 	});
+    */
 });
 </script>
 
 EOF;
+        /*
 		echo '<div class="create-gal">
 			<h2>' . t('Создание галереи') . '</h2>
 			<p>' . t('Выделите нужные файлы. (У вас должен быть активирован плагин <strong>LightBox</strong>)') . '</p>
 			 <button class="i-gen" type="button" id="gallerycodeclick">' . t('Генерировать код галереи') . '</button>
 			<textarea id="gallerycode" style="display: none"></textarea>
-		</div>
-		';
+		</div>';
+        */
 	}
 	else
 	{

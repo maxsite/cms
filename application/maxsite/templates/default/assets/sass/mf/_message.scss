@@ -1,0 +1,43 @@
+// системные сообщения
+
+@use 'im_variables' as *;
+
+.mso-message-alert {
+	color: var(--red);
+}
+
+.mso-message-ok,
+.comment-ok
+{
+	color: #fff;
+	padding: 10px;
+	margin: 0 0 20px 0;
+	background: var(--green);
+	
+	&:after {
+		font-family: mfont;
+		display: inline-block;
+		margin-right: 7px;
+		content: unquote("\"#{ $im-exclamation-triangle }\""); 
+		float: right;
+		margin-top: 5px;
+	}
+}
+
+.mso-message-error,
+.comment-error 
+{
+	color: #fff;
+	padding: 10px;
+	margin: 0 0 20px 0;
+	background: var(--red);
+	
+	&:after {
+		font-family: mfont;
+		display: inline-block;
+		margin-right: 7px;
+		content: unquote("\"#{ $im-exclamation-triangle }\""); 
+		float: right;
+		margin-top: 5px;
+	}
+}

@@ -70,12 +70,12 @@ if ($segment = mso_segment(2)) {
 
         
         echo <<< EOF
-<div class="flex flex-wrap-phone bor1 bor-gray300 bor-dashed-b mar30-tb pad20-b">
-    <a class="w20 w100-phone im-arrow-left pad10-tb t-center-phone" style="" href="{$siteurl}mfstore">Все модули</a>
+<div class="flex flex-wrap-tablet bor1 bor-gray300 bor-dashed-b mar30-tb pad20-b">
+    <a class="w20 w100-tablet im-arrow-left pad10-tb t-center-tablet" style="" href="{$siteurl}mfstore">Все модули</a>
 
-    <h2 class="t-center mar0 mar10-b-phone w100-phone">Mодуль <span class="t-gray600 t-italic">{$bdir}</span></h2>
+    <h2 class="t-center mar0 mar10-b-tablet w100-tablet">Mодуль <span class="t-gray600 t-italic">{$bdir}</span></h2>
     
-    <div class="w20 w100-phone t-right t-center-phone">{$prev}{$next}</div>
+    <div class="w20 w100-tablet t-right t-center-tablet">{$prev}{$next}</div>
 </div>
 EOF;
 
@@ -109,7 +109,7 @@ EOF;
                 else
                     $img = mso_holder(300, 50, $elem);
 
-                echo '<a class="w30 flex-as-center w50-tablet w100-phone pad10 mar20-b mar10-r bg-gray100 hover-bg-primary200" href="' . $currentUrl . base64_encode($elem) . '"><img src="' . $img . '" width="w100" alt="' . $elem . '" title="' . $elem . '"></a>';
+                echo '<a class="w30 flex-as-center w50-tablet w100-tablet pad10 mar20-b mar10-r bg-gray100 hover-bg-primary200" href="' . $currentUrl . base64_encode($elem) . '"><img src="' . $img . '" width="w100" alt="' . $elem . '" title="' . $elem . '"></a>';
             }
 
             echo '</div>';

@@ -14,6 +14,8 @@
  * @filesource
  */
 
+// MAX -> add webp
+
 // ------------------------------------------------------------------------
 
 /**
@@ -227,7 +229,7 @@ class CI_Image_lib {
 				}
 
 				// Is there a file name?
-				if ( ! preg_match("#\.(jpg|jpeg|gif|png)$#i", $full_dest_path))
+				if ( ! preg_match("#\.(jpg|jpeg|gif|png|webp)$#i", $full_dest_path))
 				{
 					$this->dest_folder = $full_dest_path.'/';
 					$this->dest_image = $this->source_image;
@@ -1170,6 +1172,16 @@ class CI_Image_lib {
 
 						return imagecreatefrompng($path);
 				break;
+            case IMAGETYPE_WEBP :
+						if ( ! function_exists('imagecreatefromwebp'))
+						{
+							$this->set_error(array('imglib_unsupported_imagecreate', 'imglib_web_not_supported'));
+							return FALSE;
+						}
+
+						return imagecreatefromwebp($path);
+				break;    
+                
 
 		}
 
@@ -1232,6 +1244,20 @@ class CI_Image_lib {
 							return FALSE;
 						}
 				break;
+            case IMAGETYPE_WEBP	:
+						if ( ! function_exists('imagewebp'))
+						{
+							$this->set_error(array('imglib_unsupported_imagecreate', 'imglib_webp_not_supported'));
+							return FALSE;
+						}
+
+						if ( ! @imagewebp($resource, $this->full_dst_path))
+						{
+							$this->set_error('imglib_save_failed');
+							return FALSE;
+						}
+				break;    
+                
 			default		:
 							$this->set_error(array('imglib_unsupported_imagecreate'));
 							return FALSE;
@@ -1264,6 +1290,8 @@ class CI_Image_lib {
 			case 2		:	imagejpeg($resource, '', $this->quality);
 				break;
 			case 3		:	imagepng($resource);
+				break;
+            case IMAGETYPE_WEBP :	imagewebp($resource);
 				break;
 			default		:	echo 'Unable to display the image';
 				break;
@@ -1342,8 +1370,10 @@ class CI_Image_lib {
 		}
 
 		$vals = @getimagesize($path);
-
-		$types = array(1 => 'gif', 2 => 'jpeg', 3 => 'png');
+        
+        // pr($vals);
+        
+		$types = array(1 => 'gif', 2 => 'jpeg', 3 => 'png', IMAGETYPE_WEBP => 'webp');
 
 		$mime = (isset($types[$vals['2']])) ? 'image/'.$types[$vals['2']] : 'image/jpg';
 

@@ -285,7 +285,7 @@ function mso_wordwrap($str, $wid = 80, $tag = ' ')
 // функция возвращает массив $path_url-файлов по указанному $path - каталог на сервере
 // $full_path - нужно ли возвращать полный адрес (true) или только имя файла (false)
 // $exts - массив требуемых расширений. По-умолчанию - картинки
-function mso_get_path_files($path = '', $path_url = '', $full_path = true, $exts = ['jpg', 'jpeg', 'png', 'gif', 'ico', 'svg'], $minus = true)
+function mso_get_path_files($path = '', $path_url = '', $full_path = true, $exts = ['jpg', 'jpeg', 'png', 'gif', 'ico', 'svg', 'webp'], $minus = true)
 {
     // если не указаны пути, то отдаём пустой массив
     if (!$path) return [];

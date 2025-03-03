@@ -11,7 +11,7 @@ h1(mar40-t) Дизайн шаблона
 ?>
 
 <div class="flex flex-wrap-tablet t-gray700 mar30-t t-center t90">
-	div(w23 w48-tablet w100-phone mar20-b bg-gray100 pad10 rounded)
+	div(w23 w100-tablet mar20-b bg-gray100 pad10 rounded)
 		__(t150 mar10-t) gray100
 		__(mar10-tb) 19$/month
 		__(mar10-tb) 10 database
@@ -19,7 +19,7 @@ h1(mar40-t) Дизайн шаблона
 		__(mar10-tb) 1 sites
 	/div
 	
-	div(w23 w48-tablet w100-phone mar20-b bg-gray200 pad10 rounded)
+	div(w23 w100-tablet mar20-b bg-gray200 pad10 rounded)
 		__(t150 mar10-t) gray200
 		__(mar10-tb) 19$/month
 		__(mar10-tb) 10 database
@@ -27,7 +27,7 @@ h1(mar40-t) Дизайн шаблона
 		__(mar10-tb) 1 sites
 	/div
 	
-	div(w23 w48-tablet w100-phone mar20-b bg-gray300 pad10 rounded)
+	div(w23 w100-tablet mar20-b bg-gray300 pad10 rounded)
 		__(t150 mar10-t) gray300
 		__(mar10-tb) 19$/month
 		__(mar10-tb) 10 database
@@ -35,7 +35,7 @@ h1(mar40-t) Дизайн шаблона
 		__(mar10-tb) 1 sites
 	/div
 	
-	div(w23 w48-tablet w100-phone mar20-b bg-gray400 pad10 rounded)
+	div(w23 w100-tablet mar20-b bg-gray400 pad10 rounded)
 		__(t150 mar10-t) gray400
 		__(mar10-tb) 19$/month
 		__(mar10-tb) 10 database
@@ -95,8 +95,8 @@ hr
 <button class="button button1 im-check" type="im-check">button</button>
 <button class="button button1 fas fa-check" type="button">fas fa-check</button>
 <br><br>
-<button class="button button1 im-phone" type="button">im-phone</button>
-<button class="button button1 fas fa-phone" type="button">fas fa-phone</button>
+<button class="button button1 im-tablet" type="button">im-tablet</button>
+<button class="button button1 fas fa-tablet" type="button">fas fa-tablet</button>
 <br><br>
 <button class="button button1 im-download" type="button">im-download</button>
 <button class="button button1 fas fa-download" type="button">fas fa-download</button>
@@ -106,28 +106,28 @@ h3(mar50-t) Форма FORM
 <form>
 	<div class="mar20-t">
         <label class="flex flex-vcenter flex-wrap">
-            <div class="w20 w100-phone">Name *</div> 
+            <div class="w20 w100-tablet">Name *</div> 
             <input class="flex-grow3 form-input" type="text" name="myform[name]" placeholder="name...">
         </label>
     </div>
 	
 	<div class="mar20-t">
         <label class="flex flex-vcenter flex-wrap">
-            <div class="w20 w100-phone">Email</div> 
+            <div class="w20 w100-tablet">Email</div> 
             <input class="flex-grow3 form-input" type="email" name="myform[email]" placeholder="email...">
         </label>
     </div>    
     
     <div class="mar20-t">
         <label class="flex flex-wrap">
-            <div class="w20 w100-phone">Message</div> 
+            <div class="w20 w100-tablet">Message</div> 
             <textarea class="flex-grow3 h100px form-input" name="myform[text]" placeholder="message..."></textarea>
         </label>
     </div>
     
     <div class="mar20-t">
         <label class="flex flex-wrap">
-            <div class="w20 w100-phone">Choose an option</div>
+            <div class="w20 w100-tablet">Choose an option</div>
             <div class="flex-grow3">
                 <select class="w100 form-input">
                     <option>Choose an option</option>
@@ -140,9 +140,9 @@ h3(mar50-t) Форма FORM
     </div>
     
      <div class="mar20-t flex">
-        <div class="w20 w0-phone"></div>
+        <div class="w20 w0-tablet"></div>
         
-        <div class="flex-grow3 w100-phone">
+        <div class="flex-grow3 w100-tablet">
             <label class="form-checkbox">
                 <input type="checkbox">
                 <span class="form-checkbox-icon bg-gray200"></span> gray
@@ -166,9 +166,9 @@ h3(mar50-t) Форма FORM
     </div>   
     
      <div class="mar20-t flex">
-        <div class="w20 w0-phone"></div>
+        <div class="w20 w0-tablet"></div>
         
-        <div class="flex-grow3 w100-phone">
+        <div class="flex-grow3 w100-tablet">
             <label class="form-radio">
                 <input type="radio" name="myform[radio]" value="1">
                 <span class="form-radio-icon bg-green300"></span> green
@@ -192,8 +192,8 @@ h3(mar50-t) Форма FORM
     </div>
 
     <div class="mar20-t flex">
-        __(w20 w0-phone) 
-        __(flex-grow3 w100-phone) <button class="button bg-blue500 hover-bg-blue600 t-blue100 hover-t-white" type="submit">Отправить</button>
+        __(w20 w0-tablet) 
+        __(flex-grow3 w100-tablet) <button class="button bg-blue500 hover-bg-blue600 t-blue100 hover-t-white" type="submit">Отправить</button>
     </div>
 </form>
 

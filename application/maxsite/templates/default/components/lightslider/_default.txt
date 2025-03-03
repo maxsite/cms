@@ -1,5 +1,5 @@
 [options]
-block_start = <div class="layout-center-wrap gr-cyan1"><div class="layout-wrap pad10-tb">
+block_start = <div class="layout-center-wrap"><div class="layout-wrap pad10-tb">
 block_end = </div></div>
 [/options]
 
@@ -13,13 +13,13 @@ mode: "slide",
 [/js]
 
 [slide]
-<div class="ls-fullwidth h400px h200px-phone bor1 bor-solid bor-gray600" style="background-image: url(https://picsum.photos/1000/400?image=1015);"><div class="ls-text t-white">Free <a href="#">text</a></div></div>
+<div class="h400px h200px-tablet bor1 bor-solid bor-gray600" style="background-image: url(https://picsum.photos/1200/400?image=1015);"><div class="t-white t-center t250 mar100-t t-shadow">Тext</div></div>
 [/slide]
 
 [slide]
-<div class="ls-fullwidth h400px h200px-phone bor1 bor-solid bor-gray600" style="background-image: url(https://picsum.photos/1000/400?image=1045);"><div class="ls-text t-white">Free <a href="#">text</a></div></div>
+<div class="h400px h200px-tablet bor1 bor-solid bor-gray600" style="background-image: url(https://picsum.photos/1200/400?image=1045);"><div class="t-white t-center t250 mar100-t t-shadow">Тext</div></div>
 [/slide]
 
 [slide]
-<div class="ls-fullwidth h400px h200px-phone bor1 bor-solid bor-gray600" style="background-image: url(https://picsum.photos/1000/400?image=1036);"><div class="ls-text t-white">Free <a href="#">text</a></div></div>
+<div class="h400px h200px-tablet bor1 bor-solid bor-gray600" style="background-image: url(https://picsum.photos/1200/400?image=1036);"><div class="t-white t-center t250 mar100-t t-shadow">Тext</div></div>
 [/slide]

@@ -177,7 +177,8 @@ function mso_page_feed($page_slug = '', $page_title = 'Подписаться', 
 // вывод текста
 function mso_page_content($page_content = '', $use_password = true, $message = 'Данная запись защищена паролем.')
 {
-	global $page;
+	// global $page;
+    $page = mso_get_val('mso_pages', 0, true);
 
 	mso_hook('content_start'); // хук на начало блока
 

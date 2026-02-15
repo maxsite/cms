@@ -1,5 +1,9 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 
+if (!is_login()) die('no login');
+mso_checkreferer();
+if (!mso_check_allow('editor_files')) die('no allow');
+
 if ( $post = mso_check_post(array('file_path', 'content')) )
 {
 	$file = base64_decode($post['file_path']);

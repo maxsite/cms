@@ -545,8 +545,8 @@ class CI_Image_lib {
 		}
 
 		//  Kill the file handles
-		imagedestroy($dst_img);
-		imagedestroy($src_img);
+		// imagedestroy($dst_img);
+		// imagedestroy($src_img);
 
 		// Set the file to 777
 		@chmod($this->full_dst_path, FILE_WRITE_MODE);
@@ -751,8 +751,8 @@ class CI_Image_lib {
 		}
 
 		//  Kill the file handles
-		imagedestroy($dst_img);
-		imagedestroy($src_img);
+		// imagedestroy($dst_img);
+		// imagedestroy($src_img);
 
 		// Set the file to 777
 
@@ -837,7 +837,7 @@ class CI_Image_lib {
 		}
 
 		//  Kill the file handles
-		imagedestroy($src_img);
+		// imagedestroy($src_img);
 
 		// Set the file to 777
 		@chmod($this->full_dst_path, FILE_WRITE_MODE);
@@ -976,8 +976,8 @@ class CI_Image_lib {
 			}
 		}
 
-		imagedestroy($src_img);
-		imagedestroy($wm_img);
+		// imagedestroy($src_img);
+		// imagedestroy($wm_img);
 
 		return TRUE;
 	}
@@ -1117,7 +1117,7 @@ class CI_Image_lib {
 			$this->image_save_gd($src_img);
 		}
 
-		imagedestroy($src_img);
+		// imagedestroy($src_img);
 
 		return TRUE;
 	}

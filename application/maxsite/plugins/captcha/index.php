@@ -84,7 +84,7 @@ function create_captha_img($char)
 	$src = 'data:image/png;base64,' . base64_encode(ob_get_contents());
 	ob_end_clean();
 
-	imagedestroy ($im);	   
+	// imagedestroy ($im);	   
 	
 	return $src;
 }

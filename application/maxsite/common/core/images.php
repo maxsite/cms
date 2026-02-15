@@ -230,7 +230,8 @@ function mso_holder($width = 100, $height = 100, $text = true, $background_color
     $src = 'data:image/png;base64,' . base64_encode(ob_get_contents());
     ob_end_clean();
 
-    imagedestroy($im);
+    // php 8.5
+    // imagedestroy($im);
 
     return $src;
 }

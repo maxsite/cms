@@ -1,5 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 
+if (!is_login()) die('no login');
+mso_checkreferer();
 
 if ( $post = mso_check_post(array('data')) )
 {

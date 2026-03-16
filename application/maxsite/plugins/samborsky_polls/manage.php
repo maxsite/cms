@@ -307,8 +307,8 @@ $plug_path = getinfo('plugins_url') .'samborsky_polls/';
 <div class="polls_addEdit_form">
 	<form method="post">
 		<?= mso_form_session('f_session_id')?>
-		<input type="hidden" name="act" value="<?= $act?>" />
-		<input type="hidden" name="id" value="<?= $qu->data->q_id ?>" />
+		<input type="hidden" name="act" value="<?= htmlspecialchars($act) ?>" />
+		<input type="hidden" name="id" value="<?= htmlspecialchars($qu->data->q_id) ?>" />
 
 
 		<h2><?= t('Вопрос:')?></h2>
@@ -324,9 +324,9 @@ $plug_path = getinfo('plugins_url') .'samborsky_polls/';
 				?>
 
 				<li class="ui-state-default"<?= $st_not_vis ?>>
-					<input type="text" name="ans[<?= $nmb ?>][ans]" value="<?= $ans->a_answer ?>" class="ans_text" />
-					<input type="text" name="ans[<?= $nmb ?>][votes]" value="<?= $ans->a_votes ?>" class="ans_votes" />
-					<input type="hidden" name="ans[<?= $nmb ?>][id]" value="<?= $ans->a_id ?>" />
+					<input type="text" name="ans[<?= $nmb ?>][ans]" value="<?= htmlspecialchars($ans->a_answer) ?>" class="ans_text" />
+					<input type="text" name="ans[<?= $nmb ?>][votes]" value="<?= htmlspecialchars($ans->a_votes) ?>" class="ans_votes" />
+					<input type="hidden" name="ans[<?= $nmb ?>][id]" value="<?= htmlspecialchars($ans->a_id) ?>" />
 					<a href="" class="del_ans"><img src="<?= $plug_path ?>img/del_ans.png" title="<?= t('удалить ответ')?>" /></a>
 				</li>
 
@@ -340,10 +340,10 @@ $plug_path = getinfo('plugins_url') .'samborsky_polls/';
 		<h2><?= t('Дата начала/окончания голосования:')?></h2>
 		<div class="polls_manage_date">
 			<?= t('Начало (М/Д/Г):')?>
-			<input type="text" id="beginDate" name="beginDate" value="<?= date("m/d/Y",$qu->data->q_timestamp) ?>">
+			<input type="text" id="beginDate" name="beginDate" value="<?= htmlspecialchars(date("m/d/Y", $qu->data->q_timestamp)) ?>">
 			&nbsp;&nbsp;&nbsp;
 			<?= t('Окончание (М/Д/Г) (включительно):')?>
-			<input type="text" id="expiryDate" name="expiryDate" value="<?= date("m/d/Y",$qu->data->q_expiry) ?>">
+			<input type="text" id="expiryDate" name="expiryDate" value="<?= htmlspecialchars(date("m/d/Y", $qu->data->q_expiry)) ?>">
 			<p><input type="checkbox" name="noExpiry" id="noExpiry" <?= $no_expiry ?>>&nbsp;<?= t('Бессрочное голосование')?></p>
 		</div><br /><br />
 

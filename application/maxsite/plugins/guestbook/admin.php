@@ -106,16 +106,16 @@
 
 		$form = '
 				<p><span class="ftitle ffirst2 fheader">' . t('Короткая ссылка:') . '</span>
-				<span><input name="f_slug" type="text" value="' . $options['slug'] . '"></span>
+				<span><input name="f_slug" type="text" value="' . htmlspecialchars($options['slug']) . '"></span>
 				<span>&nbsp;<a href="' . getinfo('siteurl') . $options['slug']  . '" target="_blank" class="i globe">' . t('Просмотр') . '</a></span>
 				</p>
 				
 				<p><span class="ftitle ffirst2 fheader">' . t('Отзывов на страницу:') . '</span>
-					<span><input name="f_limit" type="text" value="' . $options['limit'] . '"></span>
+					<span><input name="f_limit" type="text" value="' . htmlspecialchars($options['limit']) . '"></span>
 				</p>
 			
 				<p><span class="ftitle ffirst2 fheader">' . t('Уведомлять на email:') . '</span>
-					<span><input name="f_email" type="text" value="' . $options['email'] . '"></span>
+					<span><input name="f_email" type="text" value="' . htmlspecialchars($options['email']) . '"></span>
 				</p>';
 		
 		
@@ -127,7 +127,7 @@
 				<label><input name="f_moderation" type="checkbox"' . $check . '> ' . t('Модерация каждого отзыва') . '</label></p>';
 		
 		
-		$form .= '<p class="header">' . t('Текст перед отзывами (можно использовать HTML):') . '</p><textarea name="f_text" rows="7">' . $options['text'] . '</textarea>';
+		$form .= '<p class="header">' . t('Текст перед отзывами (можно использовать HTML):') . '</p><textarea name="f_text" rows="7">' . htmlspecialchars($options['text']) . '</textarea>';
 		
 		
 		$form .= '<p class="header">' . t('Укажите названия полей') . '</p>

@@ -10,4 +10,4 @@ Please report security issues in any way:
 
 ## Supported Versions
 
-Version 109.2 - supported
+Version 109.4 - supported

@@ -60,7 +60,7 @@
 		$chk = $options['moderation_links'] ? ' checked="checked"  ' : '';
 		$form .= '<p><label><input name="f_moderation_links" type="checkbox" ' . $chk . '> <strong>' . t('Отправлять комментарий на модерацию, если в нем встречается хоть одна ссылка.') . '</strong></label>';
 		
-		$form .= '<p><strong>' . t('Файл для логов:') . '</strong> ' . getinfo('uploads_dir') . ' <input name="f_logging_file" type="text" value="' . $options['logging_file'] . '">';
+		$form .= '<p><strong>' . t('Файл для логов:') . '</strong> ' . getinfo('uploads_dir') . ' <input name="f_logging_file" type="text" value="' . htmlspecialchars($options['logging_file']) . '">';
 		if (file_exists( getinfo('uploads_dir') . $options['logging_file'] ))
 			$form .= ' <a href="' . getinfo('uploads_url') . $options['logging_file'] . '" target="_blank">' . t('Посмотреть') . '</a>';
 		

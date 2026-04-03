@@ -3,11 +3,11 @@
 $info = array(
 	'name' => t('Счетчик переходов'),
 	'description' => t('Подсчет количества переходов по ссылке. Обрамите нужную ссылку в [dc]...[/dc]'),
-	'version' => '1.3',
+	'version' => '1.4',
 	'author' => 'Максим',
 	'editors' => 'Wave',
 	'plugin_url' => '',
-	'author_url' => 'http://maxsite.org/',
+	'author_url' => 'https://maxsite.org/',
 	'group' => 'text',
 	'options_url' => getinfo('site_admin_url') . 'plugin_down_count',
 );

@@ -36,11 +36,11 @@
 		if ( !isset($options['all404']) ) $options['all404'] = '';
 
 		echo '<form method="post">' . mso_form_session('f_session_id');
-		echo '<textarea name="f_all" rows="10">' .  $options['all'] . '</textarea>';
+		echo '<textarea name="f_all" rows="10">' .  htmlspecialchars($options['all']) . '</textarea>';
 		
 		echo '<p class="info">' . t('Здесь можно указать редиректы, которые сработают только при несуществующем типе данных (custom_page_404).') . '</p>';
 
-		echo '<textarea name="f_all404" rows="10">' .  $options['all404'] . '</textarea>';
+		echo '<textarea name="f_all404" rows="10">' .  htmlspecialchars($options['all404']) . '</textarea>';
 		
 		echo '<button type="submit" name="f_submit" class="i save">' . t('Сохранить изменения') . '</button>';
 		echo '</form>';

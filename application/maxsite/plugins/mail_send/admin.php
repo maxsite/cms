@@ -97,11 +97,11 @@
 		echo '<form class="fform" method="post">' . mso_form_session('f_session_id');
 
 		echo '<p><span class="fheader">' . t('Тема письма:') . '</span></p><p><span><input name="f_subject" type="text" value="' 
-			. $options['subject'] . '"></span></p>';
+			. htmlspecialchars($options['subject']) . '"></span></p>';
 
-		echo '<p class="hr"><span class="fheader">' . t('От кого (email):') . '</span></p><p><span><input name="f_from" type="text" style="width: 100%" value="' . $options['from'] . '"></span></p>';
+		echo '<p class="hr"><span class="fheader">' . t('От кого (email):') . '</span></p><p><span><input name="f_from" type="text" style="width: 100%" value="' . htmlspecialchars($options['from']) . '"></span></p>';
 
-		echo '<p class="hr"><span class="fheader">' . t('Файл вложения (путь к файлу в «uploads»):') . '</span></p><p><span><input name="f_files" type="text" value="' . $options['files'] . '"></span></p>';
+		echo '<p class="hr"><span class="fheader">' . t('Файл вложения (путь к файлу в «uploads»):') . '</span></p><p><span><input name="f_files" type="text" value="' . htmlspecialchars($options['files']) . '"></span></p>';
 		
 		echo '<p class="hr"><span class="fheader">' . t('Текст письма:') . '</span></p><p><span><textarea name="f_message" rows="10">' . htmlspecialchars($options['message']) . '</textarea></span></p>';
 

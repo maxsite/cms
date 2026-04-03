@@ -3,7 +3,7 @@
 $info = array(
 	'name' => t('Гостевая книга'),
 	'description' => t('Гостевая книга на вашем сайте'),
-	'version' => '2.0',
+	'version' => '2.1',
 	'author' => 'Максим',
 	'plugin_url' => '',
 	'author_url' => 'https://maxsite.org/',

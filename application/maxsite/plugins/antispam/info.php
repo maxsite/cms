@@ -3,10 +3,10 @@
 $info = array(
 	'name' => t('Антиспам'),
 	'description' => t('Отлавливает спам. Можно задать черные списки IP и запретных слов'),
-	'version' => '1.2',
+	'version' => '1.3',
 	'author' => 'Максим',
 	'plugin_url' => '',
-	'author_url' => '//maxsite.org/',
+	'author_url' => 'https://maxsite.org/',
 	'group' => 'security',
 	'options_url' => getinfo('site_admin_url') . 'plugin_antispam',
 );

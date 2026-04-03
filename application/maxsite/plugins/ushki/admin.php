@@ -126,10 +126,10 @@ function UaddText(t, t2, id){var comment = document.getElementById("ut"+id);  if
 				
 		$form .= 
 '<div class="ushka show ' . $class_alpha . '"><dl>
-	<dt class="show-header"><a href="#" class="link"><span class="">' . $us['name'] . '</span></a></dt>'
+	<dt class="show-header"><a href="#" class="link"><span class="">' . htmlspecialchars($us['name']) . '</span></a></dt>'
 	. '<dd class="show-text">'
 		. '<p class="ushki_title"> 
-			<input name="f_ushka['.$id.'][name]" type="text" class="ushka_name" value="'. $us['name'] . '">
+			<input name="f_ushka['.$id.'][name]" type="text" class="ushka_name" value="'. htmlspecialchars($us['name']) . '">
 			<select name="f_ushka[' . $id . '][type]">
 				<option value="html"' . $sel_html . '>TEXT/HTML</option>
 				<option value="php"' . $sel_php . '>PHP</option>

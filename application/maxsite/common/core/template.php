@@ -11,6 +11,8 @@
 // if ($fn = mso_fe('stock/page_out/page-out.php')) require $fn;
 function mso_fe($file, $dir = false)
 {
+    if (strpos($file, '..') !== false) return false;
+    
 	if ($dir === false) $dir = getinfo('template_dir');
 
 	$file = $dir . $file;

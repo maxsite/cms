@@ -1,5 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+if (!is_login()) die('no login');
+mso_checkreferer();
+
 if(isset($_POST['act']) and $_POST['act'] == 'close')
 {
 	$CI = &get_instance();
@@ -18,4 +21,4 @@ elseif(isset($_POST['act']) and $_POST['act'] == 'open')
 	echo 1;
 }
 
-?>
+# end of file

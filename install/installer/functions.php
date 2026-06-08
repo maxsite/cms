@@ -230,7 +230,10 @@ function getHostSite()
  */
 function newDatabase($PV)
 {
-	if (file_exists(MSODIR . 'application/config/database.php-distr')) {
+	if (file_exists(MSODIR . 'application/config/database.php-distr') 
+        and 
+        !file_exists(MSODIR . 'application/config/database.php'))
+        {
 		$file = file_get_contents(MSODIR . 'application/config/database.php-distr');
 
 		$file = str_replace('$db[\'default\'][\'hostname\'] = \'localhost\';', '$db[\'default\'][\'hostname\'] = \'' . $PV['db_hostname'] . '\';', $file);

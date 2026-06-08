@@ -113,7 +113,8 @@ function mso_initalizing()
      
 	if ($comuser) {
         $comuser = mso_de_code($comuser, 'decode'); // данные закодированы
-		$comuser = @unserialize($comuser);
+		// $comuser = @unserialize($comuser);
+        $comuser = @unserialize($comuser, ['allowed_classes' => false]);
         
         if ($comuser) {
             /*

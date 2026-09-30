@@ -151,10 +151,10 @@
 				_mso_add_row(t('URL аватара'), 'f_avatar_url', $row['users_avatar_url']);
 				
 				
-				$CI->table->add_row(t('Описание'), '<textarea name="f_description" rows="3">' . htmlspecialchars($row['users_description']) . '</textarea>');
+				$CI->table->add_row(t('Описание'), '<textarea name="f_description" rows="3">' . htmlspecialchars($row['users_description'] ?? '') . '</textarea>');
 				
 				if ( mso_check_allow('edit_users_admin_note') )
-					$CI->table->add_row(t('Примечание админа'), '<textarea name="f_admin_note" rows="3">' . htmlspecialchars($row['users_admin_note']) . '</textarea>');
+					$CI->table->add_row(t('Примечание админа'), '<textarea name="f_admin_note" rows="3">' . htmlspecialchars($row['users_admin_note'] ?? '') . '</textarea>');
 			
 				// ДР это три поля
 				$y = mso_date_convert('Y', $row['users_date_birth']);
